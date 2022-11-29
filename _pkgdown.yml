@@ -1,0 +1,199 @@
+url: ~
+
+navbar:
+  components:
+    home: ~
+    intro:
+      text: Get Started
+      href: articles/get-started.html
+    articles:
+      text: Articles
+      menu:
+      - text: update history
+        href: articles/updates.html
+      - text: -------
+      - text: the tidyproteomics data-object
+        href: articles/data-object.html
+      - text: -------
+      - text: importing
+        href: articles/importing.html
+      - text: subsetting
+        href: articles/subsetting.html
+      - text: -------
+      - text: Workflow - Import & Summary
+        href: articles/workflow-simple.html
+      - text: Workflow - Subset
+        href: articles/workflow-subset.html
+
+
+template:
+  bootstrap: 5
+  # bootswatch: default
+
+reference:
+- title: Import / Export
+  description: |
+    Data can imported from flat tables or file directories, and exported again into
+    flat tables. See `vignette("importing")` for more details and examples.
+  contents:
+  - import
+  - export_quant
+  - export_analysis
+  - load_local
+  - save_local
+  - save_table
+
+- title: Helper functions
+  description: |
+    These functions can save data and tables out to the project folder, add
+    annotations to the data and tables, modify the experimental names, and
+    list out the sequence of data transformations.
+  contents:
+  - merge
+  - collapse
+  - operations
+  - reassign
+  - annotate
+  - show_annotations
+  - path_to_package_data
+
+- title: Subsetting
+  description: |
+    **Subsetting** filters an tidyproteomics data-object by a given regular expression to
+    create a subset. See `vignette("subsetting")` for more details and examples.
+  contents:
+  - subset
+
+- title: Summarizing
+  description: |
+    **Summarizing** computes quick summary statistics on a given tidyproteomics data-object.
+    See `vignette("summary")` for more details and examples.
+  contents:
+  - print.tidyproteomics
+  - plot.tidyproteomics
+  - summary.tidyproteomics
+  - plot_counts
+  - plot_quantrank
+
+- title: Normalizing
+  description: |
+    **Normalizing** adjusts the quantitiative values between samples to remove
+    collection biases, based on a number of methods.
+    See `vignette("normalization")` for more details and examples.
+  contents:
+  - normalize
+  - select_normalization
+
+- title: Imputing
+  description: |
+    **Imputing** calculates values for missing observations, based on a number of methods.
+    See `vignette("impute")` for more details and examples.
+  contents:
+  - impute
+
+- title: Visualization
+  description: |
+    **Visualizing** data is important for understanding the underlying quality of the
+    data as well as generating graphical representations for documenting work.
+    See `vignette("visualization")` for more details and examples.
+  contents:
+  - plot_normalization
+  - plot_variation_cv
+  - plot_variation_pca
+  - plot_dynamic_range
+  - plot_venn
+  - plot_euler
+  - plot_pca
+  - plot_heatmap
+
+- title: Two-sample Analysis
+  description: |
+    **Two-sample Analysis** is a process by which two samples are statistically
+    compared to identify potential observational outliers worth explroing
+    further.
+    See `vignette("visualization")` for more details and examples.
+  contents:
+  - expression
+  - plot_volcano
+  - plot_proportion
+  - plot_compexp
+  - enrichment
+  - plot_enrichment
+
+- title: Protein Sequencing
+  description: |
+    **Protein Sequencing** allows for the visulaization of peptide sequences
+    and modifications mapped back onto the full protein sequence.
+    See `vignette("sequencing")` for more details and examples.
+  contents:
+  - plot_protein
+  - protein_map
+
+
+- title: internal
+  contents:
+  - center
+  - data_import
+  - check_data
+  - check_table
+  - ecoli_peptides
+  - ecoli_proteins
+  - enrichment_gsea
+  - enrichment_wilcoxon
+  - expression_limma
+  - expression_test
+  - extract
+  - get_annotation_terms
+  - get_annotations
+  - get_quant_names
+  - get_sample_names
+  - get_variables
+  - get_unique_variables
+  - hdf
+  - import_pd_peps
+  - import_pd_prots
+  - impute_byfunction
+  - impute_randomforest
+  - impute_ratio
+  - meld
+  - codify
+  - invlog2
+  - list_venn
+  - merge_quantitative
+  - munge_identifier
+  - normalize_limma
+  - normalize_linear
+  - normalize_loess
+  - normalize_median
+  - normalize_randomforest
+  - normalize_scaled
+  - plot_save
+  - read_data
+  - reverselog_transformation
+  - stats_contamination
+  - stats_print
+  - stats_summary
+  - fgeomean
+  - fmean
+  - fmedian
+  - fsum
+  - fmin
+  - str_normalize
+  - table_quantrank
+  - theme_palette
+  - transform_factor
+  - transform_log2
+  - transform_median
+
+  - match_vect
+  - set_vect
+  - hash_vector
+  - down_select
+  - get_segment
+  - protein_map_munge
+  - align_modification
+  - align_peptide
+  - tidyproteomics_quo
+  - write_local
+  - println
+  - tidyproteomics

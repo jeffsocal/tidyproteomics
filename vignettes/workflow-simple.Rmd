@@ -1,0 +1,56 @@
+---
+title: "Workflows: Simple"
+output: rmarkdown::html_vignette
+description: |
+  r - omics: coded wiring for local analysis of quantitative omics data
+vignette: >
+  %\VignetteIndexEntry{Workflows: Simple}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+
+A basic workflow for importing a summarizing data
+
+```{r, message = FALSE}
+library("dplyr")
+library("tidyproteomics")
+```
+
+```{r, eval = FALSE}
+# path_to_package_data() loads data specific to this package
+# for your project load local data
+# example: 
+# your_proteins <- "./data/your_exported_results.xlsx" %>%
+#   import("ProteomeDiscoverer", "proteins")
+
+ecoli_proteins <- path_to_package_data("proteins") %>%
+  import("ProteomeDiscoverer", "proteins")
+```
+
+summarize globally
+```{r}
+ecoli_proteins %>% summary()
+```
+
+summarize by sample
+```{r}
+ecoli_proteins %>% summary(by = 'sample') 
+```
+
+summarize for contamination
+```{r}
+ecoli_proteins %>% summary(contamination = 'CRAP') 
+```
+
+summarize for contamination which is labeled as _ribosome_
+```{r}
+ecoli_proteins %>% summary(contamination = "ribosome") 
+```

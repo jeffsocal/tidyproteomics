@@ -1,0 +1,65 @@
+---
+title: "Subsetting"
+output: rmarkdown::html_vignette
+description: |
+  r - omics: coded wiring for local analysis of quantitative omics data
+vignette: >
+  %\VignetteIndexEntry{Subsetting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+Subsetting data in tidyproteomics with `subset()` is straight forward, and similar to the tidyverse function `tidyverse::filter()`. This function however introduces a new concept for pattern matching which is similar to SQL syntax, `%like%` and `%!like%` will include or exclude string based variables that contain the matching regular expression. The name `subset()` is used here to avoid conflicting with `dplyr::filter()` and to also separate it as a tidyproteomics specific function due to the underlying nature of the tidyproteomics data structure.
+
+```{r, message = FALSE}
+library("dplyr")
+library("tidyproteomics")
+
+ecoli_proteins %>% summary('sample')
+```
+
+Subsetting can be a powerful way to slice-and-dice data, print quick stats or provide a quick visualization. For example, the ecoli data set can be subset to just the proteins with "Ribosome" in the description:
+
+```{r}
+ecoli_proteins %>% subset(description %like% "Ribosome") %>% summary('sample')
+```
+
+Aside from filtering directly on `protein_accession` values, subsetting can use any of the columns in the `experiments` table:
+```{r}
+colnames(ecoli_proteins$experiments)
+```
+
+any of the terms in the `accounting` table:
+```{r}
+colnames(ecoli_proteins$accounting)
+```
+
+and any of the terms in the `annotations` table:
+```{r}
+ecoli_proteins$annotations$term %>% unique()
+```
+
+This allows for the specific importing of specialized terms with `annotate()` from which subsetting can be performed.
+```{r}
+ecoli_proteins %>% subset(cellular_component %like% "Ribosome") %>% summary('sample')
+```
+
+Additionally, provided the quantitative platform produces an imputed value commonly referred to as "match between runs", the data can be filtered to exclude these values. This can be valuable in cases were true presence/absence is desired, larger portions of the proteome differ.
+```{r}
+ecoli_proteins %>% subset(match_between_runs == FALSE) %>% summary('sample')
+```
+
+Also, data can be filtered to proteins containing a desired number of underlying peptides.
+```{r}
+ecoli_proteins %>% subset(mum_peptides <= 1) %>% summary('sample')
+```
+
+```{r}
+ecoli_proteins %>% subset(num_unique_peptides <= 1) %>% summary('sample')
+```

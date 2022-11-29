@@ -1,0 +1,57 @@
+---
+title: "The tidyproteomics data-object"
+output: rmarkdown::html_vignette
+description: |
+  r - omics: coded wiring for local analysis of quantitative omics data
+vignette: >
+  %\VignetteIndexEntry{The tidyproteomics data-object}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+
+The underlying data is just a list object with a structure detailed below. Fundamentally, quantitative data requires only a minimum of identifying data - mainly, the observation (protein_accession), the sample observed in, and the sample replicate. All, underlying analyses and transformation need only this minimum of information, the rest are simply annotations to the data and aptly stored in annotations or accounting.
+
+    .
+    ├── origin                     string[ProteomeDiscoverer, MaxQuant]
+    ├── analyte                    string[proteins, peptides]
+    ├── identifier                 string[protein_accession]
+    ├── quantitative_source        string[raw, ...]
+    ├── operations                 list
+    ├── experiments                tibble (lcms runs / samples / replicates) 
+    │   ├── sample_id              string (crc32 hash of import_file and sample_file)
+    │   ├── import_file
+    │   ├── sample_file
+    │   ├── sample
+    │   └── replicate
+    ├── quantitative               tibble (quantitative values / normalized)
+    │   ├── sample_id
+    │   ├── identifier(...)        protein | protein, peptide, modification
+    │   ├── sample
+    │   ├── replicate
+    │   └── abundance_[raw, ...]
+    ├── accounting                 tibble (summary and qualitative values)
+    │   ├── sample_id
+    │   ├── identifier(...) 
+    │   ├── match_between_runs
+    │   ├── [protein, ...]_group
+    │   └── num_[peptides, ...]
+    ├── annotations                tibble (annotation terms and groups)
+        ├── identifier(...) 
+        ├── term
+        └── annotation
+    
+
+
+
+```{r}
+library(tidyproteomics)
+str(ecoli_proteins)
+```

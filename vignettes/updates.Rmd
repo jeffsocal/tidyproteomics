@@ -1,0 +1,85 @@
+---
+title: "Update History"
+output: rmarkdown::html_vignette
+description: |
+  r - omics: coded wiring for local analysis of quantitative omics data
+vignette: >
+  %\VignetteIndexEntry{Update History}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+# A condensed accounting of version updates
+### Version: 0.4.2 - 2022.11
+
+-   modified expression() to more accurately account for the imputation ratio
+
+
+### Version: 0.4.1 - 2022.11.03
+
+-   refactored plotting to utilize a generalized save function to facilitate pipelining
+-   modified subset to behave like a tidyverse function while also introducing the operators `like` and `!like` to subset data based on a string matching comparison
+-   updated the functions normalize(), plot_counts() and summary() that utilize subset()
+
+
+### Version: 0.4.0 - 2022.10.28
+
+-   refactored import() to allow for user based configurations
+-   refactored subset(), eliminating remove(), to account for value comparison and pattern matching
+-   refactored reassign(), from modify(), to improve sample renaming
+
+
+### Version: 0.3.0 - 2022.10.15
+
+-   added plot_quantrank()
+-   fixed issue with ProteomeDiscoverer importing of TMT data
+
+
+### Version: 0.2.8 - 2022.09.29
+
+-   minor bug fixes
+-   refactored rollup() to collapse()
+-   defined meld() and codify() to create uniformity in data import and segmentation 
+
+
+### Version: 0.2.6 - 2022.09.23
+
+-   created remove() and migrated subset(match_between_runs = FALSE)
+-   improved protein accounting in import() and rollup() to include protein group accounting
+-   added plot_counts()
+-   added import('Skyline', 'peptides'), Skyline can handel DDA, PRM via MSAmanda and DIA vi DIA-Umpire
+-   added import('DIA-NN', 'peptides'), DIA-NN can handel DIA
+
+
+### Version: 0.2.4 - 2022.09.19
+-   fixed issue with "out of memory" on subset(match_between_runs = FALSE)
+-   fixed an x-axis ordering bug plot_variation()
+-   fixed a minor bug in importing ProteomeDiscoverer peptide data
+
+
+### Version: 0.2.2 - 2022.09.13
+
+-   fixed a minor bug in importing MaxQuant data (empty data object)
+-   fixed a minor bug in plot_protein()
+-   fixed bug in annotations()
+-   fixed bug in impute() with randomforest
+-   fixed bug in expression() with limma
+
+### Version: 0.2.1 - 2022.09.08
+
+-   added import() for MaxQuant peptides (evidence.txt)
+-   added import() for MaxQuant proteins (proteinGroups.txt)
+-   updated import() for ProteomeDiscoverer (better configs)
+
+### Version: 0.1.3
+
+-   added protein rollup() function, integrated with [rfasta](https://github.com/jeffsocal/rfasta)
+
+### Version: 0.1.2
+
+-   updated impute() accounting
+-   added plot_enrichment()
+-   added history of data transformations via operations()
+
+### Version: 0.1.0
+
+-   initial code commit
