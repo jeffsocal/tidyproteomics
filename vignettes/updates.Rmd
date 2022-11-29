@@ -9,10 +9,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 # A condensed accounting of version updates
-### Version: 0.4.2 - 2022.11
+### Version: 1.0.2 - 2022.11.28
+
+-   implemented S3 object for tidyproteomics data object
+-   refactored all functions to accout for new data object
+-   fixed minor issues with exporting data and plots
+
+### Version: 0.4.2 - 2022.11.15
 
 -   modified expression() to more accurately account for the imputation ratio
-
 
 ### Version: 0.4.1 - 2022.11.03
 
@@ -82,4 +87,4 @@ vignette: >
 
 ### Version: 0.1.0
 
--   initial code commit
+-   initial cohesion of a loose collection of functions into an R package

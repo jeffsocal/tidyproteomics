@@ -26,7 +26,7 @@
 #' ecoli_proteins %>%
 #'    expression(ko/wt, .method = stats::t.test) %>%
 #'    enrichment(ko/wt, .term = 'biological_process', .method = 'wilcoxon') %>%
-#'    plot_enrichment(ko/wt) +
+#'    plot_enrichment(ko/wt, .term = 'biological_process') +
 #'    labs(title = "Ecoli: Term Enrichment", subtitle = "KO / WT")
 #'
 #'

@@ -7,6 +7,7 @@
 plot_enrichment(
   data = NULL,
   ...,
+  .term = NULL,
   enrichment_min = 1,
   enrichment_column = "enrichment",
   significance_max = 0.01,
@@ -55,7 +56,7 @@ library(tidyproteomics)
 ecoli_proteins \%>\%
    expression(ko/wt, .method = stats::t.test) \%>\%
    enrichment(ko/wt, .term = 'biological_process', .method = 'wilcoxon') \%>\%
-   plot_enrichment(ko/wt) +
+   plot_enrichment(ko/wt, .term = 'biological_process') +
    labs(title = "Ecoli: Term Enrichment", subtitle = "KO / WT")
 
 

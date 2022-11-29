@@ -4,7 +4,13 @@
 \alias{export_analysis}
 \title{Export the quantitative data from an tidyproteomics data-object}
 \usage{
-export_analysis(data = NULL, ..., .analysis = NULL, .file_name = NULL)
+export_analysis(
+  data = NULL,
+  ...,
+  .analysis = NULL,
+  .term = NULL,
+  .file_name = NULL
+)
 }
 \arguments{
 \item{data}{tidyproteomics data object}
