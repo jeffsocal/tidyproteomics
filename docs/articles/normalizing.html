@@ -53,8 +53,6 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/updates.html">update history</a>
-    <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/importing.html">importing</a>
@@ -63,8 +61,10 @@
     <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
-    <a class="dropdown-item" href="../articles/01-workflow-import.html">01 Simple</a>
-    <a class="dropdown-item" href="../articles/01-workflow-import.html">02 Publication Demo</a>
+    <a class="dropdown-item" href="../articles/01-workflow-simple.html">01 Simple</a>
+    <a class="dropdown-item" href="../articles/02-workflow-publication.html">02 Publication Demo</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
 </li>
       </ul>
@@ -232,37 +232,13 @@ and therefore is only applicable to normalization of the whole proteome.
 The <em>limma</em> normalization method also does not accept a subset
 for normalization. Both of these methods will be skipped if a subset is
 implemented.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rdata <span class="ot">&lt;-</span> <span class="fu">path_to_package_data</span>(<span class="st">"pd_ecoli-hint_proteins.xlsx"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">import</span>(<span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">normalize</span>(description <span class="sc">%like%</span> <span class="st">'ribosome'</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.method =</span> <span class="fu">c</span>(<span class="st">'median'</span>, <span class="st">'linear'</span>, <span class="st">'loess'</span>, <span class="st">'svm'</span>)) </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m Importing  [3mpd_ecoli-hint_proteins.xlsx [23m</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [33m! [39m .. not all expected annotation columns present in import file</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m Importing  [3mpd_ecoli-hint_proteins.xlsx [23m</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a> [32m✔ [39m Importing  [3mpd_ecoli<span class="sc">-</span>hint_proteins.xlsx [23m  [<span class="dv">38</span>;<span class="dv">5</span>;249m[611ms] [39m</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [33m! [39m   normalization based on 2772 of 2661 identifiers</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [33m! [39m    [3m [3mWARNING [3m [23m: filter narrowed range, NAs may result</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [33m! [39m    [3m [3mWARNING [3m [23m: omitting `limma` and `randomforest` - can not accomidate subsetting</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m Normalizing quantitative data</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m ... using  [34mmedian shift [39m</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [32m✔ [39m ... using  [34mmedian shift [39m  [38;5;249m[228ms] [39m</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m ... using  [34mlinear regression [39m</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [32m✔ [39m ... using  [34mlinear regression [39m  [38;5;249m[126ms] [39m</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m ... using  [34mloess regression [39m</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [32m✔ [39m ... using  [34mloess regression [39m  [38;5;249m[121ms] [39m</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m ... using  [34msvm regression [39m</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [32m✔ [39m ... using  [34msvm regression [39m  [38;5;249m[847ms] [39m</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m Selecting best normalization method</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [32m✔ [39m Selecting best normalization method ... done</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m  ... selected  [34m [3m [34mlinear [34m [23m [39m</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>rdata <span class="sc">%&gt;%</span> <span class="fu">plot_variation_cv</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"pd_ecoli-hint_proteins.xlsx"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span><span class="va">description</span> <span class="op">%like%</span> <span class="st">'ribosome'</span>,</span>
+<span>            .method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'median'</span>, <span class="st">'linear'</span>, <span class="st">'loess'</span>, <span class="st">'svm'</span><span class="op">)</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_variation_cv.html">plot_variation_cv</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="normalizing_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>

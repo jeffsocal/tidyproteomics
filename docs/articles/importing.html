@@ -53,16 +53,18 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/updates.html">update history</a>
-    <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/importing.html">importing</a>
     <a class="dropdown-item" href="../articles/subsetting.html">subsetting</a>
+    <a class="dropdown-item" href="../articles/normalizing.html">normalizing</a>
+    <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/01-workflow-import.html">01 Import &amp; Summarize</a>
-    <a class="dropdown-item" href="../articles/02-workflow-subset.html">02 Subset</a>
-    <a class="dropdown-item" href="../articles/03-workflow-normalize-impute.html">03 Normalize &amp; Impute</a>
+    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <a class="dropdown-item" href="../articles/01-workflow-simple.html">01 Simple</a>
+    <a class="dropdown-item" href="../articles/02-workflow-publication.html">02 Publication Demo</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
 </li>
       </ul>
@@ -137,7 +139,7 @@ as what was supplied. In each line there is a pull-down menu for
 designating each file (or label for TMT) to one of the
 <code>Catigorical Factors</code>. This will now ensure that when
 importing the data there are properly labeled sample. No big deal if
-that hasn’t been done, it can be fixed with the <code>modify()</code>
+that hasn’t been done, it can be fixed with the <code><a href="https://purrr.tidyverse.org/reference/modify.html" class="external-link">modify()</a></code>
 function.</p>
 </div>
 <div class="section level4">
@@ -363,7 +365,7 @@ file will only contain an entry for each file if in the initial MaxQuant
 configuration the Experiment column in the raw data tab has a unique
 value for each file (eg 1, 2, 3, …), otherwise the values get merged on
 common experiment groups in the output for the protein level data. The
-sample groups can then be set with the <code>modify()</code>
+sample groups can then be set with the <code><a href="https://purrr.tidyverse.org/reference/modify.html" class="external-link">modify()</a></code>
 function.</p>
 </div>
 <div class="section level4">

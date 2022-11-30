@@ -27,15 +27,18 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/updates.html">update history</a>
-    <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/importing.html">importing</a>
     <a class="dropdown-item" href="../articles/subsetting.html">subsetting</a>
+    <a class="dropdown-item" href="../articles/normalizing.html">normalizing</a>
+    <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/workflow-simple.html">Workflow - Import &amp; Summary</a>
-    <a class="dropdown-item" href="../articles/workflow-subset.html">Workflow - Subset</a>
+    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <a class="dropdown-item" href="../articles/01-workflow-import.html">01 Simple</a>
+    <a class="dropdown-item" href="../articles/02-workflow-publication.html">02 Publication Demo</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -91,18 +94,18 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Importing <span style="font-style: italic;">pd_ecoli-hint_proteins.xlsx</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> .. not all expected annotation columns present in import file</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Importing <span style="font-style: italic;">pd_ecoli-hint_proteins.xlsx</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Importing <span style="font-style: italic;">pd_ecoli-hint_proteins.xlsx</span> <span style="color: #B2B2B2;">[771ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Importing <span style="font-style: italic;">pd_ecoli-hint_proteins.xlsx</span> <span style="color: #B2B2B2;">[658ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span> <span style="color: #B2B2B2;">[41ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span> <span style="color: #B2B2B2;">[54ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 439 values imputed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">linear regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">loess regression</span> <span style="color: #B2B2B2;">[127ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[164ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">loess regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">loess regression</span> <span style="color: #B2B2B2;">[528ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">loess regression</span> <span style="color: #B2B2B2;">[601ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span>
@@ -114,7 +117,7 @@
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Data files (pd_ecoli-hint_proteins.xlsx) were imported as proteins from</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   ProteomeDiscoverer</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Data reassigned sample to ko where 'sample like hint_ko'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   • Missing values imputed via .Primitive("min").</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   • Missing values imputed within samples via .Primitive("min").</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • ... 439 values imputed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Data normalized via linear, loess.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Normalization automatically selected as linear.</span>

@@ -9,9 +9,6 @@ navbar:
     articles:
       text: Articles
       menu:
-      - text: update history
-        href: articles/updates.html
-      - text: -------
       - text: the tidyproteomics data-object
         href: articles/data-object.html
       - text: -------
@@ -26,9 +23,12 @@ navbar:
       - text: -------
       - text: Workflows
       - text: 01 Simple
-        href: articles/01-workflow-import.html
+        href: articles/01-workflow-simple.html
       - text: 02 Publication Demo
         href: articles/02-workflow-publication.html
+      - text: -------
+      - text: update history
+        href: articles/updates.html
 
 template:
   bootstrap: 5
@@ -171,6 +171,7 @@ reference:
   - normalize_median
   - normalize_randomforest
   - normalize_scaled
+  - normalize_svm
   - plot_save
   - read_data
   - reverselog_transformation

@@ -27,15 +27,18 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/updates.html">update history</a>
-    <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/importing.html">importing</a>
     <a class="dropdown-item" href="../articles/subsetting.html">subsetting</a>
+    <a class="dropdown-item" href="../articles/normalizing.html">normalizing</a>
+    <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/workflow-simple.html">Workflow - Import &amp; Summary</a>
-    <a class="dropdown-item" href="../articles/workflow-subset.html">Workflow - Subset</a>
+    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <a class="dropdown-item" href="../articles/01-workflow-import.html">01 Simple</a>
+    <a class="dropdown-item" href="../articles/02-workflow-publication.html">02 Publication Demo</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -62,6 +65,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">impute_byfunction</span><span class="op">(</span></span>
 <span>  table <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  impute_function <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"within"</span>, <span class="st">"between"</span><span class="op">)</span>,</span>
 <span>  minimum_to_impute <span class="op">=</span> <span class="fl">0.25</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>

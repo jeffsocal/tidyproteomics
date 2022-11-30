@@ -53,8 +53,6 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/updates.html">update history</a>
-    <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/importing.html">importing</a>
@@ -63,8 +61,10 @@
     <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
-    <a class="dropdown-item" href="../articles/01-workflow-import.html">01 Simple</a>
-    <a class="dropdown-item" href="../articles/01-workflow-import.html">02 Publication Demo</a>
+    <a class="dropdown-item" href="../articles/01-workflow-simple.html">01 Simple</a>
+    <a class="dropdown-item" href="../articles/02-workflow-publication.html">02 Publication Demo</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
 </li>
       </ul>
@@ -256,7 +256,43 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt;  0.1380689</span></span>
 <span><span class="co">#&gt;  0.1612074</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data Transformations</span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data files (pd_ecoli-hint_proteins.xlsx) were</span></span>
+<span><span class="co">#&gt;   imported as proteins from ProteomeDiscoverer</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data reassigned sample to ko where 'sample like</span></span>
+<span><span class="co">#&gt;   hint'</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data subset `sample` %like% `ko`</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data normalized via median.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Normalization automatically selected as median.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Missing values imputed within samples via</span></span>
+<span><span class="co">#&gt;   .Primitive("min").</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: ... 197 values imputed</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data files (pd_ecoli-hint_proteins.xlsx) were</span></span>
+<span><span class="co">#&gt;   imported as proteins from ProteomeDiscoverer</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data reassigned sample to ko where 'sample like</span></span>
+<span><span class="co">#&gt;   hint'</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data subset `sample` %like% `wt`</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data normalized via median.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Normalization automatically selected as median.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Missing values imputed within samples via</span></span>
+<span><span class="co">#&gt;   .Primitive("min").</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: ... 212 values imputed</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • Merged 2 data sets</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

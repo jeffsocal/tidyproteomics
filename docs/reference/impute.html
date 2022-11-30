@@ -27,15 +27,18 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/updates.html">update history</a>
-    <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/importing.html">importing</a>
     <a class="dropdown-item" href="../articles/subsetting.html">subsetting</a>
+    <a class="dropdown-item" href="../articles/normalizing.html">normalizing</a>
+    <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/workflow-simple.html">Workflow - Import &amp; Summary</a>
-    <a class="dropdown-item" href="../articles/workflow-subset.html">Workflow - Subset</a>
+    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <a class="dropdown-item" href="../articles/01-workflow-import.html">01 Simple</a>
+    <a class="dropdown-item" href="../articles/02-workflow-publication.html">02 Publication Demo</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -62,6 +65,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">impute</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  impute_function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"within"</span>, <span class="st">"between"</span><span class="op">)</span>,</span>
 <span>  minimum_to_impute <span class="op">=</span> <span class="fl">0.25</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -112,8 +116,8 @@ be removed in the function call.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>impute_function <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">function (x, na.rm = FALSE, ...) </span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing by <span style="color: #FF5F00; font-style: italic;">function (x, na.rm = FALSE, ...) </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">function (x, na.rm = FALSE, ...) </span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">function (x, na.rm = FALSE, ...) </span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 439 values imputed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -128,31 +132,7 @@ be removed in the function call.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>impute_function <span class="op">=</span> <span class="st">'randomforest'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">impute_function</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> randomForest 4.7-1.1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Type rfNews() to see new features/changes/bug fixes.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘randomForest’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:dplyr’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     combine</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: foreach</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rngtools</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... median oobe 1.35e+10</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">impute_function</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing by <span style="color: #FF5F00; font-style: italic;">impute_function</span> <span style="color: #B2B2B2;">[7.6s]</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 439 values imputed</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  sample files proteins protein_groups peptides peptides_unique quantifiable</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      ko     4     2772           2772    31271           31025         98.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      wt     4     2772           2772    31271           31025         98.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1375100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1611476</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir = list(`?` = function(...) stop()), enclos = envir):</span> object 'impute_function_str' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

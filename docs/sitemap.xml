@@ -7,6 +7,21 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/articles/01-workflow-import.html</loc>
+  </url>
+  <url>
+    <loc>/articles/01-workflow-simple.html</loc>
+  </url>
+  <url>
+    <loc>/articles/02-workflow-publication.html</loc>
+  </url>
+  <url>
+    <loc>/articles/02-workflow-subset.html</loc>
+  </url>
+  <url>
+    <loc>/articles/03-workflow-normalize-impute.html</loc>
+  </url>
+  <url>
     <loc>/articles/data-object.html</loc>
   </url>
   <url>
@@ -16,7 +31,16 @@
     <loc>/articles/importing.html</loc>
   </url>
   <url>
+    <loc>/articles/imputing.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/normalization.html</loc>
+  </url>
+  <url>
+    <loc>/articles/normalizing.html</loc>
   </url>
   <url>
     <loc>/articles/romics.html</loc>
@@ -263,6 +287,9 @@
   </url>
   <url>
     <loc>/reference/normalize_scaled.html</loc>
+  </url>
+  <url>
+    <loc>/reference/normalize_svm.html</loc>
   </url>
   <url>
     <loc>/reference/operations.html</loc>

@@ -31,15 +31,18 @@ as it returns the original tidyproteomics data-object."><meta property="og:image
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/updates.html">update history</a>
-    <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/importing.html">importing</a>
     <a class="dropdown-item" href="../articles/subsetting.html">subsetting</a>
+    <a class="dropdown-item" href="../articles/normalizing.html">normalizing</a>
+    <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/workflow-simple.html">Workflow - Import &amp; Summary</a>
-    <a class="dropdown-item" href="../articles/workflow-subset.html">Workflow - Subset</a>
+    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <a class="dropdown-item" href="../articles/01-workflow-import.html">01 Simple</a>
+    <a class="dropdown-item" href="../articles/02-workflow-publication.html">02 Publication Demo</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -108,25 +111,11 @@ as it returns the original tidyproteomics data-object.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># a global summary</span></span></span>
 <span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: global</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  files proteins protein_groups peptides peptides_unique quantifiable       CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      8     2772           2772    31271           31025         98.5 0.1573717</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir = list(`?` = function(...) stop()), enclos = envir):</span> object 'method' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># a summary by sample</span></span></span>
 <span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  sample files proteins protein_groups peptides peptides_unique quantifiable</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      ko     4     2772           2772    31271           31025         98.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      wt     4     2772           2772    31271           31025         98.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1380689</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1612074</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir = list(`?` = function(...) stop()), enclos = envir):</span> object 'method' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># a summary by sample with match_between_runs removed</span></span></span>
 <span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
@@ -136,89 +125,17 @@ as it returns the original tidyproteomics data-object.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">match_between_runs</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">FALSE</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">match_between_runs</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">FALSE</span> ... done</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  sample files proteins protein_groups peptides peptides_unique quantifiable</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      ko     4     2683           2683    30779           30562         99.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      wt     4     2666           2666    30811           30589         99.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1329208</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1558694</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir = list(`?` = function(...) stop()), enclos = envir):</span> object 'method' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># a summary of match_between_runs</span></span></span>
 <span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'match_between_runs'</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: match_between_runs</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  match_between_runs files proteins protein_groups peptides peptides_unique</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               FALSE     8     2772           2772    30795           30576</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                TRUE     8      527            527      477             450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  quantifiable       CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          99.1 0.1532708</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          55.7 0.2856872</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir = list(`?` = function(...) stop()), enclos = envir):</span> object 'method' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"cellular_component"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: cellular_component</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            cellular_component files proteins protein_groups peptides</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  cytoskeleton     8     2772           2772    31271</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       cytosol     8      589            589     8894</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  non-structural extracellular     8        3              3        9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       nucleus     8        1              1        5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          other cell component     8      433            433     4684</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   other cytoplasmic organelle     8     2772           2772    31271</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               other membranes     8       61             61      744</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               plasma membrane     8     2772           2772    31271</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       translational apparatus     8        3              3       11</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  peptides_unique quantifiable       CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            31025         98.5 0.1573717</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             8828         99.1 0.1329716</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                9         88.9 0.1248169</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                5        100.0 0.1301963</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             4652         98.6 0.1632274</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            31025         98.5 0.1573717</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              739         97.5 0.1871234</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            31025         98.5 0.1573717</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               11        100.0 0.4519613</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir = list(`?` = function(...) stop()), enclos = envir):</span> object 'method' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"biological_process"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: biological_process</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                biological_process files proteins protein_groups peptides</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    DNA metabolism     8     2772           2772    31271</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   RNA metabolism OR transcription     8     2772           2772    31271</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     cell adhesion     8        1              1        1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  cell cycle OR cell proliferation     8        3              3       39</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  cell organization and biogenesis     8       15             15      198</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               cell-cell signaling     8     2772           2772    31271</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           developmental processes     8        3              3        4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        other biological processes     8      175            175     1262</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         other metabolic processes     8      610            610     8233</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                protein metabolism     8       18             18      332</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               signal transduction     8        1              1       18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                   stress response     8       45             45      330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         transport     8      196            196     1542</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  peptides_unique quantifiable       CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            31025         98.5 0.1573717</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            31025         98.5 0.1573717</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                1         62.5 0.2738303</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               39        100.0 0.1084535</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              197         98.4 0.1615593</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            31025         98.5 0.1573717</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                4         75.0 0.1980664</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             1258         98.4 0.1752463</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             8179         98.6 0.1511318</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              332         99.9 0.1944947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               18        100.0 0.1228771</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              316         93.6 0.1537054</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             1529         97.6 0.1815972</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir = list(`?` = function(...) stop()), enclos = envir):</span> object 'method' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
