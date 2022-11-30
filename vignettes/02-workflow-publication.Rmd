@@ -1,0 +1,149 @@
+---
+title: "02 Pubication Demo"
+output: rmarkdown::html_vignette
+description: |
+  tidyproteomics: simplified data object and analysis functions
+vignette: >
+  %\VignetteIndexEntry{Workflows: Simple}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+The following is a demonstration workflow for generating the figures from the publication.
+
+```{r, message=FALSE}
+library(tidyverse)
+library(tidyproteomics)
+```
+
+### Import
+
+```{r, message=FALSE}
+rdata <- path_to_package_data('pd_ecoli-hint_proteins.xlsx') %>%
+  # import the data set
+  import('ProteomeDiscoverer', 'proteins') %>%
+  # change the labels on the samples containing 'ko'
+  reassign('sample', 'ko', 'ko') 
+```
+
+### Summary Plots
+
+```{r, eval=FALSE}
+rdata <- rdata %>%
+  # plot some simple summary stats
+  plot_counts(destination) %>%
+  plot_quantrank(destination = "png") %>%
+  plot_venn(destination = "png") %>%
+  plot_euler(destination = "png")
+```
+
+### Summary Stats
+
+```{r, eval=FALSE}
+rdata <- rdata %>%
+  # save a table of simple summary stats
+  summary('sample', destination = 'save') %>%
+  # save a report on contamination
+  summary(contamination = 'CRAP', destination = 'save') %>%
+  # remove contamination
+  subset(description %!like% "^CRAP")
+```
+
+### Normalization and Imputation
+
+```{r, eval=FALSE}
+rdata <- rdata %>%
+  # normalize via several methods, best method will be automatically selected
+  normalize(c('median','linear','limma','randomforest')) %>%
+  # impute with a minimum value (this is a knock-out)
+  impute(base::min)
+  # plot visualizations comparing normalization methods
+  plot_normalization(destination = 'png') %>%
+  plot_variation_cv(destination = 'png') %>% 
+  plot_variation_pca(destination = 'png') %>%
+  plot_dynamic_range(destination = 'png') %>%
+  # plot visualizations of unbiased clustering
+  plot_heatmap(destination = 'png') %>%
+  plot_pca(destination = 'png')
+```
+
+### Expression Analysis
+
+```{r, eval=FALSE}
+rdata <- rdata %>%
+  # calculate the expression between experiment: ko and control: wt
+  expression(ko/wt) %>%
+  # plot the expression analysis
+  plot_volcano(ko/wt, destination = 'png', significance_column = 'p_value') %>% 
+  plot_proportion(ko/wt, destination = 'png')
+```
+
+### Enrichment Analysis
+
+```{r, eval=FALSE}
+rdata <- rdata %>%
+  # calculate the enrichment of the GO term(s) using the results
+  # from the expression analysis
+  enrichment(ko/wt, .term = 'biological_process') %>%
+  enrichment(ko/wt, .term = 'cellular_component') %>%
+  enrichment(ko/wt, .term = 'molecular_function') %>%
+  # plot the enrichment analysis
+  plot_enrichment(ko/wt, .term = 'biological_process', destination = 'png') %>%
+  plot_enrichment(ko/wt, .term = 'cellular_component', destination = 'png') %>%
+  plot_enrichment(ko/wt, .term = 'molecular_function', destination = 'png') 
+```
+
+### Advanced
+
+#### Plot Quantitation-Rank with Log2 Cutoff
+
+```{r, eval=FALSE}
+# SUPPLEMENTAL FIGURES
+# plot an alternate quantitative ranking
+rdata %>%
+  plot_quantrank(display_filter = 'log2_foldchange',
+                 display_cutoff = 5)
+ggsave("plot_proteins_quantitation_rank_filtered.png",
+       width = 6, h = 4)
+```
+
+#### Plot Comparison of Two Expressions
+
+```{r, eval=FALSE}
+# import the data again to now avoid imputation
+rdata <- path_to_package_data('pd_ecoli-hint_proteins.xlsx') %>%
+  # import the data set
+  import('ProteomeDiscoverer', 'proteins') %>%
+  # change the labels on the samples containing 'ko'
+  reassign('sample', 'ko', 'ko')
+
+# run a an expression analysis using a t.test statistical comparison
+tbl_expression_ttest <- rdata %>%
+  expression(ko/wt, .method = stats::t.test) %>%
+  # export the results table to the assigned object
+  export_analysis(ko/wt, .analysis = 'expression')
+
+# run a an expression analysis using the limma statistical method
+tbl_expression_limma <- rdata %>%
+  expression(ko/wt, .method = 'limma') %>%
+  # export the results table to the assigned object
+  export_analysis(ko/wt, .analysis = 'expression')
+
+# plot the two expression tables two compare similarities between methods
+plot_compexp(tbl_expression_ttest,
+             tbl_expression_limma,
+             labels_column = 'gene_name',
+             log2fc_min = 1, significance_column = 'p_value') +
+  ggplot2::labs(x = "(log2 FC) Wilcoxon Rank Sum",
+                y = "(log2 FC) Emperical Bayes (limma)",
+                title = "Ecoli Hint KO ~ WT")
+
+ggsave("plot_enrichment_comparison.png",
+       width = 6, h = 4)
+```

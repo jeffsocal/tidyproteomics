@@ -74,6 +74,7 @@ merge <- function(
   new_data$accounting <- dplyr::bind_rows(l_accouting)
   new_data$annotations <- dplyr::bind_rows(l_annotations) %>% unique()
 
+  class(new_data) <- 'tidyproteomics'
   return(new_data)
 }
 

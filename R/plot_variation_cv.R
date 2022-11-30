@@ -44,7 +44,7 @@ plot_variation_cv <- function(
   data_quant <- data %>% extract(values = quant_values)
 
   quant_values_all <- c('raw', 'median', 'scaled', 'linear',
-                        'limma', 'loess', 'randomforest')
+                        'limma', 'loess', 'svm', 'randomforest')
   norm_vals <- intersect(quant_values_all, quant_values)
 
 

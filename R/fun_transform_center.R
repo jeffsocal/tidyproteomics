@@ -29,7 +29,6 @@ center <- function(
   }
 
   table  %>%
-    dplyr::filter(!is.na(dplyr::across(values))) %>%
     dplyr::group_by(dplyr::across(group_by)) %>%
     fun_app(fun = fun_center, val = values) %>%
     dplyr::rename({{value_method}} := {{values}})

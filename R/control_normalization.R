@@ -36,7 +36,7 @@
 normalize <- function(
     data,
     ...,
-    .method = c("scaled", "median", "linear", "limma", "loess", "randomforest")
+    .method = c("scaled", "median", "linear", "limma", "loess", "svm", "randomforest")
 ){
 
   # visible bindings
@@ -85,20 +85,26 @@ normalize <- function(
       subset(..., .verbose = FALSE) %>%
       extract(values = 'raw') %>%
       transform_log2(values = 'abundance') %>%
-      dplyr::rename(abundance = abundance_log2)
+      dplyr::rename(abundance = abundance_log2) %>%
+      dplyr::full_join(
+        data %>% extract(values = 'raw') %>% dplyr::select(!'abundance'),
+        by = c("identifier", "sample", "replicate")
+      )
 
     pst_n <- dc$identifier %>% unique() %>% length()
-    pst_range <- dc$abundance %>% range()
+    pst_range <- dc$abundance %>% range(na.rm = TRUE)
 
     cli::cli_alert_warning("  normalization based on {pst_n} of {pre_n} identifiers")
     data$operations <- append(data$operations, glue::glue(" ... based on a subset {pst_n} of {pre_n} identifiers"))
     if(pre_range[1] < pst_range[1] | pre_range[2] > pst_range[2]){
       cli::cli_alert_warning("  {.emph WARNING}: filter narrowed range, NAs may result")
+      cli::cli_alert_warning("  {.emph WARNING}: omitting `limma` and `randomforest` - can not accomidate subsetting")
     }
 
   }
 
   cli::cli_alert_info("Normalizing quantitative data")
+  cli::cli_progress_bar(type = 'tasks')
 
   for(m in .method){
     start_time <- Sys.time()
@@ -114,6 +120,8 @@ normalize <- function(
       }
     }
 
+    if(!is.null(use_quo) & m %in% c('limma','randomforest')) {next}
+
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "blue")))
     cli::cli_progress_step(" ... using {.info {m} {f}}")
 
@@ -124,27 +132,28 @@ normalize <- function(
     # remove previous normalized variable if it exists
     data$quantitative <- data$quantitative %>% dplyr::select(!tidyselect::matches(paste0("\\_", m)))
 
-    tryCatch({
-      if(m == 'median') {       d_norm <- d %>% normalize_median(dc_this)}
-      if(m == 'scaled') {       d_norm <- d %>% normalize_scaled(dc_this)}
-      if(m == 'linear') {       d_norm <- d %>% normalize_linear(dc_this)}
-      if(m == 'loess') {        d_norm <- d %>% normalize_loess(dc_this)}
-      if(m == 'randomforest') { d_norm <- d %>% normalize_randomforest(dc_this)}
-      if(m == 'limma') {        d_norm <- d %>% normalize_limma()}
+    # tryCatch({
+    if(m == 'median') {         d_norm <- d %>% normalize_median(dc_this)}
+    if(m == 'scaled') {         d_norm <- d %>% normalize_scaled(dc_this)}
+    if(m == 'linear') {         d_norm <- d %>% normalize_linear(dc_this)}
+    if(m == 'loess') {          d_norm <- d %>% normalize_loess(dc_this)}
+    if(m == 'svm') {            d_norm <- d %>% normalize_svm(dc_this)}
+    if(m == 'limma') {          d_norm <- d %>% normalize_limma()}
+    if(m == 'randomforest') {   d_norm <- d %>% normalize_randomforest(dc_this)}
 
-      d_norm <- d_norm %>%
-        dplyr::mutate(abundance_normalized = invlog2(abundance_normalized)) %>%
-        dplyr::rename(abundance = abundance_normalized)
+    d_norm <- d_norm %>%
+      dplyr::mutate(abundance_normalized = invlog2(abundance_normalized)) %>%
+      dplyr::rename(abundance = abundance_normalized)
 
-      data <- data %>% merge_quantitative(d_norm, m)
+    data <- data %>% merge_quantitative(d_norm, m)
 
-    }, error = function(err) {
-      err = as.character(as.vector(err))
-      cli::cli_abort(err)
-    })
+    # }, error = function(err) {
+    #   err = as.character(as.vector(err))
+    #   cli::cli_abort(err)
+    # })
+  cli::cli_progress_done()
   }
 
-  cli::cli_progress_done()
   data <- data %>% select_normalization()
   return(data)
 }

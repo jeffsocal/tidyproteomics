@@ -2,7 +2,7 @@
 title: "Get Started"
 output: rmarkdown::html_vignette
 description: |
-  r - omics: coded wiring for local analysis of quantitative omics data
+  tidyproteomics: simplified data object and analysis functions
 vignette: >
   %\VignetteIndexEntry{Get Started}
   %\VignetteEngine{knitr::rmarkdown}

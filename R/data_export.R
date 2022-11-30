@@ -204,7 +204,7 @@ save_local <- function(
   if(!dir.exists("./data/rds")) {dir.create("./data/rds", recursive = T)}
 
   cli::cli_process_start("Saving {data$analyte} to local dir ./data/rds")
-  file_name <- paste0(analyte, '.rds')
+  file_name <- paste0(data$analyte, '.rds')
   saveRDS(data, paste0('./data/rds/', file_name))
 }
 

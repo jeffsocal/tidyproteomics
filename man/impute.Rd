@@ -7,6 +7,7 @@
 impute(
   data = NULL,
   impute_function = base::min,
+  method = c("within", "between"),
   minimum_to_impute = 0.25,
   cores = 2
 )

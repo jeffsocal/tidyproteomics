@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="r - omics: coded wiring for local analysis of quantitative omics data
+<meta name="description" content="tidyproteomics: simplified data object and analysis functions
 ">
 <title>Subsetting • tidyproteomics</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -19,7 +19,7 @@
 <script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Subsetting">
-<meta property="og:description" content="r - omics: coded wiring for local analysis of quantitative omics data
+<meta property="og:description" content="tidyproteomics: simplified data object and analysis functions
 ">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -59,9 +59,12 @@
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/importing.html">importing</a>
     <a class="dropdown-item" href="../articles/subsetting.html">subsetting</a>
+    <a class="dropdown-item" href="../articles/normalizing.html">normalizing</a>
+    <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/workflow-simple.html">Workflow - Import &amp; Summary</a>
-    <a class="dropdown-item" href="../articles/workflow-subset.html">Workflow - Subset</a>
+    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <a class="dropdown-item" href="../articles/01-workflow-import.html">01 Simple</a>
+    <a class="dropdown-item" href="../articles/01-workflow-import.html">02 Publication Demo</a>
   </div>
 </li>
       </ul>
@@ -92,14 +95,26 @@
     
 <p>Subsetting data in tidyproteomics with <code><a href="../reference/subset.html">subset()</a></code> is
 straight forward, and similar to the tidyverse function
-<code>tidyverse::filter()</code>. This function however introduces a new
-concept for pattern matching which is similar to SQL syntax,
-<code>%like%</code> and <code>%!like%</code> will include or exclude
-string based variables that contain the matching regular expression. The
-name <code><a href="../reference/subset.html">subset()</a></code> is used here to avoid conflicting with
-<code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">dplyr::filter()</a></code> and to also separate it as a tidyproteomics
-specific function due to the underlying nature of the tidyproteomics
-data structure.</p>
+<code>tidyverse::filter()</code>. The name <code><a href="../reference/subset.html">subset()</a></code> is used
+here to avoid conflicting with <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">dplyr::filter()</a></code> and to also
+separate it as a tidyproteomics specific function due to the underlying
+nature of the tidyproteomics data structure. The function
+<code><a href="../reference/subset.html">subset()</a></code> allows data to be easily filtered with simple
+semantic expressions, similar to how the filter function in the
+tidyverse package dplyr operates. This package also introduces two new
+operators that work as a regular expression filter, similar to SQL
+syntax, (<strong><em>%like%</em></strong> and
+<strong><em>%!like%</em></strong>) which can be used in the semantic
+expression to subset data base on pattern matching in variable groups.
+For example, the expression
+<strong><em><code>description %!like% 'ribosome'</code></em></strong>
+would keep all proteins with a description that does not include the
+word <em>‘ribosome’</em>. Additionally, together with the
+<code><a href="../reference/merge.html">merge()</a></code> and <code><a href="../reference/reassign.html">reassign()</a></code> functions, data can be
+combined from multiple sources, assigned to specific sample groups and
+analyzed in a single collective. Alternatively, for example, data can be
+separated, normalized and imputed independently then recombined back
+into a single collective for analysis and visualization.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"tidyproteomics"</span><span class="op">)</span></span>
@@ -111,25 +126,21 @@ data structure.</p>
 <span><span class="co">#&gt;        CVs</span></span>
 <span><span class="co">#&gt;  0.1380689</span></span>
 <span><span class="co">#&gt;  0.1612074</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h3>
 <p>Subsetting can be a powerful way to slice-and-dice data, print quick
 stats or provide a quick visualization. For example, the ecoli data set
 can be subset to just the proteins with “Ribosome” in the
 description:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op">%like%</span> <span class="st">"Ribosome"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span> ... done</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  sample files proteins protein_groups peptides peptides_unique quantifiable</span></span>
 <span><span class="co">#&gt;      ko     4       11             11      116             115         99.1</span></span>
 <span><span class="co">#&gt;      wt     4       11             11      116             115         99.1</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
 <span><span class="co">#&gt;  0.1425569</span></span>
-<span><span class="co">#&gt;  0.1588590</span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1588590</span></span></code></pre></div>
 <p>Aside from filtering directly on <code>protein_accession</code>
 values, subsetting can use any of the columns in the
 <code>experiments</code> table:</p>
@@ -148,74 +159,107 @@ values, subsetting can use any of the columns in the
 <span><span class="co">#&gt; [1] "description"        "gene_id_entrez"     "gene_id_ensemble"  </span></span>
 <span><span class="co">#&gt; [4] "gene_name"          "biological_process" "cellular_component"</span></span>
 <span><span class="co">#&gt; [7] "molecular_function" "wiki_pathway"       "reactome_pathway"</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="using-annotations">Using Annotations<a class="anchor" aria-label="anchor" href="#using-annotations"></a>
+</h3>
 <p>This allows for the specific importing of specialized terms with
 <code><a href="../reference/annotate.html">annotate()</a></code> from which subsetting can be performed.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">cellular_component</span> <span class="op">%like%</span> <span class="st">"Ribosome"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">cellular_component</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">cellular_component</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span> ... done</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
+<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">cellular_component</span> <span class="op">%like%</span> <span class="st">"nucleus"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  sample files proteins protein_groups peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;      ko     4     2772           2772    31271           31025         98.4</span></span>
-<span><span class="co">#&gt;      wt     4     2772           2772    31271           31025         98.5</span></span>
+<span><span class="co">#&gt;      ko     4        6              6       78              71         90.1</span></span>
+<span><span class="co">#&gt;      wt     4        6              6       78              71         91.0</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
-<span><span class="co">#&gt;  0.1380689</span></span>
-<span><span class="co">#&gt;  0.1612074</span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1244344</span></span>
+<span><span class="co">#&gt;  0.1502377</span></span></code></pre></div>
 <p>Additionally, provided the quantitative platform produces an imputed
 value commonly referred to as “match between runs”, the data can be
 filtered to exclude these values. This can be valuable in cases were
 true presence/absence is desired, larger portions of the proteome
 differ.</p>
+</div>
+<div class="section level3">
+<h3 id="using-accountings">Using Accountings<a class="anchor" aria-label="anchor" href="#using-accountings"></a>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">match_between_runs</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">match_between_runs</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">FALSE</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">match_between_runs</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">FALSE</span> ... done</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  sample files proteins protein_groups peptides peptides_unique quantifiable</span></span>
 <span><span class="co">#&gt;      ko     4     2683           2683    30779           30562         99.1</span></span>
 <span><span class="co">#&gt;      wt     4     2666           2666    30811           30589         99.1</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
 <span><span class="co">#&gt;  0.1329208</span></span>
-<span><span class="co">#&gt;  0.1558694</span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1558694</span></span></code></pre></div>
 <p>Also, data can be filtered to proteins containing a desired number of
 underlying peptides.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">mum_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Variable `mum_peptides` not found in data.</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
 <span><span class="co">#&gt;  sample files proteins protein_groups peptides peptides_unique quantifiable</span></span>
 <span><span class="co">#&gt;      ko     4     2772           2772    31271           31025         98.4</span></span>
 <span><span class="co">#&gt;      wt     4     2772           2772    31271           31025         98.5</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
 <span><span class="co">#&gt;  0.1380689</span></span>
-<span><span class="co">#&gt;  0.1612074</span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1612074</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">num_unique_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">num_unique_peptides</span> <span style="color: #0000BB;">&lt;=</span> <span style="color: #FF5F00; font-style: italic;">1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">num_unique_peptides</span> <span style="color: #0000BB;">&lt;=</span> <span style="color: #FF5F00; font-style: italic;">1</span> ... done</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  sample files proteins protein_groups peptides peptides_unique quantifiable</span></span>
 <span><span class="co">#&gt;      ko     4      336            336      396             336         50.7</span></span>
 <span><span class="co">#&gt;      wt     4      336            336      396             336         50.3</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
 <span><span class="co">#&gt;  0.2357830</span></span>
-<span><span class="co">#&gt;  0.2518408</span></span>
+<span><span class="co">#&gt;  0.2518408</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">cellular_component</span> <span class="op">%like%</span> <span class="st">"cytosol"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="co">#&gt;  files proteins protein_groups peptides peptides_unique quantifiable     CVs</span></span>
+<span><span class="co">#&gt;      8      969            969    14954           14828         98.9 0.13241</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="split-then-merge">Split then Merge<a class="anchor" aria-label="anchor" href="#split-then-merge"></a>
+</h3>
+<p>Here is an example where data is split into two groups, independently
+manipulated, the merged back together. Not advisable for an experiment
+like this, just for demonstration purposes.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data_ko</span> <span class="op">&lt;-</span> <span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">sample</span> <span class="op">%like%</span> <span class="st">"ko"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'median'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data_wt</span> <span class="op">&lt;-</span> <span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">sample</span> <span class="op">%like%</span> <span class="st">"wt"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'median'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge.html">merge</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">data_ko</span>, <span class="va">data_wt</span><span class="op">)</span>, quantitative_source <span class="op">=</span> <span class="st">'all'</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data_new</span></span>
+<span><span class="co">#&gt; Quantitation    8 files </span></span>
+<span><span class="co">#&gt;                 2 samples (ko, wt) </span></span>
+<span><span class="co">#&gt;                 2772 proteins </span></span>
+<span><span class="co">#&gt;                 4.8 log10 dynamic range </span></span>
+<span><span class="co">#&gt;  *imputed       within samples via .Primitive("min"). within samples via .Primitive("min"). </span></span>
+<span><span class="co">#&gt; Accounting      (5) match_between_runs num_peptides num_unique_peptides num_psms</span></span>
+<span><span class="co">#&gt;                 imputed </span></span>
+<span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name</span></span>
+<span><span class="co">#&gt;                 biological_process cellular_component</span></span>
+<span><span class="co">#&gt;                 molecular_function wiki_pathway</span></span>
+<span><span class="co">#&gt;                 reactome_pathway </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
-  </main>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  sample files proteins protein_groups peptides peptides_unique quantifiable</span></span>
+<span><span class="co">#&gt;      ko     4     2772           2772    31271           31025         98.4</span></span>
+<span><span class="co">#&gt;      wt     4     2772           2772    31271           31025         98.5</span></span>
+<span><span class="co">#&gt;        CVs</span></span>
+<span><span class="co">#&gt;  0.1380689</span></span>
+<span><span class="co">#&gt;  0.1612074</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

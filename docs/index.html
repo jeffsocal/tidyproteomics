@@ -65,9 +65,12 @@
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="articles/importing.html">importing</a>
     <a class="dropdown-item" href="articles/subsetting.html">subsetting</a>
+    <a class="dropdown-item" href="articles/normalizing.html">normalizing</a>
+    <a class="dropdown-item" href="articles/imputing.html">imputing</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="articles/workflow-simple.html">Workflow - Import &amp; Summary</a>
-    <a class="dropdown-item" href="articles/workflow-subset.html">Workflow - Subset</a>
+    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <a class="dropdown-item" href="articles/01-workflow-import.html">01 Simple</a>
+    <a class="dropdown-item" href="articles/02-workflow-publication.html">02 Publication Demo</a>
   </div>
 </li>
       </ul>
@@ -111,14 +114,14 @@
 <div class="section level2">
 <h2 id="get-started">Get Started<a class="anchor" aria-label="anchor" href="#get-started"></a>
 </h2>
-<p>Its simple to get started. Make a new project, drop your raw data in a folder labeled <em>data</em>. For more information see <code><a href="articles/workflow-simple.html">vignette("workflow-simple")</a></code></p>
+<p>Its simple to get started. Make a new project, drop your raw data in a folder labeled <em>data</em>. For more information see <code>vignette("workflow-simple")</code></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tidyproteomics</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="st">"./data/some_ProteomeDiscoverer_data.xlsx"</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="st">"./data/some_ProteomeDiscoverer_data.xlsx"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="reference/import.html">import</a></span><span class="op">(</span><span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span><span class="op">)</span></span>
 <span>  </span>
-<span><span class="va">data</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"samples"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"samples"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

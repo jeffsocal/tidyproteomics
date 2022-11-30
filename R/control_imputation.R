@@ -23,6 +23,7 @@
 impute <- function(
     data = NULL,
     impute_function = base::min,
+    method = c('within', 'between'),
     minimum_to_impute = 0.25,
     cores = 2
 ){
@@ -32,7 +33,7 @@ impute <- function(
   imputed.x <- NULL
 
   check_data(data)
-
+  method <- rlang::arg_match(method)
   quant_source <- data$quantitative_source
   table <- data %>% extract(quant_source, na.rm = TRUE)
 
@@ -47,19 +48,21 @@ impute <- function(
 
     impute_function_str <- rlang::quo_text(impute_function)
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-    cli::cli_progress_step("Imputing by {.emph {impute_function_str}}")
+    cli::cli_progress_step("Imputing {.emph {method}} samples by {.emph {impute_function_str}}")
 
-    table <- table %>% impute_byfunction(impute_function, minimum_to_impute = minimum_to_impute)
-    data$operations <- append(data$operations, glue::glue("Missing values imputed via {impute_function_str}."))
+    table <- table %>% impute_byfunction(impute_function, minimum_to_impute = minimum_to_impute, method = method)
+    data$operations <- append(data$operations, glue::glue("Missing values imputed {method} samples via {impute_function_str}."))
 
   } else if(mode(impute_function) == 'character' && impute_function == 'randomforest') {
 
+    method <- 'between'
+
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-    cli::cli_progress_step("Imputing by {.emph impute_function}")
+    cli::cli_progress_step("Imputing {.emph {method}} samples by {.emph {impute_function_str}}")
 
     l_out <- table %>% impute_randomforest(minimum_to_impute = minimum_to_impute, cores = cores)
     table <- l_out$table
-    data$operations <- append(data$operations, glue::glue("Missing values imputed via {impute_function}."))
+    data$operations <- append(data$operations, glue::glue("Missing values imputed {method} samples via {impute_function}."))
     data$operations <- append(data$operations, l_out$operation)
   } else {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))

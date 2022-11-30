@@ -19,12 +19,16 @@ navbar:
         href: articles/importing.html
       - text: subsetting
         href: articles/subsetting.html
+      - text: normalizing
+        href: articles/normalizing.html
+      - text: imputing
+        href: articles/imputing.html
       - text: -------
-      - text: Workflow - Import & Summary
-        href: articles/workflow-simple.html
-      - text: Workflow - Subset
-        href: articles/workflow-subset.html
-
+      - text: Workflows
+      - text: 01 Simple
+        href: articles/01-workflow-import.html
+      - text: 02 Publication Demo
+        href: articles/02-workflow-publication.html
 
 template:
   bootstrap: 5

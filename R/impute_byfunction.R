@@ -11,6 +11,7 @@
 impute_byfunction <- function(
     table = NULL,
     impute_function = stats::median,
+    method = c('within', 'between'),
     minimum_to_impute = 0.25
 ){
 
@@ -22,7 +23,7 @@ impute_byfunction <- function(
   sample_rep <- NULL
 
   check_table(table)
-
+  method <- rlang::arg_match(method)
   impute_function_name <- gsub("\\.", "_", as.character(methods::functionBody(impute_function))[2])
 
   tryCatch({
@@ -60,16 +61,29 @@ impute_byfunction <- function(
       ) %>%
       dplyr::mutate(imputed = is.na(abundance))
 
-    table_impute <- table_long %>%
-      dplyr::group_by(sample_rep) %>%
-      dplyr::mutate(abundance = ifelse(is.na(abundance),
-                                       impute_function(abundance, na.rm=TRUE),
-                                       abundance)) %>%
-      dplyr::ungroup() %>%
-      dplyr::inner_join(
-        tb_exps, by='sample_rep'
-      ) %>%
-      dplyr::select("identifier", "sample", "replicate", "abundance", "imputed")
+    if(method == 'within') {
+      table_impute <- table_long %>%
+        dplyr::group_by(sample_rep) %>%
+        dplyr::mutate(abundance = ifelse(is.na(abundance),
+                                         impute_function(abundance, na.rm=TRUE),
+                                         abundance)) %>%
+        dplyr::ungroup() %>%
+        dplyr::inner_join(
+          tb_exps, by='sample_rep'
+        ) %>%
+        dplyr::select("identifier", "sample", "replicate", "abundance", "imputed")
+    } else {
+      table_impute <- table_long %>%
+        dplyr::group_by(identifier) %>%
+        dplyr::mutate(abundance = ifelse(is.na(abundance),
+                                         impute_function(abundance, na.rm=TRUE),
+                                         abundance)) %>%
+        dplyr::ungroup() %>%
+        dplyr::inner_join(
+          tb_exps, by='sample_rep'
+        ) %>%
+        dplyr::select("identifier", "sample", "replicate", "abundance", "imputed")
+    }
 
   }, error = function(err) {
     err = as.character(as.vector(err))

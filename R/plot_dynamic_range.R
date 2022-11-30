@@ -43,7 +43,7 @@ plot_dynamic_range <- function(
   check_data(data)
 
   quant_values_all <- c('raw', 'median', 'scaled', 'linear',
-                        'limma', 'loess', 'randomforest')
+                        'limma', 'loess', 'svm', 'randomforest')
   quant_values <- get_quant_names(data)
   data_quant <- data %>% extract(values = quant_values)
 

@@ -7,6 +7,7 @@
 impute_byfunction(
   table = NULL,
   impute_function = stats::median,
+  method = c("within", "between"),
   minimum_to_impute = 0.25
 )
 }

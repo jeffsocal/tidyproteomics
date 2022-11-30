@@ -2,11 +2,14 @@
 title: "Subsetting"
 output: rmarkdown::html_vignette
 description: |
-  r - omics: coded wiring for local analysis of quantitative omics data
+  tidyproteomics: simplified data object and analysis functions
 vignette: >
   %\VignetteIndexEntry{Subsetting}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r, echo = FALSE}
@@ -15,7 +18,24 @@ set.seed(1041)
 options(dplyr.print_max = 10)
 ```
 
-Subsetting data in tidyproteomics with `subset()` is straight forward, and similar to the tidyverse function `tidyverse::filter()`. This function however introduces a new concept for pattern matching which is similar to SQL syntax, `%like%` and `%!like%` will include or exclude string based variables that contain the matching regular expression. The name `subset()` is used here to avoid conflicting with `dplyr::filter()` and to also separate it as a tidyproteomics specific function due to the underlying nature of the tidyproteomics data structure.
+Subsetting data in tidyproteomics with `subset()` is straight forward,
+and similar to the tidyverse function `tidyverse::filter()`. The name
+`subset()` is used here to avoid conflicting with `dplyr::filter()` and
+to also separate it as a tidyproteomics specific function due to the
+underlying nature of the tidyproteomics data structure. The function
+`subset()` allows data to be easily filtered with simple semantic
+expressions, similar to how the filter function in the tidyverse package
+dplyr operates. This package also introduces two new operators that work
+as a regular expression filter, similar to SQL syntax, (***%like%*** and
+***%!like%***) which can be used in the semantic expression to subset
+data base on pattern matching in variable groups. For example, the
+expression ***`description %!like% 'ribosome'`*** would keep all
+proteins with a description that does not include the word *'ribosome'*.
+Additionally, together with the `merge()` and `reassign()` functions,
+data can be combined from multiple sources, assigned to specific sample
+groups and analyzed in a single collective. Alternatively, for example,
+data can be separated, normalized and imputed independently then
+recombined back into a single collective for analysis and visualization.
 
 ```{r, message = FALSE}
 library("dplyr")
@@ -24,42 +44,97 @@ library("tidyproteomics")
 ecoli_proteins %>% summary('sample')
 ```
 
-Subsetting can be a powerful way to slice-and-dice data, print quick stats or provide a quick visualization. For example, the ecoli data set can be subset to just the proteins with "Ribosome" in the description:
+### Examples
+Subsetting can be a powerful way to slice-and-dice data, print quick
+stats or provide a quick visualization. For example, the ecoli data set
+can be subset to just the proteins with "Ribosome" in the description:
 
-```{r}
+```{r, message = FALSE}
 ecoli_proteins %>% subset(description %like% "Ribosome") %>% summary('sample')
 ```
 
-Aside from filtering directly on `protein_accession` values, subsetting can use any of the columns in the `experiments` table:
+Aside from filtering directly on `protein_accession` values, subsetting
+can use any of the columns in the `experiments` table:
+
 ```{r}
 colnames(ecoli_proteins$experiments)
 ```
 
 any of the terms in the `accounting` table:
+
 ```{r}
 colnames(ecoli_proteins$accounting)
 ```
 
 and any of the terms in the `annotations` table:
+
 ```{r}
 ecoli_proteins$annotations$term %>% unique()
 ```
 
-This allows for the specific importing of specialized terms with `annotate()` from which subsetting can be performed.
-```{r}
-ecoli_proteins %>% subset(cellular_component %like% "Ribosome") %>% summary('sample')
+### Using Annotations
+This allows for the specific importing of specialized terms with
+`annotate()` from which subsetting can be performed.
+
+```{r, message = FALSE}
+ecoli_proteins %>% subset(cellular_component %like% "nucleus") %>% summary('sample')
 ```
 
-Additionally, provided the quantitative platform produces an imputed value commonly referred to as "match between runs", the data can be filtered to exclude these values. This can be valuable in cases were true presence/absence is desired, larger portions of the proteome differ.
-```{r}
+Additionally, provided the quantitative platform produces an imputed
+value commonly referred to as "match between runs", the data can be
+filtered to exclude these values. This can be valuable in cases were
+true presence/absence is desired, larger portions of the proteome
+differ.
+
+### Using Accountings
+```{r, message = FALSE}
 ecoli_proteins %>% subset(match_between_runs == FALSE) %>% summary('sample')
 ```
 
-Also, data can be filtered to proteins containing a desired number of underlying peptides.
-```{r}
+Also, data can be filtered to proteins containing a desired number of
+underlying peptides.
+
+```{r, message = FALSE}
 ecoli_proteins %>% subset(mum_peptides <= 1) %>% summary('sample')
 ```
 
-```{r}
+```{r, message = FALSE}
 ecoli_proteins %>% subset(num_unique_peptides <= 1) %>% summary('sample')
+```
+
+```{r, message = FALSE}
+ecoli_proteins %>% 
+  subset(cellular_component %like% "cytosol") %>% 
+  summary() 
+```
+
+### Split then Merge
+Here is an example where data is split into two groups, independently
+manipulated, the merged back together. Not advisable for an experiment
+like this, just for demonstration purposes.
+
+```{r, message = FALSE}
+data_ko <- ecoli_proteins %>% 
+  subset(sample %like% "ko") %>% 
+  normalize(.method = c('median')) %>%
+  impute()
+
+data_wt <- ecoli_proteins %>% 
+  subset(sample %like% "wt") %>% 
+  normalize(.method = c('median')) %>%
+  impute()
+
+data_new <- merge(list(data_ko, data_wt), quantitative_source = 'all')
+```
+
+```{r, message = FALSE}
+data_new
+```
+
+```{r, message = FALSE}
+data_new %>% summary('sample')
+```
+
+```{r}
+data_new %>% operations()
 ```

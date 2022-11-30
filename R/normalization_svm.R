@@ -5,41 +5,42 @@
 #'
 #' @return a tibble
 #'
-normalize_loess <- function(
+normalize_svm <- function(
     data = NULL,
     data_centered = NULL
 ){
 
   # visible bindings
   identifier <- NULL
-  replicate <- NULL
-  sample <- NULL
   abundance <- NULL
   abundance_centered <- NULL
 
-  pre_range <- data$abundance %>% range()
-  pst_range <- data_centered$abundance %>% range(na.rm = TRUE)
-
-  adjust_loess_control <- F
-  if(pre_range[1] < pst_range[1] | pre_range[2] > pst_range[2]){
-    adjust_loess_control <- T
-  }
-
   data_norm <- data %>%
+    dplyr::group_by(sample, replicate) %>%
+    tidyr::nest(data = c('identifier', 'abundance'))
+
+  data_mdl <- data %>%
     dplyr::inner_join(data_centered, by='identifier', suffix = c("","_centered")) %>%
     dplyr::select(identifier, replicate, sample, abundance, abundance_centered) %>%
     dplyr::group_by(sample, replicate) %>%
     tidyr::nest(data = c('identifier', 'abundance', 'abundance_centered')) %>%
-    dplyr::mutate(m = purrr::map(data, stats::loess, formula = abundance_centered ~ abundance))
+    dplyr::ungroup()
 
-  for( i in 1:nrow(data_norm) ){
-    tdf <- data_norm$data[[i]]
-    lm <- data_norm$m[[i]]
-    if(adjust_loess_control == T){
-      data_norm$data[[i]]$abundance_normalized <- stats::predict(lm, newdata=tdf$abundance, control=stats::loess.control(surface="direct"))
-    } else {
-      data_norm$data[[i]]$abundance_normalized <- stats::predict(lm, newdata=tdf$abundance)
-    }
+  for( i in 1:nrow(data_mdl) ){
+
+    vals_medn <- data_mdl$data[[i]]$abundance_centered %>% unlist()
+    vals_this <- data_mdl$data[[i]]$abundance %>% unlist()
+
+    nlm_par <- e1071::tune.svm(vals_medn ~ vals_this,
+                               type = 'eps-regression', kernel = 'linear',
+                               gamma = 2^(-1:1), cost = 2^(2:4))
+
+    nlm <- e1071::svm(vals_medn ~ vals_this,
+                      type = 'eps-regression', kernel = 'linear',
+                      gamma = nlm_par$best.parameters$gamma[1],
+                      cost = nlm_par$best.parameters$cost[1])
+
+    data_norm$data[[i]]$abundance_normalized <- stats::predict(nlm, newdata=data_norm$data[[i]]$abundance)
   }
 
   nms <- c('identifier', 'sample', 'replicate', 'abundance_normalized')

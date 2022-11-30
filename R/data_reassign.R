@@ -65,7 +65,7 @@ reassign <- function(
   } else if(!is.character(replace)){
     cli::cli_abort("`replace` must be a charcter string")
   } else if(length(w) == 0) {
-    cli::cli_abort("did not pattern {.emph {pattern}} in {.emph {field}}")
+    cli::cli_abort("did not find {.emph {pattern}} in {.emph {field}}")
   }else {
 
     w <- which(grepl(pattern, as.data.frame(data$experiments)[,field]))

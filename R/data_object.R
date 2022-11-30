@@ -10,6 +10,7 @@ print.tidyproteomics <- function(
     obj
 ) {
 
+  check_data(obj)
   obj_size <- as.numeric(object.size(obj))
   names_samples <- unique(unlist(obj$experiments$sample))
   names_accounting <- names(obj$accounting)
@@ -31,11 +32,20 @@ print.tidyproteomics <- function(
   println("", glue::glue("{length(unique(unlist(obj$quantitative[obj$identifier[1]])))} {obj$identifier[1]}s"))
   println("", glue::glue("{signif(dynamic_range,2)} log10 dynamic range"))
 
-  println("Accounting", glue::glue("({length(names_accounting)}) {paste(names_accounting, collapse=' ')}"))
+  if(obj$quantitative_source != 'raw') {println(" *normalized", glue::glue("{obj$quantitative_source}"))}
+  v_impt <- obj %>% get_variables('accounting')
+  if('imputed' %in% v_impt) {
+    v_impt <- obj$operations[which(grepl('imputed.*via', obj$operations))]
+    v_impt <- sub(".*imputed\\s+", "", v_impt)
+    v_impt <- gsub("(\\s|\\n)+", " ", v_impt)
+    println(" *imputed", glue::glue("{v_impt}"))
+  }
+
+  println("Accounting", glue::glue("({length(names_accounting)}) {stringr::str_wrap(paste(names_accounting, collapse=' '), 60, exdent = 16)}"))
 
   if(!is.null(obj$annotations)) {
     names_annotations <- unique(unlist(obj$annotations$term))
-    println("Annotations", glue::glue("({length(names_annotations)}) {paste(names_annotations, collapse=' ')}"))
+    println("Annotations", glue::glue("({length(names_annotations)}) {stringr::str_wrap(paste(names_annotations, collapse=' '), 60, exdent = 16)}"))
   }
 
   if(!is.null(obj$analysis)) {
@@ -43,10 +53,9 @@ print.tidyproteomics <- function(
     for(comp in names(obj$analysis)) {
       analyses <- sort(names(obj$analysis[[comp]]), decreasing = TRUE)
       terms <- ''
-      if('enrichment' %in% analyses) {terms <- glue::glue("({names(obj$analysis[[comp]][['enrichment']])})")}
+      if('enrichment' %in% analyses) {terms <- glue::glue("({paste(names(obj$analysis[[comp]][['enrichment']]), collapse =', ')})")}
       println("", glue::glue("{comp} -> {paste(analyses, collapse=' & ')} {terms}"))
     }
-
   }
 
   println("")

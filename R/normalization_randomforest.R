@@ -19,6 +19,9 @@ normalize_randomforest <- function(
     dplyr::group_by(sample, replicate) %>%
     tidyr::nest(data = c('identifier', 'abundance'))
 
+  data_centered <- data_centered %>%
+    dplyr::filter(!is.na(abundance))
+
   data_mdl <- data %>%
     dplyr::inner_join(data_centered, by='identifier', suffix = c("","_centered")) %>%
     dplyr::select(identifier, replicate, sample, abundance, abundance_centered) %>%
@@ -31,9 +34,9 @@ normalize_randomforest <- function(
     vals_medn <- data_mdl$data[[i]]$abundance_centered %>% unlist()
     vals_this <- data_mdl$data[[i]]$abundance %>% unlist()
 
-    lm <- randomForest::randomForest(vals_medn ~ vals_this)
+    nlm <- randomForest::randomForest(vals_medn ~ vals_this)
 
-    data_norm$data[[i]]$abundance_normalized <- stats::predict(lm, newdata=data_norm$data[[i]]$abundance)
+    data_norm$data[[i]]$abundance_normalized <- stats::predict(nlm, newdata=data_norm$data[[i]]$abundance)
   }
 
   nms <- c('identifier', 'sample', 'replicate', 'abundance_normalized')

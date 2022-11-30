@@ -1,0 +1,99 @@
+---
+title: "01 Import and Summarize"
+output: rmarkdown::html_vignette
+description: |
+  tidyproteomics: simplified data object and analysis functions
+vignette: >
+  %\VignetteIndexEntry{Workflows: Simple}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+The following is a simple workflow for the importing and summarizing of a data set. The tidyproteomics data object has a defined `print()` function that will summarized the data contents, while the `summary()` function will provide a statistical summary of the quantitative data with values as described in Table 1.
+
+*Table 1 - summary table description*
+
+| Colunm          | Accounting                               |
+|-----------------|------------------------------------------|
+| *first*         | group (eg sample name)                   |
+| files           | *integer* number present in group        |
+| proteins        | *integer* number present in group        |
+| protein_groups  | *integer* number present in group        |
+| peptides        | *integer* number present in group        |
+| peptides_unique | *integer* number present in group        |
+| quantifiable    | *percent* ratio of non-zero values       |
+| CVs             | *ratio* quantitative abundance (sd/mean) |
+
+```{r, message = FALSE}
+library("dplyr")
+library("tidyproteomics")
+```
+
+### Importing Data
+
+```{r}
+# path_to_package_data() loads data specific to this package
+# for your project load local data
+# example: 
+# your_proteins <- "./data/your_exported_results.xlsx" %>%
+#   import("ProteomeDiscoverer", "proteins")
+
+ecoli_proteins <- path_to_package_data("pd_ecoli-hint_proteins.xlsx") %>%
+  import("ProteomeDiscoverer", "proteins")
+```
+
+#### Print Data Contents
+
+Printing the imported data object, or simply exposing the object will show a summary of the data object contents
+
+```{r}
+ecoli_proteins
+```
+
+As more operations are performed on the data, more of the contents are summarized
+
+```{r}
+ecoli_proteins %>%
+  reassign(field = 'sample', pattern = 'hint_ko', replace = 'ko') %>%
+  expression(ko/wt) %>%
+  enrichment(ko/wt, .term = 'biological_process') %>%
+  enrichment(ko/wt, .term = 'molecular_function')
+```
+
+#### Summarize Quantitative Data
+
+Use the explicit `summary()` function summarize the data, in this case globally.
+
+```{r}
+ecoli_proteins %>% summary()
+```
+
+Here is a summary by unique sample names
+
+```{r}
+ecoli_proteins %>% summary(by = 'sample') 
+```
+
+A summary that includes contamination where the description is contains 'CRAP', as in the crap-ome
+
+```{r}
+ecoli_proteins %>% summary(contamination = 'CRAP') 
+```
+
+A summary for contamination where we specify where the description is contains 'ribosome'
+
+```{r}
+ecoli_proteins %>% summary(contamination = "ribosome") 
+```
+
+A summary based on a term set in the provided annotations
+
+```{r}
+ecoli_proteins %>% summary('biological_process')
+```
