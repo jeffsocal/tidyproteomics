@@ -5,7 +5,7 @@
 #' as foldchange ~ statistical significance. See also `plot_proportion()`.  This function can
 #' take either a tidyproteomics data object or a table with the required headers.
 #'
-#' @param table a tibble
+#' @param data a tibble
 #' @param ... two sample comparison
 #' @param log2fc_column a character defining the column name of the log2 foldchange values.
 #' @param log2fc_min a numeric defining the minimum log2 foldchange to highlight.

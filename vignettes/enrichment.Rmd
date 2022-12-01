@@ -1,0 +1,48 @@
+---
+title: "Enrichment"
+output: rmarkdown::html_vignette
+description: |
+  tidyproteomics: simplified data object and analysis functions
+vignette: >
+  %\VignetteIndexEntry{Subsetting}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+### Term Enrichment
+
+Term enrichment analysis is possible proceeding an expression analysis with the `enrichment()` function, employing either the _GSEA_ algorithm or a simple _Wilcoxon rank sum_ comparison, and can be visualized with the `plot_enrichment()` function.
+
+```{r, message=FALSE, warning=FALSE}
+library("dplyr")
+library("tidyproteomics")
+
+rdata <- ecoli_proteins %>% 
+  normalize(.method = 'linear') %>%
+  impute(impute_function = base::min) %>%
+  expression(ko/wt) %>%
+  enrichment(ko/wt, .term = 'biological_process')
+```
+
+#### Exporting Results
+The results of this analysis are stored in the tidyproteomics data-object and can easily be exported to save as a flat data table or used in an external down stream analysis.
+```{r}
+
+rdata %>% export_analysis(ko/wt, .analysis = 'enrichment', .term = 'biological_process')
+```
+
+#### Enrichment Plot
+
+```{r}
+
+rdata %>% plot_enrichment(ko/wt, .term = 'biological_process')
+```

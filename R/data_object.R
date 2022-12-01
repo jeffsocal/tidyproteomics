@@ -26,7 +26,8 @@ print.tidyproteomics <- function(
   dynamic_range <- log10(mean(dynamic_range$abundance_q995, na.rm = TRUE)) - log10(mean(dynamic_range$abundance_q005, na.rm = TRUE))
 
   cli::cli_h2(cli::style_bold("{.emph Quantitative Proteomics Data Object}"))
-  cli::cli_text("{obj$origin} -> {obj$analyt} ({prettyunits::pretty_bytes(obj_size)})")
+  println("Origin", glue::glue("{obj$origin}"))
+  println("", glue::glue("{obj$analyt} ({prettyunits::pretty_bytes(obj_size)})"))
   println("Quantitation", glue::glue("{nrow(obj$experiments)} files"))
   println("", glue::glue("{length(names_samples)} samples ({paste(names_samples, collapse=', ')})"))
   println("", glue::glue("{length(unique(unlist(obj$quantitative[obj$identifier[1]])))} {obj$identifier[1]}s"))

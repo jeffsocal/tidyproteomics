@@ -16,14 +16,15 @@ set.seed(1041)
 options(dplyr.print_max = 10)
 ```
 
-An R package for the post processing and analysis of quantitative proteomic data - effectively wiring inputs and outputs for complex analyses akin to bundled copper wires that are used to create a circuit for residential electrical services. This package supports at a high level:
+Tidyproteomics is an R package for the post processing and analysis of quantitative proteomic data. Accomplished through a simplified S3 data object and corrisponing function. This package supports at a high level:
 
 -   data filtering
 -   data visualization
 -   quantitative normalization & imputation
 -   two-sample expression & term enrichment analysis
+-   protein inference, sequence coverage and visualization
 
-The objective of tidyproteomics is to simplify the post analysis of many proteomics projects by providing an R framework for the analysis and integration of methods and algorithms. The goal to is provide a set of functional steps to processing your data, a record of that processing and methods for visualization. It is intended to be much like how the tidyverse provides data processing functions that can be piped together for easily understood and cleaner code.
+The objective of tidyproteomics is to simplify the post analysis of many proteomics projects by providing an R framework for the analysis and integration of methods and algorithms. The goal to is provide a set of functional steps to processing your data, a record of that processing and methods for visualization. It is intended to be much like how the tidyverse provides data processing functions that can be piped together for easily understood and cleaner code. Reference the `vignette("workflow-publication")`.
 
 While there are several well developed and exceptional tools available to perform the exact same analysis, they are often tied to specific up-stream inputs, perform only a portion of the desired analysis, or have limited licensing availability.
 
@@ -33,6 +34,8 @@ This package was designed to allow for expansion and integration of other algori
 ## Package overview
 
 ### data manipulation
+
+Reference `vignette("importing")` and `vignette("subsetting")`
 
 -   `import()` - imports data from several sources into the tidyproteomics data object
 -   `subset()` - subset a tidyproteomics data object by a given *regex*
@@ -49,10 +52,14 @@ This package was designed to allow for expansion and integration of other algori
 
 ### normalization
 
+Reference `vignette("normalizing")`
+
 -   `normalize()` - normalize the raw data from a tidyproteomics data object
 -   `select_normalization()` - use a weighted scheme to automatically pick the best normalization method, or manually set one for down-stream analysis
 
 ### impute missing values
+
+Reference `vignette("imputing")`
 
 -   `impute()` - impute missing values from a tidyproteomics data object
 

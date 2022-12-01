@@ -1,5 +1,5 @@
 ---
-title: "02 Pubication Demo"
+title: "Pubication Demo"
 output: rmarkdown::html_vignette
 description: |
   tidyproteomics: simplified data object and analysis functions

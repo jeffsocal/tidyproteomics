@@ -1,0 +1,134 @@
+---
+title: "Expression"
+output: rmarkdown::html_vignette
+description: |
+  tidyproteomics: simplified data object and analysis functions
+vignette: >
+  %\VignetteIndexEntry{Subsetting}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+### Analysis of Two Samples
+
+One of the most fundamental analyses for quantitative proteomics is the
+estimation of univariate differences between two samples. Tidyproteomics
+accommodates two sample analysis using the `expression()` function, the
+results of which can be visualized using the `plot_volcano()` and
+`plot_proportion()` visualization functions as shown below. The
+expression analysis can be accomplished thought the R *limma* package,
+or using any two-sample statistical comparison, the default method
+employs the two-sided T-test. If no values pass the cutoff it will
+automatically choose the top proteins to display.
+
+```{r, message = FALSE}
+
+```
+
+| parameter           | description                                                               | inputs                                                | default        |
+|--------------|---------------------------|-------------------|--------------|
+| log2fc_min          | the minimum cutoff for displaying                                         | *0 to Inf*                                            | *2*            |
+| significance_column | the column to use for significance                                        | *adj_p\_value, p_value*                               | *adj_p\_value* |
+| significance_max    | the minimum cutoff for displaying                                         | *1 to 1/Inf*                                          | *0.05*         |
+| labels_column       | how to label the points                                                   | any value in annotations, eg *gene_name, description* | *protein*      |
+| show_pannels        | show the colored areas highlighting significance                          | *TRUE / FALSE*                                        | *TRUE*         |
+| show_lines          | show the dotted cutoff lines                                              | *TRUE / FALSE*                                        | *TRUE*         |
+| show_fc_scale       | show the second scale on top converting *log2_foldchange* to *foldchange* | *TRUE / FALSE*                                        | *TRUE*         |
+| point_size          | size of each dot                                                          | *1/10* to *5*                                         | *NULL*         |
+| color_positive      | color for positive expression                                             | [any R accepts](https://r-charts.com/colors/)         | *dodgerblue*   |
+| color_negative      | color for negative expression                                             | [any R accepts](https://r-charts.com/colors/)         | *firebrick1*   |
+
+```{r, message=FALSE}
+library("dplyr")
+library("tidyproteomics")
+
+rdata <- ecoli_proteins %>% 
+  normalize(.method = 'linear') %>%
+  impute(impute_function = base::min) %>%
+  expression(ko/wt)
+```
+
+#### Exporting Results
+
+The results of this analysis are stored in the tidyproteomics
+data-object and can easily be exported to save as a flat data table or
+used in an external down stream analysis.
+
+```{r}
+
+rdata %>% export_analysis(ko/wt, .analysis = 'expression')
+```
+
+#### Volcano Plot
+
+The default is to plot accoring to adjusted p-value with a Log2
+fold-change cutoff of 2 or greater.
+
+```{r}
+
+rdata %>% plot_volcano(ko/wt)
+```
+
+The parameters can be adjusted to suit your needs ...
+
+```{r}
+
+rdata %>% plot_volcano(ko/wt,
+                       significance_column = 'p_value',
+                       log2fc_min = 1)
+```
+
+... or desires.
+
+```{r}
+library(ggplot2)
+
+rdata %>% plot_volcano(ko/wt,
+                       significance_column = 'p_value',
+                       log2fc_min = 1,
+                       color_positive = 'orange',
+                       color_negative = 'purple',
+                       show_lines = FALSE,
+                       show_fc_scale = FALSE,
+                       show_pannels = FALSE,
+                       labels_column = 'gene_name') +
+  labs(title = "A nice volcano plot", subtitle = "with great colors")
+```
+
+#### Proportional Plot
+
+The proportional plot is complementary to the volcano plot and utilizes
+all the same underlying data. The default is to show both the top 1%
+(`proportion_min = 0.01`) along with the values passing the fold-change
+and significance cutoffs.
+
+```{r, message=FALSE}
+library(ggplot2)
+
+rdata %>% plot_proportion(ko/wt)
+```
+
+This plot can likewise also be manipulated like the volcano plot.
+
+```{r}
+library(ggplot2)
+
+rdata %>% plot_proportion(ko/wt,
+                       significance_column = 'p_value',
+                       log2fc_min = 5,
+                       proportion_min = 0.03,
+                       color_positive = 'orange',
+                       color_negative = 'purple',
+                       show_lines = TRUE,
+                       labels_column = 'gene_name')
+
+```

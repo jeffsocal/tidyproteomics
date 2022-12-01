@@ -5,7 +5,7 @@ Authors@R:
     person("Jeff", "Jones", , "jeffj@caltech.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7142-2222"))
 Description: 
-    Creates a simple, universal data structure for the post 
+    Creates a simple, universal S3 data structure for the post 
     analysis of mass spectrometry based quantitative proteomic data. In
     addition, this package collects, adapts and organizes several useful
     algorithms and methods used in typical post analysis workflows.
@@ -49,3 +49,4 @@ Imports:
 Depends: 
     R (>= 2.10)
 LazyData: true
+URL: https://jeffsocal.github.io/tidyproteomics/

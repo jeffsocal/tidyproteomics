@@ -1,5 +1,4 @@
-url: ~
-
+url: https://jeffsocal.github.io/tidyproteomics/
 navbar:
   components:
     home: ~
@@ -11,29 +10,37 @@ navbar:
       menu:
       - text: the tidyproteomics data-object
         href: articles/data-object.html
-      - text: -------
-      - text: importing
+      - text: '-------'
+      - text: Operations
+      - text: Importing
         href: articles/importing.html
-      - text: subsetting
+      - text: Summarizing
+        href: articles/summarizing.html
+      - text: Subsetting
         href: articles/subsetting.html
-      - text: normalizing
+      - text: Normalizing
         href: articles/normalizing.html
-      - text: imputing
+      - text: Imputing
         href: articles/imputing.html
-      - text: -------
+      - text: '-------'
+      - text: Analysis
+      - text: Visualizing
+        href: articles/visualizing.html
+      - text: Expression
+        href: articles/expression.html
+      - text: Enrichment
+        href: articles/enrichment.html
+      - text: '-------'
       - text: Workflows
-      - text: 01 Simple
-        href: articles/01-workflow-simple.html
-      - text: 02 Publication Demo
-        href: articles/02-workflow-publication.html
-      - text: -------
+      - text: Simple
+        href: articles/workflow-simple.html
+      - text: Publication Demo
+        href: articles/workflow-publication.html
+      - text: '-------'
       - text: update history
         href: articles/updates.html
-
 template:
   bootstrap: 5
-  # bootswatch: default
-
 reference:
 - title: Import / Export
   description: |
@@ -46,7 +53,6 @@ reference:
   - load_local
   - save_local
   - save_table
-
 - title: Helper functions
   description: |
     These functions can save data and tables out to the project folder, add
@@ -60,14 +66,11 @@ reference:
   - annotate
   - show_annotations
   - path_to_package_data
-
 - title: Subsetting
   description: |
     **Subsetting** filters an tidyproteomics data-object by a given regular expression to
     create a subset. See `vignette("subsetting")` for more details and examples.
-  contents:
-  - subset
-
+  contents: subset
 - title: Summarizing
   description: |
     **Summarizing** computes quick summary statistics on a given tidyproteomics data-object.
@@ -78,23 +81,19 @@ reference:
   - summary.tidyproteomics
   - plot_counts
   - plot_quantrank
-
 - title: Normalizing
   description: |
     **Normalizing** adjusts the quantitiative values between samples to remove
     collection biases, based on a number of methods.
-    See `vignette("normalization")` for more details and examples.
+    See `vignette("normalizing")` for more details and examples.
   contents:
   - normalize
   - select_normalization
-
 - title: Imputing
   description: |
     **Imputing** calculates values for missing observations, based on a number of methods.
-    See `vignette("impute")` for more details and examples.
-  contents:
-  - impute
-
+    See `vignette("imputing")` for more details and examples.
+  contents: impute
 - title: Visualization
   description: |
     **Visualizing** data is important for understanding the underlying quality of the
@@ -109,13 +108,12 @@ reference:
   - plot_euler
   - plot_pca
   - plot_heatmap
-
 - title: Two-sample Analysis
   description: |
     **Two-sample Analysis** is a process by which two samples are statistically
     compared to identify potential observational outliers worth explroing
     further.
-    See `vignette("visualization")` for more details and examples.
+    See `vignette("expression")` and `vignette("enrichment")` for more details and examples.
   contents:
   - expression
   - plot_volcano
@@ -123,7 +121,6 @@ reference:
   - plot_compexp
   - enrichment
   - plot_enrichment
-
 - title: Protein Sequencing
   description: |
     **Protein Sequencing** allows for the visulaization of peptide sequences
@@ -132,8 +129,6 @@ reference:
   contents:
   - plot_protein
   - protein_map
-
-
 - title: internal
   contents:
   - center
@@ -189,7 +184,6 @@ reference:
   - transform_factor
   - transform_log2
   - transform_median
-
   - match_vect
   - set_vect
   - hash_vector
@@ -202,3 +196,4 @@ reference:
   - write_local
   - println
   - tidyproteomics
+

@@ -67,10 +67,7 @@ stats_summary <- function(
       peptides_unique = ceiling(num_unique_peptides %>% sum(na.rm = T) / length(unique(sample_id))),
       quantifiable = signif(num_unique_peptides[!is.na(abundance)] %>% sum(na.rm=T) / length(unique(sample_id)) / peptides * 100, 3),
       .groups = 'drop'
-    ) %>%
-    dplyr::select(dplyr::all_of(c(group_by, 'proteins', 'protein_groups', 'peptides',
-                                  'peptides_unique', 'quantifiable'))) %>%
-    dplyr::filter(!is.na(quantifiable))
+    )
   cli::cli_process_done()
   cli::cli_progress_cleanup()
 

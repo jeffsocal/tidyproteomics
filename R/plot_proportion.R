@@ -16,7 +16,7 @@
 #' @param proportion_min a numeric defining the minimum proportional expression to highlight.
 #' @param labels_column a character defining the column name of the column for labeling.
 #' @param label_significance a boolean for labeling values below the significance threshold.
-#' @param show_panels a boolean for showing colored up/down expression panels.
+#' @param show_pannels a boolean for showing colored up/down expression panels.
 #' @param show_lines a boolean for showing threshold lines.
 #' @param show_fc_scale a boolean for showing the secondary foldchange scale.
 #' @param point_size a numeric for shanging the point size.
@@ -59,7 +59,7 @@ plot_proportion <- function(
     proportion_min = 0.01,
     labels_column = 'protein',
     label_significance = TRUE,
-    show_panels = FALSE,
+    show_pannels = FALSE,
     show_lines = TRUE,
     show_fc_scale = TRUE,
     point_size = NULL,
@@ -183,7 +183,7 @@ plot_proportion <- function(
     ggplot2::geom_point(data = table_neg, alpha=.5, color=color_negative) +
     ggplot2::geom_point(data = table_pos, alpha=.5, color=color_positive)
 
-  if(show_panels == TRUE) {
+  if(show_pannels == TRUE) {
     plot <- plot +
       ggplot2::annotate("rect",
                         xmin = -Inf, xmax = -fc_min,

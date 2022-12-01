@@ -1,0 +1,143 @@
+---
+title: "Summarizing"
+output: rmarkdown::html_vignette
+description: |
+  tidyproteomics: simplified data object and analysis functions
+vignette: >
+  %\VignetteIndexEntry{Subsetting}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+Summarizing proteomics data is vital to understanding the bigger picture
+and conveying summary stats that set the tone for the larger analysis.
+The results of each summary can be directed to via the destination
+option to `"print"` on screen, `"save"` to a file or `"return"` as a
+tibble.
+
+```{r, message = FALSE}
+library("dplyr")
+library("tidyproteomics")
+```
+
+### Printing
+
+The tidyproteomics data object can be printed to show a summary of the
+object contents.
+
+```{r}
+ecoli_proteins
+```
+
+And these can expand to encompass additions generated through other
+operations.
+
+```{r}
+ecoli_proteins %>% expression(ko/wt) %>% enrichment(ko/wt, .term = 'biological_process')
+```
+
+### Summarizing
+
+#### Groups
+
+The tidyproteomics data object can summarize the quantitative and
+accounting data ...
+
+```{r}
+ecoli_proteins %>% summary()
+```
+
+... using columns corrisponing to experimental meta-data ...
+
+```{r}
+ecoli_proteins %>% summary(by = 'sample')
+```
+
+... terms in the annotation meta-data ...
+
+```{r}
+ecoli_proteins %>% summary(by = 'biological_process')
+```
+
+... and even terms in the accounting data ...
+
+```{r}
+ecoli_proteins %>% summary(by = 'num_peptides')
+```
+
+```{r}
+ecoli_proteins %>% summary(by = 'match_between_runs')
+```
+
+#### Contamination
+
+In addition, the data can account for any type of contamination. If the
+key word "CRAP" is use then the data will partition out by *Keratin*,
+*BSA*, *Trypsin* and *Other*, so long as the protein descriptions
+contain CRAP and presumably originate from the
+[CRAPome](https://reprint-apms.org/?q=chooseworkflow). However, any
+FASTA file, used at the data translation step (eg with
+ProteomeDiscoverer), and manipulated to contain CRAP in the description
+can be utilized.
+
+```{r}
+ecoli_proteins %>% summary(contamination = 'CRAP')
+```
+
+Alternatively, any protein descriptor can also be use ...
+
+```{r}
+ecoli_proteins %>% summary(contamination = 'Trypsin')
+```
+
+... and as such.
+
+```{r}
+ecoli_proteins %>% summary(contamination = 'ribosome')
+```
+
+### Visualizing
+
+Currently two summary visualizations are implemented in tidyproteomics.
+
+#### Counts
+
+In a simple grouped barchart, proteins (individual, and groups) as well
+as peptides (all, unique) are displayed with the match-between-runs
+shown as the margin above the ms2 evidenced identifications.
+
+```{r}
+ecoli_proteins %>% plot_counts()
+```
+
+#### Quantitation
+
+In recent literature a summary of protein quantitation has been
+visualized as a rank-based dot-plot.
+
+```{r}
+ecoli_proteins %>% plot_quantrank()
+```
+
+Additionally, this plot can be extended to highlight statistical
+differences via an unbiased all-pair-wise comparison, to give an
+anticipated view of how to guide downstream analyses.
+
+```{r}
+ecoli_proteins %>% plot_quantrank(display_filter = 'log2_foldchange', display_cutoff = 2)
+```
+
+Filter to limit to the range `c(low, high)` and display the protein ids.
+
+```{r}
+ecoli_proteins %>% plot_quantrank(show_rank_scale = TRUE, limit_rank = c(1,25))
+```

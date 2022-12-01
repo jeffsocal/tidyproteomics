@@ -1,5 +1,5 @@
 ---
-title: "Normalization"
+title: "Normalizing"
 output: rmarkdown::html_vignette
 description: |
   tidyproteomics: simplified data object and analysis functions
