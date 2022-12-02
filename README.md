@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # tidyproteomics <a href=''><img src="man/figures/logo.png" align="right" height="139"/></a>
 
 An R package for the post processing and analysis of quantitative
@@ -28,7 +22,7 @@ annotations and accountings like *match_between_runs* and
 *num_peptides*.
 
 | operator        | description          | example                                          |
-|-------------------|-------------------|------------------------------------|
+|-------------------|-------------------|-----------------------------------|
 | ==              | equals               | `sample == 'wt'` , `match_between_runs == FALSE` |
 | !=              | does not equal       | `biological_function != 'DNA metabolism'`        |
 | \<, \>          | less, greater than   | `num_unique_peptides >= 2`                       |
@@ -37,10 +31,11 @@ annotations and accountings like *match_between_runs* and
 | /               | ratio                | `experiment / control`                           |
 
 Expression analysis also utilizes this type of syntax when referencing
-samples for analysis. For example `data %>% expression(ko/wt)` would know to run the
-differential expression of the sample *ko* with respect to the sample
-*wt* such that positive log2 difference would be up-expressed in *ko*
-and a negative log2 differences would be down-expressed in *ko*.
+samples for analysis. For example `data %>% expression(ko/wt)` would
+know to run the differential expression of the sample *ko* with respect
+to the sample *wt* such that positive log2 difference would be
+up-expressed in *ko* and a negative log2 differences would be
+down-expressed in *ko*.
 
 ## Installation
 
