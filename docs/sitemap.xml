@@ -1,483 +1,498 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/404.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/articles/01-workflow-import.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/01-workflow-import.html</loc>
   </url>
   <url>
-    <loc>/articles/01-workflow-simple.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/01-workflow-simple.html</loc>
   </url>
   <url>
-    <loc>/articles/02-workflow-publication.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/02-workflow-publication.html</loc>
   </url>
   <url>
-    <loc>/articles/02-workflow-subset.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/02-workflow-subset.html</loc>
   </url>
   <url>
-    <loc>/articles/03-workflow-normalize-impute.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/03-workflow-normalize-impute.html</loc>
   </url>
   <url>
-    <loc>/articles/data-object.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/data-object.html</loc>
   </url>
   <url>
-    <loc>/articles/get-started.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/enrichment.html</loc>
   </url>
   <url>
-    <loc>/articles/importing.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/expression.html</loc>
   </url>
   <url>
-    <loc>/articles/imputing.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/get-started.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/importing.html</loc>
   </url>
   <url>
-    <loc>/articles/normalization.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/imputing.html</loc>
   </url>
   <url>
-    <loc>/articles/normalizing.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/romics.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/normalization.html</loc>
   </url>
   <url>
-    <loc>/articles/subsetting.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/normalizing.html</loc>
   </url>
   <url>
-    <loc>/articles/updates.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/romics.html</loc>
   </url>
   <url>
-    <loc>/articles/workflow-simple.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/subsetting.html</loc>
   </url>
   <url>
-    <loc>/articles/workflow-subset.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/summarizing.html</loc>
   </url>
   <url>
-    <loc>/articles/workflow_simple.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/updates.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/visualizing.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/workflow-publication.html</loc>
   </url>
   <url>
-    <loc>/reference/add_annotations.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/workflow-simple.html</loc>
   </url>
   <url>
-    <loc>/reference/align_modification.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/workflow-subset.html</loc>
   </url>
   <url>
-    <loc>/reference/align_peptide.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/workflow_simple.html</loc>
   </url>
   <url>
-    <loc>/reference/analysis_contamination.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/authors.html</loc>
   </url>
   <url>
-    <loc>/reference/analysis_summary.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/index.html</loc>
   </url>
   <url>
-    <loc>/reference/annotate.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/add_annotations.html</loc>
   </url>
   <url>
-    <loc>/reference/annotate_table.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/align_modification.html</loc>
   </url>
   <url>
-    <loc>/reference/center.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/align_peptide.html</loc>
   </url>
   <url>
-    <loc>/reference/check_data.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/analysis_contamination.html</loc>
   </url>
   <url>
-    <loc>/reference/check_table.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/analysis_summary.html</loc>
   </url>
   <url>
-    <loc>/reference/check_ui.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/annotate.html</loc>
   </url>
   <url>
-    <loc>/reference/codify.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/annotate_table.html</loc>
   </url>
   <url>
-    <loc>/reference/collapse.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/center.html</loc>
   </url>
   <url>
-    <loc>/reference/data_import.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/check_data.html</loc>
   </url>
   <url>
-    <loc>/reference/down_select.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/check_table.html</loc>
   </url>
   <url>
-    <loc>/reference/ecoli_peptides.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/check_ui.html</loc>
   </url>
   <url>
-    <loc>/reference/ecoli_proteins.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/codify.html</loc>
   </url>
   <url>
-    <loc>/reference/enrichment.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/collapse.html</loc>
   </url>
   <url>
-    <loc>/reference/enrichment_gsea.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/data_import.html</loc>
   </url>
   <url>
-    <loc>/reference/enrichment_wilcoxon.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/down_select.html</loc>
   </url>
   <url>
-    <loc>/reference/export.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/ecoli_peptides.html</loc>
   </url>
   <url>
-    <loc>/reference/export_analysis.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/ecoli_proteins.html</loc>
   </url>
   <url>
-    <loc>/reference/export_quant.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/enrichment.html</loc>
   </url>
   <url>
-    <loc>/reference/expression.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/enrichment_gsea.html</loc>
   </url>
   <url>
-    <loc>/reference/expression_limma.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/enrichment_wilcoxon.html</loc>
   </url>
   <url>
-    <loc>/reference/expression_test.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/export.html</loc>
   </url>
   <url>
-    <loc>/reference/extract.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/export_analysis.html</loc>
   </url>
   <url>
-    <loc>/reference/fgeomean.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/export_quant.html</loc>
   </url>
   <url>
-    <loc>/reference/fmean.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/expression.html</loc>
   </url>
   <url>
-    <loc>/reference/fmedian.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/expression_limma.html</loc>
   </url>
   <url>
-    <loc>/reference/fmin.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/expression_test.html</loc>
   </url>
   <url>
-    <loc>/reference/fsum.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/extract.html</loc>
   </url>
   <url>
-    <loc>/reference/get_annotation_terms.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/fgeomean.html</loc>
   </url>
   <url>
-    <loc>/reference/get_annotations.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/fmean.html</loc>
   </url>
   <url>
-    <loc>/reference/get_columns.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/fmedian.html</loc>
   </url>
   <url>
-    <loc>/reference/get_quant_names.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/fmin.html</loc>
   </url>
   <url>
-    <loc>/reference/get_sample_names.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/fsum.html</loc>
   </url>
   <url>
-    <loc>/reference/get_segment.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/get_annotation_terms.html</loc>
   </url>
   <url>
-    <loc>/reference/get_unique_variables.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/get_annotations.html</loc>
   </url>
   <url>
-    <loc>/reference/get_variables.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/get_columns.html</loc>
   </url>
   <url>
-    <loc>/reference/getpath.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/get_quant_names.html</loc>
   </url>
   <url>
-    <loc>/reference/hash_vector.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/get_sample_names.html</loc>
   </url>
   <url>
-    <loc>/reference/hdf.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/get_segment.html</loc>
   </url>
   <url>
-    <loc>/reference/import.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/get_unique_variables.html</loc>
   </url>
   <url>
-    <loc>/reference/import_dn_peps.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/get_variables.html</loc>
   </url>
   <url>
-    <loc>/reference/import_mq_peps.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/getpath.html</loc>
   </url>
   <url>
-    <loc>/reference/import_mq_prots.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/hash_vector.html</loc>
   </url>
   <url>
-    <loc>/reference/import_pd_peps.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/hdf.html</loc>
   </url>
   <url>
-    <loc>/reference/import_pd_prots.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/import.html</loc>
   </url>
   <url>
-    <loc>/reference/import_sk_peps.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/import_dn_peps.html</loc>
   </url>
   <url>
-    <loc>/reference/impute.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/import_mq_peps.html</loc>
   </url>
   <url>
-    <loc>/reference/impute_byfunction.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/import_mq_prots.html</loc>
   </url>
   <url>
-    <loc>/reference/impute_randomforest.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/import_pd_peps.html</loc>
   </url>
   <url>
-    <loc>/reference/impute_ratio.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/import_pd_prots.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/import_sk_peps.html</loc>
   </url>
   <url>
-    <loc>/reference/invlog2.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/impute.html</loc>
   </url>
   <url>
-    <loc>/reference/list_venn.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/impute_byfunction.html</loc>
   </url>
   <url>
-    <loc>/reference/load_from_project.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/impute_randomforest.html</loc>
   </url>
   <url>
-    <loc>/reference/load_local.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/impute_ratio.html</loc>
   </url>
   <url>
-    <loc>/reference/load_omics.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/match_vect.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/invlog2.html</loc>
   </url>
   <url>
-    <loc>/reference/meld.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/list_venn.html</loc>
   </url>
   <url>
-    <loc>/reference/merge.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/load_from_project.html</loc>
   </url>
   <url>
-    <loc>/reference/merge_quantitative.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/load_local.html</loc>
   </url>
   <url>
-    <loc>/reference/modify.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/load_omics.html</loc>
   </url>
   <url>
-    <loc>/reference/munge_identifier.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/match_vect.html</loc>
   </url>
   <url>
-    <loc>/reference/normalize.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/meld.html</loc>
   </url>
   <url>
-    <loc>/reference/normalize_colnames.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/merge.html</loc>
   </url>
   <url>
-    <loc>/reference/normalize_limma.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/merge_quantitative.html</loc>
   </url>
   <url>
-    <loc>/reference/normalize_linear.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/modify.html</loc>
   </url>
   <url>
-    <loc>/reference/normalize_loess.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/munge_identifier.html</loc>
   </url>
   <url>
-    <loc>/reference/normalize_median.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/normalize.html</loc>
   </url>
   <url>
-    <loc>/reference/normalize_randomforest.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/normalize_colnames.html</loc>
   </url>
   <url>
-    <loc>/reference/normalize_scaled.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/normalize_limma.html</loc>
   </url>
   <url>
-    <loc>/reference/normalize_svm.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/normalize_linear.html</loc>
   </url>
   <url>
-    <loc>/reference/operations.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/normalize_loess.html</loc>
   </url>
   <url>
-    <loc>/reference/path_to_package_data.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/normalize_median.html</loc>
   </url>
   <url>
-    <loc>/reference/plot.tidyproteomics.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/normalize_randomforest.html</loc>
   </url>
   <url>
-    <loc>/reference/plot.tidyquant.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/normalize_scaled.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_compexp.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/normalize_svm.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_counts.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/operations.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_dynamic_range.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/path_to_package_data.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_enrichment.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot.tidyproteomics.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_euler.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot.tidyquant.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_heatmap.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_compexp.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_normalization.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_counts.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_pca.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_dynamic_range.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_proportion.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_enrichment.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_protein.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_euler.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_quantrank.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_heatmap.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_save.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_normalization.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_variation.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_pca.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_variation_cv.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_proportion.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_variation_pca.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_protein.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_venn.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_quantrank.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_venneuler.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_save.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_volcano.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_variation.html</loc>
   </url>
   <url>
-    <loc>/reference/print.tidyproteomics.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_variation_cv.html</loc>
   </url>
   <url>
-    <loc>/reference/print.tidyquant.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_variation_pca.html</loc>
   </url>
   <url>
-    <loc>/reference/println.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_venn.html</loc>
   </url>
   <url>
-    <loc>/reference/protein_data.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_venneuler.html</loc>
   </url>
   <url>
-    <loc>/reference/protein_map.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_volcano.html</loc>
   </url>
   <url>
-    <loc>/reference/protein_map_munge.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/print.tidyproteomics.html</loc>
   </url>
   <url>
-    <loc>/reference/read_data.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/print.tidyquant.html</loc>
   </url>
   <url>
-    <loc>/reference/reassign.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/println.html</loc>
   </url>
   <url>
-    <loc>/reference/remove.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/protein_data.html</loc>
   </url>
   <url>
-    <loc>/reference/reverselog_transformation.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/protein_map.html</loc>
   </url>
   <url>
-    <loc>/reference/rollup.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/protein_map_munge.html</loc>
   </url>
   <url>
-    <loc>/reference/romics_quo.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/read_data.html</loc>
   </url>
   <url>
-    <loc>/reference/save_local.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/reassign.html</loc>
   </url>
   <url>
-    <loc>/reference/save_omics.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/remove.html</loc>
   </url>
   <url>
-    <loc>/reference/save_table.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/reverselog_transformation.html</loc>
   </url>
   <url>
-    <loc>/reference/save_to_project.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/rollup.html</loc>
   </url>
   <url>
-    <loc>/reference/select_normalization.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/romics_quo.html</loc>
   </url>
   <url>
-    <loc>/reference/set_vect.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/save_local.html</loc>
   </url>
   <url>
-    <loc>/reference/show_annotation.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/save_omics.html</loc>
   </url>
   <url>
-    <loc>/reference/show_annotations.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/save_table.html</loc>
   </url>
   <url>
-    <loc>/reference/stats_contamination.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/save_to_project.html</loc>
   </url>
   <url>
-    <loc>/reference/stats_print.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/select_normalization.html</loc>
   </url>
   <url>
-    <loc>/reference/stats_summary.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/set_vect.html</loc>
   </url>
   <url>
-    <loc>/reference/str_normalize.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/show_annotation.html</loc>
   </url>
   <url>
-    <loc>/reference/subset.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/show_annotations.html</loc>
   </url>
   <url>
-    <loc>/reference/subset_in.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/stats_contamination.html</loc>
   </url>
   <url>
-    <loc>/reference/subset_out.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/stats_print.html</loc>
   </url>
   <url>
-    <loc>/reference/summary.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/stats_summary.html</loc>
   </url>
   <url>
-    <loc>/reference/summary.tidyproteomics.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/str_normalize.html</loc>
   </url>
   <url>
-    <loc>/reference/summary.tidyquant.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/subset.html</loc>
   </url>
   <url>
-    <loc>/reference/summary_print.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/subset_in.html</loc>
   </url>
   <url>
-    <loc>/reference/table_quantrank.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/subset_out.html</loc>
   </url>
   <url>
-    <loc>/reference/theme_palette.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/summary.html</loc>
   </url>
   <url>
-    <loc>/reference/tidyproteomics.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/summary.tidyproteomics.html</loc>
   </url>
   <url>
-    <loc>/reference/tidyproteomics_quo.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/summary.tidyquant.html</loc>
   </url>
   <url>
-    <loc>/reference/tidyquant.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/summary_print.html</loc>
   </url>
   <url>
-    <loc>/reference/tidyquant_quo.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/table_quantrank.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_factor.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/theme_palette.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_log2.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/tidyproteomics.html</loc>
   </url>
   <url>
-    <loc>/reference/transform_median.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/tidyproteomics_quo.html</loc>
   </url>
   <url>
-    <loc>/reference/write_local.html</loc>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/tidyquant.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/tidyquant_quo.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/transform_factor.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/transform_log2.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/transform_median.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/write_local.html</loc>
   </url>
 </urlset>

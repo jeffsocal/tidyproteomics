@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="tidyproteomics: simplified data object and analysis functions
 ">
-<title>Imputation • tidyproteomics</title>
+<title>Imputing • tidyproteomics</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -18,10 +18,10 @@
 <link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Imputation">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Imputing">
 <meta property="og:description" content="tidyproteomics: simplified data object and analysis functions
 ">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://jeffsocal.github.io/tidyproteomics/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -55,14 +55,21 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/importing.html">importing</a>
-    <a class="dropdown-item" href="../articles/subsetting.html">subsetting</a>
-    <a class="dropdown-item" href="../articles/normalizing.html">normalizing</a>
-    <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
+    <h6 class="dropdown-header" data-toc-skip>Operations</h6>
+    <a class="dropdown-item" href="../articles/importing.html">Importing</a>
+    <a class="dropdown-item" href="../articles/summarizing.html">Summarizing</a>
+    <a class="dropdown-item" href="../articles/subsetting.html">Subsetting</a>
+    <a class="dropdown-item" href="../articles/normalizing.html">Normalizing</a>
+    <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
+    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
+    <a class="dropdown-item" href="../articles/expression.html">Expression</a>
+    <a class="dropdown-item" href="../articles/enrichment.html">Enrichment</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
-    <a class="dropdown-item" href="../articles/01-workflow-simple.html">01 Simple</a>
-    <a class="dropdown-item" href="../articles/02-workflow-publication.html">02 Publication Demo</a>
+    <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
+    <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -84,7 +91,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Imputation</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Imputing</h1>
             
       
       
@@ -111,30 +118,43 @@ experiment we know how the experiment is affected.</p>
 <strong>within</strong> or <strong>between</strong> samples:</p>
 <table class="table">
 <colgroup>
-<col width="25%">
-<col width="75%">
+<col width="20%">
+<col width="20%">
+<col width="58%">
 </colgroup>
 <thead><tr class="header">
+<th>Function</th>
 <th>Method</th>
 <th>Description</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td>base::min</td>
+<td>
+<strong>within</strong> or <strong>between</strong>
+</td>
 <td>the minimum value in any given set</td>
 </tr>
 <tr class="even">
 <td>stats::median</td>
+<td>
+<strong>within</strong> or <strong>between</strong>
+</td>
 <td>the minimum value in any given set</td>
 </tr>
 <tr class="odd">
 <td><em>user supplied function</em></td>
+<td>
+<strong>within</strong> or <strong>between</strong>
+</td>
 <td>e.g. <em>function (x, na.rm) { quantile(x, 0.05, na.rm = na.rm)[1]
 }</em>
 </td>
 </tr>
 <tr class="even">
-<td>randomforest</td>
+<td>“randomforest”</td>
+<td>
+<strong>between</strong> only</td>
 <td>a non-linear random forest implementation of missForest</td>
 </tr>
 </tbody>
@@ -142,7 +162,7 @@ experiment we know how the experiment is affected.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"tidyproteomics"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jeffsocal.github.io/tidyproteomics/">"tidyproteomics"</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="imputing">Imputing<a class="anchor" aria-label="anchor" href="#imputing"></a>
 </h3>
@@ -168,15 +188,7 @@ experiment we know how the experiment is affected.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">sample</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">identifier</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span> <span style="color: #B2B2B2;">[56ms]</span></span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... 439 values imputed</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">protein</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">P05706|P0A8R4|P0A9K1|P0AAJ8|P0ACE7|P18776|P24</span>…</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">protein</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">P05706|P0A8R4|P0A9K1|P0AAJ8|P0ACE7|P18776|P24</span>…</span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="imputing_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 </div>
 <div class="section level4">
@@ -201,15 +213,7 @@ mutation.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">sample</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">identifier</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Imputing <span style="color: #FF5F00; font-style: italic;">between</span> samples by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">between</span> samples by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span> <span style="color: #B2B2B2;">[73ms]</span></span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... 439 values imputed</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">protein</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">P05706|P0A8R4|P0A9K1|P0AAJ8|P0ACE7|P18776|P24</span>…</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">protein</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">P05706|P0A8R4|P0A9K1|P0AAJ8|P0ACE7|P18776|P24</span>…</span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="imputing_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 </div>
 </div>

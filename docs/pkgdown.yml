@@ -2,14 +2,21 @@ pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
-  01-workflow-simple: 01-workflow-simple.html
-  02-workflow-publication: 02-workflow-publication.html
   data-object: data-object.html
+  enrichment: enrichment.html
+  expression: expression.html
   get-started: get-started.html
   importing: importing.html
   imputing: imputing.html
   normalizing: normalizing.html
   subsetting: subsetting.html
+  summarizing: summarizing.html
   updates: updates.html
-last_built: 2022-11-30T22:37Z
+  visualizing: visualizing.html
+  workflow-publication: workflow-publication.html
+  workflow-simple: workflow-simple.html
+last_built: 2022-12-02T16:47Z
+urls:
+  reference: https://jeffsocal.github.io/tidyproteomics/reference
+  article: https://jeffsocal.github.io/tidyproteomics/articles
 

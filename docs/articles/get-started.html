@@ -21,7 +21,7 @@
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Get Started">
 <meta property="og:description" content="tidyproteomics: simplified data object and analysis functions
 ">
-<meta property="og:image" content="/logo.png">
+<meta property="og:image" content="https://jeffsocal.github.io/tidyproteomics/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -55,14 +55,21 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/importing.html">importing</a>
-    <a class="dropdown-item" href="../articles/subsetting.html">subsetting</a>
-    <a class="dropdown-item" href="../articles/normalizing.html">normalizing</a>
-    <a class="dropdown-item" href="../articles/imputing.html">imputing</a>
+    <h6 class="dropdown-header" data-toc-skip>Operations</h6>
+    <a class="dropdown-item" href="../articles/importing.html">Importing</a>
+    <a class="dropdown-item" href="../articles/summarizing.html">Summarizing</a>
+    <a class="dropdown-item" href="../articles/subsetting.html">Subsetting</a>
+    <a class="dropdown-item" href="../articles/normalizing.html">Normalizing</a>
+    <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
+    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
+    <a class="dropdown-item" href="../articles/expression.html">Expression</a>
+    <a class="dropdown-item" href="../articles/enrichment.html">Enrichment</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
-    <a class="dropdown-item" href="../articles/01-workflow-simple.html">01 Simple</a>
-    <a class="dropdown-item" href="../articles/02-workflow-publication.html">02 Publication Demo</a>
+    <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
+    <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -93,16 +100,16 @@
 
     
     
-<p>An R package for the post processing and analysis of quantitative
-proteomic data - effectively wiring inputs and outputs for complex
-analyses akin to bundled copper wires that are used to create a circuit
-for residential electrical services. This package supports at a high
+<p>Tidyproteomics is an R package for the post processing and analysis
+of quantitative proteomic data. Accomplished through a simplified S3
+data object and corrisponing function. This package supports at a high
 level:</p>
 <ul>
 <li>data filtering</li>
 <li>data visualization</li>
 <li>quantitative normalization &amp; imputation</li>
 <li>two-sample expression &amp; term enrichment analysis</li>
+<li>protein inference, sequence coverage and visualization</li>
 </ul>
 <p>The objective of tidyproteomics is to simplify the post analysis of
 many proteomics projects by providing an R framework for the analysis
@@ -110,7 +117,8 @@ and integration of methods and algorithms. The goal to is provide a set
 of functional steps to processing your data, a record of that processing
 and methods for visualization. It is intended to be much like how the
 tidyverse provides data processing functions that can be piped together
-for easily understood and cleaner code.</p>
+for easily understood and cleaner code. Reference the
+<code><a href="../articles/workflow-publication.html">vignette("workflow-publication")</a></code>.</p>
 <p>While there are several well developed and exceptional tools
 available to perform the exact same analysis, they are often tied to
 specific up-stream inputs, perform only a portion of the desired
@@ -125,6 +133,8 @@ intended to be open for review, improvement and bug fixing.</p>
 <div class="section level3">
 <h3 id="data-manipulation">data manipulation<a class="anchor" aria-label="anchor" href="#data-manipulation"></a>
 </h3>
+<p>Reference <code><a href="../articles/importing.html">vignette("importing")</a></code> and
+<code><a href="../articles/subsetting.html">vignette("subsetting")</a></code></p>
 <ul>
 <li>
 <code><a href="../reference/import.html">import()</a></code> - imports data from several sources into the
@@ -165,6 +175,7 @@ quantitative expression for all proteins observed</li>
 <div class="section level3">
 <h3 id="normalization">normalization<a class="anchor" aria-label="anchor" href="#normalization"></a>
 </h3>
+<p>Reference <code><a href="../articles/normalizing.html">vignette("normalizing")</a></code></p>
 <ul>
 <li>
 <code><a href="../reference/normalize.html">normalize()</a></code> - normalize the raw data from a
@@ -178,6 +189,7 @@ for down-stream analysis</li>
 <div class="section level3">
 <h3 id="impute-missing-values">impute missing values<a class="anchor" aria-label="anchor" href="#impute-missing-values"></a>
 </h3>
+<p>Reference <code><a href="../articles/imputing.html">vignette("imputing")</a></code></p>
 <ul>
 <li>
 <code><a href="../reference/impute.html">impute()</a></code> - impute missing values from a tidyproteomics
@@ -256,7 +268,7 @@ enrichment for a given expression test</li>
 <h4 id="a-simple-work-flow-for-importing-data-and-summarizing">A simple work flow for importing data and summarizing<a class="anchor" aria-label="anchor" href="#a-simple-work-flow-for-importing-data-and-summarizing"></a>
 </h4>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"tidyproteomics"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jeffsocal.github.io/tidyproteomics/">"tidyproteomics"</a></span><span class="op">)</span></span>
 <span><span class="va">ecoli_proteins</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"proteins"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span><span class="op">)</span> </span>
 <span></span>

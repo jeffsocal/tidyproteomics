@@ -35,7 +35,7 @@ automatically choose the top proteins to display.
 ```
 
 | parameter           | description                                                               | inputs                                                | default        |
-|--------------|---------------------------|-------------------|--------------|
+|---------------------|---------------------------------------------------------------------------|-------------------------------------------------------|----------------|
 | log2fc_min          | the minimum cutoff for displaying                                         | *0 to Inf*                                            | *2*            |
 | significance_column | the column to use for significance                                        | *adj_p\_value, p_value*                               | *adj_p\_value* |
 | significance_max    | the minimum cutoff for displaying                                         | *1 to 1/Inf*                                          | *0.05*         |
