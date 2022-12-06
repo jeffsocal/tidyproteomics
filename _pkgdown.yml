@@ -135,8 +135,8 @@ reference:
   - data_import
   - check_data
   - check_table
-  - ecoli_peptides
-  - ecoli_proteins
+  - hela_peptides
+  - hela_proteins
   - enrichment_gsea
   - enrichment_wilcoxon
   - expression_limma

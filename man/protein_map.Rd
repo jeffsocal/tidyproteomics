@@ -21,7 +21,7 @@ Align a peptide data to protein sequences for visualization
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 
-ecoli_protein_map <- ecoli_peptides \%>\%
+hela_protein_map <- hela_peptides \%>\%
    protein_map(fasta = path_to_package_data('fasta'))
 
 }

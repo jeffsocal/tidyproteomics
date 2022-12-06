@@ -14,9 +14,9 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>%
-#'    expression(ko/wt) %>%
-#'    export_analysis(ko/wt, .analysis = 'expression') %>%
+#' hela_proteins %>%
+#'    expression(knockdown/control) %>%
+#'    export_analysis(knockdown/control, .analysis = "expression") %>%
 #'    save_table("expression_limma_ko_over_wt.csv")
 #'
 save_table <- function(

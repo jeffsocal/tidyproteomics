@@ -113,12 +113,12 @@ The expression analysis can be accomplished thought the R <em>limma</em>
 package, or using any two-sample statistical comparison, the default
 method employs the two-sided T-test. If no values pass the cutoff it
 will automatically choose the top proteins to display.</p>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
-<col width="12%">
-<col width="44%">
-<col width="32%">
-<col width="9%">
+<col width="18%">
+<col width="36%">
+<col width="25%">
+<col width="18%">
 </colgroup>
 <thead><tr class="header">
 <th>parameter</th>
@@ -198,10 +198,10 @@ will automatically choose the top proteins to display.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jeffsocal.github.io/tidyproteomics/">"tidyproteomics"</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="st">'linear'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="st">'loess'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span>impute_function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="exporting-results">Exporting Results<a class="anchor" aria-label="anchor" href="#exporting-results"></a>
 </h4>
@@ -210,21 +210,21 @@ data-object and can easily be exported to save as a flat data table or
 used in an external down stream analysis.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/export_analysis.html">export_analysis</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span>, .analysis <span class="op">=</span> <span class="st">'expression'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,651 × 18</span></span></span>
+<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/export_analysis.html">export_analysis</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .analysis <span class="op">=</span> <span class="st">'expression'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5,672 × 18</span></span></span>
 <span><span class="co">#&gt;    protein imputed     n avera…¹ propo…² foldc…³ log2_…⁴ p_value adj_p…⁵ descr…⁶</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> P77795    0.25      8  4.15<span style="color: #949494;">e</span>5 7.14<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>   21.3     4.41  0.143        1 Unchar…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> P0AF06    0.375     8  3.95<span style="color: #949494;">e</span>5 6.80<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>   20.4     4.35  0.047<span style="text-decoration: underline;">6</span>       1 Motili…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> P43531    0.375     8  1.91<span style="color: #949494;">e</span>5 3.28<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>   15.8     3.99  0.078<span style="text-decoration: underline;">2</span>       1 Inner …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> P67127    0.125     8  5.84<span style="color: #949494;">e</span>5 1.00<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>   11.4     3.51  0.569        1 UPF005…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> P0A9K1    0.25      8  2.07<span style="color: #949494;">e</span>5 3.55<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>   10.3     3.37  0.109        1 Protei…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> P05706    0.375     8  1.82<span style="color: #949494;">e</span>5 3.12<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>    7.59    2.92  0.530        1 PTS sy…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> P76394    0.25      8  2.47<span style="color: #949494;">e</span>5 4.24<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>    5.34    2.42  0.033<span style="text-decoration: underline;">9</span>       1 Unchar…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> P77213    0.375     8  1.02<span style="color: #949494;">e</span>5 1.75<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>    5.06    2.34  0.114        1 Putati…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> P76086    0         8  6.62<span style="color: #949494;">e</span>6 1.14<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    5.03    2.33  0.179        1 Transc…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> P75811    0.625     8  4.12<span style="color: #949494;">e</span>5 7.08<span style="color: #949494;">e</span><span style="color: #BB0000;">-7</span>    5.01    2.33  0.343        1 HTH-ty…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 2,641 more rows, 8 more variables: gene_id_entrez &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Q9H6S1    0.333     6  4.08<span style="color: #949494;">e</span>6 1.62<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>   104.     6.70 0.004<span style="text-decoration: underline;">12</span>       1 5-azac…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Q9NRR6    0.5       6  9.62<span style="color: #949494;">e</span>5 3.81<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    28.4    4.83 0.191         1 Phosph…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> P48509    0         6  1.80<span style="color: #949494;">e</span>8 7.15<span style="color: #949494;">e</span><span style="color: #BB0000;">-4</span>    25.7    4.68 0.301         1 CD151 …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Q9UI14    0.333     6  7.84<span style="color: #949494;">e</span>5 3.11<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    21.8    4.45 0.186         1 Prenyl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Q9BY50    0.167     6  1.21<span style="color: #949494;">e</span>6 4.80<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    20.7    4.37 0.001<span style="text-decoration: underline;">72</span>       1 Signal…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> P49427    0.167     6  1.64<span style="color: #949494;">e</span>6 6.50<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    17.7    4.15 0.610         1 Ubiqui…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Q8WUH1    0.167     6  7.65<span style="color: #949494;">e</span>5 3.03<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    17.5    4.13 0.010<span style="text-decoration: underline;">8</span>        1 Protei…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Q9UK39    0.167     6  9.43<span style="color: #949494;">e</span>5 3.74<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    17.4    4.12 0.042<span style="text-decoration: underline;">2</span>        1 Noctur…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> A0A2R8…   0         6  9.73<span style="color: #949494;">e</span>5 3.86<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    17.3    4.12 0.220         1 AP-3 c…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Q96SL8    0.167     6  7.32<span style="color: #949494;">e</span>5 2.90<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    17.2    4.10 0.018<span style="text-decoration: underline;">1</span>        1 Flt3-i…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 5,662 more rows, 8 more variables: gene_id_entrez &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gene_id_ensemble &lt;chr&gt;, gene_name &lt;chr&gt;, biological_process &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   cellular_component &lt;chr&gt;, molecular_function &lt;chr&gt;, wiki_pathway &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   reactome_pathway &lt;chr&gt;, and abbreviated variable names ¹​average_expression,</span></span></span>
@@ -239,18 +239,15 @@ used in an external down stream analysis.</p>
 fold-change cutoff of 2 or greater.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_volcano.html">plot_volcano</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> no values significant at current settings</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #FF5F00; font-style: italic;">log2_foldchange</span> (<span style="color: #BB0000;">2</span>) and <span style="color: #FF5F00; font-style: italic;">adj_p_value</span> (<span style="color: #BB0000;">0.05</span>)</span></span>
-<span><span class="co">#&gt; Warning in min(x): no non-missing arguments to min; returning Inf</span></span>
-<span><span class="co">#&gt; Warning in max(x): no non-missing arguments to max; returning -Inf</span></span></code></pre></div>
+<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_volcano.html">plot_volcano</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span></span></code></pre></div>
 <p><img src="expression_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>The parameters can be adjusted to suit your needs …</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_volcano.html">plot_volcano</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span>,</span>
+<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_volcano.html">plot_volcano</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>,</span>
 <span>                       significance_column <span class="op">=</span> <span class="st">'p_value'</span>,</span>
-<span>                       log2fc_min <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span>                       significance_max <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>                       log2fc_min <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="expression_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>… or desires.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -261,9 +258,10 @@ fold-change cutoff of 2 or greater.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     annotate</span></span>
 <span></span>
-<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_volcano.html">plot_volcano</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span>,</span>
+<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_volcano.html">plot_volcano</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>,</span>
 <span>                       significance_column <span class="op">=</span> <span class="st">'p_value'</span>,</span>
-<span>                       log2fc_min <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                       significance_max <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>                       log2fc_min <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>                       color_positive <span class="op">=</span> <span class="st">'orange'</span>,</span>
 <span>                       color_negative <span class="op">=</span> <span class="st">'purple'</span>,</span>
 <span>                       show_lines <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -283,9 +281,7 @@ passing the fold-change and significance cutoffs.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_proportion.html">plot_proportion</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in min(x): no non-missing arguments to min; returning Inf</span></span>
-<span><span class="co">#&gt; Warning in max(x): no non-missing arguments to max; returning -Inf</span></span>
+<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_proportion.html">plot_proportion</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: ggrepel: 2 unlabeled data points (too many overlaps). Consider</span></span>
 <span><span class="co">#&gt; increasing max.overlaps</span></span></code></pre></div>
 <p><img src="expression_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
@@ -293,15 +289,18 @@ passing the fold-change and significance cutoffs.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_proportion.html">plot_proportion</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span>,</span>
+<span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_proportion.html">plot_proportion</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>,</span>
 <span>                       significance_column <span class="op">=</span> <span class="st">'p_value'</span>,</span>
-<span>                       log2fc_min <span class="op">=</span> <span class="fl">5</span>,</span>
-<span>                       proportion_min <span class="op">=</span> <span class="fl">0.03</span>,</span>
+<span>                       proportion_min <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>                       log2fc_min <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>                       color_positive <span class="op">=</span> <span class="st">'orange'</span>,</span>
 <span>                       color_negative <span class="op">=</span> <span class="st">'purple'</span>,</span>
 <span>                       show_lines <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                       labels_column <span class="op">=</span> <span class="st">'gene_name'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> <span style="color: #0000BB;">proportional_expression</span> appears to sum to 1 adjusting values to 100(%)</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> <span style="color: #0000BB;">proportional_expression</span> appears to sum to 1 adjusting values to 100(%)</span></span>
+<span><span class="co">#&gt; Warning: Removed 1 rows containing missing values (geom_text_repel).</span></span>
+<span><span class="co">#&gt; Warning: ggrepel: 15 unlabeled data points (too many overlaps). Consider</span></span>
+<span><span class="co">#&gt; increasing max.overlaps</span></span></code></pre></div>
 <p><img src="expression_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
 </div>

@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 description: |
   tidyproteomics: simplified data object and analysis functions
 vignette: >
-  %\VignetteIndexEntry{Workflows: Simple}
+  %\VignetteIndexEntry{Import and Summarize}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -44,8 +44,11 @@ library("tidyproteomics")
 # your_proteins <- "./data/your_exported_results.xlsx" %>%
 #   import("ProteomeDiscoverer", "proteins")
 
-ecoli_proteins <- path_to_package_data("pd_ecoli-hint_proteins.xlsx") %>%
-  import("ProteomeDiscoverer", "proteins")
+hela_proteins <- path_to_package_data("p97KD_HCT116") %>%
+  import("ProteomeDiscoverer", "proteins") %>%
+  # change the sample labels
+  reassign('sample', 'ctl', 'ctrl') %>%
+  reassign('sample', 'p97', 'kndw')
 ```
 
 #### Print Data Contents
@@ -53,17 +56,16 @@ ecoli_proteins <- path_to_package_data("pd_ecoli-hint_proteins.xlsx") %>%
 Printing the imported data object, or simply exposing the object will show a summary of the data object contents
 
 ```{r}
-ecoli_proteins
+hela_proteins
 ```
 
 As more operations are performed on the data, more of the contents are summarized
 
 ```{r}
-ecoli_proteins %>%
-  reassign(field = 'sample', pattern = 'hint_ko', replace = 'ko') %>%
-  expression(ko/wt) %>%
-  enrichment(ko/wt, .term = 'biological_process') %>%
-  enrichment(ko/wt, .term = 'molecular_function')
+hela_proteins %>%
+  expression(kndw/ctrl) %>%
+  enrichment(kndw/ctrl, .term = 'biological_process') %>%
+  enrichment(kndw/ctrl, .term = 'molecular_function')
 ```
 
 #### Summarize Quantitative Data
@@ -71,29 +73,29 @@ ecoli_proteins %>%
 Use the explicit `summary()` function summarize the data, in this case globally.
 
 ```{r}
-ecoli_proteins %>% summary()
+hela_proteins %>% summary()
 ```
 
 Here is a summary by unique sample names
 
 ```{r}
-ecoli_proteins %>% summary(by = 'sample') 
+hela_proteins %>% summary(by = 'sample') 
 ```
 
 A summary that includes contamination where the description is contains 'CRAP', as in the crap-ome
 
 ```{r}
-ecoli_proteins %>% summary(contamination = 'CRAP') 
+hela_proteins %>% summary(contamination = 'CRAP') 
 ```
 
 A summary for contamination where we specify where the description is contains 'ribosome'
 
 ```{r}
-ecoli_proteins %>% summary(contamination = "ribosome") 
+hela_proteins %>% summary(contamination = "ribosome") 
 ```
 
 A summary based on a term set in the provided annotations
 
 ```{r}
-ecoli_proteins %>% summary('biological_process')
+hela_proteins %>% summary('biological_process')
 ```

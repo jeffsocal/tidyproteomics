@@ -89,7 +89,7 @@ take either a tidyproteomics data object or a table with the required headers.</
 <span>  proportion_min <span class="op">=</span> <span class="fl">0.01</span>,</span>
 <span>  labels_column <span class="op">=</span> <span class="st">"protein"</span>,</span>
 <span>  label_significance <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  show_panels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show_pannels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show_lines <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  show_fc_scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  point_size <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -139,7 +139,7 @@ take either a tidyproteomics data object or a table with the required headers.</
 <dd><p>a boolean for labeling values below the significance threshold.</p></dd>
 
 
-<dt>show_panels</dt>
+<dt>show_pannels</dt>
 <dd><p>a boolean for showing colored up/down expression panels.</p></dd>
 
 
@@ -190,23 +190,25 @@ take either a tidyproteomics data object or a table with the required headers.</
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>   <span class="fu">plot_proportion</span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span>, log2fc_min <span class="op">=</span> <span class="fl">0.5</span>, significance_column <span class="op">=</span> <span class="st">'p_value'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu">plot_proportion</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, log2fc_min <span class="op">=</span> <span class="fl">0.5</span>, significance_column <span class="op">=</span> <span class="st">'p_value'</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #0000BB;">proportional_expression</span> appears to sum to 1 adjusting values to 100(%)</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>ggrepel: 352 unlabeled data points (too many overlaps). Consider increasing max.overlaps</span>
 <span class="r-plt img"><img src="plot_proportion-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># generates the same out come</span></span></span>
-<span class="r-in"><span><span class="co"># ecoli_proteins %&gt;%</span></span></span>
-<span class="r-in"><span><span class="co">#    expression(ko/wt) %&gt;%</span></span></span>
-<span class="r-in"><span><span class="co">#    export_analysis(ko/wt, .analysis = 'expression) %&gt;%</span></span></span>
+<span class="r-in"><span><span class="co"># hela_proteins %&gt;%</span></span></span>
+<span class="r-in"><span><span class="co">#    expression(knockdown/control) %&gt;%</span></span></span>
+<span class="r-in"><span><span class="co">#    export_analysis(knockdown/control, .analysis = 'expression) %&gt;%</span></span></span>
 <span class="r-in"><span><span class="co">#    plot_proportion(log2fc_min = 0.5, significance_column = 'p_value')</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># display the gene name instead</span></span></span>
-<span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>   <span class="fu">plot_proportion</span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span>, log2fc_min <span class="op">=</span> <span class="fl">0.5</span>, significance_column <span class="op">=</span> <span class="st">'p_value'</span>, labels_column <span class="op">=</span> <span class="st">"gene_name"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu">plot_proportion</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, log2fc_min <span class="op">=</span> <span class="fl">0.5</span>, significance_column <span class="op">=</span> <span class="st">'p_value'</span>, labels_column <span class="op">=</span> <span class="st">"gene_name"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #0000BB;">proportional_expression</span> appears to sum to 1 adjusting values to 100(%)</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>ggrepel: 346 unlabeled data points (too many overlaps). Consider increasing max.overlaps</span>
 <span class="r-plt img"><img src="plot_proportion-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

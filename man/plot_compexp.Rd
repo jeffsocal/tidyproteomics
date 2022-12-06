@@ -71,15 +71,17 @@ library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 
 # comparing two analytical methods, in substitute for two conditions
-exp_a <- ecoli_proteins \%>\% expression(ko/wt) \%>\%
-     export_analysis(ko/wt, .analysis = 'expression')
+exp_a <- hela_proteins \%>\%
+     expression(knockdown/control) \%>\%
+     export_analysis(knockdown/control, .analysis = "expression")
 
-exp_b <- ecoli_proteins \%>\% expression(ko/wt, .method = "limma") \%>\%
-     export_analysis(ko/wt, .analysis = 'expression')
+exp_b <- hela_proteins \%>\%
+     expression(knockdown/control, .method = "limma") \%>\%
+     export_analysis(knockdown/control, .analysis = "expression")
 
-plot_compexp(exp_a, exp_b, log2fc_min = 1, significance_column = 'p_value') +
+plot_compexp(exp_a, exp_b, log2fc_min = 1, significance_column = "p_value") +
      ggplot2::labs(x = "(log2 FC) Wilcoxon Rank Sum",
                    y = "(log2 FC) Emperical Bayes (limma)",
-                   title = "Ecoli Hint KO ~ WT")
+                   title = "Hela p97 Knockdown ~ Control")
 
 }

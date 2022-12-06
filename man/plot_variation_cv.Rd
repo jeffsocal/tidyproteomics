@@ -24,7 +24,7 @@ method that minimizes CVs while also retaining the dynamic range.
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins \%>\%
+hela_proteins \%>\%
   normalize(.method = c("scaled", "median", "linear", "limma", "loess")) \%>\%
   plot_variation_cv()
 

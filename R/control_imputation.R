@@ -14,11 +14,11 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>% summary('sample')
+#' hela_proteins %>% summary("sample")
 #'
-#' ecoli_proteins %>% impute(impute_function = stats::median) %>% summary('sample')
+#' hela_proteins %>% impute(impute_function = stats::median) %>% summary("sample")
 #'
-#' ecoli_proteins %>% impute(impute_function = 'randomforest') %>% summary('sample')
+#' hela_proteins %>% impute(impute_function = "randomforest") %>% summary("sample")
 #'
 impute <- function(
     data = NULL,
@@ -58,7 +58,7 @@ impute <- function(
     method <- 'between'
 
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-    cli::cli_progress_step("Imputing {.emph {method}} samples by {.emph {impute_function_str}}")
+    cli::cli_progress_step("Imputing {.emph {method}} samples by {.emph randomforest}")
 
     l_out <- table %>% impute_randomforest(minimum_to_impute = minimum_to_impute, cores = cores)
     table <- l_out$table
@@ -71,12 +71,17 @@ impute <- function(
 
   cli::cli_progress_done()
 
+  table <- data$experiments %>%
+    dplyr::select(c('sample_id', 'sample', 'replicate')) %>%
+    dplyr::full_join(table, by = c('sample', 'replicate'))
+
   data <- data %>%
     merge_quantitative(table %>% dplyr::select(!imputed), quant_source)
 
   table <- table %>%
     munge_identifier("separate", data$identifier) %>%
     dplyr::select(!dplyr::matches('abundance')) %>%
+    dplyr::select(!dplyr::matches('sample_id')) %>%
     dplyr::full_join(data$experiments, by = c('sample', 'replicate')) %>%
     dplyr::select(!c('sample', 'replicate', 'import_file', 'sample_file'))
 

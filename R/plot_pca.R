@@ -17,17 +17,17 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins <- ecoli_proteins %>%
+#' hela_proteins <- hela_proteins %>%
 #'   normalize(.method = c("scaled", "median", "linear", "limma", "loess")) %>%
 #'   select_normalization()
 #'
-#' ecoli_proteins %>% plot_pca()
+#' hela_proteins %>% plot_pca()
 #'
 #' # a different PC set
-#' ecoli_proteins %>% plot_pca(variables = c("PC2", "PC3"))
+#' hela_proteins %>% plot_pca(variables = c("PC2", "PC3"))
 #'
 #' # a PC scree plot
-#' ecoli_proteins %>% plot_pca("scree")
+#' hela_proteins %>% plot_pca("scree")
 #'
 plot_pca <- function(
     data = NULL,

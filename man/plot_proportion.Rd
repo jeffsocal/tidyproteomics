@@ -15,7 +15,7 @@ plot_proportion(
   proportion_min = 0.01,
   labels_column = "protein",
   label_significance = TRUE,
-  show_panels = FALSE,
+  show_pannels = FALSE,
   show_lines = TRUE,
   show_fc_scale = TRUE,
   point_size = NULL,
@@ -45,7 +45,7 @@ plot_proportion(
 
 \item{label_significance}{a boolean for labeling values below the significance threshold.}
 
-\item{show_panels}{a boolean for showing colored up/down expression panels.}
+\item{show_pannels}{a boolean for showing colored up/down expression panels.}
 
 \item{show_lines}{a boolean for showing threshold lines.}
 
@@ -77,19 +77,19 @@ take either a tidyproteomics data object or a table with the required headers.
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins \%>\%
-   expression(ko/wt) \%>\%
-   plot_proportion(ko/wt, log2fc_min = 0.5, significance_column = 'p_value')
+hela_proteins \%>\%
+   expression(knockdown/control) \%>\%
+   plot_proportion(knockdown/control, log2fc_min = 0.5, significance_column = 'p_value')
 
 # generates the same out come
-# ecoli_proteins \%>\%
-#    expression(ko/wt) \%>\%
-#    export_analysis(ko/wt, .analysis = 'expression) \%>\%
+# hela_proteins \%>\%
+#    expression(knockdown/control) \%>\%
+#    export_analysis(knockdown/control, .analysis = 'expression) \%>\%
 #    plot_proportion(log2fc_min = 0.5, significance_column = 'p_value')
 
 # display the gene name instead
-ecoli_proteins \%>\%
-   expression(ko/wt) \%>\%
-   plot_proportion(ko/wt, log2fc_min = 0.5, significance_column = 'p_value', labels_column = "gene_name")
+hela_proteins \%>\%
+   expression(knockdown/control) \%>\%
+   plot_proportion(knockdown/control, log2fc_min = 0.5, significance_column = 'p_value', labels_column = "gene_name")
 
 }

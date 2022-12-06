@@ -95,10 +95,10 @@ Reference `vignette("imputing")`
 
 ```{r, eval = FALSE}
 library("tidyproteomics")
-ecoli_proteins <- path_to_package_data("proteins") %>%
+hela_proteins <- path_to_package_data("proteins") %>%
   import("ProteomeDiscoverer", "proteins") 
 
-ecoli_proteins %>% summary()
-ecoli_proteins %>% summary(by = 'sample') 
-ecoli_proteins %>% summary(by = 'contamination') 
+hela_proteins %>% summary()
+hela_proteins %>% summary(by = 'sample') 
+hela_proteins %>% summary(by = 'contamination') 
 ```

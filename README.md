@@ -31,7 +31,7 @@ annotations and accountings like *match_between_runs* and
 | /               | ratio                | `experiment / control`                           |
 
 Expression analysis also utilizes this type of syntax when referencing
-samples for analysis. For example `data %>% expression(ko/wt)` would
+samples for analysis. For example `data %>% expression(knockdown/control)` would
 know to run the differential expression of the sample *ko* with respect
 to the sample *wt* such that positive log2 difference would be
 up-expressed in *ko* and a negative log2 differences would be

@@ -106,22 +106,43 @@ This function will only replace the sample string and update the replicate numbe
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># check the experiment table</span></span></span>
-<span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"experiment"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"experiment"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Variable `experiment` not found in data.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># make the modification</span></span></span>
-<span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>   <span class="fu">reassign</span><span class="op">(</span>field <span class="op">=</span> <span class="st">"sample"</span>, pattern <span class="op">=</span> <span class="st">"ko"</span>, replace <span class="op">=</span> <span class="st">"hint_ko"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu">reassign</span><span class="op">(</span>field <span class="op">=</span> <span class="st">"sample"</span>, pattern <span class="op">=</span> <span class="st">"control"</span>, replace <span class="op">=</span> <span class="st">"ct"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu">reassign</span><span class="op">(</span>field <span class="op">=</span> <span class="st">"sample"</span>, pattern <span class="op">=</span> <span class="st">"knockdown"</span>, replace <span class="op">=</span> <span class="st">"kd"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir = list(`?` = function(...) stop()), enclos = envir):</span> object 'method' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  sample files protein_groups proteins peptides peptides_unique quantifiable</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      ct     3           8851     8851    95877           83161         75.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      kd     3           8851     8851    95877           83161         75.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        CVs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1536197</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2120776</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># reassign specific file_ids</span></span></span>
-<span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">reassign</span><span class="op">(</span>field <span class="op">=</span> <span class="st">"sample_file"</span>, pattern <span class="op">=</span> <span class="st">"f1"</span>, replace <span class="op">=</span> <span class="st">"new"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">reassign</span><span class="op">(</span>field <span class="op">=</span> <span class="st">"sample_file"</span>, pattern <span class="op">=</span> <span class="st">"f2"</span>, replace <span class="op">=</span> <span class="st">"new"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir = list(`?` = function(...) stop()), enclos = envir):</span> object 'method' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sample files protein_groups proteins peptides peptides_unique quantifiable</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    control     2           8851     8851    95877           83161         75.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     2           8851     8851    95877           83161         75.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        new     2           8851     8851    95877           83161         75.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        CVs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1299545</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2400136</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2165048</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

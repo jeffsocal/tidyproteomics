@@ -157,7 +157,7 @@ according to individual analyte means</td>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># your_proteins &lt;- "./data/your_exported_results.xlsx" %&gt;%</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   import("ProteomeDiscoverer", "proteins")</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ecoli_proteins <span class="ot">&lt;-</span> <span class="fu">path_to_package_data</span>(<span class="st">"pd_ecoli-hint_proteins.xlsx"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>hela_proteins <span class="ot">&lt;-</span> <span class="fu">path_to_package_data</span>(<span class="st">"pd_ecoli-hint_proteins.xlsx"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">import</span>(<span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">normalize</span>()</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m Importing  [3mpd_ecoli-hint_proteins.xlsx [23m</span></span>
@@ -197,10 +197,10 @@ on the CVs and is the least rigorous. Note here the dramatic reduction
 in CVs <em>randomforest</em> yielded while also maintaining the overall
 dynamic range.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_variation_cv.html">plot_variation_cv</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_variation_cv.html">plot_variation_cv</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="normalization_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_variation_pca.html">plot_variation_pca</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_variation_pca.html">plot_variation_pca</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="normalization_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>The effect <em>randomforest</em> has on the data is most noticable at
 the lower dynamic range, as seen in the plot below where the CVs for

@@ -101,7 +101,7 @@
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># your_proteins &lt;- "./data/your_exported_results.xlsx" %&gt;%</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   import("ProteomeDiscoverer", "proteins")</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>ecoli_proteins <span class="ot">&lt;-</span> <span class="fu">path_to_package_data</span>(<span class="st">"pd_ecoli-hint_proteins.xlsx"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>hela_proteins <span class="ot">&lt;-</span> <span class="fu">path_to_package_data</span>(<span class="st">"pd_ecoli-hint_proteins.xlsx"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">import</span>(<span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span>)</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [36mℹ [39m Importing  [3mpd_ecoli-hint_proteins.xlsx [23m</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [33m! [39m .. not all expected annotation columns present in import file</span></span>
@@ -110,7 +110,7 @@
 <p>Printing the imported data object, or simply exposing the object will
 show a summary of the data object contents</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoli_proteins</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -125,7 +125,7 @@ show a summary of the data object contents</p>
 <p>As more operations are performed on the data, more of the contents
 are summarized</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span>field <span class="op">=</span> <span class="st">'sample'</span>, pattern <span class="op">=</span> <span class="st">'hint_ko'</span>, replace <span class="op">=</span> <span class="st">'ko'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">ko</span><span class="op">/</span><span class="va">wt</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -148,12 +148,12 @@ are summarized</p>
 <span><span class="co">#&gt; Accounting      (4) match_between_runs num_peptides num_unique_peptides num_psms </span></span>
 <span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name biological_process cellular_component molecular_function wiki_pathway reactome_pathway </span></span>
 <span><span class="co">#&gt; Analyses        (1) </span></span>
-<span><span class="co">#&gt;                 ko/wt -&gt; expression &amp; enrichment (biological_process, molecular_function) </span></span>
+<span><span class="co">#&gt;                 knockdown/control -&gt; expression &amp; enrichment (biological_process, molecular_function) </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>Use the explicit <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> function summarize the data,
 in this case globally.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: global</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -162,7 +162,7 @@ in this case globally.</p>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>Here is a summary by unique sample names</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'sample'</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'sample'</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -176,7 +176,7 @@ in this case globally.</p>
 <p>A summary that includes contamination where the description is
 contains ‘CRAP’, as in the crap-ome</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'CRAP'</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'CRAP'</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -202,7 +202,7 @@ contains ‘CRAP’, as in the crap-ome</p>
 <p>A summary for contamination where we specify where the description is
 contains ‘ribosome’</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">"ribosome"</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">"ribosome"</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>

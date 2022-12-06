@@ -16,7 +16,7 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>%
+#' hela_proteins %>%
 #'   normalize(.method = c("linear", "loess", "randomforest")) %>%
 #'   plot_variation_pca()
 #'

@@ -25,13 +25,13 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>% plot_quantrank()
+#' hela_proteins %>% plot_quantrank()
 #'
-#' ecoli_proteins %>% plot_quantrank(type = 'lines')
+#' hela_proteins %>% plot_quantrank(type = "lines")
 #'
-#' ecoli_proteins %>% plot_quantrank(display_filter = 'log2_foldchange', display_cutoff = 1)
+#' hela_proteins %>% plot_quantrank(display_filter = "log2_foldchange", display_cutoff = 1)
 #'
-#' ecoli_proteins %>% plot_quantrank(limit_rank = c(1,50), show_rank_scale = TRUE)
+#' hela_proteins %>% plot_quantrank(limit_rank = c(1,50), show_rank_scale = TRUE)
 #'
 plot_quantrank <- function(
     data = NULL,
@@ -208,11 +208,11 @@ plot_quantrank <- function(
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>% plot_quantrank()
+#' hela_proteins %>% plot_quantrank()
 #'
-#' ecoli_proteins %>% plot_quantrank(type = 'lines')
+#' hela_proteins %>% plot_quantrank(type = 'lines')
 #'
-#' ecoli_proteins %>% plot_quantrank(type = 'lines', display_filter = 'log2_foldchange', display_cutoff = 1)
+#' hela_proteins %>% plot_quantrank(type = 'lines', display_filter = 'log2_foldchange', display_cutoff = 1)
 #'
 table_quantrank <- function(
     data = NULL,

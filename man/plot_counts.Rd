@@ -32,6 +32,6 @@ a (tidyproteomics data-object | ggplot-object)
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins \%>\% plot_counts()
+hela_proteins \%>\% plot_counts()
 
 }

@@ -33,8 +33,8 @@ a tibble
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins \%>\%
+hela_proteins \%>\%
    normalize(.method = "loess") \%>\%
-   export_quant(file_name = "ecoli_quant_data.xlsx", normalized = "loess")
+   export_quant(file_name = "hela_quant_data.xlsx", normalized = "loess")
 
 }

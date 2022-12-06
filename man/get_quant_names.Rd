@@ -18,6 +18,6 @@ normalized quantitative values, such as \emph{raw}, \emph{linear}, \emph{loess}
 }
 \examples{
 library(tidyproteomics)
-get_quant_names(ecoli_proteins)
+get_quant_names(hela_proteins)
 
 }

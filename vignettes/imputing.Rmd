@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 description: |
   tidyproteomics: simplified data object and analysis functions
 vignette: >
-  %\VignetteIndexEntry{Workflows: Simple}
+  %\VignetteIndexEntry{Imputing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -43,10 +43,15 @@ library("tidyproteomics")
 # your_proteins <- "./data/your_exported_results.xlsx" %>%
 #   import("ProteomeDiscoverer", "proteins")
 
-rdata <- path_to_package_data("pd_ecoli-hint_proteins.xlsx") %>%
+rdata <- path_to_package_data("p97KD_HCT116") %>%
   import("ProteomeDiscoverer", "proteins")
 ```
 
+As part of this demonstration, signal from *P06576 in p07_kd* has been artificially removed to simulate a "genetic knockout mutation".
+```{r, message=FALSE}
+w <- which(rdata$quantitative$protein == 'P06576' & rdata$quantitative$sample == 'p97_kd')
+rdata$quantitative <- rdata$quantitative[-w,]
+```
 #### Using *within*
 
 Note the difference using **within** ..
@@ -55,26 +60,27 @@ Note the difference using **within** ..
 
 rdata %>% 
   impute(impute_function = base::min, method = 'within') %>%
-  subset(protein %like% "P05706|P0A8R4|P0A9K1|P0AAJ8|P0ACE7|P18776|P24252|P31826|P32674") %>% 
+  subset(protein %like% "P23443|P51812|P06576") %>% 
   extract() %>%
   ggplot(aes(replicate, abundance)) +
   geom_point(aes(color=sample)) +
   facet_wrap(~identifier) +
-  scale_y_log10()
+  scale_y_log10() +
+  scale_y_log10(limits = c(1e4,1e9))
 ```
 
 #### Using *between*
 
-.. as opposed to **between**. The **between** method can be considered to contain the bias of any *real* offset, note our protein *P0ACE7* (i.e *hinT*), shows the expected offset for the **within** method, and does not for the **between** method. Consider only using **between** methods when imputing values you suspect are missing-at-random. In our case *P0ACE7* (i.e *hinT*) is missing-not-at-random, because we performed a genetic knockout mutation.
+.. as opposed to **between**. The **between** method can be considered to contain the bias of any *real* offset, note our protein *P06576* (i.e our artifical knock-out), shows the expected offset for the **within** method, and does not for the **between** method. Consider only using **between** methods when imputing values you suspect are missing-at-random. In our case *P06576* is missing-not-at-random, because we performed a "genetic knockout mutation".
 
 ```{r, message=FALSE}
 
 rdata %>% 
   impute(impute_function = base::min, method = 'between') %>%
-  subset(protein %like% "P05706|P0A8R4|P0A9K1|P0AAJ8|P0ACE7|P18776|P24252|P31826|P32674") %>% 
+  subset(protein %like% "P23443|P51812|P06576") %>% 
   extract() %>%
   ggplot(aes(replicate, abundance)) +
   geom_point(aes(color=sample)) +
   facet_wrap(~identifier) +
-  scale_y_log10()
+  scale_y_log10(limits = c(1e4,1e9))
 ```

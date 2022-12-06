@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' library(tidyproteomics)
-#' get_quant_names(ecoli_proteins)
+#' get_quant_names(hela_proteins)
 #'
 get_quant_names <- function(data) {
   check_data(data)

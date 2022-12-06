@@ -14,6 +14,7 @@ vignette: >
 -   implemented S3 object for tidyproteomics data object
 -   refactored all functions to accout for new data object
 -   fixed minor issues with exporting data and plots
+-   updated and added more vignettes
 
 ### Version: 0.4.2 - 2022.11.15
 

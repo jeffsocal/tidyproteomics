@@ -22,9 +22,9 @@ Main function for importing data to the tidyproteomics list object
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins <- path_to_package_data("ecoli-hint_proteins") \%>\%
+hela_proteins <- path_to_package_data("p97KD_HCT116") \%>\%
    import("ProteomeDiscoverer", "proteins")
 
-ecoli_proteins \%>\% summary('sample')
+hela_proteins \%>\% summary("sample")
 
 }

@@ -20,13 +20,13 @@ GGplot2 extension to plot a Euler diagram
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins \%>\%
+hela_proteins \%>\%
    subset(match_between_runs == FALSE) \%>\%
    plot_euler()
 
-ecoli_proteins \%>\%
+hela_proteins \%>\%
    subset(match_between_runs == FALSE) \%>\%
-   subset(cellular_component \%like\% 'cytosol') \%>\%
+   subset(cellular_component \%like\% "cytosol") \%>\%
    plot_euler()
 
 }

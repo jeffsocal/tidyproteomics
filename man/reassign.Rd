@@ -27,15 +27,16 @@ library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 
 # check the experiment table
-ecoli_proteins \%>\% summary("experiment")
+hela_proteins \%>\% summary("experiment")
 
 # make the modification
-ecoli_proteins \%>\%
-   reassign(field = "sample", pattern = "ko", replace = "hint_ko") \%>\%
+hela_proteins \%>\%
+   reassign(field = "sample", pattern = "control", replace = "ct") \%>\%
+   reassign(field = "sample", pattern = "knockdown", replace = "kd") \%>\%
    summary("sample")
 
 # reassign specific file_ids
-ecoli_proteins \%>\%
+hela_proteins \%>\%
    reassign(field = "sample_file", pattern = "f1", replace = "new") \%>\%
    reassign(field = "sample_file", pattern = "f2", replace = "new") \%>\%
    summary("sample")

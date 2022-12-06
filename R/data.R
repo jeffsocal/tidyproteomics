@@ -1,6 +1,6 @@
 #' A sample tidyproteomics data object
 #'
-#' A dataset containing the quantitative protein data for thousands of proteins from 4
+#' A dataset containing the quantitative protein data for thousands of proteins from 2
 #' samples with 3 replicates each
 #'
 #' @format A list collection of character values and tibbles:
@@ -10,11 +10,11 @@
 #'   ...
 #' }
 #'
-"ecoli_proteins"
+"hela_proteins"
 
 #' A sample tidyproteomics data object
 #'
-#' A dataset containing the quantitative peptide data for ten proteins from 4
+#' A dataset containing the quantitative peptide data for ten proteins from 2
 #' samples with 3 replicates each
 #'
 #' @format A list collection of character values and tibbles:
@@ -24,4 +24,4 @@
 #'   ...
 #' }
 #'
-"ecoli_peptides"
+"hela_peptides"

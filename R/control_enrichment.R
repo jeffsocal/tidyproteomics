@@ -17,16 +17,16 @@
 #' library(tidyproteomics)
 #'
 #' # using the default GSEA method
-#' ecoli_proteins %>%
-#'    expression(ko/wt) %>%
-#'    enrichment(ko/wt, .term = 'biological_process') %>%
-#'    export_analysis(ko/wt, .analysis = "enrichment")
+#' hela_proteins %>%
+#'    expression(knockdown/control) %>%
+#'    enrichment(knockdown/control, .term = "biological_process") %>%
+#'    export_analysis(knockdown/control, .analysis = "enrichment", .term = "biological_process")
 #'
 #' # using a Wilcoxon Rank Sum method
-#' ecoli_proteins %>%
-#'    expression(ko/wt) %>%
-#'    enrichment(ko/wt, .term = 'biological_process', .method = 'wilcoxon') %>%
-#'    export_analysis(ko/wt, .analysis = "enrichment")
+#' hela_proteins %>%
+#'    expression(knockdown/control) %>%
+#'    enrichment(knockdown/control, .term = "biological_process", .method = "wilcoxon") %>%
+#'    export_analysis(knockdown/control, .analysis = "enrichment", .term = "biological_process")
 #'
 enrichment <- function(
     data = NULL,

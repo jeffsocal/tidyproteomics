@@ -16,9 +16,9 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>%
+#' hela_proteins %>%
 #'    normalize(.method = "loess") %>%
-#'    export_quant(file_name = "ecoli_quant_data.xlsx", normalized = "loess")
+#'    export_quant(file_name = "hela_quant_data.xlsx", normalized = "loess")
 #'
 export_quant <- function(
     data       = NULL,
@@ -125,9 +125,11 @@ export_quant <- function(
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>%
-#'    expression(ko/wt) %>%
-#'    export_analysis(ko/wt, .analysis = "expression", .file_name = "ecoli_expression_ko-wt.xlsx")
+#' hela_proteins %>%
+#'    expression(knockdown/control) %>%
+#'    export_analysis(knockdown/control,
+#'                    .analysis = "expression",
+#'                    .file_name = "hela_expression_kd-cl.xlsx")
 #'
 export_analysis <- function(
     data = NULL,

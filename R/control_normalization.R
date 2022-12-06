@@ -21,17 +21,17 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>%
-#'      normalize(.method = c('scaled', 'median')) %>%
-#'      summary('sample')
+#' hela_proteins %>%
+#'      normalize(.method = c("scaled", "median")) %>%
+#'      summary("sample")
 #'
 #' # normalize between samples according to a subset, then apply to all values
 #' #   this would be recommended with a pull-down experiment wherein a conserved
 #' #   protein complex acts as the majority content and individual inter-actors
 #' #   are of quantitative differentiation
-#' ecoli_proteins %>%
-#'      normalize(description %!like% 'Ribosome', .method = c('scaled', 'median')) %>%
-#'      summary('sample')
+#' hela_proteins %>%
+#'      normalize(description %!like% "Ribosome", .method = c("scaled", "median")) %>%
+#'      summary("sample")
 #'
 normalize <- function(
     data,
@@ -83,7 +83,12 @@ normalize <- function(
 
     dc <- data %>%
       subset(..., .verbose = FALSE) %>%
-      extract(values = 'raw') %>%
+      extract(values = 'raw')
+
+    pst_n <- dc$identifier %>% unique() %>% length()
+    pst_range <- dc$abundance %>% range(na.rm = TRUE)
+
+    dc <- dc %>%
       transform_log2(values = 'abundance') %>%
       dplyr::rename(abundance = abundance_log2) %>%
       dplyr::full_join(
@@ -91,11 +96,9 @@ normalize <- function(
         by = c("identifier", "sample", "replicate")
       )
 
-    pst_n <- dc$identifier %>% unique() %>% length()
-    pst_range <- dc$abundance %>% range(na.rm = TRUE)
 
     cli::cli_alert_warning("  normalization based on {pst_n} of {pre_n} identifiers")
-    data$operations <- append(data$operations, glue::glue(" ... based on a subset {pst_n} of {pre_n} identifiers"))
+    data$operations <- append(data$operations, glue::glue(" ... based on a subset of {pst_n} out of {pre_n} identifiers"))
     if(pre_range[1] < pst_range[1] | pre_range[2] > pst_range[2]){
       cli::cli_alert_warning("  {.emph WARNING}: filter narrowed range, NAs may result")
       cli::cli_alert_warning("  {.emph WARNING}: omitting `limma` and `randomforest` - can not accomidate subsetting")

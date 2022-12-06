@@ -41,35 +41,35 @@ recombined back into a single collective for analysis and visualization.
 library("dplyr")
 library("tidyproteomics")
 
-ecoli_proteins %>% summary('sample')
+hela_proteins %>% summary('sample')
 ```
 
 ### Examples
 Subsetting can be a powerful way to slice-and-dice data, print quick
-stats or provide a quick visualization. For example, the ecoli data set
+stats or provide a quick visualization. For example, the Hela data set
 can be subset to just the proteins with "Ribosome" in the description:
 
 ```{r, message = FALSE}
-ecoli_proteins %>% subset(description %like% "Ribosome") %>% summary('sample')
+hela_proteins %>% subset(description %like% "Ribosome") %>% summary('sample')
 ```
 
 Aside from filtering directly on `protein_accession` values, subsetting
 can use any of the columns in the `experiments` table:
 
 ```{r}
-colnames(ecoli_proteins$experiments)
+colnames(hela_proteins$experiments)
 ```
 
 any of the terms in the `accounting` table:
 
 ```{r}
-colnames(ecoli_proteins$accounting)
+colnames(hela_proteins$accounting)
 ```
 
 and any of the terms in the `annotations` table:
 
 ```{r}
-ecoli_proteins$annotations$term %>% unique()
+hela_proteins$annotations$term %>% unique()
 ```
 
 ### Using Annotations
@@ -77,7 +77,7 @@ This allows for the specific importing of specialized terms with
 `annotate()` from which subsetting can be performed.
 
 ```{r, message = FALSE}
-ecoli_proteins %>% subset(cellular_component %like% "nucleus") %>% summary('sample')
+hela_proteins %>% subset(cellular_component %like% "nucleus") %>% summary('sample')
 ```
 
 Additionally, provided the quantitative platform produces an imputed
@@ -88,22 +88,22 @@ differ.
 
 ### Using Accountings
 ```{r, message = FALSE}
-ecoli_proteins %>% subset(match_between_runs == FALSE) %>% summary('sample')
+hela_proteins %>% subset(match_between_runs == FALSE) %>% summary('sample')
 ```
 
 Also, data can be filtered to proteins containing a desired number of
 underlying peptides.
 
 ```{r, message = FALSE}
-ecoli_proteins %>% subset(mum_peptides <= 1) %>% summary('sample')
+hela_proteins %>% subset(mum_peptides <= 1) %>% summary('sample')
 ```
 
 ```{r, message = FALSE}
-ecoli_proteins %>% subset(num_unique_peptides <= 1) %>% summary('sample')
+hela_proteins %>% subset(num_unique_peptides <= 1) %>% summary('sample')
 ```
 
 ```{r, message = FALSE}
-ecoli_proteins %>% 
+hela_proteins %>% 
   subset(cellular_component %like% "cytosol") %>% 
   summary() 
 ```
@@ -114,17 +114,17 @@ manipulated, the merged back together. Not advisable for an experiment
 like this, just for demonstration purposes.
 
 ```{r, message = FALSE}
-data_ko <- ecoli_proteins %>% 
-  subset(sample %like% "ko") %>% 
+data_kd <- hela_proteins %>% 
+  subset(sample %like% "knockdown") %>% 
   normalize(.method = c('median')) %>%
   impute()
 
-data_wt <- ecoli_proteins %>% 
-  subset(sample %like% "wt") %>% 
+data_ct <- hela_proteins %>% 
+  subset(sample %like% "control") %>% 
   normalize(.method = c('median')) %>%
   impute()
 
-data_new <- merge(list(data_ko, data_wt), quantitative_source = 'all')
+data_new <- merge(list(data_kd, data_ct), quantitative_source = 'all')
 ```
 
 ```{r, message = FALSE}

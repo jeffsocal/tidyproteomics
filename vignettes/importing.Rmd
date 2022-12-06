@@ -76,9 +76,9 @@ The columns following columns should be considered. These can be modified in the
 
 ```{r, eval = FALSE}
 # replace path_to_package_data("proteins") with the path to your local data.
-# ecoli_proteins <- "./data/ecoli_export_table.xlsx" %>%
+# hela_proteins <- "./data/hela_export_table.xlsx" %>%
 #    import("ProteomeDiscoverer", "proteins") 
-ecoli_proteins <- path_to_package_data("ecoli-hint_proteins") %>%
+hela_proteins <- path_to_package_data("hela_proteins") %>%
    import("ProteomeDiscoverer", "proteins") 
 ```
 
@@ -123,12 +123,12 @@ The columns following columns should be considered. These can be modified in the
 | accounting   | num_psms           | MS/MS count   |          |
 
 ```{r, eval = FALSE}
-ecoli_proteins <- "path_to_maxquant_project/combined/txt/proteinGroups.txt" %>%
+hela_proteins <- "path_to_maxquant_project/combined/txt/proteinGroups.txt" %>%
    import("MaxQuant", "proteins") %>%
-   reassign(field = 'sample', pattern = 'sample_1', replace = 'hint_ko') %>%
-   reassign(field = 'sample', pattern = 'sample_2', replace = 'hint_ko') %>%
-   reassign(field = 'sample', pattern = 'sample_3', replace = 'hint_ko') %>%
-   reassign(field = 'sample', pattern = 'sample_4', replace = 'hint_ko') %>%
+   reassign(field = 'sample', pattern = 'sample_1', replace = 'ko') %>%
+   reassign(field = 'sample', pattern = 'sample_2', replace = 'ko') %>%
+   reassign(field = 'sample', pattern = 'sample_3', replace = 'ko') %>%
+   reassign(field = 'sample', pattern = 'sample_4', replace = 'ko') %>%
    reassign(field = 'sample', pattern = 'sample_5', replace = 'wt') %>%
    reassign(field = 'sample', pattern = 'sample_6', replace = 'wt') %>%
    reassign(field = 'sample', pattern = 'sample_7', replace = 'wt') %>%
@@ -166,7 +166,7 @@ The columns following columns should be considered. These can be modified in the
 | accounting   | is_decoy           | Is Decoy          | yes      |
 
 ```{r, eval = FALSE}
-ecoli_proteins <- "path_to_skyline_project/output_file_name.csv" %>%
+hela_proteins <- "path_to_skyline_project/output_file_name.csv" %>%
    import("Skyline", "peptides")
 ```
 
@@ -196,6 +196,6 @@ The columns following columns should be considered. These can be modified in the
 | accounting   | num_psms           |                   | yes      |
 
 ```{r, eval = FALSE}
-ecoli_proteins <- "path_to_diann_project/output_file_name.csv" %>%
+hela_proteins <- "path_to_diann_project/output_file_name.csv" %>%
    import("DIA-NN", "peptides")
 ```

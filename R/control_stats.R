@@ -18,32 +18,35 @@
 #' library(tidyproteomics)
 #'
 #' # a global summary
-#' ecoli_proteins %>% summary()
+#' hela_proteins %>% summary()
 #'
 #' # a summary by sample
-#' ecoli_proteins %>% summary("sample")
+#' hela_proteins %>% summary("sample")
 #'
 #' # a summary by sample with match_between_runs removed
-#' ecoli_proteins %>%
+#' hela_proteins %>%
 #'    subset(match_between_runs == FALSE) %>%
 #'    summary("sample")
 #'
 #' # a summary of match_between_runs
-#' ecoli_proteins %>% summary('match_between_runs')
+#' hela_proteins %>% summary("match_between_runs")
 #'
-#' ecoli_proteins %>% summary("cellular_component")
+#' hela_proteins %>% summary("cellular_component")
 #'
-#' ecoli_proteins %>% summary("biological_process")
+#' hela_proteins %>% summary("biological_process")
 #'
 summary.tidyproteomics <- function(
     data,
     by = c('global'),
     destination = c("print", "save", "return"),
+    limit = 25,
     contamination = NULL
 ){
 
   check_data(data)
   destination <- rlang::arg_match(destination)
+  if(!is.numeric(limit)) {cli::cli_abort("limit must be a numeric not `{limit}`")}
+  limit <- max(ceiling(limit), 1)
 
   if(is.null(by)) {by <- 'global'}
 
@@ -63,9 +66,9 @@ summary.tidyproteomics <- function(
       vars <- sort(vars)
     }
 
-    if(length(vars) > 25) {
-      cli::cli_alert_info("Too many variables, limiting to the first 25")
-      vars <- vars[1:25]
+    if(length(vars) > limit) {
+      cli::cli_alert_info("Too many variables, limiting to the first {limit}")
+      vars <- vars[1:limit]
     }
 
     table <- list()

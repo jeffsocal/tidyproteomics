@@ -53,5 +53,5 @@ The underlying data is just a list object with a structure detailed below. Funda
 
 ```{r}
 library(tidyproteomics)
-str(ecoli_proteins)
+str(hela_proteins)
 ```

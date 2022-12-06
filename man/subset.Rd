@@ -27,13 +27,13 @@ library(tidyproteomics)
 
 # creates a subset of just Ribosomes, based on the string in the annotation
 # protein_description
-ecoli_proteins \%>\%
-   subset(description \%like\% 'Ribosome') \%>\%
+hela_proteins \%>\%
+   subset(description \%like\% "Ribosome") \%>\%
    summary()
 
 # creates a subset without Ribosomes
-ecoli_proteins \%>\%
-   subset(description \%!like\% 'Ribosome') \%>\%
+hela_proteins \%>\%
+   subset(description \%!like\% "Ribosome") \%>\%
    summary()
 
 }

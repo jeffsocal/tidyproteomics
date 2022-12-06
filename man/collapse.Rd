@@ -48,7 +48,7 @@ a tidyproteomics data-object
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-# data <- ecoli_peptides \%>\% collapse()
-# data \%>\% summary('sample')
+# data <- hela_peptides \%>\% collapse()
+# data \%>\% summary("sample")
 
 }

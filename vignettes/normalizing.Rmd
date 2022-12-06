@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 description: |
   tidyproteomics: simplified data object and analysis functions
 vignette: >
-  %\VignetteIndexEntry{Workflows: Simple}
+  %\VignetteIndexEntry{Normalizing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -26,7 +26,7 @@ Normalization currently supports the following methods:
 | linear       | a linear regression is applied to each sample according to individual analyte means                                                                                                                                          |
 | limma        | wrapper to the limma package                                                                                                                                                                                                 |
 | loess        | a non-linear loess (quantile) regression applied to each sample according to individual analyte means                                                                                                                        |
-| svm          | a non-linear egression (support vector machine) applied to each sample according to individual analyte means. This implementation utilizes eps-regression from the e1071 package and tuning of the gama and cost parameters. |
+| svm          | a non-linear regression (support vector machine) applied to each sample according to individual analyte means. This implementation utilizes eps-regression from the e1071 package and tuning of the gama and cost parameters. |
 | randomforest | a non-linear random forest regression applied to each sample according to individual analyte means                                                                                                                           |
 
 ```{r, message = FALSE}
@@ -43,7 +43,7 @@ library("tidyproteomics")
 # your_proteins <- "./data/your_exported_results.xlsx" %>%
 #   import("ProteomeDiscoverer", "proteins")
 
-rdata <- path_to_package_data("pd_ecoli-hint_proteins.xlsx") %>%
+rdata <- path_to_package_data("p97KD_HCT116") %>%
   import("ProteomeDiscoverer", "proteins") %>%
   normalize()
 ```
@@ -69,7 +69,7 @@ rdata %>% plot_variation_pca()
 The effect *randomforest* has on the data is most noticable at the lower dynamic range, as seen in the plot below where the CVs for values under 10\^6 in abundance have been dramatically reduced. If you are hunting for low abundant biomarkers, this method is highly recomended.
 
 ```{r, message=FALSE}
-path_to_package_data("pd_ecoli-hint_proteins.xlsx") %>%
+path_to_package_data("p97KD_HCT116") %>%
   import("ProteomeDiscoverer", "proteins") %>%
   normalize(.method = c('median', 'randomforest')) %>% 
   plot_dynamic_range()
@@ -77,12 +77,14 @@ path_to_package_data("pd_ecoli-hint_proteins.xlsx") %>%
 
 ### Normalization based on a subset
 
-In addition to proteome wide normalization, a subset can be used as the basis for normalization, such as the case for spike-in quantitative analytes or the perhaps the bait protein in an immunoprecipitation experiment. This is accomplished with the same semantic syntax as with the `subset()` function and is reflected in the recorded operations. Be aware that using a regression from a smaller dynamic range than the full proteome may not predict well beyond the limts of the subset.
+In addition to proteome wide normalization, a subset can be used as the basis for normalization, such as the case for spike-in quantitative analytes or the perhaps the bait protein in an immunoprecipitation experiment. This is accomplished with the same semantic syntax as with the `subset()` function and is reflected in the recorded operations. Be aware that using a regression from a smaller dynamic range than the full proteome may not predict well beyond the limts of the subset. 
+
+NOTE: while *linear* and *svm* can predict beyond the training set limits, *loess* can not.
 
 NOTE: The *randomforest* normalization method, as implemented, requires the the prediction set size to match the training test size, and therefore is only applicable to normalization of the whole proteome. The *limma* normalization method also does not accept a subset for normalization. Both of these methods will be skipped if a subset is implemented.
 
 ```{r, message=FALSE}
-rdata <- path_to_package_data("pd_ecoli-hint_proteins.xlsx") %>%
+rdata <- path_to_package_data("p97KD_HCT116") %>%
   import("ProteomeDiscoverer", "proteins") %>%
   normalize(description %like% 'ribosome',
             .method = c('median', 'linear', 'loess', 'svm')) 

@@ -20,31 +20,31 @@
 #' library(tidyproteomics)
 #'
 #' # simple t.test expression analysis
-#' ecoli_proteins %>%
-#'    expression(ko/wt) %>%
-#'    export_analysis(ko/wt, .analysis = "expression")
+#' hela_proteins %>%
+#'    expression(knockdown/control) %>%
+#'    export_analysis(knockdown/control, .analysis = "expression")
 #'
 #' # a wilcox.test expression analysis
-#' ecoli_proteins %>%
-#'    expression(ko/wt, .method = stats::wilcox.test) %>%
-#'    export_analysis(ko/wt, .analysis = "expression")
+#' hela_proteins %>%
+#'    expression(knockdown/control, .method = stats::wilcox.test) %>%
+#'    export_analysis(knockdown/control, .analysis = "expression")
 #'
 #' # a one-tailed wilcox.test expression analysis
 #' wilcoxon_less <- function(x, y) {
-#'    stats::wilcox.test(x, y, alternative = 'less')
+#'    stats::wilcox.test(x, y, alternative = "less")
 #' }
-#' ecoli_proteins <- ecoli_proteins %>%
-#'    expression(ko/wt, .method = stats::wilcox.test)
+#' hela_proteins <- hela_proteins %>%
+#'    expression(knockdown/control, .method = stats::wilcox.test)
 #'
-#' ecoli_proteins %>% export_analysis(ko/wt, .analysis = "expression")
+#' hela_proteins %>% export_analysis(knockdown/control, .analysis = "expression")
 #'
 #' # Note: the userdefined function is preserved in the operations tracking
-#' ecoli_proteins %>% operations()
+#' hela_proteins %>% operations()
 #'
 #' # limma expression analysis
-#' ecoli_proteins %>%
-#'    expression(ko/wt, .method = "limma") %>%
-#'    export_analysis(ko/wt, .analysis = "expression")
+#' hela_proteins %>%
+#'    expression(knockdown/control, .method = "limma") %>%
+#'    export_analysis(knockdown/control, .analysis = "expression")
 #'
 expression <- function(
     data = NULL,

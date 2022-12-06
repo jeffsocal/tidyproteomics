@@ -29,20 +29,20 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>%
-#'    expression(ko/wt) %>%
-#'    plot_volcano(ko/wt, log2fc_min = 0.5, significance_column = 'p_value')
+#' hela_proteins %>%
+#'    expression(knockdown/control) %>%
+#'    plot_volcano(knockdown/control, log2fc_min = 0.5, significance_column = "p_value")
 #'
 #' # generates the same out come
-#' # ecoli_proteins %>%
-#' #     expression(ko/wt) %>%
-#' #     export_analysis(ko/wt, .analysis = 'expression) %>%
-#' #     plot_volcano(log2fc_min = 0.5, significance_column = 'p_value')
+#' # hela_proteins %>%
+#' #     expression(knockdown/control) %>%
+#' #     export_analysis(knockdown/control, .analysis = "expression") %>%
+#' #     plot_volcano(log2fc_min = 0.5, significance_column = "p_value")
 #'
 #' # display the gene name instead
-#' ecoli_proteins %>%
-#'    expression(ko/wt) %>%
-#'    plot_volcano(ko/wt, log2fc_min = 0.5, significance_column = 'p_value', labels_column = "gene_name")
+#' hela_proteins %>%
+#'    expression(knockdown/control) %>%
+#'    plot_volcano(knockdown/control, log2fc_min = 0.5, significance_column = "p_value", labels_column = "gene_name")
 #'
 plot_volcano <- function(
     data = NULL,

@@ -20,12 +20,13 @@ a character
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins <- path_to_package_data("ecoli-hint_proteins") \%>\%
+hela_proteins <- path_to_package_data("p97KD_HCT116") \%>\%
    import("ProteomeDiscoverer", "proteins") \%>\%
-   reassign("sample", "hint_ko", "ko") \%>\%
+   reassign("sample", "ctl", "control") \%>\%
+   reassign("sample", "p97", "knockdown") \%>\%
    impute() \%>\%
    normalize(.method = c("linear","loess"))
 
-ecoli_proteins \%>\% operations()
+hela_proteins \%>\% operations()
 
 }

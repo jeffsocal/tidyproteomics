@@ -142,39 +142,40 @@ accounting.</p>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     expression, merge, subset</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">ecoli_proteins</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">hela_proteins</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 9</span></span>
 <span><span class="co">#&gt;  $ origin             : chr "ProteomeDiscoverer"</span></span>
 <span><span class="co">#&gt;  $ analyte            : chr "proteins"</span></span>
 <span><span class="co">#&gt;  $ identifier         : chr "protein"</span></span>
 <span><span class="co">#&gt;  $ quantitative_source: chr "raw"</span></span>
-<span><span class="co">#&gt;  $ operations         :List of 2</span></span>
-<span><span class="co">#&gt;   ..$ : 'glue' chr "Data files (pd_ecoli-hint_proteins.xlsx) were imported as proteins from ProteomeDiscoverer"</span></span>
-<span><span class="co">#&gt;   ..$ : chr "Data reassigned sample to ko where 'sample like hint'"</span></span>
-<span><span class="co">#&gt;  $ experiments        :Classes 'tbl_df', 'tbl' and 'data.frame': 8 obs. of  5 variables:</span></span>
-<span><span class="co">#&gt;   ..$ sample_id  : chr [1:8] "f87cee7e" "fa3a5027" "fbf83a10" "feb72c95" ...</span></span>
-<span><span class="co">#&gt;   ..$ import_file: chr [1:8] "pd_ecoli-hint_proteins.xlsx" "pd_ecoli-hint_proteins.xlsx" "pd_ecoli-hint_proteins.xlsx" "pd_ecoli-hint_proteins.xlsx" ...</span></span>
-<span><span class="co">#&gt;   ..$ sample_file: chr [1:8] "f1" "f2" "f3" "f4" ...</span></span>
-<span><span class="co">#&gt;   ..$ sample     : chr [1:8] "ko" "ko" "ko" "ko" ...</span></span>
-<span><span class="co">#&gt;   ..$ replicate  : chr [1:8] "1" "2" "3" "4" ...</span></span>
-<span><span class="co">#&gt;  $ quantitative       :Classes 'tbl_df', 'tbl' and 'data.frame': 22176 obs. of  5 variables:</span></span>
-<span><span class="co">#&gt;   ..$ sample_id    : chr [1:22176] "f87cee7e" "fa3a5027" "fbf83a10" "feb72c95" ...</span></span>
-<span><span class="co">#&gt;   ..$ sample       : chr [1:22176] "ko" "ko" "ko" "ko" ...</span></span>
-<span><span class="co">#&gt;   ..$ replicate    : chr [1:22176] "1" "2" "3" "4" ...</span></span>
-<span><span class="co">#&gt;   ..$ protein      : chr [1:22176] "P0A6P9" "P0A6P9" "P0A6P9" "P0A6P9" ...</span></span>
-<span><span class="co">#&gt;   ..$ abundance_raw: num [1:22176] 9.16e+09 7.88e+09 8.25e+09 8.69e+09 8.27e+09 ...</span></span>
-<span><span class="co">#&gt;  $ accounting         :Classes 'tbl_df', 'tbl' and 'data.frame': 22176 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   ..$ sample_id          : chr [1:22176] "f87cee7e" "fa3a5027" "fbf83a10" "feb72c95" ...</span></span>
-<span><span class="co">#&gt;   ..$ protein            : chr [1:22176] "P0A6P9" "P0A6P9" "P0A6P9" "P0A6P9" ...</span></span>
-<span><span class="co">#&gt;   ..$ protein_group      : chr [1:22176] "P0A6P9" "P0A6P9" "P0A6P9" "P0A6P9" ...</span></span>
-<span><span class="co">#&gt;   ..$ match_between_runs : logi [1:22176] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;   ..$ num_peptides       : num [1:22176] 34 34 34 34 34 34 34 34 31 31 ...</span></span>
-<span><span class="co">#&gt;   ..$ num_unique_peptides: num [1:22176] 33 33 33 33 33 33 33 33 31 31 ...</span></span>
-<span><span class="co">#&gt;   ..$ num_psms           : num [1:22176] 3416 3416 3416 3416 3416 ...</span></span>
-<span><span class="co">#&gt;  $ annotations        :Classes 'tbl_df', 'tbl' and 'data.frame': 24948 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   ..$ protein   : chr [1:24948] "P0A6P9" "P0A6P9" "P0A6P9" "P0A6P9" ...</span></span>
-<span><span class="co">#&gt;   ..$ term      : chr [1:24948] "description" "gene_id_entrez" "gene_id_ensemble" "gene_name" ...</span></span>
-<span><span class="co">#&gt;   ..$ annotation: chr [1:24948] "Enolase OS=Escherichia coli (strain K12) OX=83333 GN=eno PE=1 SV=2" "61754225; 945032" NA "eno" ...</span></span>
+<span><span class="co">#&gt;  $ operations         :List of 3</span></span>
+<span><span class="co">#&gt;   ..$ : 'glue' chr "Data files (p97KD_HCT116_20221202_chimerys_proteins.xlsx) were imported as proteins from ProteomeDiscoverer"</span></span>
+<span><span class="co">#&gt;   ..$ : chr "Data reassigned sample to control where 'sample like ctl'"</span></span>
+<span><span class="co">#&gt;   ..$ : chr "Data reassigned sample to knockdown where 'sample like p97'"</span></span>
+<span><span class="co">#&gt;  $ experiments        :Classes 'tbl_df', 'tbl' and 'data.frame': 6 obs. of  5 variables:</span></span>
+<span><span class="co">#&gt;   ..$ sample_id  : chr [1:6] "3771f11f" "31ba33f4" "307859c3" "35374f46" ...</span></span>
+<span><span class="co">#&gt;   ..$ import_file: chr [1:6] "p97KD_HCT116_20221202_chimerys_proteins.xlsx" "p97KD_HCT116_20221202_chimerys_proteins.xlsx" "p97KD_HCT116_20221202_chimerys_proteins.xlsx" "p97KD_HCT116_20221202_chimerys_proteins.xlsx" ...</span></span>
+<span><span class="co">#&gt;   ..$ sample_file: chr [1:6] "f1" "f4" "f5" "f2" ...</span></span>
+<span><span class="co">#&gt;   ..$ sample     : chr [1:6] "control" "control" "control" "knockdown" ...</span></span>
+<span><span class="co">#&gt;   ..$ replicate  : chr [1:6] "1" "2" "3" "1" ...</span></span>
+<span><span class="co">#&gt;  $ quantitative       :Classes 'tbl_df', 'tbl' and 'data.frame': 53106 obs. of  5 variables:</span></span>
+<span><span class="co">#&gt;   ..$ sample_id    : chr [1:53106] "3771f11f" "31ba33f4" "307859c3" "35374f46" ...</span></span>
+<span><span class="co">#&gt;   ..$ sample       : chr [1:53106] "control" "control" "control" "knockdown" ...</span></span>
+<span><span class="co">#&gt;   ..$ replicate    : chr [1:53106] "1" "2" "3" "1" ...</span></span>
+<span><span class="co">#&gt;   ..$ protein      : chr [1:53106] "P07900" "P07900" "P07900" "P07900" ...</span></span>
+<span><span class="co">#&gt;   ..$ abundance_raw: num [1:53106] 3.87e+09 3.98e+09 3.42e+09 4.96e+09 4.01e+09 ...</span></span>
+<span><span class="co">#&gt;  $ accounting         :Classes 'tbl_df', 'tbl' and 'data.frame': 53106 obs. of  7 variables:</span></span>
+<span><span class="co">#&gt;   ..$ sample_id          : chr [1:53106] "3771f11f" "31ba33f4" "307859c3" "35374f46" ...</span></span>
+<span><span class="co">#&gt;   ..$ protein            : chr [1:53106] "P07900" "P07900" "P07900" "P07900" ...</span></span>
+<span><span class="co">#&gt;   ..$ protein_group      : chr [1:53106] "P07900" "P07900" "P07900" "P07900" ...</span></span>
+<span><span class="co">#&gt;   ..$ match_between_runs : logi [1:53106] FALSE TRUE FALSE FALSE TRUE FALSE ...</span></span>
+<span><span class="co">#&gt;   ..$ num_peptides       : num [1:53106] 37 37 37 37 37 37 36 36 36 36 ...</span></span>
+<span><span class="co">#&gt;   ..$ num_unique_peptides: num [1:53106] 24 24 24 24 24 24 25 25 25 25 ...</span></span>
+<span><span class="co">#&gt;   ..$ num_psms           : num [1:53106] 4378 4378 4378 4378 4378 ...</span></span>
+<span><span class="co">#&gt;  $ annotations        :Classes 'tbl_df', 'tbl' and 'data.frame': 79659 obs. of  3 variables:</span></span>
+<span><span class="co">#&gt;   ..$ protein   : chr [1:79659] "P07900" "P07900" "P07900" "P07900" ...</span></span>
+<span><span class="co">#&gt;   ..$ term      : chr [1:79659] "description" "gene_id_entrez" "gene_id_ensemble" "gene_name" ...</span></span>
+<span><span class="co">#&gt;   ..$ annotation: chr [1:79659] "Heat shock protein HSP 90-alpha OS=Homo sapiens OX=9606 GN=HSP90AA1 PE=1 SV=5" "3320" "ENSG00000080824" "HSP90AA1" ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "class")= chr "tidyproteomics"</span></span></code></pre></div>
   </main>
 </div>

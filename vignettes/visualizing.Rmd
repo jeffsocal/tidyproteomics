@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 description: |
   tidyproteomics: simplified data object and analysis functions
 vignette: >
-  %\VignetteIndexEntry{Subsetting}
+  %\VignetteIndexEntry{Visualizing}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -41,7 +41,7 @@ dynamic grange `plot_variation_cv()` and principal component variation
 ```{r, message = FALSE}
 library("dplyr")
 library("tidyproteomics")
-rdata <- ecoli_proteins %>% normalize()
+rdata <- hela_proteins %>% normalize()
 
 rdata %>% plot_normalization()
 ```

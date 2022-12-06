@@ -24,6 +24,8 @@ plot_volcano(
 )
 }
 \arguments{
+\item{data}{a tibble}
+
 \item{...}{two sample comparison}
 
 \item{log2fc_min}{a numeric defining the minimum log2 foldchange to highlight.}
@@ -53,8 +55,6 @@ plot_volcano(
 \item{height}{a numeric}
 
 \item{width}{a numeric}
-
-\item{table}{a tibble}
 }
 \value{
 a ggplot2 object
@@ -67,19 +67,19 @@ take either a tidyproteomics data object or a table with the required headers.
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins \%>\%
-   expression(ko/wt) \%>\%
-   plot_volcano(ko/wt, log2fc_min = 0.5, significance_column = 'p_value')
+hela_proteins \%>\%
+   expression(knockdown/control) \%>\%
+   plot_volcano(knockdown/control, log2fc_min = 0.5, significance_column = "p_value")
 
 # generates the same out come
-# ecoli_proteins \%>\%
-#     expression(ko/wt) \%>\%
-#     export_analysis(ko/wt, .analysis = 'expression) \%>\%
-#     plot_volcano(log2fc_min = 0.5, significance_column = 'p_value')
+# hela_proteins \%>\%
+#     expression(knockdown/control) \%>\%
+#     export_analysis(knockdown/control, .analysis = "expression") \%>\%
+#     plot_volcano(log2fc_min = 0.5, significance_column = "p_value")
 
 # display the gene name instead
-ecoli_proteins \%>\%
-   expression(ko/wt) \%>\%
-   plot_volcano(ko/wt, log2fc_min = 0.5, significance_column = 'p_value', labels_column = "gene_name")
+hela_proteins \%>\%
+   expression(knockdown/control) \%>\%
+   plot_volcano(knockdown/control, log2fc_min = 0.5, significance_column = "p_value", labels_column = "gene_name")
 
 }

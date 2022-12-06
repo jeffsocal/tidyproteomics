@@ -33,10 +33,10 @@ Main method for imputing missing values
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins \%>\% summary('sample')
+hela_proteins \%>\% summary("sample")
 
-ecoli_proteins \%>\% impute(impute_function = stats::median) \%>\% summary('sample')
+hela_proteins \%>\% impute(impute_function = stats::median) \%>\% summary("sample")
 
-ecoli_proteins \%>\% impute(impute_function = 'randomforest') \%>\% summary('sample')
+hela_proteins \%>\% impute(impute_function = "randomforest") \%>\% summary("sample")
 
 }

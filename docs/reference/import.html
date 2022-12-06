@@ -97,24 +97,24 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op">&lt;-</span> <span class="fu"><a href="path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"ecoli-hint_proteins"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="fu"><a href="path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"p97KD_HCT116"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">import</span><span class="op">(</span><span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Importing <span style="font-style: italic;">pd_ecoli-hint_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Importing <span style="font-style: italic;">p97KD_HCT116_20221202_chimerys_proteins.xlsx</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> .. not all expected annotation columns present in import file</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Importing <span style="font-style: italic;">pd_ecoli-hint_proteins.xlsx</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Importing <span style="font-style: italic;">pd_ecoli-hint_proteins.xlsx</span> <span style="color: #B2B2B2;">[774ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Importing <span style="font-style: italic;">p97KD_HCT116_20221202_chimerys_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Importing <span style="font-style: italic;">p97KD_HCT116_20221202_chimerys_proteins.xlsx</span> <span style="color: #B2B2B2;">[1.9s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">ecoli_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   sample files protein_groups proteins peptides peptides_unique quantifiable</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  hint_ko     4           2772     2772    31271           31025         98.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       wt     4           2772     2772    31271           31025         98.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  sample files protein_groups proteins peptides peptides_unique quantifiable</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     ctl     3           8851     8851    95877           83161         75.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  p97_kd     3           8851     8851    95877           83161         75.3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1380689</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1612074</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1536197</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2120776</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

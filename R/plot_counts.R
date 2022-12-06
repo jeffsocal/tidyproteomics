@@ -15,7 +15,7 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' ecoli_proteins %>% plot_counts()
+#' hela_proteins %>% plot_counts()
 #'
 plot_counts <- function(
     data = NULL,
@@ -37,13 +37,14 @@ plot_counts <- function(
 
   accounting <- rlang::arg_match(accounting)
   check_data(data)
+  limit <- nrow(data$experiments)
 
   fat <- list(
     data %>%
       subset(match_between_runs == FALSE, .verbose = FALSE) %>%
       subset(imputed >= !!impute_max, .verbose = FALSE) %>%
-      summary('sample_id', destination = 'return') %>% dplyr::mutate(mbr = 'xMBR'),
-    data %>% summary('sample_id', destination = 'return') %>% dplyr::mutate(mbr = 'MBR')
+      summary('sample_id', destination = 'return', limit = limit) %>% dplyr::mutate(mbr = 'xMBR'),
+    data %>% summary('sample_id', destination = 'return', limit = limit) %>% dplyr::mutate(mbr = 'MBR')
   )  %>%
     dplyr::bind_rows() %>%
     dplyr::full_join(

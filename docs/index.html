@@ -109,9 +109,9 @@
 <p>This package supports the same <a href="https://en.wikipedia.org/wiki/Syntactic_sugar" class="external-link">syntactic sugar</a> utilized in the tidy-verse functions like filter, and introduces the <code>%like%</code> operator, see <code><a href="articles/subsetting.html">vignette("subsetting")</a></code> . These operations can extend to all aspects of the data set, including sample names, protein IDs, annotations and accountings like <em>match_between_runs</em> and <em>num_peptides</em>.</p>
 <table class="table">
 <colgroup>
-<col width="25%">
-<col width="25%">
-<col width="48%">
+<col width="26%">
+<col width="26%">
+<col width="47%">
 </colgroup>
 <thead><tr class="header">
 <th>operator</th>
@@ -153,7 +153,7 @@
 </tr>
 </tbody>
 </table>
-<p>Expression analysis also utilizes this type of syntax when referencing samples for analysis. For example <code>data %&gt;% expression(ko/wt)</code> would know to run the differential expression of the sample <em>ko</em> with respect to the sample <em>wt</em> such that positive log2 difference would be up-expressed in <em>ko</em> and a negative log2 differences would be down-expressed in <em>ko</em>.</p>
+<p>Expression analysis also utilizes this type of syntax when referencing samples for analysis. For example <code>data %&gt;% expression(knockdown/control)</code> would know to run the differential expression of the sample <em>ko</em> with respect to the sample <em>wt</em> such that positive log2 difference would be up-expressed in <em>ko</em> and a negative log2 differences would be down-expressed in <em>ko</em>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>

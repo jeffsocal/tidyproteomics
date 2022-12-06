@@ -34,16 +34,16 @@ adventitious to select a optimal normalization method based on performance.
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-ecoli_proteins \%>\%
-     normalize(.method = c('scaled', 'median')) \%>\%
-     summary('sample')
+hela_proteins \%>\%
+     normalize(.method = c("scaled", "median")) \%>\%
+     summary("sample")
 
 # normalize between samples according to a subset, then apply to all values
 #   this would be recommended with a pull-down experiment wherein a conserved
 #   protein complex acts as the majority content and individual inter-actors
 #   are of quantitative differentiation
-ecoli_proteins \%>\%
-     normalize(description \%!like\% 'Ribosome', .method = c('scaled', 'median')) \%>\%
-     summary('sample')
+hela_proteins \%>\%
+     normalize(description \%!like\% "Ribosome", .method = c("scaled", "median")) \%>\%
+     summary("sample")
 
 }

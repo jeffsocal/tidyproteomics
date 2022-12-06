@@ -41,7 +41,7 @@ read_data <- function(
 #'
 #' @examples
 #' library(tidyproteomics)
-#' # ecoli_proteins <- load_omics(source = "proteins")
+#' # hela_proteins <- load_omics(source = "proteins")
 #'
 load_local <- function(
     source = c("peptides","proteins")

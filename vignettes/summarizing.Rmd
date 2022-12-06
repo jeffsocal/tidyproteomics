@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 description: |
   tidyproteomics: simplified data object and analysis functions
 vignette: >
-  %\VignetteIndexEntry{Subsetting}
+  %\VignetteIndexEntry{Summarizing}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -35,14 +35,14 @@ The tidyproteomics data object can be printed to show a summary of the
 object contents.
 
 ```{r}
-ecoli_proteins
+hela_proteins
 ```
 
 And these can expand to encompass additions generated through other
 operations.
 
 ```{r}
-ecoli_proteins %>% expression(ko/wt) %>% enrichment(ko/wt, .term = 'biological_process')
+hela_proteins %>% expression(knockdown/control) %>% enrichment(knockdown/control, .term = 'biological_process')
 ```
 
 ### Summarizing
@@ -53,29 +53,29 @@ The tidyproteomics data object can summarize the quantitative and
 accounting data ...
 
 ```{r}
-ecoli_proteins %>% summary()
+hela_proteins %>% summary()
 ```
 
 ... using columns corrisponing to experimental meta-data ...
 
 ```{r}
-ecoli_proteins %>% summary(by = 'sample')
+hela_proteins %>% summary(by = 'sample')
 ```
 
 ... terms in the annotation meta-data ...
 
 ```{r}
-ecoli_proteins %>% summary(by = 'biological_process')
+hela_proteins %>% summary(by = 'biological_process')
 ```
 
 ... and even terms in the accounting data ...
 
 ```{r}
-ecoli_proteins %>% summary(by = 'num_peptides')
+hela_proteins %>% summary(by = 'num_peptides')
 ```
 
 ```{r}
-ecoli_proteins %>% summary(by = 'match_between_runs')
+hela_proteins %>% summary(by = 'match_between_runs')
 ```
 
 #### Contamination
@@ -90,19 +90,19 @@ ProteomeDiscoverer), and manipulated to contain CRAP in the description
 can be utilized.
 
 ```{r}
-ecoli_proteins %>% summary(contamination = 'CRAP')
+hela_proteins %>% summary(contamination = 'CRAP')
 ```
 
 Alternatively, any protein descriptor can also be use ...
 
 ```{r}
-ecoli_proteins %>% summary(contamination = 'Trypsin')
+hela_proteins %>% summary(contamination = 'Trypsin')
 ```
 
 ... and as such.
 
 ```{r}
-ecoli_proteins %>% summary(contamination = 'ribosome')
+hela_proteins %>% summary(contamination = 'ribosome')
 ```
 
 ### Visualizing
@@ -116,7 +116,7 @@ as peptides (all, unique) are displayed with the match-between-runs
 shown as the margin above the ms2 evidenced identifications.
 
 ```{r}
-ecoli_proteins %>% plot_counts()
+hela_proteins %>% plot_counts()
 ```
 
 #### Quantitation
@@ -125,7 +125,7 @@ In recent literature a summary of protein quantitation has been
 visualized as a rank-based dot-plot.
 
 ```{r}
-ecoli_proteins %>% plot_quantrank()
+hela_proteins %>% plot_quantrank()
 ```
 
 Additionally, this plot can be extended to highlight statistical
@@ -133,11 +133,11 @@ differences via an unbiased all-pair-wise comparison, to give an
 anticipated view of how to guide downstream analyses.
 
 ```{r}
-ecoli_proteins %>% plot_quantrank(display_filter = 'log2_foldchange', display_cutoff = 2)
+hela_proteins %>% plot_quantrank(display_filter = 'log2_foldchange', display_cutoff = 2)
 ```
 
 Filter to limit to the range `c(low, high)` and display the protein ids.
 
 ```{r}
-ecoli_proteins %>% plot_quantrank(show_rank_scale = TRUE, limit_rank = c(1,25))
+hela_proteins %>% plot_quantrank(show_rank_scale = TRUE, limit_rank = c(1,25))
 ```

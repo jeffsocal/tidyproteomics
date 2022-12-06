@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 description: |
   tidyproteomics: simplified data object and analysis functions
 vignette: >
-  %\VignetteIndexEntry{Subsetting}
+  %\VignetteIndexEntry{Expression}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
@@ -35,7 +35,7 @@ automatically choose the top proteins to display.
 ```
 
 | parameter           | description                                                               | inputs                                                | default        |
-|---------------------|---------------------------------------------------------------------------|-------------------------------------------------------|----------------|
+|--------------|---------------------------|-------------------|--------------|
 | log2fc_min          | the minimum cutoff for displaying                                         | *0 to Inf*                                            | *2*            |
 | significance_column | the column to use for significance                                        | *adj_p\_value, p_value*                               | *adj_p\_value* |
 | significance_max    | the minimum cutoff for displaying                                         | *1 to 1/Inf*                                          | *0.05*         |
@@ -51,10 +51,10 @@ automatically choose the top proteins to display.
 library("dplyr")
 library("tidyproteomics")
 
-rdata <- ecoli_proteins %>% 
-  normalize(.method = 'linear') %>%
+rdata <- hela_proteins %>% 
+  normalize(.method = 'loess') %>%
   impute(impute_function = base::min) %>%
-  expression(ko/wt)
+  expression(knockdown/control)
 ```
 
 #### Exporting Results
@@ -65,7 +65,7 @@ used in an external down stream analysis.
 
 ```{r}
 
-rdata %>% export_analysis(ko/wt, .analysis = 'expression')
+rdata %>% export_analysis(knockdown/control, .analysis = 'expression')
 ```
 
 #### Volcano Plot
@@ -75,16 +75,17 @@ fold-change cutoff of 2 or greater.
 
 ```{r}
 
-rdata %>% plot_volcano(ko/wt)
+rdata %>% plot_volcano(knockdown/control)
 ```
 
 The parameters can be adjusted to suit your needs ...
 
 ```{r}
 
-rdata %>% plot_volcano(ko/wt,
+rdata %>% plot_volcano(knockdown/control,
                        significance_column = 'p_value',
-                       log2fc_min = 1)
+                       significance_max = 0.01,
+                       log2fc_min = 2)
 ```
 
 ... or desires.
@@ -92,9 +93,10 @@ rdata %>% plot_volcano(ko/wt,
 ```{r}
 library(ggplot2)
 
-rdata %>% plot_volcano(ko/wt,
+rdata %>% plot_volcano(knockdown/control,
                        significance_column = 'p_value',
-                       log2fc_min = 1,
+                       significance_max = 0.01,
+                       log2fc_min = 2,
                        color_positive = 'orange',
                        color_negative = 'purple',
                        show_lines = FALSE,
@@ -114,7 +116,7 @@ and significance cutoffs.
 ```{r, message=FALSE}
 library(ggplot2)
 
-rdata %>% plot_proportion(ko/wt)
+rdata %>% plot_proportion(knockdown/control)
 ```
 
 This plot can likewise also be manipulated like the volcano plot.
@@ -122,10 +124,10 @@ This plot can likewise also be manipulated like the volcano plot.
 ```{r}
 library(ggplot2)
 
-rdata %>% plot_proportion(ko/wt,
+rdata %>% plot_proportion(knockdown/control,
                        significance_column = 'p_value',
-                       log2fc_min = 5,
-                       proportion_min = 0.03,
+                       proportion_min = 0.1,
+                       log2fc_min = 2,
                        color_positive = 'orange',
                        color_negative = 'purple',
                        show_lines = TRUE,

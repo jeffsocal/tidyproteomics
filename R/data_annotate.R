@@ -74,9 +74,9 @@ annotate <- function(
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
 #'
-#' ecoli_proteins %>% show_annotations()
+#' hela_proteins %>% show_annotations()
 #'
-#' ecoli_proteins %>% show_annotations('reactome_pathway')
+#' hela_proteins %>% show_annotations('reactome_pathway')
 #'
 show_annotations <- function(
     data,
