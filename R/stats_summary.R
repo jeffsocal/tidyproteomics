@@ -65,7 +65,7 @@ stats_summary <- function(
       proteins = identifier %>% unique() %>% length(),
       peptides = ceiling(num_peptides %>% sum(na.rm = T) / length(unique(sample_id))),
       peptides_unique = ceiling(num_unique_peptides %>% sum(na.rm = T) / length(unique(sample_id))),
-      quantifiable = signif(num_unique_peptides[!is.na(abundance)] %>% sum(na.rm=T) / length(unique(sample_id)) / peptides * 100, 3),
+      quantifiable = signif(num_peptides[!is.na(abundance)] %>% sum(na.rm=T) / length(unique(sample_id)) / peptides * 100, 3),
       .groups = 'drop'
     )
   cli::cli_process_done()

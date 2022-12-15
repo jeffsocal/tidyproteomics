@@ -111,8 +111,8 @@ import_pd_peps <- function(
 
     dat_out <- dat_out %>% dplyr::bind_rows(this_dat)
 
+    cli::cli_progress_done()
   }
-  cli::cli_progress_done()
 
   dl <- list(
     origin = 'ProteomeDiscoverer',

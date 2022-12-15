@@ -33,7 +33,7 @@ hela_proteins \%>\%
 
 # creates a subset without Ribosomes
 hela_proteins \%>\%
-   subset(description \%!like\% "Ribosome") \%>\%
+   subset(!description \%like\% "Ribosome") \%>\%
    summary()
 
 }

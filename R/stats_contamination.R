@@ -31,7 +31,7 @@ stats_contamination <- function(
   # filter out the pattern contaminant proteins
   data_crap <- c()
   data_test <- data %>% extract()
-  data_rest <- data %>% subset(description %!like% !!pattern, .verbose = FALSE) %>%
+  data_rest <- data %>% subset(!description %like% !!pattern, .verbose = FALSE) %>%
     extract() %>%
     dplyr::mutate(protein_origin = 'native')
 
@@ -47,7 +47,7 @@ stats_contamination <- function(
             extract() %>% dplyr::mutate(protein_origin = 'Trypsin'),
           data_temp %>% subset(description %like% "BSA", .verbose = FALSE) %>%
             extract() %>% dplyr::mutate(protein_origin = 'BSA'),
-          data_temp %>% subset(description %!like% "Keratin|Trypsin|BSA", .verbose = FALSE) %>%
+          data_temp %>% subset(!description %like% "Keratin|Trypsin|BSA", .verbose = FALSE) %>%
             extract() %>% dplyr::mutate(protein_origin = 'Other')
         ) %>% dplyr::bind_rows()
       } else {

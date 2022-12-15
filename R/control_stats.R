@@ -74,7 +74,7 @@ summary.tidyproteomics <- function(
     table <- list()
     for( var in vars ) {
       table[[rlang::quo_text(var)]] <- data %>%
-        subset(!!by == !!var, .verbose = FALSE) %>%
+        subset(!!by == !!var, .verbose = FALSE, rm.mbr = FALSE) %>%
         stats_summary() %>%
         dplyr::mutate(variable = var)
     }

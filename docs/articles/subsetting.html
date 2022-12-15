@@ -110,11 +110,10 @@ nature of the tidyproteomics data structure. The function
 semantic expressions, similar to how the filter function in the
 tidyverse package dplyr operates. This package also introduces two new
 operators that work as a regular expression filter, similar to SQL
-syntax, (<strong><em>%like%</em></strong> and
-<strong><em>%!like%</em></strong>) which can be used in the semantic
-expression to subset data base on pattern matching in variable groups.
-For example, the expression
-<strong><em><code>description %!like% 'ribosome'</code></em></strong>
+syntax, (<strong><em>%like%</em></strong>) which can be used in the
+semantic expression to subset data base on pattern matching in variable
+groups. For example, the expression
+<strong><em><code>!description %like% 'ribosome'</code></em></strong>
 would keep all proteins with a description that does not include the
 word <em>‘ribosome’</em>. Additionally, together with the
 <code><a href="../reference/merge.html">merge()</a></code> and <code><a href="../reference/reassign.html">reassign()</a></code> functions, data can be
@@ -128,11 +127,11 @@ into a single collective for analysis and visualization.</p>
 <span></span>
 <span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;    control     3           8851     8851    95877           83161         75.1</span></span>
-<span><span class="co">#&gt;  knockdown     3           8851     8851    95877           83161         75.3</span></span>
+<span><span class="co">#&gt;    control     3           7055     7055    66329           58706         90.8</span></span>
+<span><span class="co">#&gt;  knockdown     3           7055     7055    66329           58706         90.9</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
-<span><span class="co">#&gt;  0.1536197</span></span>
-<span><span class="co">#&gt;  0.2120776</span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1600474</span></span>
+<span><span class="co">#&gt;  0.2099227</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
@@ -143,11 +142,11 @@ description:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op">%like%</span> <span class="st">"Ribosome"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;    control     3             23       23      330             329         91.0</span></span>
-<span><span class="co">#&gt;  knockdown     3             23       23      330             329         98.2</span></span>
-<span><span class="co">#&gt;        CVs</span></span>
-<span><span class="co">#&gt;  0.1385568</span></span>
-<span><span class="co">#&gt;  0.1909457</span></span></code></pre></div>
+<span><span class="co">#&gt;    control     3             18       18      224             224         97.6</span></span>
+<span><span class="co">#&gt;  knockdown     3             18       18      224             224         99.6</span></span>
+<span><span class="co">#&gt;         CVs</span></span>
+<span><span class="co">#&gt;  0.09428087</span></span>
+<span><span class="co">#&gt;  0.17145051</span></span></code></pre></div>
 <p>Aside from filtering directly on <code>protein_accession</code>
 values, subsetting can use any of the columns in the
 <code>experiments</code> table:</p>
@@ -175,11 +174,11 @@ values, subsetting can use any of the columns in the
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">cellular_component</span> <span class="op">%like%</span> <span class="st">"nucleus"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;    control     3           5098     5098    62534           54181         76.1</span></span>
-<span><span class="co">#&gt;  knockdown     3           5098     5098    62534           54181         76.2</span></span>
+<span><span class="co">#&gt;    control     3           4227     4227    44075           39105         92.1</span></span>
+<span><span class="co">#&gt;  knockdown     3           4227     4227    44075           39105         92.1</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
-<span><span class="co">#&gt;  0.1491658</span></span>
-<span><span class="co">#&gt;  0.2089183</span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1556844</span></span>
+<span><span class="co">#&gt;  0.2046765</span></span></code></pre></div>
 <p>Additionally, provided the quantitative platform produces an imputed
 value commonly referred to as “match between runs”, the data can be
 filtered to exclude these values. This can be valuable in cases were
@@ -192,35 +191,35 @@ differ.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">match_between_runs</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;    control     2           8222     8222    92037           81343         78.2</span></span>
-<span><span class="co">#&gt;  knockdown     2           8307     8307    92584           81592         78.1</span></span>
+<span><span class="co">#&gt;    control     3           6527     6527    62871           56511         94.0</span></span>
+<span><span class="co">#&gt;  knockdown     3           6556     6556    63319           56819         93.7</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
-<span><span class="co">#&gt;  0.1111203</span></span>
-<span><span class="co">#&gt;  0.1034109</span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1566694</span></span>
+<span><span class="co">#&gt;  0.2085010</span></span></code></pre></div>
 <p>Also, data can be filtered to proteins containing a desired number of
 underlying peptides.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">mum_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;    control     3           8851     8851    95877           83161         75.1</span></span>
-<span><span class="co">#&gt;  knockdown     3           8851     8851    95877           83161         75.3</span></span>
+<span><span class="co">#&gt;    control     3           7055     7055    66329           58706         90.8</span></span>
+<span><span class="co">#&gt;  knockdown     3           7055     7055    66329           58706         90.9</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
-<span><span class="co">#&gt;  0.1536197</span></span>
-<span><span class="co">#&gt;  0.2120776</span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1600474</span></span>
+<span><span class="co">#&gt;  0.2099227</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">num_unique_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;    control     3           1685     1685     6756            1681         4.15</span></span>
-<span><span class="co">#&gt;  knockdown     3           1685     1685     6756            1681         4.18</span></span>
+<span><span class="co">#&gt;    control     3           1459     1459     4202            1459         50.5</span></span>
+<span><span class="co">#&gt;  knockdown     3           1459     1459     4202            1459         48.9</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
-<span><span class="co">#&gt;  0.1842657</span></span>
-<span><span class="co">#&gt;  0.2114607</span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1864955</span></span>
+<span><span class="co">#&gt;  0.2136799</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">cellular_component</span> <span class="op">%like%</span> <span class="st">"cytosol"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="co">#&gt;  files protein_groups proteins peptides peptides_unique quantifiable       CVs</span></span>
-<span><span class="co">#&gt;      6           3306     3306    44785           39377         79.1 0.2451987</span></span></code></pre></div>
+<span><span class="co">#&gt;      6           2855     2855    33053           29506         92.9 0.2443934</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="split-then-merge">Split then Merge<a class="anchor" aria-label="anchor" href="#split-then-merge"></a>
@@ -243,12 +242,12 @@ like this, just for demonstration purposes.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span></span>
 <span><span class="co">#&gt; Origin          Merged </span></span>
-<span><span class="co">#&gt;                 proteins (13.94 MB) </span></span>
+<span><span class="co">#&gt;                 proteins (10.95 MB) </span></span>
 <span><span class="co">#&gt; Quantitation    6 files </span></span>
 <span><span class="co">#&gt;                 2 samples (knockdown, control) </span></span>
-<span><span class="co">#&gt;                 8851 proteins </span></span>
+<span><span class="co">#&gt;                 7055 proteins </span></span>
 <span><span class="co">#&gt;                 4.2 log10 dynamic range </span></span>
-<span><span class="co">#&gt;  *imputed        </span></span>
+<span><span class="co">#&gt;  *imputed       within samples via .Primitive("min"). within samples via .Primitive("min"). </span></span>
 <span><span class="co">#&gt; Accounting      (5) match_between_runs num_peptides num_unique_peptides num_psms</span></span>
 <span><span class="co">#&gt;                 imputed </span></span>
 <span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name</span></span>
@@ -259,17 +258,16 @@ like this, just for demonstration purposes.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;    control     3           8851     8851    95877           83161         76.7</span></span>
-<span><span class="co">#&gt;  knockdown     3           8851     8851    95877           83161         75.3</span></span>
+<span><span class="co">#&gt;    control     3           6527     6527    65121           58003         93.8</span></span>
+<span><span class="co">#&gt;  knockdown     3           6556     6556    65344           58095         91.8</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
-<span><span class="co">#&gt;  0.1666301</span></span>
-<span><span class="co">#&gt;  0.2120776</span></span></code></pre></div>
+<span><span class="co">#&gt;  0.1729510</span></span>
+<span><span class="co">#&gt;  0.2099236</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data Transformations</span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data files</span></span>
-<span><span class="co">#&gt;   (p97KD_HCT116_20221202_chimerys_proteins.xlsx) were imported as proteins from</span></span>
-<span><span class="co">#&gt;   ProteomeDiscoverer</span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data files (p97KD_HCT116_proteins.xlsx) were</span></span>
+<span><span class="co">#&gt;   imported as proteins from ProteomeDiscoverer</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data reassigned sample to control where 'sample</span></span>
 <span><span class="co">#&gt;   like ctl'</span></span>
@@ -279,18 +277,19 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data subset `sample` %like% `knockdown`</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Removed MBR between `all` groups</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data normalized via median.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Normalization automatically selected as median.</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Missing values imputed within samples by</span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Missing values imputed within samples via</span></span>
 <span><span class="co">#&gt;   .Primitive("min").</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: ... 669 values imputed</span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: ... 636 values imputed</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data files</span></span>
-<span><span class="co">#&gt;   (p97KD_HCT116_20221202_chimerys_proteins.xlsx) were imported as proteins from</span></span>
-<span><span class="co">#&gt;   ProteomeDiscoverer</span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data files (p97KD_HCT116_proteins.xlsx) were</span></span>
+<span><span class="co">#&gt;   imported as proteins from ProteomeDiscoverer</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data reassigned sample to control where 'sample</span></span>
 <span><span class="co">#&gt;   like ctl'</span></span>
@@ -300,14 +299,16 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data subset `sample` %like% `control`</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Removed MBR between `all` groups</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data normalized via median.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Normalization automatically selected as raw.</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Missing values imputed within samples by</span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Missing values imputed within samples via</span></span>
 <span><span class="co">#&gt;   .Primitive("min").</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: ... 707 values imputed</span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: ... 714 values imputed</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • Merged 2 data sets</span></span></code></pre></div>
 </div>

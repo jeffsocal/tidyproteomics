@@ -30,7 +30,7 @@
 #' #   protein complex acts as the majority content and individual inter-actors
 #' #   are of quantitative differentiation
 #' hela_proteins %>%
-#'      normalize(description %!like% "Ribosome", .method = c("scaled", "median")) %>%
+#'      normalize(!description %like% "Ribosome", .method = c("scaled", "median")) %>%
 #'      summary("sample")
 #'
 normalize <- function(

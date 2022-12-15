@@ -53,7 +53,7 @@ rdata <- rdata %>%
   # save a report on contamination
   summary(contamination = "CRAP", destination = "save") %>%
   # remove contamination
-  subset(description %!like% "^CRAP")
+  subset(!description %like% "^CRAP")
 ```
 
 ### Normalization and Imputation

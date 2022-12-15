@@ -4,21 +4,12 @@
 \alias{down_select}
 \title{Helper function to subset a data frame}
 \usage{
-down_select(
-  table = NULL,
-  variable = NULL,
-  operator = c("<", "<=", ">", ">=", "==", "!=", "\%like\%", "\%!like\%"),
-  value = NULL
-)
+down_select(table = NULL, tidyproteomics_quo = NULL)
 }
 \arguments{
 \item{table}{a tibble}
 
-\item{variable}{a character string}
-
-\item{operator}{a character string}
-
-\item{value}{a character string}
+\item{tidyproteomics_quo}{a character vector}
 }
 \value{
 a tibble

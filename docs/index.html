@@ -137,16 +137,21 @@
 <td><code>num_unique_peptides &gt;= 2</code></td>
 </tr>
 <tr class="even">
-<td>%like%, %!like%</td>
+<td>%like%</td>
 <td>contains</td>
 <td><code>description %like% 'ribosome'</code></td>
 </tr>
 <tr class="odd">
+<td>! %like%</td>
+<td>does not contain</td>
+<td><code>!description %like% 'ribosome'</code></td>
+</tr>
+<tr class="even">
 <td>—</td>
 <td>— <em>expression</em> —</td>
 <td>—</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>/</td>
 <td>ratio</td>
 <td><code>experiment / control</code></td>

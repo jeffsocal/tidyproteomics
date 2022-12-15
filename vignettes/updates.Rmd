@@ -11,6 +11,10 @@ vignette: >
 # A condensed accounting of version updates
 ### Version: 1.0.2 - 2022.11.28
 
+-   modified %!like% to the more conventional !x %like% y
+
+### Version: 1.0.2 - 2022.11.28
+
 -   implemented S3 object for tidyproteomics data object
 -   refactored all functions to accout for new data object
 -   fixed minor issues with exporting data and plots

@@ -5,8 +5,12 @@
 #' data-object based on a regular expression and targeted annotation. This function
 #' will return a smaller tidyproteomics data-object.
 #'
+#' Note: `rm.mbr()` is run as default, this is to remove MBR proteins that may no
+#' longer have the original "anchor" observation present.
+#'
 #' @param data tidyproteomics data object
 #' @param ... a three part expression (eg. x == a)
+#' @param rm.mbr a boolean
 #' @param .verbose a boolean
 #'
 #' @return a tibble
@@ -24,12 +28,13 @@
 #'
 #' # creates a subset without Ribosomes
 #' hela_proteins %>%
-#'    subset(description %!like% "Ribosome") %>%
+#'    subset(!description %like% "Ribosome") %>%
 #'    summary()
 #'
 subset <- function(
     data = NULL,
     ...,
+    rm.mbr = TRUE,
     .verbose = TRUE
 ){
 
@@ -42,16 +47,20 @@ subset <- function(
   variable <- str_quo['variable']
   operator <- str_quo['operator']
   value <- str_quo['value']
+  inverse <- str_quo['inverse']
+  inverse_str <- ''
+  if(inverse == TRUE) { inverse_str <- '!' }
+
 
   identifier <- data$identifier
   which_segment <- get_segment(data, variable, .verbose)
   if(is.null(which_segment)) {return(data)}
-  operation <- glue::glue("Data subset `{variable}` {operator} `{value}`")
+  operation <- glue::glue("Data subset {inverse_str}`{variable}` {operator} `{value}`")
 
   if(.verbose == TRUE) {
     cli::cli_text("")
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "blue")))
-    cli::cli_process_start("Subsetting data: {.emph {variable}} {.info {operator}} {.emph {value}}")
+    cli::cli_process_start("Subsetting data: {.emph {inverse_str}{variable}} {.info {operator}} {.emph {value}}")
   }
 
   identifier <- data$identifier
@@ -62,7 +71,7 @@ subset <- function(
 
     data[[which_segment]] <- data[[which_segment]] %>%
       tidyr::pivot_wider(identifier, names_from = 'term', values_from = 'annotation') %>%
-      down_select(variable, operator, value) %>%
+      down_select(str_quo) %>%
       tidyr::pivot_longer(cols = !dplyr::matches(paste0(identifier, '$')),
                           names_to = 'term', values_to = 'annotation')
 
@@ -78,7 +87,7 @@ subset <- function(
       dplyr::inner_join(data$accounting, by = select_by)
 
   } else {
-    data[[which_segment]] <- down_select(data[[which_segment]], variable, operator, value)
+    data[[which_segment]] <- down_select(data[[which_segment]], str_quo)
   }
 
   if(which_segment %in% c('experiments', 'quantitative')) {
@@ -119,6 +128,9 @@ subset <- function(
 
   data$operations <- append(data$operations, operation)
 
+  if(rm.mbr == TRUE)
+    data <- data %>% rm.mbr()
+
   if(.verbose == TRUE) {cli::cli_process_done()}
 
   return(data)
@@ -128,20 +140,21 @@ subset <- function(
 #' Helper function to subset a data frame
 #'
 #' @param table a tibble
-#' @param variable a character string
-#' @param value a character string
-#' @param operator a character string
+#' @param tidyproteomics_quo a character vector
 #'
 #' @return a tibble
 #'
 down_select <- function(
     table = NULL,
-    variable = NULL,
-    operator = c("<","<=",">",">=","==","!=","%like%","%!like%"),
-    value = NULL
+    tidyproteomics_quo = NULL
 ) {
 
-  operator <- rlang::arg_match(operator)
+  variable <- tidyproteomics_quo['variable']
+  operator <- tidyproteomics_quo['operator']
+  value <- tidyproteomics_quo['value']
+  inverse <- tidyproteomics_quo['inverse']
+
+  operator <- rlang::arg_match(operator, c("<","<=",">",">=","==","!=","%like%"))
   if(is.null(table) || is.null(variable) || is.null(value)) {return(table)}
   table <- as.data.frame(table)
 
@@ -152,10 +165,13 @@ down_select <- function(
   if(operator == ">="){ w <- which(table[,variable] >= value) }
   if(operator == "=="){ w <- which(table[,variable] == value) }
   if(operator == "!="){ w <- which(table[,variable] != value) }
+  # if(operator == "%in%"){ w <- which(table[,variable] %in% value) }
   if(operator == "%like%"){ w <- which(grepl(value, table[,variable], ignore.case = T)) }
-  if(operator == "%!like%"){ w <- which(!grepl(value, table[,variable], ignore.case = T)) }
 
-  if(length(w) > 0) {table <- table[w,]}
+  if(length(w) > 0) {
+    if(inverse == TRUE){ table <- table[-w,] }
+    else{ table <- table[w,] }
+  }
 
   return(tibble::as_tibble(table))
 }
@@ -175,12 +191,7 @@ tidyproteomics_quo <- function(...) {
   rlang_quo <- rlang::quo(...)
   quo_obj <- rlang::quo_text(rlang_quo)
   quo_obj <- sub("/", " / ", quo_obj)
-  # if(rlang::is_empty(rlang::quo_get_env(rlang_quo)) == TRUE){
-  #   # return(NULL)
-  #   quo_obj <- sub("/", " / ", ...)
-  # } else {
-  #   quo_obj <- sub("/", " / ", rlang::quo_text(rlang_quo))
-  # }
+
   quo_obj <- sub("\\s+", " ", quo_obj)
   if(quo_obj == "") {return(NULL)}
   quo_str <- stringr::str_split(quo_obj, " ")[[1]]
@@ -194,7 +205,13 @@ tidyproteomics_quo <- function(...) {
     quo_str <- quo_str[-w]
   }
   quo_str <- gsub('\"', '', quo_str)
-  names(quo_str) <- c('variable','operator','value')
+  quo_str[4] <- FALSE
+  names(quo_str) <- c('variable','operator','value','inverse')
+
+  if(grepl("^\\!", quo_str[1])) {
+    quo_str[1] <- sub("^\\!", "", quo_str[1])
+    quo_str[4] <- TRUE
+  }
 
   return(quo_str)
 }
@@ -204,7 +221,7 @@ tidyproteomics_quo <- function(...) {
   grepl(b, a, ignore.case = T)
 }
 
-#' @export
-`%!like%` <- function(a, b) {
-  !grepl(b, a, ignore.case = T)
-}
+# #' @export
+# `%!like%` <- function(a, b) {
+#   !grepl(b, a, ignore.case = T)
+# }

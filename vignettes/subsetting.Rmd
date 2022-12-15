@@ -26,10 +26,9 @@ underlying nature of the tidyproteomics data structure. The function
 `subset()` allows data to be easily filtered with simple semantic
 expressions, similar to how the filter function in the tidyverse package
 dplyr operates. This package also introduces two new operators that work
-as a regular expression filter, similar to SQL syntax, (***%like%*** and
-***%!like%***) which can be used in the semantic expression to subset
+as a regular expression filter, similar to SQL syntax, (***%like%***) which can be used in the semantic expression to subset
 data base on pattern matching in variable groups. For example, the
-expression ***`description %!like% 'ribosome'`*** would keep all
+expression ***`!description %like% 'ribosome'`*** would keep all
 proteins with a description that does not include the word *'ribosome'*.
 Additionally, together with the `merge()` and `reassign()` functions,
 data can be combined from multiple sources, assigned to specific sample

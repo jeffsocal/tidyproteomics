@@ -3,7 +3,6 @@
 S3method(plot,tidyproteomics)
 S3method(print,tidyproteomics)
 S3method(summary,tidyproteomics)
-export("%!like%")
 export("%like%")
 export(annotate)
 export(collapse)

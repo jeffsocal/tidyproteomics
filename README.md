@@ -26,7 +26,8 @@ annotations and accountings like *match_between_runs* and
 | ==              | equals               | `sample == 'wt'` , `match_between_runs == FALSE` |
 | !=              | does not equal       | `biological_function != 'DNA metabolism'`        |
 | \<, \>          | less, greater than   | `num_unique_peptides >= 2`                       |
-| %like%, %!like% | contains             | `description %like% 'ribosome'`                  |
+| %like%          | contains             | `description %like% 'ribosome'`                  |
+| ! %like%        | does not contain     | `!description %like% 'ribosome'`                  |
 | ---             | --- *expression* --- | ---                                              |
 | /               | ratio                | `experiment / control`                           |
 
