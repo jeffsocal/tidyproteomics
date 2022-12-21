@@ -57,6 +57,12 @@ plot_counts <- function(
   if(length(w) > 0) {fat <- fat[-w,]}
 
   fat$metric <- unlist(fat[,accounting])
+  legend_title <- 'Replicate'
+  fat$fill <- fat$replicate
+  if(length(unique(fat$replicate)) > 9) {
+    fat$fill <- fat$sample
+    legend_title <- 'Sample'
+  }
   metric_max <- max(fat$metric) * 1.1
 
   fat_mean <- fat %>%
@@ -77,10 +83,10 @@ plot_counts <- function(
     # dplyr::mutate(replicate = as.factor(replicate)) %>%
     ggplot2::ggplot(ggplot2::aes(replicate, metric)) +
     ggplot2::geom_bar(ggplot2::aes(group = replicate), color = 'grey',
-                      stat = 'identity', fill=NA,position = 'identity',
+                      stat = 'identity', fill=NA, position = 'identity',
                       width=1) +
-    ggplot2::geom_bar(ggplot2::aes(fill=replicate, group = replicate),
-                      stat = 'identity', alpha=.67,position = 'identity',
+    ggplot2::geom_bar(ggplot2::aes(fill=fill, group = replicate),
+                      stat = 'identity', alpha=.67, position = 'identity',
                       width=1) +
     ggplot2::facet_grid(.~sample, scales = 'free_x', space = 'free_x')  +
     ggplot2::geom_text(data = fat_mean,
@@ -90,7 +96,8 @@ plot_counts <- function(
     ggplot2::scale_fill_brewer(palette = palette) +
     ggplot2::scale_color_brewer(palette = palette) +
     ggplot2::theme_classic() +
-    ggplot2::labs(title = paste(data$origin, "--", sub("s$", "", accounting), 'counts')) +
+    ggplot2::labs(title = paste(data$origin, "--", sub("s$", "", accounting), 'counts'),
+                  fill = legend_title) +
     ggplot2::ylab(accounting) +
     ggplot2::theme(axis.title.x = ggplot2::element_blank(),
                    axis.ticks.x = ggplot2::element_blank(),

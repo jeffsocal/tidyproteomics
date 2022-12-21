@@ -44,13 +44,12 @@ subset <- function(
   str_quo <- tidyproteomics_quo(...)
   if(is.null(str_quo)) { return(data) }
 
-  variable <- str_quo['variable']
-  operator <- str_quo['operator']
-  value <- str_quo['value']
-  inverse <- str_quo['inverse']
+  variable <- str_quo[['variable']]
+  operator <- str_quo[['operator']]
+  value <- str_quo[['value']]
+  inverse <- str_quo[['inverse']]
   inverse_str <- ''
   if(inverse == TRUE) { inverse_str <- '!' }
-
 
   identifier <- data$identifier
   which_segment <- get_segment(data, variable, .verbose)
@@ -108,6 +107,7 @@ subset <- function(
   }
 
   if(which_segment == 'accounting') {
+
     data$experiments <- data$experiments %>%
       dplyr::filter(sample_id %in% unique(data$accounting$sample_id)) %>%
       dplyr::group_by(sample) %>%
@@ -149,10 +149,10 @@ down_select <- function(
     tidyproteomics_quo = NULL
 ) {
 
-  variable <- tidyproteomics_quo['variable']
-  operator <- tidyproteomics_quo['operator']
-  value <- tidyproteomics_quo['value']
-  inverse <- tidyproteomics_quo['inverse']
+  variable <- tidyproteomics_quo[['variable']]
+  operator <- tidyproteomics_quo[['operator']]
+  value <- tidyproteomics_quo[['value']]
+  inverse <- tidyproteomics_quo[['inverse']]
 
   operator <- rlang::arg_match(operator, c("<","<=",">",">=","==","!=","%like%"))
   if(is.null(table) || is.null(variable) || is.null(value)) {return(table)}
@@ -160,13 +160,14 @@ down_select <- function(
 
   w <- c()
   if(operator == "<"){ w <- which(table[,variable] < value) }
-  if(operator == ">"){ w <- which(table[,variable] > value) }
-  if(operator == "<="){ w <- which(table[,variable] <= value) }
-  if(operator == ">="){ w <- which(table[,variable] >= value) }
-  if(operator == "=="){ w <- which(table[,variable] == value) }
-  if(operator == "!="){ w <- which(table[,variable] != value) }
+  else if(operator == ">"){ w <- which(table[,variable] > value) }
+  else if(operator == "<="){ w <- which(table[,variable] <= value) }
+  else if(operator == ">="){ w <- which(table[,variable] >= value) }
+  else if(operator == "=="){ w <- which(table[,variable] == value) }
+  else if(operator == "!="){ w <- which(table[,variable] != value) }
   # if(operator == "%in%"){ w <- which(table[,variable] %in% value) }
-  if(operator == "%like%"){ w <- which(grepl(value, table[,variable], ignore.case = T)) }
+  else if(operator == "%like%"){ w <- which(grepl(value, table[,variable], ignore.case = T)) }
+  else {}
 
   if(length(w) > 0) {
     if(inverse == TRUE){ table <- table[-w,] }
@@ -205,13 +206,21 @@ tidyproteomics_quo <- function(...) {
     quo_str <- quo_str[-w]
   }
   quo_str <- gsub('\"', '', quo_str)
+  quo_str <- as.list(quo_str)
   quo_str[4] <- FALSE
   names(quo_str) <- c('variable','operator','value','inverse')
 
+  # logic for "not"
   if(grepl("^\\!", quo_str[1])) {
+    if(grepl("^\\%", quo_str[2])) { quo_str[4] <- TRUE }
+    else { cli::cli_abort("undefined method for `!` at start of expression") }
     quo_str[1] <- sub("^\\!", "", quo_str[1])
-    quo_str[4] <- TRUE
   }
+
+  # logic to turn characters back to a numeric
+  if(grepl("[^0-9\\.]", quo_str[3])) {
+    # keep as string
+  } else { quo_str[3] <- as.numeric(quo_str[3]) }
 
   return(quo_str)
 }

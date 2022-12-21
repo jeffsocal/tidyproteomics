@@ -4,12 +4,14 @@
 \alias{subset}
 \title{Create a data subset}
 \usage{
-subset(data = NULL, ..., .verbose = TRUE)
+subset(data = NULL, ..., rm.mbr = TRUE, .verbose = TRUE)
 }
 \arguments{
 \item{data}{tidyproteomics data object}
 
 \item{...}{a three part expression (eg. x == a)}
+
+\item{rm.mbr}{a boolean}
 
 \item{.verbose}{a boolean}
 }
@@ -20,6 +22,9 @@ a tibble
 \code{subset()} is the main function for sub-setting quantitative data from a tidyproteomics
 data-object based on a regular expression and targeted annotation. This function
 will return a smaller tidyproteomics data-object.
+
+Note: \code{rm.mbr()} is run as default, this is to remove MBR proteins that may no
+longer have the original "anchor" observation present.
 }
 \examples{
 library(dplyr, warn.conflicts = FALSE)

@@ -38,9 +38,9 @@ enrichment <- function(
   check_data(data)
   str_quo <- tidyproteomics_quo(...)
   if(is.null(str_quo)) { return(data) }
-  experiment <- str_quo['variable']
-  control <- str_quo['value']
-  if(str_quo['operator'] != "/") {
+  experiment <- str_quo[['variable']]
+  control <- str_quo[['value']]
+  if(str_quo[['operator']] != "/") {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
     cli::cli_abort("Comparison operator must be {.emph \"/\"} (e.g. {experiment}{.emph /}{control})")
   }

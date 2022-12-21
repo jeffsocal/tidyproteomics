@@ -59,7 +59,8 @@ codify <- function(
         cols = !dplyr::matches(paste(paste0("^", identifier, "$"), collapse = "|")),
         names_to = 'term',
         values_to = 'annotation'
-      ) %>% unique()
+      ) %>% unique() %>%
+      dplyr::filter(!is.na(annotation))
   } else {
     tb_annotations <- c()
   }
