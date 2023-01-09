@@ -146,8 +146,8 @@ export_analysis <- function(
     cli::cli_alert_info("Try one of ({paste(names(data$analysis), collapse = ', ')})")
     return(data)
   }
-  experiment <- str_quo['variable']
-  control <- str_quo['value']
+  experiment <- str_quo[['variable']]
+  control <- str_quo[['value']]
   if(str_quo['operator'] != "/") {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
     cli::cli_abort("Comparison operator must be {.emph \"/\"} (e.g. {experiment}{.emph /}{control})")
