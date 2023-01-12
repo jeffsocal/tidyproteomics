@@ -45,8 +45,12 @@ plot_variation_cv <- function(
 
   quant_values_all <- c('raw', 'median', 'scaled', 'linear',
                         'limma', 'loess', 'svm', 'randomforest')
-  norm_vals <- intersect(quant_values_all, quant_values)
 
+  norm_vals <- intersect(quant_values_all, quant_values)
+  if(length(norm_vals) == 1) {
+    cli::cli_alert_warning("Normalization has not yet been performed.")
+    return(data)
+  }
 
   data_quant_norm_range <- data_quant %>%
     dplyr::mutate(abundance = abundance %>% log10(),
@@ -86,12 +90,12 @@ plot_variation_cv <- function(
 
   plot <- data_quant_cvs_mean %>%
     dplyr::select(origin, sample, mean = cv_mean) %>%
-    dplyr::mutate(stat = 'CVs') %>%
+    dplyr::mutate(stat = 'CVs (sd/mean)') %>%
     dplyr::bind_rows(
       data_quant_norm_range %>%
         dplyr::mutate(mean = abundance_95h - abundance_95l) %>%
         dplyr::select(origin, sample, mean) %>%
-        dplyr::mutate(stat = 'Dynamic Range')
+        dplyr::mutate(stat = 'Dynamic Range (95%CI Log10)')
     ) %>%
     dplyr::mutate(origin = forcats::fct_relevel(origin, norm_vals)) %>%
     ggplot2::ggplot(ggplot2::aes(origin, mean, color=sample)) +

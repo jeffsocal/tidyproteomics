@@ -70,7 +70,7 @@ plot_volcano <- function(
   file_name = "volcano"
   if('tidyproteomics' %in% class(data)) {
     table <- data %>% export_analysis(..., .analysis = 'expression')
-    str_quo <- sub("/", "-", paste(tidyproteomics_quo(...), collapse = ""))
+    str_quo <- tidyproteomics_quo_name(...)
     file_name = glue::glue("{data$analyte}_{data$quantitative_source}_volcano_{str_quo}")
   } else {
     table <- data

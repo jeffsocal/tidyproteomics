@@ -77,7 +77,7 @@ plot_proportion <- function(
   file_name <- 'proportion'
   if('tidyproteomics' %in% class(data)) {
     table <- data %>% export_analysis(..., .analysis = 'expression')
-    str_quo <- sub("/", "-", paste(tidyproteomics_quo(...), collapse = ""))
+    str_quo <- tidyproteomics_quo_name(...)
     file_name = glue::glue("{data$analyte}_{data$quantitative_source}_proportion_{str_quo}")
   } else {
     table <- data

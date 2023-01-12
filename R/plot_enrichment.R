@@ -53,7 +53,7 @@ plot_enrichment <- function(
   file_name = 'enrichment'
   if('tidyproteomics' %in% class(data)) {
     table <- data %>% export_analysis(..., .analysis = 'enrichment', .term = .term)
-    str_quo <- sub("/", "-", paste(tidyproteomics_quo(...), collapse = ""))
+    str_quo <- tidyproteomics_quo_name(...)
     file_name = glue::glue("{data$analyte}_{data$quantitative_source}_enrichment_{str_quo}")
   } else {
     table <- data

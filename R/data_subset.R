@@ -180,12 +180,9 @@ down_select <- function(
 
 #' Helper function to subset a data frame
 #'
-#' @param table a tibble
-#' @param variable a character string
-#' @param value a character string
-#' @param operator a character string
+#' @param ... a quo
 #'
-#' @return a tibble
+#' @return a list object
 #'
 tidyproteomics_quo <- function(...) {
 
@@ -223,6 +220,18 @@ tidyproteomics_quo <- function(...) {
   } else { quo_str[3] <- as.numeric(quo_str[3]) }
 
   return(quo_str)
+}
+
+#' Helper function to get a name from the ...
+#'
+#' @param ... a quo
+#'
+#' @return a character string
+#'
+tidyproteomics_quo_name <- function(...){
+  str_quo <- tidyproteomics_quo(...)
+  if(is.null(str_quo)) { return(data) }
+  return(paste(str_quo[['variable']], str_quo[['value']], sep="-"))
 }
 
 #' @export

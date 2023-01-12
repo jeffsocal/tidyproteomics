@@ -35,6 +35,10 @@ plot_normalization <- function(
   data_quant <- data %>% extract(values = quant_values)
 
   norm_vals <- intersect(quant_values_all, quant_values)
+  if(length(norm_vals) == 1) {
+    cli::cli_alert_warning("Normalization has not yet been performed.")
+    return(data)
+  }
 
   data_medians <- data_quant %>%
     dplyr::group_by(origin) %>%
