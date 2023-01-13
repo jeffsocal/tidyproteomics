@@ -91,8 +91,8 @@ impute <- function(
 
   if('imputed.y' %in% colnames(data$accounting)){
     data$accounting <- data$accounting %>%
-      dplyr::mutate(imputed = ifelse(is.na(imputed.x), 1, imputed.x)) %>%
-      dplyr::select(!c('imputed.x', 'imputed.y'))
+      dplyr::rename(imputed = imputed.y) %>%
+      dplyr::select(!c('imputed.x'))
   }
 
   impute_msg <- glue::glue("... {data$accounting %>% dplyr::filter(imputed == TRUE) %>% nrow()} values imputed")
