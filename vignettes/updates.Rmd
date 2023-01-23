@@ -9,6 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 # A condensed accounting of version updates
+### Version: 1.1.2 - 2023.01.23
+
+-   refactored the import function to allow both wide and long format data in a configuration file, eliminating the hard coded import functions for ProteomeDiscoverer and MaxQuant
+
 ### Version: 1.0.4 - 2022.11.28
 
 -   modified %!like% to the more conventional !x %like% y

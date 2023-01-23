@@ -18,6 +18,7 @@ stats_contamination <- function(
   sample <- NULL
   replicate <- NULL
   abundance <- NULL
+  description <- NULL
   file_id <- NULL
   protein_origin <- NULL
   native <- NULL

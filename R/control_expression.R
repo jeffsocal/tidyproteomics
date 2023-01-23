@@ -56,6 +56,7 @@ expression <- function(
   imputed <- NULL
   log2_foldchange <- NULL
   foldchange <- NULL
+  sample_id <- NULL
 
   check_data(data)
   str_quo <- tidyproteomics_quo(...)

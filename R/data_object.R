@@ -10,6 +10,10 @@ print.tidyproteomics <- function(
     obj
 ) {
 
+  # visible bindings
+  object.size <- NULL
+  abundance <- NULL
+
   check_data(obj)
   obj_size <- as.numeric(object.size(obj))
   names_samples <- unique(unlist(obj$experiments$sample))
@@ -28,9 +32,9 @@ print.tidyproteomics <- function(
   cli::cli_h2(cli::style_bold("{.emph Quantitative Proteomics Data Object}"))
   println("Origin", glue::glue("{obj$origin}"))
   println("", glue::glue("{obj$analyt} ({prettyunits::pretty_bytes(obj_size)})"))
-  println("Quantitation", glue::glue("{nrow(obj$experiments)} files"))
-  println("", glue::glue("{length(names_samples)} samples ({paste(names_samples, collapse=', ')})"))
-  println("", glue::glue("{length(unique(unlist(obj$quantitative[obj$identifier[1]])))} {obj$identifier[1]}s"))
+  println("Composition", glue::glue("{nrow(obj$experiments)} files"))
+  println("", glue::glue("{length(names_samples)} samples ({stringr::str_wrap(paste(names_samples, collapse=' '), 76, exdent = 16)})"))
+  println("Quantitation", glue::glue("{length(unique(unlist(obj$quantitative[obj$identifier[1]])))} {obj$identifier[1]}s"))
   println("", glue::glue("{signif(dynamic_range,2)} log10 dynamic range"))
 
   if(obj$quantitative_source != 'raw') {println(" *normalized", glue::glue("{obj$quantitative_source}"))}
@@ -42,11 +46,11 @@ print.tidyproteomics <- function(
     println(" *imputed", glue::glue("{v_impt}"))
   }
 
-  println("Accounting", glue::glue("({length(names_accounting)}) {stringr::str_wrap(paste(names_accounting, collapse=' '), 60, exdent = 16)}"))
+  println("Accounting", glue::glue("({length(names_accounting)}) {stringr::str_wrap(paste(names_accounting, collapse=' '), 76, exdent = 16)}"))
 
   if(!is.null(obj$annotations)) {
     names_annotations <- unique(unlist(obj$annotations$term))
-    println("Annotations", glue::glue("({length(names_annotations)}) {stringr::str_wrap(paste(names_annotations, collapse=' '), 60, exdent = 16)}"))
+    println("Annotations", glue::glue("({length(names_annotations)}) {stringr::str_wrap(paste(names_annotations, collapse=' '), 76, exdent = 16)}"))
   }
 
   if(!is.null(obj$analysis)) {

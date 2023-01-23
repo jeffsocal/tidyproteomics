@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -118,7 +118,8 @@ handeling, so be aware. For ProteomeDiscoverer the peptide’s config can
 be modified to use <code>Master Protein Accessions</code> or
 <code>Protein Accessions</code> if either column is present. Also note,
 that for some configurations the <em>sample</em> group has no defined
-“supplied name”, as this is later derived by the extraction code.</p>
+“supplied name”, as this is later derived by the extraction code defined
+in the columns labeled “pattern”.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jeffsocal.github.io/tidyproteomics/">"tidyproteomics"</a></span><span class="op">)</span></span></code></pre></div>
@@ -132,6 +133,22 @@ This can be accomplished by opening the Study Results, then selecting
 keep only Level 1 checked, and select either “Proteins” or “Peptide
 Groups”. See the Exporting section below to make sure the required
 columns are present.</p>
+<p>The data exported from ProteomeDiscoverer is not very “tidy”, as it
+has mixed wide-format columns (eg. Abundance for each sample on a single
+row) and long-format. The data table from ProteomeDiscoverer is
+protein-centric wherein each row is dedicated to a single protein,
+rather than a single measurement. To clean up this data we need to
+“rotate” the wide-format columns such that each row in our new table is
+a single observation. In other words, we need a single abundance value
+for a single protein from a single sample, per row. To accomplish this
+we need to pivot the wide-format columns defined in the column
+<strong>pivot</strong> then “extract” the sample name from the column
+header as defined in the column <strong>pattern_extract</strong>. These
+patterns conform to standard regular expressions.</p>
+<p>Note that the pivot columns will provide the basis for
+<em>sample</em> and <em>sample_file</em> by extracting the correct
+values as indicated in the <strong>pattern_extract</strong> column, and
+hence the absence of a value for <strong>column_import</strong>.</p>
 <div class="section level4">
 <h4 id="initial-set-up">Initial Set Up<a class="anchor" aria-label="anchor" href="#initial-set-up"></a>
 </h4>
@@ -157,55 +174,97 @@ function.</p>
 </h5>
 <p>The columns following columns should be considered. These can be
 modified in the file
-<code>tidyproteomics/inst/extdata/config/proteomediscoverer_protein_headers</code>:</p>
+<code>tidyproteomics/inst/extdata/config/ProteomeDiscoverer_proteins.tsv</code>:</p>
 <table class="table">
+<colgroup>
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+</colgroup>
 <thead><tr class="header">
-<th>group</th>
-<th>normalized name</th>
-<th>supplied name</th>
-<th>required</th>
+<th>category</th>
+<th>column_defined</th>
+<th>column_import</th>
+<th>pattern_extract</th>
+<th>pattern_remove</th>
+<th>pattern_split</th>
+<th>pivot</th>
+<th><em>REQUIRED</em></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td>sample</td>
 <td>sample</td>
 <td></td>
-<td>yes</td>
+<td>“(?&lt;=,).+”</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>sample</td>
 <td>sample_file</td>
 <td></td>
-<td>yes</td>
+<td>(?&lt;=)F(?=:)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="odd">
 <td>identifier</td>
-<td>protein_accession</td>
-<td>Accession</td>
-<td>yes</td>
+<td>protein</td>
+<td>^Accession$</td>
+<td></td>
+<td></td>
+<td>\;</td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>quantitative</td>
-<td>abundance</td>
-<td>Abundance:</td>
-<td>yes</td>
+<td>abundance_raw</td>
+<td>Abundance\:</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td>YES</td>
 </tr>
 <tr class="odd">
 <td>impute</td>
 <td>match_between_runs</td>
-<td>Found in Sample:</td>
+<td>Found in Sample\:</td>
+<td>Found</td>
 <td></td>
+<td></td>
+<td>TRUE</td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>accounting</td>
 <td>num_peptides</td>
-<td># Peptides</td>
+<td>^# Peptides$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>accounting</td>
 <td>num_unique_peptides</td>
-<td># Unique Peptides</td>
+<td>^# Unique Peptides$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 <tr class="even">
@@ -213,71 +272,29 @@ modified in the file
 <td>num_psms</td>
 <td># PSMs</td>
 <td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td>annotation</td>
 <td>description</td>
 <td>Description</td>
 <td></td>
-</tr>
-<tr class="even">
-<td>annotation</td>
-<td>gene_id_entrez</td>
-<td>Entrez Gene ID</td>
 <td></td>
-</tr>
-<tr class="odd">
-<td>annotation</td>
-<td>gene_id_ensemble</td>
-<td>Ensembl Gene ID</td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 <tr class="even">
-<td>annotation</td>
-<td>gene_name</td>
-<td>Gene Symbol</td>
+<td><em>…etc</em></td>
 <td></td>
-</tr>
-<tr class="odd">
-<td>annotation</td>
-<td>chromosome</td>
-<td>Chromosome</td>
 <td></td>
-</tr>
-<tr class="even">
-<td>annotation</td>
-<td>biological_process</td>
-<td>Biological Process</td>
 <td></td>
-</tr>
-<tr class="odd">
-<td>annotation</td>
-<td>cellular_component</td>
-<td>Cellular Component</td>
 <td></td>
-</tr>
-<tr class="even">
-<td>annotation</td>
-<td>molecular_function</td>
-<td>Molecular Function</td>
 <td></td>
-</tr>
-<tr class="odd">
-<td>annotation</td>
-<td>kegg_pathway</td>
-<td>KEGG Pathways</td>
 <td></td>
-</tr>
-<tr class="even">
-<td>annotation</td>
-<td>wiki_pathway</td>
-<td>WikiPathways</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>annotation</td>
-<td>reactome_pathway</td>
-<td>Reactome Pathways</td>
 <td></td>
 </tr>
 </tbody>
@@ -288,61 +305,127 @@ modified in the file
 </h5>
 <p>The columns following columns should be considered. These can be
 modified in the file
-<code>tidyproteomics/inst/extdata/config/proteomediscoverer_peptide_headers</code>:</p>
+<code>tidyproteomics/inst/extdata/config/ProteomeDiscoverer_ppeptides.tsv</code>:</p>
 <table class="table">
 <colgroup>
-<col width="19%">
-<col width="28%">
-<col width="38%">
-<col width="14%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
-<th>group</th>
-<th>normalized name</th>
-<th>supplied name</th>
-<th>required</th>
+<th>category</th>
+<th>column_defined</th>
+<th>column_import</th>
+<th>pattern_extract</th>
+<th>pattern_remove</th>
+<th>pattern_split</th>
+<th>pivot</th>
+<th><em>REQUIRED</em></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td>sample</td>
 <td>sample</td>
 <td></td>
-<td>yes</td>
+<td>“(?&lt;=,).+”</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>sample</td>
 <td>sample_file</td>
 <td></td>
-<td>yes</td>
+<td>(?&lt;=)F(?=:)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="odd">
 <td>identifier</td>
-<td>protein_accession</td>
+<td>protein</td>
 <td>Master Protein Accessions</td>
-<td>yes</td>
+<td></td>
+<td></td>
+<td>\;</td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>identifier</td>
 <td>peptide</td>
 <td>Annotated Sequence</td>
-<td>yes</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="odd">
 <td>identifier</td>
-<td>modifications</td>
-<td>Modifications</td>
-<td>yes</td>
+<td>modification</td>
+<td>^Modifications$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>quantitative</td>
-<td>abundance</td>
-<td>Abundance:</td>
-<td>yes</td>
+<td>abundance_raw</td>
+<td>Abundance\:</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td>YES</td>
 </tr>
 <tr class="odd">
 <td>impute</td>
 <td>match_between_runs</td>
-<td>Found in Sample:</td>
+<td>Found in Sample\:</td>
+<td>Found</td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td>YES</td>
+</tr>
+<tr class="even">
+<td>accounting</td>
+<td>num_psms</td>
+<td># PSMs</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>accounting</td>
+<td>description</td>
+<td>Description</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><em>…etc</em></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 </tbody>
@@ -363,6 +446,22 @@ modified in the file
 following <code>current_project \&gt; combined \&gt; txt</code> with
 data both <em>peptides (evidence.txt)</em> and <em>proteins
 (proteinGroups.txt)</em>.</p>
+<p>The data exported from MaxQuant for the file
+<em>proteinGroups.txt</em> is not very “tidy”, as it has mixed
+wide-format columns (eg. Abundance for each sample on a single row) and
+long-format. The data table from ProteomeDiscoverer is protein-centric
+wherein each row is dedicated to a single protein, rather than a single
+measurement. To clean up this data we need to “rotate” the wide-format
+columns such that each row in our new table is a single observation. In
+other words, we need a single abundance value for a single protein from
+a single sample, per row. To accomplish this we need to pivot the
+wide-format columns defined in the column <strong>pivot</strong> then
+“extract” the sample name from the column header as defined in the
+column <strong>pattern_extract</strong>. These patterns conform to
+standard regular expressions.</p>
+<p>Note also that we want to remove rows from the decoy search labeled
+<em>REV_*</em>, and indicated in the column
+<strong>pattern_remove</strong>.</p>
 <div class="section level4">
 <h4 id="initial-set-up-1">Initial Set Up<a class="anchor" aria-label="anchor" href="#initial-set-up-1"></a>
 </h4>
@@ -386,64 +485,94 @@ modified in the file
 <code>tidyproteomics/inst/extdata/config/MaxQuant_proteins.tsv</code>:</p>
 <table class="table">
 <colgroup>
-<col width="20%">
-<col width="30%">
-<col width="35%">
-<col width="14%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th>category</th>
 <th>column_defined</th>
 <th>column_import</th>
-<th>required</th>
+<th>pattern_extract</th>
+<th>pattern_remove</th>
+<th>pattern_split</th>
+<th>pivot</th>
+<th><em>REQUIRED</em></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td>sample</td>
 <td>sample</td>
 <td></td>
-<td>yes</td>
+<td>(?&lt;=\s)[0-9]+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>sample</td>
 <td>sample_file</td>
 <td></td>
-<td>yes</td>
+<td>(?&lt;=\s)[0-9]+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="odd">
 <td>identifier</td>
-<td>protein_accession</td>
-<td>Protein IDs</td>
-<td>yes</td>
+<td>protein</td>
+<td>^Proteins IDs$</td>
+<td>(?&lt;=\|).*?(?=\|)</td>
+<td>^REV\_</td>
+<td>\;</td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>quantitative</td>
-<td>abundance</td>
-<td>Intensity\s</td>
-<td>yes</td>
+<td>abundance_raw</td>
+<td>^Intensity\s$</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td>YES</td>
 </tr>
 <tr class="odd">
-<td>impute</td>
-<td>match_between_runs</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
 <td>accounting</td>
 <td>num_psms</td>
-<td>MS/MS count</td>
+<td>^MS/MS count</td>
 <td></td>
-</tr>
-<tr class="odd">
-<td>accounting</td>
-<td>num_peptides</td>
-<td>Peptide counts (all)</td>
+<td></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 <tr class="even">
 <td>accounting</td>
+<td>num_peptides</td>
+<td>^Peptides\s</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>accounting</td>
 <td>num_unique_peptides</td>
-<td>Peptide counts (unique)</td>
+<td>^Unique peptides\s</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
 <td></td>
 </tr>
 </tbody>
@@ -456,59 +585,105 @@ modified in the file
 modified in the file
 <code>tidyproteomics/inst/extdata/config/MaxQuant_peptides.tsv</code>:</p>
 <table class="table">
+<colgroup>
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+</colgroup>
 <thead><tr class="header">
 <th>category</th>
 <th>column_defined</th>
 <th>column_import</th>
-<th>required</th>
+<th>pattern_extract</th>
+<th>pattern_remove</th>
+<th>pattern_split</th>
+<th>pivot</th>
+<th><em>REQUIRED</em></th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td>sample</td>
-<td>sample_file</td>
+<td>sample</td>
 <td>Raw file</td>
-<td>yes</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>sample</td>
-<td>sample</td>
+<td>sample_file</td>
 <td>Experiment</td>
-<td>yes</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="odd">
 <td>identifier</td>
-<td>protein_accession</td>
-<td>Proteins</td>
-<td>yes</td>
+<td>protein</td>
+<td>^Proteins$</td>
+<td>(?&lt;=\|).*?(?=\|)</td>
+<td></td>
+<td>\;</td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>identifier</td>
 <td>peptide</td>
-<td>Sequence</td>
-<td>yes</td>
+<td>^Sequence$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="odd">
 <td>identifier</td>
-<td>modifications</td>
-<td>Modifications</td>
-<td>yes</td>
+<td>modification</td>
+<td>^Modified sequence$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>quantitative</td>
-<td>abundance</td>
-<td>Intensity\s</td>
-<td>yes</td>
+<td>abundance_raw</td>
+<td>^Intensity$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="odd">
 <td>impute</td>
 <td>match_between_runs</td>
 <td>Type</td>
+<td>MATCH</td>
 <td></td>
+<td></td>
+<td></td>
+<td>YES</td>
 </tr>
 <tr class="even">
 <td>accounting</td>
 <td>num_psms</td>
 <td>MS/MS count</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
 <td></td>
 </tr>
 </tbody>
@@ -531,7 +706,9 @@ modified in the file
 <h3 id="skyline">Skyline<a class="anchor" aria-label="anchor" href="#skyline"></a>
 </h3>
 <p>The Skyline software suite can export quantitative peptide data for
-most analyses.</p>
+most analyses. The exported data file is in a fairly “tidy” long format
+CSV file, where each peptide for each sample is reported on an
+individual row.</p>
 <div class="section level4">
 <h4 id="initial-set-up-2">Initial Set Up<a class="anchor" aria-label="anchor" href="#initial-set-up-2"></a>
 </h4>
@@ -557,70 +734,6 @@ required values shown below, name the report in
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/SkyLine_peptides.tsv</code>:</p>
-<table class="table">
-<thead><tr class="header">
-<th>category</th>
-<th>column_defined</th>
-<th>column_import</th>
-<th>required</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>sample</td>
-<td>sample_file</td>
-<td>File Name</td>
-<td>yes</td>
-</tr>
-<tr class="even">
-<td>sample</td>
-<td>sample</td>
-<td>Replicate Name</td>
-<td>yes</td>
-</tr>
-<tr class="odd">
-<td>identifier</td>
-<td>protein_accession</td>
-<td>Protein Accession</td>
-<td>yes</td>
-</tr>
-<tr class="even">
-<td>identifier</td>
-<td>peptide</td>
-<td>Peptide Sequence</td>
-<td>yes</td>
-</tr>
-<tr class="odd">
-<td>identifier</td>
-<td>modifications</td>
-<td>Modified Sequence</td>
-<td>yes</td>
-</tr>
-<tr class="even">
-<td>quantitative</td>
-<td>abundance</td>
-<td>Normalized Area</td>
-<td>yes</td>
-</tr>
-<tr class="odd">
-<td>impute</td>
-<td>match_between_runs</td>
-<td>Identified</td>
-<td>yes</td>
-</tr>
-<tr class="even">
-<td>accounting</td>
-<td>num_psms</td>
-<td></td>
-<td>yes</td>
-</tr>
-<tr class="odd">
-<td>accounting</td>
-<td>is_decoy</td>
-<td>Is Decoy</td>
-<td>yes</td>
-</tr>
-</tbody>
-</table>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="st">"path_to_skyline_project/output_file_name.csv"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"Skyline"</span>, <span class="st">"peptides"</span><span class="op">)</span></span></code></pre></div>
@@ -631,7 +744,9 @@ modified in the file
 <h3 id="dia-nn">DIA-NN<a class="anchor" aria-label="anchor" href="#dia-nn"></a>
 </h3>
 <p>The DIA-NN software suite exports quantitative peptide data back into
-the project folder as <em>report.tsv</em>.</p>
+the project folder as <em>report.tsv</em>. The exported data file is in
+a fairly “tidy” long format file, where each peptide for each sample is
+reported on an individual row.</p>
 <div class="section level4">
 <h4 id="exporting-3">Exporting<a class="anchor" aria-label="anchor" href="#exporting-3"></a>
 </h4>
@@ -647,64 +762,6 @@ the project folder as <em>report.tsv</em>.</p>
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/DIA-NN_peptides.tsv</code>:</p>
-<table class="table">
-<thead><tr class="header">
-<th>category</th>
-<th>column_defined</th>
-<th>column_import</th>
-<th>required</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>sample</td>
-<td>sample_file</td>
-<td>File.Name</td>
-<td>yes</td>
-</tr>
-<tr class="even">
-<td>sample</td>
-<td>sample</td>
-<td>Run</td>
-<td>yes</td>
-</tr>
-<tr class="odd">
-<td>identifier</td>
-<td>protein_accession</td>
-<td>Protein.Ids</td>
-<td>yes</td>
-</tr>
-<tr class="even">
-<td>identifier</td>
-<td>peptide</td>
-<td>Stripped.Sequence</td>
-<td>yes</td>
-</tr>
-<tr class="odd">
-<td>identifier</td>
-<td>modifications</td>
-<td>Modified.Sequence</td>
-<td>yes</td>
-</tr>
-<tr class="even">
-<td>quantitative</td>
-<td>abundance</td>
-<td>Ms1.Area</td>
-<td>yes</td>
-</tr>
-<tr class="odd">
-<td>impute</td>
-<td>match_between_runs</td>
-<td></td>
-<td>yes</td>
-</tr>
-<tr class="even">
-<td>accounting</td>
-<td>num_psms</td>
-<td></td>
-<td>yes</td>
-</tr>
-</tbody>
-</table>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="st">"path_to_diann_project/output_file_name.csv"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"DIA-NN"</span>, <span class="st">"peptides"</span><span class="op">)</span></span></code></pre></div>

@@ -1,10 +1,8 @@
-category	column_defined	column_import	pattern_extract	pattern_remove
-sample	file_id	Raw file		
-sample	sample	Experiment		
-identifier	protein	Protein IDs	(?<=\\|).*(?=\\|)	
-quantitative	abundance_raw	Intensity\s		
-impute	match_between_runs	Type	MATCH	
-accounting	num_psms	MS/MS count		
-accounting	num_peptides	Peptide counts (all)		
-accounting	num_unique_peptides	Peptide counts (unique)		
-accounting	protein_group	Protein IDs		
+category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
+sample	sample		(?<=\s)[0-9]+			
+sample	sample_file		(?<=\s)[0-9]+			
+identifier	protein	^Protein IDs	(?<=\|).*?(?=\|)	^REV\_	\;	
+quantitative	abundance_raw	^Intensity\s				TRUE
+accounting	num_psms	^MS/MS count				
+accounting	num_peptides	^Peptides\s				TRUE
+accounting	num_unique_peptides	^Unique peptides\s				TRUE

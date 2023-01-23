@@ -7,16 +7,10 @@
 tidyproteomics_quo(...)
 }
 \arguments{
-\item{table}{a tibble}
-
-\item{variable}{a character string}
-
-\item{value}{a character string}
-
-\item{operator}{a character string}
+\item{...}{a quo}
 }
 \value{
-a tibble
+a list object
 }
 \description{
 Helper function to subset a data frame

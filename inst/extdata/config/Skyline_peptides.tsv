@@ -1,9 +1,10 @@
-category	column_defined	column_import	pattern_extract	pattern_remove
-sample	sample_file	File Name		
-sample	sample	Replicate Name		
-identifier	protein	Protein Accession		
-identifier	peptide	Peptide Sequence		
-identifier	modifications	Peptide Modified Sequence		
-quantitative	abundance_raw	Normalized Area		#N/A
-impute	match_between_runs	Identified	ALIGNED|FALSE	
-filter	is_decoy	Is Decoy		TRUE
+category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
+sample	sample_file	File Name				
+sample	sample	Replicate Name				
+identifier	protein	Protein Accession			\;	
+identifier	peptide	Peptide Sequence				
+identifier	modifications	Peptide Modified Sequence				
+quantitative	abundance_raw	Normalized Area		#N/A		
+impute	match_between_runs	Identified	ALIGNED|FALSE			
+filter	is_decoy	Is Decoy		TRUE		
+annotation	gene_name	Gene Name				

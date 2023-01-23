@@ -14,18 +14,45 @@ read_data <- function(
     ...
 ) {
 
+  # visible bindings
+  col_name <- NULL
+
   ext <- stringr::str_extract(path, "\\..{3,4}$")
   ext <- rlang::arg_match(ext, c(".rds", ".csv", ".tsv", ".xlsx", ".xls", ".txt"))
 
   if( grepl("\\.rds$", path) ) {
-    path %>% readr::read_rds()
-  } else if( grepl("\\.csv$", path) ) {
-    path %>% readr::read_csv(...)
-  } else if( grepl("\\.(tsv|txt)$", path) ) {
-    path %>% readr::read_tsv(...)
+    tbl <- path %>% readr::read_rds()
+  } else if( grepl("\\.(csv|tsv|txt)$", path) ) {
+    suppressWarnings(
+      tbl <- path %>% vroom::vroom(progress = FALSE, col_types = vroom::cols())
+    )
+
+    tbl_problems <- vroom::problems(tbl)
+    if(nrow(tbl_problems) > 1){
+
+      tbl_problems <- tbl_problems %>%
+        dplyr::inner_join(
+          tibble::tibble(col_name = colnames(tbl)) %>%
+            dplyr::mutate(col = dplyr::row_number()),
+          by='col') %>%
+        dplyr::select(!dplyr::matches('file|col$')) %>%
+        dplyr::relocate(col_name)
+
+      cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
+      cli::cli_alert_info("... issues with {.emph {signif(length(unique(tbl_problems$row))/nrow(tbl) * 100,3)}%} of the data imported")
+      cli::cli_alert_info("... effecting columns {.emph {unique(tbl_problems$col_name)}}")
+      cli::cli_alert_info("... check to verify that the columns effected are not imported")
+
+      cli::cli_alert_info("{.emph ===== EXAMPLE =====}")
+      print(tbl_problems %>% utils::head())
+      cli::cli_alert_info("{.emph ===================}")
+    }
+
   } else if( grepl("\\.xl[xs]+$", path) ) {
-    path %>% readxl::read_excel()
+    tbl <- path %>% readxl::read_excel(col_types = 'text')
   }
+
+  return(tbl)
 }
 
 #' Load project specific data

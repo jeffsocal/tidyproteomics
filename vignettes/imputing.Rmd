@@ -22,7 +22,7 @@ While random forest algorithms have shown superiority in imputation and regressi
 Imputation currently supports the following methods calculated either **within** or **between** samples:
 
 | Function                 | Method                    | Description                                                        |
-|---------------|---------------|------------------------------------------|
+|-----------------|-----------------|---------------------------------------|
 | base::min                | **within** or **between** | the minimum value in any given set                                 |
 | stats::median            | **within** or **between** | the minimum value in any given set                                 |
 | *user supplied function* | **within** or **between** | e.g. *function (x, na.rm) { quantile(x, 0.05, na.rm = na.rm)[1] }* |
@@ -48,10 +48,12 @@ rdata <- path_to_package_data("p97KD_HCT116") %>%
 ```
 
 As part of this demonstration, signal from *P06576 in p07_kd* has been artificially removed to simulate a "genetic knockout mutation".
+
 ```{r, message=FALSE}
 w <- which(rdata$quantitative$protein == 'P06576' & rdata$quantitative$sample == 'p97_kd')
 rdata$quantitative <- rdata$quantitative[-w,]
 ```
+
 #### Using *within*
 
 Note the difference using **within** ..
@@ -65,7 +67,6 @@ rdata %>%
   ggplot(aes(replicate, abundance)) +
   geom_point(aes(color=sample)) +
   facet_wrap(~identifier) +
-  scale_y_log10() +
   scale_y_log10(limits = c(1e4,1e9))
 ```
 

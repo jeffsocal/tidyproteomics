@@ -34,6 +34,7 @@ plot_counts <- function(
   label <- NULL
   match_between_runs <- NULL
   imputed <- NULL
+  fill <- NULL
 
   accounting <- rlang::arg_match(accounting)
   check_data(data)

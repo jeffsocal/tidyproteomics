@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_import.R
 \name{data_import}
 \alias{data_import}
-\title{A helper function for importing peptide table data from ProteomeDiscoverer}
+\title{A helper function for importing peptide table data}
 \usage{
 data_import(file_names = NULL, platform = NULL, analyte = NULL, path = NULL)
 }
@@ -19,5 +19,5 @@ data_import(file_names = NULL, platform = NULL, analyte = NULL, path = NULL)
 a tidyproteomics list data-object
 }
 \description{
-A helper function for importing peptide table data from ProteomeDiscoverer
+A helper function for importing peptide table data
 }

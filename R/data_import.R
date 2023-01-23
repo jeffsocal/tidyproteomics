@@ -1,4 +1,4 @@
-#' A helper function for importing peptide table data from ProteomeDiscoverer
+#' A helper function for importing peptide table data
 #'
 #' @param file_names a character vector of file paths
 #' @param platform a character string
@@ -23,6 +23,13 @@ data_import <- function(
   match_between_runs <- NULL
   num_psms <- NULL
 
+  column_defined <- NULL
+  pivot <- NULL
+  column_import <- NULL
+  accounting <- NULL
+  account_str <- NULL
+  protein_cluster <- NULL
+
   if(is.null(file_names)) {cli::cli_abort(c("x" = "No file paths indicated"))}
   if(is.null(platform)) {cli::cli_abort(c("x" = "No file platform indicated"))}
   if(is.null(analyte)) {cli::cli_abort(c("x" = "No file analyte indicated"))}
@@ -34,60 +41,129 @@ data_import <- function(
     path_to_config <- glue::glue("{platform}_{analyte}") %>% path_to_package_data()
   }
 
-  cols_config <- path_to_config %>%
+  tbl_config <- path_to_config %>%
     readr::read_tsv(show_col_types = FALSE, progress = FALSE) %>%
-    as.data.frame()
+    as.data.frame() %>%
+    dplyr::filter(!is.na(column_defined))
 
-  cols_needed <- c("sample_file", "sample", "abundance_raw")
-  cols_extract <- cols_config[which(!is.na(cols_config$pattern_extract) & cols_config$category != "impute"),]
-  cols_remove <- cols_config[which(!is.na(cols_config$pattern_remove)),]
-  cols_mbr <- cols_config[which(!is.na(cols_config$pattern_extract) & cols_config$category == "impute"),]
+  # does the config file have all the right columns
+  tbl_config_need <- c("category","column_defined","column_import","pattern_extract","pattern_remove","pattern_split","pivot")
+  tbl_config_have <- names(tbl_config)
+  if(length(setdiff(tbl_config_need, tbl_config_have)) > 0) {
+    cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
+    cli::cli_abort(c("x" = "Columns missing in config fill: {.emph {setdiff(tbl_config_need, tbl_config_have)}}"))
+  }
+
+  ##############################################################################
+  # order of operations
+  # read_each >
+  #        pivot_long > extract_pivot > pivot_wide >
+  #        split > remove >
+  #        extract >
+  #        rename
+  # merge_each
+  # replicate sample accounting
+  ##############################################################################
+
+  # parse out tables for import manipulation
+  tbl_pivot <- tbl_config %>% dplyr::filter(pivot == TRUE | is.na(column_import))
+  pivot_cols <- tbl_pivot %>% dplyr::filter(!is.na(column_import)) %>% dplyr::select(column_import) %>% unlist() %>% as.character()
+  pivot_str <- paste(pivot_cols, collapse = "|")
 
   # read in the config file for annotation columns
-  cols_all <- set_vect(cols_config)
-  cols_quantitative <- set_vect(cols_config, 'quantitative')
-  cols_annotations <- set_vect(cols_config, 'annotation')
-  cols_accountings <- set_vect(cols_config, 'accounting')
-  cols_identifiers <- set_vect(cols_config, 'identifier')
-  cols_samples <- set_vect(cols_config, 'sample')
-  cols_impute <- set_vect(cols_config, 'impute')
-  cols_filter <- set_vect(cols_config, 'filter')
+  cols_all <- set_vect(tbl_config)
+  cols_all_str <- paste(cols_all[which(!is.na(cols_all))], collapse = "|")
+
+  cli::cli_div(theme = list(span.emph = list(color = "blue")))
+  cli::cli_alert_info("Importing {.emph {platform}}:")
 
   dat_out <- c()
   for(i in 1:length(file_names) ){
     file_name <- file_names[i]
 
-    this_dat <- file_name %>% read_data(show_col_types = FALSE, progress = FALSE)
+    cli::cli_progress_step("... {.emph {basename(file_name)}}")
 
-    cli::cli_progress_step("Importing {.emph {basename(file_name)}}")
+    this_dat <- file_name %>%
+      read_data(show_col_types = FALSE, progress = FALSE) %>%
+      dplyr::select(dplyr::matches(cols_all_str))
 
-    this_dat_cols <- this_dat %>% colnames()
-    get_cols_all <- match_vect(this_dat_cols, cols_all)
+    if(nrow(this_dat) == 0) {cli::cli_abort("... no data extracted, check config file")}
 
-    cols_notfound <- setdiff(cols_needed, names(get_cols_all))
-    if(length(cols_notfound) > 0) {
-      cli::cli_abort(".. import error, did not find columns for {.emph {cols_notfound}}")
+    ############################################################################
+    # pivot LONG
+    if(pivot_str != "") {
+      this_dat <- this_dat %>%
+        tidyr::pivot_longer(cols = dplyr::matches(pivot_str), names_to = 'accounting')
+
+      # pivot extract
+      tbl_pivot_extract <- tbl_pivot %>%
+        dplyr::filter(is.na(column_import)) %>%
+        dplyr::mutate(column_import = 'accounting')
+
+      this_dat <- this_dat %>% import_extract(tbl_pivot_extract)
     }
 
-    get_cols_quantitative <- match_vect(this_dat_cols, cols_quantitative)
-    get_cols_annotations <- match_vect(this_dat_cols, cols_annotations)
-    get_cols_accountings <- match_vect(this_dat_cols, cols_accountings)
-    get_cols_identifiers <- match_vect(this_dat_cols, cols_identifiers)
-    get_cols_samples <- match_vect(this_dat_cols, cols_samples)
-    get_cols_impute <- match_vect(this_dat_cols, cols_impute)
-    get_cols_filter <- match_vect(this_dat_cols, cols_filter)
+    ############################################################################
+    # pivot WIDE
+    if(pivot_str != "") {
 
-    if(length(get_cols_annotations) != length(cols_annotations)) {cli::cli_alert_warning(".. not all `annotation` columns imported, only found {.emph {get_cols_annotations}}")}
-    if(length(get_cols_quantitative) != length(cols_quantitative)) {cli::cli_abort(".. `quantitative` import error, did not find {.emph {cols_quantitative}}")}
-    if(length(get_cols_identifiers) != length(cols_identifiers)) {cli::cli_abort(".. `identifier` import error, only found {.emph {get_cols_identifiers}}")}
-    if(length(get_cols_samples) != length(cols_samples)) {cli::cli_abort(".. `sample` import error, only found {.emph {get_cols_samples}}")}
+      this_dat <- this_dat %>%
+        dplyr::full_join(
+          this_dat %>%
+            dplyr::mutate(
+              account_str = accounting %>% stringr::str_extract(pivot_str)) %>%
+            dplyr::select(accounting, account_str) %>%
+            unique() ,
+          by = 'accounting'
+        ) %>%
+        dplyr::select(!dplyr::matches('accounting')) %>%
+        dplyr::rename(accounting = account_str) %>%
+        tidyr::pivot_wider(names_from = 'accounting', values_from = 'value')
+    }
+
+    ############################################################################
+    # split rows
+    this_dat <- this_dat %>% import_split(tbl_config)
+
+    ############################################################################
+    # remove rows
+    this_dat <- this_dat %>% import_remove(tbl_config)
+
+    ############################################################################
+    # extract values
+    this_dat <- this_dat %>% import_extract(tbl_config, remove = TRUE)
+
+    ############################################################################
+    # rename columns
+    this_dat <- this_dat %>% import_rename(tbl_config)
+
+    ############################################################################
+    # deal with protein_groups
+    if('protein_cluster' %in% names(this_dat)) {
+      u_prot_all <- this_dat$protein %>% unique() %>% length()
+      this_dat <- this_dat %>%
+        dplyr::group_by(protein_cluster) %>%
+        dplyr::mutate(protein_group = paste(protein, collapse = ";")) %>%
+        dplyr::slice_head(n = 1) %>%
+        dplyr::ungroup() %>%
+        dplyr::select(!dplyr::matches('protein_cluster'))
+
+      u_prot_red <- this_dat$protein %>% unique() %>% length()
+      cli::cli_alert_info("... homology collapsed {.emph {u_prot_all}} proteins into {.emph {u_prot_red}} proteins groups")
+    }
+
+    ############################################################################
+    # munge MBR
+    this_dat <- this_dat %>% import_mbr(tbl_config)
+
+    ############################################################################
+    # validate the imported data is good
+    this_dat %>% import_validate(tbl_config)
 
     this_dat <- this_dat %>%
-      dplyr::select(dplyr::all_of(c(get_cols_identifiers,
-                                    get_cols_all))) %>%
-      tidyr::separate_rows(protein, sep = "\\;\\s*") %>%
       dplyr::mutate(sample = gsub("\\-", "_", sample)) %>%
       dplyr::mutate(sample = gsub("\\/", "_", sample)) %>%
+      dplyr::mutate(sample = tolower(sample)) %>%
       dplyr::mutate(sample = ifelse(grepl("^[0-9]", sample), paste0("s", sample), sample)) %>%
       dplyr::mutate(protein = trimws(protein)) %>%
       dplyr::mutate(import_file = basename(file_name)) %>%
@@ -95,39 +171,15 @@ data_import <- function(
       dplyr::relocate(import_file, sample_file, sample_id) %>%
       as.data.frame()
 
-    # subset the data table based on patterns to remove
-    if(nrow(cols_remove) > 0) {
-      for(i in 1:nrow(cols_remove)) {
-        w <- which(grepl(cols_remove$pattern_remove[i], this_dat[,cols_remove$column_defined[i]]))
-        if(length(w) > 0) {this_dat <- this_dat[-w,]}
-      }
-    }
-
-    # pull values out of the data based on a pattern
-    if(nrow(cols_extract) > 0) {
-      for(i in 1:nrow(cols_extract)) {
-        this_dat[,cols_extract$column_defined[i]] <- stringr::str_extract(this_dat[,cols_extract$column_defined[i]], cols_extract$pattern_extract[i])
-      }
-    }
-
-    # remove filtering columns
-    if(length(cols_filter) > 0) {this_dat[,names(cols_filter)] <- NULL}
-
-    # sort out match_between_runs
-    if(nrow(cols_mbr) > 0) {
-      this_dat$match_between_runs <- grepl(cols_mbr$pattern_extract[1], this_dat$match_between_runs)
-    } else {
-      this_dat$match_between_runs <- FALSE
-    }
+    if(!'num_psms' %in% names(this_dat)) {this_dat <- this_dat %>% dplyr::mutate(num_psms = 1)}
+    get_cols_num <- names(this_dat)[which(grepl('^num_|^abundance_', names(this_dat)))]
+    for(get_col_num in get_cols_num){ this_dat[,get_col_num] <- as.numeric(this_dat[,get_col_num]) }
 
     get_cols <- names(this_dat)[which(!grepl('abundance_raw|match_between_runs|num_', names(this_dat)))]
 
-    if(!'num_psms' %in% names(this_dat)) {this_dat <- this_dat %>% dplyr::mutate(num_psms = 1)}
-
     this_dat <- this_dat %>%
-      dplyr::mutate(abundance_raw = as.numeric(abundance_raw)) %>%
       dplyr::group_by(dplyr::across(get_cols)) %>%
-      dplyr::slice_max(match_between_runs) %>%
+      dplyr::slice_min(match_between_runs, with_ties = FALSE) %>%
       dplyr::summarise(num_psms = sum(num_psms),
                        match_between_runs = max(match_between_runs) == 1,
                        abundance_raw = sum(abundance_raw),
@@ -139,17 +191,32 @@ data_import <- function(
     cli::cli_progress_done()
   }
 
+  cols_annotations <- set_vect(tbl_config, 'annotation') %>% names()
+  cols_identifiers <- set_vect(tbl_config, 'identifier') %>% names()
+
+  # replicate accounting
+  dat_out <- dat_out %>%
+    dplyr::full_join(
+      dat_out %>%
+        dplyr::select(sample, sample_file) %>%
+        unique() %>%
+        dplyr::group_by(sample) %>%
+        dplyr::mutate(replicate = dplyr::row_number() %>% as.character()) %>%
+        dplyr::ungroup(),
+      by = c("sample","sample_file")
+    )
+
   dl <- list(
     origin = platform,
     analyte = analyte,
-    identifier = names(cols_identifiers),
+    identifier = cols_identifiers,
     quantitative_source = 'raw',
     operations = list()
   ) %>% append(
     dat_out %>%
       codify(
-        identifier = names(cols_identifiers),
-        annotations = names(cols_annotations)
+        identifier = cols_identifiers,
+        annotations = cols_annotations
       ))
 
   return(dl)

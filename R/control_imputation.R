@@ -31,6 +31,7 @@ impute <- function(
   # visible bindings
   imputed <- NULL
   imputed.x <- NULL
+  imputed.y <- NULL
 
   check_data(data)
   method <- rlang::arg_match(method)

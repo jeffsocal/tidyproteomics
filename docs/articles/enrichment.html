@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,18 +127,18 @@ used in an external down stream analysis.</p>
 <code class="sourceCode R"><span></span>
 <span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/export_analysis.html">export_analysis</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .analysis <span class="op">=</span> <span class="st">'enrichment'</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 5</span></span></span>
-<span><span class="co">#&gt;    annotation                        p_value adj_p_value enrichment  size</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> cell proliferation               0.000<span style="text-decoration: underline;">153</span>     0.001<span style="text-decoration: underline;">99</span>      289.    309</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> conjugation                      0.000<span style="text-decoration: underline;">171</span>     0.002<span style="text-decoration: underline;">05</span>     -<span style="color: #BB0000;">237.</span>   <span style="text-decoration: underline;">1</span>242</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> cellular component movement      0.003<span style="text-decoration: underline;">87</span>      0.042<span style="text-decoration: underline;">6</span>       110.   <span style="text-decoration: underline;">1</span>026</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> development                      0.010<span style="text-decoration: underline;">1</span>       0.101       -<span style="color: #BB0000;">251.</span>    898</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> cell differentiation             0.012<span style="text-decoration: underline;">5</span>       0.112         96.9   560</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> cellular homeostasis             0.052<span style="text-decoration: underline;">4</span>       0.420         40.8  <span style="text-decoration: underline;">2</span>988</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> defense response                 0.136        0.953       -<span style="color: #BB0000;">136.</span>    869</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> cell organization and biogenesis 0.281        1            -<span style="color: #BB0000;">24.6</span>  <span style="text-decoration: underline;">1</span>397</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> coagulation                      0.386        1            -<span style="color: #BB0000;">30.3</span>   981</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cell death                       0.744        1           -<span style="color: #BB0000;">228.</span>    171</span></span>
+<span><span class="co">#&gt;    annotation                          p_value adj_p_value enrichment  size</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> conjugation                      0.000<span style="text-decoration: underline;">005</span>14   0.000<span style="text-decoration: underline;">066</span>8     -<span style="color: #BB0000;">14.6</span>   <span style="text-decoration: underline;">1</span>242</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> cell proliferation               0.000<span style="text-decoration: underline;">167</span>     0.002<span style="text-decoration: underline;">01</span>        17.8    309</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> development                      0.002<span style="text-decoration: underline;">35</span>      0.025<span style="text-decoration: underline;">9</span>        -<span style="color: #BB0000;">15.5</span>    898</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> cellular component movement      0.004<span style="text-decoration: underline;">27</span>      0.042<span style="text-decoration: underline;">7</span>          6.77  <span style="text-decoration: underline;">1</span>026</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> cell differentiation             0.014<span style="text-decoration: underline;">7</span>       0.132           5.98   560</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> cellular homeostasis             0.034<span style="text-decoration: underline;">6</span>       0.277           2.51  <span style="text-decoration: underline;">2</span>988</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> defense response                 0.061<span style="text-decoration: underline;">6</span>       0.431          -<span style="color: #BB0000;">8.36</span>   869</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> cell organization and biogenesis 0.114        0.684          -<span style="color: #BB0000;">1.51</span>  <span style="text-decoration: underline;">1</span>397</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> coagulation                      0.224        1              -<span style="color: #BB0000;">1.87</span>   981</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> cell growth                      0.491        1              -<span style="color: #BB0000;">2.49</span>  <span style="text-decoration: underline;">1</span>806</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 3 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level4">

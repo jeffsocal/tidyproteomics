@@ -37,7 +37,7 @@ library("tidyproteomics")
 
 ### Importing Data
 
-```{r}
+```{r, message = FALSE}
 # path_to_package_data() loads data specific to this package
 # for your project load local data
 # example: 

@@ -196,4 +196,12 @@ reference:
   - write_local
   - println
   - tidyproteomics
+  - import_extract
+  - import_mbr
+  - import_remove
+  - import_rename
+  - import_split
+  - import_validate
+  - rm.mbr
+  - tidyproteomics_quo_name
 

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,21 +99,34 @@
 <span class="r-in"><span>   <span class="fu"><a href="reassign.html">reassign</a></span><span class="op">(</span><span class="st">"sample"</span>, <span class="st">"p97"</span>, <span class="st">"knockdown"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="impute.html">impute</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"linear"</span>,<span class="st">"loess"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Importing <span style="font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> .. not all expected annotation columns present in import file</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Importing <span style="font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Importing <span style="font-style: italic;">p97KD_HCT116_proteins.xlsx</span> <span style="color: #B2B2B2;">[1.1s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Importing <span style="color: #0000BB; font-style: italic;">ProteomeDiscoverer</span>:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #0000BB; font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... extracting <span style="color: #0000BB; font-style: italic;">(?&lt;=\Sample\,\s).+</span> from <span style="color: #0000BB; font-style: italic;">accounting ~ sample</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #0000BB; font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... extracting <span style="color: #0000BB; font-style: italic;">(?&lt;=\s)F\d+(?=\:)</span> from <span style="color: #0000BB; font-style: italic;">accounting ~ sample_file</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #0000BB; font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... created a <span style="color: #0000BB; font-style: italic;">protein_group</span> accounting</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #0000BB; font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... split <span style="color: #0000BB; font-style: italic;">protein</span> with <span style="color: #0000BB; font-style: italic;">\;</span> resulting in 0 new rows</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #0000BB; font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... homology collapsed <span style="color: #0000BB; font-style: italic;">7055</span> proteins into <span style="color: #0000BB; font-style: italic;">7055</span> proteins groups</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #0000BB; font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... match between runs accounting for <span style="color: #0000BB; font-style: italic;">3.58%</span> of data</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #0000BB; font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> ... not all `annotation` columns imported, missing <span style="color: #FF5F00; font-style: italic;">chromosome</span> and <span style="color: #FF5F00; font-style: italic;">kegg_pathway</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #0000BB; font-style: italic;">p97KD_HCT116_proteins.xlsx</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... <span style="color: #0000BB; font-style: italic;">p97KD_HCT116_proteins.xlsx</span> <span style="color: #B2B2B2;">[5.7s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span> <span style="color: #B2B2B2;">[56ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">.Primitive("min")</span> <span style="color: #B2B2B2;">[211ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 1584 values imputed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">linear regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[276ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[229ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">loess regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">loess regression</span> <span style="color: #B2B2B2;">[1.4s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">loess regression</span> <span style="color: #B2B2B2;">[1.3s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span>

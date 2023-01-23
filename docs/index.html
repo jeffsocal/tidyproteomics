@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,12 +94,14 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="tidyproteomics-">tidyproteomics 
-<a class="anchor" aria-label="anchor" href="#tidyproteomics-"></a>
+<img src="logo.png" class="logo" alt=""><h1 id="tidyproteomics-">tidyproteomics <a class="anchor" aria-label="anchor" href="#tidyproteomics-"></a>
 </h1>
 </div>
-<p>An R package for the post processing and analysis of quantitative proteomic data. In reality, this is just a package of functions and plots that I use every day for the analysis of quantitative proteomic data. Currently inputs are implemented for ProteomeDiscoverer, MaxQuant, Skyline and DIA-NN, and assume peptide level FDR has already been accounted for. This package supports at a high level:</p>
+<p>An R package for the tidy-ing, post processing and analysis of quantitative proteomic data.</p>
+<p>Proteomics analysis software, available either through a paid subscription or as an open-source tool, fail to output data in a well conceived tidy format. A majority of these tools generate output formats that have either mixed wide- and long-format data structures, columns headers with messy names and added symbols, and often confusing variable names. This leads researchers to create one-off scripts for cleaning and importing data from various formats, often creating an environment of unmaintained, bespoke code. This package attempts to solve that problem by creating a flexible import tool to unify multiple formats and create an new tidy R object for proteomics analysis.</p>
+<p>Currently inputs are implemented for ProteomeDiscoverer, MaxQuant, Skyline and DIA-NN, and assume peptide level FDR has already been accounted for. This package supports at a high level:</p>
 <ul>
+<li>data importing</li>
 <li>data filtering</li>
 <li>data visualization</li>
 <li>quantitative normalization &amp; imputation</li>

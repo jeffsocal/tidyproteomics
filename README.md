@@ -1,42 +1,31 @@
-# tidyproteomics <a href=''><img src="man/figures/logo.png" align="right" height="139"/></a>
+# tidyproteomics <img src="man/figures/logo.png" align="right" height="139"/>
 
-An R package for the post processing and analysis of quantitative
-proteomic data. In reality, this is just a package of functions and
-plots that I use every day for the analysis of quantitative proteomic
-data. Currently inputs are implemented for ProteomeDiscoverer, MaxQuant,
-Skyline and DIA-NN, and assume peptide level FDR has already been
-accounted for. This package supports at a high level:
+An R package for the tidy-ing, post processing and analysis of quantitative proteomic data.
 
+Proteomics analysis software, available either through a paid subscription or as an open-source tool, fail to output data in a well conceived tidy format. A majority of these tools generate output formats that have either mixed wide- and long-format data structures, columns headers with messy names and added symbols, and often confusing variable names. This leads researchers to create one-off scripts for cleaning and importing data from various formats, often creating an environment of unmaintained, bespoke code. This package attempts to solve that problem by creating a flexible import tool to unify multiple formats and create an new tidy R object for proteomics analysis.
+
+Currently inputs are implemented for ProteomeDiscoverer, MaxQuant, Skyline and DIA-NN, and assume peptide level FDR has already been accounted for. This package supports at a high level:
+
+-   data importing
 -   data filtering
 -   data visualization
 -   quantitative normalization & imputation
 -   two-sample expression & term enrichment analysis
 -   protein inference, sequence coverage and visualization
 
-This package supports the same [syntactic
-sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) utilized in the
-tidy-verse functions like filter, and introduces the `%like%` operator,
-see `vignette("subsetting")` . These operations can extend to all
-aspects of the data set, including sample names, protein IDs,
-annotations and accountings like *match_between_runs* and
-*num_peptides*.
+This package supports the same [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) utilized in the tidy-verse functions like filter, and introduces the `%like%` operator, see `vignette("subsetting")` . These operations can extend to all aspects of the data set, including sample names, protein IDs, annotations and accountings like *match_between_runs* and *num_peptides*.
 
-| operator        | description          | example                                          |
-|-------------------|-------------------|-----------------------------------|
-| ==              | equals               | `sample == 'wt'` , `match_between_runs == FALSE` |
-| !=              | does not equal       | `biological_function != 'DNA metabolism'`        |
-| \<, \>          | less, greater than   | `num_unique_peptides >= 2`                       |
-| %like%          | contains             | `description %like% 'ribosome'`                  |
-| ! %like%        | does not contain     | `!description %like% 'ribosome'`                  |
-| ---             | --- *expression* --- | ---                                              |
-| /               | ratio                | `experiment / control`                           |
+| operator | description          | example                                          |
+|-------------------|-------------------|----------------------------------|
+| ==       | equals               | `sample == 'wt'` , `match_between_runs == FALSE` |
+| !=       | does not equal       | `biological_function != 'DNA metabolism'`        |
+| \<, \>   | less, greater than   | `num_unique_peptides >= 2`                       |
+| %like%   | contains             | `description %like% 'ribosome'`                  |
+| ! %like% | does not contain     | `!description %like% 'ribosome'`                 |
+| ---      | --- *expression* --- | ---                                              |
+| /        | ratio                | `experiment / control`                           |
 
-Expression analysis also utilizes this type of syntax when referencing
-samples for analysis. For example `data %>% expression(knockdown/control)` would
-know to run the differential expression of the sample *ko* with respect
-to the sample *wt* such that positive log2 difference would be
-up-expressed in *ko* and a negative log2 differences would be
-down-expressed in *ko*.
+Expression analysis also utilizes this type of syntax when referencing samples for analysis. For example `data %>% expression(knockdown/control)` would know to run the differential expression of the sample *ko* with respect to the sample *wt* such that positive log2 difference would be up-expressed in *ko* and a negative log2 differences would be down-expressed in *ko*.
 
 ## Installation
 
@@ -48,12 +37,7 @@ devtools::install_github("jeffsocal/tidyproteomics")
 devtools::install_github("jeffsocal/rfasta")
 ```
 
-You will also need the Bioconductor packages
-[limma](https://bioconductor.org/packages/release/bioc/html/limma.html),
-[qvalue](https://bioconductor.org/packages/release/bioc/html/qvalue.html),
-and
-[fgsea](https://bioconductor.org/packages/release/bioc/html/fgsea.html),
-to install these type:
+You will also need the Bioconductor packages [limma](https://bioconductor.org/packages/release/bioc/html/limma.html), [qvalue](https://bioconductor.org/packages/release/bioc/html/qvalue.html), and [fgsea](https://bioconductor.org/packages/release/bioc/html/fgsea.html), to install these type:
 
 ``` r
 install.packages("BiocManager")
@@ -62,9 +46,7 @@ BiocManager::install(c("limma","qvalue","fgsea"))
 
 ## Get Started
 
-Its simple to get started. Make a new project, drop your raw data in a
-folder labeled *data*. For more information see
-`vignette("01-workflow-simple")`
+Its simple to get started. Make a new project, drop your raw data in a folder labeled *data*. For more information see `vignette("01-workflow-simple")`
 
 ``` r
 library(tidyproteomics)

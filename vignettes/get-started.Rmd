@@ -18,6 +18,7 @@ options(dplyr.print_max = 10)
 
 Tidyproteomics is an R package for the post processing and analysis of quantitative proteomic data. Accomplished through a simplified S3 data object and corrisponing function. This package supports at a high level:
 
+-   data importing
 -   data filtering
 -   data visualization
 -   quantitative normalization & imputation

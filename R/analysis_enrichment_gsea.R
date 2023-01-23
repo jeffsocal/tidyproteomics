@@ -24,6 +24,8 @@ enrichment_gsea <- function(
   NES <- NULL
   log2err <- NULL
   p_value <- NULL
+  identifier <- NULL
+  adj_p_value <- NULL
 
   set.seed(1234)
 

@@ -18,6 +18,7 @@ codify <- function(
   # visible bindings
   import_file <- NULL
   sample_file <- NULL
+  annotation <- NULL
 
   if(is.null(identifier)) {cli::cli_abort("No identifier provided for codifying")}
   if(is.null(table)) {cli::cli_abort("No table provided for codifying")}
@@ -72,10 +73,11 @@ codify <- function(
     unique()
 
   if(nrow(tb_accounting) != nrow(tb_quantitative)) {
-    cli::cli_abort(c("x" = "Something did not parse correctly",
-                     "i" = "Table of quantitative values has {nrow(tb_quantitative)} rows",
-                     "i" = "Table of accounting values has {nrow(tb_accounting)} rows",
-                     "i" = "Check the sample group expressions for `pattern_extract`"))
+    cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
+    cli::cli_alert_info(c("x" = "Something did not parse correctly",
+                     "i" = "Table of quantitative values has {.emph {nrow(tb_quantitative)}} rows",
+                     "i" = "Table of accounting values has {.emph {nrow(tb_accounting)}} rows",
+                     "i" = "Check the sample group expressions for {.emph pattern_extract}"))
   }
 
   list(

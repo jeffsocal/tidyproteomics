@@ -1,7 +1,7 @@
-category	column_defined	column_import	pattern_extract	pattern_remove
-sample	sample_file	File.Name	[a-zA-Z0-9\_\-]*\..*$	
-sample	sample	Run		
-identifier	protein	Protein.Ids		^DECOY
-identifier	peptide	Stripped.Sequence		
-identifier	modifications	Modified.Sequence		
-quantitative	abundance_raw	Ms1.Area		#N/A
+category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
+sample	sample_file	File.Name	[a-zA-Z0-9\_\-]*\..*$			
+sample	sample	Run				
+identifier	protein	Protein.Ids		^DECOY	\;	
+identifier	peptide	Stripped.Sequence				
+identifier	modifications	Modified.Sequence				
+quantitative	abundance_raw	Ms1.Area		#N/A		

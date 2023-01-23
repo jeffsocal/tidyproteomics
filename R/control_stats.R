@@ -43,6 +43,9 @@ summary.tidyproteomics <- function(
     contamination = NULL
 ){
 
+  # visible bindings
+  variable <- NULL
+
   check_data(data)
   destination <- rlang::arg_match(destination)
   if(!is.numeric(limit)) {cli::cli_abort("limit must be a numeric not `{limit}`")}

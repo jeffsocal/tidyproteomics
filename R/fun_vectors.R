@@ -29,7 +29,12 @@ match_vect <- function(
     un_vec,
     n_vec
 ){
+
+  g_vec <- c()
+  for(n_int in n_vec){
+    g_vec <-   n_vec
+  }
   g_vec <- intersect(n_vec, un_vec)
-  names(g_vec) <- names(n_vec[which(n_vec %in% g_vec)])
+  # names(g_vec) <- names(n_vec[which(n_vec %in% g_vec)])
   return(g_vec)
 }

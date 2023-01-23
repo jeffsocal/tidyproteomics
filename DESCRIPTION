@@ -1,6 +1,6 @@
 Package: tidyproteomics
 Title: An S3 data object and framework for common quantitative proteomic analyses
-Version: 1.0.5
+Version: 1.1.2
 Authors@R: 
     person("Jeff", "Jones", , "jeffj@caltech.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7142-2222"))
