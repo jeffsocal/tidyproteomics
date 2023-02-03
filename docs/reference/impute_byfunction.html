@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/get-started.html">Get Started</a>
+  <a class="nav-link" href="../articles/overview.html">Overview</a>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -85,8 +85,11 @@
 
 <dt>impute_function</dt>
 <dd><p>summary statistic function. Default is median, examples of
-other functions include min, max, mean, sum. One could write a function for the
-lower 5%, lower5th &lt;- function(x)  quantile(x, 0.05)[1] .</p></dd>
+other functions include min, max, mean, sum.</p></dd>
+
+
+<dt>method</dt>
+<dd><p>a character string to indicate the imputation method (within, between)</p></dd>
 
 
 <dt>minimum_to_impute</dt>

@@ -4,8 +4,9 @@
 #' `plot_enrichment()` is a GGplot2 implementation for plotting the enrichment values. This function can
 #' take either a tidyproteomics data object or a table with the required headers.
 #'
-#' @param table a tibble
+#' @param data a tidyproteomics data object
 #' @param ... two sample comparison
+#' @param .term a character string indicating the term enrichment analysis should be calculated for
 #' @param enrichment_column a character defining the column name of enrichment values.
 #' @param enrichment_min a numeric defining the minimum log2 enrichment to highlight.
 #' @param significance_column a character defining the column name of the statistical significance values.
@@ -71,8 +72,8 @@ plot_enrichment <- function(
     dplyr::mutate(keep = abs(.data[[enrichment_column]]) >= enrichment_min &
                     .data[[significance_column]] <= significance_max,
                   term_col = .data[[term_column]]) %>%
-    dplyr::arrange(dplyr::desc(.data[[significance_column]])) %>%
-    dplyr::mutate(term_col = forcats::fct_reorder(term_col, .data[[significance_column]], .desc = TRUE))
+    dplyr::arrange(dplyr::desc(.data[[enrichment_column]])) %>%
+    dplyr::mutate(term_col = forcats::fct_reorder(term_col, .data[[enrichment_column]], .desc = FALSE))
 
 
   # construct the enrichment plot
@@ -81,7 +82,8 @@ plot_enrichment <- function(
                                  y = term_col,
                                  color = .data[[significance_column]],
                                  size = .data[[size_column]])) +
-    ggplot2::geom_point(alpha = 0.33) +
+    ggplot2::geom_vline(xintercept = 0, alpha=.33) +
+    ggplot2::geom_point(alpha = 0.2) +
     ggplot2::geom_point(data = table %>% dplyr::filter(keep == TRUE),
                         alpha = 1) +
     ggplot2::scale_color_gradient(low = 'red', high = "blue") +

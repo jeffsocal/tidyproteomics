@@ -29,7 +29,8 @@ extract <- function(
   if(values %>% length() == 1){
     d_out <- d %>%
       dplyr::select(!tidyselect::matches('abundance') | tidyselect::matches(paste0(values, "$"))) %>%
-      dplyr::rename(abundance = tidyselect::matches(values))
+      dplyr::rename(abundance = tidyselect::matches(values)) %>%
+      dplyr::mutate(origin = 'raw')
   } else {
     d_out <- d %>%
       tidyr::pivot_longer(

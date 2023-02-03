@@ -11,7 +11,7 @@ get_segment(data = NULL, variable = NULL, .verbose = TRUE)
 
 \item{variable}{a character string}
 
-\item{verbose}{a boolean}
+\item{.verbose}{a boolean}
 }
 \value{
 a character

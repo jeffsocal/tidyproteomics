@@ -3,6 +3,8 @@
 #' @param table a tibble
 #' @param values a character string
 #'
+#' @importFrom rlang :=
+#'
 #' @return a tibble
 #'
 transform_log2 <- function(

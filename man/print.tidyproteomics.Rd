@@ -4,10 +4,12 @@
 \alias{print.tidyproteomics}
 \title{Tidy-Quant data object print definition}
 \usage{
-\method{print}{tidyproteomics}(obj)
+\method{print}{tidyproteomics}(x, ...)
 }
 \arguments{
-\item{obj}{tidyproteomics data object}
+\item{x}{tidyproteomics data object}
+
+\item{...}{unused legacy}
 }
 \value{
 print object summary

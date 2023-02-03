@@ -34,7 +34,7 @@ protein_map <- function(
   position_end <- NULL
 
   check_data(data)
-  l_fasta <- rfasta::parse(fasta_path)
+  l_fasta <- fasta_parse(fasta_path)
   data_quant <- tidyproteomics::extract(data, data$quantitative_source) %>%
     tidyr::separate(identifier, into = c('protein', 'peptide', 'modifications'),
                     sep = "\\s\\|\\s")

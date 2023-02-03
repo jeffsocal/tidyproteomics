@@ -37,7 +37,7 @@ library("tidyproteomics")
 
 ### Importing Data
 
-```{r, message = FALSE}
+```{r, eval = FALSE}
 # path_to_package_data() loads data specific to this package
 # for your project load local data
 # example: 
@@ -47,8 +47,8 @@ library("tidyproteomics")
 hela_proteins <- path_to_package_data("p97KD_HCT116") %>%
   import("ProteomeDiscoverer", "proteins") %>%
   # change the sample labels
-  reassign('sample', 'ctl', 'ctrl') %>%
-  reassign('sample', 'p97', 'kndw')
+  reassign('sample', 'ctl', 'control') %>%
+  reassign('sample', 'p97', 'knockdown')
 ```
 
 #### Print Data Contents
@@ -63,9 +63,9 @@ As more operations are performed on the data, more of the contents are summarize
 
 ```{r}
 hela_proteins %>%
-  expression(kndw/ctrl) %>%
-  enrichment(kndw/ctrl, .term = 'biological_process') %>%
-  enrichment(kndw/ctrl, .term = 'molecular_function')
+  expression(knockdown/control) %>%
+  enrichment(knockdown/control, .term = 'biological_process') %>%
+  enrichment(knockdown/control, .term = 'molecular_function')
 ```
 
 #### Summarize Quantitative Data

@@ -136,7 +136,7 @@ plot_volcano <- function(
     plot <- table %>%
       ggplot2::ggplot(ggplot2::aes(.data[[log2fc_column]], .data[[significance_column]]))
   } else {
-    point_size <- rlang::arg_mathc(point_size, table_cols)
+    point_size <- rlang::arg_match(point_size, table_cols)
     plot <- table %>%
       ggplot2::ggplot(ggplot2::aes(.data[[log2fc_column]], .data[[significance_column]],
                                    size = .data[[point_size]]))

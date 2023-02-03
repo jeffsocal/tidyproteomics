@@ -128,10 +128,10 @@ subset <- function(
 
   data$operations <- append(data$operations, operation)
 
-  if(rm.mbr == TRUE)
-    data <- data %>% rm.mbr()
-
+  if(rm.mbr == TRUE) {data <- data %>% rm.mbr()}
   if(.verbose == TRUE) {cli::cli_process_done()}
+
+  # cli::cli_alert_info("...[debug] {.emph {variable}} found in {.emph {which_segment}}")
 
   return(data)
 }
@@ -229,12 +229,21 @@ tidyproteomics_quo <- function(...) {
 #' @return a character string
 #'
 tidyproteomics_quo_name <- function(...){
+
   str_quo <- tidyproteomics_quo(...)
-  if(is.null(str_quo)) { return(data) }
+  if(is.null(str_quo)) { return(NULL) }
   return(paste(str_quo[['variable']], str_quo[['value']], sep="-"))
 }
 
+#' Helper function for subsetting
+#'
+#' @param a a dplyr tibble column reference
+#' @param b a dplyr tibble column reference
+#'
+#' @return a character string
+#'
 #' @export
+#'
 `%like%` <- function(a, b) {
   grepl(b, a, ignore.case = T)
 }

@@ -1,0 +1,9 @@
+category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
+sample	sample		(?<=\:\s).+?(?=\])			
+sample	sample_file		(?<=\[).+(?=\;)			
+identifier	protein	accession			\;	
+quantitative	abundance_raw	protein_abundance_assay				TRUE
+annotation	description	description				
+accounting	num_peptides	num_peptides				
+accounting	num_unique_peptides	num_unique_peptides				
+accounting	num_psms	num_psms				

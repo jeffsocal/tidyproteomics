@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="../articles/get-started.html">Get Started</a>
+  <a class="nav-link" href="../articles/overview.html">Overview</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -170,8 +170,8 @@ summary of the quantitative data with values as described in Table
 <span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"p97KD_HCT116"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># change the sample labels</span></span>
-<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'ctl'</span>, <span class="st">'ctrl'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'p97'</span>, <span class="st">'kndw'</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'ctl'</span>, <span class="st">'control'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'p97'</span>, <span class="st">'knockdown'</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="print-data-contents">Print Data Contents<a class="anchor" aria-label="anchor" href="#print-data-contents"></a>
 </h4>
@@ -183,39 +183,39 @@ show a summary of the data object contents</p>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (10.50 MB) </span></span>
-<span><span class="co">#&gt; Quantitation    6 files </span></span>
-<span><span class="co">#&gt;                 2 samples (ctrl, kndw) </span></span>
-<span><span class="co">#&gt;                 7055 proteins </span></span>
+<span><span class="co">#&gt;                 proteins (10.76 MB) </span></span>
+<span><span class="co">#&gt; Composition     6 files </span></span>
+<span><span class="co">#&gt;                 2 samples (control, knockdown) </span></span>
+<span><span class="co">#&gt; Quantitation    7055 proteins </span></span>
 <span><span class="co">#&gt;                 4 log10 dynamic range </span></span>
+<span><span class="co">#&gt;                 28.8% missing values </span></span>
 <span><span class="co">#&gt; Accounting      (4) match_between_runs num_peptides num_unique_peptides num_psms </span></span>
-<span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name</span></span>
-<span><span class="co">#&gt;                 biological_process cellular_component</span></span>
-<span><span class="co">#&gt;                 molecular_function wiki_pathway</span></span>
+<span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name biological_process</span></span>
+<span><span class="co">#&gt;                 cellular_component molecular_function wiki_pathway</span></span>
 <span><span class="co">#&gt;                 reactome_pathway </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>As more operations are performed on the data, more of the contents
 are summarized</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .term <span class="op">=</span> <span class="st">'molecular_function'</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'molecular_function'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (11.11 MB) </span></span>
-<span><span class="co">#&gt; Quantitation    6 files </span></span>
-<span><span class="co">#&gt;                 2 samples (ctrl, kndw) </span></span>
-<span><span class="co">#&gt;                 7055 proteins </span></span>
+<span><span class="co">#&gt;                 proteins (11.37 MB) </span></span>
+<span><span class="co">#&gt; Composition     6 files </span></span>
+<span><span class="co">#&gt;                 2 samples (control, knockdown) </span></span>
+<span><span class="co">#&gt; Quantitation    7055 proteins </span></span>
 <span><span class="co">#&gt;                 4 log10 dynamic range </span></span>
+<span><span class="co">#&gt;                 28.8% missing values </span></span>
 <span><span class="co">#&gt; Accounting      (4) match_between_runs num_peptides num_unique_peptides num_psms </span></span>
-<span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name</span></span>
-<span><span class="co">#&gt;                 biological_process cellular_component</span></span>
-<span><span class="co">#&gt;                 molecular_function wiki_pathway</span></span>
+<span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name biological_process</span></span>
+<span><span class="co">#&gt;                 cellular_component molecular_function wiki_pathway</span></span>
 <span><span class="co">#&gt;                 reactome_pathway </span></span>
 <span><span class="co">#&gt; Analyses        (1) </span></span>
-<span><span class="co">#&gt;                 kndw/ctrl -&gt; expression &amp; enrichment (biological_process, molecular_function) </span></span>
+<span><span class="co">#&gt;                 knockdown/control -&gt; expression &amp; enrichment (biological_process, molecular_function) </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 </div>
 <div class="section level4">
@@ -236,9 +236,9 @@ in this case globally.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;    ctrl     3           7055     7055    66329           58706         90.8</span></span>
-<span><span class="co">#&gt;    kndw     3           7055     7055    66329           58706         90.9</span></span>
+<span><span class="co">#&gt;     sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
+<span><span class="co">#&gt;    control     3           7055     7055    66329           58706         90.8</span></span>
+<span><span class="co">#&gt;  knockdown     3           7055     7055    66329           58706         90.9</span></span>
 <span><span class="co">#&gt;        CVs</span></span>
 <span><span class="co">#&gt;  0.1600474</span></span>
 <span><span class="co">#&gt;  0.2099227</span></span>
@@ -250,13 +250,13 @@ contains ‘CRAP’, as in the crap-ome</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  sample replicate native   BSA Keratin    Other Trypsin sample_id</span></span>
-<span><span class="co">#&gt;    ctrl         1  92.7% 3.66%   3.56%  0.0023%    0.1%  e9b20ea7</span></span>
-<span><span class="co">#&gt;    ctrl         2    92% 4.02%   3.89% 0.00205%  0.123%  ef79cc4c</span></span>
-<span><span class="co">#&gt;    ctrl         3    92% 4.01%    3.9% 0.00208%  0.113%  eebba67b</span></span>
-<span><span class="co">#&gt;    kndw         1    92% 4.01%   3.88% 0.00183%  0.125%  ebf4b0fe</span></span>
-<span><span class="co">#&gt;    kndw         2  92.7% 3.66%   3.59%  0.0023% 0.0648%  ea36dac9</span></span>
-<span><span class="co">#&gt;    kndw         3  92.2% 3.89%   3.82% 0.00232% 0.0679%  ecfd1822</span></span>
+<span><span class="co">#&gt;     sample replicate native   BSA Keratin    Other Trypsin sample_id</span></span>
+<span><span class="co">#&gt;    control         1  92.7% 3.66%   3.56%  0.0023%    0.1%  e9b20ea7</span></span>
+<span><span class="co">#&gt;    control         2    92% 4.02%   3.89% 0.00205%  0.123%  ef79cc4c</span></span>
+<span><span class="co">#&gt;    control         3    92% 4.01%    3.9% 0.00208%  0.113%  eebba67b</span></span>
+<span><span class="co">#&gt;  knockdown         1    92% 4.01%   3.88% 0.00183%  0.125%  ebf4b0fe</span></span>
+<span><span class="co">#&gt;  knockdown         2  92.7% 3.66%   3.59%  0.0023% 0.0648%  ea36dac9</span></span>
+<span><span class="co">#&gt;  knockdown         3  92.2% 3.89%   3.82% 0.00232% 0.0679%  ecfd1822</span></span>
 <span><span class="co">#&gt;                 import_file sample_file</span></span>
 <span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          f1</span></span>
 <span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          f4</span></span>
@@ -272,13 +272,13 @@ contains ‘ribosome’</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  sample replicate native ribosome sample_id                import_file</span></span>
-<span><span class="co">#&gt;    ctrl         1  99.8%   0.155%  e9b20ea7 p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;    ctrl         2  99.8%    0.15%  ef79cc4c p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;    ctrl         3  99.8%   0.156%  eebba67b p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;    kndw         1  99.8%   0.171%  ebf4b0fe p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;    kndw         2  99.8%   0.166%  ea36dac9 p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;    kndw         3  99.8%   0.164%  ecfd1822 p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;     sample replicate native ribosome sample_id                import_file</span></span>
+<span><span class="co">#&gt;    control         1  99.8%   0.155%  e9b20ea7 p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;    control         2  99.8%    0.15%  ef79cc4c p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;    control         3  99.8%   0.156%  eebba67b p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;  knockdown         1  99.8%   0.171%  ebf4b0fe p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;  knockdown         2  99.8%   0.166%  ea36dac9 p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;  knockdown         3  99.8%   0.164%  ecfd1822 p97KD_HCT116_proteins.xlsx</span></span>
 <span><span class="co">#&gt;  sample_file</span></span>
 <span><span class="co">#&gt;           f1</span></span>
 <span><span class="co">#&gt;           f4</span></span>

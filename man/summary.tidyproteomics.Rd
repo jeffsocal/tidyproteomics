@@ -4,22 +4,12 @@
 \alias{summary.tidyproteomics}
 \title{Summarize the data}
 \usage{
-\method{summary}{tidyproteomics}(
-  data,
-  by = c("global"),
-  destination = c("print", "save", "return"),
-  limit = 25,
-  contamination = NULL
-)
+\method{summary}{tidyproteomics}(object, ...)
 }
 \arguments{
-\item{data}{tidyproteomics data object}
+\item{object}{tidyproteomics data object}
 
-\item{by}{what to summarize}
-
-\item{destination}{character string, one of (save, print)}
-
-\item{contamination}{as character string}
+\item{...}{passthrough arguments}
 }
 \value{
 a tibble on \emph{print}, a tidyproteomics data-object on \emph{save}

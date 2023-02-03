@@ -15,8 +15,9 @@ impute_byfunction(
 \item{table}{a tibble}
 
 \item{impute_function}{summary statistic function. Default is median, examples of
-other functions include min, max, mean, sum. One could write a function for the
-lower 5\%, lower5th <- function(x) { quantile(x, 0.05)[\link{1}] }.}
+other functions include min, max, mean, sum.}
+
+\item{method}{a character string to indicate the imputation method (within, between)}
 
 \item{minimum_to_impute}{the minimum ratio to impute at}
 }

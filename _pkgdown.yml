@@ -3,8 +3,8 @@ navbar:
   components:
     home: ~
     intro:
-      text: Get Started
-      href: articles/get-started.html
+      text: Overview
+      href: articles/overview.html
     articles:
       text: Articles
       menu:
@@ -149,8 +149,6 @@ reference:
   - get_variables
   - get_unique_variables
   - hdf
-  - import_pd_peps
-  - import_pd_prots
   - impute_byfunction
   - impute_randomforest
   - impute_ratio
@@ -173,6 +171,7 @@ reference:
   - stats_contamination
   - stats_print
   - stats_summary
+  - tidyproteomics_summary
   - fgeomean
   - fmean
   - fmedian
@@ -204,4 +203,12 @@ reference:
   - import_validate
   - rm.mbr
   - tidyproteomics_quo_name
+  - analysis_counts
+  - read_mzTab
+  - "%like%"
+  - fasta_digest
+  - fasta_extract
+  - fasta_parse
+  - fasta_peptides
+  - fasta_regex
 

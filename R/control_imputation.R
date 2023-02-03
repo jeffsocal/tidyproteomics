@@ -2,9 +2,9 @@
 #'
 #' @param data a tidyproteomics list data-object
 #' @param impute_function summary statistic function. Default is base::min, examples of
-#' other functions include min, max, mean, sum. One could write a function for the
-#' lower 5%, lower5th <- function(x) { quantile(x, 0.05)[[1]] }. Note, NAs will be
+#' other functions include min, max, mean, sum. Note, NAs will be
 #' be removed in the function call.
+#' @param method a character string to indicate the imputation method (within, between)
 #' @param minimum_to_impute the minimum ratio to impute at
 #' @param cores the number of threads used to speed the calculation
 #'
@@ -36,7 +36,8 @@ impute <- function(
   check_data(data)
   method <- rlang::arg_match(method)
   quant_source <- data$quantitative_source
-  table <- data %>% extract(quant_source, na.rm = TRUE)
+  table <- data %>% extract(quant_source, na.rm = TRUE) %>%
+    dplyr::select(!dplyr::matches("^origin$"))
 
   if('imputed' %in% colnames(data$accounting)) {
     cli::cli_alert_info("This is data has been collapsed from the peptide-level")

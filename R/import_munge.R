@@ -27,6 +27,7 @@ import_rename <- function(
 #'
 #' @param tbl_data a table of imported data
 #' @param tbl_config a table of config values
+#' @param remove as boolean to determine if the extracted column name should change or copy to a new, retaining the old
 #'
 #' @return a tibble
 #'
@@ -86,12 +87,25 @@ import_split <- function(
   # visible bindings
   pattern_split <- NULL
 
+  # create the protein_cluster column anyways
+  tbl_data <- tbl_data %>% dplyr::mutate(protein_cluster = paste0('pg', dplyr::row_number()))
+
   tbl_config <- tbl_config %>% dplyr::filter(!is.na(pattern_split)) %>% as.data.frame()
-  if(nrow(tbl_config) == 0) return(tbl_data)
+  if(nrow(tbl_config) == 0) { return(tbl_data) }
   for(i in row.names(tbl_config)){
+
+    tbl_cols <- colnames(tbl_data)
+
     pattern <- tbl_config[i,]$pattern_split
     col_imp <- tbl_config[i,]$column_import
+    col_imp <- tbl_cols[which(grepl(col_imp, tbl_cols))][1]
     col_def <- tbl_config[i,]$column_defined
+
+    # detect the split
+    if(length(which(grepl(pattern, tbl_data[,col_imp] %>% unlist()))) == 0) {
+      cli::cli_alert_info("... split {.emph {col_def}} with {.emph {pattern}} not detected")
+      next()
+    }
 
     prev_nrows <- tbl_data %>% nrow()
 
@@ -148,14 +162,16 @@ import_mbr <- function(
     tbl_data = NULL,
     tbl_config = NULL
 ){
+
+  tbl_data$match_between_runs <- FALSE
+
   if(nrow(tbl_config) == 0) return(tbl_data)
+
   cols_mbr <- tbl_config[which(!is.na(tbl_config$pattern_extract) & tbl_config$category == "impute"),]
 
   # sort out match_between_runs
   if(nrow(cols_mbr) > 0) {
     tbl_data$match_between_runs <- grepl(cols_mbr$pattern_extract[1], tbl_data$match_between_runs)
-  } else {
-    tbl_data$match_between_runs <- FALSE
   }
 
   n_mbr <- length(which(tbl_data$match_between_runs == TRUE))

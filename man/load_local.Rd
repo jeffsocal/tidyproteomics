@@ -4,10 +4,10 @@
 \alias{load_local}
 \title{Load project specific data}
 \usage{
-load_local(source = c("peptides", "proteins"))
+load_local(analyte = c("peptides", "proteins"))
 }
 \arguments{
-\item{source}{a character string}
+\item{analyte}{a character string}
 }
 \value{
 an tidyproteomics data object
@@ -18,6 +18,6 @@ tidyproteomics data object
 }
 \examples{
 library(tidyproteomics)
-# hela_proteins <- load_omics(source = "proteins")
+# hela_proteins <- load_omics(analyte = "proteins")
 
 }

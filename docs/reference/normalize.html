@@ -22,7 +22,7 @@ adventitious to select a optimal normalization method based on performance."><me
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@ adventitious to select a optimal normalization method based on performance."><me
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/get-started.html">Get Started</a>
+  <a class="nav-link" href="../articles/overview.html">Overview</a>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -101,12 +101,11 @@ adventitious to select a optimal normalization method based on performance.</p>
 
 
 <dt>...</dt>
-<dd><p>use a subset of the data for normalization see <code><a href="subset.html">subset()</a></code>. This is useful when normalizing against a spike-in set of
-proteins</p></dd>
+<dd><p>use a subset of the data for normalization see <code><a href="subset.html">subset()</a></code>. This is useful when normalizing against a spike-in set of proteins</p></dd>
 
 
-<dt>method</dt>
-<dd><p>character vector (scaled, median, linear, limma, loess, randomforest)</p></dd>
+<dt>.method</dt>
+<dd><p>character vector of normalization to use</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -125,10 +124,10 @@ proteins</p></dd>
 <span class="r-in"><span>     <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">scaled shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[222ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[242ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[213ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[236ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span>
@@ -150,17 +149,17 @@ proteins</p></dd>
 <span class="r-in"><span><span class="co">#   protein complex acts as the majority content and individual inter-actors</span></span></span>
 <span class="r-in"><span><span class="co">#   are of quantitative differentiation</span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
-<span class="r-in"><span>     <span class="fu">normalize</span><span class="op">(</span><span class="op">!</span><span class="va">description</span> <span class="op">%like%</span> <span class="st">"Ribosome"</span>, .method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scaled"</span>, <span class="st">"median"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>     <span class="fu">normalize</span><span class="op">(</span><span class="op">!</span><span class="va">description</span> <span class="op"><a href="grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span>, .method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scaled"</span>, <span class="st">"median"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>     <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span>   normalization based on 7037 of 5346 identifiers</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span>   <span style="font-style: italic;">WARNING</span>: filter narrowed range, NAs may result</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span>   <span style="font-style: italic;">WARNING</span>: omitting `limma` and `randomforest` - can not accomidate subsetting</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">scaled shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[213ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[228ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[217ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[235ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span>

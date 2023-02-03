@@ -41,7 +41,8 @@ dynamic grange `plot_variation_cv()` and principal component variation
 ```{r, message = FALSE}
 library("dplyr")
 library("tidyproteomics")
-rdata <- hela_proteins %>% normalize()
+
+rdata <- hela_proteins %>% normalize(.method = c("scaled", "median", "linear", "loess", "randomforest"))
 
 rdata %>% plot_normalization()
 ```

@@ -33,6 +33,11 @@ rm.mbr <- function(
   n_mbr <- NULL
 
   check_data(data)
+
+  # abort if the data does not contain "match_between_runs"
+  # NOTE "imputed" may need to be considered
+  if(!'match_between_runs' %in% colnames(data$accounting)) { return(data) }
+
   .groups <- rlang::arg_match(.groups)
 
   n_ids_pre <- data$quantitative %>%

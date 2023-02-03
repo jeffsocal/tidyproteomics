@@ -27,6 +27,8 @@ plot_proportion(
 )
 }
 \arguments{
+\item{data}{a tidyproteomics data object}
+
 \item{...}{two sample comparison}
 
 \item{log2fc_column}{a character defining the column name of the log2 foldchange values.}
@@ -62,8 +64,6 @@ plot_proportion(
 \item{height}{a numeric}
 
 \item{width}{a numeric}
-
-\item{table}{a tibble}
 }
 \value{
 a ggplot2 object

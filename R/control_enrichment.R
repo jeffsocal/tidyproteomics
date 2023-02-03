@@ -45,6 +45,7 @@ enrichment <- function(
     cli::cli_abort("Comparison operator must be {.emph \"/\"} (e.g. {experiment}{.emph /}{control})")
   }
   check_samples(data, experiment, control)
+  identifier <- data$identifier
 
   .term <- rlang::arg_match(.term, get_annotation_terms(data))
   .method <- rlang::arg_match(.method)

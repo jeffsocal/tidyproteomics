@@ -20,13 +20,14 @@ a character
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
+\dontrun{
 hela_proteins <- path_to_package_data("p97KD_HCT116") \%>\%
    import("ProteomeDiscoverer", "proteins") \%>\%
    reassign("sample", "ctl", "control") \%>\%
    reassign("sample", "p97", "knockdown") \%>\%
    impute() \%>\%
    normalize(.method = c("linear","loess"))
-
+}
 hela_proteins \%>\% operations()
 
 }

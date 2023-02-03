@@ -20,6 +20,7 @@
 #' Example: fquantile <- function(x){stats::quantile(x, .75, na.rm = TRUE)}
 #'
 #' @return a tidyproteomics data-object
+#' @importFrom rlang :=
 #' @export
 #'
 #' @examples
@@ -86,8 +87,8 @@ collapse <- function(
 
     count_peptides <- function(x){ x$peptides <- length(x$peptides); return(x) }
 
-    tb_fasta <- rfasta::parse(fasta_path)
-    tb_fasta <- parallel::mclapply(tb_fasta, rfasta::digest)
+    tb_fasta <- fasta_parse(fasta_path)
+    tb_fasta <- parallel::mclapply(tb_fasta, fasta_digest)
     tb_fasta <- parallel::mclapply(tb_fasta, count_peptides)
     tb_fasta <- tb_fasta %>%
       dplyr::bind_rows() %>%
@@ -255,7 +256,8 @@ collapse <- function(
       identifier = sort(identifier)[1],
       .groups = 'drop'
     ) %>%
-    dplyr::relocate(identifier)
+    dplyr::relocate(identifier) %>%
+    dplyr::mutate(abundance = ifelse(abundance == 0, NA, abundance))
 
   # rename the abundance column
   colnames(tb_pro_quant_summed)[which(colnames(tb_pro_quant_summed) == 'abundance')] <- paste('abundance', data$quantitative_source, sep="_")

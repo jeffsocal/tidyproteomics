@@ -1,4 +1,4 @@
-#' Summarize the data
+#' Helper function to summarize the data
 #'
 #' @description
 #' `summary()` is an analysis function that computes the protein summary
@@ -8,34 +8,12 @@
 #' @param data tidyproteomics data object
 #' @param by what to summarize
 #' @param destination character string, one of (save, print)
+#' @param limit a numeric to limit the number of output groups
 #' @param contamination as character string
 #'
 #' @return a tibble on *print*, a tidyproteomics data-object on *save*
-#' @export
 #'
-#' @examples
-#' library(dplyr, warn.conflicts = FALSE)
-#' library(tidyproteomics)
-#'
-#' # a global summary
-#' hela_proteins %>% summary()
-#'
-#' # a summary by sample
-#' hela_proteins %>% summary("sample")
-#'
-#' # a summary by sample with match_between_runs removed
-#' hela_proteins %>%
-#'    subset(match_between_runs == FALSE) %>%
-#'    summary("sample")
-#'
-#' # a summary of match_between_runs
-#' hela_proteins %>% summary("match_between_runs")
-#'
-#' hela_proteins %>% summary("cellular_component")
-#'
-#' hela_proteins %>% summary("biological_process")
-#'
-summary.tidyproteomics <- function(
+tidyproteomics_summary <- function(
     data,
     by = c('global'),
     destination = c("print", "save", "return"),
@@ -58,6 +36,8 @@ summary.tidyproteomics <- function(
     table <- data %>% stats_contamination(pattern = contamination)
   } else if(by == 'global') {
     table <- data %>% stats_summary()
+  } else if(by == 'experiment') {
+    table <- data$experiment
   } else {
 
     vars <- data %>% get_unique_variables(by)
@@ -94,4 +74,45 @@ summary.tidyproteomics <- function(
   } else {
     stats_print(table, paste("Summary:", by))
   }
+}
+
+#' Summarize the data
+#'
+#' @description
+#' `summary()` is an analysis function that computes the protein summary
+#' statistics for a given tidyproteomics data object. This is a _passthrough_ function
+#' as it returns the original tidyproteomics data-object.
+#'
+#' @param object tidyproteomics data object
+#' @param ... passthrough arguments
+#'
+#' @return a tibble on *print*, a tidyproteomics data-object on *save*
+#' @export
+#'
+#' @examples
+#' library(dplyr, warn.conflicts = FALSE)
+#' library(tidyproteomics)
+#'
+#' # a global summary
+#' hela_proteins %>% summary()
+#'
+#' # a summary by sample
+#' hela_proteins %>% summary("sample")
+#'
+#' # a summary by sample with match_between_runs removed
+#' hela_proteins %>%
+#'    subset(match_between_runs == FALSE) %>%
+#'    summary("sample")
+#'
+#' # a summary of match_between_runs
+#' hela_proteins %>% summary("match_between_runs")
+#'
+#' hela_proteins %>% summary("cellular_component")
+#'
+#' hela_proteins %>% summary("biological_process")
+#'
+summary.tidyproteomics <- function(
+    object,
+    ...) {
+  tidyproteomics_summary(object, ...)
 }

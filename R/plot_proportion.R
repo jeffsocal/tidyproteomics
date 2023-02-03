@@ -6,7 +6,7 @@
 #' proteins See also `plot_volcano()`. This function can
 #' take either a tidyproteomics data object or a table with the required headers.
 #'
-#' @param table a tibble
+#' @param data a tidyproteomics data object
 #' @param ... two sample comparison
 #' @param log2fc_column a character defining the column name of the log2 foldchange values.
 #' @param log2fc_min a numeric defining the minimum log2 foldchange to highlight.
@@ -161,7 +161,7 @@ plot_proportion <- function(
     plot <- table %>%
       ggplot2::ggplot(ggplot2::aes(.data[[log2fc_column]], .data[[proportion_column]]))
   } else {
-    point_size <- rlang::arg_mathc(point_size, table_cols)
+    point_size <- rlang::arg_match(point_size, table_cols)
     plot <- table %>%
       ggplot2::ggplot(ggplot2::aes(.data[[log2fc_column]], .data[[proportion_column]],
                                    size = .data[[point_size]]))

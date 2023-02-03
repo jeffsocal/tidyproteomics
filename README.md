@@ -4,7 +4,7 @@ An R package for the tidy-ing, post processing and analysis of quantitative prot
 
 Proteomics analysis software, available either through a paid subscription or as an open-source tool, fail to output data in a well conceived tidy format. A majority of these tools generate output formats that have either mixed wide- and long-format data structures, columns headers with messy names and added symbols, and often confusing variable names. This leads researchers to create one-off scripts for cleaning and importing data from various formats, often creating an environment of unmaintained, bespoke code. This package attempts to solve that problem by creating a flexible import tool to unify multiple formats and create an new tidy R object for proteomics analysis.
 
-Currently inputs are implemented for ProteomeDiscoverer, MaxQuant, Skyline and DIA-NN, and assume peptide level FDR has already been accounted for. This package supports at a high level:
+This package supports at a high level:
 
 -   data importing
 -   data filtering
@@ -13,10 +13,24 @@ Currently inputs are implemented for ProteomeDiscoverer, MaxQuant, Skyline and D
 -   two-sample expression & term enrichment analysis
 -   protein inference, sequence coverage and visualization
 
+## Data Support
+
+Importing is currently implemented for a few platforms and assume peptide level FDR (at the user's desired level) has already been accounted for. See `vignette("importing")`. Importing is flexible enough to accept other data platforms in flat files (.csv, .tsv, and .xlsx) with a custom configuration.
+
+| Platform           | peptides                        | proteins                  | notes                         |
+|-----------------|--------------------|-----------------|-------------------|
+| ProteomeDiscoverer | \*.xlsx *peptides export*       | \*.xlsx *proteins export* | requires layout configuration |
+| MaxQuant           | evidence.txt                    | proteinGroups.txt         |                               |
+| Skyline            | \*.csv *MSstats peptide report* |                           | requires MSstats install      |
+| DIA-NN             | \*.tsv *peptide report*         |                           |                               |
+| mzTab              | \*.mzTab (v1.0.0)               | \*.mzTab (v1.0.0)         | does not track MBR            |
+
+## Ease of Use
+
 This package supports the same [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) utilized in the tidy-verse functions like filter, and introduces the `%like%` operator, see `vignette("subsetting")` . These operations can extend to all aspects of the data set, including sample names, protein IDs, annotations and accountings like *match_between_runs* and *num_peptides*.
 
 | operator | description          | example                                          |
-|-------------------|-------------------|----------------------------------|
+|-----------------|-----------------|--------------------------------------|
 | ==       | equals               | `sample == 'wt'` , `match_between_runs == FALSE` |
 | !=       | does not equal       | `biological_function != 'DNA metabolism'`        |
 | \<, \>   | less, greater than   | `num_unique_peptides >= 2`                       |
@@ -34,7 +48,6 @@ To install, open R and type:
 ``` r
 install.packages("devtools")
 devtools::install_github("jeffsocal/tidyproteomics")
-devtools::install_github("jeffsocal/rfasta")
 ```
 
 You will also need the Bioconductor packages [limma](https://bioconductor.org/packages/release/bioc/html/limma.html), [qvalue](https://bioconductor.org/packages/release/bioc/html/qvalue.html), and [fgsea](https://bioconductor.org/packages/release/bioc/html/fgsea.html), to install these type:
@@ -43,6 +56,8 @@ You will also need the Bioconductor packages [limma](https://bioconductor.org/pa
 install.packages("BiocManager")
 BiocManager::install(c("limma","qvalue","fgsea"))
 ```
+
+**NOTE:** There are several other packages required that will be prompted and automatically downloaded from CRAN when installing. Depending on your current system some packages require the installation of OS level libraries for advanced math and string manipulation.
 
 ## Get Started
 

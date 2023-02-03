@@ -26,6 +26,8 @@ plot_save(
 \item{height}{a numeric}
 
 \item{width}{a numeric}
+
+\item{...}{passthrough ggplot2::ggsave arguments}
 }
 \value{
 a ggplot2 object

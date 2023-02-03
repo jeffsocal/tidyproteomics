@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/get-started.html">Get Started</a>
+  <a class="nav-link" href="../articles/overview.html">Overview</a>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -86,9 +86,12 @@
 
 <dt>impute_function</dt>
 <dd><p>summary statistic function. Default is base::min, examples of
-other functions include min, max, mean, sum. One could write a function for the
-lower 5%, lower5th &lt;- function(x)  quantile(x, 0.05)[1] . Note, NAs will be
+other functions include min, max, mean, sum. Note, NAs will be
 be removed in the function call.</p></dd>
+
+
+<dt>method</dt>
+<dd><p>a character string to indicate the imputation method (within, between)</p></dd>
 
 
 <dt>minimum_to_impute</dt>
@@ -151,7 +154,7 @@ be removed in the function call.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rngtools</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... median oobe 3.12e+10</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing <span style="color: #FF5F00; font-style: italic;">between</span> samples by <span style="color: #FF5F00; font-style: italic;">randomforest</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">between</span> samples by <span style="color: #FF5F00; font-style: italic;">randomforest</span> <span style="color: #B2B2B2;">[46.9s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">between</span> samples by <span style="color: #FF5F00; font-style: italic;">randomforest</span> <span style="color: #B2B2B2;">[51.2s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 1584 values imputed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>

@@ -1,6 +1,6 @@
 Package: tidyproteomics
 Title: An S3 data object and framework for common quantitative proteomic analyses
-Version: 1.1.2
+Version: 1.2.4
 Authors@R: 
     person("Jeff", "Jones", , "jeffj@caltech.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7142-2222"))
@@ -9,15 +9,19 @@ Description:
     analysis of mass spectrometry based quantitative proteomic data. In
     addition, this package collects, adapts and organizes several useful
     algorithms and methods used in typical post analysis workflows.
-License: MIT
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
+VignetteBuilder: knitr
 Suggests: 
+    utils,
+    knitr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
     Biostrings,
+    broom,
     cli,
     digest,
     doParallel,
@@ -30,23 +34,25 @@ Imports:
     ggrepel,
     glue,
     grDevices,
-    hexbin,
     limma,
     magrittr,
+    methods,
     missForest,
     pheatmap,
     purrr,
     randomForest,
+    RColorBrewer,
     readr,
     readxl,
-    rfasta,
+    rlang,
     scales,
     stringr,
     tibble,
     tidyr,
     tidyselect,
+    vroom,
     writexl
 Depends: 
-    R (>= 2.10)
+    R (>= 3.5.0)
 LazyData: true
 URL: https://jeffsocal.github.io/tidyproteomics/

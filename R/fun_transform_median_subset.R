@@ -4,6 +4,8 @@
 #' @param group_by character vector
 #' @param rename character string
 #'
+#' @importFrom rlang :=
+#'
 #' @return a tibble
 #'
 transform_median <- function(

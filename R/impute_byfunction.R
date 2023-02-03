@@ -2,8 +2,8 @@
 #'
 #' @param table a tibble
 #' @param impute_function summary statistic function. Default is median, examples of
-#' other functions include min, max, mean, sum. One could write a function for the
-#' lower 5%, lower5th <- function(x) { quantile(x, 0.05)[[1]] }.
+#' other functions include min, max, mean, sum.
+#' @param method a character string to indicate the imputation method (within, between)
 #' @param minimum_to_impute the minimum ratio to impute at
 #'
 #' @return a tibble

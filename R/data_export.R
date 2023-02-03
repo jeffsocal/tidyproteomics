@@ -114,10 +114,11 @@ export_quant <- function(
 #' _identifier_ as the designation for the measured observation.
 #'
 #' @param data tidyproteomics data object
-#' @param file_name character string vector
-#' @param raw_data a boolean
-#' @param normalized a boolean
-#' @param scaled a boolean
+#' @param ... two sample comparison e.g. experimental/control
+#' @param .analysis a character string for the specific analysis to export
+#' @param .term a character string of the term from an enrichment analysis
+#' @param .append a character string of the term to append to the output
+#' @param .file_name a character string for file to write to, format implied from string ('.rds', '.xlsx', '.csv', '.tsv')
 #'
 #' @return a tibble
 #' @export
@@ -128,57 +129,93 @@ export_quant <- function(
 #' hela_proteins %>%
 #'    expression(knockdown/control) %>%
 #'    export_analysis(knockdown/control,
-#'                    .analysis = "expression",
-#'                    .file_name = "hela_expression_kd-cl.xlsx")
+#'                    .analysis = "expression")
+#'
+#' hela_proteins %>%
+#'    export_analysis(.analysis = "counts")
 #'
 export_analysis <- function(
     data = NULL,
     ...,
     .analysis = NULL,
     .term = NULL,
+    .append = NULL,
     .file_name = NULL
 ){
 
+  # visible bindings
+  term <- NULL
+  annotation <- NULL
+
   check_data(data)
-  str_quo <- tidyproteomics_quo(...)
-  if(is.null(str_quo)) {
-    cli::cli_alert_warning("No comparison provided")
-    cli::cli_alert_info("Try one of ({paste(names(data$analysis), collapse = ', ')})")
-    return(data)
-  }
-  experiment <- str_quo[['variable']]
-  control <- str_quo[['value']]
-  if(str_quo['operator'] != "/") {
+
+  if(.analysis == 'counts'){
+    tbl_out <- data %>% analysis_counts()
+  } else {
+
+    str_quo <- tidyproteomics_quo(...)
+    if(is.null(str_quo)) {
+      cli::cli_alert_warning("No comparison provided")
+      cli::cli_alert_info("Try one of ({paste(names(data$analysis), collapse = ', ')})")
+      return(data)
+    }
+    experiment <- str_quo[['variable']]
+    control <- str_quo[['value']]
+    if(str_quo['operator'] != "/") {
+      cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
+      cli::cli_abort("Comparison operator must be {.emph \"/\"} (e.g. {experiment}{.emph /}{control})")
+    }
+    check_samples(data, experiment, control)
+
+    set_expression <- glue::glue("{experiment}/{control}")
+    if(is.null(data$analysis[[set_expression]])){
+      cli::cli_abort(c("No analysis data for `{experiment}` `{control}`",
+                       "i" = "  suggestion: run expression({experiment}/{control})"))
+    }
+
+
+    analyses <- c(data$analysis[[set_expression]], 'counts')
+    .analysis <- rlang::arg_match(.analysis, names(analyses))
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-    cli::cli_abort("Comparison operator must be {.emph \"/\"} (e.g. {experiment}{.emph /}{control})")
-  }
-  check_samples(data, experiment, control)
 
-  set_expression <- glue::glue("{experiment}/{control}")
-  if(is.null(data$analysis[[set_expression]])){
-    cli::cli_abort(c("No analysis data for `{experiment}` `{control}`",
-                     "i" = "  suggestion: run expression({experiment}/{control})"))
-  }
+    tbl_out <- analyses[[.analysis]]
+    if(.analysis == 'enrichment') {
+      .term <- rlang::arg_match(.term, names(tbl_out))
+      cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
+      tbl_out <- tbl_out[[.term]]
+    }
 
-
-  analyses <- data$analysis[[set_expression]]
-  .analysis <- rlang::arg_match(.analysis, names(analyses))
-  cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-
-  tbl_out <- analyses[[.analysis]]
-  if(.analysis == 'enrichment') {
-    .term <- rlang::arg_match(.term, names(tbl_out))
-    cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-    tbl_out <- tbl_out[[.term]]
+    if(length(intersect(data$identifier, colnames(tbl_out))) == length(data$identifier)) {
+      tbl_out <- tbl_out %>%
+        dplyr::left_join(
+          data$annotations %>%
+            tidyr::pivot_wider(names_from = 'term', values_from = 'annotation'),
+          by = data$identifier
+        )
+    }
   }
 
-  if(length(intersect(data$identifier, colnames(tbl_out))) == length(data$identifier)) {
+  if(!is.null(.append)) {
+
+    .append <- rlang::arg_match(.append, get_annotation_terms(data))
+
     tbl_out <- tbl_out %>%
       dplyr::left_join(
-        data$annotations %>%
-          tidyr::pivot_wider(names_from = 'term', values_from = 'annotation'),
-        by = data$identifier
-      )
+        data$annotation %>%
+          dplyr::filter(term %in% c(.term, .append)) %>%
+          tidyr::pivot_wider(names_from = 'term', values_from = 'annotation') %>%
+          dplyr::select(dplyr::matches(paste0("^", paste(c(.term, .append), collapse = "$|^"), "$"))) %>%
+          tidyr::separate_rows(!!.term, sep = ";") %>%
+          dplyr::rename(annotation = !!.term) %>%
+          dplyr::rename(append = !!.append) %>%
+          dplyr::filter(!is.na(annotation)) %>%
+          dplyr::group_by(annotation) %>%
+          dplyr::summarize(
+            append_group = paste(append, collapse = ", "),
+            .groups = 'drop'
+          ), by = 'annotation')
+
+    colnames(tbl_out)[which(colnames(tbl_out) == 'append_group')] <- paste0(.append, "s")
   }
 
   if(is.null(.file_name)) {return(tbl_out)}

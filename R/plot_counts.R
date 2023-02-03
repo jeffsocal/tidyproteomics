@@ -1,4 +1,4 @@
-#' Plot the variation in normalized values
+#' Plot the accounting of proteins. peptides, and other counts
 #'
 #' @description
 #' `plot_counts()` is a GGplot2 implementation for plotting counting statistics.
@@ -35,24 +35,12 @@ plot_counts <- function(
   match_between_runs <- NULL
   imputed <- NULL
   fill <- NULL
+  is_mbr <- NULL
 
   accounting <- rlang::arg_match(accounting)
   check_data(data)
-  limit <- nrow(data$experiments)
 
-  fat <- list(
-    data %>%
-      subset(match_between_runs == FALSE, .verbose = FALSE) %>%
-      subset(imputed >= !!impute_max, .verbose = FALSE) %>%
-      summary('sample_id', destination = 'return', limit = limit) %>% dplyr::mutate(mbr = 'xMBR'),
-    data %>% summary('sample_id', destination = 'return', limit = limit) %>% dplyr::mutate(mbr = 'MBR')
-  )  %>%
-    dplyr::bind_rows() %>%
-    dplyr::full_join(
-      data$experiment %>%
-        dplyr::select(c('sample_id', 'sample', 'replicate')),
-      by = 'sample_id'
-    )
+  fat <- data %>% analysis_counts(impute_max = impute_max)
 
   w <- which(duplicated(fat[,c('sample_id', 'sample', accounting)]))
   if(length(w) > 0) {fat <- fat[-w,]}
@@ -67,7 +55,7 @@ plot_counts <- function(
   metric_max <- max(fat$metric) * 1.1
 
   fat_mean <- fat %>%
-    dplyr::group_by(sample, mbr) %>%
+    dplyr::group_by(sample, is_mbr) %>%
     dplyr::summarise(
       replicate = mean(as.numeric(replicate)),
       q025 = round(stats::quantile(metric, .025)),
@@ -77,8 +65,8 @@ plot_counts <- function(
       .groups = 'drop') %>%
     dplyr::mutate(label = ifelse(ci95 == 0, metric,
                                  glue::glue("{metric} \u00B1 {ci95}")),
-                  label = ifelse(mbr == 'MBR', glue::glue("{label} mbr"), label),
-                  metric = ifelse(mbr == 'MBR', metric * 1.05, metric * .95))
+                  label = ifelse(is_mbr == TRUE, glue::glue("{label} mbr"), label),
+                  metric = ifelse(is_mbr == TRUE, metric * 1.05, metric * .95))
 
   plot <- fat %>%
     # dplyr::mutate(replicate = as.factor(replicate)) %>%

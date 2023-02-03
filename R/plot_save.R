@@ -9,6 +9,7 @@
 #' @param destination a character string
 #' @param height a numeric
 #' @param width a numeric
+#' @param ... passthrough ggplot2::ggsave arguments
 #'
 #' @return a ggplot2 object
 #'

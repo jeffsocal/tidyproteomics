@@ -5,6 +5,8 @@
 #' @param values character string
 #' @param method character string
 #'
+#' @importFrom rlang :=
+#'
 #' @return a tibble
 #'
 center <- function(

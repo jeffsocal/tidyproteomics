@@ -12,7 +12,7 @@ table by checking the ending of path string"><meta property="og:image" content="
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@ table by checking the ending of path string"><meta property="og:image" content="
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../articles/get-started.html">Get Started</a>
+  <a class="nav-link" href="../articles/overview.html">Overview</a>
 </li>
 <li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -72,7 +72,7 @@ table by checking the ending of path string</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_data</span><span class="op">(</span>path <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_data</span><span class="op">(</span>path <span class="op">=</span> <span class="cn">NULL</span>, platform <span class="op">=</span> <span class="cn">NULL</span>, analyte <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"peptides"</span>, <span class="st">"proteins"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -81,8 +81,12 @@ table by checking the ending of path string</p>
 <dd><p>a path character string</p></dd>
 
 
-<dt>...</dt>
-<dd><p>readr passthrough options</p></dd>
+<dt>platform</dt>
+<dd><p>a character string</p></dd>
+
+
+<dt>analyte</dt>
+<dd><p>a character string</p></dd>
 
 </dl></div>
     <div class="section level2">

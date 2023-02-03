@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="../articles/get-started.html">Get Started</a>
+  <a class="nav-link" href="../articles/overview.html">Overview</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
@@ -173,13 +173,12 @@ experiment we know how the experiment is affected.</p>
 <span><span class="co"># your_proteins &lt;- "./data/your_exported_results.xlsx" %&gt;%</span></span>
 <span><span class="co">#   import("ProteomeDiscoverer", "proteins")</span></span>
 <span></span>
-<span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"p97KD_HCT116"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span></span></code></pre></div>
 <p>As part of this demonstration, signal from <em>P06576 in p07_kd</em>
 has been artificially removed to simulate a “genetic knockout
 mutation”.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">$</span><span class="va">protein</span> <span class="op">==</span> <span class="st">'P06576'</span> <span class="op">&amp;</span> <span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">$</span><span class="va">sample</span> <span class="op">==</span> <span class="st">'p97_kd'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">$</span><span class="va">protein</span> <span class="op">==</span> <span class="st">'P06576'</span> <span class="op">&amp;</span> <span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">$</span><span class="va">sample</span> <span class="op">==</span> <span class="st">'knockdown'</span><span class="op">)</span></span>
 <span><span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span> <span class="op">&lt;-</span> <span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">[</span><span class="op">-</span><span class="va">w</span>,<span class="op">]</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="using-within">Using <em>within</em><a class="anchor" aria-label="anchor" href="#using-within"></a>
@@ -189,7 +188,7 @@ mutation”.</p>
 <code class="sourceCode R"><span></span>
 <span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span>impute_function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>, method <span class="op">=</span> <span class="st">'within'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">protein</span> <span class="op">%like%</span> <span class="st">"P23443|P51812|P06576"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"P23443|P51812|P06576"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/extract.html">extract</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">sample</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -213,7 +212,7 @@ because we performed a “genetic knockout mutation”.</p>
 <code class="sourceCode R"><span></span>
 <span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span>impute_function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>, method <span class="op">=</span> <span class="st">'between'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">protein</span> <span class="op">%like%</span> <span class="st">"P23443|P51812|P06576"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"P23443|P51812|P06576"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/extract.html">extract</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">sample</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>

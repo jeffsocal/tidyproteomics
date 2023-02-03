@@ -5,24 +5,33 @@
 #' table by checking the ending of path string
 #'
 #' @param path a path character string
-#' @param ... readr passthrough options
+#' @param platform a character string
+#' @param analyte a character string
 #'
 #' @return tibble
 #'
 read_data <- function(
     path = NULL,
-    ...
+    platform = NULL,
+    analyte = c("peptides","proteins")
 ) {
 
   # visible bindings
   col_name <- NULL
 
-  ext <- stringr::str_extract(path, "\\..{3,4}$")
-  ext <- rlang::arg_match(ext, c(".rds", ".csv", ".tsv", ".xlsx", ".xls", ".txt"))
+  analyte <- rlang::arg_match(analyte)
+  format <- c(".txt", ".csv", ".tsv", ".rds", ".xlsx", ".xls", ".mzTab")
+  ext <- stringr::str_extract(path, "\\..{3,6}$")
+  ext <- rlang::arg_match(ext, format)
 
-  if( grepl("\\.rds$", path) ) {
+  if( ext == '.rds' ) {
     tbl <- path %>% readr::read_rds()
-  } else if( grepl("\\.(csv|tsv|txt)$", path) ) {
+  } else if( ext == '.mzTab' && platform == 'mzTab' ) {
+    obj <- path %>% read_mzTab(analyte)
+    analyte <- obj$analyte
+    platform <- obj$platform
+    tbl <- obj$data
+  } else if( ext %in% format[1:3] ) {
     suppressWarnings(
       tbl <- path %>% vroom::vroom(progress = FALSE, col_types = vroom::cols())
     )
@@ -48,11 +57,14 @@ read_data <- function(
       cli::cli_alert_info("{.emph ===================}")
     }
 
-  } else if( grepl("\\.xl[xs]+$", path) ) {
+  } else if( ext %in% format[5:6] ) {
     tbl <- path %>% readxl::read_excel(col_types = 'text')
+  } else {
+    cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
+    cli::cli_abort("Can not import {.emph {path}}. File format not recognized, must be one of {.emph {format}}.")
   }
 
-  return(tbl)
+  return(list(platform = platform, analyte = analyte, data = tbl))
 }
 
 #' Load project specific data
@@ -61,22 +73,22 @@ read_data <- function(
 #' `load_local()` is a simple function that loads the current project
 #' tidyproteomics data object
 #'
-#' @param source a character string
+#' @param analyte a character string
 #'
 #' @return an tidyproteomics data object
 #' @export
 #'
 #' @examples
 #' library(tidyproteomics)
-#' # hela_proteins <- load_omics(source = "proteins")
+#' # hela_proteins <- load_omics(analyte = "proteins")
 #'
 load_local <- function(
-    source = c("peptides","proteins")
+    analyte = c("peptides","proteins")
 ) {
-  source <- rlang::arg_match(source)
-  path <- glue::glue("./data/rds/{source}.rds")
+  analyte <- rlang::arg_match(analyte)
+  path <- glue::glue("./data/rds/{analyte}.rds")
   if(!file.exists(path)) {
-    cli::cli_abort(c("x" = "Data not found for {source}"))
+    cli::cli_abort(c("x" = "Data not found for {analyte}"))
   }
   return(path %>% readRDS())
 }

@@ -16,9 +16,10 @@ impute(
 \item{data}{a tidyproteomics list data-object}
 
 \item{impute_function}{summary statistic function. Default is base::min, examples of
-other functions include min, max, mean, sum. One could write a function for the
-lower 5\%, lower5th <- function(x) { quantile(x, 0.05)[\link{1}] }. Note, NAs will be
+other functions include min, max, mean, sum. Note, NAs will be
 be removed in the function call.}
+
+\item{method}{a character string to indicate the imputation method (within, between)}
 
 \item{minimum_to_impute}{the minimum ratio to impute at}
 

@@ -47,6 +47,26 @@ plot_dynamic_range <- function(
   quant_values <- get_quant_names(data)
   data_quant <- data %>% extract(values = quant_values)
 
+  use_samples <- data$experiments %>%
+    dplyr::group_by(sample) %>%
+    dplyr::slice_max(replicate, n = 1, with_ties = FALSE) %>%
+    dplyr::filter(replicate > 1) %>%
+    dplyr::select(sample) %>%
+    unlist() %>% as.character()
+
+  if(length(use_samples) == 0){
+    cli::cli_abort("No samples with enought replicates to measure variation")
+  }
+
+  drop_samples <- setdiff(data %>% get_sample_names(), use_samples)
+  if(length(drop_samples) > 0) {
+    cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
+    cli::cli_alert_info("Samples {.emph {drop_samples}} have been dropped, contain a single replicate")
+  }
+
+  data_quant <- data_quant %>%
+    dplyr::filter(sample %in% use_samples)
+
   data_quant_norm_range <- data_quant %>%
     dplyr::mutate(abundance = abundance %>% log10(),
                   origin = origin %>% as.factor()) %>%

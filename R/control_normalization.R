@@ -11,9 +11,8 @@
 #' adventitious to select a optimal normalization method based on performance.
 #'
 #' @param data tidyproteomics data object
-#' @param method character vector (scaled, median, linear, limma, loess, randomforest)
-#' @param ... use a subset of the data for normalization see `subset()`. This is useful when normalizing against a spike-in set of
-#' proteins
+#' @param ... use a subset of the data for normalization see `subset()`. This is useful when normalizing against a spike-in set of proteins
+#' @param .method character vector of normalization to use
 #'
 #' @return a tidyproteomics data-object
 #' @export
@@ -69,7 +68,8 @@ normalize <- function(
   d <- dc <- data %>%
     extract(values = 'raw') %>%
     transform_log2(values = 'abundance') %>%
-    dplyr::rename(abundance = abundance_log2)
+    dplyr::rename(abundance = abundance_log2) %>%
+    dplyr::select(!dplyr::matches("^origin$"))
 
   data$operations <- append(data$operations, glue::glue("Data normalized via {paste(.method, collapse=', ')}."))
 

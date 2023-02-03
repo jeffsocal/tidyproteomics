@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="articles/get-started.html">Get Started</a>
+  <a class="nav-link" href="articles/overview.html">Overview</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
@@ -99,7 +99,7 @@
 </div>
 <p>An R package for the tidy-ing, post processing and analysis of quantitative proteomic data.</p>
 <p>Proteomics analysis software, available either through a paid subscription or as an open-source tool, fail to output data in a well conceived tidy format. A majority of these tools generate output formats that have either mixed wide- and long-format data structures, columns headers with messy names and added symbols, and often confusing variable names. This leads researchers to create one-off scripts for cleaning and importing data from various formats, often creating an environment of unmaintained, bespoke code. This package attempts to solve that problem by creating a flexible import tool to unify multiple formats and create an new tidy R object for proteomics analysis.</p>
-<p>Currently inputs are implemented for ProteomeDiscoverer, MaxQuant, Skyline and DIA-NN, and assume peptide level FDR has already been accounted for. This package supports at a high level:</p>
+<p>This package supports at a high level:</p>
 <ul>
 <li>data importing</li>
 <li>data filtering</li>
@@ -108,12 +108,70 @@
 <li>two-sample expression &amp; term enrichment analysis</li>
 <li>protein inference, sequence coverage and visualization</li>
 </ul>
+<div class="section level2">
+<h2 id="data-support">Data Support<a class="anchor" aria-label="anchor" href="#data-support"></a>
+</h2>
+<p>Importing is currently implemented for a few platforms and assume peptide level FDR (at the user’s desired level) has already been accounted for. See <code><a href="articles/importing.html">vignette("importing")</a></code>. Importing is flexible enough to accept other data platforms in flat files (.csv, .tsv, and .xlsx) with a custom configuration.</p>
+<table class="table">
+<colgroup>
+<col width="23%">
+<col width="27%">
+<col width="23%">
+<col width="26%">
+</colgroup>
+<thead><tr class="header">
+<th>Platform</th>
+<th>peptides</th>
+<th>proteins</th>
+<th>notes</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>ProteomeDiscoverer</td>
+<td>*.xlsx <em>peptides export</em>
+</td>
+<td>*.xlsx <em>proteins export</em>
+</td>
+<td>requires layout configuration</td>
+</tr>
+<tr class="even">
+<td>MaxQuant</td>
+<td>evidence.txt</td>
+<td>proteinGroups.txt</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Skyline</td>
+<td>*.csv <em>MSstats peptide report</em>
+</td>
+<td></td>
+<td>requires MSstats install</td>
+</tr>
+<tr class="even">
+<td>DIA-NN</td>
+<td>*.tsv <em>peptide report</em>
+</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>mzTab</td>
+<td>*.mzTab (v1.0.0)</td>
+<td>*.mzTab (v1.0.0)</td>
+<td>does not track MBR</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
+<h2 id="ease-of-use">Ease of Use<a class="anchor" aria-label="anchor" href="#ease-of-use"></a>
+</h2>
 <p>This package supports the same <a href="https://en.wikipedia.org/wiki/Syntactic_sugar" class="external-link">syntactic sugar</a> utilized in the tidy-verse functions like filter, and introduces the <code>%like%</code> operator, see <code><a href="articles/subsetting.html">vignette("subsetting")</a></code> . These operations can extend to all aspects of the data set, including sample names, protein IDs, annotations and accountings like <em>match_between_runs</em> and <em>num_peptides</em>.</p>
 <table class="table">
 <colgroup>
-<col width="26%">
-<col width="26%">
-<col width="47%">
+<col width="23%">
+<col width="23%">
+<col width="52%">
 </colgroup>
 <thead><tr class="header">
 <th>operator</th>
@@ -161,18 +219,19 @@
 </tbody>
 </table>
 <p>Expression analysis also utilizes this type of syntax when referencing samples for analysis. For example <code>data %&gt;% expression(knockdown/control)</code> would know to run the differential expression of the sample <em>ko</em> with respect to the sample <em>wt</em> such that positive log2 difference would be up-expressed in <em>ko</em> and a negative log2 differences would be down-expressed in <em>ko</em>.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>To install, open R and type:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jeffsocal/tidyproteomics"</span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jeffsocal/rfasta"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jeffsocal/tidyproteomics"</span><span class="op">)</span></span></code></pre></div>
 <p>You will also need the Bioconductor packages <a href="https://bioconductor.org/packages/release/bioc/html/limma.html" class="external-link">limma</a>, <a href="https://bioconductor.org/packages/release/bioc/html/qvalue.html" class="external-link">qvalue</a>, and <a href="https://bioconductor.org/packages/release/bioc/html/fgsea.html" class="external-link">fgsea</a>, to install these type:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
 <span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"limma"</span>,<span class="st">"qvalue"</span>,<span class="st">"fgsea"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><strong>NOTE:</strong> There are several other packages required that will be prompted and automatically downloaded from CRAN when installing. Depending on your current system some packages require the installation of OS level libraries for advanced math and string manipulation.</p>
 </div>
 <div class="section level2">
 <h2 id="get-started">Get Started<a class="anchor" aria-label="anchor" href="#get-started"></a>
@@ -191,7 +250,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 

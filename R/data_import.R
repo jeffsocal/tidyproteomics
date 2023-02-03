@@ -83,9 +83,12 @@ data_import <- function(
 
     cli::cli_progress_step("... {.emph {basename(file_name)}}")
 
-    this_dat <- file_name %>%
-      read_data(show_col_types = FALSE, progress = FALSE) %>%
-      dplyr::select(dplyr::matches(cols_all_str))
+    ############################################################################
+    # read_data covers csv, tsv, xlsx and mzTab
+    this_dat_obj <- file_name %>% read_data(platform, analyte)
+    this_dat <- this_dat_obj$data %>% dplyr::select(dplyr::matches(cols_all_str))
+    analyte <- this_dat_obj$analyte
+    platform <- this_dat_obj$platform
 
     if(nrow(this_dat) == 0) {cli::cli_abort("... no data extracted, check config file")}
 
@@ -100,7 +103,7 @@ data_import <- function(
         dplyr::filter(is.na(column_import)) %>%
         dplyr::mutate(column_import = 'accounting')
 
-      this_dat <- this_dat %>% import_extract(tbl_pivot_extract)
+      this_dat <- this_dat %>% import_extract(tbl_pivot_extract) %>% unique()
     }
 
     ############################################################################
@@ -118,7 +121,7 @@ data_import <- function(
         ) %>%
         dplyr::select(!dplyr::matches('accounting')) %>%
         dplyr::rename(accounting = account_str) %>%
-        tidyr::pivot_wider(names_from = 'accounting', values_from = 'value')
+        tidyr::pivot_wider(names_from = 'accounting', values_from = 'value', values_fn = function(x){ x %>% as.numeric() %>% sum()})
     }
 
     ############################################################################
@@ -139,16 +142,21 @@ data_import <- function(
 
     ############################################################################
     # deal with protein_groups
-    if('protein_cluster' %in% names(this_dat)) {
-      u_prot_all <- this_dat$protein %>% unique() %>% length()
-      this_dat <- this_dat %>%
-        dplyr::group_by(protein_cluster) %>%
-        dplyr::mutate(protein_group = paste(protein, collapse = ";")) %>%
-        dplyr::slice_head(n = 1) %>%
-        dplyr::ungroup() %>%
-        dplyr::select(!dplyr::matches('protein_cluster'))
+    if(!'protein_cluster' %in% names(this_dat)) {
+      cli::cli_abort("A `patter_split` is required for identifier::protein in your config file")
+    }
+    u_prot_all <- this_dat$protein %>% unique() %>% length()
+    this_dat <- this_dat %>%
+      dplyr::group_by(protein_cluster) %>%
+      dplyr::mutate(protein_group = paste(protein, collapse = ";")) %>%
+      dplyr::slice_head(n = 1) %>%
+      dplyr::ungroup() %>%
+      dplyr::select(!dplyr::matches('protein_cluster'))
 
-      u_prot_red <- this_dat$protein %>% unique() %>% length()
+    u_prot_red <- this_dat$protein %>% unique() %>% length()
+    if(u_prot_red == u_prot_all){
+      cli::cli_alert_info("... no homology detected")
+    } else {
       cli::cli_alert_info("... homology collapsed {.emph {u_prot_all}} proteins into {.emph {u_prot_red}} proteins groups")
     }
 
@@ -169,22 +177,22 @@ data_import <- function(
       dplyr::mutate(import_file = basename(file_name)) %>%
       dplyr::mutate(sample_id = hash_vector(paste(import_file, sample_file, i))) %>%
       dplyr::relocate(import_file, sample_file, sample_id) %>%
-      as.data.frame()
+      as.data.frame() %>%
+      dplyr::mutate(abundance_raw = ifelse(abundance_raw == 0, NA, abundance_raw))
 
     if(!'num_psms' %in% names(this_dat)) {this_dat <- this_dat %>% dplyr::mutate(num_psms = 1)}
     get_cols_num <- names(this_dat)[which(grepl('^num_|^abundance_', names(this_dat)))]
     for(get_col_num in get_cols_num){ this_dat[,get_col_num] <- as.numeric(this_dat[,get_col_num]) }
 
-    get_cols <- names(this_dat)[which(!grepl('abundance_raw|match_between_runs|num_', names(this_dat)))]
-
-    this_dat <- this_dat %>%
-      dplyr::group_by(dplyr::across(get_cols)) %>%
-      dplyr::slice_min(match_between_runs, with_ties = FALSE) %>%
-      dplyr::summarise(num_psms = sum(num_psms),
-                       match_between_runs = max(match_between_runs) == 1,
-                       abundance_raw = sum(abundance_raw),
-                       .groups = 'drop') %>%
-      dplyr::mutate(abundance_raw = ifelse(abundance_raw == 0, NA, abundance_raw))
+    # de-duplication !?
+    # get_cols <- names(this_dat)[which(!grepl('abundance_raw|match_between_runs|num_', names(this_dat)))]
+    # this_dat <- this_dat %>%
+    #   dplyr::group_by(dplyr::across(get_cols)) %>%
+    #   dplyr::slice_min(match_between_runs, with_ties = FALSE) %>%
+    #   dplyr::summarise(num_psms = sum(num_psms),
+    #                    match_between_runs = max(match_between_runs) == 1,
+    #                    abundance_raw = sum(abundance_raw),
+    #                    .groups = 'drop')
 
     dat_out <- dat_out %>% dplyr::bind_rows(this_dat)
 
@@ -193,18 +201,6 @@ data_import <- function(
 
   cols_annotations <- set_vect(tbl_config, 'annotation') %>% names()
   cols_identifiers <- set_vect(tbl_config, 'identifier') %>% names()
-
-  # replicate accounting
-  dat_out <- dat_out %>%
-    dplyr::full_join(
-      dat_out %>%
-        dplyr::select(sample, sample_file) %>%
-        unique() %>%
-        dplyr::group_by(sample) %>%
-        dplyr::mutate(replicate = dplyr::row_number() %>% as.character()) %>%
-        dplyr::ungroup(),
-      by = c("sample","sample_file")
-    )
 
   dl <- list(
     origin = platform,

@@ -4,10 +4,12 @@
 \alias{plot.tidyproteomics}
 \title{Tidy-Quant data object plot definition}
 \usage{
-\method{plot}{tidyproteomics}(obj)
+\method{plot}{tidyproteomics}(x, ...)
 }
 \arguments{
-\item{obj}{tidyproteomics data object}
+\item{x}{tidyproteomics data object}
+
+\item{...}{unused legacy}
 }
 \value{
 print object summary

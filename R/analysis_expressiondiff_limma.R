@@ -33,7 +33,9 @@ expression_limma <- function(
   imputed <- NULL
   n <- NULL
 
-  data_quant <- data %>% extract(data$quantitative_source) %>% transform_log2()
+  data_quant <- data %>% extract(data$quantitative_source) %>%
+    dplyr::select(!dplyr::matches('^origin$')) %>%
+    transform_log2()
 
   # only accept proteins with complete values
   l_comp_pro <- data_quant %>%

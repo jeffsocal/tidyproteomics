@@ -26,7 +26,7 @@ get_variables <- function(
 #'
 #' @param data tidyproteomics data object
 #' @param variable a character string
-#' @param verbose a boolean
+#' @param .verbose a boolean
 #'
 #' @return a character
 #'

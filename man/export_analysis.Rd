@@ -9,19 +9,22 @@ export_analysis(
   ...,
   .analysis = NULL,
   .term = NULL,
+  .append = NULL,
   .file_name = NULL
 )
 }
 \arguments{
 \item{data}{tidyproteomics data object}
 
-\item{file_name}{character string vector}
+\item{...}{two sample comparison e.g. experimental/control}
 
-\item{raw_data}{a boolean}
+\item{.analysis}{a character string for the specific analysis to export}
 
-\item{normalized}{a boolean}
+\item{.term}{a character string of the term from an enrichment analysis}
 
-\item{scaled}{a boolean}
+\item{.append}{a character string of the term to append to the output}
+
+\item{.file_name}{a character string for file to write to, format implied from string ('.rds', '.xlsx', '.csv', '.tsv')}
 }
 \value{
 a tibble
@@ -36,7 +39,9 @@ library(tidyproteomics)
 hela_proteins \%>\%
    expression(knockdown/control) \%>\%
    export_analysis(knockdown/control,
-                   .analysis = "expression",
-                   .file_name = "hela_expression_kd-cl.xlsx")
+                   .analysis = "expression")
+
+hela_proteins \%>\%
+   export_analysis(.analysis = "counts")
 
 }

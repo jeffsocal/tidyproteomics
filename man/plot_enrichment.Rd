@@ -20,7 +20,11 @@ plot_enrichment(
 )
 }
 \arguments{
+\item{data}{a tidyproteomics data object}
+
 \item{...}{two sample comparison}
+
+\item{.term}{a character string indicating the term enrichment analysis should be calculated for}
 
 \item{enrichment_min}{a numeric defining the minimum log2 enrichment to highlight.}
 
@@ -39,8 +43,6 @@ plot_enrichment(
 \item{height}{a numeric}
 
 \item{width}{a numeric}
-
-\item{table}{a tibble}
 }
 \value{
 a ggplot2 object

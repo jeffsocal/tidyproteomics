@@ -13,10 +13,9 @@ normalize(
 \arguments{
 \item{data}{tidyproteomics data object}
 
-\item{...}{use a subset of the data for normalization see \code{subset()}. This is useful when normalizing against a spike-in set of
-proteins}
+\item{...}{use a subset of the data for normalization see \code{subset()}. This is useful when normalizing against a spike-in set of proteins}
 
-\item{method}{character vector (scaled, median, linear, limma, loess, randomforest)}
+\item{.method}{character vector of normalization to use}
 }
 \value{
 a tidyproteomics data-object

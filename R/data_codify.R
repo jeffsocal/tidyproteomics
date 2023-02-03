@@ -74,10 +74,10 @@ codify <- function(
 
   if(nrow(tb_accounting) != nrow(tb_quantitative)) {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-    cli::cli_alert_info(c("x" = "Something did not parse correctly",
-                     "i" = "Table of quantitative values has {.emph {nrow(tb_quantitative)}} rows",
-                     "i" = "Table of accounting values has {.emph {nrow(tb_accounting)}} rows",
-                     "i" = "Check the sample group expressions for {.emph pattern_extract}"))
+    cli::cli_alert_info(c("x" = "Something did not parse correctly"))
+    cli::cli_alert_info(c("i" = "... table of quantitative values has {.emph {nrow(tb_quantitative)}} rows"))
+    cli::cli_alert_info(c("i" = "... table of accounting values has {.emph {nrow(tb_accounting)}} rows"))
+    cli::cli_alert_info(c("i" = "... check the sample group expressions for {.emph pattern_extract}"))
   }
 
   list(

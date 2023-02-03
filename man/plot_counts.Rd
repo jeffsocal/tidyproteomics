@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_counts.R
 \name{plot_counts}
 \alias{plot_counts}
-\title{Plot the variation in normalized values}
+\title{Plot the accounting of proteins. peptides, and other counts}
 \usage{
 plot_counts(
   data = NULL,

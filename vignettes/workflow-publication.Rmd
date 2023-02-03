@@ -17,20 +17,15 @@ options(dplyr.print_max = 10)
 
 The following is a demonstration workflow for generating the figures from the publication.
 
-```{r, message=FALSE}
+```{r, eval=FALSE}
 library(tidyverse)
 library(tidyproteomics)
 ```
 
 ### Import
 
-```{r, message=FALSE}
-rdata <- path_to_package_data("p97KD_HCT116") %>%
-  # import the data set
-  import("ProteomeDiscoverer", "proteins") %>%
-  # change the sample labels
-  reassign("sample", "ctl", "ctrl") %>%
-  reassign("sample", "p97", "kndw")
+```{r, eval=FALSE}
+rdata <- hela_proteins
 ```
 
 ### Summary Plots

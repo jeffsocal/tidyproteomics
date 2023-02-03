@@ -1,0 +1,105 @@
+---
+title: "Overview"
+output: rmarkdown::html_vignette
+description: |
+  tidyproteomics: simplified data object and analysis functions
+vignette: >
+  %\VignetteIndexEntry{Overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+Tidyproteomics is an R package for the post processing and analysis of quantitative proteomic data. Accomplished through a simplified S3 data object and corrisponing function. This package supports at a high level:
+
+-   data importing
+-   data filtering
+-   data visualization
+-   quantitative normalization & imputation
+-   two-sample expression & term enrichment analysis
+-   protein inference, sequence coverage and visualization
+
+The objective of tidyproteomics is to simplify the post analysis of many proteomics projects by providing an R framework for the analysis and integration of methods and algorithms. The goal to is provide a set of functional steps to processing your data, a record of that processing and methods for visualization. It is intended to be much like how the tidyverse provides data processing functions that can be piped together for easily understood and cleaner code. Reference the `vignette("workflow-publication")`.
+
+While there are several well developed and exceptional tools available to perform the exact same analysis, they are often tied to specific up-stream inputs, perform only a portion of the desired analysis, or have limited licensing availability.
+
+This package was designed to allow for expansion and integration of other algorithms, methods and workflows in addition to providing access to different data formats via exported up-stream analyses. It is also intended to be open for review, improvement and bug fixing.
+
+
+## Package overview
+
+### data manipulation
+
+Reference `vignette("importing")` and `vignette("subsetting")`
+
+-   `import()` - imports data from several sources into the tidyproteomics data object
+-   `subset()` - subset a tidyproteomics data object by a given *regex*
+-   `reassign()` - quickly reassign data to different sample sets
+-   `merge()` - combines multiple imported data sets into a single object
+-   `export_quant()` - exports a tidyproteomics data object to .csv, .tsv, .xlsx or .rds
+-   `export_analysis()` - exports a tidyproteomics data object to .csv, .tsv, .xlsx or .rds
+
+### basic analysis
+
+-   `summary()` - provides a quick accounting of the number of proteins observed
+-   `plot_counts()` - provides a quick bar chart for the number of proteins observed
+-   `plot_quantrank()` - provides a quick plot on quantitative expression for all proteins observed
+
+### normalization
+
+Reference `vignette("normalizing")`
+
+-   `normalize()` - normalize the raw data from a tidyproteomics data object
+-   `select_normalization()` - use a weighted scheme to automatically pick the best normalization method, or manually set one for down-stream analysis
+
+### impute missing values
+
+Reference `vignette("imputing")`
+
+-   `impute()` - impute missing values from a tidyproteomics data object
+
+### data visualization
+
+-   `plot_normalization()` - a boxplot of the raw and normalized values
+-   `plot_variation_cv()` - a scatter plot of raw and normalized CV and dynamic range values
+-   `plot_variation_pca()` - a scatter plot of raw and normalized PCA values
+-   `plot_dynamic_range()` - a 2d density plot of raw and normalized CVs by log10 abundance
+-   `plot_venn()` - a Venn accounting diagram of protein overlap between samples
+-   `plot_euler()` - a Euler accounting diagram of protein overlap between samples
+-   `plot_pca()` - a scatter plot of PCA values for the selected normalized data values
+-   `plot_heatmap()` - a heatmap of protein by sample for the selected normalized data values, clustered in both dimensions
+
+### two-sample analysis
+
+#### expression differences
+
+-   `expression()` - calculates the two-sample statistical differences for each protein
+-   `plot_volcano()` - a scatter plot of log2-foldchange by p-values for a given expression test
+-   `plot_proportion()` - a scatter plot of log2-foldchange by proportional-expression for a given expression test
+-   `plot_compexp()` - a scatter plot comparison of two expression tests to visualize the intersection / difference
+
+#### term enrichment
+
+-   `enrichment()` - term enrichment for a given expression test using Wilcoxon Rank Sum
+-   `plot_enrichment()` - a bubble plot visualization of term enrichment for a given expression test 
+
+
+## Workflows
+
+#### A simple work flow for importing data and summarizing
+
+```{r, eval = FALSE}
+library("tidyproteomics")
+hela_proteins <- path_to_package_data("proteins") %>%
+  import("ProteomeDiscoverer", "proteins") 
+
+hela_proteins %>% summary()
+hela_proteins %>% summary(by = 'sample') 
+hela_proteins %>% summary(by = 'contamination') 
+```

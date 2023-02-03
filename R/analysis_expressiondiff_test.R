@@ -44,7 +44,9 @@ expression_test <- function(
                    "{.info experiment}:{.emph {experiment}} and {.info control}:{.emph {control}} are the same")
   }
 
-  data_quant <- data %>% extract(data$quantitative_source)
+  data_quant <- data %>% extract(data$quantitative_source) %>%
+    dplyr::select(!dplyr::matches('^origin$'))
+
   data_account <- data$accounting %>%
     munge_identifier("combine", data$identifier) %>%
     dplyr::left_join(data$experiments, by = c('sample_id'))

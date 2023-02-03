@@ -9,6 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 # A condensed accounting of version updates
+### Version: 1.2.4 - 2023.02.03
+
+-   added support for mzTab v1.0.0, exporting table for counts analysis
+
 ### Version: 1.1.2 - 2023.01.23
 
 -   refactored the import function to allow both wide and long format data in a configuration file, eliminating the hard coded import functions for ProteomeDiscoverer and MaxQuant

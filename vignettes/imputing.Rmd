@@ -43,14 +43,13 @@ library("tidyproteomics")
 # your_proteins <- "./data/your_exported_results.xlsx" %>%
 #   import("ProteomeDiscoverer", "proteins")
 
-rdata <- path_to_package_data("p97KD_HCT116") %>%
-  import("ProteomeDiscoverer", "proteins")
+rdata <- hela_proteins
 ```
 
 As part of this demonstration, signal from *P06576 in p07_kd* has been artificially removed to simulate a "genetic knockout mutation".
 
 ```{r, message=FALSE}
-w <- which(rdata$quantitative$protein == 'P06576' & rdata$quantitative$sample == 'p97_kd')
+w <- which(rdata$quantitative$protein == 'P06576' & rdata$quantitative$sample == 'knockdown')
 rdata$quantitative <- rdata$quantitative[-w,]
 ```
 

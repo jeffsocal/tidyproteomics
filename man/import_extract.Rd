@@ -10,6 +10,8 @@ import_extract(tbl_data = NULL, tbl_config = NULL, remove = FALSE)
 \item{tbl_data}{a table of imported data}
 
 \item{tbl_config}{a table of config values}
+
+\item{remove}{as boolean to determine if the extracted column name should change or copy to a new, retaining the old}
 }
 \value{
 a tibble

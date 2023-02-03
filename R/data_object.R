@@ -1,15 +1,17 @@
 #' Tidy-Quant data object print definition
 #'
-#' @param obj tidyproteomics data object
+#' @param x tidyproteomics data object
+#' @param ... unused legacy
 #'
 #' @return print object summary
 #'
 #' @exportS3Method
 #'
 print.tidyproteomics <- function(
-    obj
+    x, ...
 ) {
 
+  obj <- x
   # visible bindings
   object.size <- NULL
   abundance <- NULL
@@ -28,14 +30,16 @@ print.tidyproteomics <- function(
       .groups = 'drop'
     )
   dynamic_range <- log10(mean(dynamic_range$abundance_q995, na.rm = TRUE)) - log10(mean(dynamic_range$abundance_q005, na.rm = TRUE))
+  missing_values <- obj %>% extract() %>% dplyr::select(abundance) %>% unlist()
 
   cli::cli_h2(cli::style_bold("{.emph Quantitative Proteomics Data Object}"))
   println("Origin", glue::glue("{obj$origin}"))
   println("", glue::glue("{obj$analyt} ({prettyunits::pretty_bytes(obj_size)})"))
   println("Composition", glue::glue("{nrow(obj$experiments)} files"))
-  println("", glue::glue("{length(names_samples)} samples ({stringr::str_wrap(paste(names_samples, collapse=' '), 76, exdent = 16)})"))
+  println("", glue::glue("{length(names_samples)} samples ({stringr::str_wrap(paste(names_samples, collapse=', '), 76, exdent = 16)})"))
   println("Quantitation", glue::glue("{length(unique(unlist(obj$quantitative[obj$identifier[1]])))} {obj$identifier[1]}s"))
   println("", glue::glue("{signif(dynamic_range,2)} log10 dynamic range"))
+  println("", glue::glue("{signif(length(which(is.na(missing_values)))/length(missing_values) * 100, 3)}% missing values"))
 
   if(obj$quantitative_source != 'raw') {println(" *normalized", glue::glue("{obj$quantitative_source}"))}
   v_impt <- obj %>% get_variables('accounting')
@@ -71,17 +75,18 @@ print.tidyproteomics <- function(
 
 #' Tidy-Quant data object plot definition
 #'
-#' @param obj tidyproteomics data object
+#' @param x tidyproteomics data object
+#' @param ... unused legacy
 #'
 #' @return print object summary
 #'
 #' @exportS3Method
 #'
 plot.tidyproteomics <- function(
-    obj
+    x, ...
 ) {
-  plot_counts(obj)
-  invisible(obj)
+  plot_counts(x)
+  invisible(x)
 }
 
 #' Helper function for printing messages

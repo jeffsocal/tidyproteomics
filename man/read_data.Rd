@@ -4,12 +4,14 @@
 \alias{read_data}
 \title{Read data by format type}
 \usage{
-read_data(path = NULL, ...)
+read_data(path = NULL, platform = NULL, analyte = c("peptides", "proteins"))
 }
 \arguments{
 \item{path}{a path character string}
 
-\item{...}{readr passthrough options}
+\item{platform}{a character string}
+
+\item{analyte}{a character string}
 }
 \value{
 tibble

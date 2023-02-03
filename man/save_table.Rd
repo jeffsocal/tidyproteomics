@@ -20,11 +20,13 @@ local project, based on the extension given in the file name. This is a
 \emph{passthrough} function as it returns the original tibble.
 }
 \examples{
+\dontrun{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins \%>\%
    expression(knockdown/control) \%>\%
    export_analysis(knockdown/control, .analysis = "expression") \%>\%
    save_table("expression_limma_ko_over_wt.csv")
+}
 
 }
