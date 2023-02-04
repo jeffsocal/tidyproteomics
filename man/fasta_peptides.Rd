@@ -38,10 +38,11 @@ a vector
 \code{fasta_peptides()} Generates peptide sequences based on \code{enzyme} and \code{partial} inputs.
 }
 \examples{
-library(tidyproteomics)
+#' \dontrun{
 sequence <- "SAMERSMALLKPSAMPLERSEQUENCE"
-fasta_peptides(sequence)
+tidyproteomics:::fasta_peptides(sequence)
 
-fasta_peptides(sequence, enzyme = "[L]", partial = 2, length = c(1,12))
+tidyproteomics:::fasta_peptides(sequence, enzyme = "[L]", partial = 2, length = c(1,12))
 
+}
 }

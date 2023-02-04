@@ -20,12 +20,13 @@
 #' @return a vector
 #'
 #' @examples
-#' library(tidyproteomics)
+#' #' \dontrun{
 #' sequence <- "SAMERSMALLKPSAMPLERSEQUENCE"
-#' fasta_peptides(sequence)
+#' tidyproteomics:::fasta_peptides(sequence)
 #'
-#' fasta_peptides(sequence, enzyme = "[L]", partial = 2, length = c(1,12))
+#' tidyproteomics:::fasta_peptides(sequence, enzyme = "[L]", partial = 2, length = c(1,12))
 #'
+#' }
 fasta_peptides <- function(
     sequence = NULL,
     enzyme = "[KR]",
