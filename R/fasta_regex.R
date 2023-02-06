@@ -11,10 +11,9 @@
 #' @return a list
 #'
 #' @examples
-#' regex()
-#'
-#' regex(list("accession" = "sp\\|[A-Z]"))
-#'
+#' \dontrun{
+#' fasta_regex(list("accession" = "sp\\|[A-Z]"))
+#' }
 fasta_regex <- function(
     params = NULL
 ){

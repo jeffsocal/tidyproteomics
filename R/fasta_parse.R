@@ -15,13 +15,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' proteins <- parse("~/Local/fasta/ecoli_UniProt.fasta")
+#' proteins <- fasta_parse("~/Local/fasta/ecoli_UniProt.fasta")
 #'
 #' # using a custom supplied regex list
-#' proteins <- parse(fasta_path = "~/Local/fasta/ecoli_UniProt.fasta",
-#'                   pattern = list(
-#'                       "accession" = "sp\\|[A-Z]",
-#'                       "gene_name" = "(?<=GN\\=).*?(?=\\s..\\=)"
+#' proteins <- fasta_parse(fasta_path = "~/Local/fasta/ecoli_UniProt.fasta",
+#'                         pattern = list(
+#'                         "accession" = "sp\\|[A-Z]",
+#'                         "gene_name" = "(?<=GN\\=).*?(?=\\s..\\=)"
 #'                   ))
 #' }
 #'
