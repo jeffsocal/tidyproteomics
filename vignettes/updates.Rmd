@@ -9,6 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 # A condensed accounting of version updates
+### Version: 1.2.4 - 2023.02.13
+
+-   fixed an issue with MBR accounting
+
 ### Version: 1.2.4 - 2023.02.03
 
 -   added support for mzTab v1.0.0, exporting table for counts analysis

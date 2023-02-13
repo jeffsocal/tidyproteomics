@@ -163,7 +163,9 @@ import_mbr <- function(
     tbl_config = NULL
 ){
 
-  tbl_data$match_between_runs <- FALSE
+  if(!'match_between_runs' %in% colnames(tbl_data)) {
+    tbl_data$match_between_runs <- FALSE
+  }
 
   if(nrow(tbl_config) == 0) return(tbl_data)
 
@@ -171,12 +173,14 @@ import_mbr <- function(
 
   # sort out match_between_runs
   if(nrow(cols_mbr) > 0) {
-    tbl_data$match_between_runs <- grepl(cols_mbr$pattern_extract[1], tbl_data$match_between_runs)
+    tbl_data$match_between_runs <- grepl(cols_mbr$pattern_extract[1], unlist(tbl_data$match_between_runs))
   }
 
   n_mbr <- length(which(tbl_data$match_between_runs == TRUE))
   if(n_mbr > 1) {
     cli::cli_alert_info("... match between runs accounting for {.emph {signif(n_mbr / nrow(tbl_data) * 100,3)}%} of data")
+  } else {
+    cli::cli_alert_info("... match between runs not found in data")
   }
 
   return(tbl_data)

@@ -121,7 +121,8 @@ data_import <- function(
         ) %>%
         dplyr::select(!dplyr::matches('accounting')) %>%
         dplyr::rename(accounting = account_str) %>%
-        tidyr::pivot_wider(names_from = 'accounting', values_from = 'value', values_fn = function(x){ x %>% as.numeric() %>% sum()})
+        # some issues here with duplicate entries
+        tidyr::pivot_wider(names_from = 'accounting', values_from = 'value') #, values_fn = function(x){ x %>% as.numeric() %>% sum()}
     }
 
     ############################################################################
