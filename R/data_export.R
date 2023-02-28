@@ -185,13 +185,15 @@ export_analysis <- function(
       tbl_out <- tbl_out[[.term]]
     }
 
-    if(length(intersect(data$identifier, colnames(tbl_out))) == length(data$identifier)) {
-      tbl_out <- tbl_out %>%
-        dplyr::left_join(
-          data$annotations %>%
-            tidyr::pivot_wider(names_from = 'term', values_from = 'annotation'),
-          by = data$identifier
-        )
+    if(!is.null(data$annotations)){
+      if(length(intersect(data$identifier, colnames(tbl_out))) == length(data$identifier)) {
+        tbl_out <- tbl_out %>%
+          dplyr::left_join(
+            data$annotations %>%
+              tidyr::pivot_wider(names_from = 'term', values_from = 'annotation'),
+            by = data$identifier
+          )
+      }
     }
   }
 

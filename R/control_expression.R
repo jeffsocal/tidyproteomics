@@ -93,7 +93,7 @@ expression <- function(
       dplyr::group_by(dplyr::across(c(data$identifier, "sample_id"))) %>%
       dplyr::summarise(imputed = min(imputed) == 1, .groups = 'drop') %>%
       dplyr::group_by(dplyr::across(data$identifier)) %>%
-      dplyr::summarise(imputed = sum(imputed)/dplyr::n(), n = dplyr::n()) %>%
+      dplyr::summarise(imputed = sum(imputed)/dplyr::n(), n = dplyr::n(), .groups = 'drop') %>%
       dplyr::left_join(table, by = data$identifier)
   }
 
