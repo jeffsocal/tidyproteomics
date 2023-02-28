@@ -96,12 +96,16 @@ export_quant <- function(
       names_from = 'sample',
       values_from = tidyselect::all_of(col_abn)
     ) %>%
-    munge_identifier("separate", data$identifier) %>%
-    dplyr::left_join(
-      data$annotations %>%
-        tidyr::pivot_wider(names_from = 'term', values_from = 'annotation'),
-      by = data$identifier
-    )
+    munge_identifier("separate", data$identifier)
+
+  if(!is.null(data$annotations)) {
+    tbl_out <- tbl_out %>%
+      dplyr::left_join(
+        data$annotations %>%
+          tidyr::pivot_wider(names_from = 'term', values_from = 'annotation'),
+        by = data$identifier
+      )
+  }
 
   if(is.null(file_name)) {return(tbl_out)}
   tbl_out %>% write_local(file_name)
