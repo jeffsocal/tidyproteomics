@@ -1,20 +1,20 @@
 category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
-sample	sample		"(?<=\Sample\,\s).+"			
-sample	sample_file		(?<=\s)F\d+(?=\:)			
-identifier	protein	^Accession$			\;	
+sample	sample		(?<=(Control|Sample)\,\s).+
+sample	sample_file		(?<=\s)F\d+(\:\s\d+[CN]*)*
+identifier	protein	^Accession$			\;
 quantitative	abundance_raw	^Abundance\:				TRUE
 impute	match_between_runs	^Found in Sample\:	Found			TRUE
-accounting	num_peptides	^# Peptides$				
-accounting	num_unique_peptides	^# Unique Peptides$				
-accounting	num_psms	^# PSMs$				
-annotation	description	^Description$				
-annotation	gene_id_entrez	^Entrez Gene ID$				
-annotation	gene_id_ensemble	^Ensembl Gene ID$				
-annotation	gene_name	^Gene Symbol$				
-annotation	chromosome	^Chromosome$				
-annotation	biological_process	^Biological Process$				
-annotation	cellular_component	^Cellular Component$				
-annotation	molecular_function	^Molecular Function$				
-annotation	kegg_pathway	^KEGG Pathways$				
-annotation	wiki_pathway	^WikiPathways$				
-annotation	reactome_pathway	^Reactome Pathways$				
+accounting	num_peptides	^# Peptides$
+accounting	num_unique_peptides	^# Unique Peptides$
+accounting	num_psms	^# PSMs$
+annotation	description	^Description$
+annotation	gene_id_entrez	^Entrez Gene ID$
+annotation	gene_id_ensemble	^Ensembl Gene ID$
+annotation	gene_name	^Gene Symbol$
+annotation	chromosome	^Chromosome$
+annotation	biological_process	^Biological Process$
+annotation	cellular_component	^Cellular Component$
+annotation	molecular_function	^Molecular Function$
+annotation	kegg_pathway	^KEGG Pathways$
+annotation	wiki_pathway	^WikiPathways$
+annotation	reactome_pathway	^Reactome Pathways$
