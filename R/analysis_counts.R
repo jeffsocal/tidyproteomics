@@ -17,7 +17,9 @@ analysis_counts <- function(
 
   check_data(data)
   if(!is.numeric(impute_max)) {cli::cli_abort("{.emph impute_max} is not a numeric ..")}
-  limit <- nrow(data$experiments)
+  tbl_experiments <- data$experiments
+  limit <- nrow(tbl_experiments)
+  get_cols_experiments <- intersect(colnames(tbl_experiments), c('sample_id', 'sample', 'replicate', 'sample_group'))
 
   fat <- list(
     data %>%
@@ -28,12 +30,11 @@ analysis_counts <- function(
   )  %>%
     dplyr::bind_rows() %>%
     dplyr::full_join(
-      data$experiment %>%
-        dplyr::select(c('sample_id', 'sample', 'replicate')),
+      tbl_experiments %>% dplyr::select(get_cols_experiments),
       by = 'sample_id'
     ) %>%
     dplyr::mutate(quantifiable = quantifiable/100) %>%
-    dplyr::relocate('sample', 'replicate', 'is_mbr') %>%
+    dplyr::relocate(get_cols_experiments) %>%
     dplyr::select(!dplyr::matches('CVs|files'))
 
   return(fat)

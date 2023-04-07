@@ -9,7 +9,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 # A condensed accounting of version updates
-### Version: 1.2.4 - 2023.02.13
+### Version: 1.2.6 - 2023.02.13
+
+-   Added clarity around normalize(), impute(), collapse()
+-   Implemented parallel processing for 'ranomdforest' and 'svm' in normalize()
+-   Added a vignette on protein inferencing using collapse()
+-   Fixed a bug in peptide importing that removed homologous peptide accounting
+
+### Version: 1.2.5 - 2023.02.13
 
 -   fixed an issue with MBR accounting
 

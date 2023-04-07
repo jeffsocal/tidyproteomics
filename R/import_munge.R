@@ -115,6 +115,7 @@ import_split <- function(
     }
 
     tbl_data <- tbl_data %>% tidyr::separate_rows(dplyr::matches(paste0("^", col_imp, "$")), sep=pattern)
+    tbl_data[,col_imp] <- trimws(unlist(tbl_data[,col_imp]))
     cli::cli_alert_info("... split {.emph {col_def}} with {.emph {pattern}} resulting in {tbl_data %>% nrow() - prev_nrows} new rows")
   }
   return(tbl_data)

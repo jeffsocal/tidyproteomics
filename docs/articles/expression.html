@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,6 +70,7 @@
     <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
+    <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -111,14 +112,69 @@ visualized using the <code><a href="../reference/plot_volcano.html">plot_volcano
 <code><a href="../reference/plot_proportion.html">plot_proportion()</a></code> visualization functions as shown below.
 The expression analysis can be accomplished thought the R <em>limma</em>
 package, or using any two-sample statistical comparison, the default
-method employs the two-sided T-test. If no values pass the cutoff it
-will automatically choose the top proteins to display.</p>
-<table class="table">
+method employs the two-sided T-test. Note, if no values pass the cutoff
+it will automatically choose the top proteins to display.</p>
+<p>It should be noted that this package does not incorporate some of the
+more recent methods described in literature. These methods could be
+incorporated in future revisions, or through a user provided
+function.</p>
+<table style="width:99%;" class="table">
 <colgroup>
-<col width="18%">
-<col width="36%">
-<col width="25%">
-<col width="18%">
+<col width="13%">
+<col width="84%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>MSstats</td>
+<td>
+<p>Choi, Meena, Ching-Yun Chang, Timothy Clough, Daniel Broudy,
+Trevor Killeen, Brendan MacLean, and Olga Vitek. 2014. "MSstats: An R
+Package for Statistical Analysis of Quantitative Mass Spectrometry-Based
+Proteomic Experiments." <em>Bioinformatics</em> 30 (17): 2524–26.</p>
+<p><a href="msstats.org">msstats.org</a></p>
+</td>
+</tr>
+<tr class="even">
+<td>DEqMS</td>
+<td>
+<p>Zhu, Yafeng, Lukas M. Orre, Yan Zhou Tran, Georgios Mermelekas,
+Henrik J. Johansson, Alina Malyutina, Simon Anders, and Janne Lehtiö.
+2020. "DEqMS: A Method for Accurate Variance Estimation in Differential
+Protein Expression Analysis." <em>Molecular &amp; Cellular Proteomics:
+MCP</em> 19 (6): 1047–57.</p>
+<p><a href="https://w%20ww.bioconductor.org/packages/release/bioc/html/DEqMS.html" class="external-link">Bioconductor:
+DEqMS</a></p>
+</td>
+</tr>
+<tr class="odd">
+<td>MS -EmpiRe</td>
+<td>
+<p>Ammar, Constantin, Markus Gruber, Gergely Csaba, and Ralf Zimmer.
+2019. "MS-EmpiRe Utilizes Peptide-Level Noise Distributions for
+Ultra-Sensitive Detection of Differentially Expressed Proteins."
+<em>Molecular &amp; Cellular Proteomics: MCP</em> 18 (9): 1880–92.</p>
+<p><a href="https://github.com/zimmerlab/MS-EmpiRe" class="external-link">GitHub:MS-EmpiRe</a></p>
+</td>
+</tr>
+<tr class="even">
+<td>meqrob</td>
+<td>
+<p>Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven
+Clement. 2020. "Robust Summarization and Inference in Proteome-Wide
+Label-Free Quantification." <em>Molecular &amp; Cellular Proteomics:
+MCP</em> 19 (7): 1209–19.</p>
+<p><a href="https://www%20.bioconductor.org/packages/release/bioc/html/msqrob2.html" class="external-link">Bioconductor:
+msqrob2</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<table style="width:97%;" class="table">
+<colgroup>
+<col width="20%">
+<col width="33%">
+<col width="22%">
+<col width="20%">
 </colgroup>
 <thead><tr class="header">
 <th>parameter</th>
@@ -134,19 +190,21 @@ will automatically choose the top proteins to display.</p>
 <td><em>2</em></td>
 </tr>
 <tr class="even">
-<td>significance_column</td>
+<td>signifi cance_column</td>
 <td>the column to use for significance</td>
-<td><em>adj_p_value, p_value</em></td>
-<td><em>adj_p_value</em></td>
+<td><ul>
+<li>adj_p_value, p_value*</li>
+</ul></td>
+<td><em>a dj_p_value</em></td>
 </tr>
 <tr class="odd">
-<td>significance_max</td>
+<td>sign ificance_max</td>
 <td>the minimum cutoff for displaying</td>
 <td><em>1 to 1/Inf</em></td>
 <td><em>0.05</em></td>
 </tr>
 <tr class="even">
-<td>labels_column</td>
+<td>l abels_column</td>
 <td>how to label the points</td>
 <td>any value in annotations, eg <em>gene_name, description</em>
 </td>
@@ -165,7 +223,7 @@ will automatically choose the top proteins to display.</p>
 <td><em>TRUE</em></td>
 </tr>
 <tr class="odd">
-<td>show_fc_scale</td>
+<td>s how_fc_scale</td>
 <td>show the second scale on top converting <em>log2_foldchange</em> to
 <em>foldchange</em>
 </td>
@@ -181,15 +239,15 @@ will automatically choose the top proteins to display.</p>
 <td><em>NULL</em></td>
 </tr>
 <tr class="odd">
-<td>color_positive</td>
+<td>co lor_positive</td>
 <td>color for positive expression</td>
-<td><a href="https://r-charts.com/colors/" class="external-link">any R accepts</a></td>
+<td><a href="htt%20ps://r-charts%20.com/colors/">any R accepts</a></td>
 <td><em>dodgerblue</em></td>
 </tr>
 <tr class="even">
-<td>color_negative</td>
+<td>co lor_negative</td>
 <td>color for negative expression</td>
-<td><a href="https://r-charts.com/colors/" class="external-link">any R accepts</a></td>
+<td><a href="htt%20ps://r-charts%20.com/colors/">any R accepts</a></td>
 <td><em>firebrick1</em></td>
 </tr>
 </tbody>

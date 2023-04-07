@@ -1,0 +1,267 @@
+---
+title: "Protein Accounting"
+output: rmarkdown::html_vignette
+description: |
+  tidyproteomics: simplified data object and analysis functions
+vignette: >
+  %\VignetteIndexEntry{Protein Inferencing}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+Protein accounting is an important aspect of quantiative proteomics. It consists of aggregating individual peptide measurements into a single reported protein. However, sequence homology make this a less than trivial process, as the LCMS process does not identify proteins specifically, rather their individual peptide segments. It is then up to the researcher to implement a method that infers the original protein content.
+
+While the proteomics community at large has devised several schemes for protein accounting, not all methods are universally amenable. For example, when accounting for cellular differences between to cell states, it is often preferred to arrive at the minimal number of protein sequences that can explain the data. That means tossing aside identifiers to sequence variants - something researchers attempting to identify specific genes might like to retain. Furthermore, for researchers attempting to grasp if gene insertions are viable, gross summation of peptide abundances may miss nuances in sequence variations. These latter points are not well controlled for in platforms that cater for proteome wide discoveries. Therefor, we have attempted to provide several simple mechanisms that can apply to a variety of LCMS proteomics projects both larger proteome wide discoveries and smaller induced expression projects.
+
+More sophisticated methods of protein accounting should utilize those current implementations, export the quantitative protein level data and then import into tidyproteomics.
+
+
+## The inputs
+
+#### assign_by
+The `collapse()` function accommodates four methods for accounting with the variable:
+
+| Method         | Description                                                                                                              |
+|------------------|------------------------------------------------------|
+| all-possible   | retain all protein assignments regardless of homology                                                                    |
+| non-homologous | retain all protein assignments, but only use quantitative values from peptides that identify a single unique protein.    |
+| razor-local    | peptide will be assigned to the protein group with the largest number of total peptides identified within a sample group |
+| razor-global   | peptide will be assigned to the protein group with the largest number of total peptides identified globally              |
+
+#### top_n
+this variable sets the number of peptide quantitative values to include in the final protein quantitative value.
+
+#### split_abundance
+a true/false variable, if true, will split abundances of razor-peptides by the proportional abundance between proteins. This method is experimental, has not been validated or peer-reviewed.
+
+fasta_path
+can be provided to calculate iBAQ based values. However, currently this method only supports Tryptic based peptide accounting.
+
+
+
+## Examples
+
+```{r, warning=FALSE, echo=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(tidyproteomics)
+```
+
+```{r, echo=FALSE, message=FALSE}
+pep_data <- "../data/lcms_p97/p97KD_HCT116_peptides.xlsx" %>%
+  import("ProteomeDiscoverer", "peptides")
+```
+
+#### ProteomeDiscoverer's Protein Accounting
+We import a data-object of ProteomeDiscoverer's protein level accouting
+```{r, echo=FALSE, message=FALSE}
+pro_data <- "../data/lcms_p97/p97KD_HCT116_proteins.xlsx" %>%
+  import("ProteomeDiscoverer", "proteins") %>%
+  normalize(.method = c('median', 'linear', 'loess'))
+
+```
+
+### Assign peptides by razor logic
+```{r, warning=FALSE, message=FALSE}
+pro_frompep_razor <- pep_data %>% 
+  collapse(assign_by = 'razor-global', top_n = Inf) %>%
+  normalize(.method = c('median', 'linear', 'loess'))
+
+pro_frompep_razor %>% 
+  summary("sample", destination = 'return') %>% 
+  select(c('sample', 'proteins', 'peptides', 'CVs')) %>%
+  knitr::kable()
+```
+
+Check to see how the two results agree ...
+```{r, warning=FALSE, message=FALSE}
+tbl_merged_razor <- pro_frompep_razor$quantitative %>% select('sample','replicate','protein', 'abundance_raw') %>%
+  inner_join(pro_data$quantitative %>% select('sample','replicate','protein', 'abundance_raw'), 
+             by = c('sample','replicate','protein'),
+             suffix = c("_tidyproteomics", "_proteomediscoverer"))
+
+tbl_merged_razor %>%
+  mutate(itentical_protein_abundances = abundance_raw_proteomediscoverer == abundance_raw_tidyproteomics) %>%
+  filter(!is.na(itentical_protein_abundances)) %>%
+  group_by(itentical_protein_abundances) %>%
+  summarise(n = n(), .groups = 'drop') %>%
+  mutate(r = paste(n / sum(n) * 100, "%")) %>%
+  knitr::kable()
+```
+
+A quick plot for visualizing the
+```{r, warning=FALSE, message=FALSE}
+tbl_merged_razor %>%
+  mutate(sample_rep = paste(sample, replicate)) %>%
+  ggplot(aes(abundance_raw_proteomediscoverer, abundance_raw_tidyproteomics)) + 
+  geom_abline(color='red') +
+  geom_point(alpha = .67) +
+  scale_x_log10() +
+  scale_y_log10() +
+  facet_wrap(~sample_rep)
+```
+
+Lets look at a few examples of outliers ...
+```{r}
+tbl_merged_razor %>%
+  filter(abundance_raw_proteomediscoverer != abundance_raw_tidyproteomics) %>%
+  head(3) %>%
+  knitr::kable()
+```
+
+We will take the protein **P45983** to examine ...
+```{r, message=FALSE}
+pep_P45983 <- pep_data$quantitative %>% 
+  filter(!is.na(abundance_raw)) %>% 
+  filter(sample == 'p97_kd', replicate == 1) %>% 
+  filter(protein == 'P45983')
+
+pep_data$quantitative %>% 
+  filter(!is.na(abundance_raw)) %>% 
+  filter(sample == 'p97_kd', replicate == 1) %>%
+  filter(peptide %in% pep_P45983$peptide) %>%
+  group_by(peptide, modifications) %>%
+  summarise(
+    proteins = paste(protein, collapse = "; "),
+    abundance_raw = unique(abundance_raw)
+  ) %>%
+  knitr::kable()
+```
+
+Here we see that **P45983** yielded 5 peptides, 2 of which are shared. In the outlier table we see that ProteomeDiscoverer excluded all razor peptides from the protein quantitation. And if we dig further, we find that the peptide **IIDFGLAR** by razor definition belongs to the protein **Q16539**, while the peptide **MSYLLYQMLCGIK** can be assigned to **P45983**, thus giving us the larger value shown in the outlier table.
+```{r}
+pep_data$quantitative %>% 
+  filter(!is.na(abundance_raw)) %>% 
+  filter(sample == 'p97_kd', replicate == 1) %>%
+  filter(protein %in% c('O15264','Q86YV6','P45984','P53778','Q16539','P45983')) %>%
+  group_by(protein) %>%
+  summarise(
+    n_peptides = length(unique(peptide))
+  ) %>%
+  arrange(desc(n_peptides)) %>%
+  knitr::kable()
+
+```
+
+### Assign by excluding homologous peptides
+That means the ProteomeDiscoverer method for protein accounting excluded the abundance measurement from all razor peptides. Let try to do replicate that as well.
+```{r, warning=FALSE, message=FALSE}
+pro_frompep_nonhom <- pep_data %>% 
+  collapse(assign_by = 'non-homologous', top_n = Inf) %>%
+  normalize(.method = c('median', 'linear', 'loess'))
+
+pro_frompep_nonhom %>% 
+  summary("sample", destination = 'return') %>% 
+  select(c('sample', 'proteins', 'peptides', 'CVs')) %>%
+  knitr::kable()
+```
+
+Check to see how the two results agree ...
+```{r, warning=FALSE, message=FALSE}
+tbl_merged_nonhom <- pro_frompep_nonhom$quantitative %>% select('sample','replicate','protein', 'abundance_raw') %>%
+  inner_join(pro_data$quantitative %>% select('sample','replicate','protein', 'abundance_raw'), 
+             by = c('sample','replicate','protein'),
+             suffix = c("_tidyproteomics", "_proteomediscoverer"))
+
+tbl_merged_nonhom %>%
+  mutate(itentical_protein_abundances = abundance_raw_proteomediscoverer == abundance_raw_tidyproteomics) %>%
+  filter(!is.na(itentical_protein_abundances)) %>%
+  group_by(itentical_protein_abundances) %>%
+  summarise(n = n(), .groups = 'drop') %>%
+  mutate(r = paste(n / sum(n) * 100, "%")) %>%
+  knitr::kable()
+```
+
+A quick plot for visualizing the
+```{r, warning=FALSE, message=FALSE}
+tbl_merged_nonhom %>%
+  mutate(sample_rep = paste(sample, replicate)) %>%
+  ggplot(aes(abundance_raw_proteomediscoverer, abundance_raw_tidyproteomics)) + 
+  geom_abline(color='red') +
+  geom_point(alpha = .67) +
+  scale_x_log10() +
+  scale_y_log10() +
+  facet_wrap(~sample_rep)
+```
+
+Interesting, we now show that **P45983** agrees with ProteomeDiscoverer, yet obviously several others do not
+```{r}
+tbl_merged_nonhom %>% filter(protein == 'P45983') %>%
+  knitr::kable()
+```
+Lets look at a few examples of outliers ...
+```{r}
+tbl_merged_nonhom %>%
+  filter(abundance_raw_proteomediscoverer != abundance_raw_tidyproteomics) %>%
+  head(3) %>%
+  knitr::kable()
+```
+
+We will take the protein **Q96LR5** to examine ...
+```{r}
+pep_Q96LR5 <- pep_data$quantitative %>% 
+  filter(!is.na(abundance_raw)) %>% 
+  filter(sample == 'p97_kd', replicate == 1) %>% 
+  filter(protein == 'Q96LR5')
+
+pep_data$quantitative %>% 
+  filter(!is.na(abundance_raw)) %>% 
+  filter(sample == 'p97_kd', replicate == 1) %>%
+  filter(peptide %in% pep_Q96LR5$peptide) %>%
+  group_by(peptide, modifications) %>%
+  summarise(
+    proteins = paste(protein, collapse = "; "),
+    abundance_raw = unique(abundance_raw)
+  ) %>%
+  knitr::kable()
+```
+
+A quick check on the peptide sum and it appears that ProteomeDiscoverer ignored razor-peptides all together for this protein
+```{r}
+pep_data$quantitative %>% 
+  filter(!is.na(abundance_raw)) %>% 
+  filter(sample == 'p97_kd', replicate == 1) %>%
+  filter(peptide %in% pep_Q96LR5$peptide) %>%
+  group_by(peptide, modifications) %>%
+  summarise(
+    proteins = paste(protein, collapse = "; "),
+    abundance_raw = unique(abundance_raw),
+    .groups = 'drop'
+  ) %>%
+  summarise(abundance_sum = sum(abundance_raw)) %>%
+  knitr::kable()
+```
+
+If we examine the other proteins in that group for all the peptides that may be shared ...
+```{r}
+get_peptides <- pep_data$quantitative %>% 
+  filter(!is.na(abundance_raw)) %>% 
+  filter(sample == 'p97_kd', replicate == 1) %>%
+  filter(protein %in% c('Q96LR5','P51965','Q969T4'))
+
+pep_data$quantitative %>% 
+  filter(!is.na(abundance_raw)) %>% 
+  filter(sample == 'p97_kd', replicate == 1) %>%
+  filter(peptide %in% get_peptides$peptide) %>%
+  group_by(peptide, modifications) %>%
+  summarise(
+    proteins = paste(protein, collapse = "; "),
+    abundance_raw = unique(abundance_raw)
+  ) %>%
+  knitr::kable()
+
+```
+
+... we see that ProteomeDiscoverer actually assigned the abundances of razor-peptides. And if we check our results from the merged razor data we find that to be correct.
+```{r}
+tbl_merged_razor %>%
+  filter(sample == 'p97_kd', replicate == 1) %>% 
+  filter(protein %in% c('Q96LR5','P51965','Q969T4')) %>%
+  knitr::kable()
+```

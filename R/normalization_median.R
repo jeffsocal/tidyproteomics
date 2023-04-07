@@ -13,22 +13,16 @@ normalize_median <- function(
   # visible bindings
   abundance <- NULL
 
-  v_med <- data_centered$abundance %>% stats::median()
+  # compute the median shift
+  data_centered <- data_centered %>%
+    mutate(shift = median(abundance) - abundance)
 
-  data_norm <- list()
-
-  for( i in 1:nrow(data_centered) ){
-    tdf <- data %>% dplyr::filter(sample == data_centered$sample[i] & replicate == data_centered$replicate[i])
-    t_med <- data_centered$abundance[i]
-    data_norm[[i]] <- tdf %>%
-      dplyr::mutate(abundance_normalized = abundance + (v_med - t_med))
-  }
-
-  nms <- c('identifier', 'sample', 'replicate', 'abundance_normalized')
-
-  data_norm <- data_norm %>%
-    dplyr::bind_rows() %>%
-    dplyr::select(nms)
-
-  return(data_norm)
+  # apply the median shift and return the data
+  data %>%
+    left_join(data_centered,
+              by = c('sample','replicate'),
+              suffix = c("","_median")) %>%
+    mutate(abundance_normalized = abundance + shift) %>%
+    select(identifier, sample, replicate, abundance_normalized) %>%
+    return()
 }

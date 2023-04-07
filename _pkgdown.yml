@@ -36,6 +36,8 @@ navbar:
         href: articles/workflow-simple.html
       - text: Publication Demo
         href: articles/workflow-publication.html
+      - text: Protein Accounting
+        href: articles/protein-accounting.html
       - text: '-------'
       - text: update history
         href: articles/updates.html

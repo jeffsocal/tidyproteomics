@@ -19,6 +19,26 @@ Along with normalization, imputing missing values is another important task in q
 
 While random forest algorithms have shown superiority in imputation and regression, that does not portend their use in every case. For example, imputing missing values from a knock-out experiment, such as the dataset included in this package, are preferrable to minimum value imputation over the more complex random forest, simply because in this experiment we know how the experiment is affected.
 
+Imputation in tidyproteomics attempts to apply each function universally, meaning the same towards peptide and protein values. To do this each data-object contains a variable called the `identifier` , this tells the underlying helper functions what values in the quantitative table "identify" the thing being measured.
+
+```{r, echo=FALSE, message=FALSE}
+library("dplyr")
+library("tidyproteomics")
+```
+Proteins have a single identifier ...
+```{r}
+hela_proteins$identifier
+hela_proteins$quantitative %>% head()
+```
+
+Peptides have multiple identifiers ...
+```{r}
+hela_peptides$identifier
+hela_peptides$quantitative %>% head()
+```
+
+### Imputation Functions
+
 Imputation currently supports the following methods calculated either **within** or **between** samples:
 
 | Function                 | Method                    | Description                                                        |
@@ -64,9 +84,10 @@ rdata %>%
   subset(protein %like% "P23443|P51812|P06576") %>% 
   extract() %>%
   ggplot(aes(replicate, abundance)) +
-  geom_point(aes(color=sample)) +
+  geom_point(aes(color=sample), size=3, alpha=.5) +
   facet_wrap(~identifier) +
-  scale_y_log10(limits = c(1e4,1e9))
+  scale_y_log10(limits = c(1e4,1e9)) +
+  scale_color_manual(values = c('red','blue'))
 ```
 
 #### Using *between*
@@ -80,7 +101,8 @@ rdata %>%
   subset(protein %like% "P23443|P51812|P06576") %>% 
   extract() %>%
   ggplot(aes(replicate, abundance)) +
-  geom_point(aes(color=sample)) +
+  geom_point(aes(color=sample), size=3, alpha=.5) +
   facet_wrap(~identifier) +
-  scale_y_log10(limits = c(1e4,1e9))
+  scale_y_log10(limits = c(1e4,1e9)) +
+  scale_color_manual(values = c('red','blue'))
 ```

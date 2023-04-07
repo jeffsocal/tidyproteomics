@@ -20,6 +20,8 @@
 plot_counts <- function(
     data = NULL,
     accounting = c('protein_groups','proteins','peptides','peptides_unique'),
+    show_replicates = TRUE,
+    facet_groups = FALSE,
     impute_max = 0.5,
     palette = 'YlGnBu',
     ...
@@ -48,9 +50,12 @@ plot_counts <- function(
   fat$metric <- unlist(fat[,accounting])
   legend_title <- 'Replicate'
   fat$fill <- fat$replicate
-  if(length(unique(fat$replicate)) > 9) {
+  if(show_replicates == FALSE | length(unique(fat$replicate)) > 9) {
     fat$fill <- fat$sample
     legend_title <- 'Sample'
+  } else if(facet_groups == TRUE & 'sample_group' %in% colnames(fat)) {
+    fat$fill <- fat$sample_group
+    legend_title <- 'Group'
   }
   metric_max <- max(fat$metric) * 1.1
 
@@ -68,19 +73,36 @@ plot_counts <- function(
                   label = ifelse(is_mbr == TRUE, glue::glue("{label} mbr"), label),
                   metric = ifelse(is_mbr == TRUE, metric * 1.05, metric * .95))
 
-  plot <- fat %>%
+  if(show_replicates == FALSE | facet_groups == TRUE){
+    plot <- fat_mean %>%
+      # dplyr::mutate(replicate = as.factor(replicate)) %>%
+      ggplot2::ggplot(ggplot2::aes(sample, metric)) +
+      ggplot2::geom_bar(color = 'grey',
+                        stat = 'identity', fill=NA, position = 'identity',
+                        width=1) +
+      ggplot2::geom_bar(ggplot2::aes(fill=fill),
+                        stat = 'identity', alpha=.5, position = 'identity',
+                        width=1) +
+      ggplot2::facet_grid(.~sample, scales = 'free_x', space = 'free_x', switch = 'x')
+
+  } else {
+    plot <- fat %>%
+      # dplyr::mutate(replicate = as.factor(replicate)) %>%
+      ggplot2::ggplot(ggplot2::aes(replicate, metric)) +
+      ggplot2::geom_bar(ggplot2::aes(group = replicate), color = 'grey',
+                        stat = 'identity', fill=NA, position = 'identity',
+                        width=1) +
+      ggplot2::geom_bar(ggplot2::aes(fill=fill, group = replicate),
+                        stat = 'identity', alpha=.5, position = 'identity',
+                        width=1) +
+      ggplot2::facet_grid(.~sample, scales = 'free_x', space = 'free_x')  +
+      ggplot2::geom_text(data = fat_mean,
+                         ggplot2::aes(label = label),
+                         size = 3)
+  }
+
+  plot <- plot +
     # dplyr::mutate(replicate = as.factor(replicate)) %>%
-    ggplot2::ggplot(ggplot2::aes(replicate, metric)) +
-    ggplot2::geom_bar(ggplot2::aes(group = replicate), color = 'grey',
-                      stat = 'identity', fill=NA, position = 'identity',
-                      width=1) +
-    ggplot2::geom_bar(ggplot2::aes(fill=fill, group = replicate),
-                      stat = 'identity', alpha=.67, position = 'identity',
-                      width=1) +
-    ggplot2::facet_grid(.~sample, scales = 'free_x', space = 'free_x')  +
-    ggplot2::geom_text(data = fat_mean,
-                       ggplot2::aes(label = label),
-                       size = 3) +
     ggplot2::geom_hline(yintercept = metric_max, color=NA) +
     ggplot2::scale_fill_brewer(palette = palette) +
     ggplot2::scale_color_brewer(palette = palette) +

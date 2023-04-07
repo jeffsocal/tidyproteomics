@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,6 +70,7 @@
     <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
+    <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -114,6 +115,44 @@ example, imputing missing values from a knock-out experiment, such as
 the dataset included in this package, are preferrable to minimum value
 imputation over the more complex random forest, simply because in this
 experiment we know how the experiment is affected.</p>
+<p>Imputation in tidyproteomics attempts to apply each function
+universally, meaning the same towards peptide and protein values. To do
+this each data-object contains a variable called the
+<code>identifier</code> , this tells the underlying helper functions
+what values in the quantitative table “identify” the thing being
+measured.</p>
+<p>Proteins have a single identifier …</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hela_proteins</span><span class="op">$</span><span class="va">identifier</span></span>
+<span><span class="co">#&gt; [1] "protein"</span></span>
+<span><span class="va">hela_proteins</span><span class="op">$</span><span class="va">quantitative</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
+<span><span class="co">#&gt;   sample_id sample    replicate protein abundance_raw</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e9b20ea7  control   1         Q15149    <span style="text-decoration: underline;">1</span>011<span style="text-decoration: underline;">259</span>992.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ef79cc4c  control   2         Q15149    <span style="text-decoration: underline;">1</span>093<span style="text-decoration: underline;">277</span>593.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> eebba67b  control   3         Q15149     980<span style="text-decoration: underline;">809</span>516.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ebf4b0fe  knockdown 1         Q15149    <span style="text-decoration: underline;">1</span>410<span style="text-decoration: underline;">445</span>367.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ea36dac9  knockdown 2         Q15149    <span style="text-decoration: underline;">1</span>072<span style="text-decoration: underline;">305</span>561.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> ecfd1822  knockdown 3         Q15149    <span style="text-decoration: underline;">1</span>486<span style="text-decoration: underline;">561</span>518.</span></span></code></pre></div>
+<p>Peptides have multiple identifiers …</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hela_peptides</span><span class="op">$</span><span class="va">identifier</span></span>
+<span><span class="co">#&gt; [1] "protein"       "peptide"       "modifications"</span></span>
+<span><span class="va">hela_peptides</span><span class="op">$</span><span class="va">quantitative</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
+<span><span class="co">#&gt;   sample_id sample  replicate protein peptide               modificati…¹ abund…²</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> aaf7e768  control 1         P06576  IPSAVGYQPTLATDMGTMQER <span style="color: #BB0000;">NA</span>            4.32<span style="color: #949494;">e</span>7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> aaf7e768  control 1         P06576  IPSAVGYQPTLATDMGTMQER 1xOxidation…  1.47<span style="color: #949494;">e</span>6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> aaf7e768  control 1         Q9P2E9  LTAEFEEAQTSACR        1xCarbamido…  5.90<span style="color: #949494;">e</span>6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> aaf7e768  control 1         P11021  ITPSYVAFTPEGER        <span style="color: #BB0000;">NA</span>            5.29<span style="color: #949494;">e</span>7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> aaf7e768  control 1         P11021  IINEPTAAAIAYGLDK      <span style="color: #BB0000;">NA</span>            2.45<span style="color: #949494;">e</span>8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> aaf7e768  control 1         Q9P2E9  LLATEQEDAAVAK         <span style="color: #BB0000;">NA</span>            5.83<span style="color: #949494;">e</span>6</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable names ¹​modifications, ²​abundance_raw</span></span></span></code></pre></div>
+<div class="section level3">
+<h3 id="imputation-functions">Imputation Functions<a class="anchor" aria-label="anchor" href="#imputation-functions"></a>
+</h3>
 <p>Imputation currently supports the following methods calculated either
 <strong>within</strong> or <strong>between</strong> samples:</p>
 <table class="table">
@@ -159,14 +198,15 @@ experiment we know how the experiment is affected.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://ggplot2.tidyverse.org" class="external-link">"ggplot2"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jeffsocal.github.io/tidyproteomics/">"tidyproteomics"</a></span><span class="op">)</span></span></code></pre></div>
+</div>
 <div class="section level3">
 <h3 id="imputing">Imputing<a class="anchor" aria-label="anchor" href="#imputing"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># path_to_package_data() loads data specific to this package</span></span>
 <span><span class="co"># for your project load local data</span></span>
 <span><span class="co"># example: </span></span>
@@ -177,24 +217,25 @@ experiment we know how the experiment is affected.</p>
 <p>As part of this demonstration, signal from <em>P06576 in p07_kd</em>
 has been artificially removed to simulate a “genetic knockout
 mutation”.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">$</span><span class="va">protein</span> <span class="op">==</span> <span class="st">'P06576'</span> <span class="op">&amp;</span> <span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">$</span><span class="va">sample</span> <span class="op">==</span> <span class="st">'knockdown'</span><span class="op">)</span></span>
 <span><span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span> <span class="op">&lt;-</span> <span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">[</span><span class="op">-</span><span class="va">w</span>,<span class="op">]</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="using-within">Using <em>within</em><a class="anchor" aria-label="anchor" href="#using-within"></a>
 </h4>
 <p>Note the difference using <strong>within</strong> ..</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span>impute_function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>, method <span class="op">=</span> <span class="st">'within'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"P23443|P51812|P06576"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/extract.html">extract</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">sample</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">sample</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">3</span>, alpha<span class="op">=</span><span class="fl">.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">identifier</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1e4</span>,<span class="fl">1e9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="imputing_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1e4</span>,<span class="fl">1e9</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'red'</span>,<span class="st">'blue'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="imputing_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
 <div class="section level4">
 <h4 id="using-between">Using <em>between</em><a class="anchor" aria-label="anchor" href="#using-between"></a>
@@ -208,17 +249,18 @@ artifical knock-out), shows the expected offset for the
 <strong>between</strong> methods when imputing values you suspect are
 missing-at-random. In our case <em>P06576</em> is missing-not-at-random,
 because we performed a “genetic knockout mutation”.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span>impute_function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>, method <span class="op">=</span> <span class="st">'between'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"P23443|P51812|P06576"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/extract.html">extract</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">sample</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">sample</span><span class="op">)</span>, size<span class="op">=</span><span class="fl">3</span>, alpha<span class="op">=</span><span class="fl">.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">identifier</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1e4</span>,<span class="fl">1e9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="imputing_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1e4</span>,<span class="fl">1e9</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'red'</span>,<span class="st">'blue'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="imputing_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

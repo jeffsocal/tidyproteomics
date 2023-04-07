@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,6 +70,7 @@
     <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
+    <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -108,12 +109,12 @@ peptide level FDR (at the user’s desired level) has already been
 accounted for. See <code><a href="../articles/importing.html">vignette("importing")</a></code>. Importing is
 flexible enough to accept other data platforms in flat files (.csv,
 .tsv, and .xlsx) with a custom configuration.</p>
-<table class="table">
+<table style="width:99%;" class="table">
 <colgroup>
-<col width="24%">
-<col width="26%">
-<col width="24%">
-<col width="24%">
+<col width="7%">
+<col width="11%">
+<col width="9%">
+<col width="70%">
 </colgroup>
 <thead><tr class="header">
 <th>Platform</th>
@@ -123,38 +124,47 @@ flexible enough to accept other data platforms in flat files (.csv,
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://www.thermofisher.com/us/en/home/industrial/mass-spectrometry/liquid-chromatography-mass-spectrometry-lc-ms/lc-ms-software/multi-omics-data-analysis/proteome-discoverer-software.html" class="external-link">ProteomeDiscoverer</a></td>
+<td><a href="#proteomediscoverer">ProteomeDiscoverer</a></td>
 <td>*.xlsx <em>peptides export</em>
 </td>
 <td>*.xlsx <em>proteins export</em>
 </td>
-<td>requires layout configuration</td>
+<td>
+<p>requires layout configuration</p>
+<p><a href="https://www.thermofisher.com/us/en/home/industrial/mass-spectrometry/liquid-chromatography-mass-spectrometry-lc-ms/lc-ms-software/multi-omics-data-analysis/proteome-discoverer-software.html" class="external-link">website</a></p>
+</td>
 </tr>
 <tr class="even">
-<td><a href="https://www.maxquant.org/" class="external-link">MaxQuant</a></td>
+<td><a href="#maxquant">MaxQuant</a></td>
 <td>evidence.txt</td>
 <td>proteinGroups.txt</td>
-<td></td>
+<td><a href="https://www.maxquant.org/" class="external-link">website</a></td>
 </tr>
 <tr class="odd">
-<td><a href="https://skyline.ms/project/home/software/skyline/begin.view" class="external-link">Skyline</a></td>
+<td><a href="#skyline">Skyline</a></td>
 <td>*.csv <em>MSstats peptide report</em>
 </td>
 <td></td>
-<td>requires MSstats install</td>
+<td>
+<p>requires MSstats install</p>
+<p><a href="https://skyline.ms/project/home/software/skyline/begin.view" class="external-link">website</a></p>
+</td>
 </tr>
 <tr class="even">
-<td><a href="https://github.com/vdemichev/DiaNN" class="external-link">DIA-NN</a></td>
+<td><a href="#dia-nn">DIA-NN</a></td>
 <td>*.tsv <em>peptide report</em>
 </td>
 <td></td>
-<td></td>
+<td><a href="https://github.com/vdemichev/DiaNN" class="external-link">website</a></td>
 </tr>
 <tr class="odd">
-<td><a href="https://github.com/HUPO-PSI/mzTab" class="external-link">mzTab</a></td>
+<td><a href="#mztab">mzTab</a></td>
 <td>*.mzTab (v1.0.0)</td>
 <td>*.mzTab (v1.0.0)</td>
-<td>does not track MBR</td>
+<td>
+<p>does not track MBR</p>
+<p><a href="https://github.com/HUPO-PSI/mzTab" class="external-link">website</a></p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -170,6 +180,11 @@ be modified to use <code>Master Protein Accessions</code> or
 that for some configurations the <em>sample</em> group has no defined
 “supplied name”, as this is later derived by the extraction code defined
 in the columns labeled “pattern”.</p>
+<p>The currently known and not directly supported quantitative
+proteomics platforms are <a href="https://biognosys.com/software/spectronaut/" class="external-link">Spectronaut</a> and
+<a href="https://seer.bio/products/proteograph-analysis-suite/" class="external-link">Proteograph
+Analysis Suite</a>. Given a flat-file export, data from these platforms
+could also be importable.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jeffsocal.github.io/tidyproteomics/">"tidyproteomics"</a></span><span class="op">)</span></span></code></pre></div>
@@ -225,16 +240,16 @@ function.</p>
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/ProteomeDiscoverer_proteins.tsv</code>:</p>
-<table class="table">
+<table style="width:96%;" class="table">
 <colgroup>
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
+<col width="10%">
+<col width="15%">
+<col width="16%">
+<col width="15%">
+<col width="11%">
+<col width="11%">
+<col width="5%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th>category</th>
@@ -356,16 +371,16 @@ modified in the file
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/ProteomeDiscoverer_ppeptides.tsv</code>:</p>
-<table class="table">
+<table style="width:96%;" class="table">
 <colgroup>
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
+<col width="10%">
+<col width="14%">
+<col width="19%">
+<col width="15%">
+<col width="11%">
+<col width="10%">
+<col width="5%">
+<col width="8%">
 </colgroup>
 <thead><tr class="header">
 <th>category</th>
@@ -533,16 +548,16 @@ function.</p>
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/MaxQuant_proteins.tsv</code>:</p>
-<table class="table">
+<table style="width:96%;" class="table">
 <colgroup>
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
+<col width="10%">
+<col width="15%">
+<col width="15%">
+<col width="17%">
+<col width="11%">
+<col width="11%">
+<col width="5%">
+<col width="8%">
 </colgroup>
 <thead><tr class="header">
 <th>category</th>
@@ -634,16 +649,16 @@ modified in the file
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/MaxQuant_peptides.tsv</code>:</p>
-<table class="table">
+<table style="width:96%;" class="table">
 <colgroup>
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
+<col width="10%">
+<col width="14%">
+<col width="16%">
+<col width="17%">
+<col width="11%">
+<col width="11%">
+<col width="5%">
+<col width="8%">
 </colgroup>
 <thead><tr class="header">
 <th>category</th>
@@ -834,13 +849,13 @@ peptide level output.</p>
 <h5 id="proteins-4">Proteins<a class="anchor" aria-label="anchor" href="#proteins-4"></a>
 </h5>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_peptides</span> <span class="op">&lt;-</span> <span class="st">"path_to_data/project.mzTab"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"mzTab"</span>, <span class="st">"peptides"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data_proteins</span> <span class="op">&lt;-</span> <span class="st">"path_to_data/project.mzTab"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"mzTab"</span>, <span class="st">"proteins"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level5">
 <h5 id="peptides-4">Peptides<a class="anchor" aria-label="anchor" href="#peptides-4"></a>
 </h5>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_proteins</span> <span class="op">&lt;-</span> <span class="st">"path_to_data/project.mzTab"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"mzTab"</span>, <span class="st">"proteins"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data_peptides</span> <span class="op">&lt;-</span> <span class="st">"path_to_data/project.mzTab"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"mzTab"</span>, <span class="st">"peptides"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 </div>

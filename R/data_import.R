@@ -149,8 +149,7 @@ data_import <- function(
     u_prot_all <- this_dat$protein %>% unique() %>% length()
     this_dat <- this_dat %>%
       dplyr::group_by(protein_cluster) %>%
-      dplyr::mutate(protein_group = paste(protein, collapse = ";")) %>%
-      dplyr::slice_head(n = 1) %>%
+      dplyr::mutate(protein_group = paste(protein, collapse = "; ")) %>%
       dplyr::ungroup() %>%
       dplyr::select(!dplyr::matches('protein_cluster'))
 

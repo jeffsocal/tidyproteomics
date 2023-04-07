@@ -158,7 +158,7 @@ collapse <- function(
     dplyr::select(!c('method'))
 
   tb_peptides <- tb_peptides %>%
-    dplyr::group_by(dplyr::across(setdiff(names(tb_peptides), 'imputed'))) %>%
+    dplyr::group_by_at(setdiff(names(tb_peptides), 'imputed')) %>%
     dplyr::summarise(
       imputed = max(imputed),
       .groups = 'drop'
@@ -168,7 +168,7 @@ collapse <- function(
   tb_peptides <- tb_peptides %>%
     dplyr::left_join(
       tb_peptides %>%
-        dplyr::group_by(dplyr::across(c(experiment_ids, 'peptide'))) %>%
+        dplyr::group_by_at(c(experiment_ids, 'peptide')) %>%
         dplyr::summarise(
           num_proteins = length(unique(protein)),
           .groups = 'drop'
@@ -191,14 +191,15 @@ collapse <- function(
     if(assign_by == "non-homologous") {tb_peptides <- tb_peptides %>% dplyr::mutate(abundance = ifelse(num_proteins > 1, 0, abundance))}
 
     tb_assg <- tb_peptides %>%
-      dplyr::group_by(dplyr::across(merge_by)) %>%
+      dplyr::group_by_at(merge_by) %>%
       dplyr::summarise(
         n_peptides = dplyr::n(),
         .groups = "drop"
       ) %>%
       dplyr::inner_join(tb_peptides, by = merge_by) %>%
-      dplyr::group_by(dplyr::across(razor_by)) %>%
+      dplyr::group_by_at(razor_by) %>%
       dplyr::slice_max(n_peptides, n = 1, with_ties = TRUE) %>%
+      dplyr::ungroup() %>%
       dplyr::select(c(collapse_to, razor_by)) %>%
       unique()
 
@@ -215,14 +216,14 @@ collapse <- function(
     # calculate the protein abundance
     tb_pro_quant <- tb_prot_new %>%
       dplyr::arrange(dplyr::desc(abundance)) %>%
-      dplyr::group_by(dplyr::across(merge_by)) %>%
+      dplyr::group_by_at(merge_by) %>%
       dplyr::summarise(abundance_pro = .function(abundance[1:top_n]),
                        .groups = 'drop')
 
     # calculate the shared peptide abundance
     tb_pro_quant_shared <- tb_prot_new %>%
       dplyr::full_join(tb_pro_quant, by = merge_by) %>%
-      dplyr::group_by(dplyr::across(c(experiment_ids, 'peptide', 'modifications'))) %>%
+      dplyr::group_by_at(c(experiment_ids, 'peptide', 'modifications')) %>%
       dplyr::mutate(abundance_shared = abundance * abundance_pro / sum(abundance_pro),
                     n_shared = dplyr::n()) %>%
       dplyr::ungroup() %>%
@@ -239,7 +240,7 @@ collapse <- function(
   if(.verbose == TRUE) {cli::cli_progress_step(' ... computing protein stats')}
   tb_pro_quant_summed <- tb_pro_quant_shared %>%
     dplyr::arrange(dplyr::desc(abundance_shared)) %>%
-    dplyr::group_by(dplyr::across(merge_by)) %>%
+    dplyr::group_by_at(merge_by) %>%
     # calculate the shared protein abundance
     dplyr::summarise(abundance = .function(abundance_shared[1:top_n]),
                      peptides = paste(sort(unique(peptide)), collapse = "; "),
@@ -249,7 +250,7 @@ collapse <- function(
                      .groups = 'drop') %>%
     dplyr::rename(identifier := collapse_to) %>%
     # pull into protein groups
-    dplyr::group_by(dplyr::across(c(experiment_ids, 'abundance', 'peptides', 'num_peptides', 'num_unique_peptides', 'imputed'))) %>%
+    dplyr::group_by_at(c(experiment_ids, 'abundance', 'peptides', 'num_peptides', 'num_unique_peptides', 'imputed')) %>%
     dplyr::summarise(
       num_identifiers = length(unique(identifier)),
       identifiers_grouped = paste(sort(identifier), collapse = "; "),

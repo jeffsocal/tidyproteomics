@@ -60,8 +60,52 @@ BiocManager::install(c("limma","qvalue","fgsea"))
 **NOTE:** There are several other packages required that will be prompted and automatically downloaded from CRAN when installing. Depending on your current system some packages require the installation of OS level libraries for advanced math and string manipulation.
 
 ## Get Started
+If you want to test the features and capabilities of this project and get a better understanding of how it works, you can experiment with the two datasets that are included within the package. These datasets have been specially selected to provide you with the necessary working examples that will help you to get started with the project.
 
-Its simple to get started. Make a new project, drop your raw data in a folder labeled *data*. For more information see `vignette("01-workflow-simple")`
+The first dataset is a protein-level dataset, and the second one is a small peptide-level dataset. Both datasets are easily accessible after loading the package. You can use these datasets to practice and explore the different features and functionalities of the package. They are also used throughout the vignettes and code documentation to provide you with clear and concise examples.
+
+Protein level data.
+```r
+library(tidyproteomics)
+
+hela_protiens
+
+── Quantitative Proteomics Data Object ──
+
+Origin          ProteomeDiscoverer 
+                proteins (10.76 MB) 
+Composition     6 files 
+                2 samples (control, knockdown) 
+Quantitation    7055 proteins 
+                4 log10 dynamic range 
+                28.8% missing values 
+Accounting      (4) match_between_runs num_peptides num_unique_peptides num_psms 
+Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name biological_process
+                cellular_component molecular_function wiki_pathway
+                reactome_pathway 
+                
+```
+
+Peptide level data.
+```r
+library(tidyproteomics)
+
+hela_peptides
+── Quantitative Proteomics Data Object ──
+
+Origin          ProteomeDiscoverer 
+                peptides (188.87 kB) 
+Composition     6 files 
+                2 samples (control, knockdown) 
+Quantitation    8 proteins 
+                3.3 log10 dynamic range 
+                21.3% missing values 
+Accounting      (3) modifications match_between_runs num_psms 
+```
+
+
+## Import Your Data
+Its simple to get started. Make a new project, drop your raw data in a folder labeled *data*. For more information see `vignette("workflow-simple")`
 
 ``` r
 library(tidyproteomics)
@@ -71,3 +115,5 @@ data <- "./data/some_ProteomeDiscoverer_data.xlsx" %>%
   
 data %>% summary("samples")
 ```
+
+

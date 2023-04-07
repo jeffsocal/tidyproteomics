@@ -27,25 +27,98 @@ results of which can be visualized using the `plot_volcano()` and
 `plot_proportion()` visualization functions as shown below. The
 expression analysis can be accomplished thought the R *limma* package,
 or using any two-sample statistical comparison, the default method
-employs the two-sided T-test. If no values pass the cutoff it will
+employs the two-sided T-test. Note, if no values pass the cutoff it will
 automatically choose the top proteins to display.
+
+It should be noted that this package does not incorporate some of the
+more recent methods described in literature. These methods could be
+incorporated in future revisions, or through a user provided function.
+
++---------+------------------------------------------------------------+
+| MSstats | Choi, Meena, Ching-Yun Chang, Timothy Clough, Daniel       |
+|         | Broudy, Trevor Killeen, Brendan MacLean, and Olga Vitek.   |
+|         | 2014. \"MSstats: An R Package for Statistical Analysis of  |
+|         | Quantitative Mass Spectrometry-Based Proteomic             |
+|         | Experiments.\" *Bioinformatics* 30 (17): 2524--26.         |
+|         |                                                            |
+|         | [msstats.org](msstats.org)                                 |
++---------+------------------------------------------------------------+
+| DEqMS   | Zhu, Yafeng, Lukas M. Orre, Yan Zhou Tran, Georgios        |
+|         | Mermelekas, Henrik J. Johansson, Alina Malyutina, Simon    |
+|         | Anders, and Janne Lehtiö. 2020. \"DEqMS: A Method for      |
+|         | Accurate Variance Estimation in Differential Protein       |
+|         | Expression Analysis.\" *Molecular & Cellular Proteomics:   |
+|         | MCP* 19 (6): 1047--57.                                     |
+|         |                                                            |
+|         | [Bioconductor:                                             |
+|         | DEqMS](https://w                                           |
+|         | ww.bioconductor.org/packages/release/bioc/html/DEqMS.html) |
++---------+------------------------------------------------------------+
+| MS      | Ammar, Constantin, Markus Gruber, Gergely Csaba, and Ralf  |
+| -EmpiRe | Zimmer. 2019. \"MS-EmpiRe Utilizes Peptide-Level Noise     |
+|         | Distributions for Ultra-Sensitive Detection of             |
+|         | Differentially Expressed Proteins.\" *Molecular & Cellular |
+|         | Proteomics: MCP* 18 (9): 1880--92.                         |
+|         |                                                            |
+|         | [GitHub:MS-EmpiRe](https://github.com/zimmerlab/MS-EmpiRe) |
++---------+------------------------------------------------------------+
+| meqrob  | Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and    |
+|         | Lieven Clement. 2020. \"Robust Summarization and Inference |
+|         | in Proteome-Wide Label-Free Quantification.\" *Molecular & |
+|         | Cellular Proteomics: MCP* 19 (7): 1209--19.                |
+|         |                                                            |
+|         | [Bioconductor:                                             |
+|         | msqrob2](https://www                                       |
+|         | .bioconductor.org/packages/release/bioc/html/msqrob2.html) |
++---------+------------------------------------------------------------+
 
 ```{r, message = FALSE}
 
 ```
 
-| parameter           | description                                                               | inputs                                                | default        |
-|--------------|---------------------------|-------------------|--------------|
-| log2fc_min          | the minimum cutoff for displaying                                         | *0 to Inf*                                            | *2*            |
-| significance_column | the column to use for significance                                        | *adj_p\_value, p_value*                               | *adj_p\_value* |
-| significance_max    | the minimum cutoff for displaying                                         | *1 to 1/Inf*                                          | *0.05*         |
-| labels_column       | how to label the points                                                   | any value in annotations, eg *gene_name, description* | *protein*      |
-| show_pannels        | show the colored areas highlighting significance                          | *TRUE / FALSE*                                        | *TRUE*         |
-| show_lines          | show the dotted cutoff lines                                              | *TRUE / FALSE*                                        | *TRUE*         |
-| show_fc_scale       | show the second scale on top converting *log2_foldchange* to *foldchange* | *TRUE / FALSE*                                        | *TRUE*         |
-| point_size          | size of each dot                                                          | *1/10* to *5*                                         | *NULL*         |
-| color_positive      | color for positive expression                                             | [any R accepts](https://r-charts.com/colors/)         | *dodgerblue*   |
-| color_negative      | color for negative expression                                             | [any R accepts](https://r-charts.com/colors/)         | *firebrick1*   |
++--------------+-----------------------+---------------+--------------+
+| parameter    | description           | inputs        | default      |
++==============+=======================+===============+==============+
+| log2fc_min   | the minimum cutoff    | *0 to Inf*    | *2*          |
+|              | for displaying        |               |              |
++--------------+-----------------------+---------------+--------------+
+| signifi      | the column to use for | *             | *a           |
+| cance_column | significance          | adj_p\_value, | dj_p\_value* |
+|              |                       | p_value*      |              |
++--------------+-----------------------+---------------+--------------+
+| sign         | the minimum cutoff    | *1 to 1/Inf*  | *0.05*       |
+| ificance_max | for displaying        |               |              |
++--------------+-----------------------+---------------+--------------+
+| l            | how to label the      | any value in  | *protein*    |
+| abels_column | points                | annotations,  |              |
+|              |                       | eg            |              |
+|              |                       | *gene_name,   |              |
+|              |                       | description*  |              |
++--------------+-----------------------+---------------+--------------+
+| show_pannels | show the colored      | *TRUE /       | *TRUE*       |
+|              | areas highlighting    | FALSE*        |              |
+|              | significance          |               |              |
++--------------+-----------------------+---------------+--------------+
+| show_lines   | show the dotted       | *TRUE /       | *TRUE*       |
+|              | cutoff lines          | FALSE*        |              |
++--------------+-----------------------+---------------+--------------+
+| s            | show the second scale | *TRUE /       | *TRUE*       |
+| how_fc_scale | on top converting     | FALSE*        |              |
+|              | *log2_foldchange* to  |               |              |
+|              | *foldchange*          |               |              |
++--------------+-----------------------+---------------+--------------+
+| point_size   | size of each dot      | *1/10* to *5* | *NULL*       |
++--------------+-----------------------+---------------+--------------+
+| co           | color for positive    | [any R        | *dodgerblue* |
+| lor_positive | expression            | accepts](htt  |              |
+|              |                       | ps://r-charts |              |
+|              |                       | .com/colors/) |              |
++--------------+-----------------------+---------------+--------------+
+| co           | color for negative    | [any R        | *firebrick1* |
+| lor_negative | expression            | accepts](htt  |              |
+|              |                       | ps://r-charts |              |
+|              |                       | .com/colors/) |              |
++--------------+-----------------------+---------------+--------------+
 
 ```{r, message=FALSE}
 library("dplyr")

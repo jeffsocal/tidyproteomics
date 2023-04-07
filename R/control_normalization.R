@@ -35,7 +35,8 @@
 normalize <- function(
     data,
     ...,
-    .method = c("scaled", "median", "linear", "limma", "loess", "svm", "randomforest")
+    .method = c("scaled", "median", "linear", "limma", "loess", "svm", "randomforest"),
+    .cores = 1
 ){
 
   # visible bindings
@@ -129,7 +130,7 @@ normalize <- function(
     cli::cli_progress_step(" ... using {.info {m} {f}}")
 
     dc_this <- dc %>%
-      center(group_by = g, values = 'abundance', method=c) %>%
+      center(group_by = g, values = 'abundance', method = c) %>%
       dplyr::rename(abundance = tidyselect::matches('abundance'))
 
     # remove previous normalized variable if it exists
@@ -140,9 +141,9 @@ normalize <- function(
     if(m == 'scaled') {         d_norm <- d %>% normalize_scaled(dc_this)}
     if(m == 'linear') {         d_norm <- d %>% normalize_linear(dc_this)}
     if(m == 'loess') {          d_norm <- d %>% normalize_loess(dc_this)}
-    if(m == 'svm') {            d_norm <- d %>% normalize_svm(dc_this)}
     if(m == 'limma') {          d_norm <- d %>% normalize_limma()}
-    if(m == 'randomforest') {   d_norm <- d %>% normalize_randomforest(dc_this)}
+    if(m == 'svm') {            d_norm <- d %>% normalize_svm(dc_this, .cores)}
+    if(m == 'randomforest') {   d_norm <- d %>% normalize_randomforest(dc_this, .cores)}
 
     d_norm <- d_norm %>%
       dplyr::mutate(abundance_normalized = invlog2(abundance_normalized)) %>%
