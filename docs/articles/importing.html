@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,6 +71,7 @@
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
     <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -141,6 +142,12 @@ flexible enough to accept other data platforms in flat files (.csv,
 <td><a href="https://www.maxquant.org/" class="external-link">website</a></td>
 </tr>
 <tr class="odd">
+<td><a href="#maxquant-1">FragPipe</a></td>
+<td>combined_peptide.tsv</td>
+<td>combined_protein.tsv</td>
+<td><a href="https://fragpipe.nesvilab.org/" class="external-link">website</a></td>
+</tr>
+<tr class="even">
 <td><a href="#skyline">Skyline</a></td>
 <td>*.csv <em>MSstats peptide report</em>
 </td>
@@ -150,14 +157,14 @@ flexible enough to accept other data platforms in flat files (.csv,
 <p><a href="https://skyline.ms/project/home/software/skyline/begin.view" class="external-link">website</a></p>
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="#dia-nn">DIA-NN</a></td>
 <td>*.tsv <em>peptide report</em>
 </td>
 <td></td>
 <td><a href="https://github.com/vdemichev/DiaNN" class="external-link">website</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="#mztab">mzTab</a></td>
 <td>*.mzTab (v1.0.0)</td>
 <td>*.mzTab (v1.0.0)</td>
@@ -168,9 +175,9 @@ flexible enough to accept other data platforms in flat files (.csv,
 </tr>
 </tbody>
 </table>
-<p>Table formatted data (eg. .csv, .tsv, .xlsx) from both
-ProteomeDiscoverer and MaxQuant meet the requirements, and are defined
-in the package data <code>tidyproteomics/inst/extdata/config/</code>
+<p>Table formatted data (eg. .csv, .tsv, .xlsx) from ProteomeDiscoverer,
+MaxQuant and FragPipe meet the requirements, and are defined in the
+package data <code>tidyproteomics/inst/extdata/config/</code>
 accordingly. Note that the groups <em>sample</em>, <em>identifier</em>
 and <em>quantitative</em> are required, while the rest are optional, and
 only used if a match is found - currently this does not have good error
@@ -184,7 +191,7 @@ in the columns labeled “pattern”.</p>
 proteomics platforms are <a href="https://biognosys.com/software/spectronaut/" class="external-link">Spectronaut</a> and
 <a href="https://seer.bio/products/proteograph-analysis-suite/" class="external-link">Proteograph
 Analysis Suite</a>. Given a flat-file export, data from these platforms
-could also be importable.</p>
+could also be importable. See User Defined Import.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://dplyr.tidyverse.org" class="external-link">"dplyr"</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://jeffsocal.github.io/tidyproteomics/">"tidyproteomics"</a></span><span class="op">)</span></span></code></pre></div>
@@ -514,8 +521,8 @@ data both <em>peptides (evidence.txt)</em> and <em>proteins
 <p>The data exported from MaxQuant for the file
 <em>proteinGroups.txt</em> is not very “tidy”, as it has mixed
 wide-format columns (eg. Abundance for each sample on a single row) and
-long-format. The data table from ProteomeDiscoverer is protein-centric
-wherein each row is dedicated to a single protein, rather than a single
+long-format. The data table from MaxQuant is protein-centric wherein
+each row is dedicated to a single protein, rather than a single
 measurement. To clean up this data we need to “rotate” the wide-format
 columns such that each row in our new table is a single observation. In
 other words, we need a single abundance value for a single protein from
@@ -767,6 +774,262 @@ modified in the file
 </div>
 </div>
 </div>
+<div class="section level3" data-link="MaxQuant">
+<h3 id="maxquant-1">FragPipe<a class="anchor" aria-label="anchor" href="#maxquant-1"></a>
+</h3>
+<p>The FragPipe software suite creates files in project sub directory
+with data both <em>peptides (combined_peptide.tsv)</em> and <em>proteins
+(combined_protein.tsv)</em>.</p>
+<p>The data exported from FragPipe for the file
+<em>combined_protein.tsv</em> is not very “tidy”, as it has mixed
+wide-format columns (eg. Intensity for each sample on a single row) and
+long-format. The data table from FragPipe is protein-centric wherein
+each row is dedicated to a single protein, rather than a single
+measurement. To clean up this data we need to “rotate” the wide-format
+columns such that each row in our new table is a single observation. In
+other words, we need a single abundance value for a single protein from
+a single sample, per row. To accomplish this we need to pivot the
+wide-format columns defined in the column <strong>pivot</strong> then
+“extract” the sample name from the column header as defined in the
+column <strong>pattern_extract</strong>. These patterns conform to
+standard regular expressions.</p>
+<div class="section level4">
+<h4 id="initial-set-up-2">Initial Set Up<a class="anchor" aria-label="anchor" href="#initial-set-up-2"></a>
+</h4>
+<p>FragPipe already removes rows from the decoy search if indicated in
+the workflow setup, if however this is not being done you can indicated
+a pettern in the column <strong>pattern_remove</strong>.</p>
+</div>
+<div class="section level4">
+<h4 id="exporting-2">Exporting<a class="anchor" aria-label="anchor" href="#exporting-2"></a>
+</h4>
+<div class="section level5">
+<h5 id="proteins-2">Proteins<a class="anchor" aria-label="anchor" href="#proteins-2"></a>
+</h5>
+<p>The columns following columns should be considered. These can be
+modified in the file
+<code>tidyproteomics/inst/extdata/config/FragPipe_proteins.tsv</code>:</p>
+<table style="width:96%;" class="table">
+<colgroup>
+<col width="9%">
+<col width="11%">
+<col width="22%">
+<col width="16%">
+<col width="11%">
+<col width="10%">
+<col width="5%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th>category</th>
+<th>column_defined</th>
+<th>column_import</th>
+<th>pattern_extract</th>
+<th>pattern_remove</th>
+<th>pattern_split</th>
+<th>pivot</th>
+<th><em>REQUIRED</em></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>sample</td>
+<td>sample</td>
+<td></td>
+<td>(?&lt;=\s)[0-9]+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
+</tr>
+<tr class="even">
+<td>sample</td>
+<td>sample_file</td>
+<td></td>
+<td>(?&lt;=\s)[0-9]+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
+</tr>
+<tr class="odd">
+<td>identifier</td>
+<td>protein</td>
+<td>^Protein ID$</td>
+<td>(?&lt;=\|).*?(?=\|)</td>
+<td></td>
+<td>\;</td>
+<td></td>
+<td>YES</td>
+</tr>
+<tr class="even">
+<td>quantitative</td>
+<td>abundance_raw</td>
+<td>\sMaxLFQ\sIntensity$</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td>YES</td>
+</tr>
+<tr class="odd">
+<td>accounting</td>
+<td>num_psms</td>
+<td>^\d\sSpectral\sCount$</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>accounting</td>
+<td>num_psms_unique</td>
+<td>^\sUnique\sSpectral\sCount$</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>annotation</td>
+<td>description</td>
+<td>^Description$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>annotation</td>
+<td>gene_name</td>
+<td>^Gene$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level5">
+<h5 id="peptides-2">Peptides<a class="anchor" aria-label="anchor" href="#peptides-2"></a>
+</h5>
+<p>The columns following columns should be considered. These can be
+modified in the file
+<code>tidyproteomics/inst/extdata/config/FragPipe_peptides.tsv</code>:</p>
+<table style="width:96%;" class="table">
+<colgroup>
+<col width="10%">
+<col width="11%">
+<col width="18%">
+<col width="17%">
+<col width="11%">
+<col width="11%">
+<col width="5%">
+<col width="9%">
+</colgroup>
+<thead><tr class="header">
+<th>category</th>
+<th>column_defined</th>
+<th>column_import</th>
+<th>pattern_extract</th>
+<th>pattern_remove</th>
+<th>pattern_split</th>
+<th>pivot</th>
+<th><em>REQUIRED</em></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>sample</td>
+<td>sample</td>
+<td></td>
+<td>.+(?=\_\d+\s)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
+</tr>
+<tr class="even">
+<td>sample</td>
+<td>sample_file</td>
+<td></td>
+<td>.+(?=\sMax)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
+</tr>
+<tr class="odd">
+<td>identifier</td>
+<td>protein</td>
+<td>^Protein ID$</td>
+<td>(?&lt;=\|).*?(?=\|)</td>
+<td></td>
+<td>\;</td>
+<td></td>
+<td>YES</td>
+</tr>
+<tr class="even">
+<td>identifier</td>
+<td>peptide</td>
+<td>^Peptide Sequence$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>YES</td>
+</tr>
+<tr class="odd">
+<td>quantitative</td>
+<td>abundance_raw</td>
+<td>\sMaxLFQ\sIntensity$</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td>YES</td>
+</tr>
+<tr class="even">
+<td>accounting</td>
+<td>num_psms</td>
+<td>^\sSpectral\sCount$</td>
+<td></td>
+<td></td>
+<td></td>
+<td>TRUE</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>annotation</td>
+<td>description</td>
+<td>^Protein Description$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>annotation</td>
+<td>gene_name</td>
+<td>^Gene$</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section level3" data-link="Skyline">
+<h3 id="section"></h3>
+</div>
 <div class="section level3">
 <h3 id="skyline">Skyline<a class="anchor" aria-label="anchor" href="#skyline"></a>
 </h3>
@@ -775,7 +1038,7 @@ most analyses. The exported data file is in a fairly “tidy” long format
 CSV file, where each peptide for each sample is reported on an
 individual row.</p>
 <div class="section level4">
-<h4 id="initial-set-up-2">Initial Set Up<a class="anchor" aria-label="anchor" href="#initial-set-up-2"></a>
+<h4 id="initial-set-up-3">Initial Set Up<a class="anchor" aria-label="anchor" href="#initial-set-up-3"></a>
 </h4>
 <p>A report need to be established, under
 <code>File &gt; Export &gt; Report</code>. Select
@@ -785,16 +1048,16 @@ required values shown below, name the report in
 <code>Report Name:</code> and click <code>OK</code>.</p>
 </div>
 <div class="section level4">
-<h4 id="exporting-2">Exporting<a class="anchor" aria-label="anchor" href="#exporting-2"></a>
+<h4 id="exporting-3">Exporting<a class="anchor" aria-label="anchor" href="#exporting-3"></a>
 </h4>
 <div class="section level5">
-<h5 id="proteins-2">Proteins<a class="anchor" aria-label="anchor" href="#proteins-2"></a>
+<h5 id="proteins-3">Proteins<a class="anchor" aria-label="anchor" href="#proteins-3"></a>
 </h5>
 <p>Not yet supported. Peptides can be combined into proteins with
 <code><a href="../reference/collapse.html">collapse()</a></code>.</p>
 </div>
 <div class="section level5">
-<h5 id="peptides-2">Peptides<a class="anchor" aria-label="anchor" href="#peptides-2"></a>
+<h5 id="peptides-3">Peptides<a class="anchor" aria-label="anchor" href="#peptides-3"></a>
 </h5>
 <p>The columns following columns should be considered. These can be
 modified in the file
@@ -813,16 +1076,16 @@ the project folder as <em>report.tsv</em>. The exported data file is in
 a fairly “tidy” long format file, where each peptide for each sample is
 reported on an individual row.</p>
 <div class="section level4">
-<h4 id="exporting-3">Exporting<a class="anchor" aria-label="anchor" href="#exporting-3"></a>
+<h4 id="exporting-4">Exporting<a class="anchor" aria-label="anchor" href="#exporting-4"></a>
 </h4>
 <div class="section level5">
-<h5 id="proteins-3">Proteins<a class="anchor" aria-label="anchor" href="#proteins-3"></a>
+<h5 id="proteins-4">Proteins<a class="anchor" aria-label="anchor" href="#proteins-4"></a>
 </h5>
 <p>Not yet supported. Peptides can be combined into proteins with
 <code><a href="../reference/collapse.html">collapse()</a></code>.</p>
 </div>
 <div class="section level5">
-<h5 id="peptides-3">Peptides<a class="anchor" aria-label="anchor" href="#peptides-3"></a>
+<h5 id="peptides-4">Peptides<a class="anchor" aria-label="anchor" href="#peptides-4"></a>
 </h5>
 <p>The columns following columns should be considered. These can be
 modified in the file
@@ -843,16 +1106,16 @@ Tidyproteomics assembles the psm, peptide and protein data independently
 then sequentially combines them to generate the desired protein or
 peptide level output.</p>
 <div class="section level4">
-<h4 id="exporting-4">Exporting<a class="anchor" aria-label="anchor" href="#exporting-4"></a>
+<h4 id="exporting-5">Exporting<a class="anchor" aria-label="anchor" href="#exporting-5"></a>
 </h4>
 <div class="section level5">
-<h5 id="proteins-4">Proteins<a class="anchor" aria-label="anchor" href="#proteins-4"></a>
+<h5 id="proteins-5">Proteins<a class="anchor" aria-label="anchor" href="#proteins-5"></a>
 </h5>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_proteins</span> <span class="op">&lt;-</span> <span class="st">"path_to_data/project.mzTab"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"mzTab"</span>, <span class="st">"proteins"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level5">
-<h5 id="peptides-4">Peptides<a class="anchor" aria-label="anchor" href="#peptides-4"></a>
+<h5 id="peptides-5">Peptides<a class="anchor" aria-label="anchor" href="#peptides-5"></a>
 </h5>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_peptides</span> <span class="op">&lt;-</span> <span class="st">"path_to_data/project.mzTab"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"mzTab"</span>, <span class="st">"peptides"</span><span class="op">)</span></span></code></pre></div>

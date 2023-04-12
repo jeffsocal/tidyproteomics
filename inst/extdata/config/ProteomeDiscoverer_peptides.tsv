@@ -2,7 +2,7 @@ category	column_defined	column_import	pattern_extract	pattern_remove	pattern_spl
 sample	sample		"(?<=(Control|Sample)\,\s).+"			
 sample	sample_file		(?<=\s)F\d+(\:\s\d+[CN]*)*			
 identifier	protein	^Master Protein Accessions$			\;	
-identifier	peptide	^Annotated Sequence$				
+identifier	peptide	^Annotated Sequence$	(?<=\.).+(?=\.)			
 identifier	modifications	^Modifications$				
 quantitative	abundance_raw	^Abundance\:				TRUE
 impute	match_between_runs	^Found in Sample\:	(Found|n.a)			TRUE

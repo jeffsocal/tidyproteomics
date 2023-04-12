@@ -38,6 +38,8 @@ navbar:
         href: articles/workflow-publication.html
       - text: Protein Accounting
         href: articles/protein-accounting.html
+      - text: User Defined Import
+        href: articles/workflow-userimport.html
       - text: '-------'
       - text: update history
         href: articles/updates.html
@@ -213,4 +215,9 @@ reference:
   - fasta_parse
   - fasta_peptides
   - fasta_regex
+  - experimental
+  - experimental_groups
+  - import_charge
+  - rf_parallel
+  - svm_parallel
 

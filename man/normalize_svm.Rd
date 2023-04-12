@@ -4,7 +4,7 @@
 \alias{normalize_svm}
 \title{Normalization function for a tidyproteomics data-object}
 \usage{
-normalize_svm(data = NULL, data_centered = NULL)
+normalize_svm(data = NULL, data_centered = NULL, .cores = 1)
 }
 \arguments{
 \item{data}{tidyproteomics list data-object}

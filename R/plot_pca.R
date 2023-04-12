@@ -87,7 +87,7 @@ plot_pca <- function(
       ggplot2::labs(x = "Principal Component",
                     y = "Proportion of Total Variance",
                     title = "PCA Scree Plot",
-                    subtitle = "protein abundance log2 co-variance") +
+                    subtitle = glue::glue("{data$analyte} abundance log2 co-variance")) +
       ggplot2::theme_classic()
 
   } else {
@@ -129,7 +129,7 @@ plot_pca <- function(
       ggplot2::labs(x = paste0(pcx, " (",signif(pcx_p * 100, 3),"%)"),
                     y = paste0(pcy, " (",signif(pcy_p * 100, 3),"%)"),
                     title = paste("PCA analysis", pcx, "~", pcy),
-                    subtitle = paste0("protein abundance log2 co-variance (", quantval, ")")) +
+                    subtitle = glue::glue("{data$analyte} abundance log2 co-variance ({quantval})")) +
       ggplot2::theme_classic() +
       ggplot2::theme(axis.text = ggplot2::element_blank(),
                      axis.ticks = ggplot2::element_blank())

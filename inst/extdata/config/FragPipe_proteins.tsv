@@ -1,0 +1,9 @@
+category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
+sample	sample		.+(?=\_\d+\s)			
+sample	sample_file		.+(?=\sMax)			
+identifier	protein	^Protein ID$			\;	
+quantitative	abundance_raw	\sMaxLFQ\sIntensity$				TRUE
+accounting	num_psms	\d\sTotal\sSpectral\sCount$				TRUE
+accounting	num_psms_unique	\d\sUnique\sSpectral\sCount$				TRUE
+annotation	description	^Description$				
+annotation	gene_name	^Gene$				

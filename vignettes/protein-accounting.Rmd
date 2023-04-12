@@ -4,7 +4,7 @@ output: rmarkdown::html_vignette
 description: |
   tidyproteomics: simplified data object and analysis functions
 vignette: >
-  %\VignetteIndexEntry{Protein Inferencing}
+  %\VignetteIndexEntry{Protein Accounting}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -54,14 +54,14 @@ library(tidyproteomics)
 ```
 
 ```{r, echo=FALSE, message=FALSE}
-pep_data <- "../data/lcms_p97/p97KD_HCT116_peptides.xlsx" %>%
+pep_data <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HCT116_peptides.xlsx" %>%
   import("ProteomeDiscoverer", "peptides")
 ```
 
 #### ProteomeDiscoverer's Protein Accounting
 We import a data-object of ProteomeDiscoverer's protein level accouting
 ```{r, echo=FALSE, message=FALSE}
-pro_data <- "../data/lcms_p97/p97KD_HCT116_proteins.xlsx" %>%
+pro_data <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx" %>%
   import("ProteomeDiscoverer", "proteins") %>%
   normalize(.method = c('median', 'linear', 'loess'))
 

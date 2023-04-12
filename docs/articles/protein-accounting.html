@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,6 +71,7 @@
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
     <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -296,25 +297,25 @@ accouting</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">p97_kd</td>
-<td align="left">1</td>
+<td align="left">ctl</td>
+<td align="left">2</td>
 <td align="left">P45983</td>
-<td align="right">1699445</td>
-<td align="right">1409719</td>
+<td align="right">869555.1</td>
+<td align="right">703721.1</td>
 </tr>
 <tr class="even">
-<td align="left">p97_kd</td>
-<td align="left">1</td>
-<td align="left">Q969Z3</td>
-<td align="right">1917176</td>
-<td align="right">1917176</td>
+<td align="left">ctl</td>
+<td align="left">2</td>
+<td align="left">Q8N138</td>
+<td align="right">3530659.8</td>
+<td align="right">2396096.2</td>
 </tr>
 <tr class="odd">
-<td align="left">p97_kd</td>
-<td align="left">1</td>
+<td align="left">ctl</td>
+<td align="left">2</td>
 <td align="left">Q16537</td>
-<td align="right">4080608</td>
-<td align="right">3015887</td>
+<td align="right">4131858.3</td>
+<td align="right">3433024.4</td>
 </tr>
 </tbody>
 </table>
@@ -337,10 +338,10 @@ accouting</p>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="29%">
-<col width="19%">
-<col width="38%">
-<col width="11%">
+<col width="24%">
+<col width="21%">
+<col width="41%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">peptide</th>
@@ -350,34 +351,34 @@ accouting</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">[K].VIEQLGTPCPEFMK.[K]</td>
-<td align="left">1xCarbamidomethyl [C9]</td>
-<td align="left">P45983</td>
-<td align="right">566715.8</td>
-</tr>
-<tr class="even">
-<td align="left">[K].YAGYSFEK.[L]</td>
-<td align="left">NA</td>
-<td align="left">P45983</td>
-<td align="right">425560.5</td>
-</tr>
-<tr class="odd">
-<td align="left">[KR].IIDFGLAR.[THRQ]</td>
+<td align="left">IIDFGLAR</td>
 <td align="left">NA</td>
 <td align="left">O15264; Q86YV6; P45984; P53778; Q16539; P45983</td>
 <td align="right">3426127.8</td>
 </tr>
 <tr class="even">
-<td align="left">[R].ISVDEALQHPYINVWYDPSEAEAPPPK.[I]</td>
+<td align="left">ISVDEALQHPYINVWYDPSEAEAPPPK</td>
 <td align="left">NA</td>
 <td align="left">P45983</td>
 <td align="right">417442.9</td>
 </tr>
 <tr class="odd">
-<td align="left">[R].MSYLLYQMLCGIK.[H]</td>
+<td align="left">MSYLLYQMLCGIK</td>
 <td align="left">1xCarbamidomethyl [C10]</td>
 <td align="left">P45984; P45983</td>
 <td align="right">289726.1</td>
+</tr>
+<tr class="even">
+<td align="left">VIEQLGTPCPEFMK</td>
+<td align="left">1xCarbamidomethyl [C9]</td>
+<td align="left">P45983</td>
+<td align="right">566715.8</td>
+</tr>
+<tr class="odd">
+<td align="left">YAGYSFEK</td>
+<td align="left">NA</td>
+<td align="left">P45983</td>
+<td align="right">425560.5</td>
 </tr>
 </tbody>
 </table>
@@ -460,13 +461,13 @@ do replicate that as well.</p>
 <td align="left">ctl</td>
 <td align="right">7056</td>
 <td align="right">63622</td>
-<td align="right">0.1626280</td>
+<td align="right">0.1626325</td>
 </tr>
 <tr class="even">
 <td align="left">p97_kd</td>
 <td align="right">7056</td>
 <td align="right">63622</td>
-<td align="right">0.2118716</td>
+<td align="right">0.2118572</td>
 </tr>
 </tbody>
 </table>
@@ -493,13 +494,13 @@ do replicate that as well.</p>
 <tbody>
 <tr class="odd">
 <td align="left">FALSE</td>
-<td align="right">3448</td>
-<td align="left">11.5213686637485 %</td>
+<td align="right">3449</td>
+<td align="left">11.5247101279781 %</td>
 </tr>
 <tr class="even">
 <td align="left">TRUE</td>
-<td align="right">26479</td>
-<td align="left">88.4786313362515 %</td>
+<td align="right">26478</td>
+<td align="left">88.4752898720219 %</td>
 </tr>
 </tbody>
 </table>
@@ -536,11 +537,11 @@ ProteomeDiscoverer, yet obviously several others do not</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">p97_kd</td>
-<td align="left">1</td>
+<td align="left">ctl</td>
+<td align="left">2</td>
 <td align="left">P45983</td>
-<td align="right">1409719.2</td>
-<td align="right">1409719.2</td>
+<td align="right">703721.1</td>
+<td align="right">703721.1</td>
 </tr>
 <tr class="even">
 <td align="left">p97_kd</td>
@@ -557,18 +558,18 @@ ProteomeDiscoverer, yet obviously several others do not</p>
 <td align="right">535040.5</td>
 </tr>
 <tr class="even">
-<td align="left">ctl</td>
-<td align="left">2</td>
-<td align="left">P45983</td>
-<td align="right">703721.1</td>
-<td align="right">703721.1</td>
-</tr>
-<tr class="odd">
 <td align="left">ctl</td>
 <td align="left">3</td>
 <td align="left">P45983</td>
 <td align="right">494210.7</td>
 <td align="right">494210.7</td>
+</tr>
+<tr class="odd">
+<td align="left">p97_kd</td>
+<td align="left">1</td>
+<td align="left">P45983</td>
+<td align="right">1409719.2</td>
+<td align="right">1409719.2</td>
 </tr>
 <tr class="even">
 <td align="left">p97_kd</td>
@@ -602,25 +603,25 @@ ProteomeDiscoverer, yet obviously several others do not</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">p97_kd</td>
-<td align="left">1</td>
-<td align="left">Q96LR5</td>
-<td align="right">216778.9</td>
-<td align="right">11934777.4</td>
+<td align="left">ctl</td>
+<td align="left">2</td>
+<td align="left">Q15366</td>
+<td align="right">67906.09</td>
+<td align="right">112335311</td>
 </tr>
 <tr class="even">
-<td align="left">p97_kd</td>
-<td align="left">1</td>
-<td align="left">Q96EV2</td>
-<td align="right">261505.2</td>
-<td align="right">1488347.7</td>
+<td align="left">ctl</td>
+<td align="left">2</td>
+<td align="left">Q9Y3L5</td>
+<td align="right">81606.47</td>
+<td align="right">4567305</td>
 </tr>
 <tr class="odd">
-<td align="left">p97_kd</td>
-<td align="left">1</td>
-<td align="left">Q5R372</td>
-<td align="right">269773.3</td>
-<td align="right">909042.3</td>
+<td align="left">ctl</td>
+<td align="left">2</td>
+<td align="left">P53990</td>
+<td align="right">114462.68</td>
+<td align="right">16431834</td>
 </tr>
 </tbody>
 </table>
@@ -645,10 +646,10 @@ ProteomeDiscoverer, yet obviously several others do not</p>
 <span><span class="co">#&gt; `.groups` argument.</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="29%">
-<col width="30%">
-<col width="25%">
-<col width="15%">
+<col width="22%">
+<col width="33%">
+<col width="27%">
+<col width="16%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">peptide</th>
@@ -658,25 +659,25 @@ ProteomeDiscoverer, yet obviously several others do not</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">[K].DNWSPALTISK.[V-]</td>
+<td align="left">DNWSPALTISK</td>
 <td align="left">NA</td>
 <td align="left">Q96LR5; P51965; Q969T4</td>
 <td align="right">7005611.0</td>
 </tr>
 <tr class="even">
-<td align="left">[K].ELAEITLDPPPNCSAGPK.[G]</td>
+<td align="left">ELAEITLDPPPNCSAGPK</td>
 <td align="left">1xCarbamidomethyl [C13]</td>
 <td align="left">Q96LR5; Q969T4</td>
 <td align="right">2169172.8</td>
 </tr>
 <tr class="odd">
-<td align="left">[R].IYHCNINSQGVICLDILK.[D]</td>
+<td align="left">IYHCNINSQGVICLDILK</td>
 <td align="left">2xCarbamidomethyl [C4; C13]</td>
 <td align="left">Q96LR5; P51965; Q969T4</td>
 <td align="right">2543214.8</td>
 </tr>
 <tr class="even">
-<td align="left">[R].VDDSPSTSGGSSDGDQR.[E]</td>
+<td align="left">VDDSPSTSGGSSDGDQR</td>
 <td align="left">NA</td>
 <td align="left">Q96LR5</td>
 <td align="right">216778.9</td>
@@ -729,10 +730,10 @@ that may be shared …</p>
 <span><span class="co">#&gt; `.groups` argument.</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="29%">
-<col width="30%">
-<col width="25%">
-<col width="15%">
+<col width="22%">
+<col width="33%">
+<col width="27%">
+<col width="16%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">peptide</th>
@@ -742,37 +743,37 @@ that may be shared …</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">[K].DNWSPALTISK.[V-]</td>
+<td align="left">DNWSPALTISK</td>
 <td align="left">NA</td>
 <td align="left">Q96LR5; P51965; Q969T4</td>
 <td align="right">7005611.0</td>
 </tr>
 <tr class="even">
-<td align="left">[K].ELADITLDPPPNCSAGPK.[G]</td>
-<td align="left">1xCarbamidomethyl [C13]</td>
-<td align="left">P51965</td>
-<td align="right">2536644.8</td>
-</tr>
-<tr class="odd">
-<td align="left">[K].ELAEITLDPPPNCSAGPK.[G]</td>
-<td align="left">1xCarbamidomethyl [C13]</td>
-<td align="left">Q96LR5; Q969T4</td>
-<td align="right">2169172.8</td>
-</tr>
-<tr class="even">
-<td align="left">[R].DPAAPEPEEQEER.[K]</td>
+<td align="left">DPAAPEPEEQEER</td>
 <td align="left">NA</td>
 <td align="left">Q969T4</td>
 <td align="right">371158.4</td>
 </tr>
 <tr class="odd">
-<td align="left">[R].IYHCNINSQGVICLDILK.[D]</td>
+<td align="left">ELADITLDPPPNCSAGPK</td>
+<td align="left">1xCarbamidomethyl [C13]</td>
+<td align="left">P51965</td>
+<td align="right">2536644.8</td>
+</tr>
+<tr class="even">
+<td align="left">ELAEITLDPPPNCSAGPK</td>
+<td align="left">1xCarbamidomethyl [C13]</td>
+<td align="left">Q96LR5; Q969T4</td>
+<td align="right">2169172.8</td>
+</tr>
+<tr class="odd">
+<td align="left">IYHCNINSQGVICLDILK</td>
 <td align="left">2xCarbamidomethyl [C4; C13]</td>
 <td align="left">Q96LR5; P51965; Q969T4</td>
 <td align="right">2543214.8</td>
 </tr>
 <tr class="even">
-<td align="left">[R].VDDSPSTSGGSSDGDQR.[E]</td>
+<td align="left">VDDSPSTSGGSSDGDQR</td>
 <td align="left">NA</td>
 <td align="left">Q96LR5</td>
 <td align="right">216778.9</td>

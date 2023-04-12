@@ -58,6 +58,9 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/workflow-simple.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/workflow-userimport.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/authors.html</loc>
   </url>
   <url>
@@ -104,6 +107,12 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/enrichment_wilcoxon.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/experimental.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/experimental_groups.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/export_analysis.html</loc>
@@ -191,6 +200,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/import.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/import_charge.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/import_extract.html</loc>
@@ -355,6 +367,9 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/reverselog_transformation.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/rf_parallel.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/rm.mbr.html</loc>
   </url>
   <url>
@@ -389,6 +404,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/summary.tidyproteomics.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/svm_parallel.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/table_quantrank.html</loc>

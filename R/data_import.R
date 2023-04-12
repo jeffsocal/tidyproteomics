@@ -35,7 +35,7 @@ data_import <- function(
   if(is.null(analyte)) {cli::cli_abort(c("x" = "No file analyte indicated"))}
 
   if(!is.null(path)) {
-    if(!file.exists(path)) {cli::cli_abort("Config fine not found for {.emph {path}}")}
+    if(!file.exists(path)) {cli::cli_abort("Config file not found for {.emph {path}}")}
     path_to_config <- path
   } else {
     path_to_config <- glue::glue("{platform}_{analyte}") %>% path_to_package_data()
@@ -81,48 +81,53 @@ data_import <- function(
   for(i in 1:length(file_names) ){
     file_name <- file_names[i]
 
-    cli::cli_progress_step("... {.emph {basename(file_name)}}")
+    cli::cli_progress_step("... parsing {.emph {basename(file_name)}}")
 
     ############################################################################
     # read_data covers csv, tsv, xlsx and mzTab
     this_dat_obj <- file_name %>% read_data(platform, analyte)
-    this_dat <- this_dat_obj$data %>% dplyr::select(dplyr::matches(cols_all_str))
+    this_dat <- this_dat_obj$data %>% dplyr::select(dplyr::matches(cols_all_str, perl = TRUE))
     analyte <- this_dat_obj$analyte
     platform <- this_dat_obj$platform
 
     if(nrow(this_dat) == 0) {cli::cli_abort("... no data extracted, check config file")}
 
-    ############################################################################
-    # pivot LONG
-    if(pivot_str != "") {
-      this_dat <- this_dat %>%
-        tidyr::pivot_longer(cols = dplyr::matches(pivot_str), names_to = 'accounting')
-
-      # pivot extract
-      tbl_pivot_extract <- tbl_pivot %>%
-        dplyr::filter(is.na(column_import)) %>%
-        dplyr::mutate(column_import = 'accounting')
-
-      this_dat <- this_dat %>% import_extract(tbl_pivot_extract) %>% unique()
-    }
-
-    ############################################################################
-    # pivot WIDE
     if(pivot_str != "") {
 
-      this_dat <- this_dat %>%
-        dplyr::full_join(
-          this_dat %>%
-            dplyr::mutate(
-              account_str = accounting %>% stringr::str_extract(pivot_str)) %>%
-            dplyr::select(accounting, account_str) %>%
-            unique() ,
-          by = 'accounting'
-        ) %>%
-        dplyr::select(!dplyr::matches('accounting')) %>%
-        dplyr::rename(accounting = account_str) %>%
-        # some issues here with duplicate entries
-        tidyr::pivot_wider(names_from = 'accounting', values_from = 'value') #, values_fn = function(x){ x %>% as.numeric() %>% sum()}
+      this_dat <- this_dat %>% dplyr::mutate(row_id = row_number())
+
+      this_pivot_not <- this_dat %>%
+        dplyr::select(!dplyr::matches(pivot_str, perl = TRUE))
+
+      for( pivot_col in pivot_cols ){
+
+        pivot_col_name <- tbl_pivot %>%
+          dplyr::filter(column_import == pivot_col) %>%
+          dplyr::select('column_defined') %>%
+          as.character()
+
+        this_pivot <- this_dat %>%
+          dplyr::select(dplyr::matches(paste0('row_id|', pivot_col), perl = TRUE)) %>%
+          tidyr::pivot_longer(cols = dplyr::matches(pivot_col, perl = TRUE), names_to = 'accounting')
+
+        # pivot extract
+        tbl_pivot_extract <- tbl_pivot %>%
+          dplyr::filter(is.na(column_import)) %>%
+          dplyr::mutate(column_import = 'accounting')
+
+        this_pivot <- this_pivot %>%
+          import_extract(tbl_pivot_extract) %>%
+          unique() %>%
+          dplyr::select(!dplyr::matches('accounting')) %>%
+          dplyr::rename(!!pivot_col_name := value)
+
+        this_pivot_not <- this_pivot_not %>%
+          left_join(
+            this_pivot,
+            by = intersect(colnames(this_pivot_not), colnames(this_pivot))
+          )
+      }
+      this_dat <- this_pivot_not
     }
 
     ############################################################################
@@ -175,7 +180,7 @@ data_import <- function(
       dplyr::mutate(sample = ifelse(grepl("^[0-9]", sample), paste0("s", sample), sample)) %>%
       dplyr::mutate(protein = trimws(protein)) %>%
       dplyr::mutate(import_file = basename(file_name)) %>%
-      dplyr::mutate(sample_id = hash_vector(paste(import_file, sample_file, i))) %>%
+      dplyr::mutate(sample_id = hash_vector(paste(import_file, sample_file, sample, i))) %>%
       dplyr::relocate(import_file, sample_file, sample_id) %>%
       as.data.frame() %>%
       dplyr::mutate(abundance_raw = ifelse(abundance_raw == 0, NA, abundance_raw))
@@ -199,9 +204,11 @@ data_import <- function(
     cli::cli_progress_done()
   }
 
+  dat_out <- dat_out
   cols_annotations <- set_vect(tbl_config, 'annotation') %>% names()
   cols_identifiers <- set_vect(tbl_config, 'identifier') %>% names()
 
+  cli::cli_progress_step("... tidying the data and finishing up")
   dl <- list(
     origin = platform,
     analyte = analyte,
@@ -214,6 +221,7 @@ data_import <- function(
         identifier = cols_identifiers,
         annotations = cols_annotations
       ))
+  cli::cli_progress_done()
 
   return(dl)
 }

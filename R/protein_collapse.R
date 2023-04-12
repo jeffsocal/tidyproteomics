@@ -275,6 +275,7 @@ collapse <- function(
 
   if(!is.null(fasta_path)) {dat_pro <- dat_pro %>% dplyr::left_join(tb_fasta, by = collapse_to)}
 
+  if(.verbose == TRUE) {cli::cli_progress_step(' ... tidying the data and finishing up')}
   dat_pro <- dat_pro %>% codify(identifier = collapse_to, annotations = names(tb_fasta))
 
   # the output object

@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,6 +71,7 @@
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
     <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -272,16 +273,16 @@ used in an external down stream analysis.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5,279 × 18</span></span></span>
 <span><span class="co">#&gt;    protein imputed     n avera…¹ propo…² foldc…³ log2_…⁴ p_value adj_p…⁵ descr…⁶</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> O43295    0.333     6  4.29<span style="color: #949494;">e</span>6 1.75<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    92.5    6.53 0.129         1 SLIT-R…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Q15011    0         6  2.82<span style="color: #949494;">e</span>6 1.15<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    52.4    5.71 0.002<span style="text-decoration: underline;">48</span>       1 Homocy…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> P00414    0.333     6  1.29<span style="color: #949494;">e</span>6 5.27<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    35.1    5.14 0.004<span style="text-decoration: underline;">23</span>       1 Cytoch…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Q9BRJ7    0.167     6  1.07<span style="color: #949494;">e</span>6 4.38<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    27.9    4.80 0.017<span style="text-decoration: underline;">9</span>        1 Tudor-…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Q9UI14    0.167     6  7.79<span style="color: #949494;">e</span>5 3.18<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    23.0    4.52 0.192         1 Prenyl…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Q53FT3    0         6  2.04<span style="color: #949494;">e</span>6 8.30<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    23.0    4.52 0.195         1 Protei…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Q9BY50    0         6  1.21<span style="color: #949494;">e</span>6 4.94<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    22.2    4.47 0.002<span style="text-decoration: underline;">27</span>       1 Signal…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> A0A2R8…   0         6  9.57<span style="color: #949494;">e</span>5 3.90<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    20.5    4.36 0.199         1 AP-3 c…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> P49427    0         6  1.37<span style="color: #949494;">e</span>6 5.57<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    18.7    4.22 0.182         1 Ubiqui…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Q13751    0.333     6  6.81<span style="color: #949494;">e</span>5 2.78<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    17.4    4.12 0.001<span style="text-decoration: underline;">94</span>       1 Lamini…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> O43295    0.333     6  4.29<span style="color: #949494;">e</span>6 1.75<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    92.5    6.53 0.129     0.486 SLIT-R…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Q15011    0         6  2.82<span style="color: #949494;">e</span>6 1.15<span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span>    52.4    5.71 0.002<span style="text-decoration: underline;">48</span>   0.182 Homocy…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> P00414    0.333     6  1.29<span style="color: #949494;">e</span>6 5.27<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    35.1    5.14 0.004<span style="text-decoration: underline;">23</span>   0.219 Cytoch…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Q9BRJ7    0.167     6  1.07<span style="color: #949494;">e</span>6 4.38<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    27.9    4.80 0.017<span style="text-decoration: underline;">9</span>    0.304 Tudor-…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Q9UI14    0.167     6  7.79<span style="color: #949494;">e</span>5 3.18<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    23.0    4.52 0.192     0.544 Prenyl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Q53FT3    0         6  2.04<span style="color: #949494;">e</span>6 8.30<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    23.0    4.52 0.195     0.547 Protei…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Q9BY50    0         6  1.21<span style="color: #949494;">e</span>6 4.94<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    22.2    4.47 0.002<span style="text-decoration: underline;">27</span>   0.179 Signal…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> A0A2R8…   0         6  9.57<span style="color: #949494;">e</span>5 3.90<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    20.5    4.36 0.199     0.548 AP-3 c…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> P49427    0         6  1.37<span style="color: #949494;">e</span>6 5.57<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    18.7    4.22 0.182     0.538 Ubiqui…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Q13751    0.333     6  6.81<span style="color: #949494;">e</span>5 2.78<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>    17.4    4.12 0.001<span style="text-decoration: underline;">94</span>   0.168 Lamini…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 5,269 more rows, 8 more variables: gene_id_entrez &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gene_id_ensemble &lt;chr&gt;, gene_name &lt;chr&gt;, biological_process &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   cellular_component &lt;chr&gt;, molecular_function &lt;chr&gt;, wiki_pathway &lt;chr&gt;,</span></span></span>

@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,6 +71,7 @@
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
     <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -105,11 +106,24 @@
 <h2 id="a-condensed-accounting-of-version-updates">A condensed accounting of version updates<a class="anchor" aria-label="anchor" href="#a-condensed-accounting-of-version-updates"></a>
 </h2>
 <div class="section level4">
-<h4 id="version-1-2-6---2023-02-13">Version: 1.2.6 - 2023.02.13<a class="anchor" aria-label="anchor" href="#version-1-2-6---2023-02-13"></a>
+<h4 id="version-1-3-0---2023-03-13">Version: 1.3.0 - 2023.03.13<a class="anchor" aria-label="anchor" href="#version-1-3-0---2023-03-13"></a>
+</h4>
+<ul>
+<li>Addressed multiple charge precursor in peptide quant files</li>
+<li>Added FragPipe to the available imports</li>
+<li>Exposed adjust.p.value method selection in expression()</li>
+<li>Exposed the user defined import option</li>
+<li>Fixed a labeling error in plot_pca()</li>
+<li>Modified the method for pivoting columns-to-rows in import
+files</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="version-1-2-6---2023-03-01">Version: 1.2.6 - 2023.03.01<a class="anchor" aria-label="anchor" href="#version-1-2-6---2023-03-01"></a>
 </h4>
 <ul>
 <li>Added clarity around normalize(), impute(), collapse()</li>
-<li>Implemented parallel processing for ‘ranomdforest’ and ‘svm’ in
+<li>Implemented parallel processing for ‘randomforest’ and ‘svm’ in
 normalize()</li>
 <li>Added a vignette on protein inferencing using collapse()</li>
 <li>Fixed a bug in peptide importing that removed homologous peptide

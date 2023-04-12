@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,6 +45,7 @@
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
     <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/updates.html">update history</a>
   </div>
@@ -74,8 +75,9 @@
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  experiment <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  control <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  m.test <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span>,</span>
-<span>  <span class="va">...</span></span>
+<span>  .method <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .p.adjust <span class="op">=</span> <span class="st">"BH"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -93,7 +95,7 @@
 <dd><p>a character string representing the control sample set</p></dd>
 
 
-<dt>m.test</dt>
+<dt>.method</dt>
 <dd><p>a two-distribution test function returning a p_value for the null
 hypothesis. Default is t.test. Example functions include t.test, wilcox.test,
 stats::ks.test ...</p></dd>
@@ -101,6 +103,10 @@ stats::ks.test ...</p></dd>
 
 <dt>...</dt>
 <dd><p>pass through arguments</p></dd>
+
+
+<dt>.p.adjust</dt>
+<dd><p>a stats::p.adjust string for multiple test correction</p></dd>
 
 </dl></div>
     <div class="section level2">

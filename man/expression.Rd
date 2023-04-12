@@ -4,7 +4,7 @@
 \alias{expression}
 \title{Summarize the data}
 \usage{
-expression(data = NULL, ..., .method = stats::t.test)
+expression(data = NULL, ..., .method = stats::t.test, .p.adjust = "BH")
 }
 \arguments{
 \item{data}{tidyproteomics data object}
@@ -16,6 +16,9 @@ hypothesis. Example functions include t.test, wilcox.test, stats::ks.test,
 additionally, the string \emph{"limma"} can be used to select from the limma
 package to compute an empirical Bayesian estimation which performs better with
 non-linear distributions and uneven replicate balance between samples.}
+
+\item{.p.adjust}{a stats::p.adjust string for multiple test correction, default is
+'BH' (Benjamini & Hochberg, 1995)}
 }
 \value{
 a tibble

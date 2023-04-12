@@ -11,6 +11,8 @@
 #' additionally, the string _"limma"_ can be used to select from the limma
 #' package to compute an empirical Bayesian estimation which performs better with
 #' non-linear distributions and uneven replicate balance between samples.
+#' @param .p.adjust a stats::p.adjust string for multiple test correction, default is
+#' 'BH' (Benjamini & Hochberg, 1995)
 #'
 #' @return a tibble
 #' @export
@@ -49,7 +51,8 @@
 expression <- function(
     data = NULL,
     ...,
-    .method = stats::t.test
+    .method = stats::t.test,
+    .p.adjust = 'BH'
 ){
 
   # visible bindings
@@ -70,7 +73,7 @@ expression <- function(
   check_samples(data, experiment, control)
 
   if(mode(.method) == 'function') {
-    table <- data %>% expression_test(experiment, control, .method)
+    table <- data %>% expression_test(experiment, control, .method = .method, .p.adjust = .p.adjust)
     .method <- gsub("\\.", "_", as.character(methods::functionBody(.method))[2])
   } else if(mode(.method) == 'character' && .method == 'limma') {
     table <- data %>% expression_limma(experiment, control)
@@ -102,7 +105,7 @@ expression <- function(
     dplyr::arrange(dplyr::desc(log2_foldchange)) %>%
     dplyr::filter(!is.na(foldchange))
 
-  data$operations <- append(data$operations, glue::glue("Analysis: expression difference {.method} {experiment}/{control}"))
+  data$operations <- append(data$operations, glue::glue("Analysis: expression difference {.method} {experiment}/{control}, p.adjust = {.p.adjust}"))
 
   return(data)
 }

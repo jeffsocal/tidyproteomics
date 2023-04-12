@@ -24,12 +24,14 @@ codify <- function(
   if(is.null(table)) {cli::cli_abort("No table provided for codifying")}
   if(length(intersect(annotations, names(table))) == 0) { annotations <- NULL }
 
-  get_experiments <- paste(c("import_file","sample_file","sample_id","sample","replicate"), sep="|")
-  get_quantitative <- paste(c(paste0("^", identifier, "$"), "^sample$", "replicate", "sample_id", "abundance"), sep="|")
-  get_annotations <- paste(c(identifier, annotations), sep="|")
-  get_accounting <- paste(c(identifier, "sample_id", "impute", "match_between", "num\\_", "\\_group"), sep="|")
+  cols_experiments <- c("import_file","sample_file","sample_id","sample","replicate")
 
-  tb_experiments = table %>%
+  get_experiments <- paste(cols_experiments, collapse="|")
+  get_quantitative <- paste(c(paste0("^", identifier, "$"), "^sample$", "replicate", "sample_id", "abundance"), collapse="|")
+  get_annotations <- paste0("^", paste(c(identifier, annotations), collapse="$|^"), "$")
+  get_accounting <- paste(c(identifier, "sample_id", "impute", "match_between", "num\\_", "\\_group"), collapse="|")
+
+  tb_experiments <- table %>%
     dplyr::select(dplyr::matches(get_experiments)) %>%
     unique() %>%
     dplyr::arrange(import_file, sample_file) %>%
@@ -41,7 +43,7 @@ codify <- function(
   table <- table %>%
     tibble::as_tibble() %>%
     dplyr::full_join(tb_experiments,
-                     by = intersect(names(table), get_experiments))
+                     by = intersect(names(table), cols_experiments))
 
   tb_experiments <- table %>%
     dplyr::select(dplyr::matches(get_experiments)) %>%
@@ -52,6 +54,19 @@ codify <- function(
     dplyr::select(dplyr::matches(get_quantitative)) %>%
     dplyr::select(!dplyr::matches("num\\_|\\_group")) %>%
     dplyr::relocate(c('sample_id','sample','replicate'))
+
+  tb_quantitative_tmp <- table %>%
+    dplyr::group_by_at(setdiff(colnames(tb_quantitative), 'abundance_raw')) %>%
+    dplyr::summarise(
+      abundance_raw = sum(abundance_raw),
+      .groups = 'drop'
+    )
+
+  if(nrow(tb_quantitative) > nrow(tb_quantitative_tmp)){
+    cli::cli_alert_info(c("i" = "... peptide accounting indicates multiple precursors"))
+    cli::cli_alert_info(c("i" = "...... {.emph {nrow(tb_quantitative)}} quantitative values merged down to {.emph {nrow(tb_quantitative_tmp)}}"))
+    tb_quantitative <- tb_quantitative_tmp
+  }
 
   if(!is.null(annotations) || length(annotations) > 0) {
     tb_annotations <- table %>% dplyr::select(dplyr::matches(get_annotations)) %>%
@@ -72,11 +87,36 @@ codify <- function(
     dplyr::relocate("sample_id") %>%
     unique()
 
-  if(nrow(tb_accounting) != nrow(tb_quantitative)) {
+  # need to understand what columns are in accounting
+  cols_share <- intersect(colnames(tb_accounting), colnames(tb_quantitative))
+  cols_grouped <- setdiff(colnames(tb_accounting), cols_share)
+
+  # test and indicate that imputation was not accounted for
+  if(length(intersect(c("match_between_runs","imputed"), names(tb_accounting))) == 0) {
+    tb_accounting <- tb_accounting %>% dplyr::mutate(imputed = 0)
+  }
+
+  # merge MBR and imputed into a single is.imputed value
+  tb_accounting <- tb_accounting %>%
+    tidyr::pivot_longer(
+      dplyr::matches("match_between_runs|imputed"),
+      names_to = 'method',
+      values_to = 'imputed'
+    )  %>%
+    dplyr::mutate(imputed = as.numeric(imputed)) %>%
+    dplyr::select(!c('method')) %>%
+    dplyr::group_by_at(cols_share) %>%
+    dplyr::slice_max(imputed, n=1, with_ties = FALSE) %>%
+    dplyr::ungroup()
+
+  n_rows_tb_accounting <- tb_accounting %>% dplyr::select(c('sample_id', identifier)) %>% unique() %>% nrow()
+  n_rows_tb_quantitative <- tb_quantitative %>% dplyr::select(c('sample_id', identifier)) %>% unique() %>% nrow()
+
+  if(n_rows_tb_accounting != n_rows_tb_quantitative) {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
     cli::cli_alert_info(c("x" = "Something did not parse correctly"))
-    cli::cli_alert_info(c("i" = "... table of quantitative values has {.emph {nrow(tb_quantitative)}} rows"))
-    cli::cli_alert_info(c("i" = "... table of accounting values has {.emph {nrow(tb_accounting)}} rows"))
+    cli::cli_alert_info(c("i" = "... quantitative values shows {.emph {nrow(tb_quantitative)}} unique values"))
+    cli::cli_alert_info(c("i" = "... accounting values shows {.emph {nrow(tb_accounting)}} unique values"))
     cli::cli_alert_info(c("i" = "... check the sample group expressions for {.emph pattern_extract}"))
   }
 
@@ -87,7 +127,7 @@ codify <- function(
     annotations = tb_annotations
   )
 }
-
+?p.adjust
 #' Meld a tidyproteomics data object into a single table
 #'
 #' @description

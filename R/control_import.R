@@ -21,7 +21,8 @@
 import <- function(
     files = NULL,
     platform = NULL,
-    analyte = NULL
+    analyte = NULL,
+    path = NULL
 ){
 
   # visible bindings
@@ -31,7 +32,7 @@ import <- function(
   if(is.null(platform)) {cli::cli_abort(c("x" = "No file platform indicated"))}
   if(is.null(analyte)) {cli::cli_abort(c("x" = "No file analyte indicated"))}
 
-  data <- files %>% data_import(platform, analyte)
+  data <- files %>% data_import(platform = platform, analyte = analyte, path = path)
 
   if(nrow(data$quantitative) == 0) {
     cli::cli_abort(c("x" = "... not data present"))

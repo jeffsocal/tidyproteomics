@@ -28,6 +28,8 @@ Importing is currently implemented for a few platforms and assume peptide level 
 +----------------------+---------------------------------+---------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | [MaxQuant]           | evidence.txt                    | proteinGroups.txt         | [website](https://www.maxquant.org/)                                                                                                                                                                     |
 +----------------------+---------------------------------+---------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| [FragPipe]           | combined_peptide.tsv            | combined_protein.tsv      | [website](https://fragpipe.nesvilab.org/)                                                                                                                                                                |
++----------------------+---------------------------------+---------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | [Skyline]            | \*.csv *MSstats peptide report* |                           | requires MSstats install                                                                                                                                                                                 |
 |                      |                                 |                           |                                                                                                                                                                                                          |
 |                      |                                 |                           | [website](https://skyline.ms/project/home/software/skyline/begin.view)                                                                                                                                   |
@@ -39,9 +41,9 @@ Importing is currently implemented for a few platforms and assume peptide level 
 |                      |                                 |                           | [website](https://github.com/HUPO-PSI/mzTab)                                                                                                                                                             |
 +----------------------+---------------------------------+---------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Table formatted data (eg. .csv, .tsv, .xlsx) from both ProteomeDiscoverer and MaxQuant meet the requirements, and are defined in the package data `tidyproteomics/inst/extdata/config/` accordingly. Note that the groups *sample*, *identifier* and *quantitative* are required, while the rest are optional, and only used if a match is found - currently this does not have good error handeling, so be aware. For ProteomeDiscoverer the peptide's config can be modified to use `Master Protein Accessions` or `Protein Accessions` if either column is present. Also note, that for some configurations the *sample* group has no defined "supplied name", as this is later derived by the extraction code defined in the columns labeled "pattern".
+Table formatted data (eg. .csv, .tsv, .xlsx) from ProteomeDiscoverer, MaxQuant and FragPipe meet the requirements, and are defined in the package data `tidyproteomics/inst/extdata/config/` accordingly. Note that the groups *sample*, *identifier* and *quantitative* are required, while the rest are optional, and only used if a match is found - currently this does not have good error handeling, so be aware. For ProteomeDiscoverer the peptide's config can be modified to use `Master Protein Accessions` or `Protein Accessions` if either column is present. Also note, that for some configurations the *sample* group has no defined "supplied name", as this is later derived by the extraction code defined in the columns labeled "pattern".
 
-The currently known and not directly supported quantitative proteomics platforms are [Spectronaut](https://biognosys.com/software/spectronaut/) and [Proteograph Analysis Suite](https://seer.bio/products/proteograph-analysis-suite/). Given a flat-file export, data from these platforms could also be importable.
+The currently known and not directly supported quantitative proteomics platforms are [Spectronaut](https://biognosys.com/software/spectronaut/) and [Proteograph Analysis Suite](https://seer.bio/products/proteograph-analysis-suite/). Given a flat-file export, data from these platforms could also be importable. See User Defined Import.
 
 ```{r, message = FALSE}
 library("dplyr")
@@ -130,7 +132,7 @@ data_proteins <- path_to_package_data("hela_proteins") %>%
 
 The MaxQuant software suite creates files in project sub directories following `current_project \> combined \> txt` with data both *peptides (evidence.txt)* and *proteins (proteinGroups.txt)*.
 
-The data exported from MaxQuant for the file *proteinGroups.txt* is not very "tidy", as it has mixed wide-format columns (eg. Abundance for each sample on a single row) and long-format. The data table from ProteomeDiscoverer is protein-centric wherein each row is dedicated to a single protein, rather than a single measurement. To clean up this data we need to "rotate" the wide-format columns such that each row in our new table is a single observation. In other words, we need a single abundance value for a single protein from a single sample, per row. To accomplish this we need to pivot the wide-format columns defined in the column **pivot** then "extract" the sample name from the column header as defined in the column **pattern_extract**. These patterns conform to standard regular expressions.
+The data exported from MaxQuant for the file *proteinGroups.txt* is not very "tidy", as it has mixed wide-format columns (eg. Abundance for each sample on a single row) and long-format. The data table from MaxQuant is protein-centric wherein each row is dedicated to a single protein, rather than a single measurement. To clean up this data we need to "rotate" the wide-format columns such that each row in our new table is a single observation. In other words, we need a single abundance value for a single protein from a single sample, per row. To accomplish this we need to pivot the wide-format columns defined in the column **pivot** then "extract" the sample name from the column header as defined in the column **pattern_extract**. These patterns conform to standard regular expressions.
 
 Note also that we want to remove rows from the decoy search labeled *REV\_\**, and indicated in the column **pattern_remove**.
 
@@ -198,6 +200,68 @@ data_proteins <- "path_to_maxquant_project/combined/txt/proteinGroups.txt" %>%
    reassign(field = 'sample', pattern = 'sample_7', replace = 'wt') %>%
    reassign(field = 'sample', pattern = 'sample_8', replace = 'wt')
 ```
+
+### FragPipe {#maxquant-1 data-link="MaxQuant"}
+
+The FragPipe software suite creates files in project sub directory with data both *peptides (combined_peptide.tsv)* and *proteins (combined_protein.tsv)*.
+
+The data exported from FragPipe for the file *combined_protein.tsv* is not very "tidy", as it has mixed wide-format columns (eg. Intensity for each sample on a single row) and long-format. The data table from FragPipe is protein-centric wherein each row is dedicated to a single protein, rather than a single measurement. To clean up this data we need to "rotate" the wide-format columns such that each row in our new table is a single observation. In other words, we need a single abundance value for a single protein from a single sample, per row. To accomplish this we need to pivot the wide-format columns defined in the column **pivot** then "extract" the sample name from the column header as defined in the column **pattern_extract**. These patterns conform to standard regular expressions.
+
+#### Initial Set Up
+
+FragPipe already removes rows from the decoy search if indicated in the workflow setup, if however this is not being done you can indicated a pettern in the column **pattern_remove**.
+
+#### Exporting
+
+##### Proteins
+
+The columns following columns should be considered. These can be modified in the file `tidyproteomics/inst/extdata/config/FragPipe_proteins.tsv`:
+
++--------------+-----------------+----------------------------------+------------------------+----------------+---------------+-------+------------+
+| category     | column_defined  | column_import                    | pattern_extract        | pattern_remove | pattern_split | pivot | *REQUIRED* |
++==============+=================+==================================+========================+================+===============+=======+============+
+| sample       | sample          |                                  | (?\<=\\s)[0-9]+        |                |               |       | YES        |
++--------------+-----------------+----------------------------------+------------------------+----------------+---------------+-------+------------+
+| sample       | sample_file     |                                  | (?\<=\\s)[0-9]+        |                |               |       | YES        |
++--------------+-----------------+----------------------------------+------------------------+----------------+---------------+-------+------------+
+| identifier   | protein         | \^Protein ID\$                   | (?\<=\\\|).\*?(?=\\\|) |                | \\;           |       | YES        |
++--------------+-----------------+----------------------------------+------------------------+----------------+---------------+-------+------------+
+| quantitative | abundance_raw   | \\sMaxLFQ\\sIntensity\$          |                        |                |               | TRUE  | YES        |
++--------------+-----------------+----------------------------------+------------------------+----------------+---------------+-------+------------+
+| accounting   | num_psms        | \^\\d\\sSpectral\\sCount\$       |                        |                |               | TRUE  |            |
++--------------+-----------------+----------------------------------+------------------------+----------------+---------------+-------+------------+
+| accounting   | num_psms_unique | \^\\sUnique\\sSpectral\\sCount\$ |                        |                |               | TRUE  |            |
++--------------+-----------------+----------------------------------+------------------------+----------------+---------------+-------+------------+
+| annotation   | description     | \^Description\$                  |                        |                |               |       |            |
++--------------+-----------------+----------------------------------+------------------------+----------------+---------------+-------+------------+
+| annotation   | gene_name       | \^Gene\$                         |                        |                |               |       |            |
++--------------+-----------------+----------------------------------+------------------------+----------------+---------------+-------+------------+
+
+##### Peptides
+
+The columns following columns should be considered. These can be modified in the file `tidyproteomics/inst/extdata/config/FragPipe_peptides.tsv`:
+
++--------------+----------------+-------------------------+------------------------+----------------+---------------+-------+------------+
+| category     | column_defined | column_import           | pattern_extract        | pattern_remove | pattern_split | pivot | *REQUIRED* |
++==============+================+=========================+========================+================+===============+=======+============+
+| sample       | sample         |                         | .+(?=\\\_\\d+\\s)      |                |               |       | YES        |
++--------------+----------------+-------------------------+------------------------+----------------+---------------+-------+------------+
+| sample       | sample_file    |                         | .+(?=\\sMax)           |                |               |       | YES        |
++--------------+----------------+-------------------------+------------------------+----------------+---------------+-------+------------+
+| identifier   | protein        | \^Protein ID\$          | (?\<=\\\|).\*?(?=\\\|) |                | \\;           |       | YES        |
++--------------+----------------+-------------------------+------------------------+----------------+---------------+-------+------------+
+| identifier   | peptide        | \^Peptide Sequence\$    |                        |                |               |       | YES        |
++--------------+----------------+-------------------------+------------------------+----------------+---------------+-------+------------+
+| quantitative | abundance_raw  | \\sMaxLFQ\\sIntensity\$ |                        |                |               | TRUE  | YES        |
++--------------+----------------+-------------------------+------------------------+----------------+---------------+-------+------------+
+| accounting   | num_psms       | \^\\sSpectral\\sCount\$ |                        |                |               | TRUE  |            |
++--------------+----------------+-------------------------+------------------------+----------------+---------------+-------+------------+
+| annotation   | description    | \^Protein Description\$ |                        |                |               |       |            |
++--------------+----------------+-------------------------+------------------------+----------------+---------------+-------+------------+
+| annotation   | gene_name      | \^Gene\$                |                        |                |               |       |            |
++--------------+----------------+-------------------------+------------------------+----------------+---------------+-------+------------+
+
+###  {data-link="Skyline"}
 
 ### Skyline
 

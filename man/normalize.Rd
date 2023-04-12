@@ -7,7 +7,8 @@
 normalize(
   data,
   ...,
-  .method = c("scaled", "median", "linear", "limma", "loess", "svm", "randomforest")
+  .method = c("scaled", "median", "linear", "limma", "loess", "svm", "randomforest"),
+  .cores = 1
 )
 }
 \arguments{

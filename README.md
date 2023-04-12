@@ -21,6 +21,7 @@ Importing is currently implemented for a few platforms and assume peptide level 
 |-----------------|--------------------|-----------------|-------------------|
 | ProteomeDiscoverer | \*.xlsx *peptides export*       | \*.xlsx *proteins export* | requires layout configuration |
 | MaxQuant           | evidence.txt                    | proteinGroups.txt         |                               |
+| FragPipe           | combined_peptide.tsv            | combined_protein.tsv      |                               |
 | Skyline            | \*.csv *MSstats peptide report* |                           | requires MSstats install      |
 | DIA-NN             | \*.tsv *peptide report*         |                           |                               |
 | mzTab              | \*.mzTab (v1.0.0)               | \*.mzTab (v1.0.0)         | does not track MBR            |

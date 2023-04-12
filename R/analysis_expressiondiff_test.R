@@ -3,9 +3,10 @@
 #' @param data tidyproteomics data object
 #' @param experiment a character string representing the experimental sample set
 #' @param control a character string representing the control sample set
-#' @param m.test a two-distribution test function returning a p_value for the null
+#' @param .method a two-distribution test function returning a p_value for the null
 #' hypothesis. Default is t.test. Example functions include t.test, wilcox.test,
 #' stats::ks.test ...
+#' @param .p.adjust a stats::p.adjust string for multiple test correction
 #' @param ... pass through arguments
 #'
 #' @return a tibble
@@ -14,8 +15,9 @@ expression_test <- function(
     data = NULL,
     experiment = NULL,
     control = NULL,
-    m.test = stats::t.test,
-    ...
+    .method = stats::t.test,
+    ...,
+    .p.adjust = 'BH'
 ){
 
   # visible bindings
@@ -82,7 +84,7 @@ expression_test <- function(
     return(log2(stats::median(tbl$fc)))
   }
 
-  calc_pv <- function(x, y, m.test = stats::t.test, ...){
+  calc_pv <- function(x, y, .method = stats::t.test, ...){
     y <- unlist(y$abundance)
     x <- unlist(x$abundance)
     y <- y[which(!is.na(y))]
@@ -91,7 +93,7 @@ expression_test <- function(
     if(length(x) <= 1) return(1)
     if(length(y) <= 1) return(1)
 
-    return(m.test(y, x)$p.value)
+    return(.method(y, x)$p.value)
   }
 
   calc_ae <- function(x, y){
@@ -105,7 +107,7 @@ expression_test <- function(
     dplyr::rename(x = tidyselect::all_of(experiment)) %>%
     dplyr::rename(y = tidyselect::all_of(control)) %>%
     dplyr::mutate(log2_foldchange = purrr::map2(x, y, calc_fc),
-                  p_value = purrr::map2(x, y, calc_pv, m.test, ...),
+                  p_value = purrr::map2(x, y, calc_pv, .method, ...),
                   average_expression = purrr::map2(x, y, calc_ae)) %>%
     tidyr::unnest(c(p_value, log2_foldchange, average_expression)) %>%
     dplyr::ungroup() %>%
@@ -118,7 +120,7 @@ expression_test <- function(
                   log2_foldchange,
                   p_value)
 
-  data_quant_out$adj_p_value <- data_quant_out$p_value %>% stats::p.adjust()
+  data_quant_out$adj_p_value <- data_quant_out$p_value %>% stats::p.adjust(method = .p.adjust)
 
   return(data_quant_out %>% munge_identifier('separate', data$identifier))
 

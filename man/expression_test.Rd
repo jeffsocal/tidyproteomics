@@ -8,8 +8,9 @@ expression_test(
   data = NULL,
   experiment = NULL,
   control = NULL,
-  m.test = stats::t.test,
-  ...
+  .method = stats::t.test,
+  ...,
+  .p.adjust = "BH"
 )
 }
 \arguments{
@@ -19,11 +20,13 @@ expression_test(
 
 \item{control}{a character string representing the control sample set}
 
-\item{m.test}{a two-distribution test function returning a p_value for the null
+\item{.method}{a two-distribution test function returning a p_value for the null
 hypothesis. Default is t.test. Example functions include t.test, wilcox.test,
 stats::ks.test ...}
 
 \item{...}{pass through arguments}
+
+\item{.p.adjust}{a stats::p.adjust string for multiple test correction}
 }
 \value{
 a tibble

@@ -4,7 +4,7 @@
 \alias{import}
 \title{Main function for importing data to the tidyproteomics list object}
 \usage{
-import(files = NULL, platform = NULL, analyte = NULL)
+import(files = NULL, platform = NULL, analyte = NULL, path = NULL)
 }
 \arguments{
 \item{files}{a character vector of file paths}
