@@ -1,8 +1,8 @@
 category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
-sample	sample		(?<=\s)[0-9]+			
-sample	sample_file		(?<=\s)[0-9]+			
+sample	sample		(?<=Intensity\s).+			
+sample	sample_file		(?<=Intensity\s).+			
 identifier	protein	^Protein IDs	(?<=\|).*?(?=\|)	^REV\_	\;	
 quantitative	abundance_raw	^Intensity\s				TRUE
-accounting	num_psms	^MS/MS count				
+accounting	num_psms	^MS/MS count$				
 accounting	num_peptides	^Peptides\s				TRUE
 accounting	num_unique_peptides	^Unique peptides\s				TRUE

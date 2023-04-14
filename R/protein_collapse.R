@@ -15,9 +15,14 @@
 #' be split according to protein prevalence
 #' @param .verbose a boolean
 #' @param .function an assignable protein abundance summary function, fsum, fmean,
-#' fgeomean and fmedian have constructed as NAs must be removed.
-#' Example: fmedian <- function(x){stats::median(x, na.rm = TRUE)}
-#' Example: fquantile <- function(x){stats::quantile(x, .75, na.rm = TRUE)}
+#' fgeomean and fmedian have constructed as NAs must be removed. The default is fsum().
+#'
+#' -  Example: fsum <- function(x){base::sum(x, na.rm = TRUE)}
+#'
+#' -  Example: fmedian <- function(x){stats::median(x, na.rm = TRUE)}
+#'
+#' -  Example: fquantile <- function(x){stats::quantile(x, .75, na.rm = TRUE)}
+#'
 #'
 #' @return a tidyproteomics data-object
 #' @importFrom rlang :=

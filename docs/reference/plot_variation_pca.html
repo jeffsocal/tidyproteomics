@@ -35,7 +35,8 @@ method that minimizes CVs while also retaining the dynamic range."><meta propert
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
+    <a class="dropdown-item" href="../articles/updates.html">Updates</a>
+    <a class="dropdown-item" href="../articles/data-object.html">The Data-Object</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Operations</h6>
     <a class="dropdown-item" href="../articles/importing.html">Importing</a>
@@ -43,6 +44,8 @@ method that minimizes CVs while also retaining the dynamic range."><meta propert
     <a class="dropdown-item" href="../articles/subsetting.html">Subsetting</a>
     <a class="dropdown-item" href="../articles/normalizing.html">Normalizing</a>
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
+    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
+    <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
     <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
@@ -51,11 +54,9 @@ method that minimizes CVs while also retaining the dynamic range."><meta propert
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
-    <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
-    <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/workflow-importing.html">Importing Demo</a>
     <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/updates.html">update history</a>
+    <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -112,13 +113,13 @@ method that minimizes CVs while also retaining the dynamic range.</p>
 <span class="r-in"><span>  <span class="fu">plot_variation_pca</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">linear regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[375ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[270ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">loess regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">loess regression</span> <span style="color: #B2B2B2;">[1.3s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">loess regression</span> <span style="color: #B2B2B2;">[1.6s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">randomforest regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">randomforest regression</span> <span style="color: #B2B2B2;">[49.5s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">randomforest regression</span> <span style="color: #B2B2B2;">[34.6s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span>

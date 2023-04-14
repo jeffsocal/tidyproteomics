@@ -7,14 +7,14 @@ str_break <- "\n------\n"
 test_path <- "~/Local/gitdata/tidyproteomics_data/"
 test_files <- c(
   # "FragPipe_19.1/combined_peptide.tsv",
-  "FragPipe_19.1/combined_protein.tsv",
+  "FragPipe_19.1/combined_protein.tsv"
   # "ProteomeDiscoverer_2.5/p97KD_HCT116_peptides.xlsx",
   # "ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx",
   # "MaxQuant_1.6.10.43/txt/evidence.txt",
   # "MaxQuant_1.6.10.43/txt/proteinGroups.txt",
   # "Skyline/dda_tryp_msstats_peptides.csv",
   # "DIA_NN_1.8.1/tryp-report.tsv",
-  "PXD004163/miR_Proteintable.tsv"
+  # "PXD004163/miR_Proteintable.tsv"
 )
 
 platforms <- c("FragPipe", "ProteomeDiscoverer", "MaxQuant", "Skyline", "DIA-NN", 'mzTab')

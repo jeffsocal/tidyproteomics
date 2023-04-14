@@ -8,7 +8,9 @@ navbar:
     articles:
       text: Articles
       menu:
-      - text: the tidyproteomics data-object
+      - text: Updates
+        href: articles/updates.html
+      - text: The Data-Object
         href: articles/data-object.html
       - text: '-------'
       - text: Operations
@@ -22,6 +24,10 @@ navbar:
         href: articles/normalizing.html
       - text: Imputing
         href: articles/imputing.html
+      - text: Annotating
+        href: articles/annotating.html
+      - text: Protein Accounting
+        href: articles/collapsing.html
       - text: '-------'
       - text: Analysis
       - text: Visualizing
@@ -34,15 +40,13 @@ navbar:
       - text: Workflows
       - text: Simple
         href: articles/workflow-simple.html
-      - text: Publication Demo
-        href: articles/workflow-publication.html
-      - text: Protein Accounting
-        href: articles/protein-accounting.html
+      - text: Importing Demo
+        href: articles/workflow-importing.html
       - text: User Defined Import
         href: articles/workflow-userimport.html
-      - text: '-------'
-      - text: update history
-        href: articles/updates.html
+      - text: Publication Demo
+        href: articles/workflow-publication.html
+
 template:
   bootstrap: 5
 reference:

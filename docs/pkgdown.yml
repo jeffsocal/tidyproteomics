@@ -2,6 +2,8 @@ pandoc: '3.0'
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
+  annotating: annotating.html
+  collapsing: collapsing.html
   data-object: data-object.html
   enrichment: enrichment.html
   expression: expression.html
@@ -9,15 +11,15 @@ articles:
   imputing: imputing.html
   normalizing: normalizing.html
   overview: overview.html
-  protein-accounting: protein-accounting.html
   subsetting: subsetting.html
   summarizing: summarizing.html
   updates: updates.html
   visualizing: visualizing.html
+  workflow-importing: workflow-importing.html
   workflow-publication: workflow-publication.html
   workflow-simple: workflow-simple.html
   workflow-userimport: workflow-userimport.html
-last_built: 2023-04-12T22:17Z
+last_built: 2023-04-14T22:23Z
 urls:
   reference: https://jeffsocal.github.io/tidyproteomics/reference
   article: https://jeffsocal.github.io/tidyproteomics/articles

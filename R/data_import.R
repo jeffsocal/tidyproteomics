@@ -94,7 +94,7 @@ data_import <- function(
 
     if(pivot_str != "") {
 
-      this_dat <- this_dat %>% dplyr::mutate(row_id = row_number())
+      this_dat <- this_dat %>% dplyr::mutate(row_id = dplyr::row_number())
 
       this_pivot_not <- this_dat %>%
         dplyr::select(!dplyr::matches(pivot_str, perl = TRUE))
@@ -122,7 +122,7 @@ data_import <- function(
           dplyr::rename(!!pivot_col_name := value)
 
         this_pivot_not <- this_pivot_not %>%
-          left_join(
+          dplyr::left_join(
             this_pivot,
             by = intersect(colnames(this_pivot_not), colnames(this_pivot))
           )

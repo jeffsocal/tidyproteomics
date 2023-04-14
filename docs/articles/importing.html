@@ -53,7 +53,8 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/data-object.html">the tidyproteomics data-object</a>
+    <a class="dropdown-item" href="../articles/updates.html">Updates</a>
+    <a class="dropdown-item" href="../articles/data-object.html">The Data-Object</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Operations</h6>
     <a class="dropdown-item" href="../articles/importing.html">Importing</a>
@@ -61,6 +62,8 @@
     <a class="dropdown-item" href="../articles/subsetting.html">Subsetting</a>
     <a class="dropdown-item" href="../articles/normalizing.html">Normalizing</a>
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
+    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
+    <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
     <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
@@ -69,11 +72,9 @@
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
-    <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
-    <a class="dropdown-item" href="../articles/protein-accounting.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/workflow-importing.html">Importing Demo</a>
     <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/updates.html">update history</a>
+    <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
   </div>
 </li>
       </ul>
@@ -112,10 +113,10 @@ flexible enough to accept other data platforms in flat files (.csv,
 .tsv, and .xlsx) with a custom configuration.</p>
 <table style="width:99%;" class="table">
 <colgroup>
-<col width="7%">
+<col width="8%">
 <col width="11%">
 <col width="9%">
-<col width="70%">
+<col width="69%">
 </colgroup>
 <thead><tr class="header">
 <th>Platform</th>
@@ -235,7 +236,7 @@ as what was supplied. In each line there is a pull-down menu for
 designating each file (or label for TMT) to one of the
 <code>Catigorical Factors</code>. This will now ensure that when
 importing the data there are properly labeled sample. No big deal if
-that hasn’t been done, it can be fixed with the <code>modify()</code>
+that hasn’t been done, it can be fixed with the <code><a href="https://purrr.tidyverse.org/reference/modify.html" class="external-link">modify()</a></code>
 function.</p>
 </div>
 <div class="section level4">
@@ -247,13 +248,13 @@ function.</p>
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/ProteomeDiscoverer_proteins.tsv</code>:</p>
-<table style="width:96%;" class="table">
+<table class="table">
 <colgroup>
 <col width="10%">
-<col width="15%">
 <col width="16%">
-<col width="15%">
-<col width="11%">
+<col width="17%">
+<col width="16%">
+<col width="12%">
 <col width="11%">
 <col width="5%">
 <col width="9%">
@@ -378,16 +379,16 @@ modified in the file
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/ProteomeDiscoverer_ppeptides.tsv</code>:</p>
-<table style="width:96%;" class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="10%">
-<col width="14%">
-<col width="19%">
 <col width="15%">
+<col width="20%">
+<col width="16%">
+<col width="12%">
 <col width="11%">
-<col width="10%">
 <col width="5%">
-<col width="8%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th>category</th>
@@ -543,7 +544,7 @@ file will only contain an entry for each file if in the initial MaxQuant
 configuration the Experiment column in the raw data tab has a unique
 value for each file (eg 1, 2, 3, …), otherwise the values get merged on
 common experiment groups in the output for the protein level data. The
-sample groups can then be set with the <code>modify()</code>
+sample groups can then be set with the <code><a href="https://purrr.tidyverse.org/reference/modify.html" class="external-link">modify()</a></code>
 function.</p>
 </div>
 <div class="section level4">
@@ -555,16 +556,16 @@ function.</p>
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/MaxQuant_proteins.tsv</code>:</p>
-<table style="width:96%;" class="table">
+<table class="table">
 <colgroup>
 <col width="10%">
-<col width="15%">
-<col width="15%">
-<col width="17%">
-<col width="11%">
+<col width="16%">
+<col width="16%">
+<col width="18%">
+<col width="12%">
 <col width="11%">
 <col width="5%">
-<col width="8%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th>category</th>
@@ -656,16 +657,16 @@ modified in the file
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/MaxQuant_peptides.tsv</code>:</p>
-<table style="width:96%;" class="table">
+<table style="width:100%;" class="table">
 <colgroup>
 <col width="10%">
-<col width="14%">
-<col width="16%">
+<col width="15%">
 <col width="17%">
-<col width="11%">
+<col width="18%">
+<col width="12%">
 <col width="11%">
 <col width="5%">
-<col width="8%">
+<col width="9%">
 </colgroup>
 <thead><tr class="header">
 <th>category</th>
@@ -809,12 +810,12 @@ a pettern in the column <strong>pattern_remove</strong>.</p>
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/FragPipe_proteins.tsv</code>:</p>
-<table style="width:96%;" class="table">
+<table class="table">
 <colgroup>
-<col width="9%">
-<col width="11%">
-<col width="22%">
-<col width="16%">
+<col width="10%">
+<col width="12%">
+<col width="24%">
+<col width="17%">
 <col width="11%">
 <col width="10%">
 <col width="5%">
@@ -920,13 +921,13 @@ modified in the file
 <p>The columns following columns should be considered. These can be
 modified in the file
 <code>tidyproteomics/inst/extdata/config/FragPipe_peptides.tsv</code>:</p>
-<table style="width:96%;" class="table">
+<table class="table">
 <colgroup>
 <col width="10%">
-<col width="11%">
+<col width="12%">
+<col width="19%">
 <col width="18%">
-<col width="17%">
-<col width="11%">
+<col width="12%">
 <col width="11%">
 <col width="5%">
 <col width="9%">

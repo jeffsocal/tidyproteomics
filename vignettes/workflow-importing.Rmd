@@ -1,0 +1,96 @@
+---
+title: "Importing Demo"
+output: rmarkdown::html_vignette
+description: |
+  tidyproteomics: simplified data object and analysis functions
+vignette: >
+  %\VignetteIndexEntry{Importing Demo}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+The following is a demonstration workflow for importing data from a public repository. For an additional importing demonstration see `vignette("subsetting")`. All the of examples presented here are from previously published data where the raw data was analyzed on each platform with basic settings for mass tolerance and PTMs.
+
+### ProteomeDiscoverer
+
+Exporting the data requires some setup for the correct columns. This is explained in `vignette("importing")`.
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+library(tidyverse)
+library(tidyproteomics)
+
+# download the data
+url <- "https://data.caltech.edu/records/aevwq-2ps50/files/ProteomeDiscoverer_2.5_p97KD_HCT116_proteins.xlsx?download=1"
+download.file(url, destfile = "./data/pd_proteins.xlsx")
+
+# import the data
+data_prot <- "./data/pd_proteins.xlsx" %>% import('ProteomeDiscoverer', 'proteins')
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidyproteomics)
+
+# import the data
+data_prot <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx" %>% import('ProteomeDiscoverer', 'proteins')
+
+data_prot
+```
+
+### MaxQuant
+
+Exporting the data requires some setup for the correct columns. This is explained in `vignette("importing")`.
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+library(tidyverse)
+library(tidyproteomics)
+
+# download the data
+url <- "https://data.caltech.edu/records/aevwq-2ps50/files/MaxQuant_1.6.10.43_proteinGroups.txt?download=1"
+download.file(url, destfile = "./data/mq_proteinGroups.txt")
+
+# import the data
+data_prot <- "./data/mq_proteinGroups.txt" %>% import('MaxQuant', 'proteins')
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidyproteomics)
+
+# import the data
+data_prot <- "~/Local/gitdata/tidyproteomics_data/MaxQuant_1.6.10.43/proteinGroups.txt" %>% import('MaxQuant', 'proteins')
+
+data_prot
+```
+
+### FragPipe
+
+Exporting the data requires some setup for the correct columns. This is explained in `vignette("importing")`.
+
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+library(tidyverse)
+library(tidyproteomics)
+
+# download the data
+url <- "https://data.caltech.edu/records/aevwq-2ps50/files/FragPipe_19.1_combined_protein.tsv?download=1"
+download.file(url, destfile = "./data/fp_combined_protein.tsv")
+
+# import the data
+data_prot <- "./data/fp_combined_protein.tsv" %>% import('FragPipe', 'proteins')
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidyproteomics)
+
+# import the data
+data_prot <- "~/Local/gitdata/tidyproteomics_data/FragPipe_19.1/combined_protein.tsv" %>% import('FragPipe', 'proteins')
+
+data_prot
+```

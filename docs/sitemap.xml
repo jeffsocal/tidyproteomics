@@ -10,6 +10,12 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/annotating.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/collapsing.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/data-object.html</loc>
   </url>
   <url>
@@ -50,6 +56,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/visualizing.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/workflow-importing.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/workflow-publication.html</loc>
