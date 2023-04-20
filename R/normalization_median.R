@@ -15,14 +15,14 @@ normalize_median <- function(
 
   # compute the median shift
   data_centered <- data_centered %>%
-    mutate(shift = median(abundance) - abundance)
+    dplyr::mutate(shift = stats::median(abundance, na.rm = TRUE) - abundance)
 
   # apply the median shift and return the data
   data %>%
-    left_join(data_centered,
+    dplyr::left_join(data_centered,
               by = c('sample','replicate'),
               suffix = c("","_median")) %>%
-    mutate(abundance_normalized = abundance + shift) %>%
-    select(identifier, sample, replicate, abundance_normalized) %>%
+    dplyr::mutate(abundance_normalized = abundance + shift) %>%
+    dplyr::select(identifier, sample, replicate, abundance_normalized) %>%
     return()
 }

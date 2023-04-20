@@ -84,19 +84,13 @@ normalize <- function(
 
     dc <- data %>%
       subset(..., .verbose = FALSE) %>%
-      extract(values = 'raw')
+      extract(values = 'raw') %>%
+      transform_log2(values = 'abundance') %>%
+      dplyr::rename(abundance = abundance_log2) %>%
+      dplyr::select(!dplyr::matches("^origin$"))
 
     pst_n <- dc$identifier %>% unique() %>% length()
     pst_range <- dc$abundance %>% range(na.rm = TRUE)
-
-    dc <- dc %>%
-      transform_log2(values = 'abundance') %>%
-      dplyr::rename(abundance = abundance_log2) %>%
-      dplyr::full_join(
-        data %>% extract(values = 'raw') %>% dplyr::select(!'abundance'),
-        by = c("identifier", "sample", "replicate")
-      )
-
 
     cli::cli_alert_warning("  normalization based on {pst_n} of {pre_n} identifiers")
     data$operations <- append(data$operations, glue::glue(" ... based on a subset of {pst_n} out of {pre_n} identifiers"))

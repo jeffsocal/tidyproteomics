@@ -40,6 +40,7 @@ plot_quantrank <- function(
     show_error = TRUE,
     show_rank_scale = FALSE,
     limit_rank = NULL,
+    display_subset = NULL,
     display_filter = c('none','log2_foldchange','p_value','adj_p_value'),
     display_cutoff = 1,
     palette = 'YlGnBu',
@@ -102,7 +103,7 @@ plot_quantrank <- function(
   for( i in 1:2 ){
 
     tb_sum <- tb_sum_org
-    if(display_filter == 'none'){ i <- 2 }
+    if(display_filter == 'none' & is.null(display_subset)){ i <- 2 }
 
     if(i == 1) {
       tb_sum <- tb_sum %>% dplyr::mutate(sample = NA)
@@ -116,6 +117,10 @@ plot_quantrank <- function(
         } else {
           tb_sum <- tb_sum %>% dplyr::filter(disp_filter > display_cutoff)
         }
+      } else if(!is.null(display_subset)){
+        dsp <- display_subset %>% extract() %>% dplyr::select(identifier) %>% unique()
+        tb_sum <- tb_sum %>% dplyr::inner_join(dsp, by = 'identifier')
+        display_filter <- "subset"
       }
       alpha = .25
     }
