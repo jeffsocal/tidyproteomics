@@ -180,11 +180,11 @@ Ventura 13.3 22E252). Parallel processing for both
 <code>randomforest</code> and <code>svm</code> are accomplished using
 <code>mclapply</code> from the R parallel package.</em></p>
 </blockquote>
-<table style="width:100%;" class="table">
+<table style="width:99%;" class="table">
 <colgroup>
-<col width="5%">
-<col width="83%">
-<col width="10%">
+<col width="16%">
+<col width="51%">
+<col width="31%">
 </colgroup>
 <thead><tr class="header">
 <th>Method</th>
@@ -205,7 +205,7 @@ similar</td>
 </tr>
 <tr class="odd">
 <td>linear</td>
-<td>a linear regression is applied to each sample according tosqr
+<td>a linear regression is applied to each data set according to
 individual analyte means</td>
 <td>0.2 sec</td>
 </tr>
@@ -216,14 +216,14 @@ individual analyte means</td>
 </tr>
 <tr class="odd">
 <td>loess</td>
-<td>a non-linear loess (quantile) regression applied to each sample
+<td>a non-linear loess (quantile) regression applied to each data set
 according to individual analyte means</td>
 <td>1.3 sec</td>
 </tr>
 <tr class="even">
 <td>svm</td>
 <td>a non-linear regression (support vector machine) applied to each
-sample according to individual analyte means. This implementation
+data set according to individual analyte means. This implementation
 utilizes eps-regression from the e1071 package and tuning of the gama
 and cost parameters.</td>
 <td>
@@ -233,7 +233,7 @@ and cost parameters.</td>
 </tr>
 <tr class="odd">
 <td>randomforest</td>
-<td>a non-linear random forest regression applied to each sample
+<td>a non-linear random forest regression applied to each data set
 according to individual analyte means.</td>
 <td>
 <p>37.8 sec</p>
@@ -446,7 +446,7 @@ selection.</p>
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="st">'median'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_normalization.html">plot_normalization</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[165ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[153ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span></span>

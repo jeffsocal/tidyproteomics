@@ -23,13 +23,16 @@ Normalization in tidyproteomics attempts to apply each function universally, mea
 library(tidyproteomics)
 library(tidyverse)
 ```
+
 Proteins have a single identifier ...
+
 ```{r}
 hela_proteins$identifier
 hela_proteins$quantitative %>% head()
 ```
 
 Peptides have multiple identifiers ...
+
 ```{r}
 hela_peptides$identifier
 hela_peptides$quantitative %>% head()
@@ -41,27 +44,36 @@ Normalization currently supports the methods described below.
 
 > *Benchmark timing was accomplished on an M1 MacBook Pro (macOS Ventura 13.3 22E252). Parallel processing for both `randomforest` and `svm` are accomplished using `mclapply` from the R parallel package.*
 
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| Method       | Description                                                                                                                                                                                                                   | Timing                    |
-+==============+===============================================================================================================================================================================================================================+===========================+
-| scaled       | values are aligned medians and dynamic ranges to adjusted to be similar                                                                                                                                                       | 0.3 sec                   |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| median       | values are simply aligned to the same median value                                                                                                                                                                            | 0.3 sec                   |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| linear       | a linear regression is applied to each sample according tosqr individual analyte means                                                                                                                                        | 0.2 sec                   |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| limma        | wrapper to the limma package                                                                                                                                                                                                  | 0.4 sec                   |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| loess        | a non-linear loess (quantile) regression applied to each sample according to individual analyte means                                                                                                                         | 1.3 sec                   |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| svm          | a non-linear regression (support vector machine) applied to each sample according to individual analyte means. This implementation utilizes eps-regression from the e1071 package and tuning of the gama and cost parameters. | 5min & 52.1 sec           |
-|              |                                                                                                                                                                                                                               |                           |
-|              |                                                                                                                                                                                                                               | 2min & 26.5 sec (4 cores) |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| randomforest | a non-linear random forest regression applied to each sample according to individual analyte means.                                                                                                                           | 37.8 sec                  |
-|              |                                                                                                                                                                                                                               |                           |
-|              |                                                                                                                                                                                                                               | 14.0 sec (4 cores)        |
-+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------------------------+
++--------------+---------------------------------------------+---------------------------+
+| Method       | Description                                 | Timing                    |
++==============+=============================================+===========================+
+| scaled       | values are aligned medians and dynamic      | 0.3 sec                   |
+|              | ranges to adjusted to be similar            |                           |
++--------------+---------------------------------------------+---------------------------+
+| median       | values are simply aligned to the same       | 0.3 sec                   |
+|              | median value                                |                           |
++--------------+---------------------------------------------+---------------------------+
+| linear       | a linear regression is applied to each      | 0.2 sec                   |
+|              | data set according to individual analyte    |                           |
+|              | means                                       |                           |
++--------------+---------------------------------------------+---------------------------+
+| limma        | wrapper to the limma package                | 0.4 sec                   |
++--------------+---------------------------------------------+---------------------------+
+| loess        | a non-linear loess (quantile) regression    | 1.3 sec                   |
+|              | applied to each data set according to       |                           |
+|              | individual analyte means                    |                           |
++--------------+---------------------------------------------+---------------------------+
+| svm          | a non-linear regression (support vector     | 5min & 52.1 sec           |
+|              | machine) applied to each data set           |                           |
+|              | according to individual analyte means.      | 2min & 26.5 sec (4 cores) |
+|              | This implementation utilizes eps-regression |                           |
+|              | from the e1071 package and tuning of the    |                           |
+|              | gama and cost parameters.                   |                           |
++--------------+---------------------------------------------+---------------------------+
+| randomforest | a non-linear random forest regression       | 37.8 sec                  |
+|              | applied to each data set according to       |                           |
+|              | individual analyte means.                   | 14.0 sec (4 cores)        |
++--------------+---------------------------------------------+---------------------------+
 
 ```{r, message = FALSE}
 library("dplyr")
@@ -146,7 +158,7 @@ In the code base locate the file `R > control_normalization.R`, this is where th
 if(m == 'median') {         d_norm <- d %>% normalize_median(dc_this)}
 ```
 
-All normalization functions require two inputs, a table of all the raw values log2 transformed, and a table of grouped and 'centered' values to normalize against. This table can either be computed from the entire proteome or from a subset as demonstrated above. 
+All normalization functions require two inputs, a table of all the raw values log2 transformed, and a table of grouped and 'centered' values to normalize against. This table can either be computed from the entire proteome or from a subset as demonstrated above.
 
 ``` r
 ## the log2 raw values
