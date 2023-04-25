@@ -534,7 +534,20 @@ designations and filter the data.</p>
 <span><span class="co">#&gt;                 imputed </span></span>
 <span><span class="co">#&gt; Annotations     (2) gene_name description </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
+<p>Note that the log10 dynamic range is 0.39, typically for TMT this is
+around 3, and for LFQ it can be anywhere from 4 to 8. The plot of
+quantitative rank and quantitative value also looks atypical – the
+manuscript states:</p>
+<div class="line-block">Peptide spectrum matches found at 1% false
+discovery rate were used to infer gene identities,<br>
+which were quantified using the medians of peptide spectrum matches
+quantification ratios.</div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="workflow-userimport_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p>The TMT labeling assignments are not not provided in the literature,
+but can be found in the DEqMS tutorial:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_prot</span> <span class="op">&lt;-</span> <span class="va">data_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">protein_qvalue</span> <span class="op">&lt;</span> <span class="fl">0.01</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'s126'</span>, <span class="st">'ctrl'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -568,41 +581,17 @@ designations and filter the data.</p>
 <span><span class="co">#&gt;                 imputed </span></span>
 <span><span class="co">#&gt; Annotations     (2) gene_name description </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
-<p>Note that the log10 dynamic range is 0.39, typically for TMT this is
-around 3, and for LFQ it can be anywhere from 4 to 8. The plot of
-quantitative rank and quantitative value also looks atypical.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="workflow-userimport_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_pca.html">plot_pca</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="workflow-userimport_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<p>Note that for expression profiling the data is log2 transformed
-internally for the expression analysis.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_prot</span> <span class="op">&lt;-</span> <span class="va">data_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">miR372</span><span class="op">/</span><span class="va">ctrl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">miR519</span><span class="op">/</span><span class="va">ctrl</span><span class="op">)</span>  </span>
-<span><span class="va">data_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/export_analysis.html">export_analysis</a></span><span class="op">(</span><span class="va">miR372</span><span class="op">/</span><span class="va">ctrl</span>, .analysis <span class="op">=</span> <span class="st">'expression'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 989 × 11</span></span></span>
-<span><span class="co">#&gt;    protein imputed     n avera…¹ propo…² foldc…³ log2_…⁴ p_value adj_p…⁵ gene_…⁶</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> ID1           0     6    1.76 0.001<span style="text-decoration: underline;">68</span>    2.25   1.17   0.038<span style="text-decoration: underline;">1</span>   0.313 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> IRF7          0     6    1.68 0.001<span style="text-decoration: underline;">61</span>    2.24   1.16   0.047<span style="text-decoration: underline;">2</span>   0.313 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> ANKRD3…       0     6    1.48 0.001<span style="text-decoration: underline;">41</span>    1.87   0.905  0.017<span style="text-decoration: underline;">3</span>   0.299 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> B4GALT3       0     6    1.41 0.001<span style="text-decoration: underline;">35</span>    1.87   0.903  0.116    0.366 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> APBA3         0     6    1.23 0.001<span style="text-decoration: underline;">17</span>    1.78   0.830  0.279    0.458 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> CASP10        0     6    1.41 0.001<span style="text-decoration: underline;">35</span>    1.74   0.798  0.012<span style="text-decoration: underline;">2</span>   0.279 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> PRTG          0     6    1.49 0.001<span style="text-decoration: underline;">42</span>    1.70   0.766  0.027<span style="text-decoration: underline;">5</span>   0.308 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> FBXO33        0     6    1.42 0.001<span style="text-decoration: underline;">36</span>    1.68   0.751  0.045<span style="text-decoration: underline;">5</span>   0.313 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> VGF           0     6    1.34 0.001<span style="text-decoration: underline;">28</span>    1.65   0.724  0.031<span style="text-decoration: underline;">7</span>   0.308 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> ITM2B         0     6    1.27 0.001<span style="text-decoration: underline;">21</span>    1.65   0.722  0.215    0.412 ENSG00…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 979 more rows, 1 more variable: description &lt;chr&gt;, and abbreviated</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​average_expression, ²​proportional_expression, ³​foldchange,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​log2_foldchange, ⁵​adj_p_value, ⁶​gene_name</span></span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_volcano.html">plot_volcano</a></span><span class="op">(</span><span class="va">miR372</span><span class="op">/</span><span class="va">ctrl</span>, significance_column <span class="op">=</span> <span class="st">'p_value'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> no values significant at current settings</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... <span style="color: #FF5F00; font-style: italic;">log2_foldchange</span> (<span style="color: #BB0000;">2</span>) and <span style="color: #FF5F00; font-style: italic;">p_value</span> (<span style="color: #BB0000;">0.05</span>)</span></span></code></pre></div>
-<p><img src="workflow-userimport_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
+<p>Note that DEqMS is <em>“.. takes into account the inherent dependence
+of protein variance on the num- ber of PSMs or peptides used for
+quantification, thereby pro- viding a more accurate variance
+estimation.”</em> and as such PSM count need to be be integrated into
+this analysis, following the protocol outlined in the documentation. The
+purpose of this vignette is not to replicate the DEqMS method, rather to
+demonstrate how one would build an import definition file to utilize
+tidyproteomics.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

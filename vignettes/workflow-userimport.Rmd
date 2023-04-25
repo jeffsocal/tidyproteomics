@@ -27,7 +27,7 @@ We will be using the data from the PRIDE archive [PXD004163](https://www.ebi.ac.
 
 NOTE: This analysis is following that demonstrated in the R package [DEqMS](https://bioconductor.org/packages/release/bioc/vignettes/DEqMS/inst/doc/DEqMS-package-vignette.html).
 
-```{r}
+```{r, eval=FALSE}
 url <- "https://ftp.ebi.ac.uk/pride-archive/2016/06/PXD004163/Yan_miR_Protein_table.flatprottable.txt"
 download.file(url, destfile = "./miR_Proteintable.tsv",method = "auto")
 ```
@@ -150,6 +150,17 @@ Printing out the data object we can see we have 10 samples from the TMT_10plex. 
 data_prot
 ```
 
+Note that the log10 dynamic range is 0.39, typically for TMT this is around 3, and for LFQ it can be anywhere from 4 to 8. The plot of quantitative rank and quantitative value also looks atypical -- the manuscript states:
+
+| Peptide spectrum matches found at 1% false discovery rate were used to infer gene identities, 
+| which were quantified using the medians of peptide spectrum matches quantification ratios.
+
+```{r}
+data_prot %>% plot_quantrank()
+```
+
+The TMT labeling assignments are not not provided in the literature, but can be found in the DEqMS tutorial:
+
 ```{r}
 data_prot <- data_prot %>%
   subset(protein_qvalue < 0.01) %>%
@@ -167,23 +178,9 @@ data_prot <- data_prot %>%
 data_prot
 ```
 
-Note that the log10 dynamic range is 0.39, typically for TMT this is around 3, and for LFQ it can be anywhere from 4 to 8. The plot of quantitative rank and quantitative value also looks atypical.
-
-```{r}
-data_prot %>% plot_quantrank()
-```
 
 ```{r}
 data_prot %>% plot_pca()
 ```
 
-Note that for expression profiling the data is log2 transformed internally for the expression analysis.
-
-```{r}
-data_prot <- data_prot %>% expression(miR372/ctrl) %>% expression(miR519/ctrl)  
-data_prot %>% export_analysis(miR372/ctrl, .analysis = 'expression')
-```
-
-```{r}
-data_prot %>% plot_volcano(miR372/ctrl, significance_column = 'p_value')
-```
+Note that DEqMS is _".. takes into account the inherent dependence of protein variance on the num- ber of PSMs or peptides used for quantification, thereby pro- viding a more accurate variance estimation."_ and as such PSM count need to be be integrated into this analysis, following the protocol outlined in the documentation. The purpose of this vignette is not to replicate the DEqMS method, rather to demonstrate how one would build an import definition file to utilize tidyproteomics.
