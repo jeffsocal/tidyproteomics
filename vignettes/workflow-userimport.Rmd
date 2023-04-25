@@ -25,7 +25,7 @@ In this document, we will walk you through the process of creating a custom impo
 
 We will be using the data from the PRIDE archive [PXD004163](https://www.ebi.ac.uk/pride/archive/projects/PXD004163), which fortunately has a decently preserved data file from a TMT experiment. Reading into the *Data Processing Protocol* we find a not-standardized analysis pipeline were raw files were converted to mzML format, searched using MSGF+ and Percolator, and quantified using OpenMS project's IsobaricAnalyzer. PSMs found at 1% FDR were used to infer gene identities and quantify using PSM quantification ratios.
 
-NOTE: This analysis is following that demonstrated in the R package [DEqMS](https://bioconductor.org/packages/release/bioc/vignettes/DEqMS/inst/doc/DEqMS-package-vignette.html).
+NOTE: An indepth analysis of this data is provided in the online [DEqMS](https://bioconductor.org/packages/release/bioc/vignettes/DEqMS/inst/doc/DEqMS-package-vignette.html) documentation. The discussion here is simply about how to import data derived by a method other than those described in the `vignette("importing")`.
 
 ```{r, eval=FALSE}
 url <- "https://ftp.ebi.ac.uk/pride-archive/2016/06/PXD004163/Yan_miR_Protein_table.flatprottable.txt"
@@ -35,7 +35,7 @@ download.file(url, destfile = "./miR_Proteintable.tsv",method = "auto")
 After downloading we find the following (transposed here for readability):
 
 |              |                                           |                                                       |                                                                  |                                                                 |     |
-|--------------|-------------------------------------------|-------------------------------------------------------|------------------------------------------------------------------|-----------------------------------------------------------------|-----|
+|------------|------------|------------|------------|------------|------------|
 |              | ***header***                              | ***row_1***                                           | ***row_2***                                                      | ***row_3***                                                     | ... |
 | ***col_01*** | Protein accession                         | A2M                                                   | A2ML1                                                            | AAAS                                                            | ... |
 | ***col_02*** | Gene                                      | NA                                                    | NA                                                               | NA                                                              | ... |
@@ -178,9 +178,8 @@ data_prot <- data_prot %>%
 data_prot
 ```
 
-
 ```{r}
 data_prot %>% plot_pca()
 ```
 
-Note that DEqMS is _".. takes into account the inherent dependence of protein variance on the num- ber of PSMs or peptides used for quantification, thereby pro- viding a more accurate variance estimation."_ and as such PSM count need to be be integrated into this analysis, following the protocol outlined in the documentation. The purpose of this vignette is not to replicate the DEqMS method, rather to demonstrate how one would build an import definition file to utilize tidyproteomics.
+Note that DEqMS *"**.. takes into account the inherent dependence of protein variance on the number of PSMs or peptides used for quantification, thereby providing a more accurate variance estimation**."* and as such PSM count need to be be integrated into this analysis, following the protocol outlined in the documentation. The purpose of this vignette is not to replicate the DEqMS method, rather to demonstrate how one would build an import definition file to utilize tidyproteomics.
