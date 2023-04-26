@@ -4,25 +4,38 @@
 #' `collapse()` produces a protein based tidyproteomics data-object from a peptide based tidyproteomics data-object.
 #'
 #' @param data a tidyproteomics data-object
-#' @param collapse_to a character string
-#' @param assign_by the method to by which to combine peptides into proteins
+#' @param collapse_to a character string representing the final aggregation point.
+#' Conventionally this is the protein name or id, however, if a gene_name or
+#' any other term exists in the annotations table of the data-object, peptides can
+#' be aggregated to that.
+#' @param assign_by the method to by which to combine peptides into proteins;
+#' **all-possible** allows peptide's quantitative value to be included in all assigned
+#' proteins, **razor-local** (razor peptides are shared between proteins, a peptide
+#' which could belong to different proteins is assigned to the protein that has the
+#' highest likelihood to be actually present in the sample, so the shared peptide
+#' can only contribute to the identification score of the protein group which
+#' has the highest probability of being in the sample), in this case assignment
+#' goes to the protein of highest probability only within a sample class, such that
+#' peptides from another sample group which change the protein of highest probability
+#' are not accounted for in this scheme. **razor-global** determines protein of
+#' highest probability using all available peptides in the data set, **non-homologous**
+#' only utilizes the abundance values from peptides that have a single unique identity.
 #' @param top_n a numeric to indicate the N number of peptides summed account for
 #' the protein quantitative value, this assumes that peptides have been summed across
 #' charge states
-#' @param fasta_path if supplied, it will be used to fill in annotation values such as
-#' description, protein_name and gene_name
-#' @param split_abundance a boolean to indicate if abundances for razor peptides should
-#' be split according to protein prevalence
+#' @param fasta_path if supplied, it will be used to fill in annotation values
+#' such as description, protein_name and gene_name
+#' @param split_abundance (experimental) a boolean to indicate if abundances for razor peptides
+#' should be split according to protein prevalence, or the proportion of total
+#' abundance between all proteins that share a particular peptide.
 #' @param .verbose a boolean
 #' @param .function an assignable protein abundance summary function, fsum, fmean,
-#' fgeomean and fmedian have constructed as NAs must be removed. The default is fsum().
-#'
-#' -  Example: fsum <- function(x){base::sum(x, na.rm = TRUE)}
-#'
-#' -  Example: fmedian <- function(x){stats::median(x, na.rm = TRUE)}
-#'
-#' -  Example: fquantile <- function(x){stats::quantile(x, .75, na.rm = TRUE)}
-#'
+#' fgeomean and fmedian have constructed as NAs must be removed. The default is
+#' fsum() `fsum <- function(x){base::sum(x, na.rm = TRUE)}`,
+#' where x is the vector of peptide abundances assigned to that protein
+#' by the `assign_by` method. Note - peptides that have a 0 or NA quantitative
+#' value are still used to determine razor assignments, as that sequence was
+#' observed, quantitative values are just missing.
 #'
 #' @return a tidyproteomics data-object
 #' @importFrom rlang :=

@@ -11,6 +11,7 @@ plot_quantrank(
   show_error = TRUE,
   show_rank_scale = FALSE,
   limit_rank = NULL,
+  display_subset = NULL,
   display_filter = c("none", "log2_foldchange", "p_value", "adj_p_value"),
   display_cutoff = 1,
   palette = "YlGnBu",
