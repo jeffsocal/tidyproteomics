@@ -58,6 +58,7 @@ reference:
   - import
   - export_quant
   - export_analysis
+  - as.data.frame.tidyproteomics
   - load_local
   - save_local
   - save_table

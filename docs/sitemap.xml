@@ -40,12 +40,6 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/overview.html</loc>
   </url>
   <url>
-    <loc>https://jeffsocal.github.io/tidyproteomics/articles/protein-accounting.html</loc>
-  </url>
-  <url>
-    <loc>https://jeffsocal.github.io/tidyproteomics/articles/protein-inferencing.html</loc>
-  </url>
-  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/subsetting.html</loc>
   </url>
   <url>
@@ -86,6 +80,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/annotate.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/as.data.frame.tidyproteomics.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/center.html</loc>
