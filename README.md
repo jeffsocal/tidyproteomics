@@ -13,6 +13,11 @@ This package supports at a high level:
 -   two-sample expression & term enrichment analysis
 -   protein inference, sequence coverage and visualization
 
+## Links
+
+-   Code: [https://github.com/jeffsocal/tidyproteomics](https://github.com/jeffsocal/tidyproteomics)
+-   Docs: [https://jeffsocal.github.io/tidyproteomics/](https://jeffsocal.github.io/tidyproteomics/)
+
 ## Data Support
 
 Importing is currently implemented for a few platforms and assume peptide level FDR (at the user's desired level) has already been accounted for. See `vignette("importing")`. Importing is flexible enough to accept other data platforms in flat files (.csv, .tsv, and .xlsx) with a custom configuration.

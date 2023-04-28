@@ -54,14 +54,24 @@ library(ggplot2)
 library(tidyproteomics)
 ```
 
+Here we import a data-object of ProteomeDiscoverer's protein level accounting and investigate the difference between ProteomeDiscoverer's protein accounting and that implemented by _tidyproteomics_.
+```{r, eval=FALSE}
+# download the data
+url_pro <- "https://data.caltech.edu/records/aevwq-2ps50/files/ProteomeDiscoverer_2.5_p97KD_HCT116_proteins.xlsx?download=1"
+url_pep <- "https://data.caltech.edu/records/aevwq-2ps50/files/ProteomeDiscoverer_2.5_p97KD_HCT116_peptides.xlsx?download=1"
+
+download.file(url_pro, destfile = "./data/pd_proteins.xlsx")
+download.file(url_pep, destfile = "./data/pd_peptides.xlsx")
+
+# import the data
+pro_data <- "./data/pd_proteins.xlsx" %>% import('ProteomeDiscoverer', 'proteins')
+pep_data <- "./data/pd_peptides.xlsx" %>% import('ProteomeDiscoverer', 'peptides')
+```
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 pep_data <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HCT116_peptides.xlsx" %>%
   import("ProteomeDiscoverer", "peptides")
 ```
-
-#### ProteomeDiscoverer's Protein Accounting
-
-We import a data-object of ProteomeDiscoverer's protein level accouting
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 pro_data <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx" %>%
@@ -286,7 +296,7 @@ tbl_merged_razor %>%
   knitr::kable()
 ```
 
-#### Collapsing to Gene Name
+### Collapsing to Gene Name
 
 Alternatively, peptide level data can be collapsed to any Annotation term, in this case we will collapse to gene_name after adding the annotations to the peptide data object. See `vignette("annotating")`.
 
