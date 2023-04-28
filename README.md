@@ -15,8 +15,13 @@ This package supports at a high level:
 
 ## Links
 
--   Code: [https://github.com/jeffsocal/tidyproteomics](https://github.com/jeffsocal/tidyproteomics)
--   Docs: [https://jeffsocal.github.io/tidyproteomics/](https://jeffsocal.github.io/tidyproteomics/)
+### R Package
+-   Code: [github.com/jeffsocal/tidyproteomics](https://github.com/jeffsocal/tidyproteomics)
+-   Docs: [jeffsocal.github.io/tidyproteomics/](https://jeffsocal.github.io/tidyproteomics/)
+
+### RShiny App
+-   Code: [github.com/ejmackrell/tidyproteomics-interactive](https://github.com/ejmackrell/tidyproteomics-interactive)
+-   Web : [bioinformatics.pel.caltech.edu/tidyproteomics/](http://bioinformatics.pel.caltech.edu/tidyproteomics/)
 
 ## Data Support
 
