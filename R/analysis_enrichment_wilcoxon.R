@@ -51,7 +51,7 @@ enrichment_wilcoxon <- function(
 
     # table of annotation to test
     tbl_test <- data_expression %>%
-      dplyr::group_by(dplyr::across(identifier)) %>%
+      dplyr::group_by_at(identifier) %>%
       dplyr::mutate(annotation = as.character(annotation)) %>%
       dplyr::mutate(rank = dplyr::row_number()) %>%
       dplyr::mutate(rank = ifelse(annotation == annotation_str, 0, rank)) %>%

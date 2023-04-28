@@ -76,7 +76,7 @@ plot_compexp <- function(
     table_b %>% dplyr::mutate(name = 'table_b')
   ) %>%
     dplyr::bind_rows() %>%
-    dplyr::group_by(dplyr::across(c('name', labels_column))) %>%
+    dplyr::group_by_at(c('name', labels_column)) %>%
     dplyr::slice_min(.data[[significance_column]], n = 1, with_ties = F) %>%
     dplyr::ungroup()
 

@@ -93,9 +93,9 @@ expression <- function(
       dplyr::filter(sample_id %in% sample_ids) %>%
       tidyr::pivot_longer(dplyr::matches("match|impute"), names_to = 'type', values_to = 'imputed') %>%
       dplyr::filter(!is.na(imputed)) %>%
-      dplyr::group_by(dplyr::across(c(data$identifier, "sample_id"))) %>%
+      dplyr::group_by_at(c(data$identifier, "sample_id")) %>%
       dplyr::summarise(imputed = min(imputed) == 1, .groups = 'drop') %>%
-      dplyr::group_by(dplyr::across(data$identifier)) %>%
+      dplyr::group_by_at(data$identifier) %>%
       dplyr::summarise(imputed = sum(imputed)/dplyr::n(), n = dplyr::n(), .groups = 'drop') %>%
       dplyr::left_join(table, by = data$identifier)
   }

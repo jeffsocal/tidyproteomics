@@ -22,7 +22,7 @@ adventitious to select a optimal normalization method based on performance."><me
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,10 +128,10 @@ adventitious to select a optimal normalization method based on performance.</p>
 <span class="r-in"><span>     <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">scaled shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[232ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[231ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[259ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[141ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span>
@@ -140,12 +140,9 @@ adventitious to select a optimal normalization method based on performance.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample files protein_groups proteins peptides peptides_unique quantifiable</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control     3           7055     7055    66329           58706         90.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     3           7055     7055    66329           58706         90.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1600474</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2099227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sample protein_groups proteins peptides peptides_unique quantifiable  CVs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    control          21165     7055    66329           58706         90.8 0.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown          21165     7055    66329           58706         90.9 0.13</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># normalize between samples according to a subset, then apply to all values</span></span></span>
@@ -158,10 +155,10 @@ adventitious to select a optimal normalization method based on performance.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span>   normalization based on 5329 of 5346 identifiers</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">scaled shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[233ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[221ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[138ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[132ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span>
@@ -170,12 +167,9 @@ adventitious to select a optimal normalization method based on performance.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample files protein_groups proteins peptides peptides_unique quantifiable</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control     3           7055     7055    66329           58706         90.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     3           7055     7055    66329           58706         90.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.1600474</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  0.2099227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sample protein_groups proteins peptides peptides_unique quantifiable  CVs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    control          21165     7055    66329           58706         90.8 0.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown          21165     7055    66329           58706         90.9 0.13</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

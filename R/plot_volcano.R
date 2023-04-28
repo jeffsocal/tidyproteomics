@@ -51,7 +51,7 @@ plot_volcano <- function(
     log2fc_column = 'log2_foldchange',
     significance_max = 0.05,
     significance_column = 'adj_p_value',
-    labels_column = 'protein',
+    labels_column = NULL,
     show_pannels = TRUE,
     show_lines = TRUE,
     show_fc_scale = TRUE,
@@ -79,6 +79,7 @@ plot_volcano <- function(
   table_cols <- colnames(table)
   log2fc_column <- rlang::arg_match(log2fc_column, table_cols)
   significance_column <- rlang::arg_match(significance_column, table_cols)
+  if(is.null(labels_column)) { labels_column <- data$identifier[1] }
 
   if(abs(mean(table[[log2fc_column]],na.rm=T) - 1) < 0.05) {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "red")))

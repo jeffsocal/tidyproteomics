@@ -17,41 +17,27 @@ This package supports at a high level:
 
 Importing is currently implemented for a few platforms and assume peptide level FDR (at the user's desired level) has already been accounted for. See `vignette("importing")`. Importing is flexible enough to accept other data platforms in flat files (.csv, .tsv, and .xlsx) with a custom configuration.
 
-+--------------------+---------------------------------+---------------------------+-------------------------------+
 | Platform           | peptides                        | proteins                  | notes                         |
-+====================+=================================+===========================+===============================+
+|--------------------|---------------------------------|---------------------------|-------------------------------|
 | ProteomeDiscoverer | \*.xlsx *peptides export*       | \*.xlsx *proteins export* | requires layout configuration |
-+--------------------+---------------------------------+---------------------------+-------------------------------+
 | MaxQuant           | evidence.txt                    | proteinGroups.txt         |                               |
-+--------------------+---------------------------------+---------------------------+-------------------------------+
 | FragPipe           | combined_peptide.tsv            | combined_protein.tsv      |                               |
-+--------------------+---------------------------------+---------------------------+-------------------------------+
 | Skyline            | \*.csv *MSstats peptide report* |                           | requires MSstats install      |
-+--------------------+---------------------------------+---------------------------+-------------------------------+
 | DIA-NN             | \*.tsv *peptide report*         |                           |                               |
-+--------------------+---------------------------------+---------------------------+-------------------------------+
 | mzTab              | \*.mzTab (v1.0.0)               | \*.mzTab (v1.0.0)         | does not track MBR            |
-+--------------------+---------------------------------+---------------------------+-------------------------------+
 
 ## Ease of Use
 
 This package supports the same [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) utilized in the tidy-verse functions like filter, and introduces the `%like%` operator, see `vignette("subsetting")` . These operations can extend to all aspects of the data set, including sample names, protein IDs, annotations and accountings like *match_between_runs* and *num_peptides*.
 
-+--------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------+
-| operator                                                                 | description          | example                                                                  |
-+==========================================================================+======================+==========================================================================+
-| ==                                                                       | equals               | `sample == 'wt'` , `match_between_runs == FALSE`                         |
-+--------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------+
-| !=                                                                       | does not equal       | `biological_function != 'DNA metabolism'`                                |
-+--------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------+
-| \<, \>                                                                   | less, greater than   | `num_unique_peptides >= 2`                                               |
-+--------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------+
-| %like%                                                                   | contains             | `description %like% 'ribosome'`                                          |
-+--------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------+
-| ! %like%                                                                 | does not contain     | `!description %like% 'ribosome'`                                         |
-+--------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------+
-| /                                                                        | ratio _(expression)_ | `experiment / control`                                                   |
-+--------------------------------------------------------------------------+----------------------+--------------------------------------------------------------------------+
+| operator                  | description          | example                                          |
+|---------------------------|----------------------|--------------------------------------------------|
+| ==                        | equals               | `sample == 'wt'` , `match_between_runs == FALSE` |
+| !=                        | does not equal       | `biological_function != 'DNA metabolism'`        |
+| \<, \>                    | less, greater than   | `num_unique_peptides >= 2`                       |
+| %like%                    | contains             | `description %like% 'ribosome'`                  |
+| ! %like%                  | does not contain     | `!description %like% 'ribosome'`                 |
+| /                         | ratio *(expression)* | `experiment / control`                           |
 
 Expression analysis also utilizes this type of syntax when referencing samples for analysis. For example `data %>% expression(knockdown/control)` would know to run the differential expression of the sample *ko* with respect to the sample *wt* such that positive log2 difference would be up-expressed in *ko* and a negative log2 differences would be down-expressed in *ko*.
 
@@ -63,19 +49,13 @@ This package divides data into tables similar to those in SQL, making it easy to
 
 ### Experimental Table
 
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | Variable    | Reference                                                                                                                               |
-+=============+=========================================================================================================================================+
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------|
 | sample_id   | A checksum id on the individual data imported, allows for an unambiguous identifier usefull in differentiating samples of the same name |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | import_file | The file referenced at import, allows for multiple files to be merged                                                                   |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | sample_file | The individual MS file, or for TMT the channel, that contains data for a single observation of a given protein                          |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | sample      | The name of the MS data collected for a given class, collection, of a specimen or a cell culture, etc.                                  |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 | replicate   | A tidyproteomics derived integer assignment to a collection of same-named samples                                                       |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
 [Example]{.underline}
 
@@ -97,23 +77,15 @@ hela_proteins$experiments
 
 ### Quantitation Table
 
-+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Variable                       | Reference                                                                                                                                                                                                                                                                                                                   |
-+================================+=============================================================================================================================================================================================================================================================================================================================+
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | sample_id                      | A checksum id on the individual data imported, allows for an unambiguous identifier useful in differentiating samples of the same name                                                                                                                                                                                      |
-+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | sample                         | The name of the MS data collected for a given class, collection of sampling of tissue, a culture etc.                                                                                                                                                                                                                       |
-+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | replicate                      | A tidyproteomics derived integer assignment to a collection of same-named samples                                                                                                                                                                                                                                           |
-+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | *identifier*                   | The identifier of the "thing" being measured.                                                                                                                                                                                                                                                                               |
-|                                |                                                                                                                                                                                                                                                                                                                             |
 | protein                        | In the case of protein-level data, this is simply `protein` and is usually populated with UniProt accession numbers, names, or other protein identifiers.                                                                                                                                                                   |
-|                                |                                                                                                                                                                                                                                                                                                                             |
 | protein, peptide, modification | In the case of peptide-level data, this is a multiple of `protein` (accession number), `peptide` (amino acid sequence) and `modification` (post-translational modification).                                                                                                                                                |
-+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | abundance_raw                  | The imported quantitative measure for each protein or peptide. The tidyproteomics data object stores abundance values for the raw data and each normalization. This allows for the direct comparison of normalization methods against the raw data, and for one set of abundance values to be used for subsequent analyses. |
-+--------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 [Example]{.underline}
 
@@ -136,15 +108,11 @@ hela_proteins$quantitation
 
 ### Annotation Table
 
-+--------------+------------------------------------------------------------------------------+
 | Variable     | Reference                                                                    |
-+==============+==============================================================================+
+|--------------|------------------------------------------------------------------------------|
 | *identifier* | The identifier of the "thing" being measured.                                |
-+--------------+------------------------------------------------------------------------------+
 | term         | The name of the collection of annotations, such as gene_name or description. |
-+--------------+------------------------------------------------------------------------------+
 | annotation   | The descriptive annotation.                                                  |
-+--------------+------------------------------------------------------------------------------+
 
 [Example]{.underline}
 

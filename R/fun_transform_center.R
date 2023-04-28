@@ -31,7 +31,7 @@ center <- function(
   }
 
   table  %>%
-    dplyr::group_by(dplyr::across(group_by)) %>%
+    dplyr::group_by_at(group_by) %>%
     fun_app(fun = fun_center, val = values) %>%
     dplyr::rename({{value_method}} := {{values}})
 }

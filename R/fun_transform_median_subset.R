@@ -18,7 +18,7 @@ transform_median <- function(
   abundance <- NULL
 
   data  %>%
-    dplyr::group_by(dplyr::across(group_by)) %>%
+    dplyr::group_by_at(group_by) %>%
     dplyr::summarise(
       abundance = stats::median(abundance, na.rm = T),
       .groups = "drop"

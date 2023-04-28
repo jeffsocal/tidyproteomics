@@ -50,7 +50,7 @@ rm.mbr <- function(
 
   r2a <- data$accounting %>%
     dplyr::inner_join(data$experiments, by = 'sample_id') %>%
-    dplyr::group_by(dplyr::across(v_groups)) %>%
+    dplyr::group_by_at(v_groups) %>%
     dplyr::summarise(
       n_mbr = length(which(match_between_runs == FALSE)),
       .groups = 'drop'

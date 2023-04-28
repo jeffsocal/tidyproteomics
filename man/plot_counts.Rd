@@ -6,7 +6,7 @@
 \usage{
 plot_counts(
   data = NULL,
-  accounting = c("protein_groups", "proteins", "peptides", "peptides_unique"),
+  accounting = NULL,
   show_replicates = TRUE,
   facet_groups = FALSE,
   impute_max = 0.5,

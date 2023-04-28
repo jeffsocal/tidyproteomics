@@ -15,7 +15,7 @@ normalize_scaled <- function(
   abundance <- NULL
 
   data_centered <- data_centered %>%
-    dplyr::inner_join(data %>%
+    dplyr::left_join(data %>%
                         center(group_by = c('sample', 'replicate'), values = 'abundance', method='sum') %>%
                         dplyr::rename(abundance = dplyr::matches('abundance')),
                       by = c('sample', 'replicate'), suffix = c('','_all')) %>%

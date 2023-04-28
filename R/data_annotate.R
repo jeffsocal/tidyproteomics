@@ -26,11 +26,25 @@ annotate <- function(
 
   annotation_have <- colnames(annotations)
   annotation_need <- c(data$identifier, 'term', 'annotation')
+  v_diff <- base::setdiff(annotation_need, annotation_have)
+
+  if(data$analyte == 'peptides' & length(v_diff) > 0) {
+    g_diff <- setdiff(data$identifier, v_diff)
+    annotations <- annotations %>%
+      left_join(data$quantitative %>%
+                  dplyr::select(data$identifier) %>%
+                  unique(),
+                by = g_diff)
+
+    annotation_have <- colnames(annotations)
+    annotation_need <- c(data$identifier, 'term', 'annotation')
+    v_diff <- base::setdiff(annotation_need, annotation_have)
+  }
 
   l_have <- annotation_have %>% length()
   l_need <- annotation_need %>% length()
-  v_diff <- base::setdiff(annotation_need, annotation_have)
   l_intr <- base::intersect(annotation_have, annotation_need) %>% length()
+
   if(l_have != l_need) {
     cli::cli_abort(c("x" = "Not all columns are present",
                      "i" = "Have {annotation_have}",
@@ -46,14 +60,14 @@ annotate <- function(
 
   if(duplicates == "merge") {
     data$annotations <- data$annotations %>%
-      dplyr::group_by(dplyr::across(c(data$identifier, term))) %>%
+      dplyr::group_by_at(c(data$identifier, 'term')) %>%
       dplyr::summarise(
         annotation = paste(annotation, collapse = "; "),
         .groups = 'drop'
       )
   } else if(duplicates == "replace") {
     data$annotations <- data$annotations %>%
-      dplyr::group_by(dplyr::across(c(data$identifier, term))) %>%
+      dplyr::group_by_at(c(data$identifier, 'term')) %>%
       dplyr::mutate(duplicate = dplyr::row_number()) %>%
       dplyr::slice_max(duplicate, n = 1, with_ties = FALSE) %>%
       dplyr::select(!duplicate)

@@ -37,6 +37,7 @@ stats_summary <- function(
   if(group_by == 'experiment') { group_by <- 'sample_id' }
   if(group_by == 'global') { group_by <- NULL }
   check_data(data)
+  identifier <- data$identifier
 
   cli::cli_progress_cleanup()
   cli::cli_progress_bar(type = 'tasks')
@@ -45,64 +46,43 @@ stats_summary <- function(
     data <- data %>% collapse(.verbose = FALSE)
   }
 
-  data_quant <- data$quantitative %>%
-    dplyr::rename(abundance = abundance_raw, identifier = protein)
-  data_exps <- data$experiments
-  data_account <- data$accounting %>% dplyr::full_join(data_exps, by = c('sample_id')) %>%
-    dplyr::rename(identifier = protein)
+  tbl_long <- data %>% meld(single_quant_source = TRUE) %>%
+    munge_identifier('combine', identifiers = identifier) %>%
+    dplyr::mutate(identifiers = stringr::str_count(identifier, ";") + 1)
 
-  tb_temp_e <- data_exps %>%
-    dplyr::group_by(dplyr::across(c(group_by))) %>%
-    dplyr::summarise(files = dplyr::n(), .groups = 'drop')
-
-  tb_temp_qnt <- data_account %>%
-    dplyr::inner_join(data_quant,
-                      by = c("identifier", "sample_id", "sample", "replicate")) %>%
-    dplyr::mutate(proteins = stringr::str_count(protein_group, ";") + 1) %>%
-    dplyr::group_by(dplyr::across(c(group_by))) %>%
+  tbl_stats <- tbl_long %>%
+    dplyr::group_by_at(group_by) %>%
     dplyr::summarise(
-      protein_groups = protein_group %>% unique() %>% length(),
-      proteins = identifier %>% unique() %>% length(),
+      identifier_groups = sum(identifiers),
+      identifiers = identifier %>% unique() %>% length(),
       peptides = ceiling(num_peptides %>% sum(na.rm = T) / length(unique(sample_id))),
       peptides_unique = ceiling(num_unique_peptides %>% sum(na.rm = T) / length(unique(sample_id))),
       quantifiable = signif(num_peptides[!is.na(abundance)] %>% sum(na.rm=T) / length(unique(sample_id)) / peptides * 100, 3),
       .groups = 'drop'
     )
+
+  tbl_cvs <- tbl_long %>%
+    dplyr::group_by_at(c(group_by, 'identifier')) %>%
+    dplyr::summarise(
+      CVs = signif(sd(abundance, na.rm = TRUE)/mean(abundance, na.rm = TRUE),2),
+      .groups = 'drop'
+    ) %>%
+    dplyr::group_by_at(group_by) %>%
+    dplyr::summarise(
+      CVs = median(CVs, na.rm = TRUE),
+      .groups = 'drop'
+    ) %>%
+    dplyr::filter(!is.na(CVs))
+
+  if(nrow(tbl_cvs) != 0) { tbl_stats <- bind_cols(tbl_stats, tbl_cvs) }
+
+  w_cols <- which(grepl('^identifier[s_]*', colnames(tbl_stats)))
+  colnames(tbl_stats)[w_cols] <- sub('identifier', identifier, colnames(tbl_stats)[w_cols])
+
   cli::cli_process_done()
   cli::cli_progress_cleanup()
 
-  if(!is.null(group_by) && group_by == 'sample_id'){
-    tb_temp_qnt <- data_exps %>%
-      dplyr::inner_join(tb_temp_qnt, by = 'sample_id')
-
-    return(tb_temp_qnt)
-  }
-
-  tb_temp_a <- data_quant %>%
-    dplyr::group_by(dplyr::across(c(group_by, identifier))) %>%
-    dplyr::summarise(
-      cv = sd(abundance, na.rm=T) / mean(abundance, na.rm=T),
-      .groups = 'drop'
-    ) %>%
-    dplyr::group_by(dplyr::across(c(group_by))) %>%
-    dplyr::summarise(
-      CVs = median(cv, na.rm=T),
-      .groups = 'drop'
-    )
-
-  if(!is.null(group_by)) {
-    tb_temp_qnt <- tb_temp_qnt %>%
-      dplyr::full_join(tb_temp_a, by = group_by) %>%
-      dplyr::full_join(tb_temp_e, by = group_by) %>%
-      dplyr::relocate(files)
-  } else {
-    tb_temp_qnt <- tb_temp_qnt %>%
-      dplyr::bind_cols(tb_temp_a) %>%
-      dplyr::bind_cols(tb_temp_e) %>%
-      dplyr::relocate(files)
-  }
-
-  return(tb_temp_qnt)
+  return(tbl_stats)
 }
 
 

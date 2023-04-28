@@ -11,7 +11,7 @@ plot_volcano(
   log2fc_column = "log2_foldchange",
   significance_max = 0.05,
   significance_column = "adj_p_value",
-  labels_column = "protein",
+  labels_column = NULL,
   show_pannels = TRUE,
   show_lines = TRUE,
   show_fc_scale = TRUE,

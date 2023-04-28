@@ -35,7 +35,7 @@
 #'
 plot_quantrank <- function(
     data = NULL,
-    accounting = 'protein',
+    accounting = NULL,
     type = c("points", "lines"),
     show_error = TRUE,
     show_rank_scale = FALSE,
@@ -60,11 +60,12 @@ plot_quantrank <- function(
   abundance_025 <- NULL
 
   check_data(data)
-  v_terms <- data %>% get_annotation_terms()
+  accounting_cols <- unique(c(data$identifier, get_annotation_terms(data)))
+  if(is.null(accounting)) { accounting <- accounting_cols[1]}
+  accounting <- rlang::arg_match(accounting, accounting_cols)
 
   type <- rlang::arg_match(type)
   display_filter <- rlang::arg_match(display_filter)
-  accounting <- rlang::arg_match(accounting, v_terms)
   if(!is.logical(show_error)) {cli::cli_abort("show_error needs to be TRUE or FALSE, not `{show_error}`")}
   if(!is.logical(show_rank_scale)) {cli::cli_abort("show_rank_scale needs to be TRUE or FALSE, not `{show_rank_scale}`")}
   if(!is.null(limit_rank)) {
@@ -221,7 +222,7 @@ plot_quantrank <- function(
 #'
 table_quantrank <- function(
     data = NULL,
-    accounting = 'protein',
+    accounting = NULL,
     display_filter = c('none','log2_foldchange','p_value','adj_p_value')
 ){
 
@@ -237,10 +238,11 @@ table_quantrank <- function(
   abundance_025 <- NULL
 
   check_data(data)
-  v_terms <- data %>% get_annotation_terms()
 
   display_filter <- rlang::arg_match(display_filter)
-  accounting <- rlang::arg_match(accounting, v_terms)
+  accounting_cols <- unique(c(data$identifier, get_annotation_terms(data)))
+  if(is.null(accounting)) { accounting <- accounting_cols[1]}
+  accounting <- rlang::arg_match(accounting, accounting_cols)
   # if(deviation_filter < 0 || deviation_filter > 1) {cli::cli_abort("x" = "deviation_filter is between 0 and 1, not `{deviation_filter}`")}
 
   if(display_filter != 'none'){

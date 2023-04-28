@@ -13,7 +13,7 @@ plot_proportion(
   significance_max = 0.05,
   proportion_column = "proportional_expression",
   proportion_min = 0.01,
-  labels_column = "protein",
+  labels_column = NULL,
   label_significance = TRUE,
   show_pannels = FALSE,
   show_lines = TRUE,

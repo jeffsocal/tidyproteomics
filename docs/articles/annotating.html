@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -210,10 +210,9 @@ option to access several options, including Gene Ontology.</p>
 values, such as molecular function, by clicking on them. Once you have
 selected your desired values, click on the “Save” button to save your
 changes.</p>
-<div class="figure" style="text-align: center">
-<img src="../docs/images/uniprot_search_01.png" alt="\label{fig:1001}UniProt web search for human proteins" width="82%"><p class="caption">
-UniProt web search for human proteins
-</p>
+<div class="float">
+<img src="images/uniprot_search_01.png" style="width:100.0%" alt="Figure 1 - UniProt web search for human proteins"><div class="figcaption"><em>Figure 1 - UniProt web search for human
+proteins</em></div>
 </div>
 <p>Finally, you can download the table as a TSV file by clicking on the
 “Download” button. This file will contain all the information you need
@@ -224,12 +223,11 @@ information to enhance your research and analysis. UniProt’s website is
 a valuable resource for obtaining information about proteins, and the
 ability to customize columns and select desired values makes it even
 more useful for researchers and scientists.</p>
-<div class="figure" style="text-align: center">
-<img src="../docs/images/uniprot_search_01.png" alt="\label{fig:1002}UniProt show table layout with Go annotations" width="82%"><p class="caption">
-UniProt show table layout with Go annotations
-</p>
+<div class="float">
+<img src="images/uniprot_search_02.png" style="width:100.0%" alt="Figure 2 - UniProt show table layout with Go annotations"><div class="figcaption"><em>Figure 2 - UniProt show table layout with Go
+annotations</em></div>
 </div>
-<p>Reda in the TSV file from the downloaded UniProt table.</p>
+<p>Read in the TSV file from the downloaded UniProt table.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_go</span> <span class="op">&lt;-</span> <span class="st">"~/Local/gitdata/uniprot-compressed_true_download_true_fields_accession_2Creviewed_2C-2023.04.13-22.27.47.76.tsv"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_tsv</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>

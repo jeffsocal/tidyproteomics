@@ -28,7 +28,7 @@ codify <- function(
 
   get_experiments <- paste(cols_experiments, collapse="|")
   get_quantitative <- paste(c(paste0("^", identifier, "$"), "^sample$", "replicate", "sample_id", "abundance"), collapse="|")
-  get_annotations <- paste0("^", paste(c(identifier, annotations), collapse="$|^"), "$")
+  get_annotations <- paste0("^", paste(unique(c(identifier, annotations)), collapse="$|^"), "$")
   get_accounting <- paste(c(identifier, "sample_id", "impute", "match_between", "num\\_", "\\_group"), collapse="|")
 
   tb_experiments <- table %>%
@@ -68,8 +68,9 @@ codify <- function(
     tb_quantitative <- tb_quantitative_tmp
   }
 
-  if(!is.null(annotations) || length(annotations) > 0) {
-    tb_annotations <- table %>% dplyr::select(dplyr::matches(get_annotations)) %>%
+  if(!is.null(annotations) & length(annotations) > 1) {
+    tb_annotations <- table %>%
+      dplyr::select(dplyr::matches(get_annotations)) %>%
       dplyr::select(!dplyr::matches("num\\_|\\_group")) %>%
       tidyr::pivot_longer(
         cols = !dplyr::matches(paste(paste0("^", identifier, "$"), collapse = "|")),
@@ -83,7 +84,6 @@ codify <- function(
 
   tb_accounting <- table %>%
     dplyr::select(dplyr::matches(get_accounting)) %>%
-    dplyr::select(!dplyr::matches("\\_name$")) %>%
     dplyr::relocate("sample_id") %>%
     unique()
 
@@ -109,6 +109,8 @@ codify <- function(
     dplyr::slice_max(imputed, n=1, with_ties = FALSE) %>%
     dplyr::ungroup()
 
+  db_tbl <<- tb_accounting
+
   n_rows_tb_accounting <- tb_accounting %>% dplyr::select(c('sample_id', identifier)) %>% unique() %>% nrow()
   n_rows_tb_quantitative <- tb_quantitative %>% dplyr::select(c('sample_id', identifier)) %>% unique() %>% nrow()
 
@@ -127,7 +129,7 @@ codify <- function(
     annotations = tb_annotations
   )
 }
-?p.adjust
+
 #' Meld a tidyproteomics data object into a single table
 #'
 #' @description

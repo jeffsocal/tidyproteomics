@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -230,8 +230,8 @@ in this case globally.</p>
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: global</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  files protein_groups proteins peptides peptides_unique quantifiable       CVs</span></span>
-<span><span class="co">#&gt;      6           7055     7055    66329           58706         90.8 0.2495823</span></span>
+<span><span class="co">#&gt;  protein_groups proteins peptides peptides_unique quantifiable  CVs</span></span>
+<span><span class="co">#&gt;           42330     7055    66329           58706         90.8 0.25</span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>Here is a summary by unique sample names</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -239,12 +239,9 @@ in this case globally.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     sample files protein_groups proteins peptides peptides_unique quantifiable</span></span>
-<span><span class="co">#&gt;    control     3           7055     7055    66329           58706         90.8</span></span>
-<span><span class="co">#&gt;  knockdown     3           7055     7055    66329           58706         90.9</span></span>
-<span><span class="co">#&gt;        CVs</span></span>
-<span><span class="co">#&gt;  0.1600474</span></span>
-<span><span class="co">#&gt;  0.2099227</span></span>
+<span><span class="co">#&gt;     sample protein_groups proteins peptides peptides_unique quantifiable  CVs</span></span>
+<span><span class="co">#&gt;    control          21165     7055    66329           58706         90.8 0.16</span></span>
+<span><span class="co">#&gt;  knockdown          21165     7055    66329           58706         90.9 0.21</span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>A summary that includes contamination where the description is
 contains ‘CRAP’, as in the crap-ome</p>
@@ -296,34 +293,34 @@ contains ‘ribosome’</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: biological_process</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                biological_process files protein_groups proteins peptides</span></span>
-<span><span class="co">#&gt;                cell communication     6              9        9      100</span></span>
-<span><span class="co">#&gt;                        cell death     6              1        1        3</span></span>
-<span><span class="co">#&gt;              cell differentiation     6              3        3        9</span></span>
-<span><span class="co">#&gt;                       cell growth     6            104      104     1419</span></span>
-<span><span class="co">#&gt;  cell organization and biogenesis     6             17       17      241</span></span>
-<span><span class="co">#&gt;                cell proliferation     6           7055     7055    66329</span></span>
-<span><span class="co">#&gt;       cellular component movement     6              6        6       13</span></span>
-<span><span class="co">#&gt;              cellular homeostasis     6            324      324     2854</span></span>
-<span><span class="co">#&gt;                       coagulation     6              9        9       68</span></span>
-<span><span class="co">#&gt;                       conjugation     6            181      181     1460</span></span>
-<span><span class="co">#&gt;                  defense response     6             15       15       83</span></span>
-<span><span class="co">#&gt;                       development     6             38       38      180</span></span>
-<span><span class="co">#&gt;                 metabolic process     6            342      342     2804</span></span>
-<span><span class="co">#&gt;  peptides_unique quantifiable       CVs</span></span>
-<span><span class="co">#&gt;               93         92.0 0.1965058</span></span>
-<span><span class="co">#&gt;                1        100.0 0.3350875</span></span>
-<span><span class="co">#&gt;                9         38.9 0.3040841</span></span>
-<span><span class="co">#&gt;              839         80.3 0.2761302</span></span>
-<span><span class="co">#&gt;              241         96.7 0.2124385</span></span>
-<span><span class="co">#&gt;            58706         90.8 0.2495823</span></span>
-<span><span class="co">#&gt;               11         67.9 0.4107544</span></span>
-<span><span class="co">#&gt;             2631         93.8 0.2574754</span></span>
-<span><span class="co">#&gt;               58         88.5 0.2210740</span></span>
-<span><span class="co">#&gt;             1240         89.3 0.2629965</span></span>
-<span><span class="co">#&gt;               76         70.9 0.2713523</span></span>
-<span><span class="co">#&gt;              164         73.0 0.2483315</span></span>
-<span><span class="co">#&gt;             2422         88.6 0.2532647</span></span>
+<span><span class="co">#&gt;                biological_process protein_groups proteins peptides</span></span>
+<span><span class="co">#&gt;                cell communication             54        9      100</span></span>
+<span><span class="co">#&gt;                        cell death              6        1        3</span></span>
+<span><span class="co">#&gt;              cell differentiation             18        3        9</span></span>
+<span><span class="co">#&gt;                       cell growth            624      104     1419</span></span>
+<span><span class="co">#&gt;  cell organization and biogenesis            102       17      241</span></span>
+<span><span class="co">#&gt;                cell proliferation          42330     7055    66329</span></span>
+<span><span class="co">#&gt;       cellular component movement             36        6       13</span></span>
+<span><span class="co">#&gt;              cellular homeostasis           1944      324     2854</span></span>
+<span><span class="co">#&gt;                       coagulation             54        9       68</span></span>
+<span><span class="co">#&gt;                       conjugation           1086      181     1460</span></span>
+<span><span class="co">#&gt;                  defense response             90       15       83</span></span>
+<span><span class="co">#&gt;                       development            228       38      180</span></span>
+<span><span class="co">#&gt;                 metabolic process           2052      342     2804</span></span>
+<span><span class="co">#&gt;  peptides_unique quantifiable   CVs</span></span>
+<span><span class="co">#&gt;               93         92.0 0.200</span></span>
+<span><span class="co">#&gt;                1        100.0 0.340</span></span>
+<span><span class="co">#&gt;                9         38.9 0.305</span></span>
+<span><span class="co">#&gt;              839         80.3 0.280</span></span>
+<span><span class="co">#&gt;              241         96.7 0.210</span></span>
+<span><span class="co">#&gt;            58706         90.8 0.250</span></span>
+<span><span class="co">#&gt;               11         67.9 0.410</span></span>
+<span><span class="co">#&gt;             2631         93.8 0.260</span></span>
+<span><span class="co">#&gt;               58         88.5 0.220</span></span>
+<span><span class="co">#&gt;             1240         89.3 0.260</span></span>
+<span><span class="co">#&gt;               76         70.9 0.275</span></span>
+<span><span class="co">#&gt;              164         73.0 0.245</span></span>
+<span><span class="co">#&gt;             2422         88.6 0.250</span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 </div>
 </div>

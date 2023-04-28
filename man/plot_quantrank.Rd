@@ -6,7 +6,7 @@
 \usage{
 plot_quantrank(
   data = NULL,
-  accounting = "protein",
+  accounting = NULL,
   type = c("points", "lines"),
   show_error = TRUE,
   show_rank_scale = FALSE,

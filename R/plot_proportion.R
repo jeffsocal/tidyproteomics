@@ -57,7 +57,7 @@ plot_proportion <- function(
     significance_max = 0.05,
     proportion_column = 'proportional_expression',
     proportion_min = 0.01,
-    labels_column = 'protein',
+    labels_column = NULL,
     label_significance = TRUE,
     show_pannels = FALSE,
     show_lines = TRUE,
@@ -86,6 +86,7 @@ plot_proportion <- function(
   table_cols <- colnames(table)
   log2fc_column <- rlang::arg_match(log2fc_column, table_cols)
   significance_column <- rlang::arg_match(significance_column, table_cols)
+  if(is.null(labels_column)) { labels_column <- data$identifier[1] }
 
   if(abs(mean(table[[log2fc_column]],na.rm=T) - 1) < 0.05) {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "red")))

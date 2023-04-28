@@ -9,6 +9,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 # A condensed accounting of version updates
+
+### Version: 1.4.1 - 2023.03.28
+
+-   migrated from dplyr deprecated across() to group_by_at()
+-   minor bugfix on accounting by non-protein based values
+
 ### Version: 1.4.0 - 2023.03.27
 
 -   added the S3Method as.data.frame()

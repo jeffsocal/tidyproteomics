@@ -21,29 +21,30 @@ While the proteomics community at large has devised several schemes for protein 
 
 More sophisticated methods of protein accounting should utilize those current implementations, export the quantitative protein level data and then import into tidyproteomics.
 
+NOTE: tidyproteomics allows you to group and summarize quantitative values for any annotation term, such as gene_name or even molecular_function giving you flexibility on how individual peptide values get summarized into larger observations. See [Collapsing to Gene Name].
 
 ## The inputs
 
 #### assign_by
+
 The `collapse()` function accommodates four methods for accounting with the variable:
 
 | Method         | Description                                                                                                              |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | all-possible   | retain all protein assignments regardless of homology                                                                    |
 | non-homologous | retain all protein assignments, but only use quantitative values from peptides that identify a single unique protein.    |
 | razor-local    | peptide will be assigned to the protein group with the largest number of total peptides identified within a sample group |
 | razor-global   | peptide will be assigned to the protein group with the largest number of total peptides identified globally              |
 
 #### top_n
+
 this variable sets the number of peptide quantitative values to include in the final protein quantitative value.
 
 #### split_abundance
+
 a true/false variable, if true, will split abundances of razor-peptides by the proportional abundance between proteins. This method is experimental, has not been validated or peer-reviewed.
 
-fasta_path
-can be provided to calculate iBAQ based values. However, currently this method only supports Tryptic based peptide accounting.
-
-
+fasta_path can be provided to calculate iBAQ based values. However, currently this method only supports Tryptic based peptide accounting.
 
 ## Examples
 
@@ -59,7 +60,9 @@ pep_data <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HC
 ```
 
 #### ProteomeDiscoverer's Protein Accounting
+
 We import a data-object of ProteomeDiscoverer's protein level accouting
+
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 pro_data <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx" %>%
   import("ProteomeDiscoverer", "proteins") %>%
@@ -68,6 +71,7 @@ pro_data <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HC
 ```
 
 ### Assign peptides by razor logic
+
 ```{r, warning=FALSE, message=FALSE}
 pro_frompep_razor <- pep_data %>% 
   collapse(assign_by = 'razor-global', top_n = Inf) %>%
@@ -80,6 +84,7 @@ pro_frompep_razor %>%
 ```
 
 Check to see how the two results agree ...
+
 ```{r, warning=FALSE, message=FALSE}
 tbl_merged_razor <- pro_frompep_razor$quantitative %>% select('sample','replicate','protein', 'abundance_raw') %>%
   inner_join(pro_data$quantitative %>% select('sample','replicate','protein', 'abundance_raw'), 
@@ -96,6 +101,7 @@ tbl_merged_razor %>%
 ```
 
 A quick plot for visualizing the
+
 ```{r, warning=FALSE, message=FALSE}
 tbl_merged_razor %>%
   mutate(sample_rep = paste(sample, replicate)) %>%
@@ -108,6 +114,7 @@ tbl_merged_razor %>%
 ```
 
 Lets look at a few examples of outliers ...
+
 ```{r}
 tbl_merged_razor %>%
   filter(abundance_raw_proteomediscoverer != abundance_raw_tidyproteomics) %>%
@@ -116,6 +123,7 @@ tbl_merged_razor %>%
 ```
 
 We will take the protein **P45983** to examine ...
+
 ```{r, message=FALSE}
 pep_P45983 <- pep_data$quantitative %>% 
   filter(!is.na(abundance_raw)) %>% 
@@ -135,6 +143,7 @@ pep_data$quantitative %>%
 ```
 
 Here we see that **P45983** yielded 5 peptides, 2 of which are shared. In the outlier table we see that ProteomeDiscoverer excluded all razor peptides from the protein quantitation. And if we dig further, we find that the peptide **IIDFGLAR** by razor definition belongs to the protein **Q16539**, while the peptide **MSYLLYQMLCGIK** can be assigned to **P45983**, thus giving us the larger value shown in the outlier table.
+
 ```{r}
 pep_data$quantitative %>% 
   filter(!is.na(abundance_raw)) %>% 
@@ -150,7 +159,9 @@ pep_data$quantitative %>%
 ```
 
 ### Assign by excluding homologous peptides
+
 That means the ProteomeDiscoverer method for protein accounting excluded the abundance measurement from all razor peptides. Let try to do replicate that as well.
+
 ```{r, warning=FALSE, message=FALSE}
 pro_frompep_nonhom <- pep_data %>% 
   collapse(assign_by = 'non-homologous', top_n = Inf) %>%
@@ -163,6 +174,7 @@ pro_frompep_nonhom %>%
 ```
 
 Check to see how the two results agree ...
+
 ```{r, warning=FALSE, message=FALSE}
 tbl_merged_nonhom <- pro_frompep_nonhom$quantitative %>% select('sample','replicate','protein', 'abundance_raw') %>%
   inner_join(pro_data$quantitative %>% select('sample','replicate','protein', 'abundance_raw'), 
@@ -179,6 +191,7 @@ tbl_merged_nonhom %>%
 ```
 
 A quick plot for visualizing the
+
 ```{r, warning=FALSE, message=FALSE}
 tbl_merged_nonhom %>%
   mutate(sample_rep = paste(sample, replicate)) %>%
@@ -191,11 +204,14 @@ tbl_merged_nonhom %>%
 ```
 
 Interesting, we now show that **P45983** agrees with ProteomeDiscoverer, yet obviously several others do not
+
 ```{r}
 tbl_merged_nonhom %>% filter(protein == 'P45983') %>%
   knitr::kable()
 ```
+
 Lets look at a few examples of outliers ...
+
 ```{r}
 tbl_merged_nonhom %>%
   filter(abundance_raw_proteomediscoverer != abundance_raw_tidyproteomics) %>%
@@ -204,6 +220,7 @@ tbl_merged_nonhom %>%
 ```
 
 We will take the protein **Q96LR5** to examine ...
+
 ```{r}
 pep_Q96LR5 <- pep_data$quantitative %>% 
   filter(!is.na(abundance_raw)) %>% 
@@ -223,6 +240,7 @@ pep_data$quantitative %>%
 ```
 
 A quick check on the peptide sum and it appears that ProteomeDiscoverer ignored razor-peptides all together for this protein
+
 ```{r}
 pep_data$quantitative %>% 
   filter(!is.na(abundance_raw)) %>% 
@@ -239,6 +257,7 @@ pep_data$quantitative %>%
 ```
 
 If we examine the other proteins in that group for all the peptides that may be shared ...
+
 ```{r}
 get_peptides <- pep_data$quantitative %>% 
   filter(!is.na(abundance_raw)) %>% 
@@ -259,9 +278,60 @@ pep_data$quantitative %>%
 ```
 
 ... we see that ProteomeDiscoverer actually assigned the abundances of razor-peptides. And if we check our results from the merged razor data we find that to be correct.
+
 ```{r}
 tbl_merged_razor %>%
   filter(sample == 'p97_kd', replicate == 1) %>% 
   filter(protein %in% c('Q96LR5','P51965','Q969T4')) %>%
   knitr::kable()
+```
+
+#### Collapsing to Gene Name
+
+Alternatively, peptide level data can be collapsed to any Annotation term, in this case we will collapse to gene_name after adding the annotations to the peptide data object. See `vignette("annotating")`.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyr)
+
+data_fasta <- "~/Local/fasta/uniprot_human-20398_20220920.fasta" %>% 
+  tidyproteomics:::fasta_parse(as = "data.frame") %>%
+  select(protein = accession, gene_name, description) %>%
+  pivot_longer(
+    cols = c('gene_name', 'description'),
+    names_to = 'term',
+    values_to = 'annotation'
+  )
+
+gene_data <- pep_data %>% 
+  annotate(data_fasta, duplicates = 'merge') %>%
+  collapse(collapse_to = 'gene_name')
+```
+
+```{r, eval=FALSE}
+library(tidyr)
+
+data_fasta <- "uniprot_human-20398_20220920.fasta" %>% 
+  tidyproteomics:::fasta_parse(as = "data.frame") %>%
+  select(protein = accession, gene_name, description) %>%
+  pivot_longer(
+    cols = c('gene_name', 'description'),
+    names_to = 'term',
+    values_to = 'annotation'
+  )
+
+gene_data <- pep_data %>% 
+  annotate(data_fasta, duplicates = 'merge') %>%
+  collapse(collapse_to = 'gene_name')
+```
+
+```{r}
+gene_data %>% plot_counts()
+```
+
+```{r}
+gene_data %>% 
+  normalize(.method = 'linear') %>%
+  expression(p97_kd/ctl) %>% 
+  plot_volcano(p97_kd/ctl, significance_column = 'p_value') + 
+  labs(title = "Gene Level Expression")
 ```

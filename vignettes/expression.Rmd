@@ -34,91 +34,129 @@ It should be noted that this package does not incorporate some of the
 more recent methods described in literature. These methods could be
 incorporated in future revisions, or through a user provided function.
 
-+---------+------------------------------------------------------------+
-| MSstats | Choi, Meena, Ching-Yun Chang, Timothy Clough, Daniel       |
-|         | Broudy, Trevor Killeen, Brendan MacLean, and Olga Vitek.   |
-|         | 2014. \"MSstats: An R Package for Statistical Analysis of  |
-|         | Quantitative Mass Spectrometry-Based Proteomic             |
-|         | Experiments.\" *Bioinformatics* 30 (17): 2524--26.         |
-|         |                                                            |
-|         | [msstats.org](msstats.org)                                 |
-+---------+------------------------------------------------------------+
-| DEqMS   | Zhu, Yafeng, Lukas M. Orre, Yan Zhou Tran, Georgios        |
-|         | Mermelekas, Henrik J. Johansson, Alina Malyutina, Simon    |
-|         | Anders, and Janne Lehtiö. 2020. \"DEqMS: A Method for      |
-|         | Accurate Variance Estimation in Differential Protein       |
-|         | Expression Analysis.\" *Molecular & Cellular Proteomics:   |
-|         | MCP* 19 (6): 1047--57.                                     |
-|         |                                                            |
-|         | [Bioconductor:                                             |
-|         | DEqMS](https://w                                           |
-|         | ww.bioconductor.org/packages/release/bioc/html/DEqMS.html) |
-+---------+------------------------------------------------------------+
-| MS      | Ammar, Constantin, Markus Gruber, Gergely Csaba, and Ralf  |
-| -EmpiRe | Zimmer. 2019. \"MS-EmpiRe Utilizes Peptide-Level Noise     |
-|         | Distributions for Ultra-Sensitive Detection of             |
-|         | Differentially Expressed Proteins.\" *Molecular & Cellular |
-|         | Proteomics: MCP* 18 (9): 1880--92.                         |
-|         |                                                            |
-|         | [GitHub:MS-EmpiRe](https://github.com/zimmerlab/MS-EmpiRe) |
-+---------+------------------------------------------------------------+
-| meqrob  | Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and    |
-|         | Lieven Clement. 2020. \"Robust Summarization and Inference |
-|         | in Proteome-Wide Label-Free Quantification.\" *Molecular & |
-|         | Cellular Proteomics: MCP* 19 (7): 1209--19.                |
-|         |                                                            |
-|         | [Bioconductor:                                             |
-|         | msqrob2](https://www                                       |
-|         | .bioconductor.org/packages/release/bioc/html/msqrob2.html) |
-+---------+------------------------------------------------------------+
+#### Available Methods
 
-```{r, message = FALSE}
++--------------+------------------------------------------------------+
+| t.test       | Johnston, L. W. "Student's t-Test." *Journal of      |
+|              | Quality Technology* 2.4 (1970): 243-245.             |
+|              |                                                      |
+|              | [R::stats::t.test](https://stat.eth%%2020z           |
+|              | .ch/R-manual/R-devel/library/stats/html/t.test.html) |
++--------------+------------------------------------------------------+
+| limma        | Ritchie ME, Phipson B, Wu D, Hu Y, Law CW, Shi W,    |
+|              | Smyth GK (2015). "limma powers differential          |
+| (Empirical   | expression analyses for RNA-sequencing and           |
+| Bayes)       | microarray studies." *Nucleic Acids Research*,       |
+|              | **43**(7), e47.                                      |
+|              |                                                      |
+|              | [Bioconductor:                                       |
+|              | limma](http://bi%%2020o                              |
+|              | conductor.org/packages/release/bioc/html/limma.html) |
++--------------+------------------------------------------------------+
 
-```
+#### Alternative Methods
 
-+--------------+-----------------------+---------------+--------------+
-| parameter    | description           | inputs        | default      |
-+==============+=======================+===============+==============+
-| log2fc_min   | the minimum cutoff    | *0 to Inf*    | *2*          |
-|              | for displaying        |               |              |
-+--------------+-----------------------+---------------+--------------+
-| signifi      | the column to use for | *             | *a           |
-| cance_column | significance          | adj_p\_value, | dj_p\_value* |
-|              |                       | p_value*      |              |
-+--------------+-----------------------+---------------+--------------+
-| sign         | the minimum cutoff    | *1 to 1/Inf*  | *0.05*       |
-| ificance_max | for displaying        |               |              |
-+--------------+-----------------------+---------------+--------------+
-| l            | how to label the      | any value in  | *protein*    |
-| abels_column | points                | annotations,  |              |
-|              |                       | eg            |              |
-|              |                       | *gene_name,   |              |
-|              |                       | description*  |              |
-+--------------+-----------------------+---------------+--------------+
-| show_pannels | show the colored      | *TRUE /       | *TRUE*       |
-|              | areas highlighting    | FALSE*        |              |
-|              | significance          |               |              |
-+--------------+-----------------------+---------------+--------------+
-| show_lines   | show the dotted       | *TRUE /       | *TRUE*       |
-|              | cutoff lines          | FALSE*        |              |
-+--------------+-----------------------+---------------+--------------+
-| s            | show the second scale | *TRUE /       | *TRUE*       |
-| how_fc_scale | on top converting     | FALSE*        |              |
-|              | *log2_foldchange* to  |               |              |
-|              | *foldchange*          |               |              |
-+--------------+-----------------------+---------------+--------------+
-| point_size   | size of each dot      | *1/10* to *5* | *NULL*       |
-+--------------+-----------------------+---------------+--------------+
-| co           | color for positive    | [any R        | *dodgerblue* |
-| lor_positive | expression            | accepts](htt  |              |
-|              |                       | ps://r-charts |              |
-|              |                       | .com/colors/) |              |
-+--------------+-----------------------+---------------+--------------+
-| co           | color for negative    | [any R        | *firebrick1* |
-| lor_negative | expression            | accepts](htt  |              |
-|              |                       | ps://r-charts |              |
-|              |                       | .com/colors/) |              |
-+--------------+-----------------------+---------------+--------------+
++--------------+----------------------------------------------------+
+| MSstats      | Choi, Meena, Ching-Yun Chang, Timothy Clough,      |
+|              | Daniel Broudy, Trevor Killeen, Brendan MacLean,    |
+|              | and Olga Vitek. 2014. "MSstats: An R Package for   |
+|              | Statistical Analysis of Quantitative Mass          |
+|              | Spectrometry-Based Proteomic Experiments."         |
+|              | *Bioinformatics* 30 (17): 2524--26.                |
+|              |                                                    |
+|              | [msstats.org](msstats.org)                         |
++--------------+----------------------------------------------------+
+| DEqMS        | Zhu, Yafeng, Lukas M. Orre, Yan Zhou Tran,         |
+|              | Georgios Mermelekas, Henrik J. Johansson, Alina    |
+|              | Malyutina, Simon Anders, and Janne Lehtiö. 2020.   |
+|              | "DEqMS: A Method for Accurate Variance Estimation  |
+|              | in Differential Protein Expression Analysis."      |
+|              | *Molecular & Cellular Proteomics: MCP* 19 (6):     |
+|              | 1047--57.                                          |
+|              |                                                    |
+|              | [Bioconductor:                                     |
+|              | DEqMS](https://w%20ww.bi%20oco                     |
+|              | nductor.org/packages/release/bioc/html/DEqMS.html) |
++--------------+----------------------------------------------------+
+| MS -EmpiRe   | Ammar, Constantin, Markus Gruber, Gergely Csaba,   |
+|              | and Ralf Zimmer. 2019. "MS-EmpiRe Utilizes         |
+|              | Peptide-Level Noise Distributions for              |
+|              | Ultra-Sensitive Detection of Differentially        |
+|              | Expressed Proteins." *Molecular & Cellular         |
+|              | Proteomics: MCP* 18 (9): 1880--92.                 |
+|              |                                                    |
+|              | [GitH                                              |
+|              | ub:                                                |
+|              | MS-EmpiRe](https://github.com/zimmerlab/MS-EmpiRe) |
++--------------+----------------------------------------------------+
+| meqrob       | Sticker, Adriaan, Ludger Goeminne, Lennart         |
+|              | Martens, and Lieven Clement. 2020. "Robust         |
+|              | Summarization and Inference in Proteome-Wide       |
+|              | Label-Free Quantification." *Molecular & Cellular  |
+|              | Proteomics: MCP* 19 (7): 1209--19.                 |
+|              |                                                    |
+|              | [Bioconductor:                                     |
+|              | msqrob2](https://www%20.bioc%20ond                 |
+|              | uctor.org/packages/release/bioc/html/msqrob2.html) |
++--------------+----------------------------------------------------+
+
+### Expression Analysis
+
+#### Input Parameters
+
++--------------+-----------------+--------------+--------------+
+| parameter    | description     | inputs       | default      |
++==============+=================+==============+==============+
+| log2fc_min   | the minimum     | *0 to Inf*   | *2*          |
+|              | cutoff for      |              |              |
+|              | displaying      |              |              |
++--------------+-----------------+--------------+--------------+
+| signifi      | the column to   | -   a        | *a           |
+| cance_column | use for         |              | dj_p\_value* |
+|              | significance    | dj_p\_value, |              |
+|              |                 |              |              |
+|              |                 | p_value\*    |              |
++--------------+-----------------+--------------+--------------+
+| sign         | the minimum     | *1 to 1/Inf* | *0.05*       |
+| ificance_max | cutoff for      |              |              |
+|              | displaying      |              |              |
++--------------+-----------------+--------------+--------------+
+| l            | how to label    | any value in | *protein*    |
+| abels_column | the points      | annotations, |              |
+|              |                 | eg           |              |
+|              |                 | *gene_name,  |              |
+|              |                 | description* |              |
++--------------+-----------------+--------------+--------------+
+| show_pannels | show the        | *TRUE /      | *TRUE*       |
+|              | colored areas   | FALSE*       |              |
+|              | highlighting    |              |              |
+|              | significance    |              |              |
++--------------+-----------------+--------------+--------------+
+| show_lines   | show the dotted | *TRUE /      | *TRUE*       |
+|              | cutoff lines    | FALSE*       |              |
++--------------+-----------------+--------------+--------------+
+| s            | show the second | *TRUE /      | *TRUE*       |
+| how_fc_scale | scale on top    | FALSE*       |              |
+|              | converting      |              |              |
+|              | *l              |              |              |
+|              | og2_foldchange* |              |              |
+|              | to *foldchange* |              |              |
++--------------+-----------------+--------------+--------------+
+| point_size   | size of each    | *1/10* to    | *NULL*       |
+|              | dot             | *5*          |              |
++--------------+-----------------+--------------+--------------+
+| co           | color for       | [any R       | *dodgerblue* |
+| lor_positive | positive        | accepts]     |              |
+|              | expression      | (htt%20ps:// |              |
+|              |                 | r-charts%20. |              |
+|              |                 | com/colors/) |              |
++--------------+-----------------+--------------+--------------+
+| co           | color for       | [any R       | *firebrick1* |
+| lor_negative | negative        | accepts]     |              |
+|              | expression      | (htt%20ps:// |              |
+|              |                 | r-charts%20. |              |
+|              |                 | com/colors/) |              |
++--------------+-----------------+--------------+--------------+
 
 ```{r, message=FALSE}
 library("dplyr")

@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,11 +115,11 @@
 <h2 id="data-support">Data Support<a class="anchor" aria-label="anchor" href="#data-support"></a>
 </h2>
 <p>Importing is currently implemented for a few platforms and assume peptide level FDR (at the user’s desired level) has already been accounted for. See <code><a href="articles/importing.html">vignette("importing")</a></code>. Importing is flexible enough to accept other data platforms in flat files (.csv, .tsv, and .xlsx) with a custom configuration.</p>
-<table style="width:98%;" class="table">
+<table class="table">
 <colgroup>
-<col width="17%">
+<col width="18%">
 <col width="29%">
-<col width="23%">
+<col width="24%">
 <col width="27%">
 </colgroup>
 <thead><tr class="header">
@@ -176,11 +176,11 @@
 <h2 id="ease-of-use">Ease of Use<a class="anchor" aria-label="anchor" href="#ease-of-use"></a>
 </h2>
 <p>This package supports the same <a href="https://en.wikipedia.org/wiki/Syntactic_sugar" class="external-link">syntactic sugar</a> utilized in the tidy-verse functions like filter, and introduces the <code>%like%</code> operator, see <code><a href="articles/subsetting.html">vignette("subsetting")</a></code> . These operations can extend to all aspects of the data set, including sample names, protein IDs, annotations and accountings like <em>match_between_runs</em> and <em>num_peptides</em>.</p>
-<table style="width:99%;" class="table">
+<table class="table">
 <colgroup>
-<col width="43%">
-<col width="13%">
-<col width="43%">
+<col width="27%">
+<col width="22%">
+<col width="50%">
 </colgroup>
 <thead><tr class="header">
 <th>operator</th>
@@ -235,8 +235,8 @@
 </h3>
 <table class="table">
 <colgroup>
-<col width="9%">
-<col width="90%">
+<col width="8%">
+<col width="91%">
 </colgroup>
 <thead><tr class="header">
 <th>Variable</th>
@@ -306,16 +306,16 @@
 <td>A tidyproteomics derived integer assignment to a collection of same-named samples</td>
 </tr>
 <tr class="even">
-<td>
-<p><em>identifier</em></p>
-<p>protein</p>
-<p>protein, peptide, modification</p>
-</td>
-<td>
-<p>The identifier of the “thing” being measured.</p>
-<p>In the case of protein-level data, this is simply <code>protein</code> and is usually populated with UniProt accession numbers, names, or other protein identifiers.</p>
-<p>In the case of peptide-level data, this is a multiple of <code>protein</code> (accession number), <code>peptide</code> (amino acid sequence) and <code>modification</code> (post-translational modification).</p>
-</td>
+<td><em>identifier</em></td>
+<td>The identifier of the “thing” being measured.</td>
+</tr>
+<tr class="odd">
+<td>protein</td>
+<td>In the case of protein-level data, this is simply <code>protein</code> and is usually populated with UniProt accession numbers, names, or other protein identifiers.</td>
+</tr>
+<tr class="even">
+<td>protein, peptide, modification</td>
+<td>In the case of peptide-level data, this is a multiple of <code>protein</code> (accession number), <code>peptide</code> (amino acid sequence) and <code>modification</code> (post-translational modification).</td>
 </tr>
 <tr class="odd">
 <td>abundance_raw</td>

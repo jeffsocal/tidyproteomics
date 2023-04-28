@@ -98,7 +98,7 @@ collapse <- function(
 
   check_data(data)
 
-  collapse_possible <- data$identifier
+  collapse_possible <- unique(c(data$identifier, get_annotation_terms(data)))
 
   tb_fasta <- c()
   if(!is.null(fasta_path)) {
@@ -123,7 +123,7 @@ collapse <- function(
   collapse_to <- rlang::arg_match(collapse_to, collapse_possible)
 
   if(.verbose == TRUE){
-    cli::cli_alert_info("Collapsing by top {.emph {top_n_str}} peptides into proteins for {.emph {assign_by}} by {.emph {function_str}}")
+    cli::cli_alert_info("Collapsing by top {.emph {top_n_str}} peptides into {.emph {collapse_to}} for {.emph {assign_by}} by {.emph {function_str}}")
     cli::cli_progress_bar("...", type = "tasks")
   }
 
@@ -286,6 +286,8 @@ collapse <- function(
   tb_pro_quant_summed[,paste0("num_", collapse_to)] <- tb_pro_quant_summed$num_identifiers
   tb_pro_quant_summed[,paste0(collapse_to, "_group")] <- tb_pro_quant_summed$identifiers_grouped
 
+  if(.verbose == TRUE) {cli::cli_progress_step(' ... tidying the data and finishing up')}
+
   dat_pro <- tb_pro_quant_summed %>%
     tibble::as_tibble() %>%
     dplyr::select(!dplyr::matches('identifier')) %>%
@@ -293,8 +295,10 @@ collapse <- function(
 
   if(!is.null(fasta_path)) {dat_pro <- dat_pro %>% dplyr::left_join(tb_fasta, by = collapse_to)}
 
-  if(.verbose == TRUE) {cli::cli_progress_step(' ... tidying the data and finishing up')}
-  dat_pro <- dat_pro %>% codify(identifier = collapse_to, annotations = names(tb_fasta))
+  codify_annotations <- unique(setdiff(get_annotation_terms(data), data$identifier), names(tb_fasta))
+  codify_annotations <- intersect(codify_annotations, colnames(dat_pro))
+
+  dat_pro <- dat_pro %>% codify(identifier = collapse_to, annotations = codify_annotations)
 
   # the output object
   out <- list(

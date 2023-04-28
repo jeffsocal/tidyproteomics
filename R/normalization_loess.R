@@ -26,7 +26,7 @@ normalize_loess <- function(
   }
 
   data_norm <- data %>%
-    dplyr::inner_join(data_centered, by='identifier', suffix = c("","_centered")) %>%
+    dplyr::left_join(data_centered, by='identifier', suffix = c("","_centered")) %>%
     dplyr::select(identifier, replicate, sample, abundance, abundance_centered) %>%
     dplyr::group_by(sample, replicate) %>%
     tidyr::nest(data = c('identifier', 'abundance', 'abundance_centered')) %>%

@@ -6,7 +6,7 @@
 \usage{
 table_quantrank(
   data = NULL,
-  accounting = "protein",
+  accounting = NULL,
   display_filter = c("none", "log2_foldchange", "p_value", "adj_p_value")
 )
 }

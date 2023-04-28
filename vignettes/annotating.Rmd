@@ -20,13 +20,30 @@ options(dplyr.print_max = 10)
 
 # Annotating data
 
-As a part of the Tidyproteomics workflow, we need to update the `gene_name` and `description` annotated terms in the data imported from FragPipe. To accomplish this, we will use information from a parsed FASTA file. The parsed FASTA file should contain three columns: `protein` identifier, `term`, and `annotation`.
+As a part of the Tidyproteomics workflow, we need to update the
+`gene_name` and `description` annotated terms in the data imported from
+FragPipe. To accomplish this, we will use information from a parsed
+FASTA file. The parsed FASTA file should contain three columns:
+`protein` identifier, `term`, and `annotation`.
 
-Updating the `gene_name` and `description` annotated terms will allow for easier interpretation and analysis of the data. The `gene_name` and `description` attributes provide crucial information about the protein, such as its function and biological role. By updating these attributes with information from the FASTA file, we can ensure that our data is accurate and informative.
+Updating the `gene_name` and `description` annotated terms will allow
+for easier interpretation and analysis of the data. The `gene_name` and
+`description` attributes provide crucial information about the protein,
+such as its function and biological role. By updating these attributes
+with information from the FASTA file, we can ensure that our data is
+accurate and informative.
 
-The process of updating the `gene_name` and `description` annotated terms is simple. First, we will parse the FASTA file to extract the necessary information. Then, we will use this information to update the corresponding attributes in the imported data from FragPipe.
+The process of updating the `gene_name` and `description` annotated
+terms is simple. First, we will parse the FASTA file to extract the
+necessary information. Then, we will use this information to update the
+corresponding attributes in the imported data from FragPipe.
 
-It is important to note that the parsed FASTA file must contain accurate and up-to-date information. If the information in the FASTA file is outdated or incorrect, the updated `gene_name` and `description` attributes will also be incorrect. Therefore, it is essential to verify the accuracy of the FASTA file before using it to update the imported data from FragPipe.
+It is important to note that the parsed FASTA file must contain accurate
+and up-to-date information. If the information in the FASTA file is
+outdated or incorrect, the updated `gene_name` and `description`
+attributes will also be incorrect. Therefore, it is essential to verify
+the accuracy of the FASTA file before using it to update the imported
+data from FragPipe.
 
 ```{r, eval=FALSE}
 library(tidyverse)
@@ -51,7 +68,9 @@ data_prot <- "~/Local/gitdata/tidyproteomics_data/FragPipe_19.1/combined_protein
 
 ## From a FASTA File
 
-Read in a FASTA file using some "un-exposed" methods in the `tidyproteomics` package.
+Read in a FASTA file using some "un-exposed" methods in the
+`tidyproteomics` package.
+
 ```{r, message=FALSE}
 data_fasta <- "~/Local/fasta/uniprot_human-20398_20220920.fasta" %>% 
   tidyproteomics:::fasta_parse(as = "data.frame") %>%
@@ -94,23 +113,35 @@ data_new_replaced$annotations %>% filter(protein %in% c('P68431', 'P62805'))
 
 ## GO Annotations
 
-To obtain GO annotations, you can visit UniProt's website and search for the proteins of interest, such as human proteins. Once you have found the proteins, you will need to select the "Customize columns" option to access several options, including Gene Ontology.
+To obtain GO annotations, you can visit UniProt's website and search for
+the proteins of interest, such as human proteins. Once you have found
+the proteins, you will need to select the "Customize columns" option to
+access several options, including Gene Ontology.
 
-After selecting Gene Ontology, you will need to choose the desired values, such as molecular function, by clicking on them. Once you have selected your desired values, click on the "Save" button to save your changes.
+After selecting Gene Ontology, you will need to choose the desired
+values, such as molecular function, by clicking on them. Once you have
+selected your desired values, click on the "Save" button to save your
+changes.
 
-```{r 1001, echo=FALSE, fig.cap="\\label{fig:1001}UniProt web search for human proteins", out.width="82%", fig.align='center'}
-knitr::include_graphics("../docs/images/uniprot_search_01.png")
-```
+![*Figure 1 - UniProt web search for human
+proteins*](images/uniprot_search_01.png){width="100%"}
 
-Finally, you can download the table as a TSV file by clicking on the "Download" button. This file will contain all the information you need about your selected proteins, making it easier to analyze and interpret the data.
+Finally, you can download the table as a TSV file by clicking on the
+"Download" button. This file will contain all the information you need
+about your selected proteins, making it easier to analyze and interpret
+the data.
 
-Now that you know how to obtain GO annotations, you can use this information to enhance your research and analysis. UniProt's website is a valuable resource for obtaining information about proteins, and the ability to customize columns and select desired values makes it even more useful for researchers and scientists.
+Now that you know how to obtain GO annotations, you can use this
+information to enhance your research and analysis. UniProt's website is
+a valuable resource for obtaining information about proteins, and the
+ability to customize columns and select desired values makes it even
+more useful for researchers and scientists.
 
-```{r 1002, echo=FALSE, fig.cap="\\label{fig:1002}UniProt show table layout with Go annotations", out.width="82%", fig.align='center'}
-knitr::include_graphics("../docs/images/uniprot_search_01.png")
-```
+![*Figure 2 - UniProt show table layout with Go
+annotations*](images/uniprot_search_02.png){width="100%"}
 
-Reda in the TSV file from the downloaded UniProt table.
+Read in the TSV file from the downloaded UniProt table.
+
 ```{r, message=FALSE}
 data_go <- "~/Local/gitdata/uniprot-compressed_true_download_true_fields_accession_2Creviewed_2C-2023.04.13-22.27.47.76.tsv" %>% read_tsv()
 
@@ -118,7 +149,9 @@ head(data_go)
 
 ```
 
-We just need to tidy up that data a bit and get it into the format needed for attaching the annotations.
+We just need to tidy up that data a bit and get it into the format
+needed for attaching the annotations.
+
 ```{r}
 data_go <- data_go %>%
   select(protein = Entry,
@@ -137,6 +170,7 @@ head(data_go)
 ```
 
 Looks great!
+
 ```{r}
 data_new_go <- data_prot %>% annotate(data_go)
 
@@ -144,14 +178,18 @@ data_new_go$annotations %>% filter(protein %in% c('P68431', 'P62805'))
 
 ```
 
-Take it for a test drive by subsetting the data based on a specific annotation term.
+Take it for a test drive by subsetting the data based on a specific
+annotation term.
+
 ```{r, message=FALSE}
 data_new_go %>% 
   subset(molecular_function == 'structural constituent of chromatin')
 
 ```
 
-An enrichment plot for "ion binding" for the annotation `molecular_function`.
+An enrichment plot for "ion binding" for the annotation
+`molecular_function`.
+
 ```{r, message=FALSE}
 data_new_go %>% 
   subset(molecular_function %like% 'ion binding') %>% 

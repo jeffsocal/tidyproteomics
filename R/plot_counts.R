@@ -19,7 +19,7 @@
 #'
 plot_counts <- function(
     data = NULL,
-    accounting = c('protein_groups','proteins','peptides','peptides_unique'),
+    accounting = NULL,
     show_replicates = TRUE,
     facet_groups = FALSE,
     impute_max = 0.5,
@@ -39,8 +39,11 @@ plot_counts <- function(
   fill <- NULL
   is_mbr <- NULL
 
-  accounting <- rlang::arg_match(accounting)
+
   check_data(data)
+  accounting_cols <- c(paste0(data$identifier, c('s', '_groups')), 'peptides','peptides_unique')
+  if(is.null(accounting)) { accounting <- accounting_cols[1]}
+  accounting <- rlang::arg_match(accounting, accounting_cols)
 
   fat <- data %>% analysis_counts(impute_max = impute_max)
 
