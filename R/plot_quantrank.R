@@ -108,7 +108,7 @@ plot_quantrank <- function(
 
     if(i == 1) {
       tb_sum <- tb_sum %>% dplyr::mutate(sample = NA)
-      alpha = .1
+      alpha = .01
     }
     if(i == 2) {
       if(display_filter != 'none'){
@@ -123,7 +123,7 @@ plot_quantrank <- function(
         tb_sum <- tb_sum %>% dplyr::inner_join(dsp, by = 'identifier')
         display_filter <- "subset"
       }
-      alpha = .25
+      alpha = .67
     }
 
     if(type == 'points'){

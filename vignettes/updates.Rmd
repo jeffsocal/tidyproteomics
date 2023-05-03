@@ -10,6 +10,11 @@ vignette: >
 ---
 # A condensed accounting of version updates
 
+### Version: 1.4.2 - 2023.04.03
+
+-   updated color theme to maximize contrasts in order
+-   updated plot_quantrank() to further fade background points when using a display_subset
+
 ### Version: 1.4.1 - 2023.03.28
 
 -   migrated from dplyr deprecated across() to group_by_at()
