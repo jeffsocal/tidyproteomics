@@ -10,6 +10,8 @@ normalize_randomforest(data = NULL, data_centered = NULL, .cores = 1)
 \item{data}{tidyproteomics list data-object}
 
 \item{data_centered}{a tibble of centered values used for normalization}
+
+\item{.cores}{number of CPU cores to use for multi-threading}
 }
 \value{
 a tibble

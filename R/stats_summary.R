@@ -24,6 +24,7 @@ stats_summary <- function(
   sd <- NULL
   median <- NULL
   cv <- NULL
+  CVs <- NULL
   num_peptides <- NULL
   num_unique_peptides <- NULL
   peptides <- NULL
@@ -42,22 +43,32 @@ stats_summary <- function(
   cli::cli_progress_cleanup()
   cli::cli_progress_bar(type = 'tasks')
   if(data$analyte == 'peptides'){
-    cli::cli_progress_step(" ... calculating peptide -to- protein stats")
-    data <- data %>% collapse(.verbose = FALSE)
-  }
+    # cli::cli_progress_step(" ... calculating peptide -to- protein stats")
+    tbl_long <- data %>% meld(single_quant_source = TRUE) %>%
+      dplyr::rename(identifier = protein) %>%
+      dplyr::group_by_at(c('sample_id', group_by, 'identifier')) %>%
+      dplyr::summarise(
+        num_peptides = dplyr::n(),
+        num_unique_peptides = length(unique(peptide)),
+        abundance = sum(abundance, na.rm = T),
+        .groups = 'drop'
+      )
 
-  tbl_long <- data %>% meld(single_quant_source = TRUE) %>%
-    munge_identifier('combine', identifiers = identifier) %>%
-    dplyr::mutate(identifiers = stringr::str_count(identifier, ";") + 1)
+    identifier <- 'protein'
+
+  } else {
+    tbl_long <- data %>% meld(single_quant_source = TRUE) %>%
+      munge_identifier('combine', identifiers = identifier)
+
+  }
 
   tbl_stats <- tbl_long %>%
     dplyr::group_by_at(group_by) %>%
     dplyr::summarise(
-      identifier_groups = sum(identifiers),
       identifiers = identifier %>% unique() %>% length(),
       peptides = ceiling(num_peptides %>% sum(na.rm = T) / length(unique(sample_id))),
       peptides_unique = ceiling(num_unique_peptides %>% sum(na.rm = T) / length(unique(sample_id))),
-      quantifiable = signif(num_peptides[!is.na(abundance)] %>% sum(na.rm=T) / length(unique(sample_id)) / peptides * 100, 3),
+      quantifiable = signif(num_peptides[!is.na(abundance)] %>% sum(na.rm=T) / length(unique(sample_id)) / peptides, 3),
       .groups = 'drop'
     )
 
@@ -74,7 +85,7 @@ stats_summary <- function(
     ) %>%
     dplyr::filter(!is.na(CVs))
 
-  if(nrow(tbl_cvs) != 0) { tbl_stats <- bind_cols(tbl_stats, tbl_cvs) }
+  if(nrow(tbl_cvs) != 0) { tbl_stats <- dplyr::bind_cols(tbl_stats, tbl_cvs) }
 
   w_cols <- which(grepl('^identifier[s_]*', colnames(tbl_stats)))
   colnames(tbl_stats)[w_cols] <- sub('identifier', identifier, colnames(tbl_stats)[w_cols])

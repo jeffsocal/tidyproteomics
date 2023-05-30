@@ -61,7 +61,7 @@ data_prot <- "./data/combined_protein.tsv" %>% import('FragPipe', 'proteins')
 library(tidyverse)
 library(tidyproteomics)
 
-data_prot <- "~/Local/gitdata/tidyproteomics_data/FragPipe_19.1/combined_protein.tsv" %>%
+data_prot <- "~/Local/data/tidyproteomics/FragPipe_19.1/combined_protein.tsv" %>%
   import('FragPipe', 'proteins')
 
 ```
@@ -72,7 +72,7 @@ Read in a FASTA file using some "un-exposed" methods in the
 `tidyproteomics` package.
 
 ```{r, message=FALSE}
-data_fasta <- "~/Local/fasta/uniprot_human-20398_20220920.fasta" %>% 
+data_fasta <- "~/Local/data/fasta/uniprot_human-20398_20220920.fasta" %>% 
   tidyproteomics:::fasta_parse(as = "data.frame") %>%
   select(protein = accession, gene_name, description) %>%
   pivot_longer(
@@ -143,7 +143,7 @@ annotations*](images/uniprot_search_02.png){width="100%"}
 Read in the TSV file from the downloaded UniProt table.
 
 ```{r, message=FALSE}
-data_go <- "~/Local/gitdata/uniprot-compressed_true_download_true_fields_accession_2Creviewed_2C-2023.04.13-22.27.47.76.tsv" %>% read_tsv()
+data_go <- "~/Local/data/uniprot-compressed_true_download_true_fields_accession_2Creviewed_2C-2023.04.13-22.27.47.76.tsv" %>% read_tsv()
 
 head(data_go)
 

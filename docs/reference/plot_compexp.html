@@ -3,7 +3,7 @@
 expression differences between two methods or two sets of groups. For example,
 one could run an expression difference for two different conditions (A and B)
 prodived the experiment contained 3 samples condition A, condition B and WT,
-then compare those results. The proteins showing up in the union (purple)
+then compare those results. The proteins showing up in the intersection (purple)
 indicate common targets for condition A and B.
 expdiff_a &amp;lt;- protein_data %&amp;gt;%
    expression(experiment = "condition_a", control = "wt")
@@ -17,7 +17,7 @@ plot_compexp(expdiff_a, expdiff_b)
 expression differences between two methods or two sets of groups. For example,
 one could run an expression difference for two different conditions (A and B)
 prodived the experiment contained 3 samples condition A, condition B and WT,
-then compare those results. The proteins showing up in the union (purple)
+then compare those results. The proteins showing up in the intersection (purple)
 indicate common targets for condition A and B.
 expdiff_a &amp;lt;- protein_data %&amp;gt;%
    expression(experiment = "condition_a", control = "wt")
@@ -38,7 +38,7 @@ plot_compexp(expdiff_a, expdiff_b)
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,7 +99,7 @@ plot_compexp(expdiff_a, expdiff_b)
 expression differences between two methods or two sets of groups. For example,
 one could run an expression difference for two different conditions (A and B)
 prodived the experiment contained 3 samples condition A, condition B and WT,
-then compare those results. The proteins showing up in the union (purple)
+then compare those results. The proteins showing up in the intersection (purple)
 indicate common targets for condition A and B.</p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>expdiff_a <span class="ot">&lt;-</span> protein_data <span class="sc">%&gt;%</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>   <span class="fu">expression</span>(<span class="at">experiment =</span> <span class="st">"condition_a"</span>, <span class="at">control =</span> <span class="st">"wt"</span>)</span>

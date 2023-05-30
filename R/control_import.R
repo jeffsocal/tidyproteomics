@@ -3,6 +3,7 @@
 #' @param files a character vector of file paths
 #' @param platform the source of the data (ProteomeDiscoverer, MaxQuant)
 #' @param analyte the omics analyte (proteins, peptides)
+#' @param path a character string
 #'
 #' @return a tidyproteomics list data-object
 #' @export

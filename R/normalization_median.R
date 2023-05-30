@@ -12,6 +12,9 @@ normalize_median <- function(
 
   # visible bindings
   abundance <- NULL
+  shift <- NULL
+  identifier <- NULL
+  abundance_normalized <- NULL
 
   # compute the median shift
   data_centered <- data_centered %>%

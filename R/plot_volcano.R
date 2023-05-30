@@ -15,7 +15,7 @@
 #' @param show_pannels a boolean for showing colored up/down expression panels.
 #' @param show_lines a boolean for showing threshold lines.
 #' @param show_fc_scale a boolean for showing the secondary foldchange scale.
-#' @param point_size a numeric for changing the point size.
+#' @param point_size a character reference to a numerical value in the expression table
 #' @param color_positive a character defining the color for positive (up) expression.
 #' @param color_negative a character defining the color for negative (down) expression.
 #' @param destination a character string

@@ -31,7 +31,7 @@ annotate <- function(
   if(data$analyte == 'peptides' & length(v_diff) > 0) {
     g_diff <- setdiff(data$identifier, v_diff)
     annotations <- annotations %>%
-      left_join(data$quantitative %>%
+      dplyr::left_join(data$quantitative %>%
                   dplyr::select(data$identifier) %>%
                   unique(),
                 by = g_diff)
@@ -70,7 +70,8 @@ annotate <- function(
       dplyr::group_by_at(c(data$identifier, 'term')) %>%
       dplyr::mutate(duplicate = dplyr::row_number()) %>%
       dplyr::slice_max(duplicate, n = 1, with_ties = FALSE) %>%
-      dplyr::select(!duplicate)
+      dplyr::select(!duplicate) %>%
+      dplyr::ungroup()
   }
 
   return(data)

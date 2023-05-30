@@ -19,6 +19,8 @@ codify <- function(
   import_file <- NULL
   sample_file <- NULL
   annotation <- NULL
+  abundance_raw <- NULL
+  imputed <- NULL
 
   if(is.null(identifier)) {cli::cli_abort("No identifier provided for codifying")}
   if(is.null(table)) {cli::cli_abort("No table provided for codifying")}
@@ -68,16 +70,22 @@ codify <- function(
     tb_quantitative <- tb_quantitative_tmp
   }
 
-  if(!is.null(annotations) & length(annotations) > 1) {
+  if(!is.null(annotations) & length(annotations) > 0) {
     tb_annotations <- table %>%
-      dplyr::select(dplyr::matches(get_annotations)) %>%
-      dplyr::select(!dplyr::matches("num\\_|\\_group")) %>%
-      tidyr::pivot_longer(
-        cols = !dplyr::matches(paste(paste0("^", identifier, "$"), collapse = "|")),
-        names_to = 'term',
-        values_to = 'annotation'
-      ) %>% unique() %>%
-      dplyr::filter(!is.na(annotation))
+      dplyr::select(dplyr::matches(get_annotations))
+
+    if(ncol(tb_annotations) == 1) {
+      tb_annotations <- c()
+    } else {
+      tb_annotations <- tb_annotations %>%
+        dplyr::select(!dplyr::matches("num\\_|\\_group")) %>%
+        tidyr::pivot_longer(
+          cols = !dplyr::matches(paste(paste0("^", identifier, "$"), collapse = "|")),
+          names_to = 'term',
+          values_to = 'annotation'
+        ) %>% unique() %>%
+        dplyr::filter(!is.na(annotation))
+    }
   } else {
     tb_annotations <- c()
   }
@@ -108,8 +116,6 @@ codify <- function(
     dplyr::group_by_at(cols_share) %>%
     dplyr::slice_max(imputed, n=1, with_ties = FALSE) %>%
     dplyr::ungroup()
-
-  db_tbl <<- tb_accounting
 
   n_rows_tb_accounting <- tb_accounting %>% dplyr::select(c('sample_id', identifier)) %>% unique() %>% nrow()
   n_rows_tb_quantitative <- tb_quantitative %>% dplyr::select(c('sample_id', identifier)) %>% unique() %>% nrow()

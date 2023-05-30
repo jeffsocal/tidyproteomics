@@ -41,6 +41,7 @@ subset <- function(
   # visible bindings
   sample_id <- NULL
 
+  check_data(data)
   str_quo <- tidyproteomics_quo(...)
   if(is.null(str_quo)) { return(data) }
 

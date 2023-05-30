@@ -2,6 +2,7 @@
 #'
 #' @param data tidyproteomics list data-object
 #' @param data_centered a tibble of centered values used for normalization
+#' @param .cores number of CPU cores to use for multi-threading
 #'
 #' @return a tibble
 #'

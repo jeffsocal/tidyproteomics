@@ -5,6 +5,8 @@
 #'
 #' @param data tidyproteomics data object
 #' @param accounting character string
+#' @param show_replicates boolean to visualize replicates
+#' @param facet_groups = FALSE,
 #' @param impute_max a numeric representing the largest allowable imputation percentage
 #' @param palette a string representing the palette for scale_fill_brewer()
 #' @param ... passthrough for ggsave see `plotting`
@@ -41,6 +43,10 @@ plot_counts <- function(
 
 
   check_data(data)
+
+  if(!is.logical(show_replicates)) { cli::cli_abort("show_replicates must be TRUE|FALSE") }
+  if(!is.logical(facet_groups)) { cli::cli_abort("facet_groups must be TRUE|FALSE") }
+
   accounting_cols <- c(paste0(data$identifier, c('s', '_groups')), 'peptides','peptides_unique')
   if(is.null(accounting)) { accounting <- accounting_cols[1]}
   accounting <- rlang::arg_match(accounting, accounting_cols)

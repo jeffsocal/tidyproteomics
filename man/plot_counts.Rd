@@ -19,6 +19,10 @@ plot_counts(
 
 \item{accounting}{character string}
 
+\item{show_replicates}{boolean to visualize replicates}
+
+\item{facet_groups}{= FALSE,}
+
 \item{impute_max}{a numeric representing the largest allowable imputation percentage}
 
 \item{palette}{a string representing the palette for scale_fill_brewer()}

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,9 +74,9 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">impute</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  impute_function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>,</span>
-<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"within"</span>, <span class="st">"between"</span><span class="op">)</span>,</span>
-<span>  minimum_to_impute <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  .function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"row"</span>, <span class="st">"column"</span>, <span class="st">"matrix"</span><span class="op">)</span>,</span>
+<span>  group_by_sample <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  cores <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -87,18 +87,27 @@
 <dd><p>a tidyproteomics list data-object</p></dd>
 
 
-<dt>impute_function</dt>
+<dt>.function</dt>
 <dd><p>summary statistic function. Default is base::min, examples of
 other functions include min, max, mean, sum. Note, NAs will be
 be removed in the function call.</p></dd>
 
 
 <dt>method</dt>
-<dd><p>a character string to indicate the imputation method (within, between)</p></dd>
+<dd><p>a character string to indicate the imputation method (row, column, matrix).
+Consider a data matrix of peptide/protein "rows" and dataset "columns". A 'row'
+functions by imputing values between samples looking at the values for a given
+peptide/protein, while the 'column' method imputes within a dataset of values.
+The function 'randomforest' imputes using data from all rows and columns, or
+the "matrix", without bias toward sample groups. If given a bias for
+sample groups, expression differences would also bias sample groups. If it is the
+case that sample groups should be biased (such as gene deletion), then it is
+suggested to impute using min function and the 'within' method.</p></dd>
 
 
-<dt>minimum_to_impute</dt>
-<dd><p>the minimum ratio to impute at</p></dd>
+<dt>group_by_sample</dt>
+<dd><p>a boolean to indicate that the data should be grouped by
+sample name to bias the imputation to within that sample.</p></dd>
 
 
 <dt>cores</dt>
@@ -120,46 +129,28 @@ be removed in the function call.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample protein_groups proteins peptides peptides_unique quantifiable  CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control          21165     7055    66329           58706         90.8 0.16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown          21165     7055    66329           58706         90.9 0.21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable  CVs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    control     7055    66329           58706        0.908 0.16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     7055    66329           58706        0.909 0.21</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>impute_function <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">function (x, na.rm = FALSE, ...)  UseMethod("media</span>…</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">within</span> samples by <span style="color: #FF5F00; font-style: italic;">function (x, na.rm = FALSE, ...)  UseMethod("media</span>…</span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>.function <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">::</span>, <span style="color: #FF5F00; font-style: italic;">stats</span>, and <span style="color: #FF5F00; font-style: italic;">median</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">::</span>, <span style="color: #FF5F00; font-style: italic;">stats</span>, and <span style="color: #FF5F00; font-style: italic;">median</span> <span style="color: #B2B2B2;">[677ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 1584 values imputed</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 1919 values imputed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample protein_groups proteins peptides peptides_unique quantifiable  CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control          21165     7055    66329           58706         92.7 0.17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown          21165     7055    66329           58706         92.7 0.22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable  CVs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    control     7055    66329           58706        0.931 0.16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     7055    66329           58706        0.931 0.20</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>impute_function <span class="op">=</span> <span class="st">"randomforest"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing <span style="color: #FF5F00; font-style: italic;">between</span> samples by <span style="color: #FF5F00; font-style: italic;">randomforest</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> randomForest 4.7-1.1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Type rfNews() to see new features/changes/bug fixes.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘randomForest’</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:dplyr’:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>     combine</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: foreach</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rngtools</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... median oobe 3.12e+10</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing <span style="color: #FF5F00; font-style: italic;">between</span> samples by <span style="color: #FF5F00; font-style: italic;">randomforest</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing <span style="color: #FF5F00; font-style: italic;">between</span> samples by <span style="color: #FF5F00; font-style: italic;">randomforest</span> <span style="color: #B2B2B2;">[54.6s]</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 1584 values imputed</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample protein_groups proteins peptides peptides_unique quantifiable  CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control          21165     7055    66329           58706         92.7 0.16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown          21165     7055    66329           58706         92.7 0.21</span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>.function <span class="op">=</span> <span class="va">impute.randomforest</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">impute.randomforest</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .f(as.vector(stats::na.omit(x))):</span> imput data must be a matrix</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">impute.randomforest</span> <span style="color: #B2B2B2;">[50ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

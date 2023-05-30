@@ -130,9 +130,9 @@ data_prot <- "miR_Proteintable.tsv" %>% import('PXD004163', 'proteins', path = "
 library(dplyr)
 library(tidyproteomics)
 
-data_prot <- "~/Local/gitdata/tidyproteomics_data/PXD004163/miR_Proteintable.tsv" %>% 
+data_prot <- "~/Local/data/tidyproteomics/PXD004163/miR_Proteintable.tsv" %>% 
   import('PXD004163', 'proteins', 
-         path = "~/Local/gitdata/tidyproteomics_data/PXD004163/TMTOpenMS_proteins.tsv")
+         path = "~/Local/data/tidyproteomics/PXD004163/TMTOpenMS_proteins.tsv")
 ```
 
 ```         
@@ -164,16 +164,16 @@ The TMT labeling assignments are not not provided in the literature, but can be 
 ```{r}
 data_prot <- data_prot %>%
   subset(protein_qvalue < 0.01) %>%
-  reassign('sample', 's126', 'ctrl') %>%
-  reassign('sample', 's127n', 'miR191') %>%
-  reassign('sample', 's127c', 'miR372') %>%
-  reassign('sample', 's128n', 'miR519') %>%
-  reassign('sample', 's128c', 'ctrl') %>%
-  reassign('sample', 's129n', 'miR372') %>%
-  reassign('sample', 's129c', 'miR519') %>%
-  reassign('sample', 's130n', 'ctrl') %>%
-  reassign('sample', 's130c', 'miR191') %>%
-  reassign('sample', 's131', 'miR372')
+  reassign(sample == 's126', .replace = 'ctrl') %>%
+  reassign(sample == 's127n', .replace = 'miR191') %>%
+  reassign(sample == 's127c', .replace = 'miR372') %>%
+  reassign(sample == 's128n', .replace = 'miR519') %>%
+  reassign(sample == 's128c', .replace = 'ctrl') %>%
+  reassign(sample == 's129n', .replace = 'miR372') %>%
+  reassign(sample == 's129c', .replace = 'miR519') %>%
+  reassign(sample == 's130n', .replace = 'ctrl') %>%
+  reassign(sample == 's130c', .replace = 'miR191') %>%
+  reassign(sample == 's131', .replace = 'miR372')
 
 data_prot
 ```

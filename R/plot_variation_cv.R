@@ -35,6 +35,7 @@ plot_variation_cv <- function(
   cv_mean <- NULL
   abundance_95h <- NULL
   abundance_95l <- NULL
+  dynamic_range <- NULL
 
   check_data(data)
 
@@ -62,6 +63,7 @@ plot_variation_cv <- function(
       abundance_max = max(abundance, na.rm = T),
       abundance_95l = stats::quantile(abundance, .025, na.rm=T),
       abundance_95h = stats::quantile(abundance, .975, na.rm=T),
+      dynamic_range = abundance_95h - abundance_95l,
       .groups = "drop"
     ) %>%
     dplyr::ungroup()
@@ -88,29 +90,63 @@ plot_variation_cv <- function(
       .groups = "drop"
     )
 
-  plot <- data_quant_cvs_mean %>%
-    dplyr::select(origin, sample, mean = cv_mean) %>%
-    dplyr::mutate(stat = 'CVs (sd/mean)') %>%
-    dplyr::bind_rows(
-      data_quant_norm_range %>%
-        dplyr::mutate(mean = abundance_95h - abundance_95l) %>%
-        dplyr::select(origin, sample, mean) %>%
-        dplyr::mutate(stat = 'Dynamic Range (95%CI Log10)')
-    ) %>%
+  p_cv <- data_quant_cvs_mean %>%
     dplyr::mutate(origin = forcats::fct_relevel(origin, norm_vals)) %>%
-    ggplot2::ggplot(ggplot2::aes(origin, mean, color=sample)) +
+    ggplot2::ggplot(ggplot2::aes(origin, cv_mean, color=sample)) +
     ggplot2::geom_point() +
     ggplot2::geom_line(ggplot2::aes(group=sample)) +
     ggplot2::geom_hline(yintercept = 0, color=NA) +
-    # ggplot2::scale_color_manual(values = theme_palette) +
+    ggplot2::scale_y_continuous(n.breaks = 7) +
+    ggplot2::theme_minimal() +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle=20, hjust=1),
+                   legend.position = 'none',
+                   axis.title.y = ggplot2::element_text(size=9)) +
+    ggplot2::scale_color_manual(values = theme_palette()) +
+    ggplot2::labs(subtitle = "Quantitative Variation") +
+    ggplot2::xlab('') +
+    ggplot2::ylab('CVs (sd/mean)')
+
+  p_dr <- data_quant_norm_range %>%
+    dplyr::mutate(origin = forcats::fct_relevel(origin, norm_vals)) %>%
+    ggplot2::ggplot(ggplot2::aes(origin, dynamic_range, color=sample)) +
+    ggplot2::geom_point() +
+    ggplot2::geom_line(ggplot2::aes(group=sample)) +
     ggplot2::scale_y_continuous(n.breaks = 11) +
     ggplot2::theme_minimal() +
-    ggplot2::facet_wrap(~stat, scales='free') +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle=30, hjust=1)) +
+    ggplot2::theme(axis.text.x = ggplot2::element_text(angle=20, hjust=1),
+                   axis.title.y = ggplot2::element_text(size=9)) +
     ggplot2::scale_color_manual(values = theme_palette()) +
-    ggplot2::labs(title = "Normalization",
-                  subtitle = "Effect on Variation and Range",
-                  x = '', y ='')
+    ggplot2::labs(subtitle = "Quantitative Dynamic Range") +
+    ggplot2::xlab('') +
+    ggplot2::ylab('Dynamic Range (95%CI Log10)')
+
+  # plot <- data_quant_cvs_mean %>%
+  #   dplyr::select(origin, sample, mean = cv_mean) %>%
+  #   dplyr::mutate(stat = 'CVs (sd/mean)') %>%
+  #   dplyr::bind_rows(
+  #     data_quant_norm_range %>%
+  #       dplyr::mutate(mean = abundance_95h - abundance_95l) %>%
+  #       dplyr::select(origin, sample, mean) %>%
+  #       dplyr::mutate(stat = 'Dynamic Range (95%CI Log10)')
+  #   ) %>%
+  #   dplyr::mutate(origin = forcats::fct_relevel(origin, norm_vals)) %>%
+  #   ggplot2::ggplot(ggplot2::aes(origin, mean, color=sample)) +
+  #   ggplot2::geom_point() +
+  #   ggplot2::geom_line(ggplot2::aes(group=sample)) +
+  #   ggplot2::geom_hline(yintercept = 0, color=NA) +
+  #   ggplot2::scale_y_continuous(n.breaks = 11) +
+  #   ggplot2::theme_minimal() +
+  #   ggplot2::facet_wrap(~stat, scales='free', strip.position = 'left') +
+  #   ggplot2::theme(axis.text.x = ggplot2::element_text(angle=30, hjust=1)) +
+  #   ggplot2::scale_color_manual(values = theme_palette()) +
+  #   ggplot2::labs(title = "Normalization",
+  #                 subtitle = "Effect on Variation and Range",
+  #                 x = '', y ='')
+
+  plot <- gridExtra::grid.arrange(p_cv, p_dr, nrow = 1,
+                                  widths = c(.85,1.15),
+                                  top=grid::textGrob("Normalization Effects on Variation and Range",
+                                                     x = 0.05, hjust = 0))
 
   return(plot_save(plot,
                    data,

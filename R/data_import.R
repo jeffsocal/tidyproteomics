@@ -22,6 +22,7 @@ data_import <- function(
   abundance_raw <- NULL
   match_between_runs <- NULL
   num_psms <- NULL
+  value <- NULL
 
   column_defined <- NULL
   pivot <- NULL

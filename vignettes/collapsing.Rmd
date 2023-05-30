@@ -69,12 +69,12 @@ pep_data <- "./data/pd_peptides.xlsx" %>% import('ProteomeDiscoverer', 'peptides
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-pep_data <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HCT116_peptides.xlsx" %>%
+pep_data <- "~/Local/data/tidyproteomics/ProteomeDiscoverer_2.5/p97KD_HCT116_peptides.xlsx" %>%
   import("ProteomeDiscoverer", "peptides")
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-pro_data <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx" %>%
+pro_data <- "~/Local/data/tidyproteomics/ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx" %>%
   import("ProteomeDiscoverer", "proteins") %>%
   normalize(.method = c('median', 'linear', 'loess'))
 
@@ -303,7 +303,7 @@ Alternatively, peptide level data can be collapsed to any Annotation term, in th
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyr)
 
-data_fasta <- "~/Local/fasta/uniprot_human-20398_20220920.fasta" %>% 
+data_fasta <- "~/Local/data/fasta/uniprot_human-20398_20220920.fasta" %>% 
   tidyproteomics:::fasta_parse(as = "data.frame") %>%
   select(protein = accession, gene_name, description) %>%
   pivot_longer(

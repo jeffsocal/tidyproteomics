@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,7 +110,7 @@ facilitate this with the <code><a href="../reference/impute.html">impute()</a></
 can support any base level or user defined function along with
 implementing the R package <em>missForest</em>, widely regarded as one
 of the best algorithms for missing value imputation. Note that this
-method is a <strong>between</strong> sample imputation.</p>
+method is a <strong>matrix</strong> based sample imputation.</p>
 <p>While random forest algorithms have shown superiority in imputation
 and regression, that does not portend their use in every case. For
 example, imputing missing values from a knock-out experiment, such as
@@ -155,8 +155,7 @@ measured.</p>
 <div class="section level3">
 <h3 id="imputation-functions">Imputation Functions<a class="anchor" aria-label="anchor" href="#imputation-functions"></a>
 </h3>
-<p>Imputation currently supports the following methods calculated either
-<strong>within</strong> or <strong>between</strong> samples:</p>
+<p>Imputation currently supports the following functions:</p>
 <table class="table">
 <colgroup>
 <col width="23%">
@@ -172,30 +171,34 @@ measured.</p>
 <tr class="odd">
 <td>base::min</td>
 <td>
-<strong>within</strong> or <strong>between</strong>
+<strong>row</strong> or <strong>column</strong>
 </td>
 <td>the minimum value in any given set</td>
 </tr>
 <tr class="even">
 <td>stats::median</td>
 <td>
-<strong>within</strong> or <strong>between</strong>
+<strong>row</strong> or <strong>column</strong>
 </td>
 <td>the minimum value in any given set</td>
 </tr>
 <tr class="odd">
 <td><em>user supplied function</em></td>
-<td>
-<strong>within</strong> or <strong>between</strong>
-</td>
+<td><em>any</em></td>
 <td>e.g. <em>function (x, na.rm) { quantile(x, 0.05, na.rm = na.rm)[1]
 }</em>
 </td>
 </tr>
 <tr class="even">
-<td>“randomforest”</td>
+<td>impute.knn</td>
 <td>
-<strong>between</strong> only</td>
+<strong>matrix</strong> only</td>
+<td>a non-linear KNN implementation (bioconductor::impute)</td>
+</tr>
+<tr class="odd">
+<td>impute.randomforest</td>
+<td>
+<strong>matrix</strong> only</td>
 <td>a non-linear random forest implementation of missForest</td>
 </tr>
 </tbody>
@@ -223,13 +226,13 @@ mutation”.</p>
 <code class="sourceCode R"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">$</span><span class="va">protein</span> <span class="op">==</span> <span class="st">'P06576'</span> <span class="op">&amp;</span> <span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">$</span><span class="va">sample</span> <span class="op">==</span> <span class="st">'knockdown'</span><span class="op">)</span></span>
 <span><span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span> <span class="op">&lt;-</span> <span class="va">rdata</span><span class="op">$</span><span class="va">quantitative</span><span class="op">[</span><span class="op">-</span><span class="va">w</span>,<span class="op">]</span></span></code></pre></div>
 <div class="section level4">
-<h4 id="using-within">Using <em>within</em><a class="anchor" aria-label="anchor" href="#using-within"></a>
+<h4 id="using-column">Using <em>column</em><a class="anchor" aria-label="anchor" href="#using-column"></a>
 </h4>
-<p>Note the difference using <strong>within</strong> ..</p>
+<p>Note the difference using <strong>column</strong> ..</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span>impute_function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>, method <span class="op">=</span> <span class="st">'within'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span>.function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>, method <span class="op">=</span> <span class="st">'column'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"P23443|P51812|P06576"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/extract.html">extract</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -240,21 +243,20 @@ mutation”.</p>
 <p><img src="imputing_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
 <div class="section level4">
-<h4 id="using-between">Using <em>between</em><a class="anchor" aria-label="anchor" href="#using-between"></a>
+<h4 id="using-row">Using <em>row</em><a class="anchor" aria-label="anchor" href="#using-row"></a>
 </h4>
-<p>.. as opposed to <strong>between</strong>. The
-<strong>between</strong> method can be considered to contain the bias of
-any <em>real</em> offset, note our protein <em>P06576</em> (i.e our
-artifical knock-out), shows the expected offset for the
-<strong>within</strong> method, and does not for the
-<strong>between</strong> method. Consider only using
-<strong>between</strong> methods when imputing values you suspect are
+<p>.. as opposed to <strong>row</strong>. The <strong>row</strong>
+method can be considered to contain the bias of any <em>real</em>
+offset, note our protein <em>P06576</em> (i.e our artifical knock-out),
+shows the expected offset for the <strong>column</strong> method, and
+does not for the <strong>row</strong> method. Consider only using
+<strong>row</strong> methods when imputing values you suspect are
 missing-at-random. In our case <em>P06576</em> is missing-not-at-random,
 because we performed a “genetic knockout mutation”.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span>impute_function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>, method <span class="op">=</span> <span class="st">'between'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span>.function <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span>, method <span class="op">=</span> <span class="st">'row'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"P23443|P51812|P06576"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/extract.html">extract</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">replicate</span>, <span class="va">abundance</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -263,6 +265,21 @@ because we performed a “genetic knockout mutation”.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_log10</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1e4</span>,<span class="fl">1e9</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_color_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'red'</span>,<span class="st">'blue'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="imputing_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
+</div>
+<div class="section level4">
+<h4 id="using-matrix">Using <em>matrix</em><a class="anchor" aria-label="anchor" href="#using-matrix"></a>
+</h4>
+<p>The matrix based operation takes advantage of data present in other
+samples (eg. “row”) and the information contained in the dynamic range
+(eg “column”) to better estimate the missing value - usually this is
+best for missing-at-random.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>rdata <span class="sc">%&gt;%</span> <span class="fu">impute</span>(<span class="at">.function =</span> impute.randomforest, <span class="at">method =</span> <span class="st">'matrix'</span>) <span class="sc">%&gt;%</span></span></code></pre></div>
+<p>The R package in <a href="https://bioconductor.org/packages/release/bioc/html/impute.html" class="external-link">bioconductor::impute</a>,
+allows for the popular imputation method KNN.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">library</span>(impute)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>rdata <span class="sc">%&gt;%</span> <span class="fu">impute</span>(<span class="at">.function =</span> impute.knn, <span class="at">method =</span> <span class="st">'matrix'</span>) <span class="sc">%&gt;%</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

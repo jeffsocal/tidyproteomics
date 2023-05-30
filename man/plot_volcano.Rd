@@ -44,7 +44,7 @@ plot_volcano(
 
 \item{show_fc_scale}{a boolean for showing the secondary foldchange scale.}
 
-\item{point_size}{a numeric for changing the point size.}
+\item{point_size}{a character reference to a numerical value in the expression table}
 
 \item{color_positive}{a character defining the color for positive (up) expression.}
 

@@ -100,6 +100,9 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/collapse.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/compute_compexp.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/data_import.html</loc>
   </url>
   <url>
@@ -122,6 +125,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/export_analysis.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/export_compexp.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/export_quant.html</loc>
@@ -233,6 +239,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/impute.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/impute.randomforest.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/impute_byfunction.html</loc>

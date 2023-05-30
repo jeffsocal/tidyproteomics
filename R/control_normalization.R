@@ -13,6 +13,7 @@
 #' @param data tidyproteomics data object
 #' @param ... use a subset of the data for normalization see `subset()`. This is useful when normalizing against a spike-in set of proteins
 #' @param .method character vector of normalization to use
+#' @param .cores number of CPU cores to use for multi-threading
 #'
 #' @return a tidyproteomics data-object
 #' @export

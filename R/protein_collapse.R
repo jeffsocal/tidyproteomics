@@ -132,6 +132,7 @@ collapse <- function(
   # one of identity
   experiment_ids <- c("sample_id", "import_file", "sample_file", "sample", "replicate")
   merge_by <- c(collapse_to, experiment_ids)
+  annotation_cols <- setdiff(get_annotation_terms(data), data$identifier)
 
   if(.verbose == TRUE) {cli::cli_progress_step(' ... gathering peptides')}
 
@@ -255,10 +256,13 @@ collapse <- function(
       dplyr::mutate(abundance_shared = abundance)
   }
 
+  codify_annotations <- unique(setdiff(get_annotation_terms(data), data$identifier), names(tb_fasta))
+  codify_annotations <- intersect(codify_annotations, colnames(tb_pro_quant_shared))
+
   if(.verbose == TRUE) {cli::cli_progress_step(' ... computing protein stats')}
   tb_pro_quant_summed <- tb_pro_quant_shared %>%
     dplyr::arrange(dplyr::desc(abundance_shared)) %>%
-    dplyr::group_by_at(merge_by) %>%
+    dplyr::group_by_at(union(merge_by, codify_annotations)) %>%
     # calculate the shared protein abundance
     dplyr::summarise(abundance = .function(abundance_shared[1:top_n]),
                      peptides = paste(sort(unique(peptide)), collapse = "; "),
@@ -293,10 +297,13 @@ collapse <- function(
     dplyr::select(!dplyr::matches('identifier')) %>%
     dplyr::relocate(dplyr::matches(collapse_to))
 
-  if(!is.null(fasta_path)) {dat_pro <- dat_pro %>% dplyr::left_join(tb_fasta, by = collapse_to)}
-
-  codify_annotations <- unique(setdiff(get_annotation_terms(data), data$identifier), names(tb_fasta))
-  codify_annotations <- intersect(codify_annotations, colnames(dat_pro))
+  if(!is.null(fasta_path)) {
+    dat_pro <- dat_pro %>% dplyr::left_join(tb_fasta, by = collapse_to)
+  } else if(length(codify_annotations) > 1){
+    # create annotation table
+    tbl_annotations <- tb_pro_quant_shared[,codify_annotations] %>%  unique() %>% tidyr::drop_na()
+    dat_pro <- dat_pro %>% dplyr::left_join(tbl_annotations, by = collapse_to)
+  }
 
   dat_pro <- dat_pro %>% codify(identifier = collapse_to, annotations = codify_annotations)
 

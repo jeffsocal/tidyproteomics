@@ -12,6 +12,8 @@ import(files = NULL, platform = NULL, analyte = NULL, path = NULL)
 \item{platform}{the source of the data (ProteomeDiscoverer, MaxQuant)}
 
 \item{analyte}{the omics analyte (proteins, peptides)}
+
+\item{path}{a character string}
 }
 \value{
 a tidyproteomics list data-object

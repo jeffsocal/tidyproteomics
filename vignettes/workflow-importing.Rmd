@@ -38,7 +38,7 @@ library(tidyverse)
 library(tidyproteomics)
 
 # import the data
-data_prot <- "~/Local/gitdata/tidyproteomics_data/ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx" %>% import('ProteomeDiscoverer', 'proteins')
+data_prot <- "~/Local/data/tidyproteomics/ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx" %>% import('ProteomeDiscoverer', 'proteins')
 
 data_prot
 ```
@@ -64,7 +64,7 @@ library(tidyverse)
 library(tidyproteomics)
 
 # import the data
-data_prot <- "~/Local/gitdata/tidyproteomics_data/MaxQuant_1.6.10.43/proteinGroups.txt" %>% import('MaxQuant', 'proteins')
+data_prot <- "~/Local/data/tidyproteomics/MaxQuant_1.6.10.43/proteinGroups.txt" %>% import('MaxQuant', 'proteins')
 
 data_prot
 ```
@@ -90,7 +90,7 @@ library(tidyverse)
 library(tidyproteomics)
 
 # import the data
-data_prot <- "~/Local/gitdata/tidyproteomics_data/FragPipe_19.1/combined_protein.tsv" %>% import('FragPipe', 'proteins')
+data_prot <- "~/Local/data/tidyproteomics/FragPipe_19.1/combined_protein.tsv" %>% import('FragPipe', 'proteins')
 
 data_prot
 ```

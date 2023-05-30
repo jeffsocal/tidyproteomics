@@ -13,6 +13,7 @@
 #' @param show_error a boolean
 #' @param show_rank_scale a boolean
 #' @param limit_rank a numerical vector of 2
+#' @param display_subset a string vector of identifiers to highlight
 #' @param display_filter a numeric between 0 and 1
 #' @param display_cutoff a numeric between 0 and 1
 #' @param palette a string representing the palette for scale_fill_brewer()

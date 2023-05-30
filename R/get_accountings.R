@@ -1,7 +1,6 @@
 #' Helper function to get all accounting terms
 #'
 #' @param data tidyproteomics data object
-#' @param term a character string
 #'
 #' @return a vector
 #'

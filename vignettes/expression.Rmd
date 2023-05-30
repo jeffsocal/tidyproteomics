@@ -164,7 +164,6 @@ library("tidyproteomics")
 
 rdata <- hela_proteins %>% 
   normalize(.method = 'loess') %>%
-  impute(impute_function = base::min) %>%
   expression(knockdown/control)
 ```
 

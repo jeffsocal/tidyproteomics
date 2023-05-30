@@ -24,7 +24,7 @@ plot_save <- function(
 ){
 
   # visible bindings
-  ok_classes <- c('ggplot', 'eulergram', 'pheatmap')
+  ok_classes <- c('ggplot', 'eulergram', 'pheatmap', 'grob')
 
   destination = rlang::arg_match(destination)
   if(!is.numeric(height) && (height < 1 | height > 30)) {cli::cli_abort("plot height must be a numeric between 1 and 30")}

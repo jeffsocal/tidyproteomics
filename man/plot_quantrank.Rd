@@ -32,6 +32,8 @@ plot_quantrank(
 
 \item{limit_rank}{a numerical vector of 2}
 
+\item{display_subset}{a string vector of identifiers to highlight}
+
 \item{display_filter}{a numeric between 0 and 1}
 
 \item{display_cutoff}{a numeric between 0 and 1}

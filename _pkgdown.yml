@@ -58,6 +58,7 @@ reference:
   - import
   - export_quant
   - export_analysis
+  - export_compexp
   - as.data.frame.tidyproteomics
   - load_local
   - save_local
@@ -102,7 +103,9 @@ reference:
   description: |
     **Imputing** calculates values for missing observations, based on a number of methods.
     See `vignette("imputing")` for more details and examples.
-  contents: impute
+  contents:
+  - impute
+  - impute.randomforest
 - title: Visualization
   description: |
     **Visualizing** data is important for understanding the underlying quality of the
@@ -159,8 +162,6 @@ reference:
   - get_unique_variables
   - get_accountings
   - hdf
-  - impute_byfunction
-  - impute_randomforest
   - impute_ratio
   - meld
   - codify
@@ -223,7 +224,7 @@ reference:
   - fasta_regex
   - experimental
   - experimental_groups
-  - import_charge
   - rf_parallel
   - svm_parallel
+  - compute_compexp
 

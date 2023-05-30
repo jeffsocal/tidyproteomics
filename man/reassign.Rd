@@ -4,16 +4,14 @@
 \alias{reassign}
 \title{reassign the sample info}
 \usage{
-reassign(data = NULL, field = NULL, pattern = NULL, replace = NULL)
+reassign(data = NULL, ..., .replace = NULL)
 }
 \arguments{
 \item{data}{a tidyproteomics data-object}
 
-\item{field}{a character string}
+\item{...}{a three part expression (eg. x == a)}
 
-\item{pattern}{a character string}
-
-\item{replace}{a character string}
+\item{.replace}{a character string}
 }
 \value{
 a tidyproteomics data-object
@@ -31,14 +29,14 @@ hela_proteins \%>\% summary("experiment")
 
 # make the modification
 hela_proteins \%>\%
-   reassign(field = "sample", pattern = "control", replace = "ct") \%>\%
-   reassign(field = "sample", pattern = "knockdown", replace = "kd") \%>\%
+   reassign(sample == "control", .replace = "ct") \%>\%
+   reassign(sample == "knockdown", .replace = "kd") \%>\%
    summary("sample")
 
 # reassign specific file_ids
 hela_proteins \%>\%
-   reassign(field = "sample_file", pattern = "f1", replace = "new") \%>\%
-   reassign(field = "sample_file", pattern = "f2", replace = "new") \%>\%
+   reassign(sample_file == "f1", .replace = "new") \%>\%
+   reassign(sample_file == "f2", .replace = "new") \%>\%
    summary("sample")
 
 }

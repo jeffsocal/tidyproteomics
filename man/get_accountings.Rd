@@ -8,8 +8,6 @@ get_accountings(data = NULL)
 }
 \arguments{
 \item{data}{tidyproteomics data object}
-
-\item{term}{a character string}
 }
 \value{
 a vector

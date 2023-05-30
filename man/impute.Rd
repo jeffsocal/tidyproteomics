@@ -6,22 +6,31 @@
 \usage{
 impute(
   data = NULL,
-  impute_function = base::min,
-  method = c("within", "between"),
-  minimum_to_impute = 0.25,
+  .function = base::min,
+  method = c("row", "column", "matrix"),
+  group_by_sample = FALSE,
   cores = 2
 )
 }
 \arguments{
 \item{data}{a tidyproteomics list data-object}
 
-\item{impute_function}{summary statistic function. Default is base::min, examples of
+\item{.function}{summary statistic function. Default is base::min, examples of
 other functions include min, max, mean, sum. Note, NAs will be
 be removed in the function call.}
 
-\item{method}{a character string to indicate the imputation method (within, between)}
+\item{method}{a character string to indicate the imputation method (row, column, matrix).
+Consider a data matrix of peptide/protein "rows" and dataset "columns". A 'row'
+functions by imputing values between samples looking at the values for a given
+peptide/protein, while the 'column' method imputes within a dataset of values.
+The function 'randomforest' imputes using data from all rows and columns, or
+the "matrix", without bias toward sample groups. If given a bias for
+sample groups, expression differences would also bias sample groups. If it is the
+case that sample groups should be biased (such as gene deletion), then it is
+suggested to impute using min function and the 'within' method.}
 
-\item{minimum_to_impute}{the minimum ratio to impute at}
+\item{group_by_sample}{a boolean to indicate that the data should be grouped by
+sample name to bias the imputation to within that sample.}
 
 \item{cores}{the number of threads used to speed the calculation}
 }
@@ -36,8 +45,8 @@ library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins \%>\% summary("sample")
 
-hela_proteins \%>\% impute(impute_function = stats::median) \%>\% summary("sample")
+hela_proteins \%>\% impute(.function = stats::median) \%>\% summary("sample")
 
-hela_proteins \%>\% impute(impute_function = "randomforest") \%>\% summary("sample")
+hela_proteins \%>\% impute(.function = impute.randomforest) \%>\% summary("sample")
 
 }

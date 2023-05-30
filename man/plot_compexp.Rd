@@ -52,7 +52,7 @@ a ggplot2 object
 expression differences between two methods or two sets of groups. For example,
 one could run an expression difference for two different conditions (A and B)
 prodived the experiment contained 3 samples condition A, condition B and WT,
-then compare those results. The proteins showing up in the union (purple)
+then compare those results. The proteins showing up in the intersection (purple)
 indicate common targets for condition A and B.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{expdiff_a <- protein_data \%>\%

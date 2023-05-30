@@ -17,6 +17,8 @@ normalize(
 \item{...}{use a subset of the data for normalization see \code{subset()}. This is useful when normalizing against a spike-in set of proteins}
 
 \item{.method}{character vector of normalization to use}
+
+\item{.cores}{number of CPU cores to use for multi-threading}
 }
 \value{
 a tidyproteomics data-object
