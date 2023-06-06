@@ -15,11 +15,17 @@ This package supports at a high level:
 
 ## Links
 
+### Publication
+
+Jones, J., MacKrell, E.J., Wang, TY. et al. *Tidyproteomics: an open-source R package and data object for quantitative proteomics post analysis and visualization.* [BMC Bioinformatics 24, 239 (2023)](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-023-05360-7)
+
 ### R Package
+
 -   Code: [github.com/jeffsocal/tidyproteomics](https://github.com/jeffsocal/tidyproteomics)
 -   Docs: [jeffsocal.github.io/tidyproteomics/](https://jeffsocal.github.io/tidyproteomics/)
 
 ### RShiny App
+
 -   Code: [github.com/ejmackrell/tidyproteomics-interactive](https://github.com/ejmackrell/tidyproteomics-interactive)
 -   Web : [bioinformatics.pel.caltech.edu/tidyproteomics/](http://bioinformatics.pel.caltech.edu/tidyproteomics/)
 
@@ -28,7 +34,7 @@ This package supports at a high level:
 Importing is currently implemented for a few platforms and assume peptide level FDR (at the user's desired level) has already been accounted for. See `vignette("importing")`. Importing is flexible enough to accept other data platforms in flat files (.csv, .tsv, and .xlsx) with a custom configuration.
 
 | Platform           | peptides                        | proteins                  | notes                         |
-|--------------------|---------------------------------|---------------------------|-------------------------------|
+|------------------|-------------------|------------------|------------------|
 | ProteomeDiscoverer | \*.xlsx *peptides export*       | \*.xlsx *proteins export* | requires layout configuration |
 | MaxQuant           | evidence.txt                    | proteinGroups.txt         |                               |
 | FragPipe           | combined_peptide.tsv            | combined_protein.tsv      |                               |
@@ -40,14 +46,14 @@ Importing is currently implemented for a few platforms and assume peptide level 
 
 This package supports the same [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar) utilized in the tidy-verse functions like filter, and introduces the `%like%` operator, see `vignette("subsetting")` . These operations can extend to all aspects of the data set, including sample names, protein IDs, annotations and accountings like *match_between_runs* and *num_peptides*.
 
-| operator                  | description          | example                                          |
-|---------------------------|----------------------|--------------------------------------------------|
-| ==                        | equals               | `sample == 'wt'` , `match_between_runs == FALSE` |
-| !=                        | does not equal       | `biological_function != 'DNA metabolism'`        |
-| \<, \>                    | less, greater than   | `num_unique_peptides >= 2`                       |
-| %like%                    | contains             | `description %like% 'ribosome'`                  |
-| ! %like%                  | does not contain     | `!description %like% 'ribosome'`                 |
-| /                         | ratio *(expression)* | `experiment / control`                           |
+| operator | description          | example                                          |
+|-------------------|-------------------|----------------------------------|
+| ==       | equals               | `sample == 'wt'` , `match_between_runs == FALSE` |
+| !=       | does not equal       | `biological_function != 'DNA metabolism'`        |
+| \<, \>   | less, greater than   | `num_unique_peptides >= 2`                       |
+| %like%   | contains             | `description %like% 'ribosome'`                  |
+| ! %like% | does not contain     | `!description %like% 'ribosome'`                 |
+| /        | ratio *(expression)* | `experiment / control`                           |
 
 Expression analysis also utilizes this type of syntax when referencing samples for analysis. For example `data %>% expression(knockdown/control)` would know to run the differential expression of the sample *ko* with respect to the sample *wt* such that positive log2 difference would be up-expressed in *ko* and a negative log2 differences would be down-expressed in *ko*.
 
@@ -60,7 +66,7 @@ This package divides data into tables similar to those in SQL, making it easy to
 ### Experimental Table
 
 | Variable    | Reference                                                                                                                               |
-|-------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | sample_id   | A checksum id on the individual data imported, allows for an unambiguous identifier usefull in differentiating samples of the same name |
 | import_file | The file referenced at import, allows for multiple files to be merged                                                                   |
 | sample_file | The individual MS file, or for TMT the channel, that contains data for a single observation of a given protein                          |
@@ -88,7 +94,7 @@ hela_proteins$experiments
 ### Quantitation Table
 
 | Variable                       | Reference                                                                                                                                                                                                                                                                                                                   |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | sample_id                      | A checksum id on the individual data imported, allows for an unambiguous identifier useful in differentiating samples of the same name                                                                                                                                                                                      |
 | sample                         | The name of the MS data collected for a given class, collection of sampling of tissue, a culture etc.                                                                                                                                                                                                                       |
 | replicate                      | A tidyproteomics derived integer assignment to a collection of same-named samples                                                                                                                                                                                                                                           |
@@ -119,7 +125,7 @@ hela_proteins$quantitation
 ### Annotation Table
 
 | Variable     | Reference                                                                    |
-|--------------|------------------------------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | *identifier* | The identifier of the "thing" being measured.                                |
 | term         | The name of the collection of annotations, such as gene_name or description. |
 | annotation   | The descriptive annotation.                                                  |
