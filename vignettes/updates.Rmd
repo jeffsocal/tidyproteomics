@@ -11,6 +11,10 @@ vignette: >
 # A condensed accounting of updates, semantic versioning.
 
 ### Version: 1.5.x
+#### 1.5.1 - 2023.06.09
+
+-   updated plot_counts()
+
 #### 1.5.0 - 2023.05.23
 
 -   refactored impute() to allow for user defined matrix based functions

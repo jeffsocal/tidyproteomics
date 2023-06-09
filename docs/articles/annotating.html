@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -232,16 +232,15 @@ annotations</em></div>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data_go</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 8</span></span></span>
-<span><span class="co">#&gt;   Entry      Reviewed `Entry Name` Protein name…¹ Gene …² Organ…³ Length Gene …⁴</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> A0A087X1C5 reviewed CP2D7_HUMAN  Putative cyto… CYP2D7  Homo s…    515 aromat…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> A0A0B4J2F0 reviewed PIOS1_HUMAN  Protein PIGBO… PIGBOS1 Homo s…     54 <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> A0A0B4J2F2 reviewed SIK1B_HUMAN  Putative seri… SIK1B   Homo s…    783 ATP bi…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> A0A0C5B5G6 reviewed MOTSC_HUMAN  Mitochondrial… MT-RNR1 Homo s…     16 DNA bi…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> A0A0K2S4Q6 reviewed CD3CH_HUMAN  Protein CD300… CD300H  Homo s…    201 transm…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> A0A0U1RRE5 reviewed NBDY_HUMAN   Negative regu… NBDY L… Homo s…     68 <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable names ¹​`Protein names`, ²​`Gene Names`, ³​Organism,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​`Gene Ontology (molecular function)`</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   Entry      Reviewed `Entry Name` `Protein names`  `Gene Names` Organism Length</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> A0A087X1C5 reviewed CP2D7_HUMAN  Putative cytoch… CYP2D7       Homo sa…    515</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> A0A0B4J2F0 reviewed PIOS1_HUMAN  Protein PIGBOS1… PIGBOS1      Homo sa…     54</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> A0A0B4J2F2 reviewed SIK1B_HUMAN  Putative serine… SIK1B        Homo sa…    783</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> A0A0C5B5G6 reviewed MOTSC_HUMAN  Mitochondrial-d… MT-RNR1      Homo sa…     16</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> A0A0K2S4Q6 reviewed CD3CH_HUMAN  Protein CD300H … CD300H       Homo sa…    201</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> A0A0U1RRE5 reviewed NBDY_HUMAN   Negative regula… NBDY LINC01… Homo sa…     68</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: `Gene Ontology (molecular function)` &lt;chr&gt;</span></span></span></code></pre></div>
 <p>We just need to tidy up that data a bit and get it into the format
 needed for attaching the annotations.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -286,6 +285,13 @@ annotation term.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new_go</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">molecular_function</span> <span class="op">==</span> <span class="st">'structural constituent of chromatin'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: Specifying the `id_cols` argument by position was deprecated in tidyr 1.3.0.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please explicitly name `id_cols`, like `id_cols = identifier`.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">tidyproteomics</span> package.</span></span>
+<span><span class="co">#&gt;   Please report the issue to the authors.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
 <span><span class="co">#&gt; Origin          FragPipe </span></span>
 <span><span class="co">#&gt;                 proteins (23.96 kB) </span></span>
 <span><span class="co">#&gt; Composition     6 files </span></span>

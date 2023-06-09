@@ -24,13 +24,13 @@ plot_save <- function(
 ){
 
   # visible bindings
-  ok_classes <- c('ggplot', 'eulergram', 'pheatmap', 'grob')
+  ok_classes <- c('ggplot', 'eulergram', 'pheatmap', 'grob', 'plotly')
 
   destination = rlang::arg_match(destination)
   if(!is.numeric(height) && (height < 1 | height > 30)) {cli::cli_abort("plot height must be a numeric between 1 and 30")}
   if(!is.numeric(width) && (width < 1 | width > 30)) {cli::cli_abort("plot width must be a numeric between 1 and 30")}
   if(length(intersect(class(plot), ok_classes)) == 0) {
-    cli::cli_abort("plot must be one of type {ok_classes}")
+    cli::cli_abort("plot must be one of type {ok_classes}, not {class(plot)}")
   }
 
   if(destination == 'plot') {return(plot)}
