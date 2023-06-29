@@ -11,9 +11,13 @@ vignette: >
 # A condensed accounting of updates, semantic versioning.
 
 ### Version: 1.5.x
+#### 1.5.2 - 2023.06.29
+
+-   bug fix in limma expression differences (name ordering only effecting data with 3+ sample groups)
+
 #### 1.5.1 - 2023.06.09
 
--   updated plot_counts()
+-   updated plot_counts(), added show_replicates = T/F
 
 #### 1.5.0 - 2023.05.23
 

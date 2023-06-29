@@ -103,9 +103,12 @@ expression_test <- function(
     return(mean(y))
   }
 
+  # rename var for experiment and control to conserved x/y
+  w_x <- which(experiment == colnames(data_quant_wide))
+  w_y <- which(control == colnames(data_quant_wide))
+  colnames(data_quant_wide)[c(w_x, w_y)] <- c('x', 'y')
+
   data_quant_out <- data_quant_wide %>%
-    dplyr::rename(x = tidyselect::all_of(experiment)) %>%
-    dplyr::rename(y = tidyselect::all_of(control)) %>%
     dplyr::mutate(log2_foldchange = purrr::map2(x, y, calc_fc),
                   p_value = purrr::map2(x, y, calc_pv, .method, ...),
                   average_expression = purrr::map2(x, y, calc_ae)) %>%

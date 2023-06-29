@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,7 +136,7 @@ sample name to bias the imputation to within that sample.</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>.function <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">::</span>, <span style="color: #FF5F00; font-style: italic;">stats</span>, and <span style="color: #FF5F00; font-style: italic;">median</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">::</span>, <span style="color: #FF5F00; font-style: italic;">stats</span>, and <span style="color: #FF5F00; font-style: italic;">median</span> <span style="color: #B2B2B2;">[791ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">::</span>, <span style="color: #FF5F00; font-style: italic;">stats</span>, and <span style="color: #FF5F00; font-style: italic;">median</span> <span style="color: #B2B2B2;">[598ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 1919 values imputed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
@@ -150,7 +150,7 @@ sample name to bias the imputation to within that sample.</p></dd>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>.function <span class="op">=</span> <span class="va">impute.randomforest</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">impute.randomforest</span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .f(as.vector(stats::na.omit(x))):</span> imput data must be a matrix</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">impute.randomforest</span> <span style="color: #B2B2B2;">[53ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">impute.randomforest</span> <span style="color: #B2B2B2;">[52ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

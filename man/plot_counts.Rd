@@ -8,7 +8,6 @@ plot_counts(
   data = NULL,
   accounting = NULL,
   show_replicates = TRUE,
-  facet_groups = FALSE,
   impute_max = 0.5,
   palette = "YlGnBu",
   ...
@@ -20,8 +19,6 @@ plot_counts(
 \item{accounting}{character string}
 
 \item{show_replicates}{boolean to visualize replicates}
-
-\item{facet_groups}{= FALSE,}
 
 \item{impute_max}{a numeric representing the largest allowable imputation percentage}
 
@@ -39,5 +36,7 @@ a (tidyproteomics data-object | ggplot-object)
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins \%>\% plot_counts()
+
+hela_proteins \%>\% plot_counts(show_replicates = FALSE, palette = 'Blues')
 
 }

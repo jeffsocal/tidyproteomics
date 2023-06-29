@@ -1,4 +1,4 @@
-pandoc: '3.0'
+pandoc: 3.1.1
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
@@ -19,7 +19,7 @@ articles:
   workflow-publication: workflow-publication.html
   workflow-simple: workflow-simple.html
   workflow-userimport: workflow-userimport.html
-last_built: 2023-06-09T17:04Z
+last_built: 2023-06-29T15:34Z
 urls:
   reference: https://jeffsocal.github.io/tidyproteomics/reference
   article: https://jeffsocal.github.io/tidyproteomics/articles

@@ -61,15 +61,18 @@ expression_limma <- function(
       n_groups = length(sample), .groups = 'drop'
     )
 
-  dm <- c()
-  dm <- cbind(dm, rep(as.numeric(experiment == data_quant_groups$sample),
-                      as.numeric(unlist(data_quant_groups[experiment = data_quant_groups$sample]$n_groups))))
-  dm <- cbind(dm, rep(as.numeric(experiment != data_quant_groups$sample),
-                      as.numeric(unlist(data_quant_groups[control = data_quant_groups$sample]$n_groups))))
-
   data_lmfit <- data_quant_wide %>%
     tibble::column_to_rownames('identifier') %>%
-    as.data.frame() %>%
+    as.data.frame()
+
+  # get the matching columns from the data.frame in the order they appear
+  cols_lmfit <- stringr::str_remove(colnames(data_lmfit), "\\_{3}\\d+$")
+
+  dm <- c()
+  dm <- cbind(dm, (experiment == cols_lmfit) * 1)
+  dm <- cbind(dm, (control == cols_lmfit) * 1)
+
+  data_lmfit <- data_lmfit %>%
     limma::lmFit(dm) %>%
     limma::contrasts.fit(matrix(c(1,-1))) %>%
     limma::eBayes() %>%
