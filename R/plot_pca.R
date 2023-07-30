@@ -110,12 +110,16 @@ plot_pca <- function(
       dplyr::filter(princom == pcy & var == 'prop_var') %>%
       dplyr::select(val) %>% unlist() %>% as.numeric()
 
-    plot <- pca_res$x %>%
+    tbl_plot <- pca_res$x %>%
       as.data.frame() %>%
       dplyr::rename(pcx = dplyr::all_of(pcx),
                     pcy = dplyr::all_of(pcy)) %>%
       tibble::rownames_to_column('sample_exp') %>%
-      tidyr::separate(sample_exp, into = c('sample','replicate'), sep="\\.", remove = F) %>%
+      tidyr::separate(sample_exp, into = c('sample','replicate'), sep="\\.", remove = F)
+
+    n_samples <- tbl_plot$sample |> unique() |> length()
+
+    plot <- tbl_plot %>%
       ggplot2::ggplot(ggplot2::aes(pcx, pcy)) +
       ggplot2::geom_point(ggplot2::aes(color=sample), alpha=0.5, size=5)
 
@@ -125,7 +129,7 @@ plot_pca <- function(
     }
 
     plot <- plot +
-      ggplot2::scale_color_manual(values = theme_palette()) +
+      ggplot2::scale_color_manual(values = theme_palette(n_samples)) +
       ggplot2::labs(x = paste0(pcx, " (",signif(pcx_p * 100, 3),"%)"),
                     y = paste0(pcy, " (",signif(pcy_p * 100, 3),"%)"),
                     title = paste("PCA analysis", pcx, "~", pcy),

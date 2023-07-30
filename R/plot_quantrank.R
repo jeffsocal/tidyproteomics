@@ -177,13 +177,15 @@ plot_quantrank <- function(
     subtitle <- glue::glue("{subtitle} Filter: {display_filter} {display_cutoff}")
   }
 
+  n_samples <- tb_sum$sample |> unique() |> length()
+
   plot <- plot +
     ggplot2::scale_y_log10() +
     ggplot2::theme_classic() +
     ggplot2::labs(title = glue::glue("Quantitation Rank Plot: {data$origin}"),
                   subtitle = subtitle,
                   x = glue::glue('{accounting} rank'), y = glue::glue("log10 abundance")) +
-    ggplot2::scale_color_manual(values = theme_palette()) +
+    ggplot2::scale_color_manual(values = theme_palette(n_samples)) +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90))
 
   if(show_rank_scale == FALSE){

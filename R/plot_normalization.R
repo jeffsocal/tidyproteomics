@@ -44,6 +44,8 @@ plot_normalization <- function(
     dplyr::group_by(origin) %>%
     dplyr::summarise(abundance = stats::  median(abundance, na.rm=T), .groups = 'drop')
 
+  n_reps <- data_quant$replicate |> unique() |> length()
+
   plot <- data_quant %>%
     dplyr::mutate(origin = forcats::fct_relevel(origin, norm_vals)) %>%
     ggplot2::ggplot() +
@@ -54,7 +56,7 @@ plot_normalization <- function(
     ggplot2::facet_wrap(~origin, nrow=1) +
     ggplot2::coord_flip() +
     ggplot2::theme_minimal() +
-    ggplot2::scale_color_manual(values = theme_palette()) +
+    ggplot2::scale_color_manual(values = theme_palette(n_reps)) +
     ggplot2::labs(title = "Normalization", subtitle = data$analyte)
 
   if(length(norm_vals) > 3){

@@ -4,7 +4,7 @@
 \alias{theme_palette}
 \title{helper function for having nice colors}
 \usage{
-theme_palette()
+theme_palette(n = 16)
 }
 \value{
 character vector of curated html colors

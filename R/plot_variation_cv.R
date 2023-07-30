@@ -90,6 +90,8 @@ plot_variation_cv <- function(
       .groups = "drop"
     )
 
+  n_colors <- data_quant_cvs_mean$sample |> unique() |> length()
+
   p_cv <- data_quant_cvs_mean %>%
     dplyr::mutate(origin = forcats::fct_relevel(origin, norm_vals)) %>%
     ggplot2::ggplot(ggplot2::aes(origin, cv_mean, color=sample)) +
@@ -101,7 +103,7 @@ plot_variation_cv <- function(
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle=20, hjust=1),
                    legend.position = 'none',
                    axis.title.y = ggplot2::element_text(size=9)) +
-    ggplot2::scale_color_manual(values = theme_palette()) +
+    ggplot2::scale_color_manual(values = theme_palette(n_colors)) +
     ggplot2::labs(subtitle = "Quantitative Variation") +
     ggplot2::xlab('') +
     ggplot2::ylab('CVs (sd/mean)')
@@ -115,7 +117,7 @@ plot_variation_cv <- function(
     ggplot2::theme_minimal() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle=20, hjust=1),
                    axis.title.y = ggplot2::element_text(size=9)) +
-    ggplot2::scale_color_manual(values = theme_palette()) +
+    ggplot2::scale_color_manual(values = theme_palette(n_colors)) +
     ggplot2::labs(subtitle = "Quantitative Dynamic Range") +
     ggplot2::xlab('') +
     ggplot2::ylab('Dynamic Range (95%CI Log10)')
