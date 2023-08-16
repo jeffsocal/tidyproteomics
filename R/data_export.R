@@ -119,10 +119,16 @@ export_quant <- function(
 #'
 #' @param data tidyproteomics data object
 #' @param ... two sample comparison e.g. experimental/control
-#' @param .analysis a character string for the specific analysis to export
-#' @param .term a character string of the term from an enrichment analysis
-#' @param .append a character string of the term to append to the output
-#' @param .file_name a character string for file to write to, format implied from string ('.rds', '.xlsx', '.csv', '.tsv')
+#' @param .analysis a character string for the specific analysis to export. For
+#' example, the base analysis 'counts' always exists, it is the base analysis
+#' supporting plot_counts(). The other analysis are 'expression' and 'enrichment',
+#' which are only available when those analyses have been performed.
+#' @param .term a character string of the term from an enrichment analysis. Use
+#' the show_annotations() function to list the available terms.
+#' @param .append a character string of the term to append to the output. Use
+#' the show_annotations() function to list the available terms.
+#' @param .file_name a character string for file to write to, format implied
+#' from string ('.rds', '.xlsx', '.csv', '.tsv')
 #'
 #' @return a tibble
 #' @export

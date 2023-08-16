@@ -18,13 +18,19 @@ export_analysis(
 
 \item{...}{two sample comparison e.g. experimental/control}
 
-\item{.analysis}{a character string for the specific analysis to export}
+\item{.analysis}{a character string for the specific analysis to export. For
+example, the base analysis 'counts' always exists, it is the base analysis
+supporting plot_counts(). The other analysis are 'expression' and 'enrichment',
+which are only available when those analyses have been performed.}
 
-\item{.term}{a character string of the term from an enrichment analysis}
+\item{.term}{a character string of the term from an enrichment analysis. Use
+the show_annotations() function to list the available terms.}
 
-\item{.append}{a character string of the term to append to the output}
+\item{.append}{a character string of the term to append to the output. Use
+the show_annotations() function to list the available terms.}
 
-\item{.file_name}{a character string for file to write to, format implied from string ('.rds', '.xlsx', '.csv', '.tsv')}
+\item{.file_name}{a character string for file to write to, format implied
+from string ('.rds', '.xlsx', '.csv', '.tsv')}
 }
 \value{
 a tibble
