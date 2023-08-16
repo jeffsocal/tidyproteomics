@@ -4,7 +4,13 @@
 \alias{enrichment}
 \title{Compute protein enrichment}
 \usage{
-enrichment(data = NULL, ..., .term = NULL, .method = c("gsea", "wilcoxon"))
+enrichment(
+  data = NULL,
+  ...,
+  .term = NULL,
+  .method = c("gsea", "wilcoxon"),
+  .score_type = c("std", "pos", "neg")
+)
 }
 \arguments{
 \item{data}{tidyproteomics data object}
@@ -14,6 +20,12 @@ enrichment(data = NULL, ..., .term = NULL, .method = c("gsea", "wilcoxon"))
 \item{.term}{a character string referencing ".term" in the annotations table}
 
 \item{.method}{a character string}
+
+\item{.score_type}{a character string. From the fgsea manual: "This parameter
+defines the GSEA score type. Possible options are ("std", "pos", "neg"). By
+default ("std") the enrichment score is computed as in the original GSEA. The
+"pos" and "neg" score types are intended to be used for one-tailed tests
+(i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."}
 }
 \value{
 a tibble

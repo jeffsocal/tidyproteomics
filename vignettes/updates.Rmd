@@ -11,13 +11,17 @@ vignette: >
 # A condensed accounting of updates, semantic versioning.
 
 ### Version: 1.5.x
+#### 1.5.4 - 2023.08.16
+
+-   added support for selecting fgsea scoreType("std", "pos", "neg") [thanks: tywang-at-caltech.edu]
+
 #### 1.5.3 - 2023.07.30
 
 -   added theme color support for plotting 16+ sample groups
 
 #### 1.5.2 - 2023.06.29
 
--   bug fix in limma expression differences (name ordering only effecting data with 3+ sample groups)
+-   bug fix in limma expression differences (name ordering only effecting data with 3+ sample groups) [thanks: tywang-at-caltech.edu]
 
 #### 1.5.1 - 2023.06.09
 

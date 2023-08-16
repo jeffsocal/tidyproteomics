@@ -8,6 +8,11 @@
 #' @param ... two sample comparison e.g. experimental/control
 #' @param .term a character string referencing ".term" in the annotations table
 #' @param .method a character string
+#' @param .score_type a character string. From the fgsea manual: "This parameter
+#' defines the GSEA score type. Possible options are ("std", "pos", "neg"). By
+#' default ("std") the enrichment score is computed as in the original GSEA. The
+#' "pos" and "neg" score types are intended to be used for one-tailed tests
+#' (i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."
 #'
 #' @return a tibble
 #' @export
@@ -32,7 +37,8 @@ enrichment <- function(
     data = NULL,
     ...,
     .term = NULL,
-    .method = c('gsea', 'wilcoxon')
+    .method = c('gsea', 'wilcoxon'),
+    .score_type = c("std", "pos", "neg")
 ){
 
   check_data(data)
@@ -49,6 +55,8 @@ enrichment <- function(
 
   .term <- rlang::arg_match(.term, get_annotation_terms(data))
   .method <- rlang::arg_match(.method)
+  .score_type <- rlang::arg_match(.score_type)
+
   if(is.null(data$analysis)){
     cli::cli_abort(c("No data for the analysis of expression differences.",
                      "i" = "  run expression() first."))
@@ -72,14 +80,15 @@ enrichment <- function(
   }
 
   if(.method == 'gsea') {
-    table <- data_expression %>% enrichment_gsea(data, .term)
+    table <- data_expression %>% enrichment_gsea(data, .term, .score_type)
+    data$operations <- append(data$operations, glue::glue("Analysis: protein group enrichment via {.method}::{.score_type}, grouping by {.term} for {experiment}/{control}"))
   } else if(.method == 'wilcoxon') {
     table <- data_expression %>% enrichment_wilcoxon(data, .term, ...)
+    data$operations <- append(data$operations, glue::glue("Analysis: protein group enrichment via {.method}, grouping by {.term} for {experiment}/{control}"))
   }
 
   data$analysis[[set_expression]]$enrichment[[.term]] <- table
 
-  data$operations <- append(data$operations, glue::glue("Analysis: protein group enrichment via {.method}, grouping by {.term} for {experiment}/{control}"))
 
   return(data)
 }

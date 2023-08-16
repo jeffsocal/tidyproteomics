@@ -12,7 +12,7 @@ statistics for a given tidyproteomics data object."><meta property="og:image" co
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,13 @@ statistics for a given tidyproteomics data object.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">enrichment</span><span class="op">(</span>data <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, .term <span class="op">=</span> <span class="cn">NULL</span>, .method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gsea"</span>, <span class="st">"wilcoxon"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">enrichment</span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .term <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gsea"</span>, <span class="st">"wilcoxon"</span><span class="op">)</span>,</span>
+<span>  .score_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"std"</span>, <span class="st">"pos"</span>, <span class="st">"neg"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -95,6 +101,14 @@ statistics for a given tidyproteomics data object.</p>
 <dt>.method</dt>
 <dd><p>a character string</p></dd>
 
+
+<dt>.score_type</dt>
+<dd><p>a character string. From the fgsea manual: "This parameter
+defines the GSEA score type. Possible options are ("std", "pos", "neg"). By
+default ("std") the enrichment score is computed as in the original GSEA. The
+"pos" and "neg" score types are intended to be used for one-tailed tests
+(i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -113,10 +127,23 @@ statistics for a given tidyproteomics data object.</p>
 <span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">enrichment</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">"biological_process"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="export_analysis.html">export_analysis</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .analysis <span class="op">=</span> <span class="st">"enrichment"</span>, .term <span class="op">=</span> <span class="st">"biological_process"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    annotation p_value adj_p_value enrichment enrichment_normalized log2err  size</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> cell prol… 0.003<span style="text-decoration: underline;">31</span>      0.043<span style="text-decoration: underline;">0</span>      0.333                 1.24  0.432     279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> cell prol… 0.003<span style="text-decoration: underline;">27</span>      0.042<span style="text-decoration: underline;">6</span>      0.333                 1.24  0.432     279</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> cell diff… 0.108        1           0.286                 1.09  0.131     520</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> cellular … 0.156        1           0.274                 1.06  0.106     954</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> coagulati… 0.579        1           0.256                 0.988 0.038<span style="text-decoration: underline;">9</span>    889</span>

@@ -4,7 +4,12 @@
 \alias{enrichment_gsea}
 \title{A function for evaluating term enrichment via GSEA}
 \usage{
-enrichment_gsea(data_expression = NULL, data = NULL, term_group = NULL)
+enrichment_gsea(
+  data_expression = NULL,
+  data = NULL,
+  term_group = NULL,
+  score_type = c("std", "pos", "neg")
+)
 }
 \arguments{
 \item{data_expression}{a tibble from and two sample expression difference analysis}
@@ -12,6 +17,8 @@ enrichment_gsea(data_expression = NULL, data = NULL, term_group = NULL)
 \item{data}{tidyproteomics data object}
 
 \item{term_group}{a character string referencing "term" in the annotations table}
+
+\item{score_type}{a character string.}
 }
 \value{
 a tibble

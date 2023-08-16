@@ -36,7 +36,8 @@ plot_heatmap <- function(
   check_data(data)
 
   quantval <- data$quantitative_source
-  data_quant <- data %>% extract(values = quantval, na.rm = TRUE) %>%
+  data_quant <- data %>%
+    extract(values = quantval, na.rm = TRUE) %>%
     dplyr::select(!dplyr::matches('^origin$'))
   theme_palette <- theme_palette()
 
