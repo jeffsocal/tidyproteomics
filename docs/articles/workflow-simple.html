@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,10 +170,10 @@ summary of the quantitative data with values as described in Table
 <span><span class="co"># your_proteins &lt;- "./data/your_exported_results.xlsx" %&gt;%</span></span>
 <span><span class="co">#   import("ProteomeDiscoverer", "proteins")</span></span>
 <span></span>
-<span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"p97KD_HCT116"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"p97KD_HCT116"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># change the sample labels</span></span>
-<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'ctl'</span>, <span class="st">'control'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'ctl'</span>, <span class="st">'control'</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'p97'</span>, <span class="st">'knockdown'</span><span class="op">)</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="print-data-contents">Print Data Contents<a class="anchor" aria-label="anchor" href="#print-data-contents"></a>
@@ -200,9 +200,9 @@ show a summary of the data object contents</p>
 <p>As more operations are performed on the data, more of the contents
 are summarized</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'molecular_function'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
 <span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
@@ -318,7 +318,7 @@ are summarized</p>
 <p>Use the explicit <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> function summarize the data,
 in this case globally.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: global</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  proteins peptides peptides_unique quantifiable  CVs</span></span>
@@ -326,7 +326,7 @@ in this case globally.</p>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>Here is a summary by unique sample names</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'sample'</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'sample'</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -337,14 +337,7 @@ in this case globally.</p>
 <p>A summary that includes contamination where the description is
 contains ‘CRAP’, as in the crap-ome</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'CRAP'</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; Warning: Specifying the `id_cols` argument by position was deprecated in tidyr 1.3.0.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please explicitly name `id_cols`, like `id_cols = identifier`.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">tidyproteomics</span> package.</span></span>
-<span><span class="co">#&gt;   Please report the issue to the authors.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'CRAP'</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -366,7 +359,7 @@ contains ‘CRAP’, as in the crap-ome</p>
 <p>A summary for contamination where we specify where the description is
 contains ‘ribosome’</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">"ribosome"</span><span class="op">)</span> </span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">"ribosome"</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -387,7 +380,7 @@ contains ‘ribosome’</p>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>A summary based on a term set in the provided annotations</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'biological_process'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'biological_process'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: biological_process</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>

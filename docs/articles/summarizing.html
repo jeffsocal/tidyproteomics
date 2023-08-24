@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,7 +136,7 @@ the object contents.</p>
 <p>And these can expand to encompass additions generated through other
 operations.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
 <span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
 <span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
@@ -214,7 +214,7 @@ operations.</p>
 <p>The tidyproteomics data object can summarize the quantitative and
 accounting data …</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: global</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  proteins peptides peptides_unique quantifiable  CVs</span></span>
@@ -222,7 +222,7 @@ accounting data …</p>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>… using columns corrisponing to experimental meta-data …</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'sample'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: sample</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -232,14 +232,7 @@ accounting data …</p>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>… terms in the annotation meta-data …</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Specifying the `id_cols` argument by position was deprecated in tidyr 1.3.0.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please explicitly name `id_cols`, like `id_cols = identifier`.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">tidyproteomics</span> package.</span></span>
-<span><span class="co">#&gt;   Please report the issue to the authors.</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: biological_process</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -274,7 +267,7 @@ accounting data …</p>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>… and even terms in the accounting data …</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'num_peptides'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'num_peptides'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Too many variables, limiting to the first 25</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: num_peptides</span> ──</span></span>
@@ -307,7 +300,7 @@ accounting data …</p>
 <span><span class="co">#&gt;            71        1       71              38          1.0 0.290</span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'match_between_runs'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'match_between_runs'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: match_between_runs</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -328,7 +321,7 @@ any FASTA file, used at the data translation step (eg with
 ProteomeDiscoverer), and manipulated to contain CRAP in the description
 can be utilized.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'CRAP'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'CRAP'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -349,7 +342,7 @@ can be utilized.</p>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>Alternatively, any protein descriptor can also be use …</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'Trypsin'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'Trypsin'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -370,7 +363,7 @@ can be utilized.</p>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>… and as such.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'ribosome'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'ribosome'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -403,7 +396,7 @@ tidyproteomics.</p>
 well as peptides (all, unique) are displayed with the match-between-runs
 shown as the margin above the ms2 evidenced identifications.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_counts.html">plot_counts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_counts.html">plot_counts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="summarizing_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
 <div class="section level4">
@@ -412,20 +405,20 @@ shown as the margin above the ms2 evidenced identifications.</p>
 <p>In recent literature a summary of protein quantitation has been
 visualized as a rank-based dot-plot.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="summarizing_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 <p>Additionally, this plot can be extended to highlight statistical
 differences via an unbiased all-pair-wise comparison, to give an
 anticipated view of how to guide downstream analyses.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span>display_filter <span class="op">=</span> <span class="st">'log2_foldchange'</span>, display_cutoff <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span>display_filter <span class="op">=</span> <span class="st">'log2_foldchange'</span>, display_cutoff <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: ggrepel: 30 unlabeled data points (too many overlaps). Consider</span></span>
 <span><span class="co">#&gt; increasing max.overlaps</span></span></code></pre></div>
 <p><img src="summarizing_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 <p>Filter to limit to the range <code>c(low, high)</code> and display
 the protein ids.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span>show_rank_scale <span class="op">=</span> <span class="cn">TRUE</span>, limit_rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">25</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span>show_rank_scale <span class="op">=</span> <span class="cn">TRUE</span>, limit_rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">25</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="summarizing_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
 </div>
 </div>

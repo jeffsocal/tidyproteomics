@@ -11,6 +11,12 @@ vignette: >
 # A condensed accounting of updates, semantic versioning.
 
 ### Version: 1.5.x
+#### 1.5.5 - 2023.08.24
+
+-   fixed deprecated issue in subset (tidyr::pivot_wider)
+-   fixed issue with use R v4+ pipe operator
+-   other minor improvements
+
 #### 1.5.4 - 2023.08.16
 
 -   added support for selecting fgsea scoreType("std", "pos", "neg") [thanks: tywang-at-caltech.edu]

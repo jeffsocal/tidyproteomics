@@ -70,7 +70,9 @@ subset <- function(
     select_by <- c(identifier,"sample_id")
 
     data[[which_segment]] <- data[[which_segment]] %>%
-      tidyr::pivot_wider(identifier, names_from = 'term', values_from = 'annotation') %>%
+      tidyr::pivot_wider(id_cols = identifier,
+                         names_from = 'term',
+                         values_from = 'annotation') %>%
       down_select(str_quo) %>%
       tidyr::pivot_longer(cols = !dplyr::matches(paste0(identifier, '$')),
                           names_to = 'term', values_to = 'annotation')
