@@ -117,7 +117,7 @@ plot_pca <- function(
       tibble::rownames_to_column('sample_exp') %>%
       tidyr::separate(sample_exp, into = c('sample','replicate'), sep="\\.", remove = F)
 
-    n_samples <- tbl_plot$sample |> unique() |> length()
+    n_samples <- tbl_plot$sample %>% unique() %>% length()
 
     plot <- tbl_plot %>%
       ggplot2::ggplot(ggplot2::aes(pcx, pcy)) +

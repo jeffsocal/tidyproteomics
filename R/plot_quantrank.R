@@ -177,7 +177,7 @@ plot_quantrank <- function(
     subtitle <- glue::glue("{subtitle} Filter: {display_filter} {display_cutoff}")
   }
 
-  n_samples <- tb_sum$sample |> unique() |> length()
+  n_samples <- tb_sum$sample %>% unique() %>% length()
 
   plot <- plot +
     ggplot2::scale_y_log10() +

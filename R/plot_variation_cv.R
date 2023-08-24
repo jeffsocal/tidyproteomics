@@ -90,7 +90,7 @@ plot_variation_cv <- function(
       .groups = "drop"
     )
 
-  n_colors <- data_quant_cvs_mean$sample |> unique() |> length()
+  n_colors <- data_quant_cvs_mean$sample %>% unique() %>% length()
 
   p_cv <- data_quant_cvs_mean %>%
     dplyr::mutate(origin = forcats::fct_relevel(origin, norm_vals)) %>%

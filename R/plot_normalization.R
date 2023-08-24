@@ -44,7 +44,7 @@ plot_normalization <- function(
     dplyr::group_by(origin) %>%
     dplyr::summarise(abundance = stats::  median(abundance, na.rm=T), .groups = 'drop')
 
-  n_reps <- data_quant$replicate |> unique() |> length()
+  n_reps <- data_quant$replicate %>% unique() %>% length()
 
   plot <- data_quant %>%
     dplyr::mutate(origin = forcats::fct_relevel(origin, norm_vals)) %>%

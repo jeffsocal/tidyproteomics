@@ -47,7 +47,7 @@
 plot_volcano <- function(
     data = NULL,
     ...,
-    log2fc_min = 2,
+    log2fc_min = 1,
     log2fc_column = 'log2_foldchange',
     significance_max = 0.05,
     significance_column = 'adj_p_value',
