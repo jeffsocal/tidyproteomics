@@ -93,7 +93,22 @@ expression_test <- function(
     if(length(x) <= 1) return(1)
     if(length(y) <= 1) return(1)
 
-    return(.method(y, x)$p.value)
+    out <- tryCatch(
+      {
+        .method(y, x)$p.value
+      },
+      error=function(cond) {
+        return(1)
+      },
+      warning=function(cond) {
+        return(1)
+      },
+      finally={
+        # nothing
+      }
+    )
+
+    return(out)
   }
 
   calc_ae <- function(x, y){

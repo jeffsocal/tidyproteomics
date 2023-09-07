@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -140,20 +140,19 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hela_protein_map</span> <span class="op">&lt;-</span> <span class="va">hela_peptides</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span><span class="va">hela_protein_map</span> <span class="op">&lt;-</span> <span class="va">hela_peptides</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="protein_map.html">protein_map</a></span><span class="op">(</span>fasta <span class="op">=</span> <span class="fu"><a href="path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">'fasta'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Parsing FASTA file human.fasta</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Parsing FASTA file human.fasta ... done</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Sequence mapping</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   Sequence mapping <span style="color: #00BB00;">■■■■■■■■■                       </span>  25% | ETA:  6s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   Sequence mapping <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■            </span>  62% | ETA:  2s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   Sequence mapping <span style="color: #00BB00;">■■■■■■■■■■■■■■■■                </span>  50% | ETA:  4s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   Sequence mapping <span style="color: #00BB00;">■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ </span> 100% | ETA:  0s</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Sequence mapping</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Sequence mapping ... done</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hela_protein_map</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">plot_protein</span><span class="op">(</span><span class="st">'P06576'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hela_protein_map</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">plot_protein</span><span class="op">(</span><span class="st">'P06576'</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="plot_protein-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

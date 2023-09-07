@@ -208,7 +208,7 @@ impute <- function(
 
   impute_msg <- glue::glue("... {data$accounting %>% dplyr::filter(imputed == TRUE) %>% nrow()} values imputed")
   cli::cli_alert_info(impute_msg)
-  data$operations <- append(data$operations, glue::glue("Missing values imputed '{method}' samples via '{impute_function_str}' group_by_sample '{group_by_sample}'."))
+  data$operations <- append(data$operations, glue::glue("Missing values imputed by '{method}' samples via '{impute_function_str[length(impute_function_str)]}' group_by_sample '{group_by_sample}'."))
   data$operations <- append(data$operations, impute_msg)
 
   return(data)
