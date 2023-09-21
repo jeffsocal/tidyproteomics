@@ -64,6 +64,10 @@ When setting up your experiment it is essential to create sample names in the `S
 
 #### Exporting
 
+**Abundances**
+A quick note on reported abundances. ProteomeDiscoverer reports protein and peptide abundances in several ways that may not be immediately clear - tidyproteomics should have access to the raw abundance values, so that normalization and imputation are starting from scratch. We want to export for example `Abundance: F3: Sample, p97-KD`, not `Abundances (Grouped) ...`, `Abundance Ratio: ...`, or any-other derivation. This can be set by toggling the display columns in ProteomeDiscoverer to show `Abundance`, leaving the other columns should not impact data importing and will be disregarded.
+
+
 ##### Proteins
 
 The columns following columns should be considered. These can be modified in the file `tidyproteomics/inst/extdata/config/ProteomeDiscoverer_proteins.tsv`:

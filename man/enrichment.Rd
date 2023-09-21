@@ -9,7 +9,8 @@ enrichment(
   ...,
   .term = NULL,
   .method = c("gsea", "wilcoxon"),
-  .score_type = c("std", "pos", "neg")
+  .score_type = c("std", "pos", "neg"),
+  .cpu_cores = 1
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ defines the GSEA score type. Possible options are ("std", "pos", "neg"). By
 default ("std") the enrichment score is computed as in the original GSEA. The
 "pos" and "neg" score types are intended to be used for one-tailed tests
 (i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."}
+
+\item{.cpu_cores}{the number of threads used to speed the calculation}
 }
 \value{
 a tibble

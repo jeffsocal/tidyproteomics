@@ -2,29 +2,31 @@
 % Please edit documentation in R/control_import.R
 \name{import}
 \alias{import}
-\title{Main function for importing data to the tidyproteomics list object}
+\title{Main function for importing data to the tidyproteomics list object, see also
+the documentation \code{vignette("importing")} and \code{vignette("workflow-importing")}}
 \usage{
 import(files = NULL, platform = NULL, analyte = NULL, path = NULL)
 }
 \arguments{
 \item{files}{a character vector of file paths}
 
-\item{platform}{the source of the data (ProteomeDiscoverer, MaxQuant)}
+\item{platform}{the source of the data (ProteomeDiscoverer, MaxQuant, etc.)}
 
 \item{analyte}{the omics analyte (proteins, peptides)}
 
-\item{path}{a character string}
+\item{path}{a character string pointing to the local configuration file (directory/file.tsv)}
 }
 \value{
 a tidyproteomics list data-object
 }
 \description{
-Main function for importing data to the tidyproteomics list object
+Main function for importing data to the tidyproteomics list object, see also
+the documentation \code{vignette("importing")} and \code{vignette("workflow-importing")}
 }
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-\dontrun{
+#\dontrun{
 hela_proteins <- path_to_package_data("p97KD_HCT116") \%>\%
    import("ProteomeDiscoverer", "proteins")
 }

@@ -12,7 +12,7 @@ statistics for a given tidyproteomics data object."><meta property="og:image" co
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,7 +80,8 @@ statistics for a given tidyproteomics data object.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  .term <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gsea"</span>, <span class="st">"wilcoxon"</span><span class="op">)</span>,</span>
-<span>  .score_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"std"</span>, <span class="st">"pos"</span>, <span class="st">"neg"</span><span class="op">)</span></span>
+<span>  .score_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"std"</span>, <span class="st">"pos"</span>, <span class="st">"neg"</span><span class="op">)</span>,</span>
+<span>  .cpu_cores <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -109,6 +110,10 @@ default ("std") the enrichment score is computed as in the original GSEA. The
 "pos" and "neg" score types are intended to be used for one-tailed tests
 (i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."</p></dd>
 
+
+<dt>.cpu_cores</dt>
+<dd><p>the number of threads used to speed the calculation</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -127,6 +132,7 @@ default ("std") the enrichment score is computed as in the original GSEA. The
 <span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">enrichment</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">"biological_process"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="export_analysis.html">export_analysis</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .analysis <span class="op">=</span> <span class="st">"enrichment"</span>, .term <span class="op">=</span> <span class="st">"biological_process"</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>All values in the stats vector are greater than zero and scoreType is "std", maybe you should switch to scoreType = "pos".</span>
@@ -162,22 +168,23 @@ default ("std") the enrichment score is computed as in the original GSEA. The
 <span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">enrichment</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">"biological_process"</span>, .method <span class="op">=</span> <span class="st">"wilcoxon"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="export_analysis.html">export_analysis</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .analysis <span class="op">=</span> <span class="st">"enrichment"</span>, .term <span class="op">=</span> <span class="st">"biological_process"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> annotation <span style="color: #FF5F00; font-style: italic;">other</span> had issues, not reported</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    annotation                         p_value adj_p_value enrichment  size</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> conjugation                      0.000<span style="text-decoration: underline;">025</span>8    0.000<span style="text-decoration: underline;">335</span>      1.12   <span style="text-decoration: underline;">1</span>150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> cell proliferation               0.000<span style="text-decoration: underline;">144</span>     0.001<span style="text-decoration: underline;">73</span>       0.801   279</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> cellular component movement      0.000<span style="text-decoration: underline;">781</span>     0.008<span style="text-decoration: underline;">59</span>       0.926   954</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> development                      0.008<span style="text-decoration: underline;">47</span>      0.084<span style="text-decoration: underline;">7</span>        1.11    801</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> cell organization and biogenesis 0.037<span style="text-decoration: underline;">1</span>       0.334         1.05   <span style="text-decoration: underline;">1</span>273</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> defense response                 0.053<span style="text-decoration: underline;">1</span>       0.425         1.08    789</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> cell differentiation             0.083<span style="text-decoration: underline;">2</span>       0.583         0.956   520</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> coagulation                      0.175        1             1.09    889</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> cellular homeostasis             0.311        1             1.00   <span style="text-decoration: underline;">2</span>761</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> cell growth                      0.332        1             1.06   <span style="text-decoration: underline;">1</span>671</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> cell communication               0.572        1             1.07    145</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> metabolic process                0.718        1             1.03   <span style="text-decoration: underline;">2</span>965</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> cell death                       0.922        1             1.05    160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    annotation                          p_value adj_p_value enrichment  size</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> conjugation                      0.000<span style="text-decoration: underline;">003</span>42   0.000<span style="text-decoration: underline;">044</span>5      1.12   <span style="text-decoration: underline;">1</span>150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> cell proliferation               0.000<span style="text-decoration: underline;">389</span>     0.004<span style="text-decoration: underline;">67</span>        0.801   279</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> development                      0.002<span style="text-decoration: underline;">72</span>      0.029<span style="text-decoration: underline;">9</span>         1.11    801</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> cellular component movement      0.005<span style="text-decoration: underline;">92</span>      0.059<span style="text-decoration: underline;">2</span>         0.926   954</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> cell organization and biogenesis 0.008<span style="text-decoration: underline;">67</span>      0.078<span style="text-decoration: underline;">0</span>         1.05   <span style="text-decoration: underline;">1</span>273</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> defense response                 0.020<span style="text-decoration: underline;">6</span>       0.165          1.08    789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> coagulation                      0.076<span style="text-decoration: underline;">9</span>       0.538          1.09    889</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> cell growth                      0.099<span style="text-decoration: underline;">2</span>       0.595          1.06   <span style="text-decoration: underline;">1</span>671</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> metabolic process                0.116        0.595          1.03   <span style="text-decoration: underline;">2</span>965</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> cell differentiation             0.161        0.645          0.956   520</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> cell communication               0.470        1              1.07    145</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> cell death                       0.792        1              1.05    160</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> cellular homeostasis             0.796        1              1.00   <span style="text-decoration: underline;">2</span>761</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

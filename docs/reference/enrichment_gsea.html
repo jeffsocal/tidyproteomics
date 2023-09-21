@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,8 @@
 <span>  data_expression <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  term_group <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  score_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"std"</span>, <span class="st">"pos"</span>, <span class="st">"neg"</span><span class="op">)</span></span>
+<span>  score_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"std"</span>, <span class="st">"pos"</span>, <span class="st">"neg"</span><span class="op">)</span>,</span>
+<span>  cpu_cores <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -95,7 +96,11 @@
 
 
 <dt>score_type</dt>
-<dd><p>a character string.</p></dd>
+<dd><p>a character string used in the fgsea package</p></dd>
+
+
+<dt>cpu_cores</dt>
+<dd><p>the number of threads used to speed the calculation</p></dd>
 
 </dl></div>
     <div class="section level2">

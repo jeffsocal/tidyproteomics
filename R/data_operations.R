@@ -12,7 +12,7 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' \dontrun{
+#' #\dontrun{
 #' hela_proteins <- path_to_package_data("p97KD_HCT116") %>%
 #'    import("ProteomeDiscoverer", "proteins") %>%
 #'    reassign(sample == "ctl", .replace = "control") %>%

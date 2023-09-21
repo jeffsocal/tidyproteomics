@@ -1,9 +1,10 @@
-#' Main function for importing data to the tidyproteomics list object
+#' Main function for importing data to the tidyproteomics list object, see also
+#' the documentation `vignette("importing")` and `vignette("workflow-importing")`
 #'
 #' @param files a character vector of file paths
-#' @param platform the source of the data (ProteomeDiscoverer, MaxQuant)
+#' @param platform the source of the data (ProteomeDiscoverer, MaxQuant, etc.)
 #' @param analyte the omics analyte (proteins, peptides)
-#' @param path a character string
+#' @param path a character string pointing to the local configuration file (directory/file.tsv)
 #'
 #' @return a tidyproteomics list data-object
 #' @export
@@ -13,7 +14,7 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' \dontrun{
+#' #\dontrun{
 #' hela_proteins <- path_to_package_data("p97KD_HCT116") %>%
 #'    import("ProteomeDiscoverer", "proteins")
 #' }

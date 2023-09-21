@@ -3,7 +3,8 @@
 #' @param data_expression a tibble from and two sample expression difference analysis
 #' @param data tidyproteomics data object
 #' @param term_group a character string referencing "term" in the annotations table
-#' @param score_type a character string.
+#' @param score_type a character string used in the fgsea package
+#' @param cpu_cores the number of threads used to speed the calculation
 #'
 #' @return a tibble
 #'
@@ -12,7 +13,8 @@ enrichment_gsea <- function(
     data_expression = NULL,
     data = NULL,
     term_group = NULL,
-    score_type = c("std", "pos", "neg")
+    score_type = c("std", "pos", "neg"),
+    cpu_cores = 1
 ){
 
   # visible bindings
@@ -35,27 +37,27 @@ enrichment_gsea <- function(
   score_type <- rlang::arg_match(score_type)
   check_data(data)
 
-  data_expression <- data_expression %>%
+  tbl_expression <- data_expression %>%
+    dplyr::arrange(dplyr::desc(log2_foldchange)) %>%
+    dplyr::mutate(rank = dplyr::row_number()) %>%
     dplyr::left_join(get_annotations(data, term_group),
-                     by = data$identifier)
+                     by = data$identifier) %>%
+    dplyr::mutate(annotation = ifelse(is.na(annotation), 'other', annotation)) %>%
+    dplyr::mutate(annotation = as.character(annotation))
 
-  data_out <- list()
-  for(annotation_str in unique(data_expression$annotation)) {
+  colnames(tbl_expression)[which(colnames(tbl_expression) == data$identifier)] <- 'identifier'
 
-    if(is.na(annotation_str)) { next }
+  f_enrich <- function(annotation_str, x){
 
-      # table of annotation to test
-      tbl_test <- data_expression %>%
-        tidyr::unite(identifier, data$identifier) %>%
-        dplyr::group_by(identifier) %>%
-        dplyr::mutate(rank = dplyr::row_number()) %>%
-        dplyr::mutate(annotation = paste0("", as.character(annotation))) %>%
-        dplyr::mutate(rank = ifelse(annotation == annotation_str, 0, rank)) %>%
-        dplyr::mutate(annotation = ifelse(annotation != annotation_str, 'other', annotation)) %>%
-        dplyr::slice_min(rank, n = 1, with_ties = FALSE) %>%
-        dplyr::ungroup() %>%
-        dplyr::arrange(dplyr::desc(log2_foldchange)) %>%
-        dplyr::mutate(rank = dplyr::row_number())
+    # table of annotation to test
+    tbl_test <- x %>%
+      dplyr::group_by(identifier) %>%
+      dplyr::mutate(rank = ifelse(annotation == annotation_str, 0, rank)) %>%
+      dplyr::mutate(annotation = ifelse(annotation != annotation_str, 'other', annotation)) %>%
+      dplyr::slice_min(rank, n = 1, with_ties = FALSE) %>%
+      dplyr::ungroup() %>%
+      dplyr::arrange(dplyr::desc(log2_foldchange)) %>%
+      dplyr::mutate(rank = dplyr::row_number())
 
     tryCatch({
 
@@ -75,11 +77,11 @@ enrichment_gsea <- function(
       }
 
       # fgsea is set up to run all possible terms, assuming only one identifier per term
-      data_out[[annotation_str]] <- fgsea::fgsea(pathways = l_term,
-                               stats = c_rank,
-                               scoreType = score_type,
-                               minSize=15,
-                               maxSize=nrow(tbl_test)*.66) %>%
+      out <- fgsea::fgsea(pathways = l_term,
+                          stats = c_rank,
+                          scoreType = score_type,
+                          minSize=3,
+                          maxSize=nrow(tbl_test)*.66) %>%
         tibble::as_tibble() %>%
         dplyr::arrange(pval) %>%
         dplyr::select(
@@ -90,7 +92,8 @@ enrichment_gsea <- function(
           enrichment_normalized = NES,
           log2err
         ) %>%
-        dplyr::full_join(
+        dplyr::filter(annotation != 'other') %>%
+        dplyr::inner_join(
           tbl_test %>%
             dplyr::group_by(annotation) %>%
             dplyr::summarise(size = dplyr::n(),
@@ -98,17 +101,21 @@ enrichment_gsea <- function(
           by = c('annotation')
         )
 
+      return(out)
 
     }, error = function(err) {
       cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
       cli::cli_alert_info("annotation {.emph {annotation_str}} had issues, not reported")
       cli::cli_abort(err)
+
+      return(NULL)
     })
+
   }
 
-  data_out <- data_out %>%
+  data_out <- unique(tbl_expression$annotation) %>%
+    parallel::mclapply(f_enrich, tbl_expression, mc.cores = cpu_cores) %>%
     dplyr::bind_rows() %>%
-    dplyr::filter(annotation != 'other') %>%
     dplyr::mutate(adj_p_value = stats::p.adjust(p_value)) %>%
     dplyr::relocate(adj_p_value, .after = p_value) %>%
     dplyr::arrange(p_value)

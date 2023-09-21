@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -242,6 +242,17 @@ function.</p>
 <div class="section level4">
 <h4 id="exporting">Exporting<a class="anchor" aria-label="anchor" href="#exporting"></a>
 </h4>
+<p><strong>Abundances</strong> A quick note on reported abundances.
+ProteomeDiscoverer reports protein and peptide abundances in several
+ways that may not be immediately clear - tidyproteomics should have
+access to the raw abundance values, so that normalization and imputation
+are starting from scratch. We want to export for example
+<code>Abundance: F3: Sample, p97-KD</code>, not
+<code>Abundances (Grouped) ...</code>,
+<code>Abundance Ratio: ...</code>, or any-other derivation. This can be
+set by toggling the display columns in ProteomeDiscoverer to show
+<code>Abundance</code>, leaving the other columns should not impact data
+importing and will be disregarded.</p>
 <div class="section level5">
 <h5 id="proteins">Proteins<a class="anchor" aria-label="anchor" href="#proteins"></a>
 </h5>

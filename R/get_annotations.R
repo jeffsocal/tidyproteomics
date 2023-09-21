@@ -18,6 +18,7 @@ get_annotations <- function(
   data$annotations %>%
     dplyr::filter(term == term_group) %>%
     tidyr::separate_rows(annotation, sep = ";") %>%
+    dplyr::mutate(annotation = trimws(annotation)) %>%
     dplyr::select(!term)
 }
 

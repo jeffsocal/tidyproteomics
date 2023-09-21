@@ -8,6 +8,7 @@ enrichment_wilcoxon(
   data_expression = NULL,
   data = NULL,
   term_group = NULL,
+  cpu_cores = 1,
   ...
 )
 }
@@ -17,6 +18,8 @@ enrichment_wilcoxon(
 \item{data}{tidyproteomics data object}
 
 \item{term_group}{a character string referencing "term" in the annotations table}
+
+\item{cpu_cores}{the number of threads used to speed the calculation}
 
 \item{...}{pass through arguments}
 }

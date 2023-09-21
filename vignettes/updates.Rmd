@@ -11,6 +11,11 @@ vignette: >
 # A condensed accounting of updates, semantic versioning.
 
 ### Version: 1.5.x
+#### 1.5.7 - 2023.09.21
+
+-   addressed an issue with enrichment() taking long for complex annotations, implemented parallel::mclapply [thanks: github.com/eschen42]
+-   created a export_config() function to assist in custom import definitions [thanks: github.com/eschen42]
+
 #### 1.5.6 - 2023.09.07
 
 -   addressed issue#3: t.test on expression diff fails on no variance data

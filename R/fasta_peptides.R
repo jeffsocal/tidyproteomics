@@ -20,7 +20,7 @@
 #' @return a vector
 #'
 #' @examples
-#' \dontrun{
+#' #\dontrun{
 #' sequence <- "SAMERSMALLKPSAMPLERSEQUENCE"
 #' tidyproteomics:::fasta_peptides(sequence)
 #'

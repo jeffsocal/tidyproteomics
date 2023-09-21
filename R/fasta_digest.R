@@ -10,7 +10,7 @@
 #' @return a list
 #'
 #' @examples
-#' \dontrun{
+#' #\dontrun{
 #' proteins <- fasta_parse("~/Local/data/fasta/ecoli_UniProt.fasta")
 #' proteins <- fasta_digest(proteins, enzyme = "[K]", partial = 2)
 #' }

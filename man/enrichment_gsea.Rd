@@ -8,7 +8,8 @@ enrichment_gsea(
   data_expression = NULL,
   data = NULL,
   term_group = NULL,
-  score_type = c("std", "pos", "neg")
+  score_type = c("std", "pos", "neg"),
+  cpu_cores = 1
 )
 }
 \arguments{
@@ -18,7 +19,9 @@ enrichment_gsea(
 
 \item{term_group}{a character string referencing "term" in the annotations table}
 
-\item{score_type}{a character string.}
+\item{score_type}{a character string used in the fgsea package}
+
+\item{cpu_cores}{the number of threads used to speed the calculation}
 }
 \value{
 a tibble

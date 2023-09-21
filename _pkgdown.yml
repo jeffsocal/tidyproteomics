@@ -59,6 +59,7 @@ reference:
   - export_quant
   - export_analysis
   - export_compexp
+  - export_config
   - as.data.frame.tidyproteomics
   - load_local
   - save_local

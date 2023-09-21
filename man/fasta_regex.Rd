@@ -19,7 +19,7 @@ can also be supplied. To set elements in the \code{regex()} function, simply pro
 list with complementary names to over-write the current list.
 }
 \examples{
-\dontrun{
+#\dontrun{
 fasta_regex(list("accession" = "sp\\\\|[A-Z]"))
 }
 }

@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' #\dontrun{
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
 #' hela_proteins %>%

@@ -13,6 +13,7 @@
 #' default ("std") the enrichment score is computed as in the original GSEA. The
 #' "pos" and "neg" score types are intended to be used for one-tailed tests
 #' (i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."
+#' @param .cpu_cores the number of threads used to speed the calculation
 #'
 #' @return a tibble
 #' @export
@@ -38,7 +39,8 @@ enrichment <- function(
     ...,
     .term = NULL,
     .method = c('gsea', 'wilcoxon'),
-    .score_type = c("std", "pos", "neg")
+    .score_type = c("std", "pos", "neg"),
+    .cpu_cores = 1
 ){
 
   check_data(data)
@@ -80,10 +82,10 @@ enrichment <- function(
   }
 
   if(.method == 'gsea') {
-    table <- data_expression %>% enrichment_gsea(data, .term, .score_type)
+    table <- data_expression %>% enrichment_gsea(data, .term, .score_type, .cpu_cores)
     data$operations <- append(data$operations, glue::glue("Analysis: protein group enrichment via {.method}::{.score_type}, grouping by {.term} for {experiment}/{control}"))
   } else if(.method == 'wilcoxon') {
-    table <- data_expression %>% enrichment_wilcoxon(data, .term, ...)
+    table <- data_expression %>% enrichment_wilcoxon(data, .term, cpu_cores = .cpu_cores)
     data$operations <- append(data$operations, glue::glue("Analysis: protein group enrichment via {.method}, grouping by {.term} for {experiment}/{control}"))
   }
 

@@ -14,7 +14,7 @@
 #' @return a list
 #'
 #' @examples
-#' \dontrun{
+#' #\dontrun{
 #' proteins <- fasta_parse("~/Local/data/fasta/ecoli_UniProt.fasta")
 #'
 #' # using a custom supplied regex list

@@ -19,7 +19,7 @@ a list
 Only works with the "list" output of the \code{parse()} function
 }
 \examples{
-\dontrun{
+#\dontrun{
 proteins <- fasta_parse("~/Local/data/fasta/ecoli_UniProt.fasta")
 proteins <- fasta_digest(proteins, enzyme = "[K]", partial = 2)
 }
