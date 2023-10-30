@@ -80,7 +80,7 @@ impute <- function(
     }
   }
 
-  impute_function_str <- substitute(.function)
+  impute_function_str <- enquote(.function) %>% paste(collapse = ' ') %>% stringr::str_replace_all("\\s+", " ")
   cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
   cli::cli_progress_step("Imputing by {.emph {method}} using the function {.emph {impute_function_str}}")
 
@@ -208,7 +208,7 @@ impute <- function(
 
   impute_msg <- glue::glue("... {data$accounting %>% dplyr::filter(imputed == TRUE) %>% nrow()} values imputed")
   cli::cli_alert_info(impute_msg)
-  data$operations <- append(data$operations, glue::glue("Missing values imputed by '{method}' samples via '{impute_function_str[length(impute_function_str)]}' group_by_sample '{group_by_sample}'."))
+  data$operations <- append(data$operations, glue::glue("Missing values imputed by '{method}' samples via '{impute_function_str}' group_by_sample '{group_by_sample}'."))
   data$operations <- append(data$operations, impute_msg)
 
   return(data)
