@@ -12,6 +12,10 @@ vignette: >
 
 ### Version: 1.5.x
 
+#### 1.5.10 - 2023.11.03
+
+-   addressed issues#9 & #10 to better handle as.data.frame [thanks: tywang-tw-at-github]
+
 #### 1.5.9 - 2023.10.30
 
 -   addressed issue#8 to better handle the text of custom functions [thanks: michwij-at-github]

@@ -4,7 +4,7 @@
 \alias{as.data.frame.tidyproteomics}
 \title{Helper function to convert the data-object into a tibble}
 \usage{
-\method{as.data.frame}{tidyproteomics}(data, shape = c("long", "wide"), values = NULL)
+\method{as.data.frame}{tidyproteomics}(data, shape = c("long", "wide"), values = NULL, drop = NULL)
 }
 \arguments{
 \item{data}{tidyproteomics data object}
@@ -32,5 +32,11 @@ hela_proteins \%>\% as.data.frame() \%>\% as_tibble()
 
 # select the wide format
 hela_proteins \%>\% as.data.frame(shape = 'wide') \%>\% as_tibble()
+
+# select the wide format & drop some columns
+hela_proteins \%>\%
+   as.data.frame(shape = 'wide',
+                 drop = c('description','wiki_pathway','reactome_pathway','biological_process')) \%>\%
+   as_tibble()
 
 }

@@ -23,14 +23,27 @@
 #' # select the wide format
 #' hela_proteins %>% as.data.frame(shape = 'wide') %>% as_tibble()
 #'
+#' # select the wide format & drop some columns
+#' hela_proteins %>%
+#'    as.data.frame(shape = 'wide',
+#'                  drop = c('description','wiki_pathway','reactome_pathway','biological_process')) %>%
+#'    as_tibble()
+#'
 as.data.frame.tidyproteomics <- function(
     data,
     shape = c('long', 'wide'),
-    values = NULL
+    values = NULL,
+    drop = NULL
 ){
 
   check_data(data)
   if(is.null(values)) { values <- data$quantitative_source }
+  if(!is.null(drop)) {
+    can_drop <- c(colnames(data$accounting), data$annotations$term |> unique())
+    if(length(intersect(drop, can_drop)) == 0){
+      cli::cli_abort("trying to drop `{drop}`, only finding `{can_drop}`")
+    }
+  }
   values <- rlang::arg_match(values, get_quant_names(data))
   shape <- rlang::arg_match(shape)
 
@@ -54,13 +67,27 @@ as.data.frame.tidyproteomics <- function(
 
   # pivot to wide if requested
   if(shape == 'wide'){
+
+    pivot_on_values <- paste0(values, "$")
+
+    if(!'match_between_runs' %in% drop & 'match_between_runs' %in% colnames(data$accounting)) {
+      pivot_on_values <- paste0(pivot_on_values, "|match_between_runs")
+    }
+    if(!'imputed' %in% drop & 'imputed' %in% colnames(data$accounting)) {
+      pivot_on_values <- paste0(pivot_on_values, "|imputed")
+    }
+
+    drop <- c('sample_id', 'sample_file', drop)
+
     tbl_out <- tbl_out %>%
-      dplyr::select(!c('sample_id', 'sample_file')) %>%
+      dplyr::select(!dplyr::all_of(drop)) %>%
       dplyr::mutate(origin = values) %>%
       tidyr::pivot_wider(
         names_from = c('sample', 'replicate', 'origin'),
-        values_from = tidyselect::matches(paste0(values, "$"))
+        values_from = tidyselect::matches(pivot_on_values)
       )
+  } else if(!is.null(drop)) {
+    tbl_out <- tbl_out %>% dplyr::select(!dplyr::all_of(drop))
   }
 
   return(base::as.data.frame(tbl_out))
