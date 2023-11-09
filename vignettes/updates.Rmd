@@ -10,15 +10,21 @@ vignette: >
 ---
 # A condensed accounting of updates, semantic versioning.
 
+### Version: 1.6.x
+
+#### 1.6.0 - 2023.11.09
+
+-   fixed an issue with improper missing value accounting when implementing expression tests [thanks: github.com/rzieg]
+
 ### Version: 1.5.x
 
 #### 1.5.10 - 2023.11.03
 
--   addressed issues#9 & #10 to better handle as.data.frame [thanks: tywang-tw-at-github]
+-   addressed issues#9 & #10 to better handle as.data.frame [thanks: github.com/tywang-tw]
 
 #### 1.5.9 - 2023.10.30
 
--   addressed issue#8 to better handle the text of custom functions [thanks: michwij-at-github]
+-   addressed issue#8 to better handle the text of custom functions [thanks: github.com/michwij]
 
 #### 1.5.8 - 2023.10.10
 
@@ -42,7 +48,7 @@ vignette: >
 
 #### 1.5.4 - 2023.08.16
 
--   added support for selecting fgsea scoreType("std", "pos", "neg") [thanks: tywang-at-caltech.edu]
+-   added support for selecting fgsea scoreType("std", "pos", "neg") [thanks: github.com/tywang-tw]
 
 #### 1.5.3 - 2023.07.30
 
@@ -50,7 +56,7 @@ vignette: >
 
 #### 1.5.2 - 2023.06.29
 
--   bug fix in limma expression differences (name ordering only effecting data with 3+ sample groups) [thanks: tywang-at-caltech.edu]
+-   bug fix in limma expression differences (name ordering only effecting data with 3+ sample groups) [thanks: github.com/tywang-tw]
 
 #### 1.5.1 - 2023.06.09
 

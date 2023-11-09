@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,6 +137,7 @@ the object contents.</p>
 operations.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> expression::limma removed 0 proteins with completely missing values</span></span>
 <span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
 <span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
 <span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
@@ -192,10 +193,11 @@ operations.</p>
 <span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
 <span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
 <span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (11.37 MB) </span></span>
+<span><span class="co">#&gt;                 proteins (11.41 MB) </span></span>
 <span><span class="co">#&gt; Composition     6 files </span></span>
 <span><span class="co">#&gt;                 2 samples (control, knockdown) </span></span>
 <span><span class="co">#&gt; Quantitation    7055 proteins </span></span>
@@ -416,7 +418,15 @@ differences via an unbiased all-pair-wise comparison, to give an
 anticipated view of how to guide downstream analyses.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span>display_filter <span class="op">=</span> <span class="st">'log2_foldchange'</span>, display_cutoff <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: ggrepel: 30 unlabeled data points (too many overlaps). Consider</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> expression::limma removed 0 proteins with completely missing values</span></span>
+<span><span class="co">#&gt; Warning: There were 1868 warnings in `dplyr::summarise()`.</span></span>
+<span><span class="co">#&gt; The first warning was:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `log2_foldchange = max(log2_foldchange, na.rm = TRUE)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In group 6: `identifier = "A0A075B6E5"`.</span></span>
+<span><span class="co">#&gt; Caused by warning in `max()`:</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> no non-missing arguments to max; returning -Inf</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 1867 remaining warnings.</span></span>
+<span><span class="co">#&gt; Warning: ggrepel: 44 unlabeled data points (too many overlaps). Consider</span></span>
 <span><span class="co">#&gt; increasing max.overlaps</span></span></code></pre></div>
 <p><img src="summarizing_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 <p>Filter to limit to the range <code>c(low, high)</code> and display

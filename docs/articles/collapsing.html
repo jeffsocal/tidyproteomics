@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.5.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -978,12 +978,13 @@ annotations to the peptide data object. See
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Gene Level Expression"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">linear regression</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[252ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[236ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span>  ... selected <span style="color: #0000BB; font-style: italic;">linear</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> expression::limma removed 0 proteins with completely missing values</span></span>
 <span><span class="co">#&gt; Warning: Values from `annotation` are not uniquely identified; output will contain</span></span>
 <span><span class="co">#&gt; list-cols.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Use `values_fn = list` to suppress this warning.</span></span>
@@ -993,7 +994,7 @@ annotations to the peptide data object. See
 <span><span class="co">#&gt;   dplyr::group_by(gene_name, term) %&gt;%</span></span>
 <span><span class="co">#&gt;   dplyr::summarise(n = dplyr::n(), .groups = "drop") %&gt;%</span></span>
 <span><span class="co">#&gt;   dplyr::filter(n &gt; 1L)</span></span>
-<span><span class="co">#&gt; Warning: ggrepel: 82 unlabeled data points (too many overlaps). Consider</span></span>
+<span><span class="co">#&gt; Warning: ggrepel: 83 unlabeled data points (too many overlaps). Consider</span></span>
 <span><span class="co">#&gt; increasing max.overlaps</span></span></code></pre></div>
 <p><img src="collapsing_files/figure-html/unnamed-chunk-24-1.png" width="700"></p>
 </div>

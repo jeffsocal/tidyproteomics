@@ -39,13 +39,19 @@ expression_limma <- function(
 
   # only accept proteins with complete values
   l_comp_pro <- data_quant %>%
-    dplyr::filter(abundance_log2 > 1) %>%
-    dplyr::group_by(identifier) %>%
+    dplyr::filter(sample %in% c(experiment, control)) %>%
+    dplyr::group_by(identifier, sample) %>%
     dplyr::summarise(n = dplyr::n(),
                      .groups = 'drop') %>%
-    dplyr::filter(n >= max(n) * .75) %>%
+    dplyr::group_by(identifier) %>%
+    dplyr::summarise(min_group = min(n),
+                     n = n(),
+                     .groups = 'drop') %>%
+    dplyr::filter(n > 1, min_group > 0) %>%
     dplyr::select(identifier) %>%
     unlist()
+
+  cli::cli_alert_warning("expression::limma removed {length(unique(data_quant$identifier)) - length(l_comp_pro)} proteins with completely missing values")
 
   data_quant_wide <- data_quant %>%
     dplyr::filter(sample %in% c(experiment, control)) %>%

@@ -39,7 +39,7 @@ as.data.frame.tidyproteomics <- function(
   check_data(data)
   if(is.null(values)) { values <- data$quantitative_source }
   if(!is.null(drop)) {
-    can_drop <- c(colnames(data$accounting), data$annotations$term |> unique())
+    can_drop <- c(colnames(data$accounting), data$annotations$term %>% unique())
     if(length(intersect(drop, can_drop)) == 0){
       cli::cli_abort("trying to drop `{drop}`, only finding `{can_drop}`")
     }

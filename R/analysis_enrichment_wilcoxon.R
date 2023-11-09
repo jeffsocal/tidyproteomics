@@ -93,8 +93,8 @@ enrichment_wilcoxon <- function(
     dplyr::bind_rows() %>%
     dplyr::mutate(adj_p_value = stats::p.adjust(p_value)) %>%
     dplyr::relocate(adj_p_value, .after = p_value) %>%
-    dplyr::arrange(p_value) |>
-    dplyr::filter(size >= 3) |>
+    dplyr::arrange(p_value) %>%
+    dplyr::filter(size >= 3) %>%
     dplyr::filter(size <= length(unique(tbl_expression$identifier))*.66)
 
   return(data_out)
