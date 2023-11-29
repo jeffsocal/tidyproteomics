@@ -9,7 +9,7 @@
 #'
 extract <- function(
     data=NULL,
-    values='raw',
+    values=NULL,
     na.rm = FALSE
 ){
 
@@ -18,7 +18,11 @@ extract <- function(
   origin <- NULL
 
   check_data(data)
-  values <- rlang::arg_match(values, get_quant_names(data), multiple = T)
+  if(is.null(values)){
+    values <- data$quantitative_source
+  } else {
+    values <- rlang::arg_match(values, get_quant_names(data), multiple = T)
+  }
   if(!is.logical(na.rm) && !na.rm %in% c(TRUE, FALSE)){
     cli::cli_abort(c("x" = "na.rm must be TRUE or FALSE, not `{na.rm}`"))
   }
@@ -30,7 +34,7 @@ extract <- function(
     d_out <- d %>%
       dplyr::select(!tidyselect::matches('abundance') | tidyselect::matches(paste0(values, "$"))) %>%
       dplyr::rename(abundance = tidyselect::matches(values)) %>%
-      dplyr::mutate(origin = 'raw')
+      dplyr::mutate(origin = values)
   } else {
     d_out <- d %>%
       tidyr::pivot_longer(

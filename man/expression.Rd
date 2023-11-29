@@ -4,7 +4,13 @@
 \alias{expression}
 \title{Summarize the data}
 \usage{
-expression(data = NULL, ..., .method = stats::t.test, .p.adjust = "BH")
+expression(
+  data = NULL,
+  ...,
+  .pairs = NULL,
+  .method = stats::t.test,
+  .p.adjust = "BH"
+)
 }
 \arguments{
 \item{data}{tidyproteomics data object}
@@ -57,5 +63,12 @@ hela_proteins \%>\% operations()
 hela_proteins \%>\%
    expression(knockdown/control, .method = "limma") \%>\%
    export_analysis(knockdown/control, .analysis = "expression")
+
+# using the .pairs argument when multiple comparisons are needed
+comps <- list(c("control","knockdown"),
+            c("knockdown","control"))
+
+hela_proteins \%>\%
+   expression(.pairs = comps)
 
 }

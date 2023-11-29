@@ -61,13 +61,16 @@ expression_test <- function(
                      .groups = 'drop') %>%
     dplyr::group_by(identifier) %>%
     dplyr::summarise(min_group = min(n),
-                     n = n(),
+                     n = dplyr::n(),
                      .groups = 'drop') %>%
     dplyr::filter(n > 1, min_group > 0) %>%
     dplyr::select(identifier) %>%
     unlist()
 
-  cli::cli_alert_warning("expression::limma removed {length(unique(data_quant$identifier)) - length(l_comp_pro)} proteins with completely missing values")
+  # inform of missing values if any
+  if((length(unique(data_quant$identifier)) - length(l_comp_pro)) > 0){
+    cli::cli_alert_warning("expression::test removed {length(unique(data_quant$identifier)) - length(l_comp_pro)} proteins with completely missing values")
+  }
 
   data_quant_wide <- data_quant %>%
     dplyr::filter(identifier %in% l_comp_pro) %>%

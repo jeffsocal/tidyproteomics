@@ -195,6 +195,17 @@ export_analysis <- function(
       tbl_out <- tbl_out[[.term]]
     }
 
+    # add in the quantitative data
+    if(.analysis == 'expression') {
+      tbl_out <- tbl_out %>%
+        dplyr::left_join(
+          extract(data) %>%
+            tidyr::pivot_wider(names_from = c('sample','replicate'), values_from = 'abundance', names_prefix = 'abundance_') %>%
+            dplyr::rename(normalization = origin) %>%
+            munge_identifier("separate", data$identifier),
+          by = data$identifier)
+    }
+
     if(!is.null(data$annotations)){
       if(length(intersect(data$identifier, colnames(tbl_out))) == length(data$identifier)) {
         tbl_out <- tbl_out %>%

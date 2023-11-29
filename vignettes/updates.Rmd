@@ -12,6 +12,12 @@ vignette: >
 
 ### Version: 1.6.x
 
+#### 1.6.1 - 2023.11.29
+
+-   fixed some minor issues
+-   implemented the request from issue#9 adding the quantitative values to the export_analysis() function
+-   implemented the request from issue#12 allowing for the iterative evaluation of multiple comparisons for the expression() and enrichment() functions
+
 #### 1.6.0 - 2023.11.09
 
 -   fixed an issue with improper missing value accounting when implementing expression tests [thanks: github.com/rzieg]

@@ -7,6 +7,7 @@
 enrichment(
   data = NULL,
   ...,
+  .pairs = NULL,
   .term = NULL,
   .method = c("gsea", "wilcoxon"),
   .score_type = c("std", "pos", "neg"),
@@ -17,6 +18,8 @@ enrichment(
 \item{data}{tidyproteomics data object}
 
 \item{...}{two sample comparison e.g. experimental/control}
+
+\item{.pairs}{a list of vectors each containing two named sample groups}
 
 \item{.term}{a character string referencing ".term" in the annotations table}
 
@@ -52,5 +55,13 @@ hela_proteins \%>\%
    expression(knockdown/control) \%>\%
    enrichment(knockdown/control, .term = "biological_process", .method = "wilcoxon") \%>\%
    export_analysis(knockdown/control, .analysis = "enrichment", .term = "biological_process")
+
+# using the .pairs argument when multiple comparisons are needed
+comps <- list(c("control","knockdown"),
+            c("knockdown","control"))
+
+hela_proteins \%>\%
+   expression(.pairs = comps) \%>\%
+   enrichment(.pairs = comps, .term = "biological_process")
 
 }

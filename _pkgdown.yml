@@ -228,4 +228,5 @@ reference:
   - rf_parallel
   - svm_parallel
   - compute_compexp
+  - check_pairs
 

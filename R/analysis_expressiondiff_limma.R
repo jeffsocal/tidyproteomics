@@ -51,7 +51,10 @@ expression_limma <- function(
     dplyr::select(identifier) %>%
     unlist()
 
-  cli::cli_alert_warning("expression::limma removed {length(unique(data_quant$identifier)) - length(l_comp_pro)} proteins with completely missing values")
+  # inform of missing values if any
+  if((length(unique(data_quant$identifier)) - length(l_comp_pro)) > 0){
+    cli::cli_alert_warning("expression::limma removed {length(unique(data_quant$identifier)) - length(l_comp_pro)} proteins with completely missing values")
+  }
 
   data_quant_wide <- data_quant %>%
     dplyr::filter(sample %in% c(experiment, control)) %>%

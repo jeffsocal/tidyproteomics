@@ -4,7 +4,7 @@
 \alias{extract}
 \title{Main function for extracting quantitative data from a tidyproteomics data-object}
 \usage{
-extract(data = NULL, values = "raw", na.rm = FALSE)
+extract(data = NULL, values = NULL, na.rm = FALSE)
 }
 \arguments{
 \item{data}{tidyproteomics data object}

@@ -150,7 +150,7 @@ normalize <- function(
     #   err = as.character(as.vector(err))
     #   cli::cli_abort(err)
     # })
-  cli::cli_progress_done()
+    cli::cli_progress_done()
   }
 
   data <- data %>% select_normalization()
