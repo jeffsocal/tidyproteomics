@@ -29,13 +29,13 @@ hela_proteins \%>\% summary()
 # a summary by sample
 hela_proteins \%>\% summary("sample")
 
-# a summary by sample with match_between_runs removed
+# a summary by sample with imputations removed
 hela_proteins \%>\%
-   subset(match_between_runs == FALSE) \%>\%
+   subset(imputed == 0) \%>\%
    summary("sample")
 
-# a summary of match_between_runs
-hela_proteins \%>\% summary("match_between_runs")
+# a summary of imputation
+hela_proteins \%>\% summary("imputed")
 
 hela_proteins \%>\% summary("cellular_component")
 

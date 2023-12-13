@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,7 @@
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
     <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
     <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
@@ -151,12 +152,12 @@ measured.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
 <span><span class="co">#&gt;   sample_id sample    replicate protein abundance_raw</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e9b20ea7  control   1         Q15149    <span style="text-decoration: underline;">1</span>011<span style="text-decoration: underline;">259</span>992.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> ef79cc4c  control   2         Q15149    <span style="text-decoration: underline;">1</span>093<span style="text-decoration: underline;">277</span>593.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> eebba67b  control   3         Q15149     980<span style="text-decoration: underline;">809</span>516.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> ebf4b0fe  knockdown 1         Q15149    <span style="text-decoration: underline;">1</span>410<span style="text-decoration: underline;">445</span>367.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> ea36dac9  knockdown 2         Q15149    <span style="text-decoration: underline;">1</span>072<span style="text-decoration: underline;">305</span>561.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> ecfd1822  knockdown 3         Q15149    <span style="text-decoration: underline;">1</span>486<span style="text-decoration: underline;">561</span>518.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 9e6ed3ba  control   1         Q15149    <span style="text-decoration: underline;">1</span>011<span style="text-decoration: underline;">259</span>992.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> cc56fc1d  control   2         Q15149    <span style="text-decoration: underline;">1</span>093<span style="text-decoration: underline;">277</span>593.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 6a21f7a9  control   3         Q15149     980<span style="text-decoration: underline;">809</span>516.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 966be57f  knockdown 1         Q15149    <span style="text-decoration: underline;">1</span>410<span style="text-decoration: underline;">445</span>367.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 79a98e41  knockdown 2         Q15149    <span style="text-decoration: underline;">1</span>072<span style="text-decoration: underline;">305</span>561.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 9f804505  knockdown 3         Q15149    <span style="text-decoration: underline;">1</span>486<span style="text-decoration: underline;">561</span>518.</span></span></code></pre></div>
 <p>Peptides have multiple identifiers …</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_peptides</span><span class="op">$</span><span class="va">identifier</span></span>
@@ -165,12 +166,12 @@ measured.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
 <span><span class="co">#&gt;   sample_id sample  replicate protein peptide        modifications abundance_raw</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> aaf7e768  control 1         P06576  IPSAVGYQPTLAT… <span style="color: #BB0000;">NA</span>                43<span style="text-decoration: underline;">217</span>337 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> aaf7e768  control 1         P06576  IPSAVGYQPTLAT… 1xOxidation …      1<span style="text-decoration: underline;">465</span>426.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> aaf7e768  control 1         Q9P2E9  LTAEFEEAQTSACR 1xCarbamidom…      5<span style="text-decoration: underline;">899</span>490.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> aaf7e768  control 1         P11021  ITPSYVAFTPEGER <span style="color: #BB0000;">NA</span>                52<span style="text-decoration: underline;">886</span>668 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> aaf7e768  control 1         P11021  IINEPTAAAIAYG… <span style="color: #BB0000;">NA</span>               244<span style="text-decoration: underline;">628</span>414.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> aaf7e768  control 1         Q9P2E9  LLATEQEDAAVAK  <span style="color: #BB0000;">NA</span>                 5<span style="text-decoration: underline;">831</span>700.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 74a86daf  control 1         P06576  IPSAVGYQPTLAT… <span style="color: #BB0000;">NA</span>                43<span style="text-decoration: underline;">217</span>337 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 74a86daf  control 1         P06576  IPSAVGYQPTLAT… 1xOxidation …      1<span style="text-decoration: underline;">465</span>426.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 74a86daf  control 1         Q9P2E9  LTAEFEEAQTSACR 1xCarbamidom…      5<span style="text-decoration: underline;">899</span>490.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 74a86daf  control 1         P11021  ITPSYVAFTPEGER <span style="color: #BB0000;">NA</span>                52<span style="text-decoration: underline;">886</span>668 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 74a86daf  control 1         P11021  IINEPTAAAIAYG… <span style="color: #BB0000;">NA</span>               244<span style="text-decoration: underline;">628</span>414.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 74a86daf  control 1         Q9P2E9  LLATEQEDAAVAK  <span style="color: #BB0000;">NA</span>                 5<span style="text-decoration: underline;">831</span>700.</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="normalization-functions">Normalization Functions<a class="anchor" aria-label="anchor" href="#normalization-functions"></a>
 </h3>
@@ -344,10 +345,6 @@ implemented.</p>
 <span><span class="co">#&gt;   • Data files (p97KD_HCT116_proteins.xlsx) were imported as proteins from</span></span>
 <span><span class="co">#&gt;   ProteomeDiscoverer</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • Data reassigned sample to control where 'sample like ctl'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • Data reassigned sample to knockdown where 'sample like p97'</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • Data normalized via median, linear, loess, svm.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • Data normalized using subset description %like% ribosome FALSE.</span></span>
@@ -457,7 +454,7 @@ selection.</p>
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="st">'median'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_normalization.html">plot_normalization</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[109ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[138ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span></span>

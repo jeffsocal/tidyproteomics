@@ -40,3 +40,38 @@ list_venn <- function(
 
   return(vset)
 }
+
+#' Helper function extracting a subset of proteins
+#'
+#' @param data the tidyproteomics data object
+#' @param include the set of proteins contained within the intersection of these samples
+#' @param exclude the set of proteins found in these samples to exclude
+#'
+#' @return a character string
+#'
+intersect_venn <- function(
+    data = NULL,
+    include = NULL,
+    exclude = NULL){
+
+  check_data(data)
+  sn <- data %>% get_sample_names()
+  include <- rlang::arg_match(include, sn, multiple = T)
+  if(!is.null(exclude))
+    exclude <- rlang::arg_match(exclude, sn, multiple = T)
+
+  venn_set <- data %>% list_venn()
+
+  final <- venn_set[[include[1]]]
+  if(length(include) > 1){
+    for(i in 2:length(include)){
+      final <- intersect(final, venn_set[[include[i]]])
+    }
+  }
+  if(!is.null(exclude) & length(exclude) > 0){
+    for(i in 1:length(exclude)){
+      final <- setdiff(final, venn_set[[exclude[i]]])
+    }
+  }
+  return(final)
+}

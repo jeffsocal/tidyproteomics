@@ -10,11 +10,11 @@
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
 #' hela_proteins %>%
-#'    subset(match_between_runs == FALSE) %>%
+#'    subset(imputed == 0) %>%
 #'    plot_euler()
 #'
 #' hela_proteins %>%
-#'    subset(match_between_runs == FALSE) %>%
+#'    subset(imputed == 0) %>%
 #'    subset(cellular_component %like% "cytosol") %>%
 #'    plot_euler()
 #'
@@ -50,7 +50,7 @@ plot_euler <- function(
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
 #' hela_proteins %>%
-#'    subset(match_between_runs == FALSE) %>%
+#'    subset(imputed == 0) %>%
 #'    plot_venn()
 #'
 plot_venn <- function(
@@ -71,3 +71,4 @@ plot_venn <- function(
                    glue::glue("{data$analyte}_venn"),
                    ...))
 }
+

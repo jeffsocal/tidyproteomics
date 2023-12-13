@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,7 @@
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
     <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
     <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
@@ -186,16 +187,17 @@ show a summary of the data object contents</p>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (10.76 MB) </span></span>
+<span><span class="co">#&gt;                 proteins (10.67 MB) </span></span>
 <span><span class="co">#&gt; Composition     6 files </span></span>
 <span><span class="co">#&gt;                 2 samples (control, knockdown) </span></span>
 <span><span class="co">#&gt; Quantitation    7055 proteins </span></span>
 <span><span class="co">#&gt;                 4 log10 dynamic range </span></span>
 <span><span class="co">#&gt;                 28.8% missing values </span></span>
-<span><span class="co">#&gt; Accounting      (4) match_between_runs num_peptides num_unique_peptides num_psms </span></span>
-<span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name biological_process</span></span>
-<span><span class="co">#&gt;                 cellular_component molecular_function wiki_pathway</span></span>
-<span><span class="co">#&gt;                 reactome_pathway </span></span>
+<span><span class="co">#&gt;  *imputed        </span></span>
+<span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
+<span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
+<span><span class="co">#&gt;                 gene_id_entrez gene_name wiki_pathway reactome_pathway</span></span>
+<span><span class="co">#&gt;                 gene_id_ensemble </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>As more operations are performed on the data, more of the contents
 are summarized</p>
@@ -205,7 +207,7 @@ are summarized</p>
 <span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .term <span class="op">=</span> <span class="st">'molecular_function'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.1s]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.7s]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">biological_process</span></span></span>
 <span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
@@ -309,21 +311,22 @@ are summarized</p>
 <span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
 <span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
 <span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">molecular_function</span> <span style="color: #B2B2B2;">[4</span>…</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">molecular_function</span> <span style="color: #B2B2B2;">[5</span>…</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (11.42 MB) </span></span>
+<span><span class="co">#&gt;                 proteins (11.32 MB) </span></span>
 <span><span class="co">#&gt; Composition     6 files </span></span>
 <span><span class="co">#&gt;                 2 samples (control, knockdown) </span></span>
 <span><span class="co">#&gt; Quantitation    7055 proteins </span></span>
 <span><span class="co">#&gt;                 4 log10 dynamic range </span></span>
 <span><span class="co">#&gt;                 28.8% missing values </span></span>
-<span><span class="co">#&gt; Accounting      (4) match_between_runs num_peptides num_unique_peptides num_psms </span></span>
-<span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name biological_process</span></span>
-<span><span class="co">#&gt;                 cellular_component molecular_function wiki_pathway</span></span>
-<span><span class="co">#&gt;                 reactome_pathway </span></span>
+<span><span class="co">#&gt;  *imputed        </span></span>
+<span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
+<span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
+<span><span class="co">#&gt;                 gene_id_entrez gene_name wiki_pathway reactome_pathway</span></span>
+<span><span class="co">#&gt;                 gene_id_ensemble </span></span>
 <span><span class="co">#&gt; Analyses        (1) </span></span>
 <span><span class="co">#&gt;                 knockdown/control -&gt; expression &amp; enrichment (biological_process, molecular_function) </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
@@ -358,19 +361,19 @@ contains ‘CRAP’, as in the crap-ome</p>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     sample replicate native   BSA Keratin    Other Trypsin sample_id</span></span>
-<span><span class="co">#&gt;    control         1  92.7% 3.66%   3.56%  0.0023%    0.1%  e9b20ea7</span></span>
-<span><span class="co">#&gt;    control         2    92% 4.02%   3.89% 0.00205%  0.123%  ef79cc4c</span></span>
-<span><span class="co">#&gt;    control         3    92% 4.01%    3.9% 0.00208%  0.113%  eebba67b</span></span>
-<span><span class="co">#&gt;  knockdown         1    92% 4.01%   3.88% 0.00183%  0.125%  ebf4b0fe</span></span>
-<span><span class="co">#&gt;  knockdown         2  92.7% 3.66%   3.59%  0.0023% 0.0648%  ea36dac9</span></span>
-<span><span class="co">#&gt;  knockdown         3  92.2% 3.89%   3.82% 0.00232% 0.0679%  ecfd1822</span></span>
+<span><span class="co">#&gt;    control         1  92.7% 3.66%   3.56%  0.0023%    0.1%  9e6ed3ba</span></span>
+<span><span class="co">#&gt;    control         2    92% 4.02%   3.89% 0.00205%  0.123%  cc56fc1d</span></span>
+<span><span class="co">#&gt;    control         3    92% 4.01%    3.9% 0.00208%  0.113%  6a21f7a9</span></span>
+<span><span class="co">#&gt;  knockdown         1    92% 4.01%   3.88% 0.00183%  0.125%  966be57f</span></span>
+<span><span class="co">#&gt;  knockdown         2  92.7% 3.66%   3.59%  0.0023% 0.0648%  79a98e41</span></span>
+<span><span class="co">#&gt;  knockdown         3  92.2% 3.89%   3.82% 0.00232% 0.0679%  9f804505</span></span>
 <span><span class="co">#&gt;                 import_file sample_file</span></span>
-<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          f1</span></span>
-<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          f4</span></span>
-<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          f5</span></span>
-<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          f2</span></span>
-<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          f3</span></span>
-<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          f6</span></span>
+<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          F1</span></span>
+<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          F4</span></span>
+<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          F5</span></span>
+<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          F2</span></span>
+<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          F3</span></span>
+<span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          F6</span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>A summary for contamination where we specify where the description is
 contains ‘ribosome’</p>
@@ -380,19 +383,19 @@ contains ‘ribosome’</p>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     sample replicate native ribosome sample_id                import_file</span></span>
-<span><span class="co">#&gt;    control         1  99.8%   0.155%  e9b20ea7 p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;    control         2  99.8%    0.15%  ef79cc4c p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;    control         3  99.8%   0.156%  eebba67b p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;  knockdown         1  99.8%   0.171%  ebf4b0fe p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;  knockdown         2  99.8%   0.166%  ea36dac9 p97KD_HCT116_proteins.xlsx</span></span>
-<span><span class="co">#&gt;  knockdown         3  99.8%   0.164%  ecfd1822 p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;    control         1  99.8%   0.155%  9e6ed3ba p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;    control         2  99.8%    0.15%  cc56fc1d p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;    control         3  99.8%   0.156%  6a21f7a9 p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;  knockdown         1  99.8%   0.171%  966be57f p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;  knockdown         2  99.8%   0.166%  79a98e41 p97KD_HCT116_proteins.xlsx</span></span>
+<span><span class="co">#&gt;  knockdown         3  99.8%   0.164%  9f804505 p97KD_HCT116_proteins.xlsx</span></span>
 <span><span class="co">#&gt;  sample_file</span></span>
-<span><span class="co">#&gt;           f1</span></span>
-<span><span class="co">#&gt;           f4</span></span>
-<span><span class="co">#&gt;           f5</span></span>
-<span><span class="co">#&gt;           f2</span></span>
-<span><span class="co">#&gt;           f3</span></span>
-<span><span class="co">#&gt;           f6</span></span>
+<span><span class="co">#&gt;           F1</span></span>
+<span><span class="co">#&gt;           F4</span></span>
+<span><span class="co">#&gt;           F5</span></span>
+<span><span class="co">#&gt;           F2</span></span>
+<span><span class="co">#&gt;           F3</span></span>
+<span><span class="co">#&gt;           F6</span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>A summary based on a term set in the provided annotations</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">

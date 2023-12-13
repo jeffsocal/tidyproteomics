@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,7 @@
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
     <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
     <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
@@ -151,34 +152,32 @@ accounting.</p>
 <span><span class="co">#&gt;  $ analyte            : chr "proteins"</span></span>
 <span><span class="co">#&gt;  $ identifier         : chr "protein"</span></span>
 <span><span class="co">#&gt;  $ quantitative_source: chr "raw"</span></span>
-<span><span class="co">#&gt;  $ operations         :List of 3</span></span>
+<span><span class="co">#&gt;  $ operations         :List of 1</span></span>
 <span><span class="co">#&gt;   ..$ : 'glue' chr "Data files (p97KD_HCT116_proteins.xlsx) were imported as proteins from ProteomeDiscoverer"</span></span>
-<span><span class="co">#&gt;   ..$ : chr "Data reassigned sample to control where 'sample like ctl'"</span></span>
-<span><span class="co">#&gt;   ..$ : chr "Data reassigned sample to knockdown where 'sample like p97'"</span></span>
 <span><span class="co">#&gt;  $ experiments        :Classes 'tbl_df', 'tbl' and 'data.frame': 6 obs. of  5 variables:</span></span>
-<span><span class="co">#&gt;   ..$ sample_id  : chr [1:6] "e9b20ea7" "ef79cc4c" "eebba67b" "ebf4b0fe" ...</span></span>
+<span><span class="co">#&gt;   ..$ sample_id  : chr [1:6] "9e6ed3ba" "cc56fc1d" "6a21f7a9" "966be57f" ...</span></span>
 <span><span class="co">#&gt;   ..$ import_file: chr [1:6] "p97KD_HCT116_proteins.xlsx" "p97KD_HCT116_proteins.xlsx" "p97KD_HCT116_proteins.xlsx" "p97KD_HCT116_proteins.xlsx" ...</span></span>
-<span><span class="co">#&gt;   ..$ sample_file: chr [1:6] "f1" "f4" "f5" "f2" ...</span></span>
+<span><span class="co">#&gt;   ..$ sample_file: chr [1:6] "F1" "F4" "F5" "F2" ...</span></span>
 <span><span class="co">#&gt;   ..$ sample     : chr [1:6] "control" "control" "control" "knockdown" ...</span></span>
 <span><span class="co">#&gt;   ..$ replicate  : chr [1:6] "1" "2" "3" "1" ...</span></span>
 <span><span class="co">#&gt;  $ quantitative       :Classes 'tbl_df', 'tbl' and 'data.frame': 42330 obs. of  5 variables:</span></span>
-<span><span class="co">#&gt;   ..$ sample_id    : chr [1:42330] "e9b20ea7" "ef79cc4c" "eebba67b" "ebf4b0fe" ...</span></span>
+<span><span class="co">#&gt;   ..$ sample_id    : chr [1:42330] "9e6ed3ba" "cc56fc1d" "6a21f7a9" "966be57f" ...</span></span>
 <span><span class="co">#&gt;   ..$ sample       : chr [1:42330] "control" "control" "control" "knockdown" ...</span></span>
 <span><span class="co">#&gt;   ..$ replicate    : chr [1:42330] "1" "2" "3" "1" ...</span></span>
 <span><span class="co">#&gt;   ..$ protein      : chr [1:42330] "Q15149" "Q15149" "Q15149" "Q15149" ...</span></span>
 <span><span class="co">#&gt;   ..$ abundance_raw: num [1:42330] 1.01e+09 1.09e+09 9.81e+08 1.41e+09 1.07e+09 ...</span></span>
 <span><span class="co">#&gt;  $ accounting         :Classes 'tbl_df', 'tbl' and 'data.frame': 42330 obs. of  7 variables:</span></span>
-<span><span class="co">#&gt;   ..$ sample_id          : chr [1:42330] "e9b20ea7" "ef79cc4c" "eebba67b" "ebf4b0fe" ...</span></span>
-<span><span class="co">#&gt;   ..$ protein            : chr [1:42330] "Q15149" "Q15149" "Q15149" "Q15149" ...</span></span>
-<span><span class="co">#&gt;   ..$ protein_group      : chr [1:42330] "Q15149" "Q15149" "Q15149" "Q15149" ...</span></span>
-<span><span class="co">#&gt;   ..$ match_between_runs : logi [1:42330] FALSE FALSE FALSE FALSE FALSE FALSE ...</span></span>
-<span><span class="co">#&gt;   ..$ num_peptides       : num [1:42330] 228 228 228 228 228 228 200 200 200 200 ...</span></span>
-<span><span class="co">#&gt;   ..$ num_unique_peptides: num [1:42330] 59 59 59 59 59 59 200 200 200 200 ...</span></span>
-<span><span class="co">#&gt;   ..$ num_psms           : num [1:42330] 1487 1487 1487 1487 1487 ...</span></span>
-<span><span class="co">#&gt;  $ annotations        :Classes 'tbl_df', 'tbl' and 'data.frame': 63495 obs. of  3 variables:</span></span>
-<span><span class="co">#&gt;   ..$ protein   : chr [1:63495] "Q15149" "Q15149" "Q15149" "Q15149" ...</span></span>
-<span><span class="co">#&gt;   ..$ term      : chr [1:63495] "description" "gene_id_entrez" "gene_id_ensemble" "gene_name" ...</span></span>
-<span><span class="co">#&gt;   ..$ annotation: chr [1:63495] "Plectin OS=Homo sapiens OX=9606 GN=PLEC PE=1 SV=3" "5339" "ENSG00000178209" "PLEC" ...</span></span>
+<span><span class="co">#&gt;   ..$ sample_id          : chr [1:42330] "6a21f7a9" "6a21f7a9" "6a21f7a9" "6a21f7a9" ...</span></span>
+<span><span class="co">#&gt;   ..$ protein            : chr [1:42330] "A0A024R161" "A0A024R1R8" "A0A024R4E5" "A0A024R571" ...</span></span>
+<span><span class="co">#&gt;   ..$ num_peptides       : num [1:42330] 2 1 43 22 2 10 2 1 1 14 ...</span></span>
+<span><span class="co">#&gt;   ..$ num_psms           : num [1:42330] 7 5 248 106 7 54 2 4 1 61 ...</span></span>
+<span><span class="co">#&gt;   ..$ num_unique_peptides: num [1:42330] 2 1 43 20 2 1 2 1 1 14 ...</span></span>
+<span><span class="co">#&gt;   ..$ protein_group      : chr [1:42330] "A0A024R161" "A0A024R1R8" "A0A024R4E5" "A0A024R571" ...</span></span>
+<span><span class="co">#&gt;   ..$ imputed            : num [1:42330] 0 0 0 0 0 0 0 1 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ annotations        :Classes 'tbl_df', 'tbl' and 'data.frame': 52583 obs. of  3 variables:</span></span>
+<span><span class="co">#&gt;   ..$ protein   : chr [1:52583] "Q15149" "Q15149" "Q15149" "Q15149" ...</span></span>
+<span><span class="co">#&gt;   ..$ term      : chr [1:52583] "description" "biological_process" "cellular_component" "molecular_function" ...</span></span>
+<span><span class="co">#&gt;   ..$ annotation: chr [1:52583] "Plectin OS=Homo sapiens OX=9606 GN=PLEC PE=1 SV=3" "cell differentiation;cell growth;cellular homeostasis;coagulation;defense response;metabolic process" "cytoplasm;cytoskeleton;cytosol;endoplasmic reticulum;endosome;nucleus" "motor activity;structural molecule activity" ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "class")= chr "tidyproteomics"</span></span></code></pre></div>
   </main>
 </div>

@@ -12,7 +12,7 @@ This function will only replace the sample string and update the replicate numbe
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,7 @@ This function will only replace the sample string and update the replicate numbe
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
     <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
     <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
@@ -110,12 +111,12 @@ This function will only replace the sample string and update the replicate numbe
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: experiment</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  sample_id                import_file sample_file    sample replicate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   e9b20ea7 p97KD_HCT116_proteins.xlsx          f1   control         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ef79cc4c p97KD_HCT116_proteins.xlsx          f4   control         2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   eebba67b p97KD_HCT116_proteins.xlsx          f5   control         3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ebf4b0fe p97KD_HCT116_proteins.xlsx          f2 knockdown         1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ea36dac9 p97KD_HCT116_proteins.xlsx          f3 knockdown         2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ecfd1822 p97KD_HCT116_proteins.xlsx          f6 knockdown         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   9e6ed3ba p97KD_HCT116_proteins.xlsx          F1   control         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cc56fc1d p97KD_HCT116_proteins.xlsx          F4   control         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   6a21f7a9 p97KD_HCT116_proteins.xlsx          F5   control         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   966be57f p97KD_HCT116_proteins.xlsx          F2 knockdown         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   79a98e41 p97KD_HCT116_proteins.xlsx          F3 knockdown         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   9f804505 p97KD_HCT116_proteins.xlsx          F6 knockdown         3</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># make the modification</span></span></span>
@@ -138,16 +139,7 @@ This function will only replace the sample string and update the replicate numbe
 <span class="r-in"><span>   <span class="fu">reassign</span><span class="op">(</span><span class="va">sample_file</span> <span class="op">==</span> <span class="st">"f1"</span>, .replace <span class="op">=</span> <span class="st">"new"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">reassign</span><span class="op">(</span><span class="va">sample_file</span> <span class="op">==</span> <span class="st">"f2"</span>, .replace <span class="op">=</span> <span class="st">"new"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Reassigning 1</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Reassigning 4</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable  CVs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control     7055    66329           58706        0.908 0.14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     7055    66329           58706        0.908 0.24</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        new     7055    66329           58706        0.908 0.21</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in reassign(., sample_file == "f1", .replace = "new"):</span> did not find <span style="color: #FF5F00; font-style: italic;">f1</span> in <span style="color: #FF5F00; font-style: italic;">sample_file</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

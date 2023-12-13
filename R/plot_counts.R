@@ -36,7 +36,6 @@ plot_counts <- function(
   q025 <- NULL
   ci95 <- NULL
   label <- NULL
-  match_between_runs <- NULL
   imputed <- NULL
   fill <- NULL
   is_mbr <- NULL

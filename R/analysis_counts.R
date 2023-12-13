@@ -11,7 +11,6 @@ analysis_counts <- function(
 ){
 
   # visible bindings
-  match_between_runs <- NULL
   imputed <- NULL
   quantifiable <- NULL
 

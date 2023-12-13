@@ -25,6 +25,9 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/expression.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/extracting.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/importing.html</loc>
   </url>
   <url>
@@ -260,6 +263,12 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/intersect_venn.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/intersection.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/invlog2.html</loc>

@@ -28,6 +28,8 @@ navbar:
         href: articles/annotating.html
       - text: Protein Accounting
         href: articles/collapsing.html
+      - text: Extracting
+        href: articles/extracting.html
       - text: '-------'
       - text: Analysis
       - text: Visualizing
@@ -81,7 +83,9 @@ reference:
   description: |
     **Subsetting** filters an tidyproteomics data-object by a given regular expression to
     create a subset. See `vignette("subsetting")` for more details and examples.
-  contents: subset
+  contents:
+  - subset
+  - intersection
 - title: Summarizing
   description: |
     **Summarizing** computes quick summary statistics on a given tidyproteomics data-object.
@@ -229,4 +233,5 @@ reference:
   - svm_parallel
   - compute_compexp
   - check_pairs
+  - intersect_venn
 

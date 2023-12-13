@@ -12,7 +12,7 @@ statistics for a given tidyproteomics data object."><meta property="og:image" co
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,6 +40,7 @@ statistics for a given tidyproteomics data object."><meta property="og:image" co
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
     <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
     <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
@@ -129,12 +130,12 @@ non-linear distributions and uneven replicate balance between samples.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,187 × 25</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    protein imputed     n average_expression proportional_expression foldchange</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Q5SVJ8    0.667     6            <span style="text-decoration: underline;">755</span>886.              0.000<span style="text-decoration: underline;">002</span>93      52.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Q5SVJ8    0.333     6            <span style="text-decoration: underline;">755</span>886.              0.000<span style="text-decoration: underline;">002</span>93      52.1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Q15011    0         6           4<span style="text-decoration: underline;">919</span>332.              0.000<span style="text-decoration: underline;">019</span>0       48.6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> F6SA91    0.833     6            <span style="text-decoration: underline;">879</span>218.              0.000<span style="text-decoration: underline;">003</span>40      39.6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> F6SA91    0.167     6            <span style="text-decoration: underline;">879</span>218.              0.000<span style="text-decoration: underline;">003</span>40      39.6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Q9NXV2    0         6           3<span style="text-decoration: underline;">103</span>100.              0.000<span style="text-decoration: underline;">012</span>0       19.6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Q13751    0.333     6           1<span style="text-decoration: underline;">072</span>517.              0.000<span style="text-decoration: underline;">004</span>15      11.9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O00308    0.167     6            <span style="text-decoration: underline;">733</span>272.              0.000<span style="text-decoration: underline;">002</span>84      10.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Q13751    0         6           1<span style="text-decoration: underline;">072</span>517.              0.000<span style="text-decoration: underline;">004</span>15      11.9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O00308    0         6            <span style="text-decoration: underline;">733</span>272.              0.000<span style="text-decoration: underline;">002</span>84      10.1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Q9BY50    0         6           2<span style="text-decoration: underline;">049</span>680.              0.000<span style="text-decoration: underline;">007</span>93       9.75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Q8TBM8    0.333     6           3<span style="text-decoration: underline;">374</span>207.              0.000<span style="text-decoration: underline;">013</span>1        8.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Q5JUW8    0         6           1<span style="text-decoration: underline;">745</span>373.              0.000<span style="text-decoration: underline;">006</span>76       7.98</span>
@@ -144,25 +145,25 @@ non-linear distributions and uneven replicate balance between samples.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalization &lt;chr&gt;, abundance_control_1 &lt;dbl&gt;, abundance_control_2 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_control_3 &lt;dbl&gt;, abundance_knockdown_1 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_knockdown_2 &lt;dbl&gt;, abundance_knockdown_3 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   description &lt;chr&gt;, gene_id_entrez &lt;chr&gt;, gene_id_ensemble &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   gene_name &lt;chr&gt;, biological_process &lt;chr&gt;, cellular_component &lt;chr&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   description &lt;chr&gt;, biological_process &lt;chr&gt;, cellular_component &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   molecular_function &lt;chr&gt;, gene_id_entrez &lt;chr&gt;, gene_name &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># a wilcox.test expression analysis</span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">expression</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .method <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="export_analysis.html">export_analysis</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .analysis <span class="op">=</span> <span class="st">"expression"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">wilcox_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">wilcox_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">wilcox_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.2s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,187 × 25</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    protein imputed     n average_expression proportional_expression foldchange</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Q5SVJ8    0.667     6            <span style="text-decoration: underline;">755</span>886.              0.000<span style="text-decoration: underline;">002</span>93      52.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Q5SVJ8    0.333     6            <span style="text-decoration: underline;">755</span>886.              0.000<span style="text-decoration: underline;">002</span>93      52.1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Q15011    0         6           4<span style="text-decoration: underline;">919</span>332.              0.000<span style="text-decoration: underline;">019</span>0       48.6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> F6SA91    0.833     6            <span style="text-decoration: underline;">879</span>218.              0.000<span style="text-decoration: underline;">003</span>40      39.6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> F6SA91    0.167     6            <span style="text-decoration: underline;">879</span>218.              0.000<span style="text-decoration: underline;">003</span>40      39.6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Q9NXV2    0         6           3<span style="text-decoration: underline;">103</span>100.              0.000<span style="text-decoration: underline;">012</span>0       19.6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Q13751    0.333     6           1<span style="text-decoration: underline;">072</span>517.              0.000<span style="text-decoration: underline;">004</span>15      11.9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O00308    0.167     6            <span style="text-decoration: underline;">733</span>272.              0.000<span style="text-decoration: underline;">002</span>84      10.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Q13751    0         6           1<span style="text-decoration: underline;">072</span>517.              0.000<span style="text-decoration: underline;">004</span>15      11.9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O00308    0         6            <span style="text-decoration: underline;">733</span>272.              0.000<span style="text-decoration: underline;">002</span>84      10.1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Q9BY50    0         6           2<span style="text-decoration: underline;">049</span>680.              0.000<span style="text-decoration: underline;">007</span>93       9.75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Q8TBM8    0.333     6           3<span style="text-decoration: underline;">374</span>207.              0.000<span style="text-decoration: underline;">013</span>1        8.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Q5JUW8    0         6           1<span style="text-decoration: underline;">745</span>373.              0.000<span style="text-decoration: underline;">006</span>76       7.98</span>
@@ -172,8 +173,8 @@ non-linear distributions and uneven replicate balance between samples.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalization &lt;chr&gt;, abundance_control_1 &lt;dbl&gt;, abundance_control_2 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_control_3 &lt;dbl&gt;, abundance_knockdown_1 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_knockdown_2 &lt;dbl&gt;, abundance_knockdown_3 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   description &lt;chr&gt;, gene_id_entrez &lt;chr&gt;, gene_id_ensemble &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   gene_name &lt;chr&gt;, biological_process &lt;chr&gt;, cellular_component &lt;chr&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   description &lt;chr&gt;, biological_process &lt;chr&gt;, cellular_component &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   molecular_function &lt;chr&gt;, gene_id_entrez &lt;chr&gt;, gene_name &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># a one-tailed wilcox.test expression analysis</span></span></span>
 <span class="r-in"><span><span class="va">wilcoxon_less</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span></span>
@@ -189,12 +190,12 @@ non-linear distributions and uneven replicate balance between samples.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,187 × 25</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    protein imputed     n average_expression proportional_expression foldchange</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Q5SVJ8    0.667     6            <span style="text-decoration: underline;">755</span>886.              0.000<span style="text-decoration: underline;">002</span>93      52.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Q5SVJ8    0.333     6            <span style="text-decoration: underline;">755</span>886.              0.000<span style="text-decoration: underline;">002</span>93      52.1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Q15011    0         6           4<span style="text-decoration: underline;">919</span>332.              0.000<span style="text-decoration: underline;">019</span>0       48.6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> F6SA91    0.833     6            <span style="text-decoration: underline;">879</span>218.              0.000<span style="text-decoration: underline;">003</span>40      39.6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> F6SA91    0.167     6            <span style="text-decoration: underline;">879</span>218.              0.000<span style="text-decoration: underline;">003</span>40      39.6 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Q9NXV2    0         6           3<span style="text-decoration: underline;">103</span>100.              0.000<span style="text-decoration: underline;">012</span>0       19.6 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Q13751    0.333     6           1<span style="text-decoration: underline;">072</span>517.              0.000<span style="text-decoration: underline;">004</span>15      11.9 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O00308    0.167     6            <span style="text-decoration: underline;">733</span>272.              0.000<span style="text-decoration: underline;">002</span>84      10.1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Q13751    0         6           1<span style="text-decoration: underline;">072</span>517.              0.000<span style="text-decoration: underline;">004</span>15      11.9 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O00308    0         6            <span style="text-decoration: underline;">733</span>272.              0.000<span style="text-decoration: underline;">002</span>84      10.1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Q9BY50    0         6           2<span style="text-decoration: underline;">049</span>680.              0.000<span style="text-decoration: underline;">007</span>93       9.75</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Q8TBM8    0.333     6           3<span style="text-decoration: underline;">374</span>207.              0.000<span style="text-decoration: underline;">013</span>1        8.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Q5JUW8    0         6           1<span style="text-decoration: underline;">745</span>373.              0.000<span style="text-decoration: underline;">006</span>76       7.98</span>
@@ -204,16 +205,14 @@ non-linear distributions and uneven replicate balance between samples.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalization &lt;chr&gt;, abundance_control_1 &lt;dbl&gt;, abundance_control_2 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_control_3 &lt;dbl&gt;, abundance_knockdown_1 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_knockdown_2 &lt;dbl&gt;, abundance_knockdown_3 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   description &lt;chr&gt;, gene_id_entrez &lt;chr&gt;, gene_id_ensemble &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   gene_name &lt;chr&gt;, biological_process &lt;chr&gt;, cellular_component &lt;chr&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   description &lt;chr&gt;, biological_process &lt;chr&gt;, cellular_component &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   molecular_function &lt;chr&gt;, gene_id_entrez &lt;chr&gt;, gene_name &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Note: the userdefined function is preserved in the operations tracking</span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Data Transformations</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Data files (p97KD_HCT116_proteins.xlsx) were imported as proteins from</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   ProteomeDiscoverer</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   • Data reassigned sample to control where 'sample like ctl'</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   • Data reassigned sample to knockdown where 'sample like p97'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Analysis: expression difference wilcox_test knockdown/control, p.adjust =</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   BH</span>
 <span class="r-in"><span></span></span>
@@ -224,17 +223,17 @@ non-linear distributions and uneven replicate balance between samples.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">limma</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> expression::limma removed 159 proteins with completely missing values</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">limma</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">limma</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[421ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">limma</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[419ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,187 × 27</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    protein imputed     n log2_foldchange foldchange average_expression</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Q15011    0         6            5.48      44.6            2<span style="text-decoration: underline;">460</span>624.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> F6SA91    0.833     6            5.31      39.6             <span style="text-decoration: underline;">272</span>410.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Q5SVJ8    0.667     6            3.99      15.9             <span style="text-decoration: underline;">214</span>100.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Q13751    0.333     6            3.66      12.6             <span style="text-decoration: underline;">734</span>867.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> F6SA91    0.167     6            5.31      39.6             <span style="text-decoration: underline;">272</span>410.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Q5SVJ8    0.333     6            3.99      15.9             <span style="text-decoration: underline;">214</span>100.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Q13751    0         6            3.66      12.6             <span style="text-decoration: underline;">734</span>867.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Q9NXV2    0         6            3.63      12.4            1<span style="text-decoration: underline;">554</span>000.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O00308    0.167     6            3.34      10.1             <span style="text-decoration: underline;">392</span>333.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> O00308    0         6            3.34      10.1             <span style="text-decoration: underline;">392</span>333.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Q9BY50    0         6            3.09       8.51           1<span style="text-decoration: underline;">484</span>051.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Q5JUW8    0         6            3.05       8.28           1<span style="text-decoration: underline;">039</span>329.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Q5T9L3    0.167     6            2.99       7.97            <span style="text-decoration: underline;">605</span>468.</span>
@@ -245,7 +244,7 @@ non-linear distributions and uneven replicate balance between samples.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalization &lt;chr&gt;, abundance_control_1 &lt;dbl&gt;, abundance_control_2 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_control_3 &lt;dbl&gt;, abundance_knockdown_1 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_knockdown_2 &lt;dbl&gt;, abundance_knockdown_3 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   description &lt;chr&gt;, gene_id_entrez &lt;chr&gt;, gene_id_ensemble &lt;chr&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   description &lt;chr&gt;, biological_process &lt;chr&gt;, cellular_component &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># using the .pairs argument when multiple comparisons are needed</span></span></span>
 <span class="r-in"><span><span class="va">comps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"control"</span>,<span class="st">"knockdown"</span><span class="op">)</span>,</span></span>
@@ -255,7 +254,7 @@ non-linear distributions and uneven replicate balance between samples.</p></dd>
 <span class="r-in"><span>   <span class="fu">expression</span><span class="op">(</span>.pairs <span class="op">=</span> <span class="va">comps</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Using the supplied 2 sample pairs ...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">control / knockdown</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">control / knockdown</span> <span style="color: #B2B2B2;">[3s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">control / knockdown</span> <span style="color: #B2B2B2;">[3.1s]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.1s]</span></span>
@@ -264,16 +263,17 @@ non-linear distributions and uneven replicate balance between samples.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Origin          ProteomeDiscoverer </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 proteins (12.06 MB) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 proteins (11.96 MB) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Composition     6 files </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 2 samples (control, knockdown) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Quantitation    7055 proteins </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 4 log10 dynamic range </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 28.8% missing values </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Accounting      (4) match_between_runs num_peptides num_unique_peptides num_psms </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name biological_process</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 cellular_component molecular_function wiki_pathway</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 reactome_pathway </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  *imputed        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Annotations     (9) description biological_process cellular_component molecular_function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 gene_id_entrez gene_name wiki_pathway reactome_pathway</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 gene_id_ensemble </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Analyses        (2) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 knockdown/control -&gt; expression  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 control/knockdown -&gt; expression  </span>

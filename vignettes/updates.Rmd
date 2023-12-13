@@ -10,6 +10,13 @@ vignette: >
 ---
 # A condensed accounting of updates, semantic versioning.
 
+### Version: 1.7.x
+
+#### 1.7.0 - 2023.12.13
+
+-   add the ability to export the proteins specific to a given Venn intersection [extracting](./extracting.html)
+-   minor improvements on the export_analysis function to clarify column headers 
+
 ### Version: 1.6.x
 
 #### 1.6.1 - 2023.11.29

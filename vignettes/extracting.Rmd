@@ -1,0 +1,53 @@
+---
+title: "Extracting"
+output: rmarkdown::html_vignette
+description: |
+  tidyproteomics: simplified data object and analysis functions
+vignette: >
+  %\VignetteIndexEntry{Extracting}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+set.seed(1041)
+options(dplyr.print_max = 10)
+```
+
+Along with visualizing your data in several different ways, the Venn and Euler diagrams offer a powerful visual analysis on differences in analytes between sample groups. Take for example the following Venn.
+
+```{r, echo=FALSE, message=FALSE}
+library("dplyr")
+library("tidyproteomics")
+```
+
+```{r}
+hela_proteins %>% 
+  subset(imputed == 0) %>%
+  plot_venn()
+```
+
+While visualizing the differences between sample groups is interesting, often we are interested in the underlying data for a given segment. We can use the `intersection()` function to get a subset of data specific to a region defined by overlaps. Here we can extract a table of proteins exclusive to the 60 in "control".
+```{r}
+hela_proteins %>% 
+  subset(imputed == 0) %>%
+  intersection(.include = c('control'), .exclude = c('knockdown'))
+```
+In a more complex example, individual segments can be extracted ..
+```{r}
+exp_proteins <- hela_proteins %>% 
+  subset(imputed == 0) %>% 
+  reassign(sample_file %like% 'F[12]', .replace = 'a') %>%
+  reassign(sample_file %like% 'F[34]', .replace = 'b') %>%
+  reassign(sample_file %like% 'F[56]', .replace = 'c')
+
+exp_proteins %>% plot_venn()
+```
+
+.. such as the 40 proteins found in a&c but not b
+```{r}
+exp_proteins %>%
+  intersection(.include = c('a','c'), .exclude = c('b'))
+
+```

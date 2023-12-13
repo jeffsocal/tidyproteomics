@@ -21,7 +21,7 @@ GGplot2 extension to plot a Venn diagram
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins \%>\%
-   subset(match_between_runs == FALSE) \%>\%
+   subset(imputed == 0) \%>\%
    plot_venn()
 
 }

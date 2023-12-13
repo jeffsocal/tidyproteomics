@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.6.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,7 @@
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
     <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
     <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
@@ -153,15 +154,15 @@ values, subsetting can use any of the columns in the
 <p>any of the terms in the <code>accounting</code> table:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">hela_proteins</span><span class="op">$</span><span class="va">accounting</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "sample_id"           "protein"             "protein_group"      </span></span>
-<span><span class="co">#&gt; [4] "match_between_runs"  "num_peptides"        "num_unique_peptides"</span></span>
-<span><span class="co">#&gt; [7] "num_psms"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "sample_id"           "protein"             "num_peptides"       </span></span>
+<span><span class="co">#&gt; [4] "num_psms"            "num_unique_peptides" "protein_group"      </span></span>
+<span><span class="co">#&gt; [7] "imputed"</span></span></code></pre></div>
 <p>and any of the terms in the <code>annotations</code> table:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span><span class="op">$</span><span class="va">annotations</span><span class="op">$</span><span class="va">term</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "description"        "gene_id_entrez"     "gene_id_ensemble"  </span></span>
-<span><span class="co">#&gt; [4] "gene_name"          "biological_process" "cellular_component"</span></span>
-<span><span class="co">#&gt; [7] "molecular_function" "wiki_pathway"       "reactome_pathway"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "description"        "biological_process" "cellular_component"</span></span>
+<span><span class="co">#&gt; [4] "molecular_function" "gene_id_entrez"     "gene_name"         </span></span>
+<span><span class="co">#&gt; [7] "wiki_pathway"       "reactome_pathway"   "gene_id_ensemble"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="using-annotations">Using Annotations<a class="anchor" aria-label="anchor" href="#using-annotations"></a>
@@ -185,8 +186,8 @@ differ.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">match_between_runs</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable  CVs</span></span>
-<span><span class="co">#&gt;    control     6527    62871           56511        0.940 0.16</span></span>
-<span><span class="co">#&gt;  knockdown     6556    63319           56819        0.937 0.21</span></span></code></pre></div>
+<span><span class="co">#&gt;    control     7055    66329           58706        0.908 0.16</span></span>
+<span><span class="co">#&gt;  knockdown     7055    66329           58706        0.909 0.21</span></span></code></pre></div>
 <p>Also, data can be filtered to proteins containing a desired number of
 underlying peptides.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -227,38 +228,30 @@ like this, just for demonstration purposes.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span></span>
 <span><span class="co">#&gt; Origin          Merged </span></span>
-<span><span class="co">#&gt;                 proteins (10.95 MB) </span></span>
+<span><span class="co">#&gt;                 proteins (10.84 MB) </span></span>
 <span><span class="co">#&gt; Composition     6 files </span></span>
 <span><span class="co">#&gt;                 2 samples (knockdown, control) </span></span>
 <span><span class="co">#&gt; Quantitation    7055 proteins </span></span>
 <span><span class="co">#&gt;                 4 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 22.5% missing values </span></span>
+<span><span class="co">#&gt;                 27% missing values </span></span>
 <span><span class="co">#&gt;  *imputed       by 'row' samples via 'base::quote .Primitive("min")' group_by_sample 'FALSE'. by 'row' samples via 'base::quote .Primitive("min")' group_by_sample 'FALSE'. </span></span>
-<span><span class="co">#&gt; Accounting      (5) match_between_runs num_peptides num_unique_peptides num_psms imputed </span></span>
-<span><span class="co">#&gt; Annotations     (9) description gene_id_entrez gene_id_ensemble gene_name biological_process</span></span>
-<span><span class="co">#&gt;                 cellular_component molecular_function wiki_pathway</span></span>
-<span><span class="co">#&gt;                 reactome_pathway </span></span>
+<span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
+<span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
+<span><span class="co">#&gt;                 gene_id_entrez gene_name wiki_pathway reactome_pathway</span></span>
+<span><span class="co">#&gt;                 gene_id_ensemble </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable  CVs</span></span>
-<span><span class="co">#&gt;    control     6527    65121           58003        0.938 0.15</span></span>
-<span><span class="co">#&gt;  knockdown     6556    65344           58095        0.918 0.21</span></span></code></pre></div>
+<span><span class="co">#&gt;    control     7055    66329           58706        0.927 0.15</span></span>
+<span><span class="co">#&gt;  knockdown     7055    66329           58706        0.909 0.21</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data Transformations</span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data files (p97KD_HCT116_proteins.xlsx) were</span></span>
 <span><span class="co">#&gt;   imported as proteins from ProteomeDiscoverer</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data reassigned sample to control where 'sample</span></span>
-<span><span class="co">#&gt;   like ctl'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data reassigned sample to knockdown where 'sample</span></span>
-<span><span class="co">#&gt;   like p97'</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data subset `sample` %like% `knockdown`</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Removed MBR between `all` groups</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Data normalized via median.</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -267,20 +260,12 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Missing values imputed by 'row' samples via</span></span>
 <span><span class="co">#&gt;   'base::quote .Primitive("min")' group_by_sample 'FALSE'.</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: ... 636 values imputed</span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [1]: ... 689 values imputed</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data files (p97KD_HCT116_proteins.xlsx) were</span></span>
 <span><span class="co">#&gt;   imported as proteins from ProteomeDiscoverer</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data reassigned sample to control where 'sample</span></span>
-<span><span class="co">#&gt;   like ctl'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data reassigned sample to knockdown where 'sample</span></span>
-<span><span class="co">#&gt;   like p97'</span></span>
-<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data subset `sample` %like% `control`</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Removed MBR between `all` groups</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Data normalized via median.</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -289,7 +274,7 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Missing values imputed by 'row' samples via</span></span>
 <span><span class="co">#&gt;   'base::quote .Primitive("min")' group_by_sample 'FALSE'.</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: ... 714 values imputed</span></span>
+<span><span class="co">#&gt;   • ProteomeDiscoverer [2]: ... 753 values imputed</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • Merged 2 data sets</span></span></code></pre></div>
 </div>
