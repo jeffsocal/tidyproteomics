@@ -14,8 +14,9 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
 set.seed(1041)
 options(dplyr.print_max = 10)
 ```
+# Venn Diagrams and The Underlying Data
 
-Along with visualizing your data in several different ways, the Venn and Euler diagrams offer a powerful visual analysis on differences in analytes between sample groups. Take for example the following Venn.
+In addition to offering a variety of methods for visualizing your data, the use of Venn and Euler diagrams provides a potent and visually engaging means of analysis. These diagrams excel in highlighting and contrasting the differences in analytes - which are various substances analyzed in the lab - across different sample groups. This approach is particularly useful in identifying unique or shared components among the groups, thereby offering a clear and concise graphical representation of complex data sets. The visual simplicity of Venn and Euler diagrams belies their analytical power, making them indispensable tools for researchers seeking to understand the intricate relationships and variances within their data. Take for example the following Venn.
 
 ```{r, echo=FALSE, message=FALSE}
 library("dplyr")
@@ -28,26 +29,34 @@ hela_proteins %>%
   plot_venn()
 ```
 
-While visualizing the differences between sample groups is interesting, often we are interested in the underlying data for a given segment. We can use the `intersection()` function to get a subset of data specific to a region defined by overlaps. Here we can extract a table of proteins exclusive to the 60 in "control".
+While visualizing the differences between sample groups is interesting, often we are interested in the underlying data for a given segment. In tidyproteomics we can use the `intersection()` function to get a subset of data specific to a region defined by Venn and Euler diagram overlaps. 
+
+Here in this simple example we can extract a table of proteins exclusive to the 60 in "control". Note how the data now shows only `1 sample` remaining and `3 files`, as we just removed all the "knockdown" proteins and the files specific to them.
 ```{r}
 hela_proteins %>% 
   subset(imputed == 0) %>%
   intersection(.include = c('control'), .exclude = c('knockdown'))
 ```
-In a more complex example, individual segments can be extracted ..
+In a more complex example, individual segments can be extracted. In this hypothetical example we created 4 sample groups to generate a complex overlapping diagram.
 ```{r}
 exp_proteins <- hela_proteins %>% 
   subset(imputed == 0) %>% 
-  reassign(sample_file %like% 'F[12]', .replace = 'a') %>%
-  reassign(sample_file %like% 'F[34]', .replace = 'b') %>%
-  reassign(sample_file %like% 'F[56]', .replace = 'c')
+  subset(!sample_file %like% "F[56]") %>%
+  # reassigning samples here just to illistrate a point
+  reassign(sample_file %like% 'F1', .replace = 'a') %>%
+  reassign(sample_file %like% 'F2', .replace = 'b') %>%
+  reassign(sample_file %like% 'F3', .replace = 'c') %>%
+  reassign(sample_file %like% 'F4', .replace = 'd') 
 
 exp_proteins %>% plot_venn()
 ```
 
-.. such as the 40 proteins found in a&c but not b
+Here we can extract the 82 proteins found in a&c&d but not b with the following code.
 ```{r}
-exp_proteins %>%
-  intersection(.include = c('a','c'), .exclude = c('b'))
+exp_proteins %>% intersection(.include = c('a','c','d'), .exclude = c('b'))
+```
 
+Extracting a different set, for example the 21 proteins found in a&b but not in c or b with the following code. Again, note that we now only have the `2 samples` and `2 files` associated with the proteins exclusive to the intersection we selected.
+```{r}
+exp_proteins %>% intersection(.include = c('a','b'), .exclude = c('c','d'))
 ```

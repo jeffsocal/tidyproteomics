@@ -104,12 +104,23 @@
 
     
     
-<p>Along with visualizing your data in several different ways, the Venn
-and Euler diagrams offer a powerful visual analysis on differences in
-analytes between sample groups. Take for example the following Venn.</p>
+<div class="section level2">
+<h2 id="venn-diagrams-and-the-underlying-data">Venn Diagrams and The Underlying Data<a class="anchor" aria-label="anchor" href="#venn-diagrams-and-the-underlying-data"></a>
+</h2>
+<p>In addition to offering a variety of methods for visualizing your
+data, the use of Venn and Euler diagrams provides a potent and visually
+engaging means of analysis. These diagrams excel in highlighting and
+contrasting the differences in analytes - which are various substances
+analyzed in the lab - across different sample groups. This approach is
+particularly useful in identifying unique or shared components among the
+groups, thereby offering a clear and concise graphical representation of
+complex data sets. The visual simplicity of Venn and Euler diagrams
+belies their analytical power, making them indispensable tools for
+researchers seeking to understand the intricate relationships and
+variances within their data. Take for example the following Venn.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="../reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">imputed</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">0</span></span></span>
@@ -118,12 +129,16 @@ analytes between sample groups. Take for example the following Venn.</p>
 <p><img src="extracting_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 <p>While visualizing the differences between sample groups is
 interesting, often we are interested in the underlying data for a given
-segment. We can use the <code><a href="../reference/intersection.html">intersection()</a></code> function to get a
-subset of data specific to a region defined by overlaps. Here we can
-extract a table of proteins exclusive to the 60 in “control”.</p>
+segment. In tidyproteomics we can use the <code><a href="../reference/intersection.html">intersection()</a></code>
+function to get a subset of data specific to a region defined by Venn
+and Euler diagram overlaps.</p>
+<p>Here in this simple example we can extract a table of proteins
+exclusive to the 60 in “control”. Note how the data now shows only
+<code>1 sample</code> remaining and <code>3 files</code>, as we just
+removed all the “knockdown” proteins and the files specific to them.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'control'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'knockdown'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">imputed</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">0</span></span></span>
@@ -146,45 +161,78 @@ extract a table of proteins exclusive to the 60 in “control”.</p>
 <span><span class="co">#&gt;                 gene_name wiki_pathway gene_id_ensemble gene_id_entrez</span></span>
 <span><span class="co">#&gt;                 reactome_pathway </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
-<p>In a more complex example, individual segments can be extracted
-..</p>
+<p>In a more complex example, individual segments can be extracted. In
+this hypothetical example we created 4 sample groups to generate a
+complex overlapping diagram.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F[12]'</span>, .replace <span class="op">=</span> <span class="st">'a'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F[34]'</span>, .replace <span class="op">=</span> <span class="st">'b'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F[56]'</span>, .replace <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="op">!</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"F[56]"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># reassigning samples here just to illistrate a point</span></span>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F1'</span>, .replace <span class="op">=</span> <span class="st">'a'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F2'</span>, .replace <span class="op">=</span> <span class="st">'b'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F3'</span>, .replace <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F4'</span>, .replace <span class="op">=</span> <span class="st">'d'</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">imputed</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">0</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">imputed</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">0</span> ... done</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 1 and 4</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 2 and 5</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 3 and 6</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">!sample_file</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">F[56]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">!sample_file</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">F[56]</span> ... done</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 1</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 3</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 4</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 2</span></span>
 <span></span>
-<span><span class="va">exp_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">exp_proteins</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="extracting_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<p>.. such as the 40 proteins found in a&amp;c but not b</p>
+<p>Here we can extract the 82 proteins found in a&amp;c&amp;d but not b
+with the following code.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'c'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'b'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Intersection subset containing <span style="font-style: italic;">40</span> <span style="font-style: italic;">proteins</span></span></span>
+<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'c'</span>,<span class="st">'d'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'b'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Intersection subset containing <span style="font-style: italic;">82</span> <span style="font-style: italic;">proteins</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (63.20 kB) </span></span>
-<span><span class="co">#&gt; Composition     4 files </span></span>
-<span><span class="co">#&gt;                 2 samples (a, c) </span></span>
-<span><span class="co">#&gt; Quantitation    40 proteins </span></span>
-<span><span class="co">#&gt;                 1.9 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 17% missing values </span></span>
+<span><span class="co">#&gt;                 proteins (118.22 kB) </span></span>
+<span><span class="co">#&gt; Composition     3 files </span></span>
+<span><span class="co">#&gt;                 3 samples (a, d, c) </span></span>
+<span><span class="co">#&gt; Quantitation    82 proteins </span></span>
+<span><span class="co">#&gt;                 2.4 log10 dynamic range </span></span>
+<span><span class="co">#&gt;                 23.6% missing values </span></span>
 <span><span class="co">#&gt;  *imputed        </span></span>
 <span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
 <span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
-<span><span class="co">#&gt;                 gene_id_entrez gene_name reactome_pathway gene_id_ensemble</span></span>
-<span><span class="co">#&gt;                 wiki_pathway </span></span>
+<span><span class="co">#&gt;                 gene_name gene_id_ensemble wiki_pathway gene_id_entrez</span></span>
+<span><span class="co">#&gt;                 reactome_pathway </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
+<p>Extracting a different set, for example the 21 proteins found in
+a&amp;b but not in c or b with the following code. Again, note that we
+now only have the <code>2 samples</code> and <code>2 files</code>
+associated with the proteins exclusive to the intersection we
+selected.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'b'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'c'</span>,<span class="st">'d'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Intersection subset containing <span style="font-style: italic;">21</span> <span style="font-style: italic;">proteins</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
+<span><span class="co">#&gt;                 proteins (37.29 kB) </span></span>
+<span><span class="co">#&gt; Composition     2 files </span></span>
+<span><span class="co">#&gt;                 2 samples (a, b) </span></span>
+<span><span class="co">#&gt; Quantitation    21 proteins </span></span>
+<span><span class="co">#&gt;                 1.1 log10 dynamic range </span></span>
+<span><span class="co">#&gt;                 11.9% missing values </span></span>
+<span><span class="co">#&gt;  *imputed        </span></span>
+<span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
+<span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
+<span><span class="co">#&gt;                 gene_id_entrez gene_name wiki_pathway reactome_pathway</span></span>
+<span><span class="co">#&gt;                 gene_id_ensemble </span></span>
+<span><span class="co">#&gt; </span></span></code></pre></div>
+</div>
   </main>
 </div>
 
