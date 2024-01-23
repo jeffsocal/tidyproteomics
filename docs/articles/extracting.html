@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,8 +119,8 @@ belies their analytical power, making them indispensable tools for
 researchers seeking to understand the intricate relationships and
 variances within their data. Take for example the following Venn.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">imputed</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">0</span></span></span>
@@ -137,8 +137,8 @@ exclusive to the 60 in “control”. Note how the data now shows only
 <code>1 sample</code> remaining and <code>3 files</code>, as we just
 removed all the “knockdown” proteins and the files specific to them.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'control'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'knockdown'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">imputed</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">0</span></span></span>
@@ -165,13 +165,13 @@ removed all the “knockdown” proteins and the files specific to them.</p>
 this hypothetical example we created 4 sample groups to generate a
 complex overlapping diagram.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="op">!</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"F[56]"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/subset.html">subset</a></span><span class="op">(</span><span class="op">!</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"F[56]"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># reassigning samples here just to illistrate a point</span></span>
-<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F1'</span>, .replace <span class="op">=</span> <span class="st">'a'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F2'</span>, .replace <span class="op">=</span> <span class="st">'b'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F3'</span>, .replace <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F1'</span>, .replace <span class="op">=</span> <span class="st">'a'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F2'</span>, .replace <span class="op">=</span> <span class="st">'b'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F3'</span>, .replace <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'F4'</span>, .replace <span class="op">=</span> <span class="st">'d'</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">imputed</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">0</span></span></span>
@@ -185,12 +185,12 @@ complex overlapping diagram.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 4</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 2</span></span>
 <span></span>
-<span><span class="va">exp_proteins</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">exp_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_venn.html">plot_venn</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="extracting_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>Here we can extract the 82 proteins found in a&amp;c&amp;d but not b
 with the following code.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'c'</span>,<span class="st">'d'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'b'</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'c'</span>,<span class="st">'d'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'b'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Intersection subset containing <span style="font-style: italic;">82</span> <span style="font-style: italic;">proteins</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
@@ -214,7 +214,7 @@ now only have the <code>2 samples</code> and <code>2 files</code>
 associated with the proteins exclusive to the intersection we
 selected.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'b'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'c'</span>,<span class="st">'d'</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'b'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'c'</span>,<span class="st">'d'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Intersection subset containing <span style="font-style: italic;">21</span> <span style="font-style: italic;">proteins</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>

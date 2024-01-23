@@ -28,6 +28,7 @@ Jones, J., MacKrell, E.J., Wang, TY. et al. *Tidyproteomics: an open-source R pa
 
 -   Code: [github.com/ejmackrell/tidyproteomics-interactive](https://github.com/ejmackrell/tidyproteomics-interactive)
 -   Web : [bioinformatics.pel.caltech.edu/tidyproteomics/](http://bioinformatics.pel.caltech.edu/tidyproteomics/)
+-   Docs: [ejmackrell.github.io/tidyproteomics-interactive/](https://ejmackrell.github.io/tidyproteomics-interactive/)
 
 ## Data Support
 

@@ -12,6 +12,10 @@ vignette: >
 
 ### Version: 1.7.x
 
+#### 1.7.1 - 2024.01.23
+
+-   new release to add DOI from Zenodo 
+
 #### 1.7.0 - 2023.12.13
 
 -   add the ability to export the proteins specific to a given Venn intersection [extracting](./extracting.html)
