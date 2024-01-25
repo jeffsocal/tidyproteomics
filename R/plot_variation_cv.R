@@ -43,6 +43,7 @@ plot_variation_cv <- function(
 
   quant_values <- get_quant_names(data)
   data_quant <- data %>% extract(values = quant_values)
+  data_samples <- data %>% get_sample_names()
 
   quant_values_all <- c('raw', 'median', 'scaled', 'linear',
                         'limma', 'loess', 'svm', 'randomforest')
@@ -53,20 +54,6 @@ plot_variation_cv <- function(
     return(data)
   }
 
-  data_quant_norm_range <- data_quant %>%
-    dplyr::mutate(abundance = abundance %>% log10(),
-                  origin = origin %>% as.factor()) %>%
-    dplyr::filter(!is.infinite(abundance)) %>%
-    dplyr::group_by(origin, sample) %>%
-    dplyr::summarise(
-      abundance_min = min(abundance, na.rm = T),
-      abundance_max = max(abundance, na.rm = T),
-      abundance_95l = stats::quantile(abundance, .025, na.rm=T),
-      abundance_95h = stats::quantile(abundance, .975, na.rm=T),
-      dynamic_range = abundance_95h - abundance_95l,
-      .groups = "drop"
-    ) %>%
-    dplyr::ungroup()
 
   data_quant_cvs <- data_quant %>%
     dplyr::mutate(origin = sub("data_vals_", "", origin),
@@ -90,7 +77,29 @@ plot_variation_cv <- function(
       .groups = "drop"
     )
 
+  data_quant_norm_range <- data_quant %>%
+    dplyr::mutate(abundance = abundance %>% log10(),
+                  origin = origin %>% as.factor()) %>%
+    dplyr::filter(!is.infinite(abundance)) %>%
+    dplyr::group_by(origin, sample) %>%
+    dplyr::summarise(
+      abundance_min = min(abundance, na.rm = T),
+      abundance_max = max(abundance, na.rm = T),
+      abundance_95l = stats::quantile(abundance, .025, na.rm=T),
+      abundance_95h = stats::quantile(abundance, .975, na.rm=T),
+      dynamic_range = abundance_95h - abundance_95l,
+      .groups = "drop"
+    ) %>%
+    dplyr::ungroup() %>%
+    dplyr::filter(sample %in% data_quant_cvs$sample)
+
   n_colors <- data_quant_cvs_mean$sample %>% unique() %>% length()
+
+  samples_excluded <- setdiff(data_samples, data_quant_cvs$sample)
+  if(length(samples_excluded) > 0){
+    cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
+    cli::cli_alert_warning("Samples {.emph {samples_excluded}} are excluded due to having only a single replicate.")
+  }
 
   p_cv <- data_quant_cvs_mean %>%
     dplyr::mutate(origin = forcats::fct_relevel(origin, norm_vals)) %>%

@@ -51,6 +51,7 @@ plot_counts <- function(
   accounting <- rlang::arg_match(accounting, accounting_cols)
 
   fat <- data %>% analysis_counts(impute_max = impute_max)
+  n_samples <- data %>% get_sample_names() %>% length()
 
   w <- which(duplicated(fat[,c('sample_id', 'sample', accounting)]))
   if(length(w) > 0) {fat <- fat[-w,]}
@@ -86,7 +87,7 @@ plot_counts <- function(
                   label_pos = ifelse(is_mbr == TRUE, metric * 1.05, metric * .95))
 
 
-  if(show_replicates == FALSE){ # | facet_groups == TRUE){
+  if(show_replicates == FALSE){ #facet_groups == TRUE){
     plot <- fat_mean %>%
       dplyr::mutate(fill = as.factor(sample)) %>%
       # dplyr::mutate(replicate = as.factor(replicate)) %>%
@@ -127,11 +128,23 @@ plot_counts <- function(
                        ggplot2::aes(y = label_pos, label = label),
                        size = 3) +
     ggplot2::geom_hline(yintercept = metric_max, color=NA) +
-    ggplot2::scale_fill_brewer(palette = palette) +
-    ggplot2::scale_color_brewer(palette = palette) +
     ggplot2::labs(title = paste(data$origin, "--", sub("s$", "", accounting), 'counts'),
                   fill = legend_title) +
     ggplot2::ylab(accounting)
+
+  if(n_samples > 9){
+    this_palette <- theme_palette(n_samples)
+
+    plot <- plot +
+      ggplot2::scale_fill_manual(values = this_palette) +
+      ggplot2::scale_color_manual(values = this_palette)
+
+  } else {
+
+    plot <- plot +
+      ggplot2::scale_fill_brewer(palette = palette) +
+      ggplot2::scale_color_brewer(palette = palette)
+  }
 
 
   return(plot_save(plot,

@@ -12,6 +12,10 @@ vignette: >
 
 ### Version: 1.7.x
 
+#### 1.7.2 - 2024.01.24
+
+-   fixed and issue with plot_counts and plot_variation_cv failed to account for sample sets larger than 16 when providing a color palette
+
 #### 1.7.1 - 2024.01.23
 
 -   new release to add DOI from Zenodo 
