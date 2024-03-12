@@ -43,8 +43,7 @@ export_quant <- function(
   cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
 
   data_quant <- extract(data, 'raw') %>%
-    dplyr::rename(abundance_raw = abundance) %>%
-    dplyr::filter(!is.na(abundance_raw))
+    dplyr::rename(abundance_raw = abundance)
 
   if(normalized != FALSE) {
 
@@ -53,10 +52,10 @@ export_quant <- function(
     data_quant <- data_quant %>%
       dplyr::full_join(data_norm,
                        by=c('identifier', 'sample', 'replicate')) %>%
-      dplyr::rename(abundance_norm = abundance) %>%
-      dplyr::filter(!is.na(abundance_norm))
+      dplyr::rename(abundance_norm = abundance)
 
   }
+
   #
   # pull in the normalized values
   #
@@ -114,7 +113,7 @@ export_quant <- function(
 #' Export the quantitative data from an tidyproteomics data-object
 #'
 #' @description
-#' `export()` returns the main quantitative data object as a tibble with
+#' `export_analysis()` returns the main quantitative data object as a tibble with
 #' _identifier_ as the designation for the measured observation.
 #'
 #' @param data tidyproteomics data object

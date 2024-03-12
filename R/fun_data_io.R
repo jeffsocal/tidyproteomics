@@ -20,21 +20,22 @@ read_data <- function(
   col_name <- NULL
 
   analyte <- rlang::arg_match(analyte)
-  format <- c(".txt", ".csv", ".tsv", ".rds", ".xlsx", ".xls", ".mzTab")
-  ext <- stringr::str_extract(path, "\\..{3,6}$")
+  format <- c("txt", "csv", "tsv", "rds", "xlsx", "xls", "mzTab")
+  ext <- stringr::str_extract(path, "\\..{3,6}$") %>% stringr::str_remove("^\\.")
   ext <- rlang::arg_match(ext, format)
 
-  if( ext == '.rds' ) {
+  cli::cli_alert_info("... reading data as `{ext}`")
+
+  if( ext == 'rds' ) {
     tbl <- path %>% readr::read_rds()
-  } else if( ext == '.mzTab' && platform == 'mzTab' ) {
+  } else if( ext == 'mzTab' && platform == 'mzTab' ) {
     obj <- path %>% read_mzTab(analyte)
     analyte <- obj$analyte
     platform <- obj$platform
     tbl <- obj$data
   } else if( ext %in% format[1:3] ) {
-    suppressWarnings(
-      tbl <- path %>% vroom::vroom(progress = FALSE, col_types = vroom::cols())
-    )
+    tbl <- path %>% readr::read_tsv()
+    cli::cli_alert_info('... data dimentions `{dim(tbl)}`')
 
     tbl_problems <- vroom::problems(tbl)
     if(nrow(tbl_problems) > 1){

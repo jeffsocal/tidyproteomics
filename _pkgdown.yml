@@ -84,7 +84,7 @@ reference:
     **Subsetting** filters an tidyproteomics data-object by a given regular expression to
     create a subset. See `vignette("subsetting")` for more details and examples.
   contents:
-  - subset
+  - subset.tidyproteomics
   - intersection
 - title: Summarizing
   description: |

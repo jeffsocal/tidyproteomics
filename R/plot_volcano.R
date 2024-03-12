@@ -79,7 +79,9 @@ plot_volcano <- function(
   table_cols <- colnames(table)
   log2fc_column <- rlang::arg_match(log2fc_column, table_cols)
   significance_column <- rlang::arg_match(significance_column, table_cols)
-  if(is.null(labels_column)) { labels_column <- data$identifier[1] }
+  if(!is.null(labels_column)) {
+    labels_column <- rlang::arg_match(labels_column, table_cols)
+  }
 
   if(abs(mean(table[[log2fc_column]],na.rm=T) - 1) < 0.05) {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "red")))
@@ -183,7 +185,7 @@ plot_volcano <- function(
   # modify the color scheme
   plot <- plot +
     ggplot2::scale_color_manual(values = theme_palette()) +
-    ggplot2::scale_y_continuous(trans=reverselog_transformation(10)) +
+    ggplot2::scale_y_continuous(trans=reverselog_transformation(10), n.breaks = 11) +
     ggplot2::scale_x_continuous(breaks=fc_scale) +
     ggplot2::theme_bw() +
     # pretty up the axis labels

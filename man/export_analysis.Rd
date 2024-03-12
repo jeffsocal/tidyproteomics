@@ -36,7 +36,7 @@ from string ('.rds', '.xlsx', '.csv', '.tsv')}
 a tibble
 }
 \description{
-\code{export()} returns the main quantitative data object as a tibble with
+\code{export_analysis()} returns the main quantitative data object as a tibble with
 \emph{identifier} as the designation for the measured observation.
 }
 \examples{

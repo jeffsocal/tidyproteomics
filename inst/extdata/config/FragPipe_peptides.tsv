@@ -1,9 +1,9 @@
 category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
-sample	sample		.+(?=\_\d+\s)			
-sample	sample_file		.+(?=\sMax)			
-identifier	protein	^Protein ID$			\;	
-identifier	peptide	^Peptide Sequence$				
-quantitative	abundance_raw	\sMaxLFQ\sIntensity$				TRUE
+sample	sample		.+(?=\_\d+\s)
+sample	sample_file		.+(?=\s)
+identifier	protein	^Protein ID$			\;
+identifier	peptide	^Peptide Sequence$
+quantitative	abundance_raw	\sIntensity$				TRUE
 accounting	num_psms	\sSpectral\sCount$				TRUE
-annotation	description	^Protein Description$				
-annotation	gene_name	^Gene$				
+annotation	description	^Protein Description$
+annotation	gene_name	^Gene$

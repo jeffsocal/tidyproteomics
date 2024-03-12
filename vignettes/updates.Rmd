@@ -12,6 +12,11 @@ vignette: >
 
 ### Version: 1.7.x
 
+#### 1.7.3 - 2024.03.12
+-   fixed issue with importing FragPipe tsv files, seems to be an issue with the `vroom` package. Modified to use the `readr` package for data importing.
+-   modified the `export_quant()` function to allow exporting proteins with NAs for all samples
+-   changed `subset()` to be an S3 function
+
 #### 1.7.2 - 2024.01.24
 
 -   fixed and issue with plot_counts and plot_variation_cv failed to account for sample sets larger than 16 when providing a color palette

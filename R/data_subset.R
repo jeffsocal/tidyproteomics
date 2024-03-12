@@ -14,7 +14,8 @@
 #' @param .verbose a boolean
 #'
 #' @return a tibble
-#' @export
+#'
+#' @exportS3Method
 #'
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
@@ -31,7 +32,7 @@
 #'    subset(!description %like% "Ribosome") %>%
 #'    summary()
 #'
-subset <- function(
+subset.tidyproteomics <- function(
     data = NULL,
     ...,
     rm.mbr = TRUE,
