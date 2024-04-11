@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Normalizing">
 <meta property="og:description" content="tidyproteomics: simplified data object and analysis functions
@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,12 +130,12 @@ measured.</p>
 <span><span class="co">#&gt; Attaching package: 'tidyproteomics'</span></span>
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     expression, merge, subset</span></span>
+<span><span class="co">#&gt;     expression, merge</span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.1.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.1.4</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.1.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.1.5</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.5.1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.4.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.0</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.5.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.1</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.0.2     </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">ggplot2</span>::<span style="color: #00BB00;">annotate()</span> masks <span style="color: #0000BB;">tidyproteomics</span>::annotate()</span></span>
@@ -281,7 +281,7 @@ dynamic range.</p>
 <span><span class="co">#&gt;   z     cells    name               grob</span></span>
 <span><span class="co">#&gt; 1 1 (2-2,1-1) arrange     gtable[layout]</span></span>
 <span><span class="co">#&gt; 2 2 (2-2,2-2) arrange     gtable[layout]</span></span>
-<span><span class="co">#&gt; 3 3 (1-1,1-2) arrange text[GRID.text.92]</span></span></code></pre>
+<span><span class="co">#&gt; 3 3 (1-1,1-2) arrange text[GRID.text.86]</span></span></code></pre>
 </div>
 <div class="section level4">
 <h4 id="pca">PCA<a class="anchor" aria-label="anchor" href="#pca"></a>
@@ -301,7 +301,17 @@ recomended.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'median'</span>, <span class="st">'randomforest'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in ggplot2::geom_point(ggplot2::aes(x = range_x, y = range_y), color = "lightblue"): All aesthetics have length 1, but the data has 30456 rows.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Did you mean to use `annotate()`?</span></span>
+<span><span class="co">#&gt; Warning: Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Caused by error in `compute_group()`:</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> The package "hexbin" is required for `stat_bin_hex()`.</span></span></code></pre></div>
 <p><img src="normalizing_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
 </div>
@@ -312,7 +322,7 @@ recomended.</p>
 the basis for normalization, such as the case for spike-in quantitative
 analytes or the perhaps the bait protein in an immunoprecipitation
 experiment. This is accomplished with the same semantic syntax as with
-the <code><a href="../reference/subset.html">subset()</a></code> function and is reflected in the recorded
+the <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code> function and is reflected in the recorded
 operations. Be aware that using a regression from a smaller dynamic
 range than the full proteome may not predict well beyond the limts of
 the subset.</p>
@@ -335,9 +345,23 @@ implemented.</p>
 <span><span class="co">#&gt;   z     cells    name                grob</span></span>
 <span><span class="co">#&gt; 1 1 (2-2,1-1) arrange      gtable[layout]</span></span>
 <span><span class="co">#&gt; 2 2 (2-2,2-2) arrange      gtable[layout]</span></span>
-<span><span class="co">#&gt; 3 3 (1-1,1-2) arrange text[GRID.text.586]</span></span></code></pre>
+<span><span class="co">#&gt; 3 3 (1-1,1-2) arrange text[GRID.text.525]</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in ggplot2::geom_point(ggplot2::aes(x = range_x, y = range_y), color = "lightblue"): All aesthetics have length 1, but the data has 49546 rows.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Did you mean to use `annotate()`?</span></span>
+<span><span class="co">#&gt; Warning: Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
+<span><span class="co">#&gt; Caused by error in `compute_group()`:</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> The package "hexbin" is required for `stat_bin_hex()`.</span></span></code></pre></div>
 <p><img src="normalizing_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -454,7 +478,7 @@ selection.</p>
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="st">'median'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_normalization.html">plot_normalization</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[121ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[150ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span></span>

@@ -115,15 +115,20 @@ The matrix based operation takes advantage of data present in other samples (eg.
 
 ```{r, eval=FALSE}
 
-rdata %>% impute(.function = impute.randomforest, method = 'matrix') %>%
+rdata %>% impute(.function = impute.randomforest, method = 'matrix')
 ```
 
-The R package in [bioconductor::impute](https://bioconductor.org/packages/release/bioc/html/impute.html), allows for the popular imputation method KNN.
+The R package in [bioconductor::impute](https://bioconductor.org/packages/release/bioc/html/impute.html), allows for the popular imputation method KNN. The generalized `impute` function for the method `matrix` assumes the underlying function is multithreaded, as is the impute.randomforest method is. Therefore, to make any function operable, you need to make a wrapper function to allow for the `cores` variable to be accepted. In addition, the `impute` package returns an incompatible data object, that you must convert to a matrix - fortunately, the `impute` package's data object contains the matrix in `$data`.
 
 ```{r, eval=FALSE}
 library(impute)
 
-rdata %>% impute(.function = impute.knn, method = 'matrix') %>%
+my.impute.knn <- function(x, cores = NULL){
+  result <- x %>% impute.knn()
+  return(result$data)
+}
+
+rdata %>% impute(.function = my.impute.knn, method = 'matrix')
 ```
 
 
