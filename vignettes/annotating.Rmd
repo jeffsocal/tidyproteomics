@@ -143,7 +143,7 @@ annotations*](images/uniprot_search_02.png){width="100%"}
 Read in the TSV file from the downloaded UniProt table.
 
 ```{r, message=FALSE}
-data_go <- "~/Local/data/uniprotkb_human_AND_reviewed_true_AND_m_2023_10_10.tsv" %>% read_tsv()
+data_go <- "~/Local/data/uniprotkb/uniprotkb_human_AND_reviewed_true_AND_m_2023_10_10.tsv" %>% read_tsv()
 
 head(data_go)
 

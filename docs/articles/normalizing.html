@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -134,7 +134,7 @@ measured.</p>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.1.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.1.5</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.5.1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.5.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.5.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.1</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.0.2     </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
@@ -303,15 +303,8 @@ recomended.</p>
 <span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'median'</span>, <span class="st">'randomforest'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in ggplot2::geom_point(ggplot2::aes(x = range_x, y = range_y), color = "lightblue"): All aesthetics have length 1, but the data has 30456 rows.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Did you mean to use `annotate()`?</span></span>
-<span><span class="co">#&gt; Warning: Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Caused by error in `compute_group()`:</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> The package "hexbin" is required for `stat_bin_hex()`.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please consider using `annotate()` or provide this layer with data containing</span></span>
+<span><span class="co">#&gt;   a single row.</span></span></code></pre></div>
 <p><img src="normalizing_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
 </div>
@@ -345,23 +338,12 @@ implemented.</p>
 <span><span class="co">#&gt;   z     cells    name                grob</span></span>
 <span><span class="co">#&gt; 1 1 (2-2,1-1) arrange      gtable[layout]</span></span>
 <span><span class="co">#&gt; 2 2 (2-2,2-2) arrange      gtable[layout]</span></span>
-<span><span class="co">#&gt; 3 3 (1-1,1-2) arrange text[GRID.text.525]</span></span></code></pre>
+<span><span class="co">#&gt; 3 3 (1-1,1-2) arrange text[GRID.text.562]</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in ggplot2::geom_point(ggplot2::aes(x = range_x, y = range_y), color = "lightblue"): All aesthetics have length 1, but the data has 49546 rows.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Did you mean to use `annotate()`?</span></span>
-<span><span class="co">#&gt; Warning: Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Computation failed in `stat_binhex()`.</span></span>
-<span><span class="co">#&gt; Caused by error in `compute_group()`:</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> The package "hexbin" is required for `stat_bin_hex()`.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please consider using `annotate()` or provide this layer with data containing</span></span>
+<span><span class="co">#&gt;   a single row.</span></span></code></pre></div>
 <p><img src="normalizing_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -478,7 +460,7 @@ selection.</p>
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="st">'median'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_normalization.html">plot_normalization</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[150ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[118ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span></span>

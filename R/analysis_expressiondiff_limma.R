@@ -45,7 +45,7 @@ expression_limma <- function(
                      .groups = 'drop') %>%
     dplyr::group_by(identifier) %>%
     dplyr::summarise(min_group = min(n),
-                     n = n(),
+                     n = dplyr::n(),
                      .groups = 'drop') %>%
     dplyr::filter(n > 1, min_group > 0) %>%
     dplyr::select(identifier) %>%
