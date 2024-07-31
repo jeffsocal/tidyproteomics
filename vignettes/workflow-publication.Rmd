@@ -86,13 +86,13 @@ rdata <- rdata %>%
 rdata <- rdata %>%
   # calculate the enrichment of the GO term(s) using the results
   # from the expression analysis
-  enrichment(kndw/ctrl, .term = "biological_process") %>%
-  enrichment(kndw/ctrl, .term = "cellular_component") %>%
-  enrichment(kndw/ctrl, .term = "molecular_function") %>%
+  enrichment(kndw/ctrl, .terms = "biological_process") %>%
+  enrichment(kndw/ctrl, .terms = "cellular_component") %>%
+  enrichment(kndw/ctrl, .terms = "molecular_function") %>%
   # plot the enrichment analysis
-  plot_enrichment(kndw/ctrl, .term = "biological_process", destination = "png") %>%
-  plot_enrichment(kndw/ctrl, .term = "cellular_component", destination = "png") %>%
-  plot_enrichment(kndw/ctrl, .term = "molecular_function", destination = "png") 
+  plot_enrichment(kndw/ctrl, .terms = "biological_process", destination = "png") %>%
+  plot_enrichment(kndw/ctrl, .terms = "cellular_component", destination = "png") %>%
+  plot_enrichment(kndw/ctrl, .terms = "molecular_function", destination = "png") 
 ```
 
 ### Advanced

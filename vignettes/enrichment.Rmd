@@ -20,7 +20,28 @@ options(dplyr.print_max = 10)
 
 ### Term Enrichment
 
-Term enrichment analysis is possible proceeding an expression analysis with the `enrichment()` function, employing either the _GSEA_ algorithm or a simple _Wilcoxon rank sum_ comparison, and can be visualized with the `plot_enrichment()` function.
+#### Available Methods
+
++---------------+------------------------------------------------------------------------------------------+
+| GSEA          | Korotkevich G, Sukhov V, Sergushichev A (2019).                                          |
+|               | “Fast gene set enrichment analysis.”                                                     |
+|               | bioRxiv. doi:10.1101/060012,                                                             |
+|               | http://biorxiv.org/content/early/2016/06/20/060012.                                      |
+|               |                                                                                          |
+|               | [Bioconductor::fgsea](https://bioconductor.org/packages/release/bioc/html/fgsea.html)    |
++---------------+------------------------------------------------------------------------------------------+
+| Wilcoxon      | H. B. Mann, D. R. Whitney "On a Test of Whether one of Two Random Variables is           |
+| Rank Sum      | Stochastically Larger than the Other," Ann. Math. Statist. 18(1), 50-60, (March, 1947)   |
+|               |                                                                                          |
+|               | [R::stats::wilcoxon]                                                                     |
++---------------+------------------------------------------------------------------------------------------+
+| Fisher's      | Fisher, R. A. “On the Interpretation of χ2 from Contingency Tables, and the Calculation  |
+| Excact Test   | of P.” Journal of the Royal Statistical Society, vol. 85, no. 1, 1922, pp. 87–94.        |
+|               |                                                                                          |
+|               | [R::stats::fisher.test]                                                                  |
++---------------+------------------------------------------------------------------------------------------+
+
+Term enrichment analysis is possible proceeding an expression analysis with the `enrichment()` function, employing either the _GSEA_ algorithm, a simple _Wilcoxon rank sum_ comparison, or _Fisher's Exact Test_ and can be visualized with the `plot_enrichment()` function. Both _GSEA_ and _Wilcoxon_ will consider genes of a given term significant if those genes are skewed mostly up or down. The _Fisher's Exact Test_ will consider genes of a given term significant if they are "represented" more often than expected -- this is the basis of __Over-Representation Analysis__ and will consider the gene-set regardless of being skewed mostly up or down.
 
 ```{r, message=FALSE, warning=FALSE}
 library("dplyr")
@@ -30,7 +51,7 @@ rdata <- hela_proteins %>%
   normalize(.method = 'linear') %>%
   expression(knockdown/control) %>%
   enrichment(knockdown/control, 
-             .term = 'biological_process', 
+             .terms = 'biological_process', 
              .method = 'wilcoxon')
 ```
 
@@ -56,6 +77,5 @@ rdata %>% export_analysis(knockdown/control,
 
 ```{r}
 
-rdata %>% plot_enrichment(knockdown/control, 
-                          .term = 'biological_process')
+rdata %>% plot_enrichment(knockdown/control, .term = 'biological_process')
 ```

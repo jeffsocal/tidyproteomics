@@ -30,6 +30,8 @@ navbar:
         href: articles/collapsing.html
       - text: Extracting
         href: articles/extracting.html
+      - text: Automating
+        href: articles/automating.html
       - text: '-------'
       - text: Analysis
       - text: Visualizing
@@ -138,6 +140,13 @@ reference:
   - plot_compexp
   - enrichment
   - plot_enrichment
+- title: Automation
+  description: |
+    **Automating the expression and enrichment analyses.
+    See `vignette("expression")` and `vignette("enrichment")` for more details and examples.
+  contents:
+  - analyze_expressions
+  - analyze_enrichments
 - title: Protein Sequencing
   description: |
     **Protein Sequencing** allows for the visulaization of peptide sequences
@@ -234,4 +243,6 @@ reference:
   - compute_compexp
   - check_pairs
   - intersect_venn
+  - calc_enrichment
+  - enrichment_fishersexact
 

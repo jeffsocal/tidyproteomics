@@ -13,6 +13,9 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/annotating.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/automating.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/collapsing.html</loc>
   </url>
   <url>
@@ -82,10 +85,19 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/analysis_counts.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/analyze_enrichments.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/analyze_expressions.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/annotate.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/as.data.frame.tidyproteomics.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/calc_enrichment.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/center.html</loc>
@@ -116,6 +128,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/enrichment.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/enrichment_fishersexact.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/enrichment_gsea.html</loc>

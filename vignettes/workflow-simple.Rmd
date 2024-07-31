@@ -64,8 +64,8 @@ As more operations are performed on the data, more of the contents are summarize
 ```{r}
 hela_proteins %>%
   expression(knockdown/control) %>%
-  enrichment(knockdown/control, .term = 'biological_process') %>%
-  enrichment(knockdown/control, .term = 'molecular_function')
+  enrichment(knockdown/control, .terms = 'biological_process') %>%
+  enrichment(knockdown/control, .terms = 'molecular_function')
 ```
 
 #### Summarize Quantitative Data

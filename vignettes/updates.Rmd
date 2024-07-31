@@ -10,6 +10,13 @@ vignette: >
 ---
 # A condensed accounting of updates, semantic versioning.
 
+### Version: 1.8.x
+
+#### 1.8.1 - 2024.07.30
+-   Added Fisher's Exact Test (Over-Representation Analysis) to enrichment() function. 
+-   Added the ability to automate both expression() and enrichment() functions with updated .terms parameter
+-   Added the analyze_expressions() and analyze_enrichments() to compliment the automation by saving out plots and tables for each expression and enrichment test.
+
 ### Version: 1.7.x
 
 #### 1.7.4 - 2024.06.04

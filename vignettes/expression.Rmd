@@ -36,23 +36,20 @@ incorporated in future revisions, or through a user provided function.
 
 #### Available Methods
 
-+---------------+----------------------------------------------------+
-| t.test        | Johnston, L. W. "Student's t-Test." *Journal of    |
-|               | Quality Technology* 2.4 (1970): 243-245.           |
-|               |                                                    |
-|               | [R::stats::t.test](https://stat.eth%%2020z%20.c    |
-|               | h/R-manual/R-devel/library/stats/html/t.test.html) |
-+---------------+----------------------------------------------------+
-| limma         | Ritchie ME, Phipson B, Wu D, Hu Y, Law CW, Shi W,  |
-|               | Smyth GK (2015). "limma powers differential        |
-| (Empirical    | expression analyses for RNA-sequencing and         |
-| Bayes)        | microarray studies." *Nucleic Acids Research*,     |
-|               | **43**(7), e47.                                    |
-|               |                                                    |
-|               | [Bioconductor:                                     |
-|               | limma](http://bi%%2020o%20co                       |
-|               | nductor.org/packages/release/bioc/html/limma.html) |
-+---------------+----------------------------------------------------+
++---------------+---------------------------------------------------------------------------------------------------+
+| t.test        | Johnston, L. W. "Student's t-Test." *Journal of                                                   |
+|               | Quality Technology* 2.4 (1970): 243-245.                                                          |
+|               |                                                                                                   |
+|               | [R::stats::t.test](https://stat.eth%%2020z%20.ch/R-manual/R-devel/library/stats/html/t.test.html) |
++---------------+---------------------------------------------------------------------------------------------------+
+| limma         | Ritchie ME, Phipson B, Wu D, Hu Y, Law CW, Shi W,                                                 |
+|               | Smyth GK (2015). "limma powers differential                                                       |
+| (Empirical    | expression analyses for RNA-sequencing and                                                        |
+| Bayes)        | microarray studies." *Nucleic Acids Research*,                                                    |
+|               | **43**(7), e47.                                                                                   |
+|               |                                                                                                   |
+|               | [Bioconductor::limma](http://bi%%2020o%20conductor.org/packages/release/bioc/html/limma.html)     |
++---------------+---------------------------------------------------------------------------------------------------+
 
 #### Alternative Methods
 
@@ -85,9 +82,7 @@ incorporated in future revisions, or through a user provided function.
 |               | Expressed Proteins." *Molecular & Cellular       |
 |               | Proteomics: MCP* 18 (9): 1880--92.               |
 |               |                                                  |
-|               | [GitH ub:                                        |
-|               | MS                                               |
-|               | -EmpiRe](https://github.com/zimmerlab/MS-EmpiRe) |
+|               | [GitHub::MS-EmpiRe](https://github.com/zimmerlab/MS-EmpiRe) |
 +---------------+--------------------------------------------------+
 | meqrob        | Sticker, Adriaan, Ludger Goeminne, Lennart       |
 |               | Martens, and Lieven Clement. 2020. "Robust       |

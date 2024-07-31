@@ -8,9 +8,11 @@ enrichment(
   data = NULL,
   ...,
   .pairs = NULL,
-  .term = NULL,
-  .method = c("gsea", "wilcoxon"),
+  .terms = NULL,
+  .method = c("gsea", "wilcoxon", "fishers_exact"),
   .score_type = c("std", "pos", "neg"),
+  .log2fc_min = 0,
+  .significance_min = 0.05,
   .cpu_cores = 1
 )
 }
@@ -21,7 +23,7 @@ enrichment(
 
 \item{.pairs}{a list of vectors each containing two named sample groups}
 
-\item{.term}{a character string referencing ".term" in the annotations table}
+\item{.terms}{a character string referencing "term(s)" in the annotations table}
 
 \item{.method}{a character string}
 
@@ -31,7 +33,11 @@ default ("std") the enrichment score is computed as in the original GSEA. The
 "pos" and "neg" score types are intended to be used for one-tailed tests
 (i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."}
 
+\item{.log2fc_min}{used only for Fisher's Exact Test, a numeric defining the minimum log2 foldchange to consider as "enriched"}
+
 \item{.cpu_cores}{the number of threads used to speed the calculation}
+
+\item{.significance_max}{used only for Fisher's Exact Test, a numeric defining the maximum statistical significance to consider as "enriched"}
 }
 \value{
 a tibble
@@ -47,13 +53,13 @@ library(tidyproteomics)
 # using the default GSEA method
 hela_proteins \%>\%
    expression(knockdown/control) \%>\%
-   enrichment(knockdown/control, .term = "biological_process") \%>\%
+   enrichment(knockdown/control, .terms = "biological_process") \%>\%
    export_analysis(knockdown/control, .analysis = "enrichment", .term = "biological_process")
 
 # using a Wilcoxon Rank Sum method
 hela_proteins \%>\%
    expression(knockdown/control) \%>\%
-   enrichment(knockdown/control, .term = "biological_process", .method = "wilcoxon") \%>\%
+   enrichment(knockdown/control, .terms = "biological_process", .method = "wilcoxon") \%>\%
    export_analysis(knockdown/control, .analysis = "enrichment", .term = "biological_process")
 
 # using the .pairs argument when multiple comparisons are needed
@@ -62,6 +68,6 @@ comps <- list(c("control","knockdown"),
 
 hela_proteins \%>\%
    expression(.pairs = comps) \%>\%
-   enrichment(.pairs = comps, .term = "biological_process")
+   enrichment(.pairs = comps, .terms = c("biological_process", "molecular_function")
 
 }

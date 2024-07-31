@@ -42,7 +42,7 @@ And these can expand to encompass additions generated through other
 operations.
 
 ```{r}
-hela_proteins %>% expression(knockdown/control) %>% enrichment(knockdown/control, .term = 'biological_process')
+hela_proteins %>% expression(knockdown/control) %>% enrichment(knockdown/control, .terms = 'biological_process')
 ```
 
 ### Summarizing

@@ -1,0 +1,1562 @@
+term,annotation,p_value,adj_p_value,enrichment,size
+biological_process,conjugation,2.2765491426883908e-6,2.959513885494908e-5,1.1186604904199273,1227
+biological_process,cell proliferation,5.975239979261608e-4,0.00717028797511393,0.8116755987628873,301
+biological_process,cell organization and biogenesis,0.00580117469670746,0.06381292166378207,1.055097716603654,1373
+biological_process,development,0.009024785614587472,0.09024785614587472,1.1044286163330739,879
+biological_process,cellular component movement,0.009576448489287171,0.09024785614587472,0.93287008655564,1015
+biological_process,defense response,0.021862774472082833,0.17490219577666266,1.0849739612614768,848
+biological_process,metabolic process,0.07891096274259789,0.5523767391981852,1.0276251675416626,3179
+biological_process,coagulation,0.13881345063095374,0.8328807037857224,1.0793591336845942,961
+biological_process,cell differentiation,0.1494304931962144,0.8328807037857224,0.9534079146429361,551
+biological_process,cell growth,0.1628008732328547,0.8328807037857224,1.0571877279620896,1782
+biological_process,cell communication,0.4307843656320392,1,1.0703724454330081,157
+biological_process,cellular homeostasis,0.6165608905955349,1,1.0036869687148444,2944
+biological_process,cell death,0.7981656768438892,1,1.0512244101587567,169
+cellular_component,cytoskeleton,4.961841879623325e-13,5.954210255547989e-12,1.1232396050147022,2112
+cellular_component,extracellular,3.060115302825069e-10,3.3661268331075757e-9,1.1777622005344086,1008
+cellular_component,Golgi,5.15680857613426e-4,0.005156808576134261,0.7241001399525322,216
+cellular_component,cytoplasm,0.00181609829790509,0.01634488468114581,1.101717325360749,1059
+cellular_component,endoplasmic reticulum,0.02004259531980835,0.1603407625584668,1.0882003012824222,784
+cellular_component,mitochondrion,0.04016239715629717,0.2811367800940802,1.09587710488544,573
+cellular_component,cytosol,0.06963699361228902,0.4178219616737341,1.0208603732857442,2236
+cellular_component,cell surface,0.15534127730812908,0.7767063865406454,0.9134202017543561,354
+cellular_component,membrane,0.16248471422238947,0.7767063865406454,0.9802327109551784,2575
+cellular_component,endosome,0.4633465379814475,1,1.0415354288555172,843
+cellular_component,chromosome,0.6825815831567228,1,0.6308357569792997,30
+cellular_component,nucleus,0.7725012035966414,1,1.006894215393843,3182
+molecular_function,RNA binding,1.6654917133629902e-10,1.6654917133629902e-9,0.8108130563543889,1038
+molecular_function,catalytic activity,0.02531913965490538,0.22787225689414842,1.1286009361749778,261
+molecular_function,signal transducer activity,0.05819830322094377,0.46558642576755016,1.1816201625570915,225
+molecular_function,enzyme regulator activity,0.09560732448959755,0.6692512714271829,4.347218222735959,6
+molecular_function,motor activity,0.12568860512083793,0.7541316307250276,1.1032159029041797,383
+molecular_function,DNA binding,0.512993650817871,1,1.099481886642953,365
+molecular_function,protein binding,0.8057339365024397,1,0.9521237152912901,62
+molecular_function,antioxidant activity,0.8320170734099711,1,1.0543916179930264,272
+wiki_pathway,Hypothesized pathways in pathogenesis of cardiovascular disease,7.370356467189085e-5,0.046212135049275564,2.3162092186141052,10
+wiki_pathway,MAPK cascade,8.000131715981154e-5,0.050080824542042025,2.131187964921945,16
+wiki_pathway,Parkinson's disease pathway,8.106931533030267e-5,0.05066832208143917,1.9343512408914256,18
+wiki_pathway,Fluoropyrimidine activity,1.7593620910451839e-4,0.10978419448121947,-0.22058557262173728,16
+wiki_pathway,Cytoplasmic ribosomal proteins,1.78448364334067e-4,0.11117333098012375,0.6561379192990481,69
+wiki_pathway,Retinoblastoma gene in cancer,4.045004147967691e-4,0.2515992580035904,0.6699562487747139,50
+wiki_pathway,Proteasome degradation,4.1952480777943097e-4,0.26052490563102665,1.575718927767649,45
+wiki_pathway,Epithelial to mesenchymal transition in colorectal cancer,5.391118163121635e-4,0.33424932611354136,1.572204336497635,43
+wiki_pathway,Canonical and non-canonical TGF-B signaling,8.157736434249719e-4,0.5049638852800576,3.217629372681693,6
+wiki_pathway,Supression of HMGB1 mediated inflammation by THBD,9.003830441028208e-4,0.5564367212555432,-1.1109908074012478,5
+wiki_pathway,miRNA regulation of p53 pathway in prostate cancer,0.0019051227035130332,1,2.68520539733666,9
+wiki_pathway,Photodynamic therapy-induced unfolded protein response,0.0025359671919345005,1,2.154496697986552,11
+wiki_pathway,STING pathway in Kawasaki-like disease and COVID-19,0.0028092248207661212,1,-0.7364217689807481,10
+wiki_pathway,Altered glycosylation of MUC1 in tumor microenvironment,0.0033731838579256672,1,-1.0652948542925627,4
+wiki_pathway,Canonical NF-kB pathway,0.0033731838579256672,1,-1.0652948542925627,4
+wiki_pathway,Chromosomal and microsatellite instability in colorectal cancer,0.0033743923848515364,1,1.6453039159148568,35
+wiki_pathway,Hedgehog signaling pathway,0.004695628053904481,1,1.7761021861551123,15
+wiki_pathway,Parkin-ubiquitin proteasomal system pathway,0.0050391145542025536,1,1.5001261574807054,45
+wiki_pathway,DNA damage response,0.005290767168493623,1,1.7947355336160267,31
+wiki_pathway,Host-pathogen interaction of human coronaviruses - MAPK signaling,0.006046070577334628,1,1.5516475389074333,17
+wiki_pathway,Gastric cancer network 2,0.006242038941079317,1,0.436054501086835,19
+wiki_pathway,miRNA regulation of DNA damage response,0.006540744786708656,1,1.7947355336160267,31
+wiki_pathway,Pluripotent stem cell differentiation pathway,0.007233792218483895,1,-1.3488565471753,3
+wiki_pathway,VEGFA-VEGFR2 signaling pathway,0.008376410304530386,1,1.1950397960312689,230
+wiki_pathway,Chronic hyperglycemia impairment of neuron function,0.008701984775194273,1,2.222705949077888,4
+wiki_pathway,Regulation of actin cytoskeleton,0.009071840822369002,1,1.4335932067767292,51
+wiki_pathway,Nanomaterial induced apoptosis,0.009510756867030474,1,1.933398223754132,11
+wiki_pathway,Unfolded protein response,0.010479096970614842,1,3.071455634175428,6
+wiki_pathway,ncRNAs involved in STAT3 signaling in hepatocellular carcinoma,0.010791963722174613,1,-1.0195989011838773,3
+wiki_pathway,One-carbon metabolism,0.011174256906567268,1,0.5586049312338733,12
+wiki_pathway,Melanoma,0.011242775003094075,1,1.4335932067767292,25
+wiki_pathway,Nonalcoholic fatty liver disease,0.012007278468437802,1,1.3173904327229224,80
+wiki_pathway,TP53 network,0.012858686349025927,1,2.6719995545828445,3
+wiki_pathway,Glycerolipids and glycerophospholipids,0.015569303088380003,1,2.8046941681678277,10
+wiki_pathway,Overlap between signal transduction pathways contributing to LMNA laminopathies,0.015903816781995154,1,1.5230243771183762,22
+wiki_pathway,Sphingolipid metabolism overview,0.016011494964646024,1,1.5003619220260147,9
+wiki_pathway,Sphingolipid metabolism: integrated pathway,0.016011494964646024,1,1.5003619220260147,9
+wiki_pathway,Leptin-insulin signaling overlap,0.01604769785891261,1,-0.6938690815801981,3
+wiki_pathway,Mesodermal commitment pathway,0.016251427639649256,1,1.4446163973365296,30
+wiki_pathway,Genes related to primary cilium development (based on CRISPR),0.01653364168987633,1,1.6879096749048752,13
+wiki_pathway,Acute viral myocarditis,0.017519453783562632,1,1.508803313384233,34
+wiki_pathway,Familial  hyperlipidemia type 1,0.018407956309214678,1,2.9924331516528944,3
+wiki_pathway,Familial hyperlipidemia type 5,0.018407956309214678,1,2.9924331516528944,3
+wiki_pathway,Apoptosis modulation and signaling,0.018969126723306983,1,1.895070471371862,12
+wiki_pathway,Complement system in neuronal development and plasticity,0.019104760672944514,1,1.933398223754132,25
+wiki_pathway,Autophagy,0.02014095095867502,1,0.21874250137488047,14
+wiki_pathway,Host-pathogen interaction of human coronaviruses - apoptosis,0.02055114138793387,1,2.178938174957508,10
+wiki_pathway,Ebola virus infection in host,0.021244573290602437,1,1.2750106263867573,64
+wiki_pathway,Fas ligand pathway and stress induction of heat shock proteins,0.02217959855259988,1,1.3400660850425203,27
+wiki_pathway,miRNAs involvement in the immune response in sepsis,0.02320448732842819,1,-1.0652948542925627,10
+wiki_pathway,Regucalcin in proximal tubule epithelial kidney cells,0.024179655371861727,1,2.2686923823250047,9
+wiki_pathway,Insulin signaling,0.025429169675019542,1,1.3831101386264768,64
+wiki_pathway,Pancreatic adenocarcinoma pathway,0.026250383527260585,1,1.4926203728420813,46
+wiki_pathway,AGE/RAGE pathway,0.026812322236415994,1,1.598131526054451,31
+wiki_pathway,Disruption of postsynaptic signaling by CNV,0.027147756125925543,1,1.4335184806653056,10
+wiki_pathway,Gastrin signaling pathway,0.02771080148908711,1,1.4335932067767292,49
+wiki_pathway,Breast cancer pathway,0.028077534815563566,1,1.3868296459096248,42
+wiki_pathway,Bardet-Biedl syndrome,0.030965694557312438,1,1.631860059942598,13
+wiki_pathway,TGF-beta signaling in thyroid cells for epithelial-mesenchymal transition,0.03189569987525143,1,2.8882533750140214,5
+wiki_pathway,Mammalian disorder of sexual development,0.03215333336635487,1,-0.9014846004468837,3
+wiki_pathway,ErbB signaling pathway,0.0323444355360409,1,1.5619259377025343,38
+wiki_pathway,Immune response to tuberculosis,0.03365440180812435,1,1.9134791239638629,4
+wiki_pathway,lncRNA-mediated mechanisms of therapeutic resistance,0.03385032242128566,1,2.93511791532314,4
+wiki_pathway,Hepatitis B infection,0.03476579669698081,1,1.5516475389074333,55
+wiki_pathway,Joubert syndrome,0.034774480152194,1,1.3767512522236822,18
+wiki_pathway,Familial hyperlipidemia type 4,0.03498867519654485,1,2.3665501188073614,4
+wiki_pathway,Electron transport chain: OXPHOS system in mitochondria,0.03540111080126873,1,1.3130799031682232,80
+wiki_pathway,Alpha 6 beta 4 signaling pathway,0.03643735517401923,1,1.5915069151556387,19
+wiki_pathway,Fibrin complement receptor 3 signaling pathway,0.03752152309551946,1,-0.17807529056728943,9
+wiki_pathway,NIPBL role in DNA damage - Cornelia de Lange syndrome,0.038021382838895106,1,-1.2413168372003376,3
+wiki_pathway,22q11.2 copy number variation syndrome,0.039221152583920345,1,1.3563964240672426,40
+wiki_pathway,"Non-genomic actions of 1,25 dihydroxyvitamin D3",0.040417042523347525,1,1.650077572223674,24
+wiki_pathway,Ciliopathies,0.04289490990170303,1,1.5171096322638375,24
+wiki_pathway,Cancer immunotherapy by PD-1 blockade,0.04420431273556305,1,-0.6938690815801981,3
+wiki_pathway,Male infertility,0.04466188623055377,1,0.5190977532087129,34
+wiki_pathway,Biosynthesis and turnover of 1-deoxy-sphingoid bases,0.04525257146805318,1,1.5003619220260147,5
+wiki_pathway,Envelope proteins and their potential roles in EDMD physiopathology,0.04673846768493643,1,1.3286258237619712,24
+wiki_pathway,Common pathways underlying drug addiction,0.04688479586294958,1,1.3448916957634727,19
+wiki_pathway,NRF2 pathway,0.0472323403836614,1,1.39661866806078,37
+wiki_pathway,"GPCRs, class C metabotropic glutamate, pheromone",0.05039285527941277,1,2.010153859153489,3
+wiki_pathway,Alzheimer's disease and miRNA effects,0.05130024982444651,1,1.1683851426504885,116
+wiki_pathway,Alzheimer's disease,0.05130024982444651,1,1.1683851426504885,116
+wiki_pathway,Mitochondrial gene expression,0.05159068932647852,1,0.5766858246415927,11
+wiki_pathway,Hippo-Yap signaling pathway,0.05256575855177426,1,2.0788549207855307,11
+wiki_pathway,Ferroptosis,0.05397173493849349,1,1.2353071069946957,36
+wiki_pathway,FGFR3 signaling in chondrocyte proliferation and terminal differentiation,0.05599693305510216,1,1.7666271301233618,11
+wiki_pathway,Bladder cancer,0.057278609087881426,1,1.7724273469148213,16
+wiki_pathway,H19 action Rb-E2F1 signaling and CDK-Beta-catenin activity,0.05876632124268388,1,-0.10796346099908073,6
+wiki_pathway,Glial cell differentiation,0.060516054899356485,1,1.9301378349096532,4
+wiki_pathway,DNA damage response (only ATM dependent),0.060597068012957694,1,1.572204336497635,33
+wiki_pathway,Toll-like receptor signaling related to MyD88,0.061397124908948074,1,-0.034821045893733936,9
+wiki_pathway,Oxidative phosphorylation,0.06666634461869095,1,1.3463235686312847,46
+wiki_pathway,Influence of laminopathies on Wnt signaling,0.0671908425358594,1,1.3997682206845745,13
+wiki_pathway,MECP2 and associated Rett syndrome,0.06818787752472967,1,0.6592796605564749,25
+wiki_pathway,TLR4 signaling and tolerance,0.07200244494115961,1,-0.41557084613004824,6
+wiki_pathway,"NAD metabolism, sirtuins and aging",0.07230495267517235,1,0.44879063546322634,6
+wiki_pathway,Genes controlling nephrogenesis,0.07453654450376254,1,1.7056884376372372,8
+wiki_pathway,Kisspeptin/kisspeptin receptor system in the ovary,0.0745385654586297,1,1.852898258401719,13
+wiki_pathway,IL-17 signaling pathway,0.07488909693926958,1,-0.31846663063133934,10
+wiki_pathway,Energy metabolism,0.07593599857416375,1,0.5766858246415927,19
+wiki_pathway,Osteoblast differentiation and related diseases,0.07603267020696117,1,1.5380415503979563,23
+wiki_pathway,Mitochondrial complex III assembly,0.07687954854709267,1,1.4811780048185907,15
+wiki_pathway,MAPK signaling pathway,0.07728118948823985,1,1.5343443794890337,74
+wiki_pathway,Bile acids synthesis and enterohepatic circulation,0.07987289152817985,1,1.8315093610348687,4
+wiki_pathway,DNA mismatch repair,0.08029745975711632,1,0.7061549921631072,18
+wiki_pathway,Interactions between immune cells and microRNAs in tumor microenvironment,0.08137911299535974,1,-0.6995645843450591,4
+wiki_pathway,Non-small cell lung cancer,0.08224998988235606,1,1.1961546716343125,32
+wiki_pathway,Physico-chemical features and toxicity-associated pathways,0.08259571426194824,1,1.572204336497635,31
+wiki_pathway,Antiviral and anti-inflammatory effects of Nrf2 on SARS-CoV-2 pathway,0.08358216766684405,1,0.040432852200632675,9
+wiki_pathway,Sphingolipid metabolism in senescence,0.08401032770369767,1,1.5450678866442102,10
+wiki_pathway,EGF/EGFR signaling pathway,0.08697174251578572,1,1.3612623610522108,83
+wiki_pathway,Folate metabolism,0.0871702012536947,1,0.5580719922716996,21
+wiki_pathway,Nuclear receptors meta-pathway,0.0903081828699301,1,1.214561685723523,76
+wiki_pathway,Congenital generalized lipodystrophy,0.09082479586628747,1,1.6622434418075074,7
+wiki_pathway,"Relationship between inflammation, COX-2 and EGFR",0.09112375872222717,1,1.5915069151556387,9
+wiki_pathway,Lung fibrosis,0.09244258181738077,1,0.23325641915463208,8
+wiki_pathway,Oncostatin M signaling pathway,0.09358335130496369,1,1.4926203728420813,26
+wiki_pathway,TNF-alpha signaling pathway,0.09504796192215861,1,1.3481459220301069,46
+wiki_pathway,Hypothetical craniofacial development pathway,0.09536348335068065,1,2.3297231585190734,3
+wiki_pathway,Translation inhibitors in chronically activated PDGFRA cells,0.09561794931146876,1,1.2055453700241239,27
+wiki_pathway,TGF-beta signaling pathway,0.09591960144873782,1,1.3410959956756026,62
+wiki_pathway,Endoderm differentiation,0.09595933690788841,1,1.2750984895046187,18
+wiki_pathway,Endometrial cancer,0.09875356664265353,1,1.4038200444933013,26
+wiki_pathway,Apoptosis modulation by HSP70,0.09888108731873624,1,1.4395836467419953,10
+wiki_pathway,Thiamine metabolic pathways,0.10462280309108904,1,1.8929131177587626,5
+wiki_pathway,Familial partial lipodystrophy,0.10522976544260286,1,1.5516475389074333,11
+wiki_pathway,LDLRAD4 and what we know about it,0.10590997556527676,1,2.1667406623325,3
+wiki_pathway,FBXL10 enhancement of MAP/ERK signaling in diffuse large B-cell lymphoma,0.10799047754398151,1,1.6511943885057316,9
+wiki_pathway,ERK pathway in Huntington's disease,0.11229243981631871,1,1.6911318905327068,6
+wiki_pathway,Prader-Willi and Angelman syndrome,0.11284339112279895,1,0.26735950701158506,8
+wiki_pathway,Regulatory circuits of the STAT3 signaling pathway,0.11289703852181247,1,1.7434758984680765,8
+wiki_pathway,Progeria-associated lipodystrophy,0.11656280918337872,1,1.3788998455957788,14
+wiki_pathway,CCL18 signaling pathway,0.11684928990948998,1,1.319306871174705,40
+wiki_pathway,Glioblastoma signaling pathways,0.1175700234414196,1,1.5915069151556387,35
+wiki_pathway,Cholesterol metabolism with Bloch and Kandutsch-Russell pathways,0.11768628668194404,1,1.1847628707434017,27
+wiki_pathway,Ethanol effects on histone modifications,0.11877221600944672,1,0.5580719922716996,11
+wiki_pathway,Nod-like receptor (NLR) signaling pathway,0.12220501162290794,1,-1.0195989011838773,7
+wiki_pathway,Lipid metabolism in senescent cells,0.12325228921113542,1,3.6780089812978343,3
+wiki_pathway,Proximal tubule transport,0.1252095492016249,1,1.3317592657189155,18
+wiki_pathway,Mechanoregulation and pathology of YAP/TAZ via Hippo and non-Hippo mechanisms,0.13239893103078984,1,1.4954428189048756,22
+wiki_pathway,Familial hyperlipidemia type 3,0.13441540740446828,1,1.740667085961828,3
+wiki_pathway,ATM signaling in development and disease,0.13576389626448476,1,0.7734810872336046,24
+wiki_pathway,MFAP5 effect on permeability and motility of endothelial cells via cytoskeleton rearrangement,0.1359514324882107,1,1.4335932067767292,13
+wiki_pathway,Methionine de novo and salvage pathway,0.13693248082886347,1,0.5074681676897458,12
+wiki_pathway,Melatonin metabolism and effects,0.13775310296923282,1,2.6704243381042367,7
+wiki_pathway,"mRNA, protein, and metabolite inducation pathway by cyclosporin A",0.13908706058906492,1,1.566364982263032,4
+wiki_pathway,Sterol regulatory element-binding proteins (SREBP) signaling,0.13960691112853388,1,1.1455154898260296,42
+wiki_pathway,p53 transcriptional gene network,0.1423877969517097,1,1.2848713513192813,31
+wiki_pathway,Sulfation biotransformation reaction,0.14241417025079045,1,1.5857005093176177,6
+wiki_pathway,Hippocampal synaptogenesis and neurogenesis,0.14631387716906213,1,1.690731935149474,6
+wiki_pathway,Pathways affected in adenoid cystic carcinoma,0.14718557789376044,1,0.44047013260863577,19
+wiki_pathway,Hemesynthesis defects and porphyrias,0.14927990983220013,1,0.5282331879105602,5
+wiki_pathway,Heme biosynthesis,0.14927990983220013,1,0.5282331879105602,5
+wiki_pathway,Sphingolipid pathway,0.14940563930521142,1,1.4029948451741965,11
+wiki_pathway,Somatroph axis (GH) and its relationship to dietary restriction and aging,0.1496950520076888,1,-0.17807529056728943,3
+wiki_pathway,Modulation of PI3K-Akt-mTOR signaling by bioactive sphingolipids,0.15100757839583376,1,-0.17807529056728943,3
+wiki_pathway,Transcription factors regulate miRNAs related to cardiac hypertrophy,0.15558495212244072,1,-0.4359721860737437,4
+wiki_pathway,Prostaglandin synthesis and regulation,0.15731290560780462,1,0.6190065827405057,12
+wiki_pathway,PKC-gamma calcium signaling pathway in ataxia,0.15734259829458228,1,0.23012006963037865,4
+wiki_pathway,Extrafollicular B cell activation by SARS-CoV-2,0.15810132788450662,1,-0.2458564527900252,6
+wiki_pathway,Fatty acid beta-oxidation,0.1596160845769728,1,1.2875993451995915,21
+wiki_pathway,Pyrimidine metabolism,0.16180974678929544,1,0.8809307729682945,52
+wiki_pathway,Homologous recombination,0.16386706441260587,1,1.651343274195284,5
+wiki_pathway,16p11.2 proximal deletion syndrome,0.1649542543653635,1,0.655721715185128,37
+wiki_pathway,Cellular proteostasis,0.16839202743824078,1,0.43026963180033007,6
+wiki_pathway,DNA replication,0.1688022866018101,1,0.7487632220009919,28
+wiki_pathway,Signal transduction through IL1R,0.1694959296714761,1,-0.5272099735388057,10
+wiki_pathway,Notch signaling pathway,0.1708089148541592,1,1.5551229434477956,24
+wiki_pathway,Ras signaling,0.17198843242838216,1,1.09587710488544,61
+wiki_pathway,Pentose phosphate metabolism,0.17328771931930206,1,0.44079963757433743,7
+wiki_pathway,Photodynamic therapy-induced NFE2L2 (NRF2) survival signaling,0.17385035098271034,1,1.654945452210631,12
+wiki_pathway,GDNF signaling,0.17519692697098785,1,1.1917578146149506,58
+wiki_pathway,Dual hijack model of Vif in HIV infection,0.17523705191355796,1,0.45046759504659806,6
+wiki_pathway,Cholesterol biosynthesis with skeletal dysplasias,0.17584572889457523,1,1.5793913774645092,6
+wiki_pathway,Intracellular trafficking proteins involved in CMT neuropathy,0.1764734170291166,1,1.2688136694246235,14
+wiki_pathway,Regulation of apoptosis by parathyroid hormone-related protein,0.17681027685615303,1,1.873872964655837,9
+wiki_pathway,Wnt signaling pathway,0.1790381108062177,1,1.5516475389074333,21
+wiki_pathway,Omega-3 / omega-6 fatty acid synthesis,0.179345531070473,1,1.2875993451995915,7
+wiki_pathway,Aspirin and miRNAs,0.1829078099777247,1,-0.5173565054919465,3
+wiki_pathway,Focal adhesion,0.18314634511914815,1,1.1615956041029107,72
+wiki_pathway,Pre-implantation embryo,0.18433470481080264,1,0.5681813409412196,8
+wiki_pathway,mRNA processing,0.1879501366436523,1,0.9169146663204061,105
+wiki_pathway,Dravet syndrome,0.1922295394895645,1,0.1648833384922546,6
+wiki_pathway,"DNA repair pathways, full network",0.19242036451276845,1,0.7913190193531987,57
+wiki_pathway,Inhibition of exosome biogenesis and secretion by Manumycin A in CRPC cells,0.1968249166661535,1,1.520090403654271,12
+wiki_pathway,Mitochondrial long chain fatty acid beta-oxidation,0.19691487639750976,1,1.4153634781949447,13
+wiki_pathway,BMP signaling in eyelid development,0.1987160525685634,1,1.4810904156870477,5
+wiki_pathway,Small cell lung cancer,0.20125703163316597,1,1.2757188467646223,34
+wiki_pathway,ATM signaling pathway,0.20272648638841279,1,1.5027817362205174,7
+wiki_pathway,Corticotropin-releasing hormone signaling pathway,0.20312607693095744,1,1.2242801710116178,37
+wiki_pathway,Amino acid metabolism,0.20556984343174592,1,1.0072318445457091,62
+wiki_pathway,Alstrom syndrome,0.21063566379262236,1,1.4023592045850772,13
+wiki_pathway,Prostaglandin and leukotriene metabolism in senescence,0.21449606272000346,1,0.6713350439573598,5
+wiki_pathway,Metastatic brain tumor,0.2149496853207673,1,1.598131526054451,3
+wiki_pathway,miRNAs involved in DNA damage response,0.21706729873668945,1,1.505558866286186,4
+wiki_pathway,Heart development,0.21752810827516705,1,2.2294255152930087,3
+wiki_pathway,Nanoparticle triggered regulated necrosis,0.223294574579882,1,1.2124194066023333,6
+wiki_pathway,Chemokine signaling pathway,0.22507395285021467,1,1.4079185336809146,52
+wiki_pathway,Neovascularisation processes,0.22700569542752927,1,1.509565983042502,10
+wiki_pathway,Non-homologous end joining,0.22744196075978523,1,0.5601266666401058,4
+wiki_pathway,Transcriptional activation by NRF2 in response to phytochemicals,0.22778479163930226,1,1.3949899091460696,6
+wiki_pathway,Complement and coagulation cascades,0.23084918105599225,1,0.20031880042089767,6
+wiki_pathway,Gastric cancer network 1,0.23172799170708097,1,0.70033390099907,8
+wiki_pathway,IL-5 signaling pathway,0.23308741549879253,1,1.4335932067767292,17
+wiki_pathway,Cannabinoid receptor signaling,0.23437544468065827,1,0.08383382147543582,3
+wiki_pathway,Cohesin complex - Cornelia de Lange syndrome,0.23782577583088735,1,0.8018435539348814,17
+wiki_pathway,MFAP5-mediated ovarian cancer cell motility and invasiveness,0.2390592557949219,1,1.4335932067767292,7
+wiki_pathway,Kit receptor signaling pathway,0.2396445355075162,1,1.39742778391447,28
+wiki_pathway,IL-4 signaling pathway,0.24160769838553592,1,0.42443679847423055,19
+wiki_pathway,IL-1 signaling pathway,0.2461609369820909,1,0.7730629977495425,25
+wiki_pathway,Initiation of transcription and translation elongation at the HIV-1 LTR,0.24631383281576688,1,0.5922320857821198,17
+wiki_pathway,Photodynamic therapy-induced NF-kB survival signaling,0.2521724515612806,1,-1.0195989011838773,5
+wiki_pathway,Mammary gland development pathway - Puberty (Stage 2 of 4),0.25922282538409236,1,-0.7812361308027164,3
+wiki_pathway,Ebstein-Barr virus LMP1 signaling,0.2605631031755667,1,0.3129573787333783,12
+wiki_pathway,Hepatocyte growth factor receptor signaling,0.2612324607326274,1,1.5123306345257772,18
+wiki_pathway,2q13 copy number variation syndrome,0.2663293755641263,1,0.5118198090273625,21
+wiki_pathway,DDX1 as a regulatory component of the Drosha microprocessor,0.2701310322753837,1,1.6243469081884387,4
+wiki_pathway,Transcription factor regulation in adipogenesis,0.2711305003898244,1,1.217755318332105,3
+wiki_pathway,BDNF-TrkB signaling,0.2714297340560382,1,1.1805434843008196,16
+wiki_pathway,Burn wound healing,0.2716346575088421,1,0.4899992296669814,3
+wiki_pathway,Apoptosis-related network due to altered Notch3 in ovarian cancer,0.2796539442053627,1,0.8971745708092217,28
+wiki_pathway,TYROBP causal network in microglia,0.2804177799962476,1,0.6134341578510288,10
+wiki_pathway,Development of ureteric collection system,0.2825510960566674,1,1.4216880560121412,6
+wiki_pathway,Neuroinflammation and glutamatergic signaling,0.28577892715434716,1,1.1136174277847695,38
+wiki_pathway,Glycogen synthesis and degradation,0.28709589877826613,1,1.2540690263665313,18
+wiki_pathway,MAPK pathway in congenital thyroid cancer,0.28944601782536444,1,1.4335932067767292,5
+wiki_pathway,MAPK and NFkB signaling pathways inhibited by Yersinia YopJ,0.2903992398715388,1,-0.4588579706953893,5
+wiki_pathway,Angiopoietin-like protein 8 regulatory pathway,0.29282148123356005,1,1.2055453700241239,45
+wiki_pathway,Kennedy pathway from sphingolipids,0.29354692627670925,1,1.4456887605804507,8
+wiki_pathway,Toll-like receptor signaling pathway,0.2957678828030346,1,0.73894183584732,27
+wiki_pathway,Hippo-Merlin signaling dysregulation,0.29808033095170405,1,1.2179027303576837,32
+wiki_pathway,Physiological and pathological hypertrophy of the heart,0.29893392037035144,1,1.3718197508561638,11
+wiki_pathway,Extracellular vesicles in the crosstalk of cardiac cells,0.2996702158423664,1,0.766793964971841,8
+wiki_pathway,Serotonin receptor 4/6/7 and NR3C signaling,0.300954593810657,1,1.088711463149092,7
+wiki_pathway,Selenium micronutrient network,0.3012171658452395,1,0.765989963604397,27
+wiki_pathway,Integrin-mediated cell adhesion,0.3051685982096977,1,1.0848568064888495,43
+wiki_pathway,Regulation of sister chromatid separation at the metaphase-anaphase transition,0.3058968821414614,1,0.43529287614521367,6
+wiki_pathway,Allograft rejection,0.3072803064490428,1,1.152838265772405,13
+wiki_pathway,Type II diabetes mellitus,0.30929199172494026,1,2.1840936158889264,7
+wiki_pathway,Spinal cord injury,0.31032665260302533,1,1.196698765270222,28
+wiki_pathway,Serotonin transporter activity,0.31368479704524893,1,2.415356839371287,3
+wiki_pathway,Phosphodiesterases in neuronal function,0.3202857020617679,1,0.5899232305280636,4
+wiki_pathway,Resistin as a regulator of inflammation,0.32488180786694093,1,0.5118198090273625,15
+wiki_pathway,Genetic causes of porto-sinusoidal vascular disease,0.32854641353805397,1,1.4335932067767292,11
+wiki_pathway,IL1 and megakaryocytes in obesity,0.32873353002068806,1,-0.7812361308027164,3
+wiki_pathway,Acquired partial lipodystrophy / Barraquer-Simons syndrome,0.3296680917382538,1,1.4177336061490373,7
+wiki_pathway,GABA receptor signaling,0.3339153191092715,1,1.5453669118399582,8
+wiki_pathway,Ciliary landscape,0.3344011888303551,1,1.1419478621363275,129
+wiki_pathway,Mitochondrial complex IV assembly,0.3345814582942257,1,0.5424114546834237,23
+wiki_pathway,Eukaryotic transcription initiation,0.33464640817392344,1,0.7573536033667027,25
+wiki_pathway,Neurodegeneration with brain iron accumulation (NBIA) subtypes pathway,0.33692972002512755,1,1.0570304476075392,19
+wiki_pathway,Autosomal recessive osteopetrosis pathways,0.33798377464361384,1,0.7797899373081952,3
+wiki_pathway,G13 signaling pathway,0.34176302319145163,1,1.2099677889709064,20
+wiki_pathway,OSX and miRNAs in tooth development,0.3420828238845805,1,1.5380415503979563,3
+wiki_pathway,Hematopoietic stem cell gene regulation by GABP alpha/beta complex,0.3447981901229098,1,0.41821826145640656,7
+wiki_pathway,Ectoderm differentiation,0.3449616643390367,1,0.8426048024163578,32
+wiki_pathway,Target of rapamycin signaling,0.3502418256568645,1,0.7295133105919611,18
+wiki_pathway,Tryptophan metabolism,0.35282171425336056,1,1.3366698754949367,9
+wiki_pathway,Fatty acid transporters,0.3556111246445505,1,0.6591368968199407,6
+wiki_pathway,Dopamine metabolism,0.3573216063187235,1,1.5328267324739542,7
+wiki_pathway,Hypertrophy model,0.3576033689357465,1,0.5228599389416226,6
+wiki_pathway,FGF23 signaling in hypophosphatemic rickets and related disorders,0.3586120676098873,1,1.6779682009929533,5
+wiki_pathway,Malignant pleural mesothelioma,0.35892457512900783,1,1.1784887909142663,134
+wiki_pathway,Metabolic reprogramming in colon cancer,0.3595663150266161,1,0.8423861801174474,42
+wiki_pathway,Prolactin signaling pathway,0.3602731907508468,1,1.2055453700241239,37
+wiki_pathway,Glucocorticoid receptor pathway,0.36256097763062023,1,1.214561685723523,8
+wiki_pathway,2q21.1 copy number variation syndrome,0.3640397742458049,1,0.144915904669738,4
+wiki_pathway,Mitochondrial fatty acid synthesis pathway,0.3655361154984339,1,1.4506433870139586,5
+wiki_pathway,Clear cell renal cell carcinoma pathways,0.3658904115100023,1,0.8453747017193842,44
+wiki_pathway,Purinergic signaling,0.36829172441543007,1,0.5940559938831,4
+wiki_pathway,Ethanol metabolism production of ROS by CYP2E1,0.37591636930888606,1,1.2381151385828557,5
+wiki_pathway,RalA downstream regulated genes,0.38671773166725404,1,1.2953708621408646,11
+wiki_pathway,Fragile X syndrome,0.38736070552356083,1,1.1538391939804153,62
+wiki_pathway,Interactions between LOXL4 and oxidative stress pathway,0.388281536149251,1,0.774501190650602,5
+wiki_pathway,IL-10 anti-inflammatory signaling pathway,0.39686304258315797,1,1.6738133554992067,4
+wiki_pathway,G1 to S cell cycle control,0.4011962635423569,1,0.7493852810318222,25
+wiki_pathway,SREBF and miR33 in cholesterol and lipid homeostasis,0.40352798912553567,1,0.6405343298639777,9
+wiki_pathway,Synaptic vesicle pathway,0.40570284749865465,1,1.2318517791814008,19
+wiki_pathway,Angiotensin II receptor type 1 pathway,0.4101562053362319,1,1.4223513695573342,10
+wiki_pathway,Glycolysis and gluconeogenesis,0.41067761401202174,1,1.0135733913404685,28
+wiki_pathway,Thermogenesis,0.41153486883465673,1,1.1555415985775153,45
+wiki_pathway,Neurogenesis regulation in the olfactory epithelium,0.415061317271758,1,1.2650125481207688,14
+wiki_pathway,Host-pathogen interaction of human coronaviruses - interferon induction,0.41829171183948755,1,0.73894183584732,15
+wiki_pathway,Cholesterol biosynthesis pathway,0.42215893473611144,1,1.1222223810157803,13
+wiki_pathway,Wnt signaling pathway and pluripotency,0.4300874355270969,1,1.3985434771785057,28
+wiki_pathway,Interleukin-11 signaling pathway,0.43264828586012277,1,0.8685492073465542,19
+wiki_pathway,Nephrotic syndrome,0.4334923970022661,1,1.1821704850543375,18
+wiki_pathway,Histone modifications,0.43816966973418553,1,1.749609401475384,11
+wiki_pathway,Triacylglyceride synthesis,0.4493107075978144,1,0.6761045541464217,7
+wiki_pathway,MicroRNAs in cardiomyocyte hypertrophy,0.449358376540015,1,0.808292639445011,31
+wiki_pathway,2q37 copy number variation syndrome,0.4503527762242208,1,1.1034657843176008,32
+wiki_pathway,Intraflagellar transport proteins binding to dynein,0.45037317694347967,1,1.2829629022177356,14
+wiki_pathway,EPO receptor signaling,0.45298044829961015,1,1.4335932067767292,9
+wiki_pathway,IL-3 signaling pathway,0.45747675410720023,1,1.0163199921416732,21
+wiki_pathway,miRNA targets in ECM and membrane receptors,0.4608466619011066,1,-0.033803888852326304,6
+wiki_pathway,Hepatitis C and hepatocellular carcinoma,0.466718066329329,1,1.152838265772405,23
+wiki_pathway,Nucleotide excision repair in xeroderma pigmentosum,0.467799676574539,1,0.7762795020883423,39
+wiki_pathway,TCA cycle in senescence,0.46814600050712074,1,1.012721721674239,7
+wiki_pathway,Striated muscle contraction pathway,0.47210801758726545,1,0.6427718080734265,11
+wiki_pathway,Base excision repair,0.4722026822076568,1,0.7697300911616802,18
+wiki_pathway,Serotonin HTR1 group and FOS pathway,0.47240940207949017,1,0.9366766514310922,15
+wiki_pathway,Interactome of polycomb repressive complex 2 (PRC2),0.47293866421124026,1,1.3313831624902848,9
+wiki_pathway,Effect of progerin on genes involved in Hutchinson-Gilford progeria syndrome,0.4733996759550513,1,1.319293965449543,17
+wiki_pathway,Pentose phosphate pathway in senescent cells,0.47785252425254715,1,0.3658412697670314,5
+wiki_pathway,Omega-9 fatty acid synthesis,0.4820037284183722,1,1.2361811079714966,6
+wiki_pathway,Thyroid hormones production and peripheral downstream signaling effects,0.4836822675728653,1,1.106286023092527,20
+wiki_pathway,NRF2-ARE regulation,0.4845961333199068,1,1.0228461567348992,12
+wiki_pathway,Cell cycle,0.48607898040690695,1,0.8434466924965933,51
+wiki_pathway,Interleukin-1 induced activation of NF-kB,0.4862312910114767,1,1.8645212700144445,5
+wiki_pathway,TNF-related weak inducer of apoptosis (TWEAK) signaling pathway,0.4902446088463908,1,1.4926203728420813,20
+wiki_pathway,Statin inhibition of cholesterol production,0.4907322414827273,1,1.0494706208802,5
+wiki_pathway,B cell receptor signaling pathway,0.4973722380787085,1,1.4989035755888311,40
+wiki_pathway,Osteoclast signaling,0.4974181488727715,1,0.8438968223828741,3
+wiki_pathway,p38 MAPK signaling pathway,0.4994236114699602,1,1.0734687854209959,15
+wiki_pathway,TCA cycle (aka Krebs or citric acid cycle),0.5029132796488603,1,1.1403305910462567,17
+wiki_pathway,Vitamin A and carotenoid metabolism,0.5031229904890434,1,0.7271462976835078,9
+wiki_pathway,Caloric restriction and aging,0.5066603441611144,1,0.5663105297857298,5
+wiki_pathway,Disorders of fructose metabolism,0.5104897956334306,1,0.7682545178980441,6
+wiki_pathway,Notch signaling,0.5105971081304209,1,1.5380415503979563,17
+wiki_pathway,Overview of nanoparticle effects,0.5106353539513324,1,1.6089265306432943,4
+wiki_pathway,Estrogen metabolism,0.5107100957065759,1,1.5328267324739542,3
+wiki_pathway,Monoamine transport,0.5189389065821923,1,1.6100878046740004,6
+wiki_pathway,PI3K-AKT-mTOR signaling pathway and therapeutic opportunities,0.5198737542233542,1,0.8969048758162976,12
+wiki_pathway,Amino acid metabolism in triple-negative breast cancer cells,0.5212395740663163,1,1.0289124659177407,6
+wiki_pathway,Regulation of Wnt / B-catenin signaling by small molecule compounds,0.5222731523986226,1,0.7861333471664901,5
+wiki_pathway,IL-18 signaling pathway,0.5241832140227326,1,1.2055453700241239,83
+wiki_pathway,Aryl hydrocarbon receptor pathway,0.5308856003261282,1,1.2142005043563813,23
+wiki_pathway,Estrogen signaling pathway,0.5311005040506022,1,1.0163199921416732,13
+wiki_pathway,Glutathione metabolism,0.5332702509297845,1,0.8255411584227823,9
+wiki_pathway,GPR143 in melanocytes and retinal pigment epithelium cells,0.5394719399888332,1,1.088711463149092,7
+wiki_pathway,Roles of ceramides in the development of insulin resistance,0.5437103828340257,1,1.4318482015551117,3
+wiki_pathway,Focal adhesion: PI3K-Akt-mTOR-signaling pathway,0.5446030429591804,1,0.808292639445011,79
+wiki_pathway,lncRNA in canonical Wnt signaling and colorectal cancer,0.5466906928149033,1,0.9074506069254209,24
+wiki_pathway,Nucleotide excision repair,0.5482320626176664,1,0.8112785859087445,34
+wiki_pathway,Fatty acid biosynthesis,0.5530796299903933,1,1.2009854752228124,16
+wiki_pathway,Ovarian infertility,0.5581599629450505,1,1.1555415985775153,7
+wiki_pathway,Netrin-UNC5B signaling pathway,0.5597257378900695,1,1.1510712070616416,20
+wiki_pathway,Androgen receptor signaling pathway,0.5645194299991372,1,0.7222473171588661,45
+wiki_pathway,DYRK1A,0.5650885157502541,1,1.1555415985775153,23
+wiki_pathway,RANKL/RANK signaling pathway,0.5690205206725902,1,0.981917119011263,28
+wiki_pathway,Serotonin and anxiety,0.5727415055619385,1,0.7299364970940118,3
+wiki_pathway,exRNA mechanism of action and biogenesis,0.5727852511527736,1,0.7311379101710989,5
+wiki_pathway,Exercise-induced circadian regulation,0.5773033506309762,1,0.8332466692573232,17
+wiki_pathway,T cell receptor and co-stimulatory signaling,0.5815530070315261,1,0.6099255142275422,8
+wiki_pathway,IL-9 signaling pathway,0.5846340515204249,1,1.12094292311087,8
+wiki_pathway,PI3K/AKT/mTOR - vitamin D3 signaling,0.5866819086546962,1,1.136202065997893,7
+wiki_pathway,RAC1/PAK1/p38/MMP2 pathway,0.5934047546170529,1,1.293215736274567,36
+wiki_pathway,2q11.2 copy number variation syndrome,0.5940719586113081,1,1.1612276377974886,15
+wiki_pathway,Osteopontin signaling,0.5943536494590653,1,0.808292639445011,7
+wiki_pathway,Type I collagen synthesis in the context of osteogenesis imperfecta,0.5946449481827664,1,1.0293219030086584,14
+wiki_pathway,GPR40 pathway,0.5950677468511401,1,1.2801070598954387,8
+wiki_pathway,Novel intracellular components of RIG-I-like receptor pathway,0.5962740807948599,1,0.7699511109002819,27
+wiki_pathway,Galanin receptor pathway,0.6013756104445993,1,0.9366766514310922,5
+wiki_pathway,Measles virus infection,0.6039344171797671,1,1.088069774122081,47
+wiki_pathway,Neural crest differentiation,0.6068615869470569,1,1.5551229434477956,18
+wiki_pathway,Valproic acid pathway,0.6100477043006967,1,1.1902879757575369,8
+wiki_pathway,Leukocyte-intrinsic Hippo pathway functions,0.6105380036526747,1,1.432388720210375,10
+wiki_pathway,Apoptosis,0.6122363904841512,1,1.087624045839377,30
+wiki_pathway,Copper homeostasis,0.6168740110015662,1,0.8608403099494709,22
+wiki_pathway,EGFR tyrosine kinase inhibitor resistance,0.6176495592757512,1,1.1805434843008196,34
+wiki_pathway,HIF1A and PPARG regulation of glycolysis,0.6195916602504401,1,0.8768205816739344,5
+wiki_pathway,SARS coronavirus and innate immunity,0.620054764584264,1,1.1117226169549106,6
+wiki_pathway,Interferon type I signaling pathways,0.6209664175379248,1,1.076000755863636,25
+wiki_pathway,"Degradation pathway of sphingolipids, including diseases",0.6238548978368879,1,1.0800479855226464,8
+wiki_pathway,CAMKK2 pathway,0.6243793156444359,1,0.8920615564648082,16
+wiki_pathway,IL-2 signaling pathway,0.6245552158398885,1,1.0380121237442015,14
+wiki_pathway,Glucuronidation,0.6260296589178518,1,1.0402642619909084,8
+wiki_pathway,Nicotine effect on dopaminergic neurons,0.6271990724135117,1,1.0163199921416732,5
+wiki_pathway,Synthesis of ceramides and 1-deoxyceramides,0.6271990724135117,1,1.1722554110492898,5
+wiki_pathway,Oxidative stress response,0.6298623280424434,1,1.2538058128645737,18
+wiki_pathway,Type II interferon signaling,0.6326201631944155,1,1.0079428974406321,6
+wiki_pathway,GDNF/RET signaling axis,0.6334612370598682,1,1.4023592045850772,3
+wiki_pathway,Aerobic glycolysis,0.6371099740557709,1,0.7678735577792858,11
+wiki_pathway,Glycosaminoglycan degradation,0.6537330325103718,1,1.017754077110006,6
+wiki_pathway,Thyroid stimulating hormone (TSH) signaling pathway,0.6562435105571531,1,1.0126940572900922,28
+wiki_pathway,Alanine and aspartate metabolism,0.6564907617437246,1,0.9789691184878038,6
+wiki_pathway,Familial hyperlipidemia type 2,0.6592166027812691,1,1.740667085961828,3
+wiki_pathway,Wnt/beta-catenin signaling pathway in leukemia,0.6649751735413945,1,1.3006416696016918,4
+wiki_pathway,Nanoparticle triggered autophagic cell death,0.6672631250410175,1,1.04449960488714,8
+wiki_pathway,NAD+ metabolism,0.6716140639761081,1,0.7003095137579192,7
+wiki_pathway,15q11.2 copy number variation syndrome,0.6753260996381181,1,1.173057331432356,6
+wiki_pathway,G protein signaling pathways,0.6800192369245317,1,1.066731476159313,31
+wiki_pathway,Interleukin-1 (IL-1) structural pathway,0.6828029549611762,1,0.808292639445011,19
+wiki_pathway,Airway smooth muscle cell contraction,0.6831186103737023,1,1.196180233561733,6
+wiki_pathway,Myometrial relaxation and contraction pathways,0.6845958896783314,1,1.088711463149092,41
+wiki_pathway,Embryonic stem cell pluripotency pathways,0.6889336207104235,1,0.8473501746384785,23
+wiki_pathway,Endochondral ossification,0.6935829120654592,1,1.1263878879726077,9
+wiki_pathway,Endochondral ossification with skeletal dysplasias,0.6935829120654592,1,1.1263878879726077,9
+wiki_pathway,Vitamin D-sensitive calcium signaling in depression,0.6938143062980311,1,0.8621101352116726,10
+wiki_pathway,3q29 copy number variation syndrome,0.6939017876224842,1,0.9635123613774019,22
+wiki_pathway,Lipid metabolism pathway,0.6966833313979961,1,1.0163199921416732,15
+wiki_pathway,Neuroinflammation,0.6981271858143739,1,1.5454229283031171,8
+wiki_pathway,"4-hydroxytamoxifen, dexamethasone, and retinoic acids regulation of p27 expression",0.6983459524800786,1,0.7906778185972768,10
+wiki_pathway,SARS-CoV-2 mitochondrial chronic oxidative stress and endothelial dysfunction,0.7033588923712006,1,0.8014994213757858,10
+wiki_pathway,NAD metabolism in oncogene-induced senescence and mitochondrial dysfunction-associated senescence,0.7034726015881272,1,0.7710350527840826,16
+wiki_pathway,T-cell antigen receptor (TCR) pathway during Staphylococcus aureus infection,0.7038951476580381,1,1.4334437545538818,23
+wiki_pathway,Estrogen receptor pathway,0.7044722088356143,1,1.2381151385828557,3
+wiki_pathway,PI3K-Akt signaling pathway,0.7053886259728642,1,0.8704788774642793,79
+wiki_pathway,NAD+ biosynthetic pathways,0.7086993019678136,1,1.0630997161045053,10
+wiki_pathway,Angiogenesis,0.7115690540739664,1,0.7067158122941746,6
+wiki_pathway,Wnt signaling in kidney disease,0.7137551216449407,1,0.9675510392123632,9
+wiki_pathway,Serotonin receptor 2 and ELK-SRF/GATA4 signaling,0.7188997506142121,1,1.12094292311087,6
+wiki_pathway,Photodynamic therapy-induced HIF-1 survival signaling,0.7192568461064893,1,1.02702279088313,12
+wiki_pathway,Methylation pathways,0.7204178323466076,1,1.036382341278536,4
+wiki_pathway,Adipogenesis,0.7240537729848103,1,1.0745554748001955,22
+wiki_pathway,Inclusion body myositis,0.7273379318333257,1,1.6779682009929533,7
+wiki_pathway,Vitamin D in inflammatory diseases,0.7273435219326688,1,0.519816196304615,10
+wiki_pathway,Eicosanoid metabolism via lipooxygenases (LOX),0.72790691156973375,1,1.0752028123257313,7
+wiki_pathway,SARS-CoV-2 innate immunity evasion and cell-specific immune response,0.7319441318201005,1,1.084772728162146,17
+wiki_pathway,1q21.1 copy number variation syndrome,0.732619800804835,1,0.6405343298639777,9
+wiki_pathway,TCA cycle and deficiency of pyruvate dehydrogenase complex (PDHc),0.7339773541151862,1,1.03259399616615,16
+wiki_pathway,Trans-sulfuration pathway,0.7400804159081,1,0.9355609731326248,7
+wiki_pathway,Thyroxine (thyroid hormone) production,0.7411692096928955,1,0.808292639445011,5
+wiki_pathway,"Phase I biotransformations, non P450",0.7417467363755932,1,1.0792476914063351,3
+wiki_pathway,Vitamin B12 metabolism,0.7442298188212176,1,1.5023156588655924,12
+wiki_pathway,TGF-beta receptor signaling in skeletal dysplasias,0.7479117080438302,1,1.4573418112318886,10
+wiki_pathway,TGF-beta receptor signaling,0.7479117080438302,1,1.4573418112318886,10
+wiki_pathway,Glycolysis in senescence,0.7511692680956612,1,0.7678735577792858,7
+wiki_pathway,Follicle stimulating hormone (FSH) signaling pathway,0.751826346243117,1,1.106286023092527,14
+wiki_pathway,Kallmann syndrome,0.7545259460387669,1,0.7730629977495425,5
+wiki_pathway,Network map of SARS-CoV-2 signaling pathway,0.7558820466494732,1,1.087796762335002,24
+wiki_pathway,ATR signaling,0.7584180476048568,1,1.0671115091980343,3
+wiki_pathway,NO/cGMP/PKG mediated neuroprotection,0.7620474288705533,1,0.841344490153649,10
+wiki_pathway,Leukotriene metabolic pathway,0.7678274163894825,1,1.0752028123257313,3
+wiki_pathway,Inflammatory response pathway,0.7707218477992375,1,1.9350488299967357,4
+wiki_pathway,Cholesterol synthesis disorders,0.7723178886533849,1,0.947234664467965,16
+wiki_pathway,"Gamma-glutamyl cycle for the biosynthesis and degradation of glutathione, including diseases",0.7743163583201091,1,0.8154173722675218,3
+wiki_pathway,Factors and pathways affecting insulin-like growth factor (IGF1)-Akt signaling,0.7773121946214514,1,0.962238314730259,16
+wiki_pathway,Splicing factor NOVA regulated synaptic proteins,0.7781857350086289,1,1.069601292194873,23
+wiki_pathway,Cori cycle,0.7801170632122607,1,1.02702279088313,12
+wiki_pathway,Rett syndrome causing genes,0.7814778734173813,1,0.8930033158543179,15
+wiki_pathway,Sudden infant death syndrome (SIDS) susceptibility pathways,0.7820454114138812,1,0.9366766514310922,39
+wiki_pathway,ncRNAs involved in Wnt signaling in hepatocellular carcinoma,0.7831516119530965,1,0.9074506069254209,18
+wiki_pathway,Translation factors,0.7876440954323174,1,0.9283282961286045,38
+wiki_pathway,16p11.2 distal deletion syndrome,0.7887202513628204,1,1.0284408191093513,12
+wiki_pathway,Quercetin and Nf-kB / AP-1 induced apoptosis,0.7897159070532949,1,1.39661866806078,3
+wiki_pathway,PPAR-alpha pathway,0.7902282933996374,1,1.6995306434402921,10
+wiki_pathway,"Trans-sulfuration, one-carbon metabolism and related pathways",0.7963362880004798,1,0.8489888116285226,29
+wiki_pathway,IL-7 signaling pathway,0.799137735684242,1,1.12094292311087,12
+wiki_pathway,Calcium regulation in cardiac cells,0.7992375837549164,1,1.0659806731738206,40
+wiki_pathway,Extracellular vesicle-mediated signaling in recipient cells,0.803342789881631,1,1.1555415985775153,11
+wiki_pathway,Wnt signaling,0.8037348515466932,1,0.9675510392123632,29
+wiki_pathway,Interactions of natural killer cells in pancreatic cancer,0.805496534436099,1,1.2805400511179454,3
+wiki_pathway,7q11.23 copy number variation syndrome,0.8072695934150477,1,0.9013000002625313,54
+wiki_pathway,Arsenic metabolism and reactive oxygen species generation,0.8084920142973337,1,1.092583788008706,11
+wiki_pathway,Thymic stromal lymphopoietin (TSLP) signaling pathway,0.8137751550708131,1,1.0130102380208974,20
+wiki_pathway,Hippo signaling regulation pathways,0.8166056712981021,1,0.912481190690706,32
+wiki_pathway,Fluoroacetic acid toxicity,0.8197197614589533,1,1.1880903316916518,6
+wiki_pathway,Zinc homeostasis,0.822631155550903,1,0.8392962724792536,10
+wiki_pathway,Nitric oxide metabolism in cystic fibrosis,0.8235390567080157,1,1.131014935489308,6
+wiki_pathway,Neural crest cell migration during development,0.8315013796994987,1,0.9506273198908106,12
+wiki_pathway,Neural crest cell migration in cancer,0.8315013796994987,1,0.9506273198908106,12
+wiki_pathway,Modulators of TCR signaling and T cell activation,0.8322327140716588,1,0.9045880305266852,24
+wiki_pathway,AMP-activated protein kinase signaling,0.8349012513219913,1,0.9939265885814477,23
+wiki_pathway,Th17 cell differentiation pathway,0.8372263391734804,1,1.1848710514669483,12
+wiki_pathway,Canonical and non-canonical Notch signaling,0.8374102744407723,1,1.0290761031177427,8
+wiki_pathway,Mammary gland development pathway - Pregnancy and lactation (Stage 3 of 4),0.8396113758892901,1,0.8131087204721178,10
+wiki_pathway,Leptin and adiponectin,0.8475328117361421,1,0.6405343298639777,5
+wiki_pathway,Vitamin D receptor pathway,0.8506553136474537,1,0.9042661894153511,20
+wiki_pathway,S1P receptor signal transduction,0.8510288928200597,1,1.0954431249124192,10
+wiki_pathway,Pathogenic Escherichia coli infection,0.8531815359491866,1,1.0468971194834182,30
+wiki_pathway,mBDNF and proBDNF regulation of GABA neurotransmission,0.8547083908076438,1,1.179007322622755,11
+wiki_pathway,Nucleotide-binding oligomerization domain (NOD) pathway,0.8566040935345958,1,0.9929679957663153,15
+wiki_pathway,Cardiac hypertrophic response,0.8571908131095478,1,1.1555415985775153,23
+wiki_pathway,MTHFR deficiency,0.8593539524448679,1,0.7669893393439604,4
+wiki_pathway,MAP3K1 role in promoting and blocking gonadal determination,0.8604241845401848,1,1.572204336497635,5
+wiki_pathway,Mammary gland development pathway - Embryonic development (Stage 1 of 4),0.8613632347805531,1,0.7689350308830027,5
+wiki_pathway,PDGF pathway,0.8621619531392476,1,1.0043254293154844,6
+wiki_pathway,SMC1/SMC3 role in DNA damage - Cornelia de Lange Syndrome,0.8621619531392476,1,0.9304863310834797,6
+wiki_pathway,Type I interferon induction and signaling during SARS-CoV-2 infection,0.8674249876790638,1,1.1117226169549106,8
+wiki_pathway,SARS-CoV-2 B.1.1.7 variant antagonises innate immune activation,0.8698233513991488,1,1.1048821568473566,5
+wiki_pathway,Cytosolic DNA-sensing pathway,0.870065820794189,1,1.084772728162146,27
+wiki_pathway,Disorders of galactose metabolism,0.8707726154699196,1,0.9345790313390157,8
+wiki_pathway,T-cell receptor signaling pathway,0.8741494583297383,1,1.0405188849441982,34
+wiki_pathway,Type 2 papillary renal cell carcinoma,0.8743315428106659,1,0.9294996957016927,12
+wiki_pathway,White fat cell differentiation,0.8743326259456228,1,1.0751881249041686,4
+wiki_pathway,Tumor suppressor activity of SMARCB1,0.87693599112091,1,0.8010306396752123,14
+wiki_pathway,Constitutive androstane receptor pathway,0.8776233109374699,1,1.0413748558514677,6
+wiki_pathway,Complement system,0.8808964031745906,1,1.0403024592317438,20
+wiki_pathway,Brain-derived neurotrophic factor (BDNF) signaling pathway,0.8861642022488877,1,1.0767895923525492,61
+wiki_pathway,Metapathway biotransformation Phase I and II,0.888988255948297,1,0.8154173722675218,29
+wiki_pathway,Head and neck squamous cell carcinoma,0.8901079657603604,1,0.8569627849804363,34
+wiki_pathway,Clock-controlled autophagy in bone metabolism,0.8978893285940722,1,1.1833621344251832,16
+wiki_pathway,Endothelin pathways,0.9004372350548139,1,0.92577126132178,8
+wiki_pathway,Pregnane X receptor pathway,0.9042768345517668,1,1.2142005043563813,5
+wiki_pathway,Hijack of ubiquitination by SARS-CoV-2,0.9056079186870667,1,0.9147016930085585,7
+wiki_pathway,Mitochondrial immune response to SARS-CoV-2,0.9078047878157817,1,1.1185630770624644,13
+wiki_pathway,Oxidation by cytochrome P450,0.9090414842109806,1,1.4012293471852955,10
+wiki_pathway,Primary focal segmental glomerulosclerosis (FSGS),0.909242450690977,1,0.9021853398304496,35
+wiki_pathway,Proteoglycan biosynthesis,0.9092488995050834,1,0.6607741738253519,5
+wiki_pathway,miRNA biogenesis,0.9095746918613599,1,0.7784735207864062,3
+wiki_pathway,Microglia pathogen phagocytosis pathway,0.9154114266400131,1,0.8340781347652221,10
+wiki_pathway,PPAR signaling pathway,0.9209559680589077,1,1.2447503063621188,22
+wiki_pathway,Transcription co-factors SKI and SKIL protein partners,0.9253537576884329,1,0.9265997786732479,4
+wiki_pathway,Lamin A-processing pathway,0.9261023982303858,1,1.0610411754783102,3
+wiki_pathway,Mitochondrial complex II assembly,0.9272113446394655,1,1.2810550321156544,4
+wiki_pathway,RAS and bradykinin pathways in COVID-19,0.9288038782421485,1,1.0436356933380042,4
+wiki_pathway,Iron metabolism in placenta,0.9291668032379167,1,1.0524662706580614,3
+wiki_pathway,Leptin signaling pathway,0.932075382089836,1,0.9366766514310922,45
+wiki_pathway,Cardiac progenitor differentiation,0.9352987201588284,1,1.572204336497635,3
+wiki_pathway,Glucose metabolism in triple-negative breast cancer cells,0.9366887415585082,1,0.9885246280207356,7
+wiki_pathway,Synaptic signaling pathways associated with autism spectrum disorder,0.9378533617480171,1,1.106286023092527,18
+wiki_pathway,15q13.3 copy number variation syndrome,0.9386729347354582,1,1.1263878879726077,3
+wiki_pathway,Amyotrophic lateral sclerosis (ALS),0.9394167438672575,1,0.7730629977495425,17
+wiki_pathway,Eicosanoid synthesis,0.9408207394978843,1,0.8947197321786398,3
+wiki_pathway,TCA cycle nutrient use and invasiveness of ovarian cancer,0.9447438515994122,1,1.0144178197958975,4
+wiki_pathway,Pathways of nucleic acid metabolism and innate immune sensing,0.9448106500801334,1,1.1048821568473566,3
+wiki_pathway,Oxidative damage response,0.9503912557202938,1,1.0515259157577395,13
+wiki_pathway,"Cerebral organic acidurias, including diseases",0.95586655384625,1,0.7481030001182607,3
+wiki_pathway,Eicosanoid metabolism via cyclooxygenases (COX),0.9582613630059353,1,0.9652097966130778,8
+wiki_pathway,Microtubule cytoskeleton regulation,0.9602103989683786,1,1.0163199921416732,23
+wiki_pathway,Inflammatory bowel disease signaling,0.9696458770891422,1,0.7892067158473951,6
+wiki_pathway,Arrhythmogenic right ventricular cardiomyopathy,0.9753127388274013,1,1.0723902362940436,24
+wiki_pathway,nsp1 from SARS-CoV-2 inhibits translation initiation in the host cell,0.9768320414540507,1,0.9579617056083298,14
+wiki_pathway,Cancer immunotherapy by CTLA4 blockade,0.9776941385058054,1,0.5840375933261527,3
+wiki_pathway,Prion disease pathway,0.9793569817417083,1,1.0591291082320777,17
+wiki_pathway,IL6 signaling pathway,0.9819078654059512,1,0.808292639445011,23
+reactome_pathway,Selenocysteine synthesis,7.331245924432986e-6,0.011260793739929066,0.5702750743678948,63
+reactome_pathway,Peptide chain elongation,8.956928388780468e-6,0.013748885076778019,0.5702750743678948,65
+reactome_pathway,Response of EIF2AK4 (GCN2) to amino acid deficiency,1.194894554533769e-5,0.018329682466548015,0.5773052705872471,68
+reactome_pathway,Viral mRNA Translation,1.2457796803400717e-5,0.0190978024996133,0.5702750743678948,65
+reactome_pathway,Nonsense Mediated Decay (NMD) independent of the Exon Junction Complex (EJC),1.655291504452283e-5,0.025359065848208975,0.5966275013448318,71
+reactome_pathway,L13a-mediated translational silencing of Ceruloplasmin expression,2.5264084942789026e-5,0.03867931404741,0.6301529902081681,85
+reactome_pathway,Formation of a pool of free 40S subunits,4.082886455611252e-5,0.06246816277085216,0.5966275013448318,77
+reactome_pathway,Eukaryotic Translation Termination,4.578277884423428e-5,0.07000186885283421,0.6133902457764999,68
+reactome_pathway,GTP hydrolysis and joining of the 60S ribosomal subunit,5.889025498487223e-5,0.08998430961688478,0.6341314500747817,85
+reactome_pathway,Nonsense Mediated Decay (NMD) enhanced by the Exon Junction Complex (EJC),9.888860488086483e-5,0.15100289965308059,0.6321422201414748,84
+reactome_pathway,Major pathway of rRNA processing in the nucleolus and cytosol,1.068662698032203e-4,0.16307792771971416,0.6963396991191025,147
+reactome_pathway,Unwinding of DNA,1.070108839249598e-4,0.1631915979855637,-1.8264934128164647,6
+reactome_pathway,Hedgehog 'on' state,1.1700128548559183e-4,0.17830995908004196,1.6745253011505343,45
+reactome_pathway,Hh mutants are degraded by ERAD,1.3620281704127907e-4,0.20743689035386803,1.7114032158263097,43
+reactome_pathway,Hedgehog ligand biogenesis,1.5542085230893087e-4,0.23655053721419278,1.6929642584884217,44
+reactome_pathway,Regulation of RUNX3 expression and activity,1.592347586560932e-4,0.24219606791591777,1.6745253011505343,41
+reactome_pathway,Ubiquitin-dependent degradation of Cyclin D,2.500612545394534e-4,0.38009310689996917,1.6745253011505343,39
+reactome_pathway,Defective CFTR causes cystic fibrosis,3.260473962796757e-4,0.49526599494882734,1.7114032158263097,45
+reactome_pathway,Degradation of GLI1 by the proteasome,3.7254944871489864e-4,0.5655300631492162,1.613240467000999,43
+reactome_pathway,Sialic acid metabolism,4.3938797067938687e-4,0.6665515515206298,2.4898726116133214,8
+reactome_pathway,Vpu mediated degradation of CD4,4.5926307964151583e-4,0.696242828736538,1.6438828840757664,38
+reactome_pathway,Degradation of AXIN,4.750689978975564e-4,0.7197295318147979,1.6745253011505343,39
+reactome_pathway,Regulation of RAS by GAPs,5.497551959812078e-4,0.8323293667155486,1.6438828840757664,40
+reactome_pathway,Autodegradation of the E3 ubiquitin ligase COP1,5.578690333037667e-4,0.844055847388599,1.6745253011505343,37
+reactome_pathway,G2/M Checkpoints,5.578690333037667e-4,0.844055847388599,1.6745253011505343,37
+reactome_pathway,Regulation of PTEN stability and activity,6.615324277065587e-4,0.9995754982646102,1.6438828840757664,48
+reactome_pathway,SCF(Skp2)-mediated degradation of p27/p21,7.084085900968866e-4,1,1.6438828840757664,42
+reactome_pathway,COPII-mediated vesicle transport,7.270220013236796e-4,1,1.5398080545988073,38
+reactome_pathway,FBXL7 down-regulates AURKA during mitotic entry and in early mitosis,7.532346158323349e-4,1,1.613240467000999,41
+reactome_pathway,UCH proteinases,7.936194923820769e-4,1,1.4966767207657996,52
+reactome_pathway,Regulation of activated PAK-2p34 by proteasome mediated degradation,8.710637686990091e-4,1,1.6438828840757664,38
+reactome_pathway,GSK3B and BTRC:CUL1-mediated-degradation of NFE2L2,8.817475276650525e-4,1,1.594973988205204,41
+reactome_pathway,SCF-beta-TrCP mediated degradation of Emi1,8.836556664518538e-4,1,1.613240467000999,39
+reactome_pathway,Degradation of DVL,9.079231660469883e-4,1,1.6438828840757664,42
+reactome_pathway,Degradation of GLI2 by the proteasome,0.0010026729630391391,1,1.5835891623514196,42
+reactome_pathway,GLI3 is processed to GLI3R by the proteasome,0.0010026729630391391,1,1.5835891623514196,42
+reactome_pathway,Neddylation,0.001010509967529387,1,1.4254643127582876,96
+reactome_pathway,ABC-family proteins mediated transport,0.0010632261171993687,1,1.6107519693917585,51
+reactome_pathway,Degradation of beta-catenin by the destruction complex,0.0011546748597824864,1,1.6041072276031016,40
+reactome_pathway,FOXO-mediated transcription of cell cycle genes,0.001182168234235288,1,3.5470053703493654,5
+reactome_pathway,Regulation of RUNX2 expression and activity,0.0013494057941721002,1,1.5835891623514196,44
+reactome_pathway,SMAD2/SMAD3:SMAD4 heterotrimer regulates transcription,0.0014923347182104704,1,2.2294255152930087,15
+reactome_pathway,KEAP1-NFE2L2 pathway,0.001522724668775875,1,1.6041072276031016,48
+reactome_pathway,Oxidative Stress Induced Senescence,0.0015922701688129725,1,1.5802486292104991,32
+reactome_pathway,NIK-->noncanonical NF-kB signaling,0.001714136200789474,1,1.613240467000999,43
+reactome_pathway,Ubiquitin Mediated Degradation of Phosphorylated Cdc25A,0.0017613253586465684,1,1.613240467000999,39
+reactome_pathway,Interleukin-1 signaling,0.001967137979017984,1,1.613240467000999,39
+reactome_pathway,AUF1 (hnRNP D0) binds and destabilizes mRNA,0.001980198974947574,1,1.6041072276031016,40
+reactome_pathway,Asymmetric localization of PCP proteins,0.0021250418716198516,1,1.613240467000999,41
+reactome_pathway,Regulation of ornithine decarboxylase (ODC),0.002239811046658674,1,1.613240467000999,37
+reactome_pathway,Cross-presentation of soluble exogenous antigens (endosomes),0.002354356453402724,1,1.613240467000999,37
+reactome_pathway,Transcriptional Regulation by VENTX,0.002468131199019069,1,0.0011519462139666062,17
+reactome_pathway,"Antigen Presentation: Folding, assembly and peptide loading of class I MHC",0.002502722292042204,1,1.7908987307829491,15
+reactome_pathway,NRIF signals cell death from the nucleus,0.0026040736101333316,1,2.269452647503668,7
+reactome_pathway,Oxygen-dependent proline hydroxylation of Hypoxia-inducible Factor Alpha,0.0026595293764552002,1,1.5550533453005173,44
+reactome_pathway,SARS-CoV-1 modulates host translation machinery,0.002726116001203303,1,0.5344143043050181,28
+reactome_pathway,SARS-CoV-2 modulates host translation machinery,0.00279133353306345,1,0.6037149072011118,38
+reactome_pathway,TAK1-dependent IKK and NF-kappa-B activation,0.0029643207806029524,1,-1.0195989011838773,13
+reactome_pathway,Activated NOTCH1 Transmits Signal to the Nucleus,0.003049302388281364,1,2.2020784589977502,10
+reactome_pathway,ER-Phagosome pathway,0.0031992315532240294,1,1.6041072276031016,50
+reactome_pathway,Signaling by NODAL,0.003242444040101631,1,2.8882533750140214,5
+reactome_pathway,Signaling by Activin,0.003242444040101631,1,2.8882533750140214,5
+reactome_pathway,Translation initiation complex formation,0.0034242972940690002,1,0.6415072568128248,47
+reactome_pathway,Transcriptional regulation of white adipocyte differentiation,0.0035507976673748902,1,0.3203494197078603,24
+reactome_pathway,RUNX1 regulates transcription of genes involved in differentiation of HSCs,0.003610830516216353,1,1.613240467000999,47
+reactome_pathway,VEGFA-VEGFR2 Pathway,0.003737282389382662,1,1.5910680622748252,23
+reactome_pathway,p38MAPK events,0.0037573073338774965,1,2.250566503071125,6
+reactome_pathway,Downregulation of SMAD2/3:SMAD4 transcriptional activity,0.003830873695430636,1,1.6929294903867829,17
+reactome_pathway,Inactivation of APC/C via direct inhibition of the APC/C complex,0.004020918883500992,1,-0.3576653245586036,11
+reactome_pathway,Dectin-1 mediated noncanonical NF-kB signaling,0.004051118038367161,1,1.6041072276031016,44
+reactome_pathway,Vif-mediated degradation of APOBEC3G,0.00412934640611478,1,1.594973988205204,41
+reactome_pathway,Prefoldin mediated transfer of substrate  to CCT/TriC,0.004495423738800232,1,0.4174151456356332,21
+reactome_pathway,Ub-specific processing proteases,0.004946986508066642,1,1.1858606439505672,91
+reactome_pathway,L1CAM interactions,0.005038167948810333,1,3.664853880635548,4
+reactome_pathway,Negative regulation of NOTCH4 signaling,0.00511945713312074,1,1.5646234644665442,43
+reactome_pathway,RUNX3 regulates CDKN1A transcription,0.00523306526221589,1,4.521955165834905,3
+reactome_pathway,"Formation of the ternary complex, and subsequently, the 43S complex",0.005515622276365145,1,0.6184669992303808,42
+reactome_pathway,SMAD4 MH2 Domain Mutants in Cancer,0.005884551418734212,1,3.5470053703493654,3
+reactome_pathway,SMAD2/3 MH2 Domain Mutants in Cancer,0.005884551418734212,1,3.5470053703493654,3
+reactome_pathway,Germ layer formation at gastrulation,0.006135479144777927,1,3.217629372681693,4
+reactome_pathway,G alpha (s) signalling events,0.006506927029494171,1,2.813826202880143,4
+reactome_pathway,Scavenging by Class A Receptors,0.006581919562256087,1,2.0796194682424414,5
+reactome_pathway,Carnitine metabolism,0.0068604259726014185,1,2.9396365955659856,5
+reactome_pathway,Phosphorylation of the APC/C,0.00726263391873659,1,-0.3950404161889968,10
+reactome_pathway,Ribosomal scanning and start codon recognition,0.007692354564342529,1,0.6561379192990481,47
+reactome_pathway,MET activates STAT3,0.008626936046464815,1,-0.9202741417104873,3
+reactome_pathway,PIP3 activates AKT signaling,0.00875573662846929,1,0.5042371959001916,14
+reactome_pathway,RNA Polymerase I Promoter Escape,0.009095953223750447,1,0.33669052410451916,25
+reactome_pathway,MAPK6/MAPK4 signaling,0.009497993096815892,1,1.3025179868068801,52
+reactome_pathway,Regulation of PTEN gene transcription,0.009772115133098678,1,1.4381040519550714,31
+reactome_pathway,"Activation, myristolyation of BID and translocation to mitochondria",0.010473949563577929,1,2.6719995545828445,3
+reactome_pathway,Cell-extracellular matrix interactions,0.010736821276579522,1,2.2136023736562094,6
+reactome_pathway,The role of GTSE1 in G2/M progression after G2 checkpoint,0.010850609170941675,1,1.428438249317685,49
+reactome_pathway,MET interacts with TNS proteins,0.010978543179339953,1,-1.4412434912136294,4
+reactome_pathway,Generic Transcription Pathway,0.011734626095308983,1,0.14535799705790903,15
+reactome_pathway,Formation of tubulin folding intermediates by CCT/TriC,0.011769210002116883,1,0.36919332121972614,15
+reactome_pathway,ER Quality Control Compartment (ERQC),0.012719426026572101,1,4.461748176231252,9
+reactome_pathway,MAP2K and MAPK activation,0.012954401730177638,1,1.4559742348470943,22
+reactome_pathway,Erythropoietin activates RAS,0.013808200424046093,1,2.306742295696525,4
+reactome_pathway,Signaling by moderate kinase activity BRAF mutants,0.014240169882479163,1,1.4738444177391172,23
+reactome_pathway,Paradoxical activation of RAF signaling by kinase inactive BRAF,0.014240169882479163,1,1.4738444177391172,23
+reactome_pathway,Signaling downstream of RAS mutants,0.014240169882479163,1,1.4738444177391172,23
+reactome_pathway,Constitutive Signaling by Aberrant PI3K in Cancer,0.014448495114926541,1,0.5042371959001916,12
+reactome_pathway,Activation of SMO,0.015187244228647702,1,3.386356623440806,3
+reactome_pathway,Aberrant regulation of mitotic exit in cancer due to RB1 defects,0.01597186318224602,1,-0.25147225889405933,10
+reactome_pathway,Ca2+ pathway,0.01611323455432835,1,0.49758126503056377,19
+reactome_pathway,Ubiquinol biosynthesis,0.016316527235268576,1,-0.10726373160203449,4
+reactome_pathway,mRNA Splicing - Major Pathway,0.016449704042828164,1,0.8451474879327553,156
+reactome_pathway,Conversion from APC/C:Cdc20 to APC/C:Cdh1 in late anaphase,0.016963922958458322,1,-0.3576653245586036,9
+reactome_pathway,Regulation of APC/C activators between G1/S and early anaphase,0.016963922958458322,1,-0.3576653245586036,9
+reactome_pathway,XBP1(S) activates chaperone genes,0.017046614146769012,1,1.4177336061490373,21
+reactome_pathway,APC-Cdc20 mediated degradation of Nek2A,0.017747691659807892,1,-0.25147225889405933,12
+reactome_pathway,SRP-dependent cotranslational protein targeting to membrane,0.017821612776810006,1,0.7042010305171903,83
+reactome_pathway,Polymerase switching on the C-strand of the telomere,0.017905839656256497,1,0.3890534550815025,12
+reactome_pathway,RNA Polymerase I Transcription Termination,0.019139652511305,1,0.3195032779027473,19
+reactome_pathway,Activation of the AP-1 family of transcription factors,0.01914919467672849,1,1.9353042580287192,5
+reactome_pathway,Orc1 removal from chromatin,0.02014229314623191,1,1.4355374712793987,50
+reactome_pathway,Kinesins,0.02028208298107029,1,0.4347917114176088,22
+reactome_pathway,Activation of NF-kappaB in B cells,0.020750988519190938,1,1.518805340723158,46
+reactome_pathway,SUMOylation of chromatin organization proteins,0.021267103442114695,1,1.4532263900628901,40
+reactome_pathway,Pyroptosis,0.021349364464667397,1,2.213442827095708,12
+reactome_pathway,TRAF6 mediated NF-kB activation,0.024048512740630083,1,-0.03338007572869574,13
+reactome_pathway,PI3K events in ERBB2 signaling,0.02427200464057531,1,-2.3620120376791696,3
+reactome_pathway,ERBB2 Activates PTK6 Signaling,0.02427200464057531,1,-2.3620120376791696,3
+reactome_pathway,Signaling by RAF1 mutants,0.024726644454487606,1,1.4738444177391172,19
+reactome_pathway,IkBA variant leads to EDA-ID,0.02481221012325384,1,-1.0195989011838773,5
+reactome_pathway,Common Pathway of Fibrin Clot Formation,0.02488683299289768,1,-0.9191916454460288,3
+reactome_pathway,G1/S-Specific Transcription,0.02500399797573917,1,-0.4543829777922061,9
+reactome_pathway,Condensation of Prometaphase Chromosomes,0.025264727417099578,1,-0.4543829777922061,9
+reactome_pathway,"Synthesis, secretion, and inactivation of Glucose-dependent Insulinotropic Polypeptide (GIP)",0.025312579914220267,1,2.0519110242533825,3
+reactome_pathway,"Synthesis, secretion, and deacylation of Ghrelin",0.025312579914220267,1,2.0519110242533825,3
+reactome_pathway,RHOV GTPase cycle,0.025537762105672046,1,1.620587131001353,18
+reactome_pathway,DCC mediated attractive signaling,0.025651027658329054,1,1.912193656199872,6
+reactome_pathway,Recognition and association of DNA glycosylase with site containing an affected pyrimidine,0.026032517566118053,1,0.40926232005683844,6
+reactome_pathway,Cleavage of the damaged pyrimidine,0.026032517566118053,1,0.40926232005683844,6
+reactome_pathway,Cohesin Loading onto Chromatin,0.0261191119344258,1,0.2778476382111031,8
+reactome_pathway,Antigen processing: Ubiquitination & Proteasome degradation,0.026198485833846326,1,1.2519579705949493,127
+reactome_pathway,RIP-mediated NFkB activation via ZBP1,0.02671584566173721,1,-0.4588579706953893,7
+reactome_pathway,Tight junction interactions,0.027239555778723668,1,2.430157883048803,7
+reactome_pathway,RHO GTPases Activate NADPH Oxidases,0.027530472458239367,1,1.6453039159148568,9
+reactome_pathway,Asparagine N-linked glycosylation,0.027694434635956788,1,1.6567879501853422,5
+reactome_pathway,Signaling by high-kinase activity BRAF mutants,0.028132720405209134,1,1.4537188122579232,20
+reactome_pathway,DSCAM interactions,0.029163410485965127,1,2.16564950056657,5
+reactome_pathway,Pre-NOTCH Processing in the Endoplasmic Reticulum,0.0296081617947905,1,2.3235443292261606,4
+reactome_pathway,Cargo concentration in the ER,0.029626684005451757,1,1.6439777441267607,19
+reactome_pathway,SUMOylation of RNA binding proteins,0.030151517682922523,1,1.386963522182319,37
+reactome_pathway,Pre-NOTCH Processing in Golgi,0.030521161938454285,1,1.6905032810407292,6
+reactome_pathway,APC/C:Cdc20 mediated degradation of Cyclin B,0.030820905503074245,1,-0.3576653245586036,11
+reactome_pathway,Sphingolipid de novo biosynthesis,0.03188488373401875,1,1.4029948451741965,15
+reactome_pathway,Non-integrin membrane-ECM interactions,0.03204127190093707,1,4.770046632651227,4
+reactome_pathway,MET activates PTPN11,0.03233979686115034,1,-0.9202741417104873,3
+reactome_pathway,Resolution of Sister Chromatid Cohesion,0.032446943285967686,1,0.7295928948917105,57
+reactome_pathway,TRAIL  signaling,0.03271550453362037,1,4.445921262119091,3
+reactome_pathway,Regulation of gene expression in late stage (branching morphogenesis) pancreatic bud precursor cells,0.03274698154637092,1,-0.5101053116288364,3
+reactome_pathway,RUNX3 regulates NOTCH signaling,0.03274698154637092,1,-0.5101053116288364,3
+reactome_pathway,NOTCH2 Activation and Transmission of Signal to the Nucleus,0.03406147398225669,1,2.3054687477639404,6
+reactome_pathway,PCNA-Dependent Long Patch Base Excision Repair,0.034594183168343645,1,0.6710219909501264,17
+reactome_pathway,ATF6 (ATF6-alpha) activates chaperone genes,0.036151364695218735,1,2.2352130762913296,5
+reactome_pathway,"GABA synthesis, release, reuptake and degradation",0.03748593424954146,1,-0.1569192100438937,4
+reactome_pathway,RHOU GTPase cycle,0.03797554038515846,1,1.5948192206050447,22
+reactome_pathway,Pentose phosphate pathway,0.038242486868490286,1,0.3658412697670314,9
+reactome_pathway,Assembly of collagen fibrils and other multimeric structures,0.0383722840466549,1,0.004914569749942706,8
+reactome_pathway,InlA-mediated entry of Listeria monocytogenes into host cells,0.039290995954794634,1,2.427675638126773,3
+reactome_pathway,Integrin cell surface interactions,0.04146689431776759,1,0.5846364902658714,13
+reactome_pathway,APC/C:Cdc20 mediated degradation of Securin,0.0415357969930541,1,1.4052776418604047,46
+reactome_pathway,CDK-mediated phosphorylation and removal of Cdc6,0.0415357969930541,1,1.4052776418604047,46
+reactome_pathway,Autodegradation of Cdh1 by Cdh1:APC/C,0.0415357969930541,1,1.4052776418604047,46
+reactome_pathway,Nuclear Receptor transcription pathway,0.04323617469776222,1,-0.9429380416958187,5
+reactome_pathway,EGFR interacts with phospholipase C-gamma,0.04388019208761166,1,-0.2650360436355731,3
+reactome_pathway,Phenylalanine metabolism,0.044082531470547644,1,-0.14674950984764046,3
+reactome_pathway,RNA Polymerase II Transcription Termination,0.04488954409629151,1,0.8220896751147164,50
+reactome_pathway,PLCG1 events in ERBB2 signaling,0.04674279053521123,1,-0.2650360436355731,3
+reactome_pathway,mRNA 3'-end processing,0.04679221078928701,1,0.8099505139458908,45
+reactome_pathway,Synthesis of active ubiquitin: roles of E1 and E2 enzymes,0.04731036682493567,1,1.575718927767649,23
+reactome_pathway,RHOF GTPase cycle,0.049419931840508406,1,1.4511387739383652,23
+reactome_pathway,Sensory processing of sound by outer hair cells of the cochlea,0.050068741104500956,1,1.536322203152239,12
+reactome_pathway,Clathrin-mediated endocytosis,0.05083936557112242,1,1.3521542033401313,28
+reactome_pathway,APC/C:Cdh1 mediated degradation of Cdc20 and other APC/C:Cdh1 targeted proteins in late mitosis/early G1,0.05121103648275727,1,1.3821170344031244,47
+reactome_pathway,Ion transport by P-type ATPases,0.05356579302082031,1,0.2412736725780184,9
+reactome_pathway,STAT5 activation downstream of FLT3 ITD mutants,0.054508267756691015,1,2.7737831373016117,4
+reactome_pathway,Metabolism of folate and pterines,0.05555790205282217,1,0.5179182279176185,6
+reactome_pathway,mRNA Splicing - Minor Pathway,0.05594356919570483,1,0.7411380460773319,38
+reactome_pathway,2-LTR circle formation,0.055977070610292286,1,0.30771221746617833,6
+reactome_pathway,Formation of Senescence-Associated Heterochromatin Foci (SAHF),0.05647083013884827,1,0.5304700667263541,9
+reactome_pathway,RAS processing,0.05822279496703359,1,2.0677808873199823,10
+reactome_pathway,Cooperation of PDCL (PhLP1) and TRiC/CCT in G-protein beta folding,0.058768608192697816,1,0.4789291424617791,18
+reactome_pathway,Folding of actin by CCT/TriC,0.05890615079583435,1,0.4174151456356332,9
+reactome_pathway,Activation of AMPK downstream of NMDARs,0.05924009994473739,1,0.39520482724779976,10
+reactome_pathway,SUMOylation of DNA methylation proteins,0.059325400064574485,1,1.6088497195135647,9
+reactome_pathway,"Gamma carboxylation, hypusine formation and arylsulfatase activation",0.059863544445123665,1,2.6510317713831113,3
+reactome_pathway,COPI-mediated anterograde transport,0.060447193325291686,1,1.2332850213444384,64
+reactome_pathway,Downregulation of TGF-beta receptor signaling,0.06148934629892268,1,1.5690953553332363,14
+reactome_pathway,RHO GTPases Activate Rhotekin and Rhophilins,0.0618982093141126,1,1.6557725493789004,6
+reactome_pathway,p75NTR recruits signalling complexes,0.06232700596608279,1,1.8645212700144445,5
+reactome_pathway,Regulation of actin dynamics for phagocytic cup formation,0.06273765409928518,1,1.3810895195701745,32
+reactome_pathway,Deregulated CDK5 triggers multiple neurodegenerative pathways in Alzheimer's disease models,0.06360872297297782,1,0.5466108339510353,10
+reactome_pathway,RHOA GTPase cycle,0.06395918218223055,1,1.2630894974241496,59
+reactome_pathway,ERK/MAPK targets,0.06480234557641434,1,1.690731935149474,4
+reactome_pathway,Heme degradation,0.06836855462351916,1,1.6738133554992067,4
+reactome_pathway,VLDLR internalisation and degradation,0.0683895672147006,1,1.5723908873119739,5
+reactome_pathway,Amino acids regulate mTORC1,0.06884061422037992,1,1.2345121829127053,20
+reactome_pathway,Activation of ATR in response to replication stress,0.06905638842735959,1,0.6710219909501264,19
+reactome_pathway,ADP signalling through P2Y purinoceptor 12,0.06985643031904411,1,0.4419100450637371,8
+reactome_pathway,Collagen degradation,0.07029499069216547,1,-0.020359793978415027,8
+reactome_pathway,TNFR1-induced NFkappaB signaling pathway,0.07049781675596824,1,0.33762767776858565,13
+reactome_pathway,Interleukin-6 signaling,0.07070521289708494,1,-0.11536557575498163,3
+reactome_pathway,TFAP2 (AP-2) family regulates transcription of growth factors and their receptors,0.0708344920406184,1,-0.027196657780138366,4
+reactome_pathway,Signal attenuation,0.07100619255796406,1,2.2294255152930087,3
+reactome_pathway,RUNX3 regulates p14-ARF,0.07118728402291684,1,1.9533477786740039,3
+reactome_pathway,RHO GTPases activate CIT,0.0715426743619262,1,1.7120254445085858,11
+reactome_pathway,Degradation of the extracellular matrix,0.07523322072075242,1,2.134704270491833,11
+reactome_pathway,Regulation of the apoptosome activity,0.0756581657890101,1,1.7500813090553329,8
+reactome_pathway,Regulation of cholesterol biosynthesis by SREBP (SREBF),0.07620432356442937,1,1.463307590820892,7
+reactome_pathway,RAC3 GTPase cycle,0.07632286225488417,1,1.145113219303055,50
+reactome_pathway,TRAF6-mediated induction of TAK1 complex within TLR4 complex,0.0768726794905759,1,-1.7262667782017422,4
+reactome_pathway,IRAK2 mediated activation of TAK1 complex upon TLR7/8 or 9 stimulation,0.0768726794905759,1,-1.7262667782017422,4
+reactome_pathway,"TICAM1,TRAF6-dependent induction of TAK1 complex",0.0768726794905759,1,-1.7262667782017422,4
+reactome_pathway,IRAK2 mediated activation of TAK1 complex,0.0768726794905759,1,-1.7262667782017422,4
+reactome_pathway,Alpha-protein kinase 1 signaling pathway,0.0768726794905759,1,-1.7262667782017422,4
+reactome_pathway,Packaging Of Telomere Ends,0.07740236052812137,1,0.4745935680616821,5
+reactome_pathway,Growth hormone receptor signaling,0.07746799039170557,1,2.210491669457848,7
+reactome_pathway,CDC6 association with the ORC:origin complex,0.07765334124056669,1,1.9925714569280821,5
+reactome_pathway,LRR FLII-interacting protein 1 (LRRFIP1) activates type I IFN production,0.07861594471727244,1,0.2798491151411513,3
+reactome_pathway,Nef Mediated CD8 Down-regulation,0.07912832152034967,1,1.6847819480908743,4
+reactome_pathway,RNA Polymerase I Transcription Initiation,0.07922899724348403,1,0.37521318972454015,28
+reactome_pathway,"Tetrahydrobiopterin (BH4) synthesis, recycling, salvage and regulation",0.07927535515836781,1,-0.17807529056728943,5
+reactome_pathway,Deadenylation of mRNA,0.07971589355173882,1,0.3089405738581891,15
+reactome_pathway,CLEC7A (Dectin-1) signaling,0.08222449863464408,1,0.5118198090273625,11
+reactome_pathway,RAC1 GTPase cycle,0.08379933856665636,1,1.1684064037099382,69
+reactome_pathway,Calcineurin activates NFAT,0.08422034840022836,1,-0.15147859825345886,4
+reactome_pathway,NR1H3 & NR1H2 regulate gene expression linked to cholesterol transport and efflux,0.08565043977411274,1,0.6076092080451744,8
+reactome_pathway,POLB-Dependent Long Patch Base Excision Repair,0.0866129949245968,1,0.665387081486435,7
+reactome_pathway,NoRC negatively regulates rRNA expression,0.08747085424813258,1,0.4745935680616821,35
+reactome_pathway,ADORA2B mediated anti-inflammatory cytokines production,0.0882261965132136,1,0.5919319570370232,14
+reactome_pathway,FCERI mediated NF-kB activation,0.09015779889701353,1,1.428438249317685,53
+reactome_pathway,Synthesis of pyrophosphates in the cytosol,0.09092984468301885,1,0.17929140840163002,3
+reactome_pathway,Signaling by FLT3 fusion proteins,0.09123847636121103,1,2.044479710166918,6
+reactome_pathway,Dopamine Neurotransmitter Release Cycle,0.09167556957383437,1,0.3997924996546283,4
+reactome_pathway,Interferon alpha/beta signaling,0.09218507917166578,1,1.5933280854324878,16
+reactome_pathway,Interleukin-7 signaling,0.09227894270937918,1,-0.2959529798263505,5
+reactome_pathway,Signaling by CSF3 (G-CSF),0.09381618757953418,1,2.1781703503046033,4
+reactome_pathway,B-WICH complex positively regulates rRNA expression,0.09402081064771325,1,0.5024735534636545,24
+reactome_pathway,Apoptosis induced DNA fragmentation,0.09423700429555569,1,-0.5367391476699654,9
+reactome_pathway,Caspase-mediated cleavage of cytoskeletal proteins,0.09480045411135175,1,1.5365259798171136,8
+reactome_pathway,NRAGE signals death through JNK,0.09499496547607326,1,1.4888421746616627,13
+reactome_pathway,Dissolution of Fibrin Clot,0.09502743040247508,1,0.3406337558545713,5
+reactome_pathway,Mitochondrial Fatty Acid Beta-Oxidation,0.09589307605515443,1,1.774179638520293,10
+reactome_pathway,Assembly and cell surface presentation of NMDA receptors,0.09671690051909634,1,0.3372971939058276,9
+reactome_pathway,HIV Transcription Initiation,0.09769549555865582,1,0.7376439610080479,30
+reactome_pathway,RNA Polymerase II HIV Promoter Escape,0.09769549555865582,1,0.7376439610080479,30
+reactome_pathway,RNA Polymerase II Promoter Escape,0.09769549555865582,1,0.7376439610080479,30
+reactome_pathway,RNA Polymerase II Transcription Pre-Initiation And Promoter Opening,0.09769549555865582,1,0.7376439610080479,30
+reactome_pathway,RNA Polymerase II Transcription Initiation,0.09769549555865582,1,0.7376439610080479,30
+reactome_pathway,Hedgehog 'off' state,0.09795878694818502,1,0.20341355318412643,12
+reactome_pathway,G-protein activation,0.09840797251358352,1,0.4144758421706278,6
+reactome_pathway,Negative regulators of DDX58/IFIH1 signaling,0.09942450039506752,1,1.4384209144504503,17
+reactome_pathway,Regulation of expression of SLITs and ROBOs,0.09959674447716935,1,0.8177870405260048,120
+reactome_pathway,RUNX1 interacts with co-factors whose precise effect on RUNX1 targets is not known,0.1010069693549724,1,1.588276836645688,21
+reactome_pathway,Mitochondrial transcription initiation,0.10270188545125543,1,0.33127074114072275,3
+reactome_pathway,Meiotic synapsis,0.10315472734360796,1,0.5303535388656271,13
+reactome_pathway,Downregulation of ERBB4 signaling,0.1046978173520727,1,1.8370371837113817,4
+reactome_pathway,Laminin interactions,0.10497062080946633,1,2.317026755063076,8
+reactome_pathway,NOTCH1 Intracellular Domain Regulates Transcription,0.10536907606336297,1,0.3340432827122339,13
+reactome_pathway,RHO GTPases Activate ROCKs,0.10693337138491152,1,1.3448916957634727,13
+reactome_pathway,Pyrimidine catabolism,0.10800790487948861,1,-0.007940624486314824,3
+reactome_pathway,SUMOylation of DNA damage response and repair proteins,0.10808937823964988,1,1.1198559619593884,52
+reactome_pathway,RHO GTPases Activate WASPs and WAVEs,0.10871188036094198,1,1.3810895195701745,22
+reactome_pathway,"Adrenaline,noradrenaline inhibits insulin secretion",0.10906457166411135,1,0.5043504916010128,7
+reactome_pathway,Formation of the Early Elongation Complex,0.10919131444038593,1,0.6975656211514676,23
+reactome_pathway,Formation of the HIV-1 Early Elongation Complex,0.10919131444038593,1,0.6975656211514676,23
+reactome_pathway,ALK mutants bind TKIs,0.11045389251370319,1,-0.323325368192228,6
+reactome_pathway,Regulation of IFNG signaling,0.11332737522109024,1,2.1744779474566154,4
+reactome_pathway,Acyl chain remodelling of PS,0.11609248460094729,1,1.9666516018095137,4
+reactome_pathway,ERBB2 Regulates Cell Motility,0.11621623619466018,1,0.26922479359168594,5
+reactome_pathway,Heme biosynthesis,0.11718567445049356,1,0.535322321296992,6
+reactome_pathway,Inhibition of DNA recombination at telomere,0.11832747146233161,1,0.508565833820766,17
+reactome_pathway,Interconversion of nucleotide di- and triphosphates,0.1188557800075936,1,0.68757184677544,20
+reactome_pathway,Class B/2 (Secretin family receptors),0.11898937024666702,1,0.05284212467454183,4
+reactome_pathway,GPER1 signaling,0.11985001307760737,1,0.703880286523412,16
+reactome_pathway,Respiratory electron transport,0.11990954873504586,1,1.2668877262599596,36
+reactome_pathway,RHO GTPases activate PAKs,0.12096152843066046,1,1.3448916957634727,13
+reactome_pathway,Recycling pathway of L1,0.12343364485535513,1,1.43923128479322,22
+reactome_pathway,EPH-ephrin mediated repulsion of cells,0.1238000041291959,1,1.567151141222733,16
+reactome_pathway,Suppression of apoptosis,0.12493034246651291,1,1.7943404041451825,5
+reactome_pathway,Regulation of Complement cascade,0.12726913257159647,1,0.21901406622485245,4
+reactome_pathway,NOSTRIN mediated eNOS trafficking,0.12753103476466127,1,1.6622434418075074,3
+reactome_pathway,Telomere C-strand synthesis initiation,0.12937194429839396,1,0.34205240907617007,3
+reactome_pathway,"Synthesis, secretion, and inactivation of Glucagon-like Peptide-1 (GLP-1)",0.13000389950726338,1,1.9315004536748706,5
+reactome_pathway,G2/M DNA damage checkpoint,0.13127454155331525,1,0.6710219909501264,19
+reactome_pathway,RAC2 GTPase cycle,0.13128290492658964,1,1.1677745236431614,53
+reactome_pathway,Mismatch repair (MMR) directed by MSH2:MSH6 (MutSalpha),0.1313624016376037,1,0.609875887095005,8
+reactome_pathway,NCAM signaling for neurite out-growth,0.13237302207642704,1,1.6719081723495175,9
+reactome_pathway,Attachment and Entry,0.13281703837442163,1,-0.9485720835409822,3
+reactome_pathway,NOTCH3 Intracellular Domain Regulates Transcription,0.13415811625871188,1,-0.10922132576243766,4
+reactome_pathway,ERKs are inactivated,0.13509379865156187,1,2.2294255152930087,7
+reactome_pathway,Senescence-Associated Secretory Phenotype (SASP),0.13533862672597424,1,0.5024735534636545,26
+reactome_pathway,"PTK6 Regulates RHO GTPases, RAS GTPase and MAP kinases",0.13555239776396596,1,1.960395610396949,4
+reactome_pathway,"FOXO-mediated transcription of oxidative stress, metabolic and neuronal genes",0.13567009208111158,1,1.5964947570631938,9
+reactome_pathway,Peptide ligand-binding receptors,0.13572499991823106,1,2.2334088850053715,3
+reactome_pathway,Retrograde neurotrophin signalling,0.13664777959688215,1,1.561911395133492,5
+reactome_pathway,Polymerase switching,0.1370112314137101,1,0.5065372000131482,8
+reactome_pathway,FCGR3A-mediated phagocytosis,0.13760724974593444,1,1.3810895195701745,28
+reactome_pathway,RHOQ GTPase cycle,0.138675074877025,1,1.2242801710116178,33
+reactome_pathway,Signaling by FGFR1 in disease,0.14024872052316653,1,0.48495748849812614,7
+reactome_pathway,Cholesterol biosynthesis,0.14089376156415082,1,1.422789853776314,16
+reactome_pathway,Energy dependent regulation of mTOR by LKB1-AMPK,0.14164929377695828,1,1.2848713513192813,15
+reactome_pathway,Other interleukin signaling,0.1420030398440874,1,1.4006524126476732,5
+reactome_pathway,Formation of annular gap junctions,0.14240906053791708,1,1.4323029573162107,5
+reactome_pathway,O-linked glycosylation of mucins,0.1424903715306273,1,0.7677288304008346,5
+reactome_pathway,tRNA processing in the mitochondrion,0.1432237751538962,1,0.7775854884582003,5
+reactome_pathway,Signaling by ROBO receptors,0.14323918683626166,1,1.578361580978915,4
+reactome_pathway,Cdc20:Phospho-APC/C mediated degradation of Cyclin A,0.1486200276893549,1,1.2229189392106359,49
+reactome_pathway,WNT ligand biogenesis and trafficking,0.14929342244669613,1,1.5164684299132352,7
+reactome_pathway,Transport of nucleosides and free purine and pyrimidine bases across the plasma membrane,0.15044951569357756,1,0.6094380361001149,6
+reactome_pathway,HSF1-dependent transactivation,0.15089786735420735,1,-0.029931366853021436,3
+reactome_pathway,Downstream TCR signaling,0.15254910954278575,1,1.3025179868068801,54
+reactome_pathway,FGFR2 alternative splicing,0.15285487822028407,1,0.7937615504467371,22
+reactome_pathway,Activation of G protein gated Potassium channels,0.1534533295628127,1,0.5043504916010128,5
+reactome_pathway,G beta:gamma signalling through BTK,0.1534533295628127,1,0.5043504916010128,5
+reactome_pathway,Inhibition  of voltage gated Ca2+ channels via Gbeta/gamma subunits,0.1534533295628127,1,0.5043504916010128,5
+reactome_pathway,Glucagon signaling in metabolic regulation,0.1534533295628127,1,0.5043504916010128,5
+reactome_pathway,RHOJ GTPase cycle,0.1537238247030724,1,1.2193759330438056,30
+reactome_pathway,Calnexin/calreticulin cycle,0.15451819523164897,1,1.7413563837801747,4
+reactome_pathway,"Inactivation, recovery and regulation of the phototransduction cascade",0.15480857632965841,1,1.6496156304371148,4
+reactome_pathway,Nonhomologous End-Joining (NHEJ),0.15592491538320838,1,0.700327703787465,17
+reactome_pathway,Regulation of insulin secretion,0.15607168553113765,1,1.8542302989810227,4
+reactome_pathway,RUNX1 regulates genes involved in megakaryocyte differentiation and platelet function,0.15607751155796654,1,0.48408050591924984,19
+reactome_pathway,RHOG GTPase cycle,0.15676553228740622,1,1.1224519149629486,47
+reactome_pathway,Iron uptake and transport,0.15955695653778013,1,1.442636693241112,11
+reactome_pathway,Retrograde transport at the Trans-Golgi-Network,0.16018678591081825,1,1.2750017859832794,32
+reactome_pathway,RMTs methylate histone arginines,0.16120678676882674,1,0.6055836540445393,23
+reactome_pathway,Vasopressin regulates renal water homeostasis via Aquaporins,0.16335834077248756,1,0.6795134224730336,11
+reactome_pathway,Insertion of tail-anchored proteins into the endoplasmic reticulum membrane,0.16366293771644955,1,1.5905651745514875,11
+reactome_pathway,Myogenesis,0.16504569955581158,1,1.4860892041321623,6
+reactome_pathway,SUMOylation of ubiquitinylation proteins,0.16659627599276924,1,1.386963522182319,29
+reactome_pathway,Signaling by BMP,0.16659765193317902,1,1.4810904156870477,5
+reactome_pathway,ISG15 antiviral mechanism,0.16676984037932963,1,1.1048821568473566,53
+reactome_pathway,Membrane binding and targetting of GAG proteins,0.1667962258223197,1,0.07724508519929398,6
+reactome_pathway,Erythrocytes take up carbon dioxide and release oxygen,0.16799966082053133,1,-0.07757156273003812,4
+reactome_pathway,NOTCH4 Activation and Transmission of Signal to the Nucleus,0.16806788157045136,1,2.134704270491833,5
+reactome_pathway,Signaling by BRAF and RAF1 fusions,0.1734807369676517,1,1.321814529727611,32
+reactome_pathway,Tie2 Signaling,0.17366806011369582,1,2.402992921935202,5
+reactome_pathway,"BMAL1:CLOCK,NPAS2 activates circadian gene expression",0.17437024235664086,1,0.5308256860717707,6
+reactome_pathway,Regulation of FOXO transcriptional activity by acetylation,0.17479752719687808,1,-0.1296186629763299,4
+reactome_pathway,Recruitment and ATM-mediated phosphorylation of repair and signaling proteins at DNA double strand breaks,0.17591710531050722,1,0.5352179940014266,20
+reactome_pathway,Activation of the pre-replicative complex,0.17713129547670958,1,0.7481411629701616,17
+reactome_pathway,Effects of PIP2 hydrolysis,0.17786264479448796,1,2.1840936158889264,5
+reactome_pathway,Negative regulation of MAPK pathway,0.17845496241670133,1,1.2971125509117738,15
+reactome_pathway,FCERI mediated MAPK activation,0.17859414963706657,1,1.5516475389074333,13
+reactome_pathway,RAF activation,0.1802055221420811,1,1.2712759831806757,18
+reactome_pathway,Synthesis of Ketone Bodies,0.18092590198089917,1,1.7430810096815472,4
+reactome_pathway,PI5P Regulates TP53 Acetylation,0.18115522539624204,1,1.4671284080141074,5
+reactome_pathway,Heme signaling,0.18389305915960216,1,0.6547827432322777,12
+reactome_pathway,Carboxyterminal post-translational modifications of tubulin,0.18402248092924955,1,0.4347917114176088,8
+reactome_pathway,Reduction of cytosolic Ca++ levels,0.1845460593141571,1,0.2754379155115816,4
+reactome_pathway,Signaling by MST1,0.1848164168090992,1,1.486827343933264,3
+reactome_pathway,RAB geranylgeranylation,0.1852486879127069,1,0.7085276310649257,31
+reactome_pathway,Noncanonical activation of NOTCH3,0.18578094072927823,1,2.134704270491833,5
+reactome_pathway,Selenoamino acid metabolism,0.18613121092813809,1,0.5939051283161145,11
+reactome_pathway,Azathioprine ADME,0.18680317686170012,1,0.7222473171588661,11
+reactome_pathway,Nephrin family interactions,0.18746522690877268,1,1.5860087463296666,9
+reactome_pathway,Abortive elongation of HIV-1 transcript in the absence of Tat,0.18761010867359657,1,0.7573536033667027,17
+reactome_pathway,Condensation of Prophase Chromosomes,0.1926561979767573,1,0.4745935680616821,11
+reactome_pathway,Microtubule-dependent trafficking of connexons from Golgi to the plasma membrane,0.19287893233356765,1,0.32299328489281703,7
+reactome_pathway,Gap junction assembly,0.19287893233356765,1,0.32299328489281703,7
+reactome_pathway,Insulin receptor recycling,0.19329982473109325,1,1.2370636832752517,12
+reactome_pathway,Ion channel transport,0.19329982473109325,1,1.2370636832752517,12
+reactome_pathway,BBSome-mediated cargo-targeting to cilium,0.19331092161831614,1,0.4535077933225454,7
+reactome_pathway,SHOC2 M1731 mutant abolishes MRAS complex function,0.1948813861687166,1,1.3448916957634727,5
+reactome_pathway,Gain-of-function MRAS complexes activate RAF signaling,0.1948813861687166,1,1.3448916957634727,5
+reactome_pathway,Integration of viral DNA into host genomic DNA,0.1959108740485443,1,0.38548081715393734,3
+reactome_pathway,Autointegration results in viral DNA circles,0.1959108740485443,1,0.38548081715393734,3
+reactome_pathway,Downregulation of ERBB2 signaling,0.1960825570637689,1,0.684871811732834,8
+reactome_pathway,EGR2 and SOX10-mediated initiation of Schwann cell myelination,0.1962758013810548,1,1.8647449321500105,10
+reactome_pathway,Signaling by PDGF,0.19644473797954498,1,0.5846364902658714,3
+reactome_pathway,Post-chaperonin tubulin folding pathway,0.1965686754557537,1,0.4347917114176088,10
+reactome_pathway,GRB2 events in ERBB2 signaling,0.19711628572470383,1,-0.8833848024320518,4
+reactome_pathway,CREB phosphorylation,0.19921240575890353,1,1.4037109866612199,4
+reactome_pathway,EML4 and NUDC in mitotic spindle formation,0.20292203277640664,1,0.8027655971285097,52
+reactome_pathway,RHO GTPases activate PKNs,0.2037820814429383,1,1.4296693531903093,20
+reactome_pathway,ADP signalling through P2Y purinoceptor 1,0.204550586969589,1,0.5397040717276262,8
+reactome_pathway,Metabolism of ingested H2SeO4 and H2SeO3 into H2Se,0.20471860025254288,1,1.5932322521176316,3
+reactome_pathway,p75NTR negatively regulates cell cycle via SC1,0.20540785777155177,1,1.5964947570631938,3
+reactome_pathway,RIPK1-mediated regulated necrosis,0.2062371912013703,1,1.2313413873839107,3
+reactome_pathway,SARS-CoV-2 modulates autophagy,0.20655494606659494,1,1.6349778999046738,6
+reactome_pathway,Metabolism of Angiotensinogen to Angiotensins,0.20693015787618016,1,2.3420917278312827,3
+reactome_pathway,Lipophagy,0.20827328741117962,1,0.32294903215050086,5
+reactome_pathway,Gastrin-CREB signalling pathway via PKC and MAPK,0.20870565690956844,1,1.4335932067767292,5
+reactome_pathway,Prostacyclin signalling through prostacyclin receptor,0.2118973143772652,1,0.5919319570370232,6
+reactome_pathway,Glucagon-type ligand receptors,0.2118973143772652,1,0.5919319570370232,6
+reactome_pathway,Assembly of the ORC complex at the origin of replication,0.213131041804332,1,1.4964711497415972,14
+reactome_pathway,E3 ubiquitin ligases ubiquitinate target proteins,0.21315201244892695,1,1.1154466091321065,29
+reactome_pathway,Insulin processing,0.21512234566870322,1,1.2929597207154466,10
+reactome_pathway,Nef and signal transduction,0.21566369421816448,1,0.6579525844225492,3
+reactome_pathway,PPARA activates gene expression,0.2161489304460784,1,0.7907941006299465,35
+reactome_pathway,Transcriptional Regulation by E2F6,0.21623471695793917,1,1.393222631984396,14
+reactome_pathway,MHC class II antigen presentation,0.216725200587658,1,0.9822300855297601,61
+reactome_pathway,Peroxisomal protein import,0.21787417369343848,1,0.7146586338611199,16
+reactome_pathway,Golgi Cisternae Pericentriolar Stack Reorganization,0.2204931363439178,1,1.6941697862595078,8
+reactome_pathway,Receptor Mediated Mitophagy,0.22246441361260294,1,1.6634174665982495,4
+reactome_pathway,NPAS4 regulates expression of target genes,0.22256964415690844,1,0.0989219207594571,6
+reactome_pathway,AURKA Activation by TPX2,0.2267873503501157,1,0.7056536388112047,27
+reactome_pathway,TRAF6 mediated IRF7 activation,0.22822744538508982,1,0.5013022810782745,10
+reactome_pathway,Inactivation of CSF3 (G-CSF) signaling,0.2285164689311629,1,0.3511711994116819,8
+reactome_pathway,WNT5A-dependent internalization of FZD4,0.230013129708809,1,1.561911395133492,7
+reactome_pathway,Regulation of IFNA/IFNB signaling,0.23015428384569458,1,2.329262733018332,3
+reactome_pathway,ROS and RNS production in phagocytes,0.23097303767350322,1,1.1677745236431614,13
+reactome_pathway,G alpha (z) signalling events,0.2310140672867731,1,0.5919319570370232,10
+reactome_pathway,Regulation of necroptotic cell death,0.23150832303657126,1,0.45310456709602775,10
+reactome_pathway,Sensory processing of sound by inner hair cells of the cochlea,0.23205516816880203,1,1.4522402549353166,16
+reactome_pathway,Glycosphingolipid metabolism,0.23243006897282825,1,1.4673505076329962,11
+reactome_pathway,Activation of caspases through apoptosome-mediated cleavage,0.23315237074010084,1,1.5866338262959712,4
+reactome_pathway,Regulation of TP53 Activity through Phosphorylation,0.23393462712072766,1,0.771712485191821,35
+reactome_pathway,Cell surface interactions at the vascular wall,0.2353342745114082,1,0.7282471505737902,13
+reactome_pathway,Anchoring of the basal body to the plasma membrane,0.23557229645248812,1,0.7056536388112047,29
+reactome_pathway,HS-GAG degradation,0.23710367511920658,1,1.5175024363070895,4
+reactome_pathway,Synthesis of PIPs in the nucleus,0.23763407004391537,1,1.7405493547252944,4
+reactome_pathway,Dual incision in TC-NER,0.23975049364921186,1,0.7972094163496541,38
+reactome_pathway,Gap-filling DNA repair synthesis and ligation in TC-NER,0.23989136225995725,1,0.8462776697291464,39
+reactome_pathway,Establishment of Sister Chromatid Cohesion,0.24003842944940137,1,0.5939398124451736,8
+reactome_pathway,PKMTs methylate histone lysines,0.24520461574605767,1,0.6292232215561772,19
+reactome_pathway,Activation of RAC1,0.24627692438619672,1,1.482069391866465,6
+reactome_pathway,Serine biosynthesis,0.2467792203324521,1,1.385069947154013,4
+reactome_pathway,SUMOylation of intracellular receptors,0.24752467329263303,1,1.541836692700428,3
+reactome_pathway,Pyrimidine biosynthesis,0.24942184241935092,1,0.4012939341782422,3
+reactome_pathway,Translation of Replicase and Assembly of the Replication Transcription Complex,0.2506378090342816,1,1.6750865912824067,6
+reactome_pathway,Miscellaneous transport and binding events,0.25130719432581283,1,1.261023546830608,5
+reactome_pathway,VxPx cargo-targeting to cilium,0.2544267256452811,1,1.3744167804201757,9
+reactome_pathway,FCERI mediated Ca+2 mobilization,0.256652565786589,1,0.1804156674607622,10
+reactome_pathway,Estrogen-dependent gene expression,0.25843047200967684,1,0.889382405894632,48
+reactome_pathway,Nef Mediated CD4 Down-regulation,0.2585391640188467,1,1.5723908873119739,5
+reactome_pathway,G beta:gamma signalling through PI3Kgamma,0.2586289505969432,1,0.5043504916010128,9
+reactome_pathway,Post-transcriptional silencing by small RNAs,0.26052772055233253,1,0.48408050591924984,3
+reactome_pathway,Scavenging by Class F Receptors,0.26194753435675666,1,1.7247067903238555,4
+reactome_pathway,Degradation of cysteine and homocysteine,0.2629724247412783,1,1.4263156220761655,5
+reactome_pathway,Estrogen-stimulated signaling through PRKCZ,0.2636559803241908,1,2.2453718987799287,4
+reactome_pathway,Adenylate cyclase inhibitory pathway,0.2643045812828146,1,0.37946959852646145,3
+reactome_pathway,Signaling by cytosolic FGFR1 fusion mutants,0.26551545419223865,1,0.6267260553073962,4
+reactome_pathway,Antigen activates B Cell Receptor (BCR) leading to generation of second messengers,0.2665307275858183,1,1.3618877360722996,10
+reactome_pathway,TP53 Regulates Transcription of Death Receptors and Ligands,0.26695195072800143,1,1.159705580752996,4
+reactome_pathway,Regulation of PTEN localization,0.2689720117952792,1,1.6782470734602293,4
+reactome_pathway,RNA Polymerase II Pre-transcription Events,0.26936278158412685,1,0.9073714103788023,52
+reactome_pathway,Synthesis of Leukotrienes (LT) and Eoxins (EX),0.26984095656635093,1,1.2416966320279272,4
+reactome_pathway,Sulfide oxidation to sulfate,0.27042132175734196,1,0.425194353154833,4
+reactome_pathway,G beta:gamma signalling through PLC beta,0.2739666707055929,1,0.5919319570370232,6
+reactome_pathway,Presynaptic function of Kainate receptors,0.2739666707055929,1,0.5919319570370232,6
+reactome_pathway,G alpha (12/13) signalling events,0.27520231228547576,1,1.3516161912896756,18
+reactome_pathway,Transport of Mature mRNA derived from an Intron-Containing Transcript,0.2809584752782217,1,0.8703142631325129,57
+reactome_pathway,RHOB GTPase cycle,0.2814488263175277,1,1.4511387739383652,29
+reactome_pathway,Beta-oxidation of very long chain fatty acids,0.2814617449447426,1,0.1638463911631796,4
+reactome_pathway,Myoclonic epilepsy of Lafora,0.2828886787695282,1,1.404957916200743,3
+reactome_pathway,E2F-enabled inhibition of pre-replication complex formation,0.28475609475113833,1,1.6231236317941407,6
+reactome_pathway,Regulation of HSF1-mediated heat shock response,0.2847715759479472,1,1.1892974843796187,54
+reactome_pathway,CDC42 GTPase cycle,0.2853467166639786,1,1.1975415785049206,57
+reactome_pathway,PCP/CE pathway,0.28609962421309826,1,1.1332393913671128,7
+reactome_pathway,PINK1-PRKN Mediated Mitophagy,0.28618092125810507,1,1.0798220953901985,11
+reactome_pathway,TBC/RABGAPs,0.28778606884310476,1,0.7117985698980419,22
+reactome_pathway,RHOC GTPase cycle,0.28876400366731436,1,1.360309987796967,36
+reactome_pathway,Regulation of MECP2 expression and activity,0.28939803886039195,1,0.7796716323195358,12
+reactome_pathway,TNF receptor superfamily (TNFSF) members mediating non-canonical NF-kB pathway,0.2910929416665842,1,2.7234477158842614,3
+reactome_pathway,"Defective binding of RB1 mutants to E2F1,(E2F2, E2F3)",0.29295736841068226,1,1.4589438868189364,4
+reactome_pathway,PD-1 signaling,0.2930359662678569,1,1.9290206480150027,3
+reactome_pathway,Thromboxane signalling through TP receptor,0.2955580070931942,1,0.5043504916010128,7
+reactome_pathway,Cyclin D associated events in G1,0.2956808709078622,1,1.7629485101714353,12
+reactome_pathway,Downstream signal transduction,0.29732847249459476,1,1.591287488715232,10
+reactome_pathway,NCAM1 interactions,0.2982001321271081,1,0.5846364902658714,3
+reactome_pathway,ChREBP activates metabolic gene expression,0.2982007934575578,1,1.3666195390748739,4
+reactome_pathway,IRF3-mediated induction of type I IFN,0.29954050057798554,1,0.8903097155017922,7
+reactome_pathway,Translesion Synthesis by POLH,0.2996127403589928,1,0.741287993376088,13
+reactome_pathway,Association of TriC/CCT with target proteins during biosynthesis,0.3004566034278648,1,0.5296110812450138,19
+reactome_pathway,p130Cas linkage to MAPK signaling for integrins,0.3015829720009684,1,1.5910680622748252,5
+reactome_pathway,EPHA-mediated growth cone collapse,0.301836625543387,1,1.2143902079176887,9
+reactome_pathway,TP53 regulates transcription of additional cell cycle genes whose exact role in the p53 pathway remain uncertain,0.30288094944515415,1,0.2678093003270818,9
+reactome_pathway,Extra-nuclear estrogen signaling,0.3029069044366964,1,0.7440779058563861,16
+reactome_pathway,Amplification  of signal from unattached  kinetochores via a MAD2  inhibitory signal,0.3029138206171295,1,0.8350287487595137,42
+reactome_pathway,Signaling by FGFR2 IIIa TM,0.3040128584482456,1,0.8275908789019506,14
+reactome_pathway,Mismatch repair (MMR) directed by MSH2:MSH3 (MutSbeta),0.30773218677208136,1,0.741287993376088,7
+reactome_pathway,HDR through Single Strand Annealing (SSA),0.308236985568977,1,0.6140973111531912,10
+reactome_pathway,Regulation of NPAS4 mRNA translation,0.30823985442660085,1,0.6076092080451744,4
+reactome_pathway,Competing endogenous RNAs (ceRNAs) regulate PTEN translation,0.30823985442660085,1,0.6076092080451744,4
+reactome_pathway,APOBEC3G mediated resistance to HIV-1 infection,0.3099875756399829,1,0.5452260913291282,4
+reactome_pathway,Frs2-mediated activation,0.3112189117218422,1,1.4335932067767292,7
+reactome_pathway,Interleukin-4 and Interleukin-13 signaling,0.31322457989568564,1,1.4701971822510993,17
+reactome_pathway,PTK6 Regulates RTKs and Their Effectors AKT1 and DOK1,0.314144518475721,1,0.0253105025459253,4
+reactome_pathway,Regulation of signaling by CBL,0.31500512493472393,1,1.7857647056380308,6
+reactome_pathway,Intra-Golgi traffic,0.31596577088787786,1,0.8962141069479377,22
+reactome_pathway,Regulation of TP53 Activity through Acetylation,0.32491222985775975,1,1.455062101478507,13
+reactome_pathway,TP53 Regulates Transcription of Genes Involved in Cytochrome C Release,0.3292686761883434,1,1.6308304868638077,6
+reactome_pathway,Triglyceride catabolism,0.3332065967755586,1,1.2179622426675594,8
+reactome_pathway,DARPP-32 events,0.33596227097201914,1,0.16744217294867958,12
+reactome_pathway,IKK complex recruitment mediated by RIP1,0.3362122045258026,1,0.6933133571533171,6
+reactome_pathway,"TICAM1, RIP1-mediated IKK complex recruitment",0.3362122045258026,1,0.6933133571533171,6
+reactome_pathway,N-glycan trimming in the ER and Calnexin/Calreticulin cycle,0.33824096846980206,1,1.6614234871469165,9
+reactome_pathway,Josephin domain DUBs,0.33850217348241957,1,0.29646456150880895,4
+reactome_pathway,Translocation of SLC2A4 (GLUT4) to the plasma membrane,0.33869437365112504,1,0.778509324615809,42
+reactome_pathway,RAF/MAP kinase cascade,0.3411165824504814,1,0.42443679847423055,13
+reactome_pathway,Syndecan interactions,0.3419625303657565,1,0.6232411416079289,9
+reactome_pathway,TGF-beta receptor signaling in EMT (epithelial to mesenchymal transition),0.34209646915322356,1,1.234757204046803,7
+reactome_pathway,Processing of DNA double-strand break ends,0.3458813194041555,1,0.8904648188936305,26
+reactome_pathway,HuR (ELAVL1) binds and stabilizes mRNA,0.34603437738419923,1,1.5254552357702227,6
+reactome_pathway,Regulation by c-FLIP,0.34621879414543705,1,1.088069774122081,7
+reactome_pathway,CASP8 activity is inhibited,0.34621879414543705,1,1.088069774122081,7
+reactome_pathway,Dimerization of procaspase-8,0.34621879414543705,1,1.088069774122081,7
+reactome_pathway,CD163 mediating an anti-inflammatory response,0.34918340925997476,1,1.2805400511179454,3
+reactome_pathway,Synthesis of PG,0.35097307642168774,1,1.3228806449438324,3
+reactome_pathway,Amyloid fiber formation,0.3513280500109852,1,1.3292278743098882,22
+reactome_pathway,Small interfering RNA (siRNA) biogenesis,0.3517887550814562,1,0.5344510060525633,6
+reactome_pathway,SUMOylation of SUMOylation proteins,0.3521178697036354,1,1.1394207680576185,27
+reactome_pathway,Recognition and association of DNA glycosylase with site containing an affected purine,0.35433410063234466,1,0.4915797009412241,6
+reactome_pathway,Cleavage of the damaged purine,0.35433410063234466,1,0.4915797009412241,6
+reactome_pathway,Notch-HLH transcription pathway,0.3545954550091544,1,0.5529436521053525,10
+reactome_pathway,Translesion synthesis by REV1,0.35503513693814875,1,0.7061549921631072,10
+reactome_pathway,Translesion synthesis by POLK,0.35503513693814875,1,0.7061549921631072,10
+reactome_pathway,Translesion synthesis by POLI,0.35503513693814875,1,0.7061549921631072,10
+reactome_pathway,Acyl chain remodelling of PC,0.3561504914820058,1,1.3450988130142068,4
+reactome_pathway,Loss of Nlp from mitotic centrosomes,0.3570105296591008,1,0.7176232668514576,26
+reactome_pathway,MET Receptor Activation,0.35719612340455487,1,0.2801894745861849,4
+reactome_pathway,Fatty acyl-CoA biosynthesis,0.35862373633843775,1,1.2825956911357888,9
+reactome_pathway,NGF-stimulated transcription,0.3589069293691394,1,0.9366766514310922,7
+reactome_pathway,Chylomicron assembly,0.35940153792979734,1,1.463307590820892,3
+reactome_pathway,Transport of nucleotide sugars,0.36034460380192695,1,2.857395418763123,4
+reactome_pathway,EGFR downregulation,0.36126686311379447,1,0.5639075230507634,14
+reactome_pathway,HSF1 activation,0.36148041945369985,1,1.0671115091980343,11
+reactome_pathway,Interleukin-10 signaling,0.3616298367786955,1,-0.6938690815801981,3
+reactome_pathway,Nef mediated downregulation of MHC class I complex cell surface expression,0.3634226422408406,1,1.5571467789824083,7
+reactome_pathway,Platelet sensitization by LDL,0.364236080497523,1,1.2712759831806757,10
+reactome_pathway,Smooth Muscle Contraction,0.36618251247836975,1,1.2943774281819742,16
+reactome_pathway,Presynaptic phase of homologous DNA pairing and strand exchange,0.36669965720303604,1,0.7529580104990814,10
+reactome_pathway,Release of apoptotic factors from the mitochondria,0.36795605105896506,1,2.0204293868195373,3
+reactome_pathway,Purine ribonucleoside monophosphate biosynthesis,0.3681602787078336,1,0.6762903541855226,10
+reactome_pathway,Constitutive Signaling by Overexpressed ERBB2,0.369319018209794,1,1.2142005043563813,7
+reactome_pathway,Nuclear import of Rev protein,0.371758266156474,1,1.1547379973307148,28
+reactome_pathway,Beta-catenin phosphorylation cascade,0.37432310022050275,1,1.2971125509117738,7
+reactome_pathway,Signaling by GSK3beta mutants,0.37432310022050275,1,1.2971125509117738,7
+reactome_pathway,CTNNB1 S33 mutants aren't phosphorylated,0.37432310022050275,1,1.2971125509117738,7
+reactome_pathway,CTNNB1 S37 mutants aren't phosphorylated,0.37432310022050275,1,1.2971125509117738,7
+reactome_pathway,CTNNB1 S45 mutants aren't phosphorylated,0.37432310022050275,1,1.2971125509117738,7
+reactome_pathway,CTNNB1 T41 mutants aren't phosphorylated,0.37432310022050275,1,1.2971125509117738,7
+reactome_pathway,APC truncation mutants have impaired AXIN binding,0.37432310022050275,1,1.2971125509117738,7
+reactome_pathway,AXIN missense mutants destabilize the destruction complex,0.37432310022050275,1,1.2971125509117738,7
+reactome_pathway,Truncations of AMER1 destabilize the destruction complex,0.37432310022050275,1,1.2971125509117738,7
+reactome_pathway,SUMOylation of immune response proteins,0.3765272741394384,1,0.3402813986811146,4
+reactome_pathway,rRNA processing in the mitochondrion,0.377248739274601,1,0.8191397710965164,4
+reactome_pathway,MET activates PTK2 signaling,0.3774441817284799,1,1.3501539577218855,8
+reactome_pathway,Initiation of Nuclear Envelope (NE) Reformation,0.3798236439960381,1,0.6343419428048477,12
+reactome_pathway,Removal of the Flap Intermediate from the C-strand,0.38154432172492625,1,0.624926913598427,8
+reactome_pathway,Impaired BRCA2 binding to RAD51,0.38157774012997714,1,0.6710219909501264,9
+reactome_pathway,Transferrin endocytosis and recycling,0.3819758198339899,1,1.1606445993026082,13
+reactome_pathway,RUNX1 regulates transcription of genes involved in differentiation of myeloid cells,0.3820724353043414,1,0.1630196317611167,3
+reactome_pathway,Gluconeogenesis,0.38389793966205044,1,1.095258631366595,18
+reactome_pathway,SARS-CoV-1 targets host intracellular signalling and regulatory pathways,0.3849106987283657,1,1.2381151385828557,13
+reactome_pathway,Cyclin A/B1/B2 associated events during G2/M transition,0.3854129226817828,1,1.6535488030369054,8
+reactome_pathway,EPHB-mediated forward signaling,0.38623909786671246,1,1.13269861010211,20
+reactome_pathway,MAP3K8 (TPL2)-dependent MAPK1/3 activation,0.3887850237974984,1,0.5711679610786224,8
+reactome_pathway,PIWI-interacting RNA (piRNA) biogenesis,0.3891855771422001,1,0.8978281544371983,13
+reactome_pathway,Chk1/Chk2(Cds1) mediated inactivation of Cyclin B:Cdk1 complex,0.39730333643357046,1,0.6338408190704432,10
+reactome_pathway,Attenuation phase,0.39795263519041346,1,0.8177556936399052,8
+reactome_pathway,COPI-independent Golgi-to-ER retrograde traffic,0.3979634820259061,1,0.8493458067386214,34
+reactome_pathway,Interleukin-15 signaling,0.3988831852192078,1,2.402992921935202,3
+reactome_pathway,Nuclear events stimulated by ALK signaling in cancer,0.3998224764692975,1,1.2866173035217718,12
+reactome_pathway,NS1 Mediated Effects on Host Pathways,0.39998101903174327,1,1.0875971301960163,31
+reactome_pathway,Glucagon-like Peptide-1 (GLP1) regulates insulin secretion,0.4005654716940028,1,0.8479167073073535,16
+reactome_pathway,Gap-filling DNA repair synthesis and ligation in GG-NER,0.4006591786030214,1,0.7447145781731248,16
+reactome_pathway,Acetylcholine regulates insulin secretion,0.4010424283354204,1,0.3114807797905576,3
+reactome_pathway,Ion homeostasis,0.40178892836856034,1,0.6876675111340536,14
+reactome_pathway,Transport of Ribonucleoproteins into the Host Nucleus,0.4051637719218369,1,1.014423551467132,27
+reactome_pathway,SIRT1 negatively regulates rRNA expression,0.4104603637467282,1,0.4745935680616821,9
+reactome_pathway,Mitochondrial calcium ion transport,0.41152833607699923,1,1.0211904253094808,5
+reactome_pathway,RNA polymerase II transcribes snRNA genes,0.4126985559207487,1,1.2022379694578411,43
+reactome_pathway,Regulation of KIT signaling,0.41392420590708134,1,2.210491669457848,3
+reactome_pathway,FLT3 Signaling,0.4174593241991634,1,2.32758368019844,3
+reactome_pathway,"PI5P, PP2A and IER3 Regulate PI3K/AKT Signaling",0.4189219731170999,1,0.7353177140542363,25
+reactome_pathway,DDX58/IFIH1-mediated induction of interferon-alpha/beta,0.41938490891945057,1,1.40504551296587,4
+reactome_pathway,mRNA Capping,0.41993373547350227,1,0.8978281544371983,23
+reactome_pathway,Interleukin-37 signaling,0.42002677768388463,1,1.1185630770624644,9
+reactome_pathway,CRMPs in Sema3A signaling,0.42015477637053195,1,0.45719284662436493,4
+reactome_pathway,MicroRNA (miRNA) biogenesis,0.4215416344712837,1,0.7311379101710989,17
+reactome_pathway,Glutathione synthesis and recycling,0.4216614400191538,1,1.0276356121566463,7
+reactome_pathway,Assembly of the pre-replicative complex,0.42288264425257327,1,1.2176677285048445,51
+reactome_pathway,Depolymerisation of the Nuclear Lamina,0.4254477917567045,1,0.6749316835566455,5
+reactome_pathway,tRNA modification in the mitochondrion,0.4254981528981062,1,0.8899278089353971,6
+reactome_pathway,rRNA modification in the nucleus and cytosol,0.4276722219611508,1,1.0240655214933356,56
+reactome_pathway,MAPK3 (ERK1) activation,0.43278105060982586,1,0.6961651163855818,4
+reactome_pathway,SARS-CoV-1 activates/modulates innate immune responses,0.43333765928791024,1,0.842727330751632,22
+reactome_pathway,Regulation of Glucokinase by Glucokinase Regulatory Protein,0.43339725750522023,1,1.014423551467132,25
+reactome_pathway,Defective TPR may confer susceptibility towards thyroid papillary carcinoma (TPC),0.43339725750522023,1,1.014423551467132,25
+reactome_pathway,DNA methylation,0.4347650374804807,1,0.4745935680616821,7
+reactome_pathway,Late endosomal microautophagy,0.43554388702438707,1,0.6178525251594847,17
+reactome_pathway,GRB2:SOS provides linkage to MAPK signaling for Integrins,0.43730087629064984,1,1.2468461274930442,4
+reactome_pathway,RNA Polymerase III Transcription Initiation From Type 1 Promoter,0.43791554281075606,1,0.33669052410451916,15
+reactome_pathway,RNA Polymerase III Transcription Initiation From Type 2 Promoter,0.43791554281075606,1,0.33669052410451916,15
+reactome_pathway,Factors involved in megakaryocyte development and platelet production,0.4391623937919454,1,1.39661866806078,35
+reactome_pathway,Dual Incision in GG-NER,0.44023417174742346,1,0.7972094163496541,26
+reactome_pathway,Complex I biogenesis,0.44117819373311157,1,1.0944330089308054,45
+reactome_pathway,GPVI-mediated activation cascade,0.44300767199722846,1,1.3374605592035,14
+reactome_pathway,TNFR1-induced proapoptotic signaling,0.4451403428166216,1,1.084772728162146,5
+reactome_pathway,Formation of TC-NER Pre-Incision Complex,0.4470849472665225,1,0.8462776697291464,33
+reactome_pathway,IRAK1 recruits IKK complex,0.45001981080045156,1,0.27562604286950426,4
+reactome_pathway,IRAK1 recruits IKK complex upon TLR7/8 or 9 stimulation,0.45001981080045156,1,0.27562604286950426,4
+reactome_pathway,Molecules associated with elastic fibres,0.45443989084499514,1,0.2727339810567017,4
+reactome_pathway,Basigin interactions,0.45460672522875795,1,0.9388680155855677,12
+reactome_pathway,Signal transduction by L1,0.4547824338271723,1,0.8098382142321506,14
+reactome_pathway,rRNA modification in the mitochondrion,0.4564570784805103,1,0.43808756476358135,4
+reactome_pathway,CTLA4 inhibitory signaling,0.4566626273831154,1,1.2712759831806757,10
+reactome_pathway,Formation of HIV-1 elongation complex containing HIV-1 Tat,0.4588934348867109,1,0.9073714103788023,30
+reactome_pathway,Cytosolic iron-sulfur cluster assembly,0.4623749941694888,1,0.7362240812826397,8
+reactome_pathway,Apoptotic cleavage of cell adhesion  proteins,0.4626577719984163,1,0.9887688931519211,3
+reactome_pathway,Glyoxylate metabolism and glycine degradation,0.4650572371627132,1,1.136202065997893,13
+reactome_pathway,Regulation of localization of FOXO transcription factors,0.4662893727929711,1,1.5646234644665442,7
+reactome_pathway,Constitutive Signaling by NOTCH1 PEST Domain Mutants,0.4674553230846525,1,0.830251156917945,18
+reactome_pathway,Constitutive Signaling by NOTCH1 HD+PEST Domain Mutants,0.4674553230846525,1,0.830251156917945,18
+reactome_pathway,TP53 Regulates Metabolic Genes,0.4677708366587052,1,1.0570304476075392,53
+reactome_pathway,Synthesis of PIPs at the Golgi membrane,0.4680863093184186,1,1.5583214264877567,5
+reactome_pathway,SUMOylation of transcription cofactors,0.4704853149646655,1,1.2181203411631103,21
+reactome_pathway,TRAF3-dependent IRF activation pathway,0.47076333825111083,1,0.8002767639487451,8
+reactome_pathway,Signaling by ALK fusions and activated point mutants,0.4715304496121097,1,0.9341770406600288,20
+reactome_pathway,RHOH GTPase cycle,0.47180714046247874,1,1.1598572947253625,24
+reactome_pathway,Activated PKN1 stimulates transcription of AR (androgen receptor) regulated genes KLK2 and KLK3,0.47236365374472467,1,0.5024735534636545,8
+reactome_pathway,SMAC (DIABLO) binds to IAPs,0.4728634133495981,1,1.152838265772405,5
+reactome_pathway,SMAC(DIABLO)-mediated dissociation of IAP:caspase complexes,0.4728634133495981,1,1.152838265772405,5
+reactome_pathway,Rev-mediated nuclear export of HIV RNA,0.47501875752446643,1,1.014423551467132,29
+reactome_pathway,HDR through Homologous Recombination (HRR),0.4750879059065999,1,0.7447145781731248,14
+reactome_pathway,Attachment of GPI anchor to uPAR,0.4791506804301916,1,0.683291610446702,5
+reactome_pathway,O-linked glycosylation,0.479506771638433,1,1.662536279826864,3
+reactome_pathway,Deactivation of the beta-catenin transactivating complex,0.4795187883431823,1,0.6051627170599686,14
+reactome_pathway,Stimuli-sensing channels,0.484354932173529,1,1.0016133892217625,12
+reactome_pathway,Generation of second messenger molecules,0.4847227691604875,1,1.0848568064888495,7
+reactome_pathway,Processing of Capped Intron-Containing Pre-mRNA,0.4867452881274196,1,0.9573003948350611,31
+reactome_pathway,Butyrate Response Factor 1 (BRF1) binds and destabilizes mRNA,0.48687877722486733,1,0.7497207634360983,14
+reactome_pathway,DNA replication initiation,0.4885690277460682,1,0.6079438715921612,4
+reactome_pathway,Nicotinate metabolism,0.4889884777239221,1,1.6693514240365646,4
+reactome_pathway,WNT mediated activation of DVL,0.49110832885018213,1,1.8884140187460488,5
+reactome_pathway,Negative regulation of FLT3,0.4913274430568139,1,1.9290206480150027,3
+reactome_pathway,Sema4D induced cell migration and growth-cone collapse,0.4937316721528146,1,1.2143902079176887,11
+reactome_pathway,VEGFR2 mediated cell proliferation,0.4987293301395025,1,1.5458052129388218,9
+reactome_pathway,Citric acid cycle (TCA cycle),0.4999155857913796,1,1.092583788008706,19
+reactome_pathway,HDR through MMEJ (alt-NHEJ),0.4999619554873619,1,1.5674008093292735,4
+reactome_pathway,RNA Pol II CTD phosphorylation and interaction with CE during HIV infection,0.50146285352895,1,0.8978281544371983,21
+reactome_pathway,RNA Pol II CTD phosphorylation and interaction with CE,0.50146285352895,1,0.8978281544371983,21
+reactome_pathway,Pyrophosphate hydrolysis,0.5030569131593834,1,1.172194950589345,3
+reactome_pathway,RNA Polymerase III Abortive And Retractive Initiation,0.5042520466709823,1,0.7940432531745826,18
+reactome_pathway,Negative regulation of MET activity,0.5056406670764355,1,1.4526172795984793,11
+reactome_pathway,Formation of RNA Pol II elongation complex,0.5073670928691751,1,0.9840695382395814,40
+reactome_pathway,COPI-dependent Golgi-to-ER retrograde traffic,0.5098386777912931,1,1.11434472265055,52
+reactome_pathway,ARMS-mediated activation,0.5117020170932833,1,1.5910680622748252,3
+reactome_pathway,Synthesis of PC,0.5159212548882119,1,1.43616562405267,8
+reactome_pathway,PKA activation,0.5188260859579323,1,0.5500769068085545,4
+reactome_pathway,Ethanol oxidation,0.5211751815410675,1,0.34178617554754237,3
+reactome_pathway,Spry regulation of FGF signaling,0.523566019162402,1,1.4335932067767292,7
+reactome_pathway,Advanced glycosylation endproduct receptor signaling,0.5235833160463963,1,1.4152057479074014,8
+reactome_pathway,Pregnenolone biosynthesis,0.5242515018873767,1,0.6331790978876906,4
+reactome_pathway,CD28 dependent Vav1 pathway,0.5255579145526604,1,1.1601894216066586,4
+reactome_pathway,Recruitment of NuMA to mitotic centrosomes,0.5291844726619722,1,0.8134577894645599,34
+reactome_pathway,Role of LAT2/NTAL/LAB on calcium mobilization,0.5297270552242901,1,0.42443679847423055,3
+reactome_pathway,TP53 Regulates Transcription of DNA Repair Genes,0.5298922552813004,1,0.950601571235414,36
+reactome_pathway,Platelet degranulation,0.5303862961399304,1,0.9021853398304496,43
+reactome_pathway,Cytoprotection by HMOX1,0.5325232435119953,1,0.9798904841600115,31
+reactome_pathway,Downregulation of ERBB2:ERBB3 signaling,0.5349784133962256,1,-0.07596718582073289,5
+reactome_pathway,Branched-chain amino acid catabolism,0.535111391223277,1,1.0621317460127504,14
+reactome_pathway,CREB1 phosphorylation through the activation of Adenylate Cyclase,0.5367498091361969,1,0.9366766514310922,5
+reactome_pathway,Negative feedback regulation of MAPK pathway,0.5376104566918061,1,1.12094292311087,4
+reactome_pathway,Signaling by MAP2K mutants,0.5376104566918061,1,1.12094292311087,4
+reactome_pathway,G alpha (i) signalling events,0.5384078128973298,1,0.8287319600358647,16
+reactome_pathway,RND2 GTPase cycle,0.538766466221372,1,1.2394675596556197,18
+reactome_pathway,RHOBTB2 GTPase cycle,0.5388736670015781,1,0.9343274537849553,20
+reactome_pathway,SLBP independent Processing of Histone Pre-mRNAs,0.5401399011366576,1,0.9169146663204061,7
+reactome_pathway,SLBP Dependent Processing of Replication-Dependent Histone Pre-mRNAs,0.5401399011366576,1,0.9169146663204061,7
+reactome_pathway,The NLRP3 inflammasome,0.5404866027079508,1,1.0483974908794342,8
+reactome_pathway,RHOBTB1 GTPase cycle,0.5413979373561713,1,0.7185777479577964,17
+reactome_pathway,Protein methylation,0.5414249217836831,1,0.6576088786928798,8
+reactome_pathway,Acyl chain remodeling of CL,0.5421760490223162,1,0.7204544966243825,3
+reactome_pathway,alpha-linolenic acid (ALA) metabolism,0.5428158766926587,1,0.3376202941441721,7
+reactome_pathway,Transcriptional activation of mitochondrial biogenesis,0.5434025554108624,1,0.7003095137579192,23
+reactome_pathway,Cation-coupled Chloride cotransporters,0.5452468739616365,1,1.7078999007600635,3
+reactome_pathway,Rap1 signalling,0.5495345815786572,1,1.0163199921416732,7
+reactome_pathway,RSK activation,0.5496301679998581,1,1.4335932067767292,5
+reactome_pathway,DEx/H-box helicases activate type I IFN and inflammatory cytokines production,0.5518249004057874,1,0.6492639880949532,5
+reactome_pathway,Formation of the cornified envelope,0.5536392102605665,1,0.9271959826963154,16
+reactome_pathway,Apoptotic cleavage of cellular proteins,0.5564277512850806,1,1.240881084268724,5
+reactome_pathway,Vitamin D (calciferol) metabolism,0.5604695028073982,1,1.1394207680576185,3
+reactome_pathway,Synthesis of UDP-N-acetyl-glucosamine,0.5609541845172505,1,1.4357851389912657,6
+reactome_pathway,Synthesis of PE,0.561049243639653,1,1.0471411096892238,5
+reactome_pathway,Sema3A PAK dependent Axon repulsion,0.5616896093358019,1,1.0488364598695212,6
+reactome_pathway,Activation of AKT2,0.5664590226697108,1,2.3084222519753346,3
+reactome_pathway,Nuclear Pore Complex (NPC) Disassembly,0.5673047492399463,1,0.9943102810632067,28
+reactome_pathway,Activation of PPARGC1A (PGC-1alpha) by phosphorylation,0.5682879952343758,1,0.4674163696027824,3
+reactome_pathway,Aggrephagy,0.570245728155683,1,0.9057394929371156,20
+reactome_pathway,Axonal growth inhibition (RHOA activation),0.5716251345910492,1,1.2650125481207688,4
+reactome_pathway,Regulation of TP53 Activity through Association with Co-factors,0.5721753689529561,1,0.8770867646749989,5
+reactome_pathway,Removal of the Flap Intermediate,0.5738839823592687,1,0.741287993376088,7
+reactome_pathway,Metalloprotease DUBs,0.5773226284850854,1,1.4526172795984793,9
+reactome_pathway,Ribavirin ADME,0.5787108705332639,1,0.7731584615633338,7
+reactome_pathway,Endosomal/Vacuolar pathway,0.5809723615859371,1,0.35760340535514584,4
+reactome_pathway,Processing of Intronless Pre-mRNAs,0.5817440807902481,1,0.9169146663204061,17
+reactome_pathway,WNT5:FZD7-mediated leishmania damping,0.5821751920011813,1,1.1677745236431614,5
+reactome_pathway,Cytosolic sulfonation of small molecules,0.5823462265790686,1,1.072776007575502,4
+reactome_pathway,RHOT2 GTPase cycle,0.5827558718507053,1,1.2442200277237894,3
+reactome_pathway,RET signaling,0.5849447517788509,1,1.0163199921416732,7
+reactome_pathway,Glycogen synthesis,0.5860745169516037,1,0.9939265885814477,5
+reactome_pathway,SHC1 events in ERBB4 signaling,0.5885907584085026,1,2.402992921935202,3
+reactome_pathway,mRNA decay by 5' to 3' exoribonuclease,0.591652376514819,1,0.5650210993885588,11
+reactome_pathway,Telomere Extension By Telomerase,0.5916627169524405,1,1.1502231631365456,12
+reactome_pathway,Inactivation of CDC42 and RAC1,0.5922558904706022,1,1.1975415785049206,5
+reactome_pathway,GRB2 events in EGFR signaling,0.5939184976155176,1,0.5952424328150658,3
+reactome_pathway,CLEC7A (Dectin-1) induces NFAT activation,0.5945009958093836,1,0.5134908925499697,6
+reactome_pathway,ABC transporters in lipid homeostasis,0.5949437441164492,1,1.2688815985265665,5
+reactome_pathway,Uptake and function of diphtheria toxin,0.5950100943858331,1,1.4037163782370063,4
+reactome_pathway,KSRP (KHSRP) binds and destabilizes mRNA,0.595387771614482,1,1.0126928905194443,14
+reactome_pathway,Synthesis of IP3 and IP4 in the cytosol,0.5956974377076587,1,0.5118198090273625,11
+reactome_pathway,Class I peroxisomal membrane protein import,0.5968308231041675,1,0.8232010547671151,10
+reactome_pathway,ESR-mediated signaling,0.5980520164937604,1,1.4335932067767292,5
+reactome_pathway,HATs acetylate histones,0.5998396422419299,1,1.0514384486987463,32
+reactome_pathway,Regulation of Insulin-like Growth Factor (IGF) transport and uptake by Insulin-like Growth Factor Binding Proteins (IGFBPs),0.6005103710235155,1,0.8242255516264136,25
+reactome_pathway,Post-translational protein phosphorylation,0.6005103710235155,1,0.8242255516264136,25
+reactome_pathway,PKA activation in glucagon signalling,0.605124585023426,1,1.0163199921416732,5
+reactome_pathway,Pyrimidine salvage,0.6055417836141403,1,0.9006476951598873,5
+reactome_pathway,DNA Damage/Telomere Stress Induced Senescence,0.6057700250590844,1,0.508565833820766,7
+reactome_pathway,Regulated proteolysis of p75NTR,0.6059464261505132,1,1.2805400511179454,7
+reactome_pathway,RORA activates gene expression,0.6072178641939907,1,0.6547827432322777,6
+reactome_pathway,NEP/NS2 Interacts with the Cellular Export Machinery,0.6077522392081769,1,0.9943102810632067,26
+reactome_pathway,"Activation of NIMA Kinases NEK9, NEK6, NEK7",0.6078727936498095,1,-0.15504399482225756,3
+reactome_pathway,SUMOylation of transcription factors,0.6121852690497138,1,1.2502348818255147,6
+reactome_pathway,Prolactin receptor signaling,0.614590056099318,1,0.7151576315276496,4
+reactome_pathway,Potential therapeutics for SARS,0.6155661819654715,1,1.166381790709423,42
+reactome_pathway,Striated Muscle Contraction,0.6181616722254804,1,0.9447409842526602,3
+reactome_pathway,Activation of anterior HOX genes in hindbrain development during early embryogenesis,0.6182169554927964,1,0.9406368936540037,28
+reactome_pathway,RHOBTB3 ATPase cycle,0.6200132375355603,1,1.655575344586565,5
+reactome_pathway,TP53 regulates transcription of several additional cell death genes whose specific roles in p53-dependent apoptosis remain uncertain,0.6206323082638593,1,1.1991213387985524,6
+reactome_pathway,Regulation of pyruvate dehydrogenase (PDH) complex,0.6210159210205153,1,1.1408344016512721,8
+reactome_pathway,Purinergic signaling in leishmaniasis infection,0.6210818126707813,1,1.272305814455001,11
+reactome_pathway,Chaperone Mediated Autophagy,0.6216928291929444,1,1.3207163503475514,10
+reactome_pathway,DAP12 signaling,0.6221842313273,1,0.6170335630931143,8
+reactome_pathway,Aflatoxin activation and detoxification,0.6236072757940712,1,0.5796828395327579,3
+reactome_pathway,tRNA processing in the nucleus,0.6245605053538859,1,0.9261105827446356,46
+reactome_pathway,Vpr-mediated nuclear import of PICs,0.6255375179418002,1,0.9741970106592815,29
+reactome_pathway,Beta oxidation of hexanoyl-CoA to butanoyl-CoA,0.6312657596308344,1,1.3354405744055295,3
+reactome_pathway,Cyclin A:Cdk2-associated events at S phase entry,0.6318677045919244,1,0.6713350439573598,5
+reactome_pathway,Phase I - Functionalization of compounds,0.6324824118642702,1,1.5312591241218516,7
+reactome_pathway,"Signaling by PDGFRA transmembrane, juxtamembrane and kinase domain mutants",0.6326375533577829,1,0.42443679847423055,3
+reactome_pathway,Signaling by PDGFRA extracellular domain mutants,0.6326375533577829,1,0.42443679847423055,3
+reactome_pathway,Formation of HIV elongation complex in the absence of HIV Tat,0.6329081401030145,1,0.9169146663204061,31
+reactome_pathway,Interleukin receptor SHC signaling,0.6331435301775795,1,0.42443679847423055,5
+reactome_pathway,Thrombin signalling through proteinase activated receptors (PARs),0.6332301042188313,1,1.117017264908269,11
+reactome_pathway,MET activates RAP1 and RAC1,0.634087644716498,1,0.7907110179403428,8
+reactome_pathway,Endogenous sterols,0.635384931954637,1,1.4694415639454732,3
+reactome_pathway,Constitutive Signaling by AKT1 E17K in Cancer,0.6355727218673033,1,1.0461091250043038,12
+reactome_pathway,NF-kB activation through FADD/RIP-1 pathway mediated by caspase-8 and -10,0.636310358760594,1,0.73894183584732,9
+reactome_pathway,NADE modulates death signalling,0.6364852931506613,1,1.179007322622755,3
+reactome_pathway,Nuclear signaling by ERBB4,0.6367872991653885,1,1.2805400511179454,9
+reactome_pathway,Recognition of DNA damage by PCNA-containing replication complex,0.6368627096918679,1,1.1339678135693279,20
+reactome_pathway,RNA Polymerase I Promoter Opening,0.6385373673784329,1,0.5303535388656271,9
+reactome_pathway,ECM proteoglycans,0.6392684773964479,1,0.573694045720794,10
+reactome_pathway,Biotin transport and metabolism,0.6401800078262334,1,0.5707542814202129,5
+reactome_pathway,Trafficking and processing of endosomal TLR,0.6447053273468073,1,0.5473013400855007,6
+reactome_pathway,GAB1 signalosome,0.6468196523020322,1,0.5952424328150658,5
+reactome_pathway,Interleukin-1 processing,0.6483168079380766,1,0.32918464990453794,4
+reactome_pathway,Lysosome Vesicle Biogenesis,0.6483492026705852,1,1.175360089913706,22
+reactome_pathway,Signaling by Hippo,0.6529280870806283,1,0.6714263437074687,10
+reactome_pathway,Vitamin C (ascorbate) metabolism,0.6530565048390333,1,1.5312591241218516,5
+reactome_pathway,mitochondrial fatty acid beta-oxidation of unsaturated fatty acids,0.654198818828647,1,1.2172080797022233,3
+reactome_pathway,Synthesis of GDP-mannose,0.6581947057562645,1,1.2353332039973042,4
+reactome_pathway,Regulation of BACH1 activity,0.6589198537208345,1,1.1444571814851294,4
+reactome_pathway,SARS-CoV-2 activates/modulates innate and adaptive immune responses,0.6616429708749502,1,1.0596528541572445,62
+reactome_pathway,HSP90 chaperone cycle for steroid hormone receptors (SHR) in the presence of ligand,0.6634822198693417,1,1.01414843078945,32
+reactome_pathway,JNK (c-Jun kinases) phosphorylation and  activation mediated by activated human TAK1,0.6642474129887459,1,1.0015390261003567,10
+reactome_pathway,Termination of translesion DNA synthesis,0.6647546762543344,1,1.1171834616787555,18
+reactome_pathway,Disassembly of the destruction complex and recruitment of AXIN to the membrane,0.665421779376378,1,1.2971125509117738,11
+reactome_pathway,Synthesis of diphthamide-EEF2,0.6664916217244661,1,0.3885684589378372,3
+reactome_pathway,Formation of ATP by chemiosmotic coupling,0.6669659127478839,1,1.327198138130494,13
+reactome_pathway,Intraflagellar transport,0.6677099928191256,1,1.0547810056518427,16
+reactome_pathway,Transcription of E2F targets under negative control by DREAM complex,0.6681326310255319,1,1.0363355779331864,4
+reactome_pathway,Maturation of spike protein,0.6705040835193323,1,1.5195017417944159,12
+reactome_pathway,A tetrasaccharide linker sequence is required for GAG synthesis,0.6707031176412912,1,0.5933345950674634,3
+reactome_pathway,Defective B3GAT3 causes JDSSDHD,0.6707031176412912,1,0.5933345950674634,3
+reactome_pathway,PERK regulates gene expression,0.6715395479974642,1,1.0366867157712174,4
+reactome_pathway,FOXO-mediated transcription of cell death genes,0.6766166097813319,1,0.6559604267027282,3
+reactome_pathway,DAG and IP3 signaling,0.676722225341553,1,1.3618877360722996,6
+reactome_pathway,Regulation of RUNX1 Expression and Activity,0.6788917052229928,1,0.8909518509666294,10
+reactome_pathway,Recruitment of mitotic centrosome proteins and complexes,0.6793141226942137,1,0.8973226840374094,31
+reactome_pathway,PP2A-mediated dephosphorylation of key metabolic factors,0.6798415205603896,1,1.3332036818966053,4
+reactome_pathway,Nicotinamide salvaging,0.6819599410778348,1,0.7562394589174899,7
+reactome_pathway,Mitochondrial tRNA aminoacylation,0.6853077086935417,1,0.8408793776230711,14
+reactome_pathway,G beta:gamma signalling through CDC42,0.685669561176425,1,0.6795134224730336,7
+reactome_pathway,Mitochondrial translation elongation,0.6890054811340792,1,0.8888889751314966,75
+reactome_pathway,Regulation of TP53 Activity through Methylation,0.6911956802036723,1,0.2567048002833023,5
+reactome_pathway,RUNX2 regulates osteoblast differentiation,0.6925398206099989,1,1.512550060966184,8
+reactome_pathway,Nuclear events mediated by NFE2L2,0.692707346344267,1,1.0976648980449022,16
+reactome_pathway,Cytosolic tRNA aminoacylation,0.6939763393015523,1,0.9147038643579356,23
+reactome_pathway,Erythropoietin activates Phospholipase C gamma (PLCG),0.6978972913535908,1,0.5118198090273625,3
+reactome_pathway,CHL1 interactions,0.7016108004899249,1,0.7689350308830027,3
+reactome_pathway,Dectin-2 family,0.7061910666946081,1,1.060100268329626,3
+reactome_pathway,Axonal growth stimulation,0.7079114245570174,1,1.179007322622755,3
+reactome_pathway,Glycolysis,0.7125767147754707,1,1.02702279088313,18
+reactome_pathway,Retinoid metabolism and transport,0.7129089111206663,1,0.72883593803713,5
+reactome_pathway,Interaction between L1 and Ankyrins,0.713928737370368,1,1.4775438908716816,8
+reactome_pathway,Signaling by ALK,0.7150955527685825,1,0.42443679847423055,3
+reactome_pathway,DNA Damage Recognition in GG-NER,0.7152157359051241,1,0.9934103104522195,24
+reactome_pathway,PECAM1 interactions,0.7156384222241702,1,1.3972646313920003,6
+reactome_pathway,Constitutive Signaling by Ligand-Responsive EGFR Cancer Variants,0.7186935989240157,1,0.9943508475034916,8
+reactome_pathway,Regulation of TNFR1 signaling,0.7197944875571284,1,0.7124853101007814,16
+reactome_pathway,Vpr-mediated induction of apoptosis by mitochondrial outer membrane permeabilization,0.7202838413940813,1,0.982923275393294,3
+reactome_pathway,TRP channels,0.7236307782067164,1,0.73894183584732,5
+reactome_pathway,APEX1-Independent Resolution of AP Sites via the Single Nucleotide Replacement Pathway,0.7260637413703229,1,1.9166734985472407,3
+reactome_pathway,Linoleic acid (LA) metabolism,0.7342109317215881,1,0.6388359166908893,4
+reactome_pathway,Pre-NOTCH Transcription and Translation,0.7358535886794084,1,0.5303535388656271,17
+reactome_pathway,NOTCH4 Intracellular Domain Regulates Transcription,0.7402209223356675,1,1.309415468097437,6
+reactome_pathway,RUNX2 regulates genes involved in cell migration,0.741266284505732,1,1.2690999971970305,4
+reactome_pathway,Ovarian tumor domain proteases,0.7418104138025461,1,0.8659549158068177,14
+reactome_pathway,STAT3 nuclear events downstream of ALK signaling,0.7442967189618195,1,0.7260557251962034,4
+reactome_pathway,Galactose catabolism,0.7443712328825682,1,0.6774057643971166,3
+reactome_pathway,Mitochondrial protein import,0.7451594369709971,1,1.0390763978434632,46
+reactome_pathway,HDMs demethylate histones,0.7464332208670533,1,0.7728597000411075,8
+reactome_pathway,Pyruvate metabolism,0.7496559906561214,1,0.9232883742504088,8
+reactome_pathway,Trafficking of myristoylated proteins to the cilium,0.7513843428269118,1,1.3865043487129085,3
+reactome_pathway,Zinc influx into cells by the SLC39 gene family,0.7545259460387669,1,0.5499916087835295,5
+reactome_pathway,activated TAK1 mediates p38 MAPK activation,0.7564154568224579,1,1.0015390261003567,10
+reactome_pathway,Signaling by TCF7L2 mutants,0.7566577202987295,1,0.49758126503056377,3
+reactome_pathway,Oncogene Induced Senescence,0.7581753149403503,1,0.9384570094366655,11
+reactome_pathway,Signaling by ERBB2 ECD mutants,0.758271297370957,1,0.9943508475034916,8
+reactome_pathway,Cyclin E associated events during G1/S transition,0.7584904581310818,1,0.6108191368906175,4
+reactome_pathway,MET receptor recycling,0.7603853861022549,1,1.0265956886771785,7
+reactome_pathway,Role of phospholipids in phagocytosis,0.7609643955466119,1,0.600957848251791,9
+reactome_pathway,Transport of Mature mRNA Derived from an Intronless Transcript,0.7611660881987445,1,0.9703501260213608,36
+reactome_pathway,Interferon gamma signaling,0.7617968827578364,1,1.211045718805369,18
+reactome_pathway,Defective pyroptosis,0.7633955235439112,1,0.5303535388656271,11
+reactome_pathway,RNA Polymerase III Transcription Termination,0.7635492233739001,1,1.3341990466354132,11
+reactome_pathway,Glutamate and glutamine metabolism,0.7646209232519153,1,0.9203508048222574,7
+reactome_pathway,Recycling of eIF2:GDP,0.7656961460858376,1,1.015803288567257,6
+reactome_pathway,Purine catabolism,0.7671539022662155,1,0.966339031351718,6
+reactome_pathway,Uptake and function of anthrax toxins,0.7676585175257538,1,0.7906778185972768,4
+reactome_pathway,RHO GTPases activate IQGAPs,0.7677473668869966,1,1.2352289971661172,14
+reactome_pathway,CD28 dependent PI3K/Akt signaling,0.7679872762596252,1,0.7899891985258729,6
+reactome_pathway,PLC beta mediated events,0.7698633473178274,1,1.2801070598954387,6
+reactome_pathway,Surfactant metabolism,0.7707749487520286,1,0.6031953943449421,3
+reactome_pathway,ATF4 activates genes in response to endoplasmic reticulum  stress,0.7708928621079305,1,1.1528353615501032,15
+reactome_pathway,Adherens junctions interactions,0.7711148108348849,1,1.2296307568931824,6
+reactome_pathway,Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell,0.7711148108348849,1,1.2163569625671384,6
+reactome_pathway,MECP2 regulates transcription of neuronal ligands,0.7719548918209121,1,0.9366766514310922,3
+reactome_pathway,FCGR3A-mediated IL10 synthesis,0.7740516344670645,1,0.9764983217863827,12
+reactome_pathway,Coenzyme A biosynthesis,0.7758353324516744,1,0.7358616288107938,4
+reactome_pathway,OAS antiviral response,0.7765446671073674,1,1.1095935671912414,6
+reactome_pathway,Neutrophil degranulation,0.7771211090435066,1,1.0863743633221086,234
+reactome_pathway,Cristae formation,0.7772912505721243,1,1.2007557629050805,22
+reactome_pathway,Regulation of NF-kappa B signaling,0.7796938377328848,1,0.8145558393969297,7
+reactome_pathway,Postmitotic nuclear pore complex (NPC) reformation,0.780464924784477,1,0.9703501260213608,22
+reactome_pathway,Signaling by ERBB2 KD Mutants,0.7815824106536229,1,0.774501190650602,9
+reactome_pathway,Signaling by ERBB2 TMD/JMD mutants,0.7815824106536229,1,0.774501190650602,9
+reactome_pathway,Purine salvage,0.7817527899038277,1,0.9179489780939029,8
+reactome_pathway,Mitochondrial translation termination,0.7831774716079541,1,0.8583664077788168,74
+reactome_pathway,Glutathione conjugation,0.7832934883152278,1,0.5550330396131451,9
+reactome_pathway,Activation of IRF3/IRF7 mediated by TBK1/IKK epsilon,0.7871978794830254,1,0.5840375933261527,5
+reactome_pathway,Macroautophagy,0.7967398692853735,1,1.1437287439724506,30
+reactome_pathway,Fanconi Anemia Pathway,0.7973631701656169,1,1.0671115091980343,9
+reactome_pathway,Loss of Function of FBXW7 in Cancer and NOTCH1 Signaling,0.7977447606355463,1,0.8462776697291464,3
+reactome_pathway,Regulation of PLK1 Activity at G2/M Transition,0.7986179943862401,1,0.9568213380895414,34
+reactome_pathway,NOTCH3 Activation and Transmission of Signal to the Nucleus,0.7996371157082822,1,0.5952424328150658,5
+reactome_pathway,LDL clearance,0.8006834441394488,1,1.155549735293868,8
+reactome_pathway,Paracetamol ADME,0.8024084292875615,1,0.5550330396131451,5
+reactome_pathway,RNA Polymerase III Chain Elongation,0.8056300577598086,1,1.3341990466354132,9
+reactome_pathway,Processing of SMDT1,0.805838332495454,1,1.3012132511025778,11
+reactome_pathway,"Biosynthesis of the N-glycan precursor (dolichol lipid-linked oligosaccharide, LLO) and transfer to a nascent protein",0.8059640545531013,1,1.24647879892016,6
+reactome_pathway,Circadian Clock,0.8093354634301353,1,1.2179622426675594,10
+reactome_pathway,Signaling by cytosolic PDGFRA and PDGFRB fusion proteins,0.8099774755908827,1,0.7482034308862735,3
+reactome_pathway,Neurexins and neuroligins,0.8106383332687165,1,0.8402639247479441,12
+reactome_pathway,Defective HLCS causes multiple carboxylase deficiency,0.8160381472115784,1,0.9633496750255959,4
+reactome_pathway,Signaling by Retinoic Acid,0.8165132623018163,1,1.106551788237448,9
+reactome_pathway,Response of EIF2AK1 (HRI) to heme deficiency,0.8170758782046423,1,1.0366867157712174,4
+reactome_pathway,Glycogen breakdown (glycogenolysis),0.8175997708687995,1,1.1122176084418787,6
+reactome_pathway,HCMV Late Events,0.8179427606113289,1,0.9088940610607356,47
+reactome_pathway,Activation of gene expression by SREBF (SREBP),0.8189204013904254,1,1.0494706208802,23
+reactome_pathway,tRNA modification in the nucleus and cytosol,0.8212140876952383,1,0.989792607314131,20
+reactome_pathway,RNA Polymerase III Transcription Initiation From Type 3 Promoter,0.8217929057482304,1,0.9404228117740809,11
+reactome_pathway,ROBO receptors bind AKAP5,0.8222567872287061,1,1.0163199921416732,3
+reactome_pathway,Pausing and recovery of Tat-mediated HIV elongation,0.8277027312252582,1,1.1342323247100305,22
+reactome_pathway,Tat-mediated HIV elongation arrest and recovery,0.8277027312252582,1,1.1342323247100305,22
+reactome_pathway,Ephrin signaling,0.8292758172824267,1,0.6900999507907076,6
+reactome_pathway,Constitutive Signaling by NOTCH1 HD Domain Mutants,0.830066491861317,1,1.2805400511179454,3
+reactome_pathway,Inhibition of replication initiation of damaged DNA by RB1/E2F1,0.8367820249736497,1,0.6713350439573598,5
+reactome_pathway,MASTL Facilitates Mitotic Progression,0.8368517022177643,1,1.2406739231010107,4
+reactome_pathway,VEGFR2 mediated vascular permeability,0.8369887111926937,1,1.2142005043563813,13
+reactome_pathway,TFAP2A acts as a transcriptional repressor during retinoic acid induced cell differentiation,0.8369891250369041,1,0.8013811458521283,3
+reactome_pathway,RHO GTPases Activate Formins,0.8373878625701402,1,0.881145619447882,62
+reactome_pathway,Estrogen-dependent nuclear events downstream of ESR-membrane signaling,0.8383841307542239,1,0.9366766514310922,9
+reactome_pathway,"Regulation of glycolysis by fructose 2,6-bisphosphate metabolism",0.8394968254210096,1,0.8808144845989023,6
+reactome_pathway,MAPK1 (ERK2) activation,0.8397014524909303,1,0.7730629977495425,3
+reactome_pathway,RHOD GTPase cycle,0.8411629667033252,1,1.0742531444046424,33
+reactome_pathway,Glutamate Neurotransmitter Release Cycle,0.8421537402819764,1,0.742182352367272,5
+reactome_pathway,Activation of BAD and translocation to mitochondria,0.8442838151064971,1,0.9294731823920309,11
+reactome_pathway,SHC1 events in EGFR signaling,0.8444257251149911,1,1.499117677375134,4
+reactome_pathway,"Signaling by phosphorylated juxtamembrane, extracellular and kinase domain KIT mutants",0.8446871592707077,1,1.3174642339660392,4
+reactome_pathway,NF-kB is activated and signals survival,0.847064780548558,1,1.179007322622755,5
+reactome_pathway,RHO GTPases activate KTN1,0.8481314862717655,1,1.016307861783923,8
+reactome_pathway,Keratan sulfate degradation,0.8551063660112166,1,1.198583390444096,3
+reactome_pathway,"Sensory perception of sweet, bitter, and umami (glutamate) taste",0.8551063660112166,1,1.117017264908269,3
+reactome_pathway,Mitochondrial translation initiation,0.8551679650185704,1,0.91928508531514,74
+reactome_pathway,Creatine metabolism,0.8566197283753517,1,0.853357243491994,3
+reactome_pathway,Synthesis of bile acids and bile salts,0.8569224643035493,1,1.0301700537476615,3
+reactome_pathway,CD209 (DC-SIGN) signaling,0.8614308678186671,1,1.0163199921416732,9
+reactome_pathway,Regulation of TP53 Degradation,0.8641533231442982,1,0.7312548206637509,12
+reactome_pathway,Cross-presentation of particulate exogenous antigens (phagosomes),0.865104148413778,1,1.1677745236431614,3
+reactome_pathway,Utilization of Ketone Bodies,0.8654074572481296,1,0.8787258400402013,3
+reactome_pathway,Golgi Associated Vesicle Biogenesis,0.869805184039897,1,0.9701393525387949,38
+reactome_pathway,SARS-CoV-2 targets host intracellular signalling and regulatory pathways,0.87086846608903,1,0.9294731823920309,11
+reactome_pathway,Hypusine synthesis from eIF5A-lysine,0.8720851901073667,1,0.9849535446481534,3
+reactome_pathway,Synthesis of PIPs at the plasma membrane,0.8726732561367891,1,0.815997781231384,16
+reactome_pathway,Transcriptional regulation of granulopoiesis,0.8732893911140089,1,0.7335150951483597,10
+reactome_pathway,Transcriptional regulation by RUNX2,0.8737533537311057,1,0.8100290516745368,6
+reactome_pathway,RA biosynthesis pathway,0.8752363003850347,1,0.6635023212290341,5
+reactome_pathway,Cargo recognition for clathrin-mediated endocytosis,0.8766397604852358,1,1.1186604904199273,49
+reactome_pathway,Formation of xylulose-5-phosphate,0.8774919644815768,1,1.0205014510098414,4
+reactome_pathway,SEMA3A-Plexin repulsion signaling by inhibiting Integrin adhesion,0.8784679117748911,1,0.9021853398304496,3
+reactome_pathway,Regulation of innate immune responses to cytosolic DNA,0.8791516922500171,1,1.0913194964597752,8
+reactome_pathway,Defective RIPK1-mediated regulated necrosis,0.8801262403012937,1,0.911857282004733,4
+reactome_pathway,Transport of the SLBP independent Mature mRNA,0.8819183194021984,1,0.96650324138344,29
+reactome_pathway,Transport of the SLBP Dependant Mature mRNA,0.8819183194021984,1,0.96650324138344,29
+reactome_pathway,Aspirin ADME,0.8840801337295348,1,1.0418294201852727,4
+reactome_pathway,snRNP Assembly,0.8854858062600673,1,0.9417089538519231,44
+reactome_pathway,Threonine catabolism,0.8863812420740067,1,1.130041226616374,3
+reactome_pathway,Viral Messenger RNA Synthesis,0.8882418698966533,1,0.9741970106592815,37
+reactome_pathway,SUMOylation of DNA replication proteins,0.8921634865740666,1,1.014423551467132,33
+reactome_pathway,Signal regulatory protein family interactions,0.8935810811814417,1,1.150139741966408,4
+reactome_pathway,BH3-only proteins associate with and inactivate anti-apoptotic BCL-2 members,0.8946377108592927,1,1.1942665979938956,4
+reactome_pathway,Synthesis of very long-chain fatty acyl-CoAs,0.8959850893244783,1,0.8744958662483567,10
+reactome_pathway,Signaling by SCF-KIT,0.8965103641314707,1,0.7785706736034512,8
+reactome_pathway,HDL assembly,0.8967464413063188,1,1.0163199921416732,3
+reactome_pathway,SHC1 events in ERBB2 signaling,0.8972088435545273,1,0.794358971065041,7
+reactome_pathway,Endosomal Sorting Complex Required For Transport (ESCRT),0.8981096353180864,1,0.9305608645121923,22
+reactome_pathway,ERCC6 (CSB) and EHMT2 (G9a) positively regulate rRNA expression,0.9000136002602486,1,1.319293965449543,17
+reactome_pathway,eNOS activation,0.9002072410939862,1,1.1841323836053774,7
+reactome_pathway,Glycerophospholipid biosynthesis,0.9007169031772457,1,1.1794763602148557,4
+reactome_pathway,TGF-beta receptor signaling activates SMADs,0.9008113514338059,1,0.7213033527502094,8
+reactome_pathway,RAB GEFs exchange GTP for GDP on RABs,0.9017946847062581,1,1.1047501152017505,35
+reactome_pathway,Detoxification of Reactive Oxygen Species,0.9019466350394849,1,1.0089146052221165,20
+reactome_pathway,Role of ABL in ROBO-SLIT signaling,0.902851975700766,1,0.6012775172328804,3
+reactome_pathway,Norepinephrine Neurotransmitter Release Cycle,0.9031574063536109,1,0.742182352367272,3
+reactome_pathway,InlB-mediated entry of Listeria monocytogenes into host cell,0.9064482014080888,1,0.5325726132864609,9
+reactome_pathway,Constitutive Signaling by EGFRvIII,0.9072089696425724,1,0.774501190650602,7
+reactome_pathway,Hyaluronan uptake and degradation,0.9080462155473584,1,0.5506529195061893,3
+reactome_pathway,Repression of WNT target genes,0.9089197554521586,1,1.0470380110468789,4
+reactome_pathway,Plasmalogen biosynthesis,0.9098804274770219,1,1.2543731941816374,3
+reactome_pathway,Amino acid transport across the plasma membrane,0.9130063396224783,1,1.1940729045104046,6
+reactome_pathway,"Interleukin-3, Interleukin-5 and GM-CSF signaling",0.9132443902211811,1,1.0163199921416732,3
+reactome_pathway,Sema4D mediated inhibition of cell attachment and migration,0.9147470837914986,1,1.1644174588453395,4
+reactome_pathway,Budding and maturation of HIV virion,0.9165739542356728,1,0.9522276679636491,19
+reactome_pathway,Maturation of nucleoprotein,0.920431433778482,1,1.1394207680576185,7
+reactome_pathway,Separation of Sister Chromatids,0.9225691641422658,1,1.0289534829766807,102
+reactome_pathway,Formyl peptide receptors bind formyl peptides and many other ligands,0.9233453694463015,1,0.8488215308319906,3
+reactome_pathway,Methionine salvage pathway,0.9246603130646731,1,0.8703428785761995,5
+reactome_pathway,Lysine catabolism,0.925619102576255,1,0.8789897844170604,4
+reactome_pathway,Meiotic recombination,0.926319760964169,1,0.7987325240318307,10
+reactome_pathway,Cytosolic sensors of pathogen-associated DNA,0.9270350233723056,1,0.9540339789204785,12
+reactome_pathway,"SUMO is transferred from E1 to E2 (UBE2I, UBC9)",0.9277421570936366,1,1.1563916613829335,4
+reactome_pathway,"Tristetraprolin (TTP, ZFP36) binds and destabilizes mRNA",0.9284436650482125,1,1.0126928905194443,14
+reactome_pathway,Intrinsic Pathway of Fibrin Clot Formation,0.9293347864665122,1,1.1473760335989291,4
+reactome_pathway,Synthesis of PA,0.9310228400463434,1,0.8271393207073311,12
+reactome_pathway,Aspartate and asparagine metabolism,0.9360595563141235,1,0.9203508048222574,5
+reactome_pathway,Regulation of cytoskeletal remodeling and cell spreading by IPP complex components,0.9362188478143016,1,0.8026940941282904,3
+reactome_pathway,Proton-coupled monocarboxylate transport,0.9365050300695095,1,1.0464154274809097,4
+reactome_pathway,Regulation of FZD by ubiquitination,0.9371390606625032,1,0.9675510392123632,3
+reactome_pathway,MET activates RAS signaling,0.9373020525066026,1,0.7483885531369157,4
+reactome_pathway,HIV elongation arrest and recovery,0.9376542837312843,1,1.195004864342938,23
+reactome_pathway,Pausing and recovery of HIV elongation,0.9376542837312843,1,1.195004864342938,23
+reactome_pathway,CLEC7A/inflammasome pathway,0.9394277506612133,1,0.5909337933469645,4
+reactome_pathway,AKT phosphorylates targets in the cytosol,0.94236783248368,1,1.2848713513192813,9
+reactome_pathway,TYSND1 cleaves peroxisomal proteins,0.9424775468322825,1,1.2543731941816374,5
+reactome_pathway,TP53 Regulates Transcription of Genes Involved in G2 Cell Cycle Arrest,0.9426999395414161,1,0.9095927403746632,6
+reactome_pathway,Formation of the beta-catenin:TCF transactivating complex,0.9440784655466933,1,1.1156383731426514,14
+reactome_pathway,Elevation of cytosolic Ca2+ levels,0.9466050806547435,1,1.0127083603521507,4
+reactome_pathway,Beta oxidation of decanoyl-CoA to octanoyl-CoA-CoA,0.9469596434888926,1,0.9268374989725299,3
+reactome_pathway,NOD1/2 Signaling Pathway,0.9475857549662443,1,1.0101100564343979,13
+reactome_pathway,Displacement of DNA glycosylase by APEX1,0.9503374069503547,1,0.7913190193531987,3
+reactome_pathway,Formation of Incision Complex in GG-NER,0.952835120154305,1,1.0067425222340138,26
+reactome_pathway,mRNA decay by 3' to 5' exoribonuclease,0.9529007001134865,1,1.10202988585443,14
+reactome_pathway,Transcription of E2F targets under negative control by p107 (RBL1) and p130 (RBL2) in complex with HDAC1,0.9534088771501718,1,1.3313831624902848,3
+reactome_pathway,Vitamin B5 (pantothenate) metabolism,0.9534088771501718,1,1.1847628707434017,3
+reactome_pathway,Collagen biosynthesis and modifying enzymes,0.9566805969208015,1,1.0536855193823988,11
+reactome_pathway,RND3 GTPase cycle,0.9605229165716038,1,0.9447409842526602,19
+reactome_pathway,NOTCH2 intracellular domain regulates transcription,0.9647789786496311,1,0.9366766514310922,3
+reactome_pathway,"Synthesis of IP2, IP, and Ins in the cytosol",0.9679445116581626,1,0.949990984541334,5
+reactome_pathway,Transport and synthesis of PAPS,0.9687756991137758,1,1.3741478577996529,3
+reactome_pathway,"WNT5A-dependent internalization of FZD2, FZD5 and ROR2",0.9700813879315646,1,1.2318517791814008,7
+reactome_pathway,mTORC1-mediated signalling,0.9708182953124471,1,1.0570304476075392,17
+reactome_pathway,Urea cycle,0.9737537062190684,1,1.0730522986934032,4
+reactome_pathway,Transcriptional regulation by small RNAs,0.9805615644220702,1,0.9321656979103191,42
+reactome_pathway,Methylation,0.9810552882836702,1,1.036382341278536,8
+reactome_pathway,TICAM1-dependent activation of IRF3/IRF7,0.9838773688808237,1,0.8127481340844399,4
+reactome_pathway,HCMV Early Events,0.9875085351843492,1,0.9515899464072661,56
+reactome_pathway,Type I hemidesmosome assembly,0.9879211754428334,1,0.9320864728537102,6
+reactome_pathway,SUMO is conjugated to E1 (UBA2:SAE1),0.9881537102796042,1,1.1733625547082482,3
+reactome_pathway,PRC2 methylates histones and DNA,0.9893058599811058,1,1.1527046290788765,11
+reactome_pathway,Prevention of phagosomal-lysosomal fusion,0.9898797885411224,1,1.1006007432092382,6
+reactome_pathway,HDACs deacetylate histones,0.9901533323262038,1,1.1001153114008044,22
+reactome_pathway,Sealing of the nuclear envelope (NE) by ESCRT-III,0.9912619191449681,1,0.7919128723086905,16
+reactome_pathway,G alpha (q) signalling events,0.9919362896118022,1,0.6795134224730336,13
+reactome_pathway,Drug-mediated inhibition of ERBB2 signaling,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,Resistance of ERBB2 KD mutants to trastuzumab,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,Resistance of ERBB2 KD mutants to sapitinib,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,Resistance of ERBB2 KD mutants to tesevatinib,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,Resistance of ERBB2 KD mutants to neratinib,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,Resistance of ERBB2 KD mutants to osimertinib,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,Resistance of ERBB2 KD mutants to afatinib,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,Resistance of ERBB2 KD mutants to AEE788,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,Resistance of ERBB2 KD mutants to lapatinib,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,Drug resistance in ERBB2 TMD/JMD mutants,0.9921381439260792,1,0.9943508475034916,4
+reactome_pathway,RND1 GTPase cycle,0.9932629517442535,1,0.9244737160151327,16
+reactome_pathway,Gene and protein expression by JAK-STAT signaling after Interleukin-12 stimulation,0.9942851904071456,1,0.9156423012434958,25
+reactome_pathway,AKT phosphorylates targets in the nucleus,0.9961536756178913,1,0.9366766514310922,3
+reactome_pathway,Deposition of new CENPA-containing nucleosomes at the centromere,0.9976002746639056,1,1.1522893973848067,9
+reactome_pathway,MECP2 regulates neuronal receptors and channels,0.9976825304813436,1,0.9366766514310922,7
+reactome_pathway,Microbial modulation of RIPK1-mediated regulated necrosis,0.9986153185544384,1,0.73894183584732,3
+reactome_pathway,Integrin signaling,0.999238243343656,1,1.1157048714105027,6

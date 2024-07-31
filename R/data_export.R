@@ -191,7 +191,7 @@ export_analysis <- function(
     if(.analysis == 'enrichment') {
       .term <- rlang::arg_match(.term, names(tbl_out))
       cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-      tbl_out <- tbl_out[[.term]]
+      tbl_out <- tbl_out[[.term]]$data
     }
 
     # add in the quantitative data

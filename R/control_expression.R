@@ -72,7 +72,7 @@ expression <- function(
   check_data(data)
   str_quo <- tidyproteomics_quo(...)
   if(!is.null(.pairs)) {
-    cli::cli_inform("Using the supplied {length(.pairs)} sample pairs ...")
+    cli::cli_inform("Expression Analysis - using the supplied {length(.pairs)} sample pairs ...")
   } else if(is.null(str_quo)) {
     return(data)
   } else {

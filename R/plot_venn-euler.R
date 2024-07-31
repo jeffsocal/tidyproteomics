@@ -28,6 +28,7 @@ plot_euler <- function(
 
   plot <- plot(eulerr::euler(venn_set),
                main = glue::glue("Euler Diagram: {data$analyte}"),
+               fills = list(fill = theme_palette(length(venn_set)), alpha = .33),
                quantities = T,
                legend = T,
                edges = T)
@@ -62,6 +63,7 @@ plot_venn <- function(
 
   plot <- plot(eulerr::venn(venn_set),
                main = glue::glue("Venn Diagram: {data$analyte}"),
+               fills = list(fill = theme_palette(length(venn_set)), alpha = .33),
                quantities = T,
                legend = T,
                edges = T)
@@ -70,5 +72,6 @@ plot_venn <- function(
                    data,
                    glue::glue("{data$analyte}_venn"),
                    ...))
+
 }
 

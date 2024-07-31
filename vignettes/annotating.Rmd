@@ -187,15 +187,14 @@ data_new_go %>%
 
 ```
 
-An enrichment plot for "ion binding" for the annotation
-`molecular_function`.
+An enrichment plot for "ion binding" for the annotation `molecular_function`.
 
 ```{r, message=FALSE}
 data_new_go %>% 
   subset(molecular_function %like% 'ion binding') %>% 
   expression(knockdown/control) %>% 
   enrichment(knockdown/control, 
-             .term = 'molecular_function',
+             .terms = 'molecular_function',
              .method = 'wilcoxon') %>%
   plot_enrichment(
     knockdown/control, 

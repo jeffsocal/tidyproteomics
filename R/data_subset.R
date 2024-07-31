@@ -232,11 +232,11 @@ tidyproteomics_quo <- function(...) {
 #'
 #' @return a character string
 #'
-tidyproteomics_quo_name <- function(...){
+tidyproteomics_quo_name <- function(..., sep = "-"){
 
   str_quo <- tidyproteomics_quo(...)
   if(is.null(str_quo)) { return(NULL) }
-  return(paste(str_quo[['variable']], str_quo[['value']], sep="-"))
+  return(paste(str_quo[['variable']], str_quo[['value']], sep=sep))
 }
 
 #' Helper function for subsetting

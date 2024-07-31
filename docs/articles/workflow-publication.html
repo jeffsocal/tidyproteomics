@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,6 +65,7 @@
     <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
     <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
+    <a class="dropdown-item" href="../articles/automating.html">Automating</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
     <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
@@ -174,13 +175,13 @@ from the publication.</p>
 <code class="sourceCode R"><span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># calculate the enrichment of the GO term(s) using the results</span></span>
 <span>  <span class="co"># from the expression analysis</span></span>
-<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .term <span class="op">=</span> <span class="st">"biological_process"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .term <span class="op">=</span> <span class="st">"cellular_component"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .term <span class="op">=</span> <span class="st">"molecular_function"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .terms <span class="op">=</span> <span class="st">"biological_process"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .terms <span class="op">=</span> <span class="st">"cellular_component"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .terms <span class="op">=</span> <span class="st">"molecular_function"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="co"># plot the enrichment analysis</span></span>
-<span>  <span class="fu"><a href="../reference/plot_enrichment.html">plot_enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .term <span class="op">=</span> <span class="st">"biological_process"</span>, destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/plot_enrichment.html">plot_enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .term <span class="op">=</span> <span class="st">"cellular_component"</span>, destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/plot_enrichment.html">plot_enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .term <span class="op">=</span> <span class="st">"molecular_function"</span>, destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> </span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/plot_enrichment.html">plot_enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .terms <span class="op">=</span> <span class="st">"biological_process"</span>, destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/plot_enrichment.html">plot_enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .terms <span class="op">=</span> <span class="st">"cellular_component"</span>, destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/plot_enrichment.html">plot_enrichment</a></span><span class="op">(</span><span class="va">kndw</span><span class="op">/</span><span class="va">ctrl</span>, .terms <span class="op">=</span> <span class="st">"molecular_function"</span>, destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> </span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="advanced">Advanced<a class="anchor" aria-label="anchor" href="#advanced"></a>

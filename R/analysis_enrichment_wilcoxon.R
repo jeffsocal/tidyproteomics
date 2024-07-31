@@ -46,11 +46,6 @@ enrichment_wilcoxon <- function(
     )
   }
 
-  enrichment <- function(data, x){
-    stats::median(data$log2_foldchange[which(data$annotation == x)], na.rm = T) /
-      stats::median(data$log2_foldchange, na.rm = T)
-  }
-
   f_enrich <- function(annotation_str, x){
 
     tryCatch({
@@ -68,7 +63,7 @@ enrichment_wilcoxon <- function(
       out <- tbl_test %>%
         wilcox_test(annotation_str) %>%
         broom::tidy() %>%
-        dplyr::mutate(enrichment = tbl_test %>% enrichment(annotation_str),
+        dplyr::mutate(enrichment = tbl_test %>% calc_enrichment(annotation_str),
                       annotation = annotation_str,
                       size = tbl_test %>%
                         dplyr::filter(annotation == annotation_str) %>%

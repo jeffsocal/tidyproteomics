@@ -64,7 +64,6 @@ plot_volcano <- function(
 ){
 
   # visible bindings
-  .data <- NULL
   metric <- NULL
 
   file_name = "volcano"
@@ -185,7 +184,7 @@ plot_volcano <- function(
   # modify the color scheme
   plot <- plot +
     ggplot2::scale_color_manual(values = theme_palette()) +
-    ggplot2::scale_y_continuous(trans=reverselog_transformation(10), n.breaks = 11) +
+    ggplot2::scale_y_continuous(trans=reverselog_transformation(10), breaks = signif(1/10^(0:20), 1)) +
     ggplot2::scale_x_continuous(breaks=fc_scale) +
     ggplot2::theme_bw() +
     # pretty up the axis labels

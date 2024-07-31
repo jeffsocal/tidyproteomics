@@ -57,7 +57,7 @@ library(ggplot2, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins \%>\%
    expression(knockdown/control, .method = stats::t.test) \%>\%
-   enrichment(knockdown/control, .term = 'biological_process', .method = "wilcoxon") \%>\%
+   enrichment(knockdown/control, .terms = 'biological_process', .method = "wilcoxon") \%>\%
    plot_enrichment(knockdown/control, .term = "biological_process") +
    labs(title = "Hela: Term Enrichment", subtitle = "Knockdown ~ Control")
 

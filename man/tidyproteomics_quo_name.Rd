@@ -4,7 +4,7 @@
 \alias{tidyproteomics_quo_name}
 \title{Helper function to get a name from the ...}
 \usage{
-tidyproteomics_quo_name(...)
+tidyproteomics_quo_name(..., sep = "-")
 }
 \arguments{
 \item{...}{a quo}

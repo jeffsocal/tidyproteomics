@@ -26,7 +26,7 @@
 #' library(tidyproteomics)
 #' hela_proteins %>%
 #'    expression(knockdown/control, .method = stats::t.test) %>%
-#'    enrichment(knockdown/control, .term = 'biological_process', .method = "wilcoxon") %>%
+#'    enrichment(knockdown/control, .terms = 'biological_process', .method = "wilcoxon") %>%
 #'    plot_enrichment(knockdown/control, .term = "biological_process") +
 #'    labs(title = "Hela: Term Enrichment", subtitle = "Knockdown ~ Control")
 #'
@@ -50,12 +50,16 @@ plot_enrichment <- function(
   .data <- NULL
   term_col <- NULL
   keep <- NULL
+  plot_title <- ""
+  plot_subtitle <- ""
 
   file_name = 'enrichment'
   if('tidyproteomics' %in% class(data)) {
     table <- data %>% export_analysis(..., .analysis = 'enrichment', .term = .term)
     str_quo <- tidyproteomics_quo_name(...)
     file_name = glue::glue("{data$analyte}_{data$quantitative_source}_enrichment_{str_quo}")
+    plot_title <- tidyproteomics_quo_name(..., sep = " / ") %>% stringr::str_to_title()
+    plot_subtitle <- data$analysis[[tidyproteomics_quo_name(..., sep = "/")]]$enrichment[[.term]]$method
   } else {
     table <- data
   }
@@ -89,7 +93,9 @@ plot_enrichment <- function(
     ggplot2::scale_color_gradient(low = 'red', high = "blue") +
     ggplot2::theme_bw() +
     ggplot2::labs(x = "Enrichment",
-                  y = "")
+                  y = "",
+                  title = plot_title,
+                  subtitle = plot_subtitle)
 
   return(plot_save(plot,
                    data,

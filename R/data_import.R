@@ -149,7 +149,7 @@ data_import <- function(
     ############################################################################
     # deal with protein_groups
     if(!'protein_cluster' %in% names(this_dat)) {
-      cli::cli_abort("A `patter_split` is required for identifier::protein in your config file")
+      cli::cli_abort("A `pattern_split` is required for identifier::protein in your config file")
     }
     u_prot_all <- this_dat$protein %>% unique() %>% length()
     this_dat <- this_dat %>%
