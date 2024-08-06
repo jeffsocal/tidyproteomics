@@ -56,7 +56,7 @@ analyze_enrichments <- function(
     tbl_enrich <- list()
 
     for( term in names(data$analysis[[set_expression]]$enrichment) ){
-      tbl_enrich <- tbl_enrich |>
+      tbl_enrich <- tbl_enrich %>%
         list.append(
           data$analysis[[set_expression]]$enrichment[[term]]$data %>%
             dplyr::mutate(term = term) %>%
@@ -64,19 +64,19 @@ analyze_enrichments <- function(
         )
     }
 
-    tbl_enrich <- tbl_enrich |> dplyr::bind_rows()
-    n_terms <- tbl_enrich |> nrow()
-    plt_title <- set_expression |>
-      stringr::str_replace("/", " / ") |>
-      stringr::str_replace_all("_", " ") |>
+    tbl_enrich <- tbl_enrich %>% dplyr::bind_rows()
+    n_terms <- tbl_enrich %>% nrow()
+    plt_title <- set_expression %>%
+      stringr::str_replace("/", " / ") %>%
+      stringr::str_replace_all("_", " ") %>%
       stringr::str_to_title()
 
-    plt <- tbl_enrich |>
-      dplyr::slice_min(adj_p_value, n = top_n, with_ties = FALSE) |>
+    plt <- tbl_enrich %>%
+      dplyr::slice_min(adj_p_value, n = top_n, with_ties = FALSE) %>%
       dplyr::mutate(is_significant = adj_p_value <= significance_max,
-                    is_enriched = enrichment > 0) |>
-      dplyr::mutate(term = term |> stringr::str_replace_all("gene_ontology\\_", "gene_ontology\n")) |>
-      dplyr::mutate(annotation = forcats::fct_reorder(annotation, -enrichment)) |>
+                    is_enriched = enrichment > 0) %>%
+      dplyr::mutate(term = term %>% stringr::str_replace_all("gene_ontology\\_", "gene_ontology\n")) %>%
+      dplyr::mutate(annotation = forcats::fct_reorder(annotation, -enrichment)) %>%
       ggplot2::ggplot(ggplot2::aes(enrichment, annotation)) +
       # ggplot2::geom_col(ggplot2::aes(color = is_enriched), fill = NA) +
       ggplot2::geom_col(ggplot2::aes(fill = is_enriched, alpha = is_significant)) +
@@ -99,7 +99,7 @@ analyze_enrichments <- function(
 
     # save the expression table
     data_name <- glue::glue("table_{data$analyte}_enrichment_{stringr::str_replace_all(set_expression, '/', '-')}.csv")
-    tbl_enrich |> readr::write_csv(data_name)
+    tbl_enrich %>% readr::write_csv(data_name)
 
   }
 

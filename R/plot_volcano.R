@@ -15,6 +15,8 @@
 #' @param show_pannels a boolean for showing colored up/down expression panels.
 #' @param show_lines a boolean for showing threshold lines.
 #' @param show_fc_scale a boolean for showing the secondary foldchange scale.
+#' @param show_title input FALSE, TRUE for an auto-generated title or any charcter string.
+#' @param show_pval_1 a boolean for showing expressions with pvalue == 1.
 #' @param point_size a character reference to a numerical value in the expression table
 #' @param color_positive a character defining the color for positive (up) expression.
 #' @param color_negative a character defining the color for negative (down) expression.
@@ -51,10 +53,12 @@ plot_volcano <- function(
     log2fc_column = 'log2_foldchange',
     significance_max = 0.05,
     significance_column = 'adj_p_value',
-    labels_column = NULL,
+    labels_column = 'gene_name',
     show_pannels = TRUE,
     show_lines = TRUE,
     show_fc_scale = TRUE,
+    show_title = TRUE,
+    show_pval_1 = TRUE,
     point_size = NULL,
     color_positive = 'dodgerblue',
     color_negative = 'firebrick1',
@@ -65,15 +69,25 @@ plot_volcano <- function(
 
   # visible bindings
   metric <- NULL
+  significance_plot <- 'p_value'
+  title_txt <- NULL
 
   file_name = "volcano"
   if('tidyproteomics' %in% class(data)) {
     table <- data %>% export_analysis(..., .analysis = 'expression')
     str_quo <- tidyproteomics_quo_name(...)
+    title_txt <- str_quo %>%
+      stringr::str_replace("-", " / ") %>%
+      stringr::str_replace_all("_", " ") %>%
+      stringr::str_to_title()
+
+
     file_name = glue::glue("{data$analyte}_{data$quantitative_source}_volcano_{str_quo}")
   } else {
     table <- data
   }
+
+  if(is.character(show_title)){title_txt <- show_title}
 
   table_cols <- colnames(table)
   log2fc_column <- rlang::arg_match(log2fc_column, table_cols)
@@ -94,9 +108,17 @@ plot_volcano <- function(
     dplyr::mutate(keep = abs(.data[[log2fc_column]]) >= log2fc_min &
                     .data[[significance_column]] <= significance_max)
 
+  title_n_exp <- table %>% nrow()
+
+  if(show_pval_1 == FALSE){
+    table <- table %>% dplyr::filter(!.data[['p_value']] == 1)
+  }
+
+  show_signif <- TRUE
   if(length(which(table$keep == TRUE)) == 0){
     show_pannels = FALSE
     show_lines = FALSE
+    show_signif <- FALSE
 
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "red")))
     cli::cli_inform(c("i" = "no values significant at current settings",
@@ -121,7 +143,7 @@ plot_volcano <- function(
 
   signif_range <- table %>%
     dplyr::filter(.data[[significance_column]] <= significance_max) %>%
-    dplyr::select(dplyr::all_of(significance_column)) %>%
+    dplyr::select(dplyr::all_of(significance_plot)) %>%
     unlist() %>%
     range()
 
@@ -136,11 +158,11 @@ plot_volcano <- function(
   # construct the volcano plot
   if(is.null(point_size)) {
     plot <- table %>%
-      ggplot2::ggplot(ggplot2::aes(.data[[log2fc_column]], .data[[significance_column]]))
+      ggplot2::ggplot(ggplot2::aes(.data[[log2fc_column]], .data[[significance_plot]]))
   } else {
     point_size <- rlang::arg_match(point_size, table_cols)
     plot <- table %>%
-      ggplot2::ggplot(ggplot2::aes(.data[[log2fc_column]], .data[[significance_column]],
+      ggplot2::ggplot(ggplot2::aes(.data[[log2fc_column]], .data[[significance_plot]],
                                    size = .data[[point_size]]))
   }
 
@@ -155,10 +177,17 @@ plot_volcano <- function(
     }
   }
 
-  plot <- plot +
-    ggplot2::geom_point(data = table_grey, alpha=.5, color='grey') +
-    ggplot2::geom_point(data = table_neg, alpha=.5, color=color_negative) +
-    ggplot2::geom_point(data = table_pos, alpha=.5, color=color_positive)
+  if(show_signif == TRUE){
+    plot <- plot +
+      ggplot2::geom_point(data = table_grey, alpha=.5, color='grey') +
+      ggplot2::geom_point(data = table_neg, alpha=.5, color=color_negative) +
+      ggplot2::geom_point(data = table_pos, alpha=.5, color=color_positive)
+  } else {
+    plot <- plot +
+      ggplot2::geom_point(data = table, alpha=.5, color='grey') +
+      ggplot2::geom_point(data = table_neg, shape = 1) +
+      ggplot2::geom_point(data = table_pos, shape = 1)
+  }
 
   if(show_pannels == TRUE) {
     plot <- plot +
@@ -181,23 +210,38 @@ plot_volcano <- function(
                                hjust=-0.1, size=3)
   }
 
+  significance_plot_txt <- significance_plot %>% stringr::str_replace_all("_"," ") %>% stringr::str_to_title()
+  log2fc_column_txt <- log2fc_column %>% stringr::str_replace_all("_"," ") %>% stringr::str_to_title()
+
+  n_sig <- nrow(table_label)
+  if(show_signif == FALSE){ n_sig <- 0 }
+  subtitle_txt <- glue::glue("{n_sig} of {title_n_exp} found significant: {significance_column} <= {significance_max}, {log2fc_column} >= {log2fc_min}")
+  if(show_title == FALSE){ subtitle_txt <- NULL; title_txt <- NULL }
+
   # modify the color scheme
   plot <- plot +
     ggplot2::scale_color_manual(values = theme_palette()) +
     ggplot2::scale_y_continuous(trans=reverselog_transformation(10), breaks = signif(1/10^(0:20), 1)) +
     ggplot2::scale_x_continuous(breaks=fc_scale) +
-    ggplot2::theme_bw() +
+    ggplot2::geom_hline(yintercept = 1, color = NA) +
+    ggplot2::theme_classic() +
     # pretty up the axis labels
-    ggplot2::labs(x = paste0("Expression Difference (",log2fc_column, ")"),
-                  y = paste0("Significance (", significance_column, ")"))
+    ggplot2::labs(x = glue::glue("Expression Difference ({log2fc_column_txt})"),
+                  y = glue::glue("Significance ({significance_plot_txt})"),
+                  title = title_txt,
+                  subtitle = subtitle_txt) +
+    ggplot2::theme(
+      plot.subtitle = ggplot2::element_text(size=9, face="italic"),
+      axis.title = ggplot2::element_text(size=10)
+    )
 
   if(show_fc_scale == TRUE) {
     plot <- plot +
       ggplot2::annotate('text',
-                        y=Inf, x=fc_scale, size=3,
+                        y=Inf, x=fc_scale, size=3, color='grey40',
                         label = round(2^abs(fc_scale),1), vjust=-1) +
       ggplot2::annotate('text',
-                        y=Inf, x=-Inf, size=3,
+                        y=Inf, x=-Inf, size=3, , color='grey40',
                         label = 'FoldChange', vjust=-2.5, hjust=-.5)
   }
 

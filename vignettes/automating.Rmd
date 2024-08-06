@@ -63,7 +63,7 @@ library(tidyverse)
 library(tidyproteomics)
 ```
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 pairs <- list(
   c('knockdown', 'control'))
 
@@ -80,17 +80,36 @@ hela_proteins <- hela_proteins %>%
   # run the analysis that saves out plots and tables
   analyze_expressions(labels_column = 'gene_name') %>%
   analyze_enrichments(significance_max = 0.05)
-
-
-
+```
+```
+Expression Analysis - using the supplied 1 sample pairs ...
+✔ .. expression::t_test testing knockdown / control [3.5s]
+Enrichment Analysis - using the supplied 1 sample pairs ...
+✔ .. enrichment::wilcoxon testing knockdown / control by term biological_process [1.6s]
+✔ .. enrichment::wilcoxon testing knockdown / control by term cellular_component [1.5s]
+✔ .. enrichment::wilcoxon testing knockdown / control by term molecular_function [1.2s]
+✔ .. enrichment::wilcoxon testing knockdown / control by term wiki_pathway [48s]
+✔ .. enrichment::wilcoxon testing knockdown / control by term reactome_pathway [1m 58.6s]
+ℹ no values significant at current settings
+ℹ ... log2_foldchange (1) and adj_p_value (0.05)
+ℹ Saved plot_volcano.png
 ```
 
 Each plot and table are save in the local directory and labeled accordingly.
 
-
-```{r}
+```{r, eval=FALSE}
 "./table_proteins_enrichment_knockdown-control.csv" %>% read.csv()
 ```
 
-![Enrichment Plot](./proteins_enrichment_knockdown-control.png)
+The Enrichment Table
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+"./images/table_proteins_enrichment_knockdown-control.csv" %>% read.csv() %>% as_tibble()
+```
+
+```{r, eval=FALSE}
+"./proteins_enrichment_knockdown.png" %>% magick::image_read()
+```
+
+The Enrichment Plot
+![](./images/proteins_enrichment_knockdown-control.png)
 

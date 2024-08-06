@@ -13,43 +13,50 @@ navbar:
       - text: The Data-Object
         href: articles/data-object.html
       - text: '-------'
-      - text: Operations
+      - text: Basics
       - text: Importing
         href: articles/importing.html
+      - text: Annotating
+        href: articles/annotating.html
       - text: Summarizing
         href: articles/summarizing.html
+      - text: Visualizing
+        href: articles/visualizing.html
+      - text: Extracting
+        href: articles/extracting.html
+      - text: '-------'
+      - text: Processing
       - text: Subsetting
         href: articles/subsetting.html
       - text: Normalizing
         href: articles/normalizing.html
       - text: Imputing
         href: articles/imputing.html
-      - text: Annotating
-        href: articles/annotating.html
-      - text: Protein Accounting
-        href: articles/collapsing.html
-      - text: Extracting
-        href: articles/extracting.html
       - text: Automating
         href: articles/automating.html
       - text: '-------'
       - text: Analysis
-      - text: Visualizing
-        href: articles/visualizing.html
       - text: Expression
         href: articles/expression.html
       - text: Enrichment
         href: articles/enrichment.html
       - text: '-------'
-      - text: Workflows
+      - text: Peptides to Proteins
+      - text: Collapsing
+        href: articles/collapsing.html
+      - text: '-------'
+      - text: Example Workflows
       - text: Simple
         href: articles/workflow-simple.html
       - text: Importing Demo
         href: articles/workflow-importing.html
-      - text: User Defined Import
-        href: articles/workflow-userimport.html
       - text: Publication Demo
         href: articles/workflow-publication.html
+      - text: User Defined Import
+        href: articles/workflow-userimport.html
+    news:
+        text: Updates
+        href: articles/updates.html
 
 template:
   bootstrap: 5

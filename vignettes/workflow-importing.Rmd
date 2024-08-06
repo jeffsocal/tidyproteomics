@@ -56,7 +56,8 @@ url <- "https://data.caltech.edu/records/aevwq-2ps50/files/MaxQuant_1.6.10.43_pr
 download.file(url, destfile = "./data/mq_proteinGroups.txt")
 
 # import the data
-data_prot <- "./data/mq_proteinGroups.txt" %>% import('MaxQuant', 'proteins')
+data_prot <- "./data/mq_proteinGroups.txt" %>% 
+  import('MaxQuant', 'proteins')
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -64,7 +65,8 @@ library(tidyverse)
 library(tidyproteomics)
 
 # import the data
-data_prot <- "~/Local/data/tidyproteomics/MaxQuant_1.6.10.43/proteinGroups.txt" %>% import('MaxQuant', 'proteins')
+data_prot <- "~/Local/data/tidyproteomics/MaxQuant_1.6.10.43/proteinGroups.txt" %>% 
+  import('MaxQuant', 'proteins')
 
 data_prot
 ```
@@ -82,7 +84,8 @@ url <- "https://data.caltech.edu/records/aevwq-2ps50/files/FragPipe_19.1_combine
 download.file(url, destfile = "./data/fp_combined_protein.tsv")
 
 # import the data
-data_prot <- "./data/fp_combined_protein.tsv" %>% import('FragPipe', 'proteins')
+data_prot <- "./data/fp_combined_protein.tsv" %>% 
+  import('FragPipe', 'proteins')
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
@@ -90,7 +93,8 @@ library(tidyverse)
 library(tidyproteomics)
 
 # import the data
-data_prot <- "~/Local/data/tidyproteomics/FragPipe_19.1/combined_protein.tsv" %>% import('FragPipe', 'proteins')
+data_prot <- "~/Local/data/tidyproteomics/FragPipe_19.1/combined_protein.tsv" %>% 
+  import('FragPipe', 'proteins')
 
 data_prot
 ```

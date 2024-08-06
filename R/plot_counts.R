@@ -71,7 +71,7 @@ plot_counts <- function(
   #   legend_title <- 'Group'
   # }
 
-  fat$fill <- fat$fill |> as.factor()
+  fat$fill <- fat$fill %>% as.factor()
 
   metric_max <- max(fat$metric) * 1.1
 

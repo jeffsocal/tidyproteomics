@@ -145,8 +145,7 @@ Read in the TSV file from the downloaded UniProt table.
 ```{r, message=FALSE}
 data_go <- "~/Local/data/uniprotkb/uniprotkb_human_AND_reviewed_true_AND_m_2023_10_10.tsv" %>% read_tsv()
 
-head(data_go)
-
+data_go
 ```
 
 We just need to tidy up that data a bit and get it into the format
@@ -165,8 +164,7 @@ data_go <- data_go %>%
                names_to = 'term',
                values_to = 'annotation')
 
-head(data_go)
-
+data_go
 ```
 
 Looks great!
@@ -175,7 +173,6 @@ Looks great!
 data_new_go <- data_prot %>% annotate(data_go)
 
 data_new_go$annotations %>% filter(protein %in% c('P68431', 'P62805'))
-
 ```
 
 Take it for a test drive by subsetting the data based on a specific
@@ -200,6 +197,6 @@ data_new_go %>%
     knockdown/control, 
     .term = 'molecular_function',
     significance_max = 1
-  )
+  ) 
 
 ```

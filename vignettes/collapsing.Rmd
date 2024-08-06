@@ -5,8 +5,11 @@ description: |
   tidyproteomics: simplified data object and analysis functions
 vignette: >
   %\VignetteIndexEntry{Protein Accounting}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r, echo = FALSE}
@@ -90,7 +93,7 @@ pro_frompep_razor <- pep_data %>%
 pro_frompep_razor %>% 
   summary("sample", destination = 'return') %>% 
   select(c('sample', 'proteins', 'peptides', 'CVs')) %>%
-  knitr::kable()
+  as.data.frame()
 ```
 
 Check to see how the two results agree ...
@@ -107,7 +110,7 @@ tbl_merged_razor %>%
   group_by(itentical_protein_abundances) %>%
   summarise(n = n(), .groups = 'drop') %>%
   mutate(r = paste(n / sum(n) * 100, "%")) %>%
-  knitr::kable()
+  as.data.frame()
 ```
 
 A quick plot for visualizing the
@@ -127,9 +130,7 @@ Lets look at a few examples of outliers ...
 
 ```{r}
 tbl_merged_razor %>%
-  filter(abundance_raw_proteomediscoverer != abundance_raw_tidyproteomics) %>%
-  head(3) %>%
-  knitr::kable()
+  filter(abundance_raw_proteomediscoverer != abundance_raw_tidyproteomics) %>% as.data.frame()
 ```
 
 We will take the protein **P45983** to examine ...
@@ -148,8 +149,8 @@ pep_data$quantitative %>%
   summarise(
     proteins = paste(protein, collapse = "; "),
     abundance_raw = unique(abundance_raw)
-  ) %>%
-  knitr::kable()
+  ) %>% 
+  as.data.frame()
 ```
 
 Here we see that **P45983** yielded 5 peptides, 2 of which are shared. In the outlier table we see that ProteomeDiscoverer excluded all razor peptides from the protein quantitation. And if we dig further, we find that the peptide **IIDFGLAR** by razor definition belongs to the protein **Q16539**, while the peptide **MSYLLYQMLCGIK** can be assigned to **P45983**, thus giving us the larger value shown in the outlier table.
@@ -163,8 +164,8 @@ pep_data$quantitative %>%
   summarise(
     n_peptides = length(unique(peptide))
   ) %>%
-  arrange(desc(n_peptides)) %>%
-  knitr::kable()
+  arrange(desc(n_peptides)) %>% 
+  as.data.frame()
 
 ```
 
@@ -179,8 +180,8 @@ pro_frompep_nonhom <- pep_data %>%
 
 pro_frompep_nonhom %>% 
   summary("sample", destination = 'return') %>% 
-  select(c('sample', 'proteins', 'peptides', 'CVs')) %>%
-  knitr::kable()
+  select(c('sample', 'proteins', 'peptides', 'CVs')) %>% 
+  as.data.frame()
 ```
 
 Check to see how the two results agree ...
@@ -197,7 +198,7 @@ tbl_merged_nonhom %>%
   group_by(itentical_protein_abundances) %>%
   summarise(n = n(), .groups = 'drop') %>%
   mutate(r = paste(n / sum(n) * 100, "%")) %>%
-  knitr::kable()
+  as.data.frame()
 ```
 
 A quick plot for visualizing the
@@ -217,7 +218,7 @@ Interesting, we now show that **P45983** agrees with ProteomeDiscoverer, yet obv
 
 ```{r}
 tbl_merged_nonhom %>% filter(protein == 'P45983') %>%
-  knitr::kable()
+  as.data.frame()
 ```
 
 Lets look at a few examples of outliers ...
@@ -226,7 +227,7 @@ Lets look at a few examples of outliers ...
 tbl_merged_nonhom %>%
   filter(abundance_raw_proteomediscoverer != abundance_raw_tidyproteomics) %>%
   head(3) %>%
-  knitr::kable()
+  as.data.frame()
 ```
 
 We will take the protein **Q96LR5** to examine ...
@@ -246,7 +247,7 @@ pep_data$quantitative %>%
     proteins = paste(protein, collapse = "; "),
     abundance_raw = unique(abundance_raw)
   ) %>%
-  knitr::kable()
+  as.data.frame()
 ```
 
 A quick check on the peptide sum and it appears that ProteomeDiscoverer ignored razor-peptides all together for this protein
@@ -263,7 +264,7 @@ pep_data$quantitative %>%
     .groups = 'drop'
   ) %>%
   summarise(abundance_sum = sum(abundance_raw)) %>%
-  knitr::kable()
+  as.data.frame()
 ```
 
 If we examine the other proteins in that group for all the peptides that may be shared ...
@@ -283,7 +284,7 @@ pep_data$quantitative %>%
     proteins = paste(protein, collapse = "; "),
     abundance_raw = unique(abundance_raw)
   ) %>%
-  knitr::kable()
+  as.data.frame()
 
 ```
 
@@ -293,7 +294,7 @@ pep_data$quantitative %>%
 tbl_merged_razor %>%
   filter(sample == 'p97_kd', replicate == 1) %>% 
   filter(protein %in% c('Q96LR5','P51965','Q969T4')) %>%
-  knitr::kable()
+  as.data.frame()
 ```
 
 ### Collapsing to Gene Name
@@ -334,7 +335,7 @@ gene_data <- pep_data %>%
   collapse(collapse_to = 'gene_name')
 ```
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 gene_data %>% plot_counts()
 ```
 

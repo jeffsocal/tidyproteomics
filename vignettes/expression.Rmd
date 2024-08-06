@@ -2,7 +2,7 @@
 title: "Expression"
 output: rmarkdown::html_vignette
 description: |
-  tidyproteomics: simplified data object and analysis functions
+tidyproteomics: simplified data object and analysis functions
 vignette: >
   %\VignetteIndexEntry{Expression}
   %\VignetteEncoding{UTF-8}
@@ -174,8 +174,8 @@ data-object and can easily be exported to save as a flat data table or
 used in an external down stream analysis.
 
 ```{r}
-
-rdata %>% export_analysis(knockdown/control, .analysis = 'expression')
+rdata %>% 
+  export_analysis(knockdown/control, .analysis = 'expression')
 ```
 
 #### Volcano Plot
@@ -184,18 +184,18 @@ The default is to plot accoring to adjusted p-value with a Log2
 fold-change cutoff of 2 or greater.
 
 ```{r}
-
-rdata %>% plot_volcano(knockdown/control)
+rdata %>% 
+  plot_volcano(knockdown/control)
 ```
 
 The parameters can be adjusted to suit your needs ...
 
 ```{r}
-
-rdata %>% plot_volcano(knockdown/control,
-                       significance_column = 'p_value',
-                       significance_max = 0.01,
-                       log2fc_min = 2)
+rdata %>% 
+  plot_volcano(knockdown/control,
+               significance_column = 'p_value',
+               significance_max = 0.01,
+               log2fc_min = 2)
 ```
 
 ... or desires.
@@ -203,16 +203,17 @@ rdata %>% plot_volcano(knockdown/control,
 ```{r}
 library(ggplot2)
 
-rdata %>% plot_volcano(knockdown/control,
-                       significance_column = 'p_value',
-                       significance_max = 0.01,
-                       log2fc_min = 2,
-                       color_positive = 'orange',
-                       color_negative = 'purple',
-                       show_lines = FALSE,
-                       show_fc_scale = FALSE,
-                       show_pannels = FALSE,
-                       labels_column = 'gene_name') +
+rdata %>% 
+  plot_volcano(knockdown/control,
+               significance_column = 'p_value',
+               significance_max = 0.01,
+               log2fc_min = 2,
+               color_positive = 'orange',
+               color_negative = 'purple',
+               show_lines = FALSE,
+               show_fc_scale = FALSE,
+               show_pannels = FALSE,
+               labels_column = 'gene_name') +
   labs(title = "A nice volcano plot", subtitle = "with great colors")
 ```
 
@@ -226,7 +227,8 @@ and significance cutoffs.
 ```{r, message=FALSE}
 library(ggplot2)
 
-rdata %>% plot_proportion(knockdown/control)
+rdata %>% 
+  plot_proportion(knockdown/control)
 ```
 
 This plot can likewise also be manipulated like the volcano plot.
@@ -234,13 +236,14 @@ This plot can likewise also be manipulated like the volcano plot.
 ```{r}
 library(ggplot2)
 
-rdata %>% plot_proportion(knockdown/control,
-                       significance_column = 'p_value',
-                       proportion_min = 0.1,
-                       log2fc_min = 2,
-                       color_positive = 'orange',
-                       color_negative = 'purple',
-                       show_lines = TRUE,
-                       labels_column = 'gene_name')
+rdata %>% 
+  plot_proportion(knockdown/control,
+                  significance_column = 'p_value',
+                  proportion_min = 0.1,
+                  log2fc_min = 2,
+                  color_positive = 'orange',
+                  color_negative = 'purple',
+                  show_lines = TRUE,
+                  labels_column = 'gene_name')
 
 ```

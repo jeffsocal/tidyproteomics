@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,28 +56,35 @@
     <a class="dropdown-item" href="../articles/updates.html">Updates</a>
     <a class="dropdown-item" href="../articles/data-object.html">The Data-Object</a>
     <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Operations</h6>
+    <h6 class="dropdown-header" data-toc-skip>Basics</h6>
     <a class="dropdown-item" href="../articles/importing.html">Importing</a>
+    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/summarizing.html">Summarizing</a>
+    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Processing</h6>
     <a class="dropdown-item" href="../articles/subsetting.html">Subsetting</a>
     <a class="dropdown-item" href="../articles/normalizing.html">Normalizing</a>
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
-    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
-    <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
-    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <a class="dropdown-item" href="../articles/automating.html">Automating</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
-    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
     <a class="dropdown-item" href="../articles/expression.html">Expression</a>
     <a class="dropdown-item" href="../articles/enrichment.html">Enrichment</a>
     <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <h6 class="dropdown-header" data-toc-skip>Peptides to Proteins</h6>
+    <a class="dropdown-item" href="../articles/collapsing.html">Collapsing</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Example Workflows</h6>
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-importing.html">Importing Demo</a>
-    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
+    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/updates.html">Updates</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -149,30 +156,42 @@ measured.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span><span class="op">$</span><span class="va">identifier</span></span>
 <span><span class="co">#&gt; [1] "protein"</span></span>
-<span><span class="va">hela_proteins</span><span class="op">$</span><span class="va">quantitative</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
-<span><span class="co">#&gt;   sample_id sample    replicate protein abundance_raw</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 9e6ed3ba  control   1         Q15149    <span style="text-decoration: underline;">1</span>011<span style="text-decoration: underline;">259</span>992.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> cc56fc1d  control   2         Q15149    <span style="text-decoration: underline;">1</span>093<span style="text-decoration: underline;">277</span>593.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 6a21f7a9  control   3         Q15149     980<span style="text-decoration: underline;">809</span>516.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 966be57f  knockdown 1         Q15149    <span style="text-decoration: underline;">1</span>410<span style="text-decoration: underline;">445</span>367.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 79a98e41  knockdown 2         Q15149    <span style="text-decoration: underline;">1</span>072<span style="text-decoration: underline;">305</span>561.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 9f804505  knockdown 3         Q15149    <span style="text-decoration: underline;">1</span>486<span style="text-decoration: underline;">561</span>518.</span></span></code></pre></div>
+<span></span>
+<span><span class="va">hela_proteins</span><span class="op">$</span><span class="va">quantitative</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 42,330 × 5</span></span></span>
+<span><span class="co">#&gt;    sample_id sample    replicate protein abundance_raw</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 9e6ed3ba  control   1         Q15149    <span style="text-decoration: underline;">1</span>011<span style="text-decoration: underline;">259</span>992.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> cc56fc1d  control   2         Q15149    <span style="text-decoration: underline;">1</span>093<span style="text-decoration: underline;">277</span>593.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 6a21f7a9  control   3         Q15149     980<span style="text-decoration: underline;">809</span>516.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 966be57f  knockdown 1         Q15149    <span style="text-decoration: underline;">1</span>410<span style="text-decoration: underline;">445</span>367.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 79a98e41  knockdown 2         Q15149    <span style="text-decoration: underline;">1</span>072<span style="text-decoration: underline;">305</span>561.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 9f804505  knockdown 3         Q15149    <span style="text-decoration: underline;">1</span>486<span style="text-decoration: underline;">561</span>518.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 9e6ed3ba  control   1         Q09666     659<span style="text-decoration: underline;">299</span>359.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> cc56fc1d  control   2         Q09666     717<span style="text-decoration: underline;">783</span>135.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 6a21f7a9  control   3         Q09666     612<span style="text-decoration: underline;">673</span>576.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 966be57f  knockdown 1         Q09666    <span style="text-decoration: underline;">1</span>000<span style="text-decoration: underline;">041</span>657.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 42,320 more rows</span></span></span></code></pre></div>
 <p>Peptides have multiple identifiers …</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_peptides</span><span class="op">$</span><span class="va">identifier</span></span>
 <span><span class="co">#&gt; [1] "protein"       "peptide"       "modifications"</span></span>
-<span><span class="va">hela_peptides</span><span class="op">$</span><span class="va">quantitative</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
-<span><span class="co">#&gt;   sample_id sample  replicate protein peptide        modifications abundance_raw</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 74a86daf  control 1         P06576  IPSAVGYQPTLAT… <span style="color: #BB0000;">NA</span>                43<span style="text-decoration: underline;">217</span>337 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 74a86daf  control 1         P06576  IPSAVGYQPTLAT… 1xOxidation …      1<span style="text-decoration: underline;">465</span>426.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 74a86daf  control 1         Q9P2E9  LTAEFEEAQTSACR 1xCarbamidom…      5<span style="text-decoration: underline;">899</span>490.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 74a86daf  control 1         P11021  ITPSYVAFTPEGER <span style="color: #BB0000;">NA</span>                52<span style="text-decoration: underline;">886</span>668 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 74a86daf  control 1         P11021  IINEPTAAAIAYG… <span style="color: #BB0000;">NA</span>               244<span style="text-decoration: underline;">628</span>414.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 74a86daf  control 1         Q9P2E9  LLATEQEDAAVAK  <span style="color: #BB0000;">NA</span>                 5<span style="text-decoration: underline;">831</span>700.</span></span></code></pre></div>
+<span></span>
+<span><span class="va">hela_peptides</span><span class="op">$</span><span class="va">quantitative</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,416 × 7</span></span></span>
+<span><span class="co">#&gt;    sample_id sample  replicate protein peptide       modifications abundance_raw</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 74a86daf  control 1         P06576  IPSAVGYQPTLA… <span style="color: #BB0000;">NA</span>                43<span style="text-decoration: underline;">217</span>337 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 74a86daf  control 1         P06576  IPSAVGYQPTLA… 1xOxidation …      1<span style="text-decoration: underline;">465</span>426.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 74a86daf  control 1         Q9P2E9  LTAEFEEAQTSA… 1xCarbamidom…      5<span style="text-decoration: underline;">899</span>490.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 74a86daf  control 1         P11021  ITPSYVAFTPEG… <span style="color: #BB0000;">NA</span>                52<span style="text-decoration: underline;">886</span>668 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 74a86daf  control 1         P11021  IINEPTAAAIAY… <span style="color: #BB0000;">NA</span>               244<span style="text-decoration: underline;">628</span>414.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 74a86daf  control 1         Q9P2E9  LLATEQEDAAVAK <span style="color: #BB0000;">NA</span>                 5<span style="text-decoration: underline;">831</span>700.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 74a86daf  control 1         Q14692  ILALLDALSTVH… <span style="color: #BB0000;">NA</span>                  <span style="text-decoration: underline;">682</span>120.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 74a86daf  control 1         P06576  IMNVIGEPIDER  <span style="color: #BB0000;">NA</span>                43<span style="text-decoration: underline;">775</span>800 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 74a86daf  control 1         Q9P2E9  IPDHDPAPNVTV… <span style="color: #BB0000;">NA</span>                 3<span style="text-decoration: underline;">066</span>010.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 74a86daf  control 1         Q14692  LLQDLQLGDEED… <span style="color: #BB0000;">NA</span>                 1<span style="text-decoration: underline;">489</span>644.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,406 more rows</span></span></span></code></pre></div>
 <div class="section level3">
 <h3 id="normalization-functions">Normalization Functions<a class="anchor" aria-label="anchor" href="#normalization-functions"></a>
 </h3>
@@ -253,13 +272,8 @@ according to individual analyte means.</td>
 <h3 id="normalization-of-the-whole-proteome">Normalization of the whole proteome<a class="anchor" aria-label="anchor" href="#normalization-of-the-whole-proteome"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># path_to_package_data() loads data specific to this package</span></span>
-<span><span class="co"># for your project load local data</span></span>
-<span><span class="co"># example: </span></span>
-<span><span class="co"># your_proteins &lt;- "./data/your_exported_results.xlsx" %&gt;%</span></span>
-<span><span class="co">#   import("ProteomeDiscoverer", "proteins")</span></span>
-<span></span>
-<span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scaled"</span>, <span class="st">"median"</span>, <span class="st">"linear"</span>, <span class="st">"loess"</span>, <span class="st">"randomforest"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">rdata</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scaled"</span>, <span class="st">"median"</span>, <span class="st">"linear"</span>, <span class="st">"loess"</span>, <span class="st">"randomforest"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="visualizing">Visualizing<a class="anchor" aria-label="anchor" href="#visualizing"></a>
@@ -302,10 +316,7 @@ recomended.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'median'</span>, <span class="st">'randomforest'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in ggplot2::geom_point(ggplot2::aes(x = range_x, y = range_y), color = "lightblue"): All aesthetics have length 1, but the data has 30456 rows.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please consider using `annotate()` or provide this layer with data containing</span></span>
-<span><span class="co">#&gt;   a single row.</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="normalizing_files/figure-html/unnamed-chunk-9-1.png" width="700"></p>
 </div>
 </div>
@@ -341,10 +352,7 @@ implemented.</p>
 <span><span class="co">#&gt; 2 2 (2-2,2-2) arrange      gtable[layout]</span></span>
 <span><span class="co">#&gt; 3 3 (1-1,1-2) arrange text[GRID.text.562]</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in ggplot2::geom_point(ggplot2::aes(x = range_x, y = range_y), color = "lightblue"): All aesthetics have length 1, but the data has 49546 rows.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please consider using `annotate()` or provide this layer with data containing</span></span>
-<span><span class="co">#&gt;   a single row.</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_dynamic_range.html">plot_dynamic_range</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="normalizing_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rdata</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -461,7 +469,7 @@ selection.</p>
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="st">'median'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_normalization.html">plot_normalization</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[120ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[150ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span></span>

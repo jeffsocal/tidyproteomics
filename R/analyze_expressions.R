@@ -13,6 +13,8 @@
 #' @param show_pannels a boolean for showing colored up/down expression panels.
 #' @param show_lines a boolean for showing threshold lines.
 #' @param show_fc_scale a boolean for showing the secondary foldchange scale.
+#' @param show_title input FALSE, TRUE for an auto-generated title or any charcter string.
+#' @param show_pval_1 a boolean for showing expressions with pvalue == 1.
 #' @param point_size a character reference to a numerical value in the expression table
 #' @param color_positive a character defining the color for positive (up) expression.
 #' @param color_negative a character defining the color for negative (down) expression.
@@ -40,6 +42,8 @@ analyze_expressions <- function(
     show_pannels = TRUE,
     show_lines = TRUE,
     show_fc_scale = TRUE,
+    show_title = TRUE,
+    show_pval_1 = TRUE,
     point_size = NULL,
     color_positive = 'dodgerblue',
     color_negative = 'firebrick1',
@@ -61,6 +65,14 @@ analyze_expressions <- function(
 
     if(is.null(data$analysis[[set_expression]]$expression)){ next }
 
+    plt_title <- show_title
+    if(show_title == TRUE){
+      plt_title <- set_expression %>%
+        stringr::str_replace("/", " / ") %>%
+        stringr::str_replace_all("_", " ") %>%
+        stringr::str_to_title()
+    }
+
     table <- data$analysis[[set_expression]]$expression %>%
       dplyr::left_join(
         extract(data) %>%
@@ -73,22 +85,25 @@ analyze_expressions <- function(
     if(!is.null(data$annotations))
       table <- table %>% dplyr::left_join(tbl_anno, by = 'protein')
 
-    table |> plot_volcano(
-      log2fc_min = log2fc_min,
-      log2fc_column = log2fc_column,
-      significance_max = significance_max,
-      significance_column = significance_column,
-      labels_column = labels_column,
-      show_pannels = show_pannels,
-      show_lines = show_lines,
-      show_fc_scale = show_fc_scale,
-      point_size = point_size,
-      color_positive = color_positive,
-      color_negative = color_negative,
-      destination = 'png',
-      height = height,
-      width = width
-    )
+    devnull <- table %>%
+      plot_volcano(
+        log2fc_min = log2fc_min,
+        log2fc_column = log2fc_column,
+        significance_max = significance_max,
+        significance_column = significance_column,
+        labels_column = labels_column,
+        show_pannels = show_pannels,
+        show_lines = show_lines,
+        show_fc_scale = show_fc_scale,
+        show_title = plt_title,
+        show_pval_1 = show_pval_1,
+        point_size = point_size,
+        color_positive = color_positive,
+        color_negative = color_negative,
+        destination = 'png',
+        height = height,
+        width = width
+      )
 
     # plot the expressions
     plot_name <- glue::glue("{data$analyte}_volcano_{stringr::str_replace_all(set_expression, '/', '-')}.png")
@@ -96,7 +111,7 @@ analyze_expressions <- function(
 
     # save the expression table
     data_name <- glue::glue("table_{data$analyte}_expression_{stringr::str_replace_all(set_expression, '/', '-')}.csv")
-    table |> readr::write_csv(data_name)
+    table %>% readr::write_csv(data_name)
 
   }
 

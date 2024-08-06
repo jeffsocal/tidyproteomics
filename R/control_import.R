@@ -1,5 +1,8 @@
-#' Main function for importing data to the tidyproteomics list object, see also
-#' the documentation `vignette("importing")` and `vignette("workflow-importing")`
+#' Main function for importing data
+#'
+#' @description `import()` reads files from various platforms into the
+#' tidyproteomics data object -- see also the documentation `vignette("importing")`
+#' and `vignette("workflow-importing")`
 #'
 #' @param files a character vector of file paths
 #' @param platform the source of the data (ProteomeDiscoverer, MaxQuant, etc.)
@@ -14,12 +17,11 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
-#' #\dontrun{
 #' hela_proteins <- path_to_package_data("p97KD_HCT116") %>%
 #'    import("ProteomeDiscoverer", "proteins")
-#' }
 #' hela_proteins %>% summary("sample")
 #'
+
 import <- function(
     files = NULL,
     platform = NULL,

@@ -11,10 +11,12 @@ plot_volcano(
   log2fc_column = "log2_foldchange",
   significance_max = 0.05,
   significance_column = "adj_p_value",
-  labels_column = NULL,
+  labels_column = "gene_name",
   show_pannels = TRUE,
   show_lines = TRUE,
   show_fc_scale = TRUE,
+  show_title = TRUE,
+  show_pval_1 = TRUE,
   point_size = NULL,
   color_positive = "dodgerblue",
   color_negative = "firebrick1",
@@ -43,6 +45,10 @@ plot_volcano(
 \item{show_lines}{a boolean for showing threshold lines.}
 
 \item{show_fc_scale}{a boolean for showing the secondary foldchange scale.}
+
+\item{show_title}{input FALSE, TRUE for an auto-generated title or any charcter string.}
+
+\item{show_pval_1}{a boolean for showing expressions with pvalue == 1.}
 
 \item{point_size}{a character reference to a numerical value in the expression table}
 

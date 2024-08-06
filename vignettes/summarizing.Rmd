@@ -41,7 +41,7 @@ hela_proteins
 And these can expand to encompass additions generated through other
 operations.
 
-```{r}
+```{r, warning=FALSE}
 hela_proteins %>% expression(knockdown/control) %>% enrichment(knockdown/control, .terms = 'biological_process')
 ```
 
@@ -72,10 +72,6 @@ hela_proteins %>% summary(by = 'biological_process')
 
 ```{r}
 hela_proteins %>% summary(by = 'num_peptides')
-```
-
-```{r}
-hela_proteins %>% summary(by = 'match_between_runs')
 ```
 
 #### Contamination
@@ -124,7 +120,7 @@ hela_proteins %>% plot_counts()
 In recent literature a summary of protein quantitation has been
 visualized as a rank-based dot-plot.
 
-```{r}
+```{r, warning=FALSE}
 hela_proteins %>% plot_quantrank()
 ```
 
@@ -132,7 +128,7 @@ Additionally, this plot can be extended to highlight statistical
 differences via an unbiased all-pair-wise comparison, to give an
 anticipated view of how to guide downstream analyses.
 
-```{r}
+```{r, warning=FALSE}
 hela_proteins %>% plot_quantrank(display_filter = 'log2_foldchange', display_cutoff = 2)
 ```
 

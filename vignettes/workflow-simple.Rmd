@@ -61,7 +61,7 @@ hela_proteins
 
 As more operations are performed on the data, more of the contents are summarized
 
-```{r}
+```{r, warning=FALSE}
 hela_proteins %>%
   expression(knockdown/control) %>%
   enrichment(knockdown/control, .terms = 'biological_process') %>%

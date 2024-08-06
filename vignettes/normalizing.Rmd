@@ -28,14 +28,16 @@ Proteins have a single identifier ...
 
 ```{r}
 hela_proteins$identifier
-hela_proteins$quantitative %>% head()
+
+hela_proteins$quantitative
 ```
 
 Peptides have multiple identifiers ...
 
 ```{r}
 hela_peptides$identifier
-hela_peptides$quantitative %>% head()
+
+hela_peptides$quantitative
 ```
 
 ### Normalization Functions
@@ -83,13 +85,8 @@ library("tidyproteomics")
 ### Normalization of the whole proteome
 
 ```{r, message=FALSE}
-# path_to_package_data() loads data specific to this package
-# for your project load local data
-# example: 
-# your_proteins <- "./data/your_exported_results.xlsx" %>%
-#   import("ProteomeDiscoverer", "proteins")
-
-rdata <- hela_proteins %>% normalize(.method = c("scaled", "median", "linear", "loess", "randomforest"))
+rdata <- hela_proteins %>% 
+  normalize(.method = c("scaled", "median", "linear", "loess", "randomforest"))
 ```
 
 ### Visualizing
@@ -112,7 +109,7 @@ rdata %>% plot_variation_pca()
 
 The effect *randomforest* has on the data is most noticable at the lower dynamic range, as seen in the plot below where the CVs for values under 10\^6 in abundance have been dramatically reduced. If you are hunting for low abundant biomarkers, this method is highly recomended.
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 hela_proteins %>%
   normalize(.method = c('median', 'randomforest')) %>% 
   plot_dynamic_range()
@@ -134,7 +131,7 @@ rdata <- hela_proteins %>%
 rdata %>% plot_variation_cv()
 ```
 
-```{r}
+```{r, warning=FALSE}
 rdata %>% plot_dynamic_range()
 ```
 

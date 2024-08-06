@@ -28,13 +28,13 @@ library("tidyproteomics")
 Proteins have a single identifier ...
 ```{r}
 hela_proteins$identifier
-hela_proteins$quantitative %>% head()
+hela_proteins$quantitative %>% head() %>% as.data.frame()
 ```
 
 Peptides have multiple identifiers ...
 ```{r}
 hela_peptides$identifier
-hela_peptides$quantitative %>% head()
+hela_peptides$quantitative %>% head() %>% as.data.frame()
 ```
 
 ### Imputation Functions
@@ -58,12 +58,6 @@ library("tidyproteomics")
 ### Imputing
 
 ```{r, message=FALSE}
-# path_to_package_data() loads data specific to this package
-# for your project load local data
-# example: 
-# your_proteins <- "./data/your_exported_results.xlsx" %>%
-#   import("ProteomeDiscoverer", "proteins")
-
 rdata <- hela_proteins
 ```
 

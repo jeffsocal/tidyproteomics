@@ -5,76 +5,129 @@ description: |
   tidyproteomics: simplified data object and analysis functions
 vignette: >
   %\VignetteIndexEntry{Update History}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
-# A condensed accounting of updates, semantic versioning.
+
+Versioning follows a semantic scheme with a brief accounting of the
+major updates and bug-fixes listed here. For quick reference:
+
+-   x.x.N - minor updates or bug fixes
+
+-   x.N.x - introduction of new features or improvements that
+    should not break existing implementations
+
+-   N.x.x - major updates or changes that would break
+    backward compatibility
+
+------------------------------------------------------------------------
 
 ### Version: 1.8.x
 
+#### 1.8.2 - 2024.08.02
+
+-   Updated the volcano plot to include auto-generated titles, classif
+    theme, plotting only y=p-value with either p-value or adj-p-value
+    significance cutoffs and removing values with p-value==1.
+
 #### 1.8.1 - 2024.07.30
--   Added Fisher's Exact Test (Over-Representation Analysis) to enrichment() function. 
--   Added the ability to automate both expression() and enrichment() functions with updated .terms parameter
--   Added the analyze_expressions() and analyze_enrichments() to compliment the automation by saving out plots and tables for each expression and enrichment test.
+
+-   Added Fisher's Exact Test (Over-Representation Analysis) to
+    enrichment() function.
+-   Added the ability to automate both expression() and enrichment()
+    functions with updated .terms parameter
+-   Added the analyze_expressions() and analyze_enrichments() to
+    compliment the automation by saving out plots and tables for each
+    expression and enrichment test.
+
+------------------------------------------------------------------------
 
 ### Version: 1.7.x
 
 #### 1.7.4 - 2024.06.04
+
 -   Bug fix missing package reference in limma expression analysis
 
 #### 1.7.3 - 2024.03.12
--   fixed issue with importing FragPipe tsv files, seems to be an issue with the `vroom` package. Modified to use the `readr` package for data importing.
--   modified the `export_quant()` function to allow exporting proteins with NAs for all samples
+
+-   fixed issue with importing FragPipe tsv files, seems to be an issue
+    with the `vroom` package. Modified to use the `readr` package for
+    data importing.
+-   modified the `export_quant()` function to allow exporting proteins
+    with NAs for all samples
 -   changed `subset()` to be an S3 function
 
 #### 1.7.2 - 2024.01.24
 
--   fixed and issue with plot_counts and plot_variation_cv failed to account for sample sets larger than 16 when providing a color palette
+-   fixed and issue with plot_counts and plot_variation_cv failed to
+    account for sample sets larger than 16 when providing a color
+    palette
 
 #### 1.7.1 - 2024.01.23
 
--   new release to add DOI from Zenodo 
+-   new release to add DOI from Zenodo
 
 #### 1.7.0 - 2023.12.13
 
--   add the ability to export the proteins specific to a given Venn intersection [extracting](./extracting.html)
--   minor improvements on the export_analysis function to clarify column headers 
+-   add the ability to export the proteins specific to a given Venn
+    intersection [extracting](./extracting.html)
+-   minor improvements on the export_analysis function to clarify column
+    headers
+
+------------------------------------------------------------------------
 
 ### Version: 1.6.x
 
 #### 1.6.1 - 2023.11.29
 
 -   fixed some minor issues
--   implemented the request from issue#9 adding the quantitative values to the export_analysis() function
--   implemented the request from issue#12 allowing for the iterative evaluation of multiple comparisons for the expression() and enrichment() functions
+-   implemented the request from issue#9 adding the quantitative values
+    to the export_analysis() function
+-   implemented the request from issue#12 allowing for the iterative
+    evaluation of multiple comparisons for the expression() and
+    enrichment() functions
 
 #### 1.6.0 - 2023.11.09
 
--   fixed an issue with improper missing value accounting when implementing expression tests [thanks: github.com/rzieg]
+-   fixed an issue with improper missing value accounting when
+    implementing expression tests [thanks: github.com/rzieg]
+
+------------------------------------------------------------------------
 
 ### Version: 1.5.x
 
 #### 1.5.10 - 2023.11.03
 
--   addressed issues#9 & #10 to better handle as.data.frame [thanks: github.com/tywang-tw]
+-   addressed issues#9 & #10 to better handle as.data.frame [thanks:
+    github.com/tywang-tw]
 
 #### 1.5.9 - 2023.10.30
 
--   addressed issue#8 to better handle the text of custom functions [thanks: github.com/michwij]
+-   addressed issue#8 to better handle the text of custom functions
+    [thanks: github.com/michwij]
 
 #### 1.5.8 - 2023.10.10
 
--   addressed issue#5 with the default MaxQuant protein import definition [thanks: tar226-at-cornell.edu]
+-   addressed issue#5 with the default MaxQuant protein import
+    definition [thanks: tar226-at-cornell.edu]
 
 #### 1.5.7 - 2023.09.21
 
--   addressed issue#4 with enrichment() taking long for complex annotations, implemented parallel::mclapply [thanks: github.com/eschen42]
--   created a export_config() function to assist in custom import definitions [thanks: github.com/eschen42]
+-   addressed issue#4 with enrichment() taking long for complex
+    annotations, implemented parallel::mclapply [thanks:
+    github.com/eschen42]
+-   created a export_config() function to assist in custom import
+    definitions [thanks: github.com/eschen42]
 
 #### 1.5.6 - 2023.09.07
 
--   addressed issue#3: t.test on expression diff fails on no variance data
--   fixed issue with reporting imputation in object details and record of operations
+-   addressed issue#3: t.test on expression diff fails on no variance
+    data
+-   fixed issue with reporting imputation in object details and record
+    of operations
 
 #### 1.5.5 - 2023.08.24
 
@@ -84,7 +137,8 @@ vignette: >
 
 #### 1.5.4 - 2023.08.16
 
--   added support for selecting fgsea scoreType("std", "pos", "neg") [thanks: github.com/tywang-tw]
+-   added support for selecting fgsea scoreType("std", "pos", "neg")
+    [thanks: github.com/tywang-tw]
 
 #### 1.5.3 - 2023.07.30
 
@@ -92,7 +146,8 @@ vignette: >
 
 #### 1.5.2 - 2023.06.29
 
--   bug fix in limma expression differences (name ordering only effecting data with 3+ sample groups) [thanks: github.com/tywang-tw]
+-   bug fix in limma expression differences (name ordering only
+    effecting data with 3+ sample groups) [thanks: github.com/tywang-tw]
 
 #### 1.5.1 - 2023.06.09
 
@@ -102,35 +157,44 @@ vignette: >
 
 -   refactored impute() to allow for user defined matrix based functions
 -   refactored reassign() to use expressive comparisons
--   added export_compexp() to export the data under the two-expression plot
+-   added export_compexp() to export the data under the two-expression
+    plot
 -   updated plot_variation_cv() to better label y-axis
 -   modified summary() for peptides using simpler accounting
--   bugfix on import() allowing > 0 annotation columns
+-   bugfix on import() allowing \> 0 annotation columns
 -   bugfix in summary() with table merging
 -   bugfix in annotate() with leftover dplyr groups
 
+------------------------------------------------------------------------
+
 ### Version: 1.4.x
-#### 1.4.2 - 2023.04.03 {-}
+
+#### 1.4.2 - 2023.04.03 {.unnumbered}
 
 -   updated color theme to maximize contrasts in order
--   updated plot_quantrank() to further fade background points when using a display_subset
+-   updated plot_quantrank() to further fade background points when
+    using a display_subset
 
-#### 1.4.1 - 2023.03.28 {-}
+#### 1.4.1 - 2023.03.28 {.unnumbered}
 
 -   migrated from dplyr deprecated across() to group_by_at()
 -   minor bugfix on accounting by non-protein based values
 
-#### 1.4.0 - 2023.03.27 {-}
+#### 1.4.0 - 2023.03.27 {.unnumbered}
 
 -   added the S3Method as.data.frame()
 
+------------------------------------------------------------------------
+
 ### Version: 1.3.x
-#### 1.3.1 - 2023.03.20 {-}
+
+#### 1.3.1 - 2023.03.20 {.unnumbered}
 
 -   minor code updates to improve conciseness
--   added display_subset to plot_quantrank() to highlight user selected proteins/peptides amoung the whole dynamic range
+-   added display_subset to plot_quantrank() to highlight user selected
+    proteins/peptides amoung the whole dynamic range
 
-#### 1.3.0 - 2023.03.13 {-}
+#### 1.3.0 - 2023.03.13 {.unnumbered}
 
 -   addressed multiple charge precursor in peptide quant files
 -   added FragPipe to the available imports
@@ -139,88 +203,107 @@ vignette: >
 -   fixed a labeling error in plot_pca()
 -   modified the method for pivoting columns-to-rows in import files
 
+------------------------------------------------------------------------
+
 ### Version: 1.2.x
-#### 1.2.6 - 2023.03.01 {-}
+
+#### 1.2.6 - 2023.03.01 {.unnumbered}
 
 -   added clarity around normalize(), impute(), collapse()
--   implemented parallel processing for 'randomforest' and 'svm' in normalize()
+-   implemented parallel processing for 'randomforest' and 'svm' in
+    normalize()
 -   added a vignette on protein inferencing using collapse()
--   fixed a bug in peptide importing that removed homologous peptide accounting
+-   fixed a bug in peptide importing that removed homologous peptide
+    accounting
 
-#### 1.2.5 - 2023.02.13 {-}
+#### 1.2.5 - 2023.02.13 {.unnumbered}
 
 -   fixed an issue with MBR accounting
 
-#### 1.2.4 - 2023.02.03 {-}
+#### 1.2.4 - 2023.02.03 {.unnumbered}
 
 -   added support for mzTab v1.0.0, exporting table for counts analysis
 
-### Version: 1.1.x
-#### 1.1.2 - 2023.01.23 {-}
+------------------------------------------------------------------------
 
--   refactored the import function to allow both wide and long format data in a configuration file, eliminating the hard coded import functions for ProteomeDiscoverer and MaxQuant
+### Version: 1.1.x
+
+#### 1.1.2 - 2023.01.23 {.unnumbered}
+
+-   refactored the import function to allow both wide and long format
+    data in a configuration file, eliminating the hard coded import
+    functions for ProteomeDiscoverer and MaxQuant
 
 ### Version: 1.0.x
-#### 1.0.4 - 2022.11.28 {-}
+
+#### 1.0.4 - 2022.11.28 {.unnumbered}
 
 -   modified %!like% to the more conventional !x %like% y
 -   added the rm.mbr() function
 
-#### 1.0.2 - 2022.11.28 {-}
+#### 1.0.2 - 2022.11.28 {.unnumbered}
 
 -   implemented S3 object for tidyproteomics data object
 -   refactored all functions to accout for new data object
 -   fixed minor issues with exporting data and plots
 -   updated and added more vignettes
 
+------------------------------------------------------------------------
+
 ### Version: beta
-#### 0.7.3 - 2022.11.15 {-}
 
--   modified expression() to more accurately account for the imputation ratio
+#### 0.7.3 - 2022.11.15 {.unnumbered}
 
-#### 0.7.2 - 2022.11.03 {-}
+-   modified expression() to more accurately account for the imputation
+    ratio
 
--   refactored plotting to utilize a generalized save function to facilitate pipelining
--   modified subset to behave like a tidyverse function while also introducing the operators `like` and `!like` to subset data based on a string matching comparison
--   updated the functions normalize(), plot_counts() and summary() that utilize subset()
+#### 0.7.2 - 2022.11.03 {.unnumbered}
 
+-   refactored plotting to utilize a generalized save function to
+    facilitate pipelining
+-   modified subset to behave like a tidyverse function while also
+    introducing the operators `like` and `!like` to subset data based on
+    a string matching comparison
+-   updated the functions normalize(), plot_counts() and summary() that
+    utilize subset()
 
-#### 0.7.1 - 2022.10.28 {-}
+#### 0.7.1 - 2022.10.28 {.unnumbered}
 
 -   refactored import() to allow for user based configurations
--   refactored subset(), eliminating remove(), to account for value comparison and pattern matching
+-   refactored subset(), eliminating remove(), to account for value
+    comparison and pattern matching
 -   refactored reassign(), from modify(), to improve sample renaming
 
-
-#### 0.7.0 - 2022.10.15 {-}
+#### 0.7.0 - 2022.10.15 {.unnumbered}
 
 -   added plot_quantrank()
 -   fixed issue with ProteomeDiscoverer importing of TMT data
 
-
-#### 0.6.0 - 2022.09.29 {-}
+#### 0.6.0 - 2022.09.29 {.unnumbered}
 
 -   minor bug fixes
 -   refactored rollup() to collapse()
--   defined meld() and codify() to create uniformity in data import and segmentation 
+-   defined meld() and codify() to create uniformity in data import and
+    segmentation
 
-
-#### 0.5.0 - 2022.09.23 {-}
+#### 0.5.0 - 2022.09.23 {.unnumbered}
 
 -   created remove() and migrated subset(match_between_runs = FALSE)
--   improved protein accounting in import() and rollup() to include protein group accounting
+-   improved protein accounting in import() and rollup() to include
+    protein group accounting
 -   added plot_counts()
--   added import('Skyline', 'peptides'), Skyline can handel DDA, PRM via MSAmanda and DIA vi DIA-Umpire
+-   added import('Skyline', 'peptides'), Skyline can handel DDA, PRM via
+    MSAmanda and DIA vi DIA-Umpire
 -   added import('DIA-NN', 'peptides'), DIA-NN can handel DIA
 
+#### 0.4.2 - 2022.09.19 {.unnumbered}
 
-#### 0.4.2 - 2022.09.19 {-}
--   fixed issue with "out of memory" on subset(match_between_runs = FALSE)
+-   fixed issue with "out of memory" on subset(match_between_runs =
+    FALSE)
 -   fixed an x-axis ordering bug plot_variation()
 -   fixed a minor bug in importing ProteomeDiscoverer peptide data
 
-
-#### 0.4.1 - 2022.09.13 {-}
+#### 0.4.1 - 2022.09.13 {.unnumbered}
 
 -   fixed a minor bug in importing MaxQuant data (empty data object)
 -   fixed a minor bug in plot_protein()
@@ -228,22 +311,24 @@ vignette: >
 -   fixed bug in impute() with randomforest
 -   fixed bug in expression() with limma
 
-#### 0.4.0 - 2022.09.08 {-}
+#### 0.4.0 - 2022.09.08 {.unnumbered}
 
 -   added import() for MaxQuant peptides (evidence.txt)
 -   added import() for MaxQuant proteins (proteinGroups.txt)
 -   updated import() for ProteomeDiscoverer (better configs)
 
-#### 0.3.0 {-}
+#### 0.3.0 {.unnumbered}
 
--   added protein rollup() function, integrated with [rfasta](https://github.com/jeffsocal/rfasta)
+-   added protein rollup() function, integrated with
+    [rfasta](https://github.com/jeffsocal/rfasta)
 
-#### 0.2.0 {-}
+#### 0.2.0 {.unnumbered}
 
 -   updated impute() accounting
 -   added plot_enrichment()
 -   added history of data transformations via operations()
 
-#### 0.1.0 {-}
+#### 0.1.0 {.unnumbered}
 
--   initial cohesion of a loose collection of functions into an R package
+-   initial cohesion of a loose collection of functions into an R
+    package

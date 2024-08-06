@@ -123,7 +123,8 @@ This is the final defnintion file, saved as a tab-seperated-value (.tsv) file In
 library(dplyr)
 library(tidyproteomics)
 
-data_prot <- "miR_Proteintable.tsv" %>% import('PXD004163', 'proteins', path = "TMTOpenMS_proteins.tsv")
+data_prot <- "miR_Proteintable.tsv" %>%
+  import('PXD004163', 'proteins', path = "TMTOpenMS_proteins.tsv")
 ```
 
 ```{r, echo=FALSE, message=FALSE}

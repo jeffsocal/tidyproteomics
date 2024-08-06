@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,28 +56,35 @@
     <a class="dropdown-item" href="../articles/updates.html">Updates</a>
     <a class="dropdown-item" href="../articles/data-object.html">The Data-Object</a>
     <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Operations</h6>
+    <h6 class="dropdown-header" data-toc-skip>Basics</h6>
     <a class="dropdown-item" href="../articles/importing.html">Importing</a>
+    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/summarizing.html">Summarizing</a>
+    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Processing</h6>
     <a class="dropdown-item" href="../articles/subsetting.html">Subsetting</a>
     <a class="dropdown-item" href="../articles/normalizing.html">Normalizing</a>
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
-    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
-    <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
-    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <a class="dropdown-item" href="../articles/automating.html">Automating</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
-    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
     <a class="dropdown-item" href="../articles/expression.html">Expression</a>
     <a class="dropdown-item" href="../articles/enrichment.html">Enrichment</a>
     <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <h6 class="dropdown-header" data-toc-skip>Peptides to Proteins</h6>
+    <a class="dropdown-item" href="../articles/collapsing.html">Collapsing</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Example Workflows</h6>
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-importing.html">Importing Demo</a>
-    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
+    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/updates.html">Updates</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -232,16 +239,21 @@ annotations</em></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_go</span> <span class="op">&lt;-</span> <span class="st">"~/Local/data/uniprotkb/uniprotkb_human_AND_reviewed_true_AND_m_2023_10_10.tsv"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_tsv</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data_go</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 8</span></span></span>
-<span><span class="co">#&gt;   Entry      Reviewed `Entry Name` `Protein names`  `Gene Names` Organism Length</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> A0A087X1C5 reviewed CP2D7_HUMAN  Putative cytoch… CYP2D7       Homo sa…    515</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> A0A0B4J2F0 reviewed PIOS1_HUMAN  Protein PIGBOS1… PIGBOS1      Homo sa…     54</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> A0A0B4J2F2 reviewed SIK1B_HUMAN  Putative serine… SIK1B        Homo sa…    783</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> A0A0C5B5G6 reviewed MOTSC_HUMAN  Mitochondrial-d… MT-RNR1      Homo sa…     16</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> A0A0K2S4Q6 reviewed CD3CH_HUMAN  Protein CD300H … CD300H       Homo sa…    201</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> A0A0U1RRE5 reviewed NBDY_HUMAN   Negative regula… NBDY LINC01… Homo sa…     68</span></span>
+<span><span class="va">data_go</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20,426 × 8</span></span></span>
+<span><span class="co">#&gt;    Entry      Reviewed `Entry Name` `Protein names` `Gene Names` Organism Length</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> A0A087X1C5 reviewed CP2D7_HUMAN  Putative cytoc… CYP2D7       Homo sa…    515</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> A0A0B4J2F0 reviewed PIOS1_HUMAN  Protein PIGBOS… PIGBOS1      Homo sa…     54</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> A0A0B4J2F2 reviewed SIK1B_HUMAN  Putative serin… SIK1B        Homo sa…    783</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> A0A0C5B5G6 reviewed MOTSC_HUMAN  Mitochondrial-… MT-RNR1      Homo sa…     16</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> A0A0K2S4Q6 reviewed CD3CH_HUMAN  Protein CD300H… CD300H       Homo sa…    201</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> A0A0U1RRE5 reviewed NBDY_HUMAN   Negative regul… NBDY LINC01… Homo sa…     68</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> A0A1B0GTW7 reviewed CIROP_HUMAN  Ciliated left-… CIROP LMLN2  Homo sa…    788</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> A0AV02     reviewed S12A8_HUMAN  Solute carrier… SLC12A8 CCC9 Homo sa…    714</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> A0AV96     reviewed RBM47_HUMAN  RNA-binding pr… RBM47        Homo sa…    593</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> A0AVF1     reviewed IFT56_HUMAN  Intraflagellar… IFT56 TTC26  Homo sa…    554</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20,416 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: `Gene Ontology (molecular function)` &lt;chr&gt;</span></span></span></code></pre></div>
 <p>We just need to tidy up that data a bit and get it into the format
 needed for attaching the annotations.</p>
@@ -258,16 +270,21 @@ needed for attaching the annotations.</p>
 <span>               names_to <span class="op">=</span> <span class="st">'term'</span>,</span>
 <span>               values_to <span class="op">=</span> <span class="st">'annotation'</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">data_go</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
-<span><span class="co">#&gt;   protein    term               annotation                                      </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> A0A087X1C5 molecular_function aromatase activity                              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> A0A087X1C5 molecular_function heme binding                                    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> A0A087X1C5 molecular_function iron ion binding                                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> A0A087X1C5 molecular_function oxidoreductase activity, acting on paired donor…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> A0A0B4J2F0 molecular_function <span style="color: #BB0000;">NA</span>                                              </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> A0A0B4J2F2 molecular_function ATP binding</span></span></code></pre></div>
+<span><span class="va">data_go</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 61,535 × 3</span></span></span>
+<span><span class="co">#&gt;    protein    term               annotation                                     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> A0A087X1C5 molecular_function aromatase activity                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> A0A087X1C5 molecular_function heme binding                                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> A0A087X1C5 molecular_function iron ion binding                               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> A0A087X1C5 molecular_function oxidoreductase activity, acting on paired dono…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> A0A0B4J2F0 molecular_function <span style="color: #BB0000;">NA</span>                                             </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> A0A0B4J2F2 molecular_function ATP binding                                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> A0A0B4J2F2 molecular_function magnesium ion binding                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> A0A0B4J2F2 molecular_function protein serine kinase activity                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> A0A0B4J2F2 molecular_function protein serine/threonine kinase activity       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> A0A0C5B5G6 molecular_function DNA binding                                    </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61,525 more rows</span></span></span></code></pre></div>
 <p>Looks great!</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new_go</span> <span class="op">&lt;-</span> <span class="va">data_prot</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/annotate.html">annotate</a></span><span class="op">(</span><span class="va">data_go</span><span class="op">)</span></span>
@@ -311,7 +328,7 @@ annotation term.</p>
 <span>    <span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, </span>
 <span>    .term <span class="op">=</span> <span class="st">'molecular_function'</span>,</span>
 <span>    significance_max <span class="op">=</span> <span class="fl">1</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="op">)</span> </span></code></pre></div>
 <p><img src="annotating_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 </div>
 </div>

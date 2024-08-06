@@ -2,8 +2,7 @@
 % Please edit documentation in R/control_import.R
 \name{import}
 \alias{import}
-\title{Main function for importing data to the tidyproteomics list object, see also
-the documentation \code{vignette("importing")} and \code{vignette("workflow-importing")}}
+\title{Main function for importing data}
 \usage{
 import(files = NULL, platform = NULL, analyte = NULL, path = NULL)
 }
@@ -20,16 +19,15 @@ import(files = NULL, platform = NULL, analyte = NULL, path = NULL)
 a tidyproteomics list data-object
 }
 \description{
-Main function for importing data to the tidyproteomics list object, see also
-the documentation \code{vignette("importing")} and \code{vignette("workflow-importing")}
+\code{import()} reads files from various platforms into the
+tidyproteomics data object -- see also the documentation \code{vignette("importing")}
+and \code{vignette("workflow-importing")}
 }
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
-#\dontrun{
 hela_proteins <- path_to_package_data("p97KD_HCT116") \%>\%
    import("ProteomeDiscoverer", "proteins")
-}
 hela_proteins \%>\% summary("sample")
 
 }

@@ -49,7 +49,9 @@ stats or provide a quick visualization. For example, the Hela data set
 can be subset to just the proteins with "Ribosome" in the description:
 
 ```{r, message = FALSE}
-hela_proteins %>% subset(description %like% "Ribosome") %>% summary('sample')
+hela_proteins %>% 
+  subset(description %like% "Ribosome") %>% 
+  summary('sample')
 ```
 
 Aside from filtering directly on `protein_accession` values, subsetting
@@ -76,7 +78,8 @@ This allows for the specific importing of specialized terms with
 `annotate()` from which subsetting can be performed.
 
 ```{r, message = FALSE}
-hela_proteins %>% subset(cellular_component %like% "nucleus") %>% summary('sample')
+hela_proteins %>% 
+  subset(cellular_component %like% "nucleus") %>% summary('sample')
 ```
 
 Additionally, provided the quantitative platform produces an imputed
@@ -87,18 +90,21 @@ differ.
 
 ### Using Accountings
 ```{r, message = FALSE}
-hela_proteins %>% subset(match_between_runs == FALSE) %>% summary('sample')
+hela_proteins %>% 
+  subset(match_between_runs == FALSE) %>% summary('sample')
 ```
 
 Also, data can be filtered to proteins containing a desired number of
 underlying peptides.
 
 ```{r, message = FALSE}
-hela_proteins %>% subset(mum_peptides <= 1) %>% summary('sample')
+hela_proteins %>% 
+  subset(mum_peptides <= 1) %>% summary('sample')
 ```
 
 ```{r, message = FALSE}
-hela_proteins %>% subset(num_unique_peptides <= 1) %>% summary('sample')
+hela_proteins %>% 
+  subset(num_unique_peptides <= 1) %>% summary('sample')
 ```
 
 ```{r, message = FALSE}

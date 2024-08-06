@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,28 +56,35 @@
     <a class="dropdown-item" href="../articles/updates.html">Updates</a>
     <a class="dropdown-item" href="../articles/data-object.html">The Data-Object</a>
     <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Operations</h6>
+    <h6 class="dropdown-header" data-toc-skip>Basics</h6>
     <a class="dropdown-item" href="../articles/importing.html">Importing</a>
+    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/summarizing.html">Summarizing</a>
+    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Processing</h6>
     <a class="dropdown-item" href="../articles/subsetting.html">Subsetting</a>
     <a class="dropdown-item" href="../articles/normalizing.html">Normalizing</a>
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
-    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
-    <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
-    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <a class="dropdown-item" href="../articles/automating.html">Automating</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
-    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
     <a class="dropdown-item" href="../articles/expression.html">Expression</a>
     <a class="dropdown-item" href="../articles/enrichment.html">Enrichment</a>
     <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <h6 class="dropdown-header" data-toc-skip>Peptides to Proteins</h6>
+    <a class="dropdown-item" href="../articles/collapsing.html">Collapsing</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Example Workflows</h6>
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-importing.html">Importing Demo</a>
-    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
+    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/updates.html">Updates</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -141,64 +148,9 @@ operations.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .terms <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.1s]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.2s]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">biological_process</span></span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
-<span></span>
-<span><span class="co">#&gt; Warning in preparePathwaysAndStats(pathways, stats, minSize, maxSize,</span></span>
-<span><span class="co">#&gt; gseaParam, : All values in the stats vector are greater than zero and scoreType</span></span>
-<span><span class="co">#&gt; is "std", maybe you should switch to scoreType = "pos".</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">biological_process</span> <span style="color: #B2B2B2;">[1</span>…</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
@@ -313,10 +265,6 @@ accounting data …</p>
 <span><span class="co">#&gt;            73        2      146             146          1.0 0.345</span></span>
 <span><span class="co">#&gt;            71        1       71              38          1.0 0.290</span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>by <span class="op">=</span> <span class="st">'match_between_runs'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Variable `match_between_runs` not found in data.</span></span>
-<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="contamination">Contamination<a class="anchor" aria-label="anchor" href="#contamination"></a>
@@ -329,7 +277,7 @@ from the <a href="https://reprint-apms.org/?q=chooseworkflow" class="external-li
 any FASTA file, used at the data translation step (eg with
 ProteomeDiscoverer), and manipulated to contain CRAP in the description
 can be utilized.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'CRAP'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
@@ -350,7 +298,7 @@ can be utilized.</p>
 <span><span class="co">#&gt;  p97KD_HCT116_proteins.xlsx          F6</span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>Alternatively, any protein descriptor can also be use …</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'Trypsin'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
@@ -371,7 +319,7 @@ can be utilized.</p>
 <span><span class="co">#&gt;           F6</span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>… and as such.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>contamination <span class="op">=</span> <span class="st">'ribosome'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold;">Summary: contamination</span> ──</span></span>
@@ -404,38 +352,29 @@ tidyproteomics.</p>
 <p>In a simple grouped barchart, proteins (individual, and groups) as
 well as peptides (all, unique) are displayed with the match-between-runs
 shown as the margin above the ms2 evidenced identifications.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_counts.html">plot_counts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="summarizing_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
+<p><img src="summarizing_files/figure-html/unnamed-chunk-12-1.png" width="700"></p>
 </div>
 <div class="section level4">
 <h4 id="quantitation">Quantitation<a class="anchor" aria-label="anchor" href="#quantitation"></a>
 </h4>
 <p>In recent literature a summary of protein quantitation has been
 visualized as a rank-based dot-plot.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="summarizing_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p><img src="summarizing_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 <p>Additionally, this plot can be extended to highlight statistical
 differences via an unbiased all-pair-wise comparison, to give an
 anticipated view of how to guide downstream analyses.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span>display_filter <span class="op">=</span> <span class="st">'log2_foldchange'</span>, display_cutoff <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: There were 1868 warnings in `dplyr::summarise()`.</span></span>
-<span><span class="co">#&gt; The first warning was:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `log2_foldchange = max(log2_foldchange, na.rm = TRUE)`.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In group 6: `identifier = "A0A075B6E5"`.</span></span>
-<span><span class="co">#&gt; Caused by warning in `max()`:</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> no non-missing arguments to max; returning -Inf</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 1867 remaining warnings.</span></span>
-<span><span class="co">#&gt; Warning: ggrepel: 44 unlabeled data points (too many overlaps). Consider</span></span>
-<span><span class="co">#&gt; increasing max.overlaps</span></span></code></pre></div>
-<p><img src="summarizing_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span>display_filter <span class="op">=</span> <span class="st">'log2_foldchange'</span>, display_cutoff <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="summarizing_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
 <p>Filter to limit to the range <code>c(low, high)</code> and display
 the protein ids.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span>show_rank_scale <span class="op">=</span> <span class="cn">TRUE</span>, limit_rank <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">25</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="summarizing_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<p><img src="summarizing_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

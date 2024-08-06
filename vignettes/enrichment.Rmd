@@ -2,7 +2,7 @@
 title: "Enrichment"
 output: rmarkdown::html_vignette
 description: |
-  tidyproteomics: simplified data object and analysis functions
+tidyproteomics: simplified data object and analysis functions
 vignette: >
   %\VignetteIndexEntry{Enrichment}
   %\VignetteEncoding{UTF-8}
@@ -58,24 +58,26 @@ rdata <- hela_proteins %>%
 #### Exporting Results
 The results of this analysis are stored in the tidyproteomics data-object and can easily be exported to save as a flat data table or used in an external down stream analysis.
 ```{r}
+rdata %>% 
+  export_analysis(knockdown/control, 
+                  .analysis = 'enrichment', 
+                  .term = 'biological_process')
 
-rdata %>% export_analysis(knockdown/control, 
-                          .analysis = 'enrichment', 
-                          .term = 'biological_process')
 ```
 
 The results can also have any other terms appended to the output, such as protein or gene_name, which may be useful for follow-on analyses.
 ```{r}
+rdata %>% 
+  export_analysis(knockdown/control, 
+                  .analysis = 'enrichment', 
+                  .term = 'biological_process',
+                  .append = 'gene_name')
 
-rdata %>% export_analysis(knockdown/control, 
-                          .analysis = 'enrichment', 
-                          .term = 'biological_process',
-                          .append = 'gene_name')
 ```
 
 #### Enrichment Plot
 
 ```{r}
-
 rdata %>% plot_enrichment(knockdown/control, .term = 'biological_process')
+
 ```

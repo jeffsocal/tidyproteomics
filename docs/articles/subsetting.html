@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,28 +56,35 @@
     <a class="dropdown-item" href="../articles/updates.html">Updates</a>
     <a class="dropdown-item" href="../articles/data-object.html">The Data-Object</a>
     <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Operations</h6>
+    <h6 class="dropdown-header" data-toc-skip>Basics</h6>
     <a class="dropdown-item" href="../articles/importing.html">Importing</a>
+    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
     <a class="dropdown-item" href="../articles/summarizing.html">Summarizing</a>
+    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
+    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Processing</h6>
     <a class="dropdown-item" href="../articles/subsetting.html">Subsetting</a>
     <a class="dropdown-item" href="../articles/normalizing.html">Normalizing</a>
     <a class="dropdown-item" href="../articles/imputing.html">Imputing</a>
-    <a class="dropdown-item" href="../articles/annotating.html">Annotating</a>
-    <a class="dropdown-item" href="../articles/collapsing.html">Protein Accounting</a>
-    <a class="dropdown-item" href="../articles/extracting.html">Extracting</a>
     <a class="dropdown-item" href="../articles/automating.html">Automating</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Analysis</h6>
-    <a class="dropdown-item" href="../articles/visualizing.html">Visualizing</a>
     <a class="dropdown-item" href="../articles/expression.html">Expression</a>
     <a class="dropdown-item" href="../articles/enrichment.html">Enrichment</a>
     <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Workflows</h6>
+    <h6 class="dropdown-header" data-toc-skip>Peptides to Proteins</h6>
+    <a class="dropdown-item" href="../articles/collapsing.html">Collapsing</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>Example Workflows</h6>
     <a class="dropdown-item" href="../articles/workflow-simple.html">Simple</a>
     <a class="dropdown-item" href="../articles/workflow-importing.html">Importing Demo</a>
-    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
+    <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/updates.html">Updates</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -142,7 +149,9 @@ stats or provide a quick visualization. For example, the Hela data set
 can be subset to just the proteins with “Ribosome” in the
 description:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable   CVs</span></span>
 <span><span class="co">#&gt;    control       18      224             224        0.976 0.094</span></span>
 <span><span class="co">#&gt;  knockdown       18      224             224        0.996 0.170</span></span></code></pre></div>
@@ -171,7 +180,8 @@ values, subsetting can use any of the columns in the
 <p>This allows for the specific importing of specialized terms with
 <code><a href="../reference/annotate.html">annotate()</a></code> from which subsetting can be performed.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">cellular_component</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"nucleus"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">cellular_component</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"nucleus"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable  CVs</span></span>
 <span><span class="co">#&gt;    control     4227    44075           39105        0.921 0.16</span></span>
 <span><span class="co">#&gt;  knockdown     4227    44075           39105        0.921 0.20</span></span></code></pre></div>
@@ -185,19 +195,22 @@ differ.</p>
 <h3 id="using-accountings">Using Accountings<a class="anchor" aria-label="anchor" href="#using-accountings"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">match_between_runs</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">match_between_runs</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable  CVs</span></span>
 <span><span class="co">#&gt;    control     7055    66329           58706        0.908 0.16</span></span>
 <span><span class="co">#&gt;  knockdown     7055    66329           58706        0.909 0.21</span></span></code></pre></div>
 <p>Also, data can be filtered to proteins containing a desired number of
 underlying peptides.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">mum_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">mum_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable  CVs</span></span>
 <span><span class="co">#&gt;    control     7055    66329           58706        0.908 0.16</span></span>
 <span><span class="co">#&gt;  knockdown     7055    66329           58706        0.909 0.21</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">num_unique_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">num_unique_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable  CVs</span></span>
 <span><span class="co">#&gt;    control     1459     4202            1459        0.505 0.19</span></span>
 <span><span class="co">#&gt;  knockdown     1459     4202            1459        0.489 0.21</span></span></code></pre></div>
