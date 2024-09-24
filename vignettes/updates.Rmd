@@ -27,9 +27,19 @@ major updates and bug-fixes listed here. For quick reference:
 
 ### Version: 1.8.x
 
+#### 1.8.3 - 2024.09.24
+
+-   Implemented additional columns on to calculate the fraction imputed per 
+    sample when exporting to a flat table [thanks: github.com/tywang-tw].
+-   Bug fix on peptide-to-protein collapse in some cases resulting in expanded
+    sample sizes due to mismatch on table merge. 
+-   Bug fix to account for enrichment estimates when protein log2 fold 
+    change values are significantly skewed.
+
+
 #### 1.8.2 - 2024.08.02
 
--   Updated the volcano plot to include auto-generated titles, classif
+-   Updated the volcano plot to include auto-generated titles, classic
     theme, plotting only y=p-value with either p-value or adj-p-value
     significance cutoffs and removing values with p-value==1.
 

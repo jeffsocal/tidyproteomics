@@ -9,6 +9,5 @@ calc_enrichment <- function(
     data,
     x
 ){
-  stats::median(data$log2_foldchange[which(data$annotation == x)], na.rm = T) /
-    stats::median(data$log2_foldchange, na.rm = T)
+  stats::median(data$log2_foldchange[which(data$annotation == x)], na.rm = T)
 }

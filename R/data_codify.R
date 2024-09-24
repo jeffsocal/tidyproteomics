@@ -33,11 +33,14 @@ codify <- function(
   get_annotations <- paste0("^", paste(unique(c(identifier, annotations)), collapse="$|^"), "$")
   get_accounting <- paste(c(identifier, "sample_id", "impute", "match_between", "num\\_", "\\_group"), collapse="|")
 
+  # remove the replicate column to avoid merge errors
+  table[,'replicate'] <- NULL
+
   tb_experiments <- table %>%
     dplyr::select(dplyr::matches(get_experiments)) %>%
     unique() %>%
-    dplyr::arrange(import_file, sample_file) %>%
     dplyr::group_by(sample) %>%
+    dplyr::arrange(sample_id) %>%
     dplyr::mutate(replicate = as.character(dplyr::row_number())) %>%
     dplyr::ungroup() %>%
     dplyr::arrange(sample, replicate)

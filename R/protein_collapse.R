@@ -269,8 +269,11 @@ collapse <- function(
                      num_peptides = dplyr::n(),
                      num_unique_peptides = length(which(num_proteins == 1)),
                      imputed = sum(imputed) / num_peptides,
-                     .groups = 'drop') %>%
-    dplyr::rename(identifier := collapse_to) %>%
+                     .groups = 'drop')
+
+  # WORK AROUND: issue with dplyr renaming with a dynamic variable
+  tb_pro_quant_summed$identifier <- tb_pro_quant_summed[,collapse_to] |> unlist(use.names = FALSE)
+  tb_pro_quant_summed <- tb_pro_quant_summed %>%
     # pull into protein groups
     dplyr::group_by_at(c(experiment_ids, 'abundance', 'peptides', 'num_peptides', 'num_unique_peptides', 'imputed')) %>%
     dplyr::summarise(

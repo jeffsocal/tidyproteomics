@@ -118,6 +118,20 @@ expression <- function(
 
     # add in the counts and imputation stats
     if(length(base::intersect(c('match_between_runs', 'imputed'), names(data$accounting))) > 0){
+
+      table_imput_class <- data$accounting %>%
+        dplyr::filter(sample_id %in% sample_ids) %>%
+        dplyr::left_join(data$experiment |> dplyr::select(sample_id, sample), by = "sample_id") %>%
+        tidyr::pivot_longer(dplyr::matches("match|impute"), names_to = 'type', values_to = 'imputed') %>%
+        dplyr::filter(!is.na(imputed)) %>%
+        dplyr::group_by_at(c(data$identifier, "sample_id", "sample")) %>%
+        dplyr::summarise(imputed = min(imputed) == 1, .groups = 'drop') %>%
+        dplyr::group_by_at(c(data$identifier, 'sample')) %>%
+        dplyr::summarise(imputed = sum(imputed)/dplyr::n()) %>%
+        tidyr::pivot_wider(
+          names_from = 'sample', values_from = 'imputed', names_prefix = "imputed_"
+        )
+
       table <- data$accounting %>%
         dplyr::filter(sample_id %in% sample_ids) %>%
         tidyr::pivot_longer(dplyr::matches("match|impute"), names_to = 'type', values_to = 'imputed') %>%
@@ -125,7 +139,9 @@ expression <- function(
         dplyr::group_by_at(c(data$identifier, "sample_id")) %>%
         dplyr::summarise(imputed = min(imputed) == 1, .groups = 'drop') %>%
         dplyr::group_by_at(data$identifier) %>%
-        dplyr::summarise(imputed = sum(imputed)/dplyr::n(), n = dplyr::n(), .groups = 'drop') %>%
+        dplyr::summarise(imputed = sum(imputed)/dplyr::n(),
+                         n = dplyr::n(), .groups = 'drop') %>%
+        dplyr::left_join(table_imput_class, by = data$identifier) %>%
         dplyr::left_join(table, by = data$identifier)
     }
 
