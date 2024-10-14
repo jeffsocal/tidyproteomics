@@ -27,6 +27,16 @@ major updates and bug-fixes listed here. For quick reference:
 
 ### Version: 1.8.x
 
+#### 1.8.4 - 2024.10.14
+
+-   Minor fix to `merge() |> export_quant()` [thanks: github.com/tywang-tw] where
+    the quantitative source 'selected' was not recognized. This has been addressed,
+    however, it is un-advised to `normalize()` prior to `merge()` as the possibility
+    exists to have different normalization methods used between sets and major 
+    quantitative offsets, that normalization is intended to address, persist or
+    become exaggerated, increasing the probability of false positives in downstream
+    analyses.
+
 #### 1.8.3 - 2024.09.24
 
 -   Implemented additional columns on to calculate the fraction imputed per 

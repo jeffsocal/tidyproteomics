@@ -42,8 +42,8 @@ export_quant <- function(
 
   cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
 
-  data_quant <- extract(data, 'raw') %>%
-    dplyr::rename(abundance_raw = abundance)
+  get_raw <- intersect(c('raw', 'selected'), get_quant_names(data))
+  data_quant <- extract(data, get_raw[1]) %>% dplyr::rename(abundance_raw = abundance)
 
   if(normalized != FALSE) {
 
@@ -95,7 +95,8 @@ export_quant <- function(
       names_from = 'sample',
       values_from = tidyselect::all_of(col_abn)
     ) %>%
-    munge_identifier("separate", data$identifier)
+    munge_identifier("separate", data$identifier) |>
+    dplyr::select(!dplyr::matches("^origin"))
 
   if(!is.null(data$annotations)) {
     tbl_out <- tbl_out %>%

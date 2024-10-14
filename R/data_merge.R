@@ -72,7 +72,10 @@ merge <- function(
   new_data$experiments <- dplyr::bind_rows(l_experiments)
   new_data$quantitative <- dplyr::bind_rows(l_quantitative)
   new_data$accounting <- dplyr::bind_rows(l_accouting)
-  new_data$annotations <- dplyr::bind_rows(l_annotations) %>% unique()
+
+  tbl_annotations <- dplyr::bind_rows(l_annotations) %>% unique()
+  if(nrow(tbl_annotations) == 0) tbl_annotations <- NULL
+  new_data$annotations <- tbl_annotations
 
   class(new_data) <- 'tidyproteomics'
   return(new_data)
