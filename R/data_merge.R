@@ -102,11 +102,14 @@ merge_quantitative <- function(
 
   colnames(data_quant)[which('abundance' == names(data_quant))] <- paste0('abundance_', values)
 
+  # fixed issue with matrix based computations reintroducing NA's into the
+  # quantitative data table
   data$quantitative <- data$quantitative %>%
     dplyr::select(!dplyr::matches(paste0("\\_", values))) %>%
     dplyr::full_join(
       data_quant, by = names(data_quant)[which(!grepl('abundance', names(data_quant)))]
-    )
+    ) %>%
+    dplyr::filter(!is.na(sample_id))
 
   return(data)
 }
