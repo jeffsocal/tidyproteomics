@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,7 +126,21 @@ compatibility</p></li>
 <h3 id="version-1-8-x">Version: 1.8.x<a class="anchor" aria-label="anchor" href="#version-1-8-x"></a>
 </h3>
 <div class="section level4">
-<h4 id="section">1.8.5 - 2024.12.18<a class="anchor" aria-label="anchor" href="#section"></a>
+<h4 id="section">1.8.6 - 2025.05.06<a class="anchor" aria-label="anchor" href="#section"></a>
+</h4>
+<ul>
+<li>Minor fix to collapse() [thanks: github.com/rzieg]. Resolved an
+issue where selecting “all-possible” could result in only a single
+protein being chosen when two proteins shared identical peptide
+sequences. This situation can occur when searching against two FASTA
+databases that contain nearly identical proteins differing by only a
+single amino acid—such as between cRAP and Human sequence databases.
+Typically, these sequences are identical and don’t cause issues, but
+this edge case led to unintended behavior.</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="section-1">1.8.5 - 2024.12.18<a class="anchor" aria-label="anchor" href="#section-1"></a>
 </h4>
 <ul>
 <li>Minor fix to <code><a href="../reference/normalize.html">normalize()</a></code> [thanks: github.com/tywang-tw]
@@ -135,7 +149,7 @@ compromising later data exports.</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-1">1.8.4 - 2024.10.14<a class="anchor" aria-label="anchor" href="#section-1"></a>
+<h4 id="section-2">1.8.4 - 2024.10.14<a class="anchor" aria-label="anchor" href="#section-2"></a>
 </h4>
 <ul>
 <li>Minor fix to <code>merge() |&gt; export_quant()</code> [thanks:
@@ -149,7 +163,7 @@ false positives in downstream analyses.</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-2">1.8.3 - 2024.09.24<a class="anchor" aria-label="anchor" href="#section-2"></a>
+<h4 id="section-3">1.8.3 - 2024.09.24<a class="anchor" aria-label="anchor" href="#section-3"></a>
 </h4>
 <ul>
 <li>Implemented additional columns on to calculate the fraction imputed
@@ -162,7 +176,7 @@ change values are significantly skewed.</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-3">1.8.2 - 2024.08.02<a class="anchor" aria-label="anchor" href="#section-3"></a>
+<h4 id="section-4">1.8.2 - 2024.08.02<a class="anchor" aria-label="anchor" href="#section-4"></a>
 </h4>
 <ul>
 <li>Updated the volcano plot to include auto-generated titles, classic
@@ -171,7 +185,7 @@ significance cutoffs and removing values with p-value==1.</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-4">1.8.1 - 2024.07.30<a class="anchor" aria-label="anchor" href="#section-4"></a>
+<h4 id="section-5">1.8.1 - 2024.07.30<a class="anchor" aria-label="anchor" href="#section-5"></a>
 </h4>
 <ul>
 <li>Added Fisher’s Exact Test (Over-Representation Analysis) to
@@ -189,14 +203,14 @@ expression and enrichment test.</li>
 <h3 id="version-1-7-x">Version: 1.7.x<a class="anchor" aria-label="anchor" href="#version-1-7-x"></a>
 </h3>
 <div class="section level4">
-<h4 id="section-5">1.7.4 - 2024.06.04<a class="anchor" aria-label="anchor" href="#section-5"></a>
+<h4 id="section-6">1.7.4 - 2024.06.04<a class="anchor" aria-label="anchor" href="#section-6"></a>
 </h4>
 <ul>
 <li>Bug fix missing package reference in limma expression analysis</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-6">1.7.3 - 2024.03.12<a class="anchor" aria-label="anchor" href="#section-6"></a>
+<h4 id="section-7">1.7.3 - 2024.03.12<a class="anchor" aria-label="anchor" href="#section-7"></a>
 </h4>
 <ul>
 <li>fixed issue with importing FragPipe tsv files, seems to be an issue
@@ -208,7 +222,7 @@ proteins with NAs for all samples</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-7">1.7.2 - 2024.01.24<a class="anchor" aria-label="anchor" href="#section-7"></a>
+<h4 id="section-8">1.7.2 - 2024.01.24<a class="anchor" aria-label="anchor" href="#section-8"></a>
 </h4>
 <ul>
 <li>fixed and issue with plot_counts and plot_variation_cv failed to
@@ -217,14 +231,14 @@ palette</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-8">1.7.1 - 2024.01.23<a class="anchor" aria-label="anchor" href="#section-8"></a>
+<h4 id="section-9">1.7.1 - 2024.01.23<a class="anchor" aria-label="anchor" href="#section-9"></a>
 </h4>
 <ul>
 <li>new release to add DOI from Zenodo</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-9">1.7.0 - 2023.12.13<a class="anchor" aria-label="anchor" href="#section-9"></a>
+<h4 id="section-10">1.7.0 - 2023.12.13<a class="anchor" aria-label="anchor" href="#section-10"></a>
 </h4>
 <ul>
 <li>add the ability to export the proteins specific to a given Venn
@@ -240,7 +254,7 @@ headers</li>
 <h3 id="version-1-6-x">Version: 1.6.x<a class="anchor" aria-label="anchor" href="#version-1-6-x"></a>
 </h3>
 <div class="section level4">
-<h4 id="section-10">1.6.1 - 2023.11.29<a class="anchor" aria-label="anchor" href="#section-10"></a>
+<h4 id="section-11">1.6.1 - 2023.11.29<a class="anchor" aria-label="anchor" href="#section-11"></a>
 </h4>
 <ul>
 <li>fixed some minor issues</li>
@@ -252,7 +266,7 @@ functions</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-11">1.6.0 - 2023.11.09<a class="anchor" aria-label="anchor" href="#section-11"></a>
+<h4 id="section-12">1.6.0 - 2023.11.09<a class="anchor" aria-label="anchor" href="#section-12"></a>
 </h4>
 <ul>
 <li>fixed an issue with improper missing value accounting when
@@ -265,7 +279,7 @@ implementing expression tests [thanks: github.com/rzieg]</li>
 <h3 id="version-1-5-x">Version: 1.5.x<a class="anchor" aria-label="anchor" href="#version-1-5-x"></a>
 </h3>
 <div class="section level4">
-<h4 id="section-12">1.5.10 - 2023.11.03<a class="anchor" aria-label="anchor" href="#section-12"></a>
+<h4 id="section-13">1.5.10 - 2023.11.03<a class="anchor" aria-label="anchor" href="#section-13"></a>
 </h4>
 <ul>
 <li>addressed issues#9 &amp; #10 to better handle as.data.frame [thanks:
@@ -273,7 +287,7 @@ github.com/tywang-tw]</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-13">1.5.9 - 2023.10.30<a class="anchor" aria-label="anchor" href="#section-13"></a>
+<h4 id="section-14">1.5.9 - 2023.10.30<a class="anchor" aria-label="anchor" href="#section-14"></a>
 </h4>
 <ul>
 <li>addressed issue#8 to better handle the text of custom functions
@@ -281,7 +295,7 @@ github.com/tywang-tw]</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-14">1.5.8 - 2023.10.10<a class="anchor" aria-label="anchor" href="#section-14"></a>
+<h4 id="section-15">1.5.8 - 2023.10.10<a class="anchor" aria-label="anchor" href="#section-15"></a>
 </h4>
 <ul>
 <li>addressed issue#5 with the default MaxQuant protein import
@@ -289,7 +303,7 @@ definition [thanks: tar226-at-cornell.edu]</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-15">1.5.7 - 2023.09.21<a class="anchor" aria-label="anchor" href="#section-15"></a>
+<h4 id="section-16">1.5.7 - 2023.09.21<a class="anchor" aria-label="anchor" href="#section-16"></a>
 </h4>
 <ul>
 <li>addressed issue#4 with enrichment() taking long for complex
@@ -300,7 +314,7 @@ definitions [thanks: github.com/eschen42]</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-16">1.5.6 - 2023.09.07<a class="anchor" aria-label="anchor" href="#section-16"></a>
+<h4 id="section-17">1.5.6 - 2023.09.07<a class="anchor" aria-label="anchor" href="#section-17"></a>
 </h4>
 <ul>
 <li>addressed issue#3: t.test on expression diff fails on no variance
@@ -310,7 +324,7 @@ of operations</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-17">1.5.5 - 2023.08.24<a class="anchor" aria-label="anchor" href="#section-17"></a>
+<h4 id="section-18">1.5.5 - 2023.08.24<a class="anchor" aria-label="anchor" href="#section-18"></a>
 </h4>
 <ul>
 <li>fixed deprecated issue in subset (tidyr::pivot_wider)</li>
@@ -319,7 +333,7 @@ of operations</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-18">1.5.4 - 2023.08.16<a class="anchor" aria-label="anchor" href="#section-18"></a>
+<h4 id="section-19">1.5.4 - 2023.08.16<a class="anchor" aria-label="anchor" href="#section-19"></a>
 </h4>
 <ul>
 <li>added support for selecting fgsea scoreType(“std”, “pos”, “neg”)
@@ -327,14 +341,14 @@ of operations</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-19">1.5.3 - 2023.07.30<a class="anchor" aria-label="anchor" href="#section-19"></a>
+<h4 id="section-20">1.5.3 - 2023.07.30<a class="anchor" aria-label="anchor" href="#section-20"></a>
 </h4>
 <ul>
 <li>added theme color support for plotting 16+ sample groups</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-20">1.5.2 - 2023.06.29<a class="anchor" aria-label="anchor" href="#section-20"></a>
+<h4 id="section-21">1.5.2 - 2023.06.29<a class="anchor" aria-label="anchor" href="#section-21"></a>
 </h4>
 <ul>
 <li>bug fix in limma expression differences (name ordering only
@@ -343,14 +357,14 @@ github.com/tywang-tw]</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-21">1.5.1 - 2023.06.09<a class="anchor" aria-label="anchor" href="#section-21"></a>
+<h4 id="section-22">1.5.1 - 2023.06.09<a class="anchor" aria-label="anchor" href="#section-22"></a>
 </h4>
 <ul>
 <li>updated plot_counts(), added show_replicates = T/F</li>
 </ul>
 </div>
 <div class="section level4">
-<h4 id="section-22">1.5.0 - 2023.05.23<a class="anchor" aria-label="anchor" href="#section-22"></a>
+<h4 id="section-23">1.5.0 - 2023.05.23<a class="anchor" aria-label="anchor" href="#section-23"></a>
 </h4>
 <ul>
 <li>refactored impute() to allow for user defined matrix based
@@ -371,7 +385,7 @@ plot</li>
 <h3 id="version-1-4-x">Version: 1.4.x<a class="anchor" aria-label="anchor" href="#version-1-4-x"></a>
 </h3>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-23">1.4.2 - 2023.04.03<a class="anchor" aria-label="anchor" href="#section-23"></a>
+<h4 class="unnumbered" id="section-24">1.4.2 - 2023.04.03<a class="anchor" aria-label="anchor" href="#section-24"></a>
 </h4>
 <ul>
 <li>updated color theme to maximize contrasts in order</li>
@@ -380,7 +394,7 @@ using a display_subset</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-24">1.4.1 - 2023.03.28<a class="anchor" aria-label="anchor" href="#section-24"></a>
+<h4 class="unnumbered" id="section-25">1.4.1 - 2023.03.28<a class="anchor" aria-label="anchor" href="#section-25"></a>
 </h4>
 <ul>
 <li>migrated from dplyr deprecated across() to group_by_at()</li>
@@ -388,7 +402,7 @@ using a display_subset</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-25">1.4.0 - 2023.03.27<a class="anchor" aria-label="anchor" href="#section-25"></a>
+<h4 class="unnumbered" id="section-26">1.4.0 - 2023.03.27<a class="anchor" aria-label="anchor" href="#section-26"></a>
 </h4>
 <ul>
 <li>added the S3Method as.data.frame()</li>
@@ -400,7 +414,7 @@ using a display_subset</li>
 <h3 id="version-1-3-x">Version: 1.3.x<a class="anchor" aria-label="anchor" href="#version-1-3-x"></a>
 </h3>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-26">1.3.1 - 2023.03.20<a class="anchor" aria-label="anchor" href="#section-26"></a>
+<h4 class="unnumbered" id="section-27">1.3.1 - 2023.03.20<a class="anchor" aria-label="anchor" href="#section-27"></a>
 </h4>
 <ul>
 <li>minor code updates to improve conciseness</li>
@@ -409,7 +423,7 @@ proteins/peptides amoung the whole dynamic range</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-27">1.3.0 - 2023.03.13<a class="anchor" aria-label="anchor" href="#section-27"></a>
+<h4 class="unnumbered" id="section-28">1.3.0 - 2023.03.13<a class="anchor" aria-label="anchor" href="#section-28"></a>
 </h4>
 <ul>
 <li>addressed multiple charge precursor in peptide quant files</li>
@@ -427,7 +441,7 @@ files</li>
 <h3 id="version-1-2-x">Version: 1.2.x<a class="anchor" aria-label="anchor" href="#version-1-2-x"></a>
 </h3>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-28">1.2.6 - 2023.03.01<a class="anchor" aria-label="anchor" href="#section-28"></a>
+<h4 class="unnumbered" id="section-29">1.2.6 - 2023.03.01<a class="anchor" aria-label="anchor" href="#section-29"></a>
 </h4>
 <ul>
 <li>added clarity around normalize(), impute(), collapse()</li>
@@ -439,14 +453,14 @@ accounting</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-29">1.2.5 - 2023.02.13<a class="anchor" aria-label="anchor" href="#section-29"></a>
+<h4 class="unnumbered" id="section-30">1.2.5 - 2023.02.13<a class="anchor" aria-label="anchor" href="#section-30"></a>
 </h4>
 <ul>
 <li>fixed an issue with MBR accounting</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-30">1.2.4 - 2023.02.03<a class="anchor" aria-label="anchor" href="#section-30"></a>
+<h4 class="unnumbered" id="section-31">1.2.4 - 2023.02.03<a class="anchor" aria-label="anchor" href="#section-31"></a>
 </h4>
 <ul>
 <li>added support for mzTab v1.0.0, exporting table for counts
@@ -459,7 +473,7 @@ analysis</li>
 <h3 id="version-1-1-x">Version: 1.1.x<a class="anchor" aria-label="anchor" href="#version-1-1-x"></a>
 </h3>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-31">1.1.2 - 2023.01.23<a class="anchor" aria-label="anchor" href="#section-31"></a>
+<h4 class="unnumbered" id="section-32">1.1.2 - 2023.01.23<a class="anchor" aria-label="anchor" href="#section-32"></a>
 </h4>
 <ul>
 <li>refactored the import function to allow both wide and long format
@@ -472,7 +486,7 @@ functions for ProteomeDiscoverer and MaxQuant</li>
 <h3 id="version-1-0-x">Version: 1.0.x<a class="anchor" aria-label="anchor" href="#version-1-0-x"></a>
 </h3>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-32">1.0.4 - 2022.11.28<a class="anchor" aria-label="anchor" href="#section-32"></a>
+<h4 class="unnumbered" id="section-33">1.0.4 - 2022.11.28<a class="anchor" aria-label="anchor" href="#section-33"></a>
 </h4>
 <ul>
 <li>modified %!like% to the more conventional !x %like% y</li>
@@ -480,7 +494,7 @@ functions for ProteomeDiscoverer and MaxQuant</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-33">1.0.2 - 2022.11.28<a class="anchor" aria-label="anchor" href="#section-33"></a>
+<h4 class="unnumbered" id="section-34">1.0.2 - 2022.11.28<a class="anchor" aria-label="anchor" href="#section-34"></a>
 </h4>
 <ul>
 <li>implemented S3 object for tidyproteomics data object</li>
@@ -495,7 +509,7 @@ functions for ProteomeDiscoverer and MaxQuant</li>
 <h3 id="version-beta">Version: beta<a class="anchor" aria-label="anchor" href="#version-beta"></a>
 </h3>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-34">0.7.3 - 2022.11.15<a class="anchor" aria-label="anchor" href="#section-34"></a>
+<h4 class="unnumbered" id="section-35">0.7.3 - 2022.11.15<a class="anchor" aria-label="anchor" href="#section-35"></a>
 </h4>
 <ul>
 <li>modified expression() to more accurately account for the imputation
@@ -503,7 +517,7 @@ ratio</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-35">0.7.2 - 2022.11.03<a class="anchor" aria-label="anchor" href="#section-35"></a>
+<h4 class="unnumbered" id="section-36">0.7.2 - 2022.11.03<a class="anchor" aria-label="anchor" href="#section-36"></a>
 </h4>
 <ul>
 <li>refactored plotting to utilize a generalized save function to
@@ -516,7 +530,7 @@ utilize subset()</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-36">0.7.1 - 2022.10.28<a class="anchor" aria-label="anchor" href="#section-36"></a>
+<h4 class="unnumbered" id="section-37">0.7.1 - 2022.10.28<a class="anchor" aria-label="anchor" href="#section-37"></a>
 </h4>
 <ul>
 <li>refactored import() to allow for user based configurations</li>
@@ -527,7 +541,7 @@ renaming</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-37">0.7.0 - 2022.10.15<a class="anchor" aria-label="anchor" href="#section-37"></a>
+<h4 class="unnumbered" id="section-38">0.7.0 - 2022.10.15<a class="anchor" aria-label="anchor" href="#section-38"></a>
 </h4>
 <ul>
 <li>added plot_quantrank()</li>
@@ -535,7 +549,7 @@ renaming</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-38">0.6.0 - 2022.09.29<a class="anchor" aria-label="anchor" href="#section-38"></a>
+<h4 class="unnumbered" id="section-39">0.6.0 - 2022.09.29<a class="anchor" aria-label="anchor" href="#section-39"></a>
 </h4>
 <ul>
 <li>minor bug fixes</li>
@@ -545,7 +559,7 @@ segmentation</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-39">0.5.0 - 2022.09.23<a class="anchor" aria-label="anchor" href="#section-39"></a>
+<h4 class="unnumbered" id="section-40">0.5.0 - 2022.09.23<a class="anchor" aria-label="anchor" href="#section-40"></a>
 </h4>
 <ul>
 <li>created remove() and migrated subset(match_between_runs =
@@ -559,7 +573,7 @@ MSAmanda and DIA vi DIA-Umpire</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-40">0.4.2 - 2022.09.19<a class="anchor" aria-label="anchor" href="#section-40"></a>
+<h4 class="unnumbered" id="section-41">0.4.2 - 2022.09.19<a class="anchor" aria-label="anchor" href="#section-41"></a>
 </h4>
 <ul>
 <li>fixed issue with “out of memory” on subset(match_between_runs =
@@ -569,7 +583,7 @@ FALSE)</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-41">0.4.1 - 2022.09.13<a class="anchor" aria-label="anchor" href="#section-41"></a>
+<h4 class="unnumbered" id="section-42">0.4.1 - 2022.09.13<a class="anchor" aria-label="anchor" href="#section-42"></a>
 </h4>
 <ul>
 <li>fixed a minor bug in importing MaxQuant data (empty data
@@ -581,7 +595,7 @@ object)</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-42">0.4.0 - 2022.09.08<a class="anchor" aria-label="anchor" href="#section-42"></a>
+<h4 class="unnumbered" id="section-43">0.4.0 - 2022.09.08<a class="anchor" aria-label="anchor" href="#section-43"></a>
 </h4>
 <ul>
 <li>added import() for MaxQuant peptides (evidence.txt)</li>
@@ -590,7 +604,7 @@ object)</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-43">0.3.0<a class="anchor" aria-label="anchor" href="#section-43"></a>
+<h4 class="unnumbered" id="section-44">0.3.0<a class="anchor" aria-label="anchor" href="#section-44"></a>
 </h4>
 <ul>
 <li>added protein rollup() function, integrated with <a href="https://github.com/jeffsocal/rfasta" class="external-link">rfasta</a>
@@ -598,7 +612,7 @@ object)</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-44">0.2.0<a class="anchor" aria-label="anchor" href="#section-44"></a>
+<h4 class="unnumbered" id="section-45">0.2.0<a class="anchor" aria-label="anchor" href="#section-45"></a>
 </h4>
 <ul>
 <li>updated impute() accounting</li>
@@ -607,7 +621,7 @@ object)</li>
 </ul>
 </div>
 <div class="section level4 unnumbered">
-<h4 class="unnumbered" id="section-45">0.1.0<a class="anchor" aria-label="anchor" href="#section-45"></a>
+<h4 class="unnumbered" id="section-46">0.1.0<a class="anchor" aria-label="anchor" href="#section-46"></a>
 </h4>
 <ul>
 <li>initial cohesion of a loose collection of functions into an R

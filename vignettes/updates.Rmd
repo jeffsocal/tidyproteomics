@@ -27,6 +27,16 @@ major updates and bug-fixes listed here. For quick reference:
 
 ### Version: 1.8.x
 
+#### 1.8.6 - 2025.05.06
+
+-   Minor fix to collapse() [thanks: github.com/rzieg]. Resolved an issue where 
+    selecting "all-possible" could result in only a single protein being chosen 
+    when two proteins shared identical peptide sequences. This situation can occur 
+    when searching against two FASTA databases that contain nearly identical 
+    proteins differing by only a single amino acid—such as between cRAP and Human 
+    sequence databases. Typically, these sequences are identical and don't cause 
+    issues, but this edge case led to unintended behavior.
+
 #### 1.8.5 - 2024.12.18
 
 -   Minor fix to `normalize()` [thanks: github.com/tywang-tw] where after limma

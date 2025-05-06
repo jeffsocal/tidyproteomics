@@ -131,6 +131,7 @@ collapse <- function(
 
   # one of identity
   experiment_ids <- c("sample_id", "import_file", "sample_file", "sample", "replicate")
+  quant_accounting_by <- c(experiment_ids, 'abundance', 'peptides', 'num_peptides', 'num_unique_peptides', 'imputed')
   merge_by <- c(collapse_to, experiment_ids)
   annotation_cols <- setdiff(get_annotation_terms(data), data$identifier)
 
@@ -200,6 +201,9 @@ collapse <- function(
   # recombine for accurate accounting
   if(assign_by == "all-possible"){
     tb_prot_new <- tb_peptides
+    # all-possible should expose all proteins, don't collapse on double accounted proteins
+    # this comes from having a protein accounted for in both a eg. cRAP and Human proteome
+    quant_accounting_by <- c(quant_accounting_by, collapse_to)
   } else {
 
     # slice out razor peptides
@@ -273,9 +277,11 @@ collapse <- function(
 
   # WORK AROUND: issue with dplyr renaming with a dynamic variable
   tb_pro_quant_summed$identifier <- tb_pro_quant_summed[,collapse_to] |> unlist(use.names = FALSE)
+
+  # ISSUE HERE WITH all-possible
   tb_pro_quant_summed <- tb_pro_quant_summed %>%
     # pull into protein groups
-    dplyr::group_by_at(c(experiment_ids, 'abundance', 'peptides', 'num_peptides', 'num_unique_peptides', 'imputed')) %>%
+    dplyr::group_by_at(quant_accounting_by) %>%
     dplyr::summarise(
       num_identifiers = length(unique(identifier)),
       identifiers_grouped = paste(sort(identifier), collapse = "; "),
@@ -295,6 +301,9 @@ collapse <- function(
 
   if(.verbose == TRUE) {cli::cli_progress_step(' ... tidying the data and finishing up')}
 
+  cli::cli_alert_info("Number of collapsed proteins {nrow(tb_pro_quant_summed)}")
+  print(quant_accounting_by)
+
   dat_pro <- tb_pro_quant_summed %>%
     tibble::as_tibble() %>%
     dplyr::select(!dplyr::matches('identifier')) %>%
@@ -309,6 +318,7 @@ collapse <- function(
   }
 
   dat_pro <- dat_pro %>% codify(identifier = collapse_to, annotations = codify_annotations)
+
 
   # the output object
   out <- list(
