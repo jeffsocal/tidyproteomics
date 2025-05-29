@@ -27,7 +27,7 @@
 #'
 #' hela_proteins %>% impute(.function = stats::median) %>% summary("sample")
 #'
-#' hela_proteins %>% impute(.function = impute.randomforest) %>% summary("sample")
+#' hela_proteins %>% impute(.function = impute.randomforest, method = "matrix") %>% summary("sample")
 #'
 impute <- function(
     data = NULL,

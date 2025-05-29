@@ -99,7 +99,8 @@ pro_frompep_razor %>%
 Check to see how the two results agree ...
 
 ```{r, warning=FALSE, message=FALSE}
-tbl_merged_razor <- pro_frompep_razor$quantitative %>% select('sample','replicate','protein', 'abundance_raw') %>%
+tbl_merged_razor <- pro_frompep_razor$quantitative %>% 
+  select('sample','replicate','protein', 'abundance_raw') %>%
   inner_join(pro_data$quantitative %>% select('sample','replicate','protein', 'abundance_raw'), 
              by = c('sample','replicate','protein'),
              suffix = c("_tidyproteomics", "_proteomediscoverer"))
@@ -130,7 +131,7 @@ Lets look at a few examples of outliers ...
 
 ```{r}
 tbl_merged_razor %>%
-  filter(abundance_raw_proteomediscoverer != abundance_raw_tidyproteomics) %>% as.data.frame()
+  filter(abundance_raw_proteomediscoverer != abundance_raw_tidyproteomics) %>% as.data.frame() %>% head()
 ```
 
 We will take the protein **P45983** to examine ...
@@ -171,7 +172,7 @@ pep_data$quantitative %>%
 
 ### Assign by excluding homologous peptides
 
-That means the ProteomeDiscoverer method for protein accounting excluded the abundance measurement from all razor peptides. Let try to do replicate that as well.
+That means the ProteomeDiscoverer method for protein accounting excluded the abundance measurement from all razor peptides. Lets try to replicate that as well.
 
 ```{r, warning=FALSE, message=FALSE}
 pro_frompep_nonhom <- pep_data %>% 
@@ -304,35 +305,15 @@ Alternatively, peptide level data can be collapsed to any Annotation term, in th
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyr)
 
-data_fasta <- "~/Local/data/fasta/uniprot_human-20398_20220920.fasta" %>% 
-  tidyproteomics:::fasta_parse(as = "data.frame") %>%
-  select(protein = accession, gene_name, description) %>%
-  pivot_longer(
-    cols = c('gene_name', 'description'),
-    names_to = 'term',
-    values_to = 'annotation'
-  )
-
 gene_data <- pep_data %>% 
-  annotate(data_fasta, duplicates = 'merge') %>%
-  collapse(collapse_to = 'gene_name')
+  collapse(collapse_to = 'gene_name', fasta_path = "~/Local/data/fasta/uniprot_human-20398_20220920.fasta")
 ```
 
 ```{r, eval=FALSE}
 library(tidyr)
 
-data_fasta <- "uniprot_human-20398_20220920.fasta" %>% 
-  tidyproteomics:::fasta_parse(as = "data.frame") %>%
-  select(protein = accession, gene_name, description) %>%
-  pivot_longer(
-    cols = c('gene_name', 'description'),
-    names_to = 'term',
-    values_to = 'annotation'
-  )
-
 gene_data <- pep_data %>% 
-  annotate(data_fasta, duplicates = 'merge') %>%
-  collapse(collapse_to = 'gene_name')
+  collapse(collapse_to = 'gene_name', fasta_path = "uniprot_human-20398_20220920.fasta")
 ```
 
 ```{r, warning=FALSE, message=FALSE}

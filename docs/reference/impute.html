@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,10 +156,26 @@ sample name to bias the imputation to within that sample.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     7055    66329           58706        0.931 0.20</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>.function <span class="op">=</span> <span class="va">impute.randomforest</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">base::quote function (matrix = NULL, cores</span>…</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in .f(as.vector(stats::na.omit(x))):</span> imput data must be a matrix</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">base::quote function (matrix = NULL, cores</span>…</span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>.function <span class="op">=</span> <span class="va">impute.randomforest</span>, method <span class="op">=</span> <span class="st">"matrix"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">matrix</span> using the function <span style="color: #FF5F00; font-style: italic;">base::quote function (matrix = NULL, co</span>…</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> randomForest 4.7-1.1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Type rfNews() to see new features/changes/bug fixes.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Attaching package: ‘randomForest’</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> The following object is masked from ‘package:dplyr’:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>     combine</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: foreach</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rngtools</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing by <span style="color: #FF5F00; font-style: italic;">matrix</span> using the function <span style="color: #FF5F00; font-style: italic;">base::quote function (matrix = NULL, co</span>…</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 12173 values imputed</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable  CVs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    control     7055    66329           58706            1 0.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     7055    66329           58706            1 0.18</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

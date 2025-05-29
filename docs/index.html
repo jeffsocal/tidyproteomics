@@ -41,7 +41,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -162,14 +162,14 @@
 <col width="24%">
 <col width="24%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Platform</th>
 <th>peptides</th>
 <th>proteins</th>
 <th>notes</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>ProteomeDiscoverer</td>
 <td>*.xlsx <em>peptides export</em>
 </td>
@@ -177,33 +177,33 @@
 </td>
 <td>requires layout configuration</td>
 </tr>
-<tr class="even">
+<tr>
 <td>MaxQuant</td>
 <td>evidence.txt</td>
 <td>proteinGroups.txt</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>FragPipe</td>
 <td>combined_peptide.tsv</td>
 <td>combined_protein.tsv</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>Skyline</td>
 <td>*.csv <em>MSstats peptide report</em>
 </td>
 <td></td>
 <td>requires MSstats install</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>DIA-NN</td>
 <td>*.tsv <em>peptide report</em>
 </td>
 <td></td>
 <td></td>
 </tr>
-<tr class="even">
+<tr>
 <td>mzTab</td>
 <td>*.mzTab (v1.0.0)</td>
 <td>*.mzTab (v1.0.0)</td>
@@ -222,40 +222,40 @@
 <col width="26%">
 <col width="47%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>operator</th>
 <th>description</th>
 <th>example</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>==</td>
 <td>equals</td>
 <td>
 <code>sample == 'wt'</code> , <code>match_between_runs == FALSE</code>
 </td>
 </tr>
-<tr class="even">
+<tr>
 <td>!=</td>
 <td>does not equal</td>
 <td><code>biological_function != 'DNA metabolism'</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>&lt;, &gt;</td>
 <td>less, greater than</td>
 <td><code>num_unique_peptides &gt;= 2</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td>%like%</td>
 <td>contains</td>
 <td><code>description %like% 'ribosome'</code></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>! %like%</td>
 <td>does not contain</td>
 <td><code>!description %like% 'ribosome'</code></td>
 </tr>
-<tr class="even">
+<tr>
 <td>/</td>
 <td>ratio <em>(expression)</em>
 </td>
@@ -278,28 +278,28 @@
 <col width="25%">
 <col width="75%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Variable</th>
 <th>Reference</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>sample_id</td>
 <td>A checksum id on the individual data imported, allows for an unambiguous identifier usefull in differentiating samples of the same name</td>
 </tr>
-<tr class="even">
+<tr>
 <td>import_file</td>
 <td>The file referenced at import, allows for multiple files to be merged</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>sample_file</td>
 <td>The individual MS file, or for TMT the channel, that contains data for a single observation of a given protein</td>
 </tr>
-<tr class="even">
+<tr>
 <td>sample</td>
 <td>The name of the MS data collected for a given class, collection, of a specimen or a cell culture, etc.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>replicate</td>
 <td>A tidyproteomics derived integer assignment to a collection of same-named samples</td>
 </tr>
@@ -328,36 +328,36 @@
 <col width="25%">
 <col width="75%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Variable</th>
 <th>Reference</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>sample_id</td>
 <td>A checksum id on the individual data imported, allows for an unambiguous identifier useful in differentiating samples of the same name</td>
 </tr>
-<tr class="even">
+<tr>
 <td>sample</td>
 <td>The name of the MS data collected for a given class, collection of sampling of tissue, a culture etc.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>replicate</td>
 <td>A tidyproteomics derived integer assignment to a collection of same-named samples</td>
 </tr>
-<tr class="even">
+<tr>
 <td><em>identifier</em></td>
 <td>The identifier of the “thing” being measured.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>protein</td>
 <td>In the case of protein-level data, this is simply <code>protein</code> and is usually populated with UniProt accession numbers, names, or other protein identifiers.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>protein, peptide, modification</td>
 <td>In the case of peptide-level data, this is a multiple of <code>protein</code> (accession number), <code>peptide</code> (amino acid sequence) and <code>modification</code> (post-translational modification).</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>abundance_raw</td>
 <td>The imported quantitative measure for each protein or peptide. The tidyproteomics data object stores abundance values for the raw data and each normalization. This allows for the direct comparison of normalization methods against the raw data, and for one set of abundance values to be used for subsequent analyses.</td>
 </tr>
@@ -387,20 +387,20 @@
 <col width="25%">
 <col width="75%">
 </colgroup>
-<thead><tr class="header">
+<thead><tr>
 <th>Variable</th>
 <th>Reference</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td><em>identifier</em></td>
 <td>The identifier of the “thing” being measured.</td>
 </tr>
-<tr class="even">
+<tr>
 <td>term</td>
 <td>The name of the collection of annotations, such as gene_name or description.</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>annotation</td>
 <td>The descriptive annotation.</td>
 </tr>

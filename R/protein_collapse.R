@@ -97,7 +97,6 @@ collapse <- function(
   }
 
   check_data(data)
-
   collapse_possible <- unique(c(data$identifier, get_annotation_terms(data)))
 
   tb_fasta <- c()
@@ -158,7 +157,7 @@ collapse <- function(
 
       n_after <- length(unique(unlist(tb_peptides[,join_primary])))
 
-      if(n_before != n_after) {cli::cli_alert_danger("Number of proteins droped form {n_before} to {n_after}")}
+      if(n_before != n_after) {cli::cli_alert_danger("Number of {.emph {data$identifier}} collapsed form {.emph {n_before}} to {.emph {n_after}} {.emph {collapse_to}}")}
     }
   }
 
@@ -263,7 +262,7 @@ collapse <- function(
   codify_annotations <- unique(setdiff(get_annotation_terms(data), data$identifier), names(tb_fasta))
   codify_annotations <- intersect(codify_annotations, colnames(tb_pro_quant_shared))
 
-  if(.verbose == TRUE) {cli::cli_progress_step(' ... computing protein stats')}
+  if(.verbose == TRUE) {cli::cli_progress_step(' ... computing {.emph {collapse_to}} stats')}
   tb_pro_quant_summed <- tb_pro_quant_shared %>%
     dplyr::arrange(dplyr::desc(abundance_shared)) %>%
     dplyr::group_by_at(union(merge_by, codify_annotations)) %>%
@@ -301,8 +300,7 @@ collapse <- function(
 
   if(.verbose == TRUE) {cli::cli_progress_step(' ... tidying the data and finishing up')}
 
-  cli::cli_alert_info("Number of collapsed proteins {nrow(tb_pro_quant_summed)}")
-  print(quant_accounting_by)
+  cli::cli_alert_info("Peptides collapsed by {.emph {collapse_to}} into {length(unique(tb_pro_quant_summed[,collapse_to]))}")
 
   dat_pro <- tb_pro_quant_summed %>%
     tibble::as_tibble() %>%
@@ -313,11 +311,11 @@ collapse <- function(
     dat_pro <- dat_pro %>% dplyr::left_join(tb_fasta, by = collapse_to)
   } else if(length(codify_annotations) > 1){
     # create annotation table
-    tbl_annotations <- tb_pro_quant_shared[,codify_annotations] %>%  unique() %>% tidyr::drop_na()
+    tbl_annotations <- tb_pro_quant_shared[,c(collapse_to, codify_annotations)] %>%  unique() %>% tidyr::drop_na()
     dat_pro <- dat_pro %>% dplyr::left_join(tbl_annotations, by = collapse_to)
   }
 
-  dat_pro <- dat_pro %>% codify(identifier = collapse_to, annotations = codify_annotations)
+  dat_pro <- dat_pro %>% codify(identifier = collapse_to, annotations = unique(c(collapse_to, codify_annotations)))
 
 
   # the output object
