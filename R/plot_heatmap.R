@@ -7,7 +7,7 @@
 #'
 #' @param data tidyproteomics data object
 #' @param tag a character string
-#' @param row_names a boolean
+#' @param row_names either FALSE, or an annotation (eg. protein, gene_name, description etc.)
 #' @param ... passthrough for ggsave see `plotting`
 #'
 #' @return a (tidyproteomics data-object | ggplot-object)
@@ -32,6 +32,7 @@ plot_heatmap <- function(
   color <- NULL
   abundance <- NULL
   sample_rep <- NULL
+  row_names_bool <- FALSE
 
   check_data(data)
 
@@ -39,6 +40,40 @@ plot_heatmap <- function(
   data_quant <- data %>%
     extract(values = quantval, na.rm = TRUE) %>%
     dplyr::select(!dplyr::matches('^origin$'))
+
+
+  if(is.character(row_names)){
+    row_names_bool <- TRUE
+    pos_names <- get_annotation_terms(data)
+    if(!row_names %in% pos_names){
+      cli::cli_abort("`row_names` must be one of {pos_names}")
+    }
+  } else {
+    row_names_bool <- row_names
+    row_names <- data$identifier[1]
+  }
+
+  if( row_names != data$identifier ){
+    tbl_annotation <- data |> get_annotations(row_names)
+    id_col <- which(colnames(tbl_annotation) %in% data$identifier)
+    colnames(tbl_annotation)[id_col] <- 'identifier'
+    id_col <- which(colnames(tbl_annotation) == 'annotation')
+    colnames(tbl_annotation)[id_col] <- row_names
+
+    data_quant <- data_quant |>
+      dplyr::inner_join(
+        tbl_annotation, by = 'identifier'
+      )
+
+    id_col <- which(colnames(data_quant) == 'identifier')
+    data_quant <- data_quant[,-id_col]
+    id_col <- which(colnames(data_quant) == row_names)
+    colnames(data_quant)[id_col] <- 'identifier'
+
+    data_quant <- data_quant |>
+      dplyr::filter(!is.na(identifier))
+  }
+
   theme_palette <- theme_palette()
 
   data_col <- data_quant %>%
@@ -55,6 +90,9 @@ plot_heatmap <- function(
   names(group_color$sample) <- data_col$sample
 
   data_munge <- data_quant %>%
+    dplyr::group_by(sample, replicate, identifier) %>%
+    dplyr::summarise(abundance = sum(abundance),
+                     .groups = 'drop') %>%
     dplyr::mutate(abundance = log10(abundance)) %>%
     tidyr::pivot_wider(
       names_from = c('sample', 'replicate'),
@@ -70,7 +108,7 @@ plot_heatmap <- function(
                              scale = "none",
                              silent = TRUE,
                              col =  col,
-                             show_rownames = row_names,
+                             show_rownames = row_names_bool,
                              annotation_colors = group_color,
                              #annotation_legend = FALSE,
                              #legend = FALSE,
@@ -82,7 +120,7 @@ plot_heatmap <- function(
                                dplyr::select(!replicate) %>%
                                as.data.frame() %>%
                                tibble::column_to_rownames('sample_rep'),
-                             main = glue::glue("Heatmap: {data$analyte} {data$quantitative_source} \n")
+                             main = glue::glue("Heatmap: {row_names} {data$quantitative_source} \n")
   )
 
   if(!'null device' %in% names(grDevices::dev.cur())) { invisible(grDevices::dev.off()) }

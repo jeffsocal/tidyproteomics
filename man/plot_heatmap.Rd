@@ -11,7 +11,7 @@ plot_heatmap(data = NULL, tag = NULL, row_names = FALSE, ...)
 
 \item{tag}{a character string}
 
-\item{row_names}{a boolean}
+\item{row_names}{either FALSE, or an annotation (eg. protein, gene_name, description etc.)}
 
 \item{...}{passthrough for ggsave see \code{plotting}}
 }

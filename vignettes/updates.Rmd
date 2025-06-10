@@ -27,6 +27,10 @@ major updates and bug-fixes listed here. For quick reference:
 
 ### Version: 1.8.x
 
+#### 1.8.8 - 2025.06.10
+
+-   Updated volcano plots to show only whole values on x-axis.
+
 #### 1.8.7 - 2025.05.29
 
 -   Minor fix to collapse() resolving an printing of debug information.

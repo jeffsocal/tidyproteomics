@@ -105,6 +105,7 @@ plot_volcano <- function(
     dplyr::filter(!is.na(.data[[log2fc_column]])) %>%
     dplyr::filter(!is.na(.data[[significance_column]])) %>%
     dplyr::filter(!is.infinite(.data[[log2fc_column]])) %>%
+    dplyr::filter(.data[[log2fc_column]] != 0) %>%
     dplyr::mutate(keep = abs(.data[[log2fc_column]]) >= log2fc_min &
                     .data[[significance_column]] <= significance_max)
 
@@ -139,16 +140,25 @@ plot_volcano <- function(
 
   fc_min <- log2fc_min
   fc_max <- ceiling(max(abs(unlist(table[,log2fc_column])), na.rm=T))
-  fc_scale <- -5:5 * round(fc_max*2 / 11,1)
+  fc_scale <- -5:5 * round((fc_max*2) / 11)
 
   signif_range <- table %>%
-    dplyr::filter(.data[[significance_column]] <= significance_max) %>%
+    # dplyr::filter(.data[[significance_column]] <= significance_max) %>%
+    dplyr::filter(!is.infinite(.data[[significance_column]])) %>%
+    dplyr::filter(!is.na(.data[[significance_column]])) %>%
     dplyr::select(dplyr::all_of(significance_plot)) %>%
     unlist() %>%
     range()
 
-  signif_min <- min(signif_range) * .9
-  signif_max <- max(signif_range) * 1.05
+  signif_min <- min(signif_range, na.rm = T) * .9
+  signif_max <- max(signif_range, na.rm = T) * 1.05
+
+  signif_scale <- signif_range |> log10() |> rev() |> diff() |> ceiling()
+  if(signif_scale > 11) {
+    signif_scale <- 10^(1:11 * round(signif_scale / 11))
+  } else {
+    signif_scale <- c(0.001, 0.01, 10^(1:signif_scale)) |> signif(1)
+  }
 
   table_grey <- table %>% dplyr::filter(.data[['keep']] == F)
   table_label <- table %>% dplyr::filter(.data[['keep']] == T)
@@ -221,7 +231,7 @@ plot_volcano <- function(
   # modify the color scheme
   plot <- plot +
     ggplot2::scale_color_manual(values = theme_palette()) +
-    ggplot2::scale_y_continuous(trans=reverselog_transformation(10), breaks = signif(1/10^(0:20), 1)) +
+    ggplot2::scale_y_continuous(trans=reverselog_transformation(10), breaks = signif_scale) +
     ggplot2::scale_x_continuous(breaks=fc_scale) +
     ggplot2::geom_hline(yintercept = 1, color = NA) +
     ggplot2::theme_classic() +
