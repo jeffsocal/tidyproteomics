@@ -34,7 +34,12 @@ read_data <- function(
     platform <- obj$platform
     tbl <- obj$data
   } else if( ext %in% format[1:3] ) {
-    tbl <- path %>% readr::read_tsv()
+
+    if( ext == "csv" ) {
+      tbl <- path %>% readr::read_csv()
+    } else {
+      tbl <- path %>% readr::read_tsv()
+    }
     cli::cli_alert_info('... data dimentions `{dim(tbl)}`')
 
     tbl_problems <- vroom::problems(tbl)

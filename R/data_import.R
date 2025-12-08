@@ -115,6 +115,7 @@ data_import <- function(
           dplyr::filter(is.na(column_import)) %>%
           dplyr::mutate(column_import = 'accounting')
 
+
         this_pivot <- this_pivot %>%
           import_extract(tbl_pivot_extract) %>%
           unique() %>%

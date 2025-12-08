@@ -56,7 +56,8 @@ import_extract <- function(
 
     vect_extracted <- tbl_data %>%
       dplyr::select(dplyr::matches(paste0("^", col_imp, "$"))) %>% unlist() %>%
-      stringr::str_extract(pattern)
+      stringr::str_extract(pattern) %>%
+      stringr::str_trim()
 
     if(length(vect_extracted) != nrow(tbl_data)) {
       cli::cli_abort("... issue extracting {.emph {pattern}} from {.emph {col_imp} ~ {col_def}}")
