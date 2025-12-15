@@ -143,6 +143,7 @@ plot_volcano <- function(
   fc_scale <- -5:5 * round((fc_max*2) / 11)
 
   signif_range <- table %>%
+    dplyr::filter(keep == TRUE) %>%
     # dplyr::filter(.data[[significance_column]] <= significance_max) %>%
     dplyr::filter(!is.infinite(.data[[significance_column]])) %>%
     dplyr::filter(!is.na(.data[[significance_column]])) %>%
@@ -150,8 +151,10 @@ plot_volcano <- function(
     unlist() %>%
     range()
 
-  signif_min <- min(signif_range, na.rm = T) * .9
-  signif_max <- max(signif_range, na.rm = T) * 1.05
+  signif_min <- min(signif_range, na.rm = T)
+  signif_max <- max(signif_range, na.rm = T)
+
+  print(signif_range)
 
   signif_scale <- signif_range |> log10() |> rev() |> diff() |> ceiling()
   if(signif_scale > 11) {
