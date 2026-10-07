@@ -27,6 +27,10 @@ major updates and bug-fixes listed here. For quick reference:
 
 ### Version: 1.8.x
 
+#### 1.9.10 - 2026.10.01
+
+-   Added MSStats' mixed-effects expression analysis to expression() function.
+
 #### 1.8.10 - 2025.12.15
 
 -   Updated volcano plot to correct an edge case.

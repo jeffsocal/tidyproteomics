@@ -106,6 +106,12 @@ expression <- function(
       cli::cli_progress_step(" .. expression::{.emph {this_method}} testing {.emph {experiment} / {control}}")
 
       table <- data %>% expression_limma(experiment, control)
+    } else if(mode(.method) == 'character' && .method == 'mixed-effects') {
+      this_method <- glue::glue("MSstats: {.method}")
+      cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
+      cli::cli_progress_step(" .. expression::{.emph {this_method}} testing {.emph {experiment} / {control}}")
+
+      table <- data %>% expression_me(experiment, control)
     } else {
       cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
       cli::cli_abort(c("x" = "invalid test function {.emph {.method}}"))

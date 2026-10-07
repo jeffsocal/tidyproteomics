@@ -18,9 +18,9 @@ fasta_regex <- function(
     params = NULL
 ){
   out <- list(
-    "accession" = "(?<=|)[A-Z0-9]{5,12}",
+    "accession" = "(?<=|)[A-Z0-9]{5,12}(?=|)",
     "protein_name" = "(?<=|)[A-Z0-9\\_]{8,}(?=\\s)",
-    "gene_name" = "(?<=GN\\=).*?(?=\\s..\\=)",
+    "gene_name" = "(?<=GN\\=)[^\\s]+",
     "organism" = "(?<=OS\\=).*?(?=\\s..\\=)",
     "description" = "(?<=\\s).*?(?=\\s..\\=)",
     "sequence" = "[A-Z]"

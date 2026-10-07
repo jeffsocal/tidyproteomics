@@ -182,7 +182,8 @@ impute <- function(
 
   table <- data$experiments %>%
     dplyr::select(c('sample_id', 'sample', 'replicate')) %>%
-    dplyr::full_join(table, by = c('sample', 'replicate'))
+    dplyr::full_join(table, by = c('sample', 'replicate')) %>%
+    dplyr::ungroup()
 
   data <- data %>%
     merge_quantitative(table %>% dplyr::select(!imputed), quant_source)

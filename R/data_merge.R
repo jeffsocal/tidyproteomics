@@ -37,7 +37,7 @@ merge <- function(
         cli::cli_abort(c("x" = "Analytes of the first set `{this_analyte}` do not match the second `{this_data$analyte}`"))
       }
     }
-    this_quantitative_source <- 'raw'
+    this_quantitative_source <- quantitative_source
     if(quantitative_source != 'all'){
 
       quant_source <- 'raw'

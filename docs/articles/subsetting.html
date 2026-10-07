@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.10</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -246,8 +246,9 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt; Composition     6 files </span></span>
 <span><span class="co">#&gt;                 2 samples (knockdown, control) </span></span>
 <span><span class="co">#&gt; Quantitation    7055 proteins </span></span>
-<span><span class="co">#&gt;                 4 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 27% missing values </span></span>
+<span><span class="co">#&gt;                 NaN log10 dynamic range </span></span>
+<span><span class="co">#&gt;                 NaN% missing values </span></span>
+<span><span class="co">#&gt;  *normalized    all </span></span>
 <span><span class="co">#&gt;  *imputed       by 'row' samples via 'base::quote .Primitive("min")' group_by_sample 'FALSE'. by 'row' samples via 'base::quote .Primitive("min")' group_by_sample 'FALSE'. </span></span>
 <span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
 <span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
@@ -256,9 +257,23 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
-<span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable  CVs</span></span>
-<span><span class="co">#&gt;    control     7055    66329           58706        0.927 0.15</span></span>
-<span><span class="co">#&gt;  knockdown     7055    66329           58706        0.909 0.21</span></span></code></pre></div>
+<span><span class="co">#&gt; Warning: There were 7055 warnings in `dplyr::summarise()`.</span></span>
+<span><span class="co">#&gt; The first warning was:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `CVs = signif(...)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In group 1: `identifier = "A0A024R161"`.</span></span>
+<span><span class="co">#&gt; Caused by warning in `mean.default()`:</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> argument is not numeric or logical: returning NA</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 7054 remaining warnings.</span></span>
+<span><span class="co">#&gt; There were 7055 warnings in `dplyr::summarise()`.</span></span>
+<span><span class="co">#&gt; The first warning was:</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `CVs = signif(...)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In group 1: `identifier = "A0A024R161"`.</span></span>
+<span><span class="co">#&gt; Caused by warning in `mean.default()`:</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> argument is not numeric or logical: returning NA</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 7054 remaining warnings.</span></span>
+<span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable</span></span>
+<span><span class="co">#&gt;    control     7055    66329           58706            0</span></span>
+<span><span class="co">#&gt;  knockdown     7055    66329           58706            0</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data Transformations</span></span>

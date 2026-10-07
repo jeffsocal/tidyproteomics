@@ -4,7 +4,7 @@
 \alias{reverselog_transformation}
 \title{Reverse the plot axis for log transformation}
 \usage{
-reverselog_transformation(base = exp(1))
+reverselog_transformation(base = 10)
 }
 \arguments{
 \item{base}{a numeric}

@@ -140,7 +140,7 @@ plot_volcano <- function(
 
   fc_min <- log2fc_min
   fc_max <- ceiling(max(abs(unlist(table[,log2fc_column])), na.rm=T))
-  fc_scale <- -5:5 * round((fc_max*2) / 11)
+  fc_scale <- axis_breaks(fc_max)
 
   signif_range <- table %>%
     dplyr::filter(keep == TRUE) %>%
@@ -154,14 +154,13 @@ plot_volcano <- function(
   signif_min <- min(signif_range, na.rm = T)
   signif_max <- max(signif_range, na.rm = T)
 
-  print(signif_range)
-
-  signif_scale <- signif_range |> log10() |> rev() |> diff() |> ceiling()
-  if(signif_scale > 11) {
-    signif_scale <- 10^(1:11 * round(signif_scale / 11))
-  } else {
-    signif_scale <- c(0.001, 0.01, 10^(1:signif_scale)) |> signif(1)
-  }
+  # signif_scale <- signif_range |> log10() |> rev() |> diff() |> ceiling()
+  # if(signif_scale > 11) {
+  #   signif_scale <- 10^(1:11 * round(signif_scale / 11))
+  # } else {
+  #   signif_scale <- c(0.001, 0.01, 10^(1:signif_scale)) |> signif(1)
+  # }
+  # print(signif_scale)
 
   table_grey <- table %>% dplyr::filter(.data[['keep']] == F)
   table_label <- table %>% dplyr::filter(.data[['keep']] == T)
@@ -234,7 +233,11 @@ plot_volcano <- function(
   # modify the color scheme
   plot <- plot +
     ggplot2::scale_color_manual(values = theme_palette()) +
-    ggplot2::scale_y_continuous(trans=reverselog_transformation(10), breaks = signif_scale) +
+    ggplot2::scale_y_continuous(
+      trans = reverselog_transformation(10),
+      breaks = log_breaks(),
+      labels = scales::label_log() # Formats as 10^n or 0.1, 0.01
+    ) +
     ggplot2::scale_x_continuous(breaks=fc_scale) +
     ggplot2::geom_hline(yintercept = 1, color = NA) +
     ggplot2::theme_classic() +
