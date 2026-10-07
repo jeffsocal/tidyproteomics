@@ -25,11 +25,38 @@ major updates and bug-fixes listed here. For quick reference:
 
 ------------------------------------------------------------------------
 
-### Version: 1.8.x
+### Version: 1.9.x
+
+#### 1.9.13 - 2026.10.07
+
+-   Applied optimizations.
+-   Enhanced quosure expression parsing.
+-   Maintained consistent return typing in `plot_save()`.
+-   Added comprehensive unit tests to normalization, differential expression,
+    quant exports, peptide collapsing, and subsetting.
+
+#### 1.9.12 - 2026.10.07
+
+-   Minor updates to code efficency.
+-   Corrected dimension validation in `plot_save()` for plot height and width.
+
+#### 1.9.11 - 2026.10.07
+
+-   Fixed `export_quant()` from reporting redundant scaled columns, and 
+    prevent NA propagation during quantitation scaling.
+-   Enhanced GSEA enrichment analysis to batch all pathways
+    into a single `fgsea` execution for significant speed improvements.
+-   Modified linear sum scaling in to an additive log2 shift matching median
+    sample intensity across replicates.
+-   Fixed typos.
 
 #### 1.9.10 - 2026.10.01
 
 -   Added MSStats' mixed-effects expression analysis to expression() function.
+
+------------------------------------------------------------------------
+
+### Version: 1.8.x
 
 #### 1.8.10 - 2025.12.15
 

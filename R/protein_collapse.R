@@ -239,7 +239,7 @@ collapse <- function(
     tb_pro_quant <- tb_prot_new %>%
       dplyr::arrange(dplyr::desc(abundance)) %>%
       dplyr::group_by_at(merge_by) %>%
-      dplyr::summarise(abundance_pro = .function(abundance[1:top_n]),
+      dplyr::summarise(abundance_pro = .function(head(abundance, top_n)),
                        .groups = 'drop')
 
     # calculate the shared peptide abundance
@@ -267,7 +267,7 @@ collapse <- function(
     dplyr::arrange(dplyr::desc(abundance_shared)) %>%
     dplyr::group_by_at(union(merge_by, codify_annotations)) %>%
     # calculate the shared protein abundance
-    dplyr::summarise(abundance = .function(abundance_shared[1:top_n]),
+    dplyr::summarise(abundance = .function(head(abundance_shared, top_n)),
                      peptides = paste(sort(unique(peptide)), collapse = "; "),
                      num_peptides = dplyr::n(),
                      num_unique_peptides = length(which(num_proteins == 1)),

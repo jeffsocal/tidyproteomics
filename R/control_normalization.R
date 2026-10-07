@@ -97,7 +97,7 @@ normalize <- function(
     data$operations <- append(data$operations, glue::glue(" ... based on a subset of {pst_n} out of {pre_n} identifiers"))
     if(pre_range[1] < pst_range[1] | pre_range[2] > pst_range[2]){
       cli::cli_alert_warning("  {.emph WARNING}: filter narrowed range, NAs may result")
-      cli::cli_alert_warning("  {.emph WARNING}: omitting `limma` and `randomforest` - can not accomidate subsetting")
+      cli::cli_alert_warning("  {.emph WARNING}: omitting `limma` and `randomforest` - cannot accommodate subsetting")
     }
 
   }

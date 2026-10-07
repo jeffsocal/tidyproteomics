@@ -22,7 +22,7 @@ center <- function(
   if(method == 'mean') {fun_center <- function(x) {mean(x, na.rm=T)}}
   if(method == 'median') {fun_center <- function(x) {stats::median(x, na.rm=T)}}
   if(method == 'geomean') {fun_center <- function(x) {exp(mean(log(x), na.rm=T))}}
-  if(method == 'sum') {fun_center <- function(x) {sum(x, na.rm=T)}}
+  if(method == 'sum') {fun_center <- function(x) {log2(sum(invlog2(x), na.rm=T))}}
 
   value_method <- paste(values, method, sep="_")
 

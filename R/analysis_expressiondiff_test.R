@@ -42,7 +42,7 @@ expression_test <- function(
 
   if(control == experiment){
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "blue")))
-    cli::cli_abort("x" = "Expression analysis must have different samples choosen",
+    cli::cli_abort("x" = "Expression analysis must have different samples chosen",
                    "{.info experiment}:{.emph {experiment}} and {.info control}:{.emph {control}} are the same")
   }
 

@@ -10,9 +10,11 @@
 #' @param log2fc_column a character defining the column name of the log2 foldchange values.
 #' @param log2fc_min a numeric defining the minimum log2 foldchange to highlight.
 #' @param significance_column a character defining the column name of the statistical significance values.
+#' @param significance_plot a character defining the column name of values to plot on the y-axis.
 #' @param significance_max a numeric defining the maximum statistical significance to highlight.
 #' @param labels_column a character defining the column name of the column for labeling.
-#' @param show_pannels a boolean for showing colored up/down expression panels.
+#' @param show_panels a boolean for showing colored up/down expression panels.
+#' @param show_pannels deprecated alias for show_panels.
 #' @param show_lines a boolean for showing threshold lines.
 #' @param show_fc_scale a boolean for showing the secondary foldchange scale.
 #' @param show_title input FALSE, TRUE for an auto-generated title or any charcter string.
@@ -53,8 +55,10 @@ plot_volcano <- function(
     log2fc_column = 'log2_foldchange',
     significance_max = 0.05,
     significance_column = 'adj_p_value',
+    significance_plot = 'p_value',
     labels_column = 'gene_name',
-    show_pannels = TRUE,
+    show_panels = TRUE,
+    show_pannels = show_panels,
     show_lines = TRUE,
     show_fc_scale = TRUE,
     show_title = TRUE,
@@ -69,7 +73,6 @@ plot_volcano <- function(
 
   # visible bindings
   metric <- NULL
-  significance_plot <- 'p_value'
   title_txt <- NULL
 
   file_name = "volcano"
@@ -87,11 +90,19 @@ plot_volcano <- function(
     table <- data
   }
 
+  if(!missing(show_pannels)) { show_panels <- show_pannels }
   if(is.character(show_title)){title_txt <- show_title}
 
   table_cols <- colnames(table)
   log2fc_column <- rlang::arg_match(log2fc_column, table_cols)
   significance_column <- rlang::arg_match(significance_column, table_cols)
+  if(!significance_plot %in% table_cols){
+    if(significance_column %in% table_cols){
+      significance_plot <- significance_column
+    } else {
+      significance_plot <- rlang::arg_match(significance_plot, table_cols)
+    }
+  }
   if(!is.null(labels_column)) {
     labels_column <- rlang::arg_match(labels_column, table_cols)
   }
@@ -111,13 +122,13 @@ plot_volcano <- function(
 
   title_n_exp <- table %>% nrow()
 
-  if(show_pval_1 == FALSE){
-    table <- table %>% dplyr::filter(!.data[['p_value']] == 1)
+  if(show_pval_1 == FALSE && significance_plot %in% colnames(table)){
+    table <- table %>% dplyr::filter(!.data[[significance_plot]] == 1)
   }
 
   show_signif <- TRUE
   if(length(which(table$keep == TRUE)) == 0){
-    show_pannels = FALSE
+    show_panels = FALSE
     show_lines = FALSE
     show_signif <- FALSE
 
@@ -144,7 +155,6 @@ plot_volcano <- function(
 
   signif_range <- table %>%
     dplyr::filter(keep == TRUE) %>%
-    # dplyr::filter(.data[[significance_column]] <= significance_max) %>%
     dplyr::filter(!is.infinite(.data[[significance_column]])) %>%
     dplyr::filter(!is.na(.data[[significance_column]])) %>%
     dplyr::select(dplyr::all_of(significance_plot)) %>%
@@ -153,14 +163,6 @@ plot_volcano <- function(
 
   signif_min <- min(signif_range, na.rm = T)
   signif_max <- max(signif_range, na.rm = T)
-
-  # signif_scale <- signif_range |> log10() |> rev() |> diff() |> ceiling()
-  # if(signif_scale > 11) {
-  #   signif_scale <- 10^(1:11 * round(signif_scale / 11))
-  # } else {
-  #   signif_scale <- c(0.001, 0.01, 10^(1:signif_scale)) |> signif(1)
-  # }
-  # print(signif_scale)
 
   table_grey <- table %>% dplyr::filter(.data[['keep']] == F)
   table_label <- table %>% dplyr::filter(.data[['keep']] == T)
@@ -178,9 +180,11 @@ plot_volcano <- function(
                                    size = .data[[point_size]]))
   }
 
+  line_yintercept <- if (significance_plot == significance_column) significance_max else signif_max
+
   if(show_lines == TRUE){
     plot <- plot +
-      ggplot2::geom_hline(yintercept = signif_max, color='black', linetype = 2, alpha=.33)
+      ggplot2::geom_hline(yintercept = line_yintercept, color='black', linetype = 2, alpha=.33)
 
     if(fc_min != 0) {
       plot <- plot +
@@ -201,16 +205,16 @@ plot_volcano <- function(
       ggplot2::geom_point(data = table_pos, shape = 1)
   }
 
-  if(show_pannels == TRUE) {
+  if(show_panels == TRUE) {
     plot <- plot +
       ggplot2::annotate("rect",
                         xmin = -Inf, xmax = -fc_min,
-                        ymin = signif_min, ymax = signif_max,
+                        ymin = signif_min, ymax = line_yintercept,
                         alpha = .1, fill=color_negative) +
 
       ggplot2::annotate("rect",
                         xmin = fc_min, xmax = Inf,
-                        ymin = signif_min, ymax = signif_max,
+                        ymin = signif_min, ymax = line_yintercept,
                         alpha = .1, fill=color_positive)
   }
 

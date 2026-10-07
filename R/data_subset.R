@@ -190,7 +190,33 @@ down_select <- function(
 #'
 tidyproteomics_quo <- function(...) {
 
-  rlang_quo <- rlang::quo(...)
+  quos <- rlang::enquos(...)
+  if (length(quos) == 0) return(NULL)
+  rlang_quo <- quos[[1]]
+  expr <- rlang::quo_get_expr(rlang_quo)
+  if (is.null(expr) || (is.symbol(expr) && as.character(expr) == "")) return(NULL)
+
+  inverse <- FALSE
+  if (is.call(expr) && as.character(expr[[1]]) == "!") {
+    inverse <- TRUE
+    expr <- expr[[2]]
+  }
+
+  if (is.call(expr) && length(expr) == 3) {
+    op <- as.character(expr[[1]])
+    var <- if (is.symbol(expr[[2]])) as.character(expr[[2]]) else rlang::as_name(expr[[2]])
+    val <- tryCatch(
+      rlang::eval_tidy(expr[[3]], env = rlang::quo_get_env(rlang_quo)),
+      error = function(e) as.character(expr[[3]])
+    )
+    if (is.symbol(val)) val <- as.character(val)
+    if (is.character(val) && !is.na(suppressWarnings(as.numeric(val))) && !grepl("[^0-9.]", val)) {
+      val <- as.numeric(val)
+    }
+    return(list(variable = var, operator = op, value = val, inverse = inverse))
+  }
+
+  # Fallback to string parsing for non-standard expressions
   quo_obj <- rlang::quo_text(rlang_quo)
   quo_obj <- sub("/", " / ", quo_obj)
 

@@ -4,7 +4,7 @@
 \alias{merge}
 \title{Merge multiple tidyproteomics data-objects}
 \usage{
-merge(data_list = NULL, quantitative_source = c("raw", "selected", "all"))
+merge(data_list = NULL, quantitative_source = c("raw", "selected", "all"), ...)
 }
 \arguments{
 \item{data_list}{a list of tidyproteomics data objects}

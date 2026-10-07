@@ -15,6 +15,10 @@ expression_me <- function(
     control = NULL
 ){
 
+  if (!requireNamespace("MSstats", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg MSstats} is required for mixed-effects analysis. Please install it from Bioconductor.")
+  }
+
   # visible bindings
   identifier <- NULL
   samples <- NULL
@@ -66,13 +70,6 @@ expression_me <- function(
   if(!'sample_origin' %in% colnames(data_quant)){
     data_quant$sample_origin <- data_quant$sample_file
   }
-
-  # data_quant_groups <- tibble::tibble(samples = colnames(data_quant_wide)[-1]) %>%
-  #   tidyr::separate(samples, into = c('sample','replicate'), sep="\\_{3}", remove = F) %>%
-  #   dplyr::group_by(sample) %>%
-  #   dplyr::summarise(
-  #     n_groups = length(sample), .groups = 'drop'
-  #   )
 
   msstats_input <- data_quant %>%
     dplyr::transmute(

@@ -14,8 +14,8 @@
 #' default ("std") the enrichment score is computed as in the original GSEA. The
 #' "pos" and "neg" score types are intended to be used for one-tailed tests
 #' (i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."
-#' @param .log2fc_min used only for Fisher's Exact Test, a numeric defining the minimum log2 foldchange to consider as "enriched"
 #' @param .significance_max used only for Fisher's Exact Test, a numeric defining the maximum statistical significance to consider as "enriched"
+#' @param .significance_min deprecated alias for .significance_max
 #' @param .cpu_cores the number of threads used to speed the calculation
 #'
 #' @return a tibble
@@ -53,9 +53,12 @@ enrichment <- function(
     .method = c('gsea', 'wilcoxon', 'fishers_exact'),
     .score_type = c("std", "pos", "neg"),
     .log2fc_min = 0,
-    .significance_min = 0.05,
+    .significance_max = 0.05,
+    .significance_min = .significance_max,
     .cpu_cores = 1
 ){
+
+  if(!missing(.significance_min)) { .significance_max <- .significance_min }
 
   check_data(data)
   str_quo <- tidyproteomics_quo(...)
@@ -126,7 +129,7 @@ enrichment <- function(
       } else if(.method == 'fishers_exact') {
         table <- data_expression %>% enrichment_fishersexact(data, use_term,
                                                              log2fc_min = .log2fc_min,
-                                                             significance_min = .significance_min,
+                                                             significance_min = .significance_max,
                                                              cpu_cores = .cpu_cores)
         str_method = "Fisher's Exact"
       }

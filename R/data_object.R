@@ -34,7 +34,7 @@ print.tidyproteomics <- function(
 
   cli::cli_h2(cli::style_bold("{.emph Quantitative Proteomics Data Object}"))
   println("Origin", glue::glue("{obj$origin}"))
-  println("", glue::glue("{obj$analyt} ({prettyunits::pretty_bytes(obj_size)})"))
+  println("", glue::glue("{obj$analyte} ({prettyunits::pretty_bytes(obj_size)})"))
   println("Composition", glue::glue("{nrow(obj$experiments)} files"))
   println("", glue::glue("{length(names_samples)} samples ({stringr::str_wrap(paste(names_samples, collapse=', '), 76, exdent = 16)})"))
   println("Quantitation", glue::glue("{length(unique(unlist(obj$quantitative[obj$identifier[1]])))} {obj$identifier[1]}s"))

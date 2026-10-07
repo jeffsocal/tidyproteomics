@@ -11,8 +11,10 @@ plot_volcano(
   log2fc_column = "log2_foldchange",
   significance_max = 0.05,
   significance_column = "adj_p_value",
+  significance_plot = "p_value",
   labels_column = "gene_name",
-  show_pannels = TRUE,
+  show_panels = TRUE,
+  show_pannels = show_panels,
   show_lines = TRUE,
   show_fc_scale = TRUE,
   show_title = TRUE,
@@ -38,9 +40,13 @@ plot_volcano(
 
 \item{significance_column}{a character defining the column name of the statistical significance values.}
 
+\item{significance_plot}{a character defining the column name of values to plot on the y-axis.}
+
 \item{labels_column}{a character defining the column name of the column for labeling.}
 
-\item{show_pannels}{a boolean for showing colored up/down expression panels.}
+\item{show_panels}{a boolean for showing colored up/down expression panels.}
+
+\item{show_pannels}{deprecated alias for show_panels.}
 
 \item{show_lines}{a boolean for showing threshold lines.}
 

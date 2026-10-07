@@ -59,7 +59,7 @@ export_quant <- function(
   #
   # pull in the normalized values
   #
-  if(scaled != FALSE){
+  if(scaled != 'none'){
     if(normalized != FALSE){
       data_quant <- data_quant %>%
         dplyr::mutate(abundance_scaled = abundance_norm)
@@ -71,12 +71,12 @@ export_quant <- function(
     if(scaled == 'between'){
       data_quant <- data_quant %>%
         dplyr::group_by(identifier) %>%
-        dplyr::mutate(abundance_scaled = abundance_scaled / sum(abundance_scaled) * 100) %>%
+        dplyr::mutate(abundance_scaled = abundance_scaled / sum(abundance_scaled, na.rm = TRUE) * 100) %>%
         dplyr::ungroup()
     } else {
       data_quant <- data_quant %>%
         dplyr::group_by(sample, replicate) %>%
-        dplyr::mutate(abundance_scaled = abundance_scaled / sum(abundance_scaled) * 100) %>%
+        dplyr::mutate(abundance_scaled = abundance_scaled / sum(abundance_scaled, na.rm = TRUE) * 100) %>%
         dplyr::ungroup()
     }
 

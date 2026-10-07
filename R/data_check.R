@@ -62,4 +62,8 @@ check_data <- function(
 #'
 #' @return a hash of x
 #'
-hash_vector <- function(x){ unlist(lapply(x, digest::digest, 'crc32'))}
+hash_vector <- function(x){
+  ux <- unique(x)
+  h <- vapply(ux, digest::digest, FUN.VALUE = character(1), algo = 'crc32', USE.NAMES = FALSE)
+  h[match(x, ux)]
+}

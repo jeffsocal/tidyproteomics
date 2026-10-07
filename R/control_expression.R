@@ -63,6 +63,18 @@ expression <- function(
     .p.adjust = 'BH'
 ){
 
+  # Delegate to base::expression if data is not a tidyproteomics object
+  is_tp <- tryCatch({
+    val <- eval(substitute(data), envir = parent.frame())
+    inherits(val, "tidyproteomics")
+  }, error = function(e) FALSE)
+
+  if (!is_tp) {
+    cl <- sys.call()
+    cl[[1]] <- quote(base::expression)
+    return(eval(cl, parent.frame()))
+  }
+
   # visible bindings
   imputed <- NULL
   log2_foldchange <- NULL
@@ -173,7 +185,7 @@ check_samples <- function(
 
   if(control == experiment){
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "blue")))
-    cli::cli_abort("x" = "Expression analysis must have different samples choosen",
+    cli::cli_abort("x" = "Expression analysis must have different samples chosen",
                    "{.info experiment}:{.emph {experiment}} and {.info control}:{.emph {control}} are the same")
   }
 }

@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.13</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -166,12 +166,12 @@ provide a cutoff for significance highlighting.</p>
 <span>           <span class="st">"wiki_pathway"</span>,</span>
 <span>           <span class="st">"reactome_pathway"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="co"># perform the calculations</span></span>
-<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span>.pairs <span class="op">=</span> <span class="va">pairs</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span>.pairs <span class="op">=</span> <span class="va">pairs</span>, .terms <span class="op">=</span> <span class="va">terms</span>, .cpu_cores <span class="op">=</span> <span class="fl">4</span>, .method <span class="op">=</span> <span class="st">'wilcoxon'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span>.pairs <span class="op">=</span> <span class="va">pairs</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span>.pairs <span class="op">=</span> <span class="va">pairs</span>, .terms <span class="op">=</span> <span class="va">terms</span>, .cpu_cores <span class="op">=</span> <span class="fl">4</span>, .method <span class="op">=</span> <span class="st">'wilcoxon'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="co"># run the analysis that saves out plots and tables</span></span>
-<span>  <span class="fu"><a href="../reference/analyze_expressions.html">analyze_expressions</a></span><span class="op">(</span>labels_column <span class="op">=</span> <span class="st">'gene_name'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/analyze_expressions.html">analyze_expressions</a></span><span class="op">(</span>labels_column <span class="op">=</span> <span class="st">'gene_name'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/analyze_enrichments.html">analyze_enrichments</a></span><span class="op">(</span>significance_max <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
 <pre><code>Expression Analysis - using the supplied 1 sample pairs ...
 ✔ .. expression::t_test testing knockdown / control [3.5s]
@@ -187,7 +187,7 @@ Enrichment Analysis - using the supplied 1 sample pairs ...
 <p>Each plot and table are save in the local directory and labeled
 accordingly.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="st">"./table_proteins_enrichment_knockdown-control.csv"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="st">"./table_proteins_enrichment_knockdown-control.csv"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The Enrichment Table</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,561 × 6</span></span></span>
 <span><span class="co">#&gt;    term               annotation            p_value adj_p_value enrichment  size</span></span>
@@ -204,7 +204,7 @@ accordingly.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> biological_process cell growth           1.63<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.833          1.06   <span style="text-decoration: underline;">1</span>782</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,551 more rows</span></span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="st">"./proteins_enrichment_knockdown.png"</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">magick</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_read</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="st">"./proteins_enrichment_knockdown.png"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">magick</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_read</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The Enrichment Plot <img src="images/proteins_enrichment_knockdown-control.png"></p>
 </div>
   </main>

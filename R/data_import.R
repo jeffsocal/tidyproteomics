@@ -190,16 +190,6 @@ data_import <- function(
     get_cols_num <- names(this_dat)[which(grepl('^num_|^abundance_', names(this_dat)))]
     for(get_col_num in get_cols_num){ this_dat[,get_col_num] <- as.numeric(this_dat[,get_col_num]) }
 
-    # de-duplication !?
-    # get_cols <- names(this_dat)[which(!grepl('abundance_raw|match_between_runs|num_', names(this_dat)))]
-    # this_dat <- this_dat %>%
-    #   dplyr::group_by(dplyr::across(get_cols)) %>%
-    #   dplyr::slice_min(match_between_runs, with_ties = FALSE) %>%
-    #   dplyr::summarise(num_psms = sum(num_psms),
-    #                    match_between_runs = max(match_between_runs) == 1,
-    #                    abundance_raw = sum(abundance_raw),
-    #                    .groups = 'drop')
-
     dat_out <- dat_out %>% dplyr::bind_rows(this_dat)
 
     cli::cli_progress_done()

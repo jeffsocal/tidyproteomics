@@ -1,6 +1,6 @@
 Package: tidyproteomics
 Title: An S3 data object and framework for common quantitative proteomic analyses
-Version: 1.9.10
+Version: 1.9.13
 Authors@R: 
     person("Jeff", "Jones", , "jeffj@caltech.edu", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-7142-2222"))
@@ -20,6 +20,7 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
+    BiocParallel,
     Biostrings,
     broom,
     cli,
@@ -34,12 +35,15 @@ Imports:
     ggrepel,
     glue,
     grDevices,
+    gridExtra,
     limma,
     magrittr,
     methods,
     missForest,
+    MSstats,
     parallel,
     pheatmap,
+    prettyunits,
     purrr,
     randomForest,
     RColorBrewer,

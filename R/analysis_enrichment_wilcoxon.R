@@ -86,11 +86,11 @@ enrichment_wilcoxon <- function(
   data_out <- unique(tbl_expression$annotation) %>%
     parallel::mclapply(f_enrich, tbl_expression, mc.cores = cpu_cores) %>%
     dplyr::bind_rows() %>%
+    dplyr::filter(size >= 3) %>%
+    dplyr::filter(size <= length(unique(tbl_expression$identifier)) * .66) %>%
     dplyr::mutate(adj_p_value = stats::p.adjust(p_value)) %>%
     dplyr::relocate(adj_p_value, .after = p_value) %>%
-    dplyr::arrange(p_value) %>%
-    dplyr::filter(size >= 3) %>%
-    dplyr::filter(size <= length(unique(tbl_expression$identifier))*.66)
+    dplyr::arrange(p_value)
 
   return(data_out)
 }

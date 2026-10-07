@@ -12,7 +12,8 @@ enrichment(
   .method = c("gsea", "wilcoxon", "fishers_exact"),
   .score_type = c("std", "pos", "neg"),
   .log2fc_min = 0,
-  .significance_min = 0.05,
+  .significance_max = 0.05,
+  .significance_min = .significance_max,
   .cpu_cores = 1
 )
 }
@@ -33,11 +34,11 @@ default ("std") the enrichment score is computed as in the original GSEA. The
 "pos" and "neg" score types are intended to be used for one-tailed tests
 (i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."}
 
-\item{.log2fc_min}{used only for Fisher's Exact Test, a numeric defining the minimum log2 foldchange to consider as "enriched"}
+\item{.significance_max}{used only for Fisher's Exact Test, a numeric defining the maximum statistical significance to consider as "enriched"}
+
+\item{.significance_min}{deprecated alias for .significance_max}
 
 \item{.cpu_cores}{the number of threads used to speed the calculation}
-
-\item{.significance_max}{used only for Fisher's Exact Test, a numeric defining the maximum statistical significance to consider as "enriched"}
 }
 \value{
 a tibble

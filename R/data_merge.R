@@ -14,8 +14,28 @@
 #'
 merge <- function(
     data_list = NULL,
-    quantitative_source = c('raw', 'selected', 'all')
+    quantitative_source = c('raw', 'selected', 'all'),
+    ...
 ){
+
+  # Delegate to base::merge if called with standard data frames or base arguments
+  dots <- list(...)
+  is_base_call <- inherits(data_list, "data.frame") ||
+                  inherits(quantitative_source, "data.frame") ||
+                  ("x" %in% names(dots)) ||
+                  (!is.null(data_list) && is.list(data_list) && length(data_list) > 0 &&
+                   !inherits(data_list[[1]], "tidyproteomics") && !inherits(data_list, "tidyproteomics"))
+
+  if (is_base_call) {
+    cl <- sys.call()
+    cl[[1]] <- quote(base::merge)
+    return(eval(cl, parent.frame()))
+  }
+
+  if (inherits(data_list, "tidyproteomics") && inherits(quantitative_source, "tidyproteomics")) {
+    data_list <- list(data_list, quantitative_source)
+    quantitative_source <- "raw"
+  }
 
   quantitative_source <- rlang::arg_match(quantitative_source)
 

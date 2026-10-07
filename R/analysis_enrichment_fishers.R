@@ -58,10 +58,6 @@ enrichment_fishersexact <- function(
   # ----------------------------------------------
 
   list.append <- function (x, i){x[[length(x) + 1]] <- i; x}
-  enrichment <- function(data, x){
-    stats::median(data$log2_foldchange[which(data$annotation == x)], na.rm = T) /
-      stats::median(data$log2_foldchange, na.rm = T)
-  }
 
   tbl_x_sig <- tbl_x %>%
     dplyr::filter(p_value <= significance_min) %>%
