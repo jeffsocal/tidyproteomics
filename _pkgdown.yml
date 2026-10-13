@@ -54,6 +54,10 @@ navbar:
         href: articles/workflow-publication.html
       - text: User Defined Import
         href: articles/workflow-userimport.html
+      - text: '-------'
+      - text: AI & LLM Guide
+      - text: LLM Agent Skill & API
+        href: articles/llm-skill.html
     news:
         text: Updates
         href: articles/updates.html
@@ -71,6 +75,8 @@ reference:
   - export_analysis
   - export_compexp
   - export_config
+  - export_llm_skill
+  - prompt_template
   - as.data.frame.tidyproteomics
   - load_local
   - save_local
@@ -85,8 +91,11 @@ reference:
   - collapse
   - operations
   - reassign
+  - origins
   - annotate
   - show_annotations
+  - get_sample_names
+  - get_quant_names
   - path_to_package_data
 - title: Subsetting
   description: |
@@ -142,6 +151,7 @@ reference:
     See `vignette("expression")` and `vignette("enrichment")` for more details and examples.
   contents:
   - expression
+  - plot_expression
   - plot_volcano
   - plot_proportion
   - plot_compexp
@@ -178,8 +188,6 @@ reference:
   - extract
   - get_annotation_terms
   - get_annotations
-  - get_quant_names
-  - get_sample_names
   - get_variables
   - get_unique_variables
   - get_accountings

@@ -138,7 +138,7 @@ expression_me <- function(
     dplyr::arrange(adj_p_value) |>
     dplyr::mutate(proportional_expression = average_expression / sum(average_expression, na.rm = T)) %>%
     dplyr::relocate(foldchange, .after="log2_foldchange") %>%
-    dplyr::relocate(proportional_expression, .after="average_expression") %>%
+    dplyr::relocate(proportional_expression, .after="average_expression")
 
   return(diff_abundance_table %>% munge_identifier('separate', data$identifier))
 

@@ -40,6 +40,9 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/articles/llm-skill.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/articles/normalizing.html</loc>
   </url>
   <url>
@@ -155,6 +158,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/export_config.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/export_llm_skill.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/export_quant.html</loc>
@@ -349,6 +355,9 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/operations.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/origins.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/path_to_package_data.html</loc>
   </url>
   <url>
@@ -371,6 +380,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_euler.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_expression.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_heatmap.html</loc>
@@ -410,6 +422,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/println.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/prompt_template.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/protein_map.html</loc>

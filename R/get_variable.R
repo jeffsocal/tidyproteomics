@@ -4,6 +4,7 @@
 #' @param segment a character string
 #'
 #' @return a vector
+#' @export
 #'
 get_variables <- function(
     data = NULL,

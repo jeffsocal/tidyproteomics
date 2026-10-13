@@ -4,6 +4,7 @@
 #' @param variable a string character
 #'
 #' @return a vector
+#' @export
 #'
 get_unique_variables <- function(
     data = NULL,

@@ -87,12 +87,11 @@ pro_data <- "~/Local/data/tidyproteomics/ProteomeDiscoverer_2.5/p97KD_HCT116_pro
 
 ```{r, warning=FALSE, message=FALSE}
 pro_frompep_razor <- pep_data %>% 
-  collapse(assign_by = 'razor-global', top_n = Inf) %>%
+  tidyproteomics::collapse(assign_by = 'razor-global', top_n = Inf) %>%
   normalize(.method = c('median', 'linear', 'loess'))
 
 pro_frompep_razor %>% 
   summary("sample", destination = 'return') %>% 
-  select(c('sample', 'proteins', 'peptides', 'CVs')) %>%
   as.data.frame()
 ```
 
@@ -181,7 +180,6 @@ pro_frompep_nonhom <- pep_data %>%
 
 pro_frompep_nonhom %>% 
   summary("sample", destination = 'return') %>% 
-  select(c('sample', 'proteins', 'peptides', 'CVs')) %>% 
   as.data.frame()
 ```
 

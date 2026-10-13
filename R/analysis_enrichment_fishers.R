@@ -15,7 +15,7 @@ enrichment_fishersexact <- function(
     data = NULL,
     term_group = NULL,
     log2fc_min = 0,
-    significance_min = 0.05,
+    significance_max = 0.05,
     cpu_cores = 1,
     ...
 ){
@@ -60,7 +60,7 @@ enrichment_fishersexact <- function(
   list.append <- function (x, i){x[[length(x) + 1]] <- i; x}
 
   tbl_x_sig <- tbl_x %>%
-    dplyr::filter(p_value <= significance_min) %>%
+    dplyr::filter(p_value <= significance_max) %>%
     dplyr::filter(log2_foldchange >= log2fc_min)
 
   tbl_out <- list()

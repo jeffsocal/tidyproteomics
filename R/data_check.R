@@ -17,7 +17,7 @@ check_data <- function(
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
     cli::cli_abort(c("x" = "Input cannot be {.emph NULL}"))
     }
-  if(class(data) != 'tidyproteomics') {
+  if(!inherits(data, 'tidyproteomics')) {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
     cli::cli_abort(c("x" = "Input must be of type {.emph tidyproteomics}"))
   }

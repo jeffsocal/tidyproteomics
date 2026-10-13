@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,6 +81,9 @@
     <a class="dropdown-item" href="../articles/workflow-importing.html">Importing Demo</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
     <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>AI &amp; LLM Guide</h6>
+    <a class="dropdown-item" href="../articles/llm-skill.html">LLM Agent Skill &amp; API</a>
   </div>
 </li>
 <li class="nav-item">
@@ -219,16 +222,15 @@ protein accounting and that implemented by <em>tidyproteomics</em>.</p>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pro_frompep_razor</span> <span class="op">&lt;-</span> <span class="va">pep_data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/collapse.html">collapse</a></span><span class="op">(</span>assign_by <span class="op">=</span> <span class="st">'razor-global'</span>, top_n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">tidyproteomics</span><span class="fu">::</span><span class="fu"><a href="../reference/collapse.html">collapse</a></span><span class="op">(</span>assign_by <span class="op">=</span> <span class="st">'razor-global'</span>, top_n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'median'</span>, <span class="st">'linear'</span>, <span class="st">'loess'</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">pro_frompep_razor</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span>, destination <span class="op">=</span> <span class="st">'return'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'proteins'</span>, <span class="st">'peptides'</span>, <span class="st">'CVs'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   sample proteins peptides  CVs</span></span>
-<span><span class="co">#&gt; 1    ctl     7056    63622 0.14</span></span>
-<span><span class="co">#&gt; 2 p97_kd     7056    63622 0.11</span></span></code></pre></div>
+<span><span class="co">#&gt;   sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span></span>
+<span><span class="co">#&gt; 1    ctl     7056    63622           59287        0.927 0.14 0.61 0.39</span></span>
+<span><span class="co">#&gt; 2 p97_kd     7056    63622           59287        0.928 0.11 0.55 0.45</span></span></code></pre></div>
 <p>Check to see how the two results agree …</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl_merged_razor</span> <span class="op">&lt;-</span> <span class="va">pro_frompep_razor</span><span class="op">$</span><span class="va">quantitative</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
@@ -347,11 +349,10 @@ replicate that as well.</p>
 <span></span>
 <span><span class="va">pro_frompep_nonhom</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span>, destination <span class="op">=</span> <span class="st">'return'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'sample'</span>, <span class="st">'proteins'</span>, <span class="st">'peptides'</span>, <span class="st">'CVs'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   sample proteins peptides  CVs</span></span>
-<span><span class="co">#&gt; 1    ctl     7056    63622 0.14</span></span>
-<span><span class="co">#&gt; 2 p97_kd     7056    63622 0.12</span></span></code></pre></div>
+<span><span class="co">#&gt;   sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span></span>
+<span><span class="co">#&gt; 1    ctl     7056    63622           59287        0.915 0.14 0.61 0.39</span></span>
+<span><span class="co">#&gt; 2 p97_kd     7056    63622           59287        0.917 0.12 0.55 0.45</span></span></code></pre></div>
 <p>Check to see how the two results agree …</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl_merged_nonhom</span> <span class="op">&lt;-</span> <span class="va">pro_frompep_nonhom</span><span class="op">$</span><span class="va">quantitative</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">'sample'</span>,<span class="st">'replicate'</span>,<span class="st">'protein'</span>, <span class="st">'abundance_raw'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -534,14 +535,14 @@ annotations to the peptide data object. See
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Gene Level Expression"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">linear regression</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[217ms]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[218ms]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span>  ... selected <span style="color: #0000BB; font-style: italic;">linear</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">p97_kd / ctl</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">p97_kd / ctl</span> <span style="color: #B2B2B2;">[3.1s]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">p97_kd / ctl</span> <span style="color: #B2B2B2;">[3.2s]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Warning: ggrepel: 84 unlabeled data points (too many overlaps). Consider</span></span>
 <span><span class="co">#&gt; increasing max.overlaps</span></span></code></pre></div>

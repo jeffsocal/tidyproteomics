@@ -45,7 +45,7 @@ analyze_enrichments <- function(
     cli::cli_abort("significance_max must be a numeric between 0-1")
   }
   if(!is.numeric(top_n) | top_n < 0 | top_n > 100){
-    cli::cli_abort("significance_max must be a numeric between 0-100")
+    cli::cli_abort("top_n must be a numeric between 0-100")
   }
 
   check_data(data)

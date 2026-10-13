@@ -10,8 +10,14 @@ get_sample_names(data = NULL)
 \item{data}{tidyproteomics data object}
 }
 \value{
-a vector
+a character vector of unique sample names
 }
 \description{
-Helper function to get all sample names
+\code{get_sample_names()} is a helper function that returns the unique sample
+names present in a tidyproteomics data object.
+}
+\examples{
+library(tidyproteomics)
+get_sample_names(hela_proteins)
+
 }

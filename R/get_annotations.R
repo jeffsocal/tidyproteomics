@@ -4,6 +4,7 @@
 #' @param term a character string
 #'
 #' @return a vector
+#' @export
 #'
 get_annotations <- function(
     data = NULL,
@@ -27,6 +28,7 @@ get_annotations <- function(
 #' @param data tidyproteomics data object
 #'
 #' @return a vector
+#' @export
 #'
 get_annotation_terms <- function(data) {
   check_data(data)

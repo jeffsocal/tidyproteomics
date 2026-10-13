@@ -3,6 +3,7 @@
 #' @param data tidyproteomics data object
 #'
 #' @return a vector
+#' @export
 #'
 get_accountings <- function(
     data = NULL

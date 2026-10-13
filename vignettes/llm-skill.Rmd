@@ -1,0 +1,87 @@
+---
+title: "LLM Agent Guide & API Reference"
+output: rmarkdown::html_vignette
+description: |
+  Comprehensive LLM agent instructions, API reference, supported formats, and prompt guide for tidyproteomics.
+vignette: >
+  %\VignetteIndexEntry{LLM Agent Guide & API Reference}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+## Overview for AI Agents & LLMs
+
+This document is specifically curated to serve as a **machine-readable and human-readable skill reference for Large Language Models (LLMs)**—including Google DeepMind Antigravity, Anthropic Claude, OpenAI ChatGPT, Google Gemini, GitHub Copilot, and Cursor—as well as bioinformatics researchers using AI assistants.
+
+It documents:
+- The S3 object architecture of `tidyproteomics`.
+- All supported mass spectrometry data formats and configuration schemas (`supported_formats`).
+- Complete, exhaustive API reference for all exported functions (`api_reference`).
+- Canonical recipes for common end-to-end workflows.
+- Best practices and gotchas for prompt engineering and automated script generation.
+
+### Exporting the Skill Locally
+
+You can export the raw `SKILL.md` file directly into your working directory (or into `.agents/skills/` / `.cursor/rules/`) at any time using:
+
+```{r, eval = FALSE}
+library(tidyproteomics)
+
+# Export SKILL.md to the current working directory
+export_llm_skill()
+
+# Or export to a specific custom location (e.g. for an AI agent)
+export_llm_skill(destination = ".agents/skills/tidyproteomics")
+```
+
+### Ready-to-Use Prompt Templates for Researchers
+
+To assist researchers asking an LLM *"What is interesting about this dataset?"*, `tidyproteomics` provides ready-to-use prompt templates via `prompt_template()`:
+
+```{r, eval = FALSE}
+# Phase 1: Retrieve prompt to extract dataset metadata and check quality
+prompt_template("profiling")
+
+# Phase 2: Retrieve biological discovery prompt ("What's interesting about this dataset?")
+prompt_template("discovery")
+
+# Targeted two-sample contrast prompt
+prompt_template("pairwise")
+
+# Multi-condition / screen analysis prompt
+prompt_template("multicontrast")
+
+# Venn diagram and segment extraction prompt
+prompt_template("extracting")
+```
+
+---
+
+```{r, echo = FALSE, results = 'asis'}
+# Locate and load the SKILL.md document bundled with tidyproteomics
+skill_path <- system.file("extdata", "SKILL.md", package = "tidyproteomics")
+
+if (skill_path == "" || !file.exists(skill_path)) {
+  candidates <- c(
+    file.path("..", "inst", "extdata", "SKILL.md"),
+    file.path("inst", "extdata", "SKILL.md")
+  )
+  for (candidate in candidates) {
+    if (file.exists(candidate)) {
+      skill_path <- candidate
+      break
+    }
+  }
+}
+
+if (file.exists(skill_path)) {
+  skill_lines <- readLines(skill_path, warn = FALSE)
+  cat(paste(skill_lines, collapse = "\n"))
+} else {
+  cat("**Warning**: SKILL.md could not be found in package extdata.")
+}
+```

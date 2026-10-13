@@ -6,7 +6,7 @@
 \usage{
 stats_summary(
   data,
-  group_by = c("global", "sample", "replicate", "experiment")
+  group_by = c("global", "sample", "replicate", "experiment", "normalization")
 )
 }
 \arguments{

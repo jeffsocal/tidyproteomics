@@ -6,14 +6,14 @@
 #' @export
 #'
 path_to_package_data <- function(
-    item = c('proteins','peptides', 'fasta')
+    item = c('proteins','peptides', 'fasta', 'skill')
 ){
 
   item <- item[1]
 
   configs <- list(
-    list.files(system.file("extdata/config", "", package = "tidyproteomics"), full.names = T, pattern = item),
-    list.files(system.file("extdata", "", package = "tidyproteomics"), full.names = T, pattern = item)
+    list.files(system.file("extdata/config", "", package = "tidyproteomics"), full.names = T, pattern = item, ignore.case = T),
+    list.files(system.file("extdata", "", package = "tidyproteomics"), full.names = T, pattern = item, ignore.case = T)
   ) %>% unlist()
 
   if(is.na(configs[1])) {

@@ -4,7 +4,7 @@
 \alias{path_to_package_data}
 \title{Helper function for displaying path to data}
 \usage{
-path_to_package_data(item = c("proteins", "peptides", "fasta"))
+path_to_package_data(item = c("proteins", "peptides", "fasta", "skill"))
 }
 \arguments{
 \item{item}{a character string}

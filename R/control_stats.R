@@ -38,6 +38,8 @@ tidyproteomics_summary <- function(
     table <- data %>% stats_summary()
   } else if(by == 'experiment') {
     table <- data$experiment
+  } else if(by == 'normalization') {
+    table <- data %>% stats_summary(group_by = 'normalization')
   } else {
 
     vars <- data %>% get_unique_variables(by)

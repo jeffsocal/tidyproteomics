@@ -27,6 +27,22 @@ major updates and bug-fixes listed here. For quick reference:
 
 ### Version: 1.9.x
 
+#### 1.9.14 - 2026.10.08
+
+-   Added `SKILL.md` in `inst/extdata` providing comprehensive guidance,
+    API reference, supported formats, canonical workflows, and enforcement of `print(data)` (concise summary) and `summary(data)` (data quality & normalization checks) for LLMs and AI agents.
+-   Added `export_llm_skill()` to export `SKILL.md` directly to the project working directory.
+-   Added `prompt_template()` to generate standardized LLM prompt templates (discovery, profiling, pairwise, screen).
+-   Added `llm-skill` vignette exposing the full skill guide to web search and LLMs.
+-   Exposed and documented all `get_*()` inspection functions (`get_sample_names()`, `get_quant_names()`, `get_accountings()`, `get_annotation_terms()`, `get_annotations()`, `get_variables()`, `get_unique_variables()`) in package exports and `SKILL.md`.
+-   Added `group_by = "normalization"` to `stats_summary()` and `summary()` to provide summary statistics across normalized datasets.
+-   Enhanced `stats_summary()` to compute and display PC1 and PC2 variance immediately following the `CV` metric (updated from `CVs` to `CV`).
+-   Documented and enforced in `SKILL.md` that all `plot_*()` functions inherit saving options directly from `plot_save()` (e.g. `destination = "png"`), returning the `data` object for pipeline chaining (requiring variable assignment or `invisible()` to avoid unprompted console printing), and strictly prohibiting external `ggsave()` calls.
+-   Enforced named argument syntax `summary(data, contamination = 'CRAP')` in `SKILL.md` and prompt templates, explicitly warning that passing `"contamination"` positionally looks for a non-existent grouping column and returns `NULL`.
+-   Enhanced `SKILL.md` and `prompt_template()` to promote batch automation pipelines from `automating.Rmd` (`.pairs`, `.terms`, `analyze_expressions()`, `analyze_enrichments()`) and Venn/Euler diagram segment extraction from `extracting.Rmd` (`subset(imputed == 0)`, `intersection()`, `extract(na.rm = TRUE)`).
+-   Added `origins()` function to assign or modify `sample_origin` in `data$experiments` for multi-run subject mapping, supporting linear mixed-effects analysis (`expression_me()`).
+
+
 #### 1.9.13 - 2026.10.07
 
 -   Applied optimizations.

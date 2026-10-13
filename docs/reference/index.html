@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,6 +55,9 @@
     <a class="dropdown-item" href="../articles/workflow-importing.html">Importing Demo</a>
     <a class="dropdown-item" href="../articles/workflow-publication.html">Publication Demo</a>
     <a class="dropdown-item" href="../articles/workflow-userimport.html">User Defined Import</a>
+    <div class="dropdown-divider"></div>
+    <h6 class="dropdown-header" data-toc-skip>AI &amp; LLM Guide</h6>
+    <a class="dropdown-item" href="../articles/llm-skill.html">LLM Agent Skill &amp; API</a>
   </div>
 </li>
 <li class="nav-item">
@@ -111,6 +114,16 @@
         <dd>Helper function to export the config file to current project directory</dd>
       </dl><dl><dt>
           
+          <code><a href="export_llm_skill.html">export_llm_skill()</a></code> 
+        </dt>
+        <dd>Export the LLM agent skill document to the working directory</dd>
+      </dl><dl><dt>
+          
+          <code><a href="prompt_template.html">prompt_template()</a></code> 
+        </dt>
+        <dd>Retrieve standardized LLM analysis prompt templates</dd>
+      </dl><dl><dt>
+          
           <code><a href="as.data.frame.tidyproteomics.html">as.data.frame(<i>&lt;tidyproteomics&gt;</i>)</a></code> 
         </dt>
         <dd>Helper function to convert the data-object into a tibble</dd>
@@ -162,6 +175,11 @@
         <dd>reassign the sample info</dd>
       </dl><dl><dt>
           
+          <code><a href="origins.html">origins()</a></code> 
+        </dt>
+        <dd>Assign sample origin to data experiments</dd>
+      </dl><dl><dt>
+          
           <code><a href="annotate.html">annotate()</a></code> 
         </dt>
         <dd>Main function for adding annotations to a tidyproteomics data-object</dd>
@@ -170,6 +188,16 @@
           <code><a href="show_annotations.html">show_annotations()</a></code> 
         </dt>
         <dd>Display the current annotation data</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_sample_names.html">get_sample_names()</a></code> 
+        </dt>
+        <dd>Helper function to get all sample names</dd>
+      </dl><dl><dt>
+          
+          <code><a href="get_quant_names.html">get_quant_names()</a></code> 
+        </dt>
+        <dd>Get the quantitative value names</dd>
       </dl><dl><dt>
           
           <code><a href="path_to_package_data.html">path_to_package_data()</a></code> 
@@ -341,6 +369,11 @@
           <code><a href="expression.html">expression()</a></code> 
         </dt>
         <dd>Summarize the data</dd>
+      </dl><dl><dt>
+          
+          <code><a href="plot_expression.html">plot_expression()</a></code> 
+        </dt>
+        <dd>Plot protein expression differences</dd>
       </dl><dl><dt>
           
           <code><a href="plot_volcano.html">plot_volcano()</a></code> 
