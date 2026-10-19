@@ -1,5 +1,6 @@
 #' helper function for having nice colors
 #'
+#' @param n an integer representing number of colors
 #' @return character vector of curated html colors
 #'
 theme_palette <- function(n = 16){

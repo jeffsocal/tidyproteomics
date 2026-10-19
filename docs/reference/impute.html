@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -74,7 +80,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Main method for imputing missing values</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/R/control_imputation.R" class="external-link"><code>R/control_imputation.R</code></a></small>
       <div class="d-none name"><code>impute.Rd</code></div>
     </div>
 
@@ -137,26 +143,31 @@ sample name to bias the imputation to within that sample.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span> ... done</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control     7055    66329           58706        0.908 0.16 0.56 0.44</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     7055    66329           58706        0.909 0.21 0.72 0.28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable    CV  PC1  PC2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    control       18      224             224        0.976 0.094 0.56 0.44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown       18      224             224        0.996 0.170 0.75 0.25</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>.function <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">base::quote function (x, na.rm = FALSE, ..</span>…</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing by <span style="color: #FF5F00; font-style: italic;">row</span> using the function <span style="color: #FF5F00; font-style: italic;">base::quote function (x, na.rm = FALSE, ..</span>…</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 1919 values imputed</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 2 values imputed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control     7055    66329           58706        0.931 0.16 0.56 0.44</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     7055    66329           58706        0.931 0.20 0.72 0.28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable    CV  PC1  PC2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    control       18      224             224        0.996 0.094 0.62 0.38</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown       18      224             224        0.996 0.170 0.75 0.25</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">impute</span><span class="op">(</span>.function <span class="op">=</span> <span class="va">impute.randomforest</span>, method <span class="op">=</span> <span class="st">"matrix"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
@@ -172,13 +183,13 @@ sample name to bias the imputation to within that sample.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required package: rngtools</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Imputing by <span style="color: #FF5F00; font-style: italic;">matrix</span> using the function <span style="color: #FF5F00; font-style: italic;">base::quote function (matrix = NULL, co</span>…</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 12173 values imputed</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... 8 values imputed</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control     7055    66329           58706            1 0.15 0.61 0.39</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     7055    66329           58706            1 0.18 0.76 0.24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable    CV  PC1  PC2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    control       18      224             224            1 0.112 0.60 0.40</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown       18      224             224            1 0.175 0.76 0.24</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

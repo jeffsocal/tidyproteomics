@@ -13,6 +13,7 @@
 #' non-linear distributions and uneven replicate balance between samples.
 #' @param .p.adjust a stats::p.adjust string for multiple test correction, default is
 #' 'BH' (Benjamini & Hochberg, 1995)
+#' @param .pairs a list of vectors each containing two named sample groups
 #'
 #' @return a tibble
 #' @export
@@ -20,6 +21,9 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
+#'
+#' # subset for fast execution
+#' hela_proteins <- hela_proteins %>% subset(description %like% "Ribosome")
 #'
 #' # simple t.test expression analysis
 #' hela_proteins %>%
@@ -126,7 +130,7 @@ expression <- function(
       table <- data %>% expression_me(experiment, control)
     } else {
       cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-      cli::cli_abort(c("x" = "invalid test function {.emph {.method}}"))
+      cli::cli_abort(c("x" = "invalid test function {.emph {(.method)}}"))
     }
 
     sample_ids = data$experiment %>%

@@ -17,6 +17,8 @@ expression(
 
 \item{...}{two sample comparison e.g. experimental/control}
 
+\item{.pairs}{a list of vectors each containing two named sample groups}
+
 \item{.method}{a two-distribution test function returning a p_value for the null
 hypothesis. Example functions include t.test, wilcox.test, stats::ks.test,
 additionally, the string \emph{"limma"} can be used to select from the limma
@@ -36,6 +38,9 @@ statistics for a given tidyproteomics data object.
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
+
+# subset for fast execution
+hela_proteins <- hela_proteins \%>\% subset(description \%like\% "Ribosome")
 
 # simple t.test expression analysis
 hela_proteins \%>\%

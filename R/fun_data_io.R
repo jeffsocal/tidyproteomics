@@ -42,7 +42,7 @@ read_data <- function(
     }
     cli::cli_alert_info('... data dimentions `{dim(tbl)}`')
 
-    tbl_problems <- vroom::problems(tbl)
+    tbl_problems <- readr::problems(tbl)
     if(nrow(tbl_problems) > 1){
 
       tbl_problems <- tbl_problems %>%

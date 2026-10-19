@@ -24,6 +24,10 @@
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(ggplot2, warn.conflicts = FALSE)
 #' library(tidyproteomics)
+#'
+#' # subset for fast execution
+#' hela_proteins <- hela_proteins %>% subset(description %like% "Ribosome")
+#'
 #' hela_proteins %>%
 #'    expression(knockdown/control, .method = stats::t.test) %>%
 #'    enrichment(knockdown/control, .terms = 'biological_process', .method = "wilcoxon") %>%
@@ -78,7 +82,6 @@ plot_enrichment <- function(
                   term_col = .data[[term_column]]) %>%
     dplyr::arrange(dplyr::desc(.data[[enrichment_column]])) %>%
     dplyr::mutate(term_col = forcats::fct_reorder(term_col, .data[[enrichment_column]], .desc = FALSE))
-
 
   # construct the enrichment plot
   plot <- table %>%

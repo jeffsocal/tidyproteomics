@@ -13,6 +13,10 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
+#'
+#' # subset for fast execution
+#' hela_proteins <- hela_proteins %>% subset(description %like% "Ribosome")
+#'
 #' hela_proteins %>%
 #'   normalize(.method = c("scaled", "median", "linear", "limma", "loess")) %>%
 #'   plot_normalization()

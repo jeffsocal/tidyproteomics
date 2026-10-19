@@ -121,7 +121,7 @@ expression_me <- function(
   diff_abundance_table <- comparison_results$ComparisonResult %>%
     dplyr::as_tibble() %>%
     dplyr::select(
-      protein = Protein,
+      identifier = Protein,
       adj_p_value = adj.pvalue,
       p_value = pvalue,
       log2_foldchange = log2FC,
@@ -130,16 +130,16 @@ expression_me <- function(
       deg_freedom = DF,
       percent_missing = MissingPercentage
     ) %>%
-    dplyr::filter(!is.infinite(log2_foldchange)) |>
-    dplyr::left_join(tbl_stats |>
-                       dplyr::select(matches(glue::glue("{paste(data$identifier, collapse='|')}|average_expression|proportional_expression"))),
-                     by = data$identifier) |>
+    dplyr::filter(!is.infinite(log2_foldchange)) %>%
+    munge_identifier('separate', data$identifier) %>%
+    dplyr::left_join(tbl_stats %>%
+                       dplyr::select(tidyselect::matches(glue::glue("{paste(data$identifier, collapse='|')}|average_expression|proportional_expression"))),
+                     by = data$identifier) %>%
     dplyr::mutate(foldchange = invlog2(log2_foldchange)) %>%
-    dplyr::arrange(adj_p_value) |>
-    dplyr::mutate(proportional_expression = average_expression / sum(average_expression, na.rm = T)) %>%
-    dplyr::relocate(foldchange, .after="log2_foldchange") %>%
-    dplyr::relocate(proportional_expression, .after="average_expression")
+    dplyr::arrange(adj_p_value) %>%
+    dplyr::mutate(proportional_expression = average_expression / sum(average_expression, na.rm = TRUE)) %>%
+    dplyr::relocate(foldchange, .after = "log2_foldchange") %>%
+    dplyr::relocate(proportional_expression, .after = "average_expression")
 
-  return(diff_abundance_table %>% munge_identifier('separate', data$identifier))
-
+  return(diff_abundance_table)
 }

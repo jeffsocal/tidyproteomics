@@ -1,9 +1,8 @@
 #' Helper function for plotting a human readable axis
 #'
-#' @param data tidyproteomics data object
-#' @param pairs the list of vector doublets
+#' @param x a numeric value representing the range boundary
 #'
-#' @return list of vectors
+#' @return numeric vector of axis break points
 #'
 axis_breaks <- function(x) {
   # 1. Define the 'nice' base steps

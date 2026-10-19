@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' library(tidyproteomics)
-#' #\dontrun{
+#' \dontrun{
 #' export_config("mzTab", 'peptides')
 #' }
 #'

@@ -76,7 +76,7 @@ munge_identifier <- function(
   # unite or separate based on the identifier
   if( munge == 'combine'){
     data <- data %>% tidyr::unite(identifier,
-                                  identifiers, sep=" | ")
+                                  dplyr::all_of(identifiers), sep=" | ")
   } else {
     data <- data %>% tidyr::separate(identifier,
                                      into = identifiers,

@@ -8,6 +8,8 @@ tidyproteomics_quo_name(..., sep = "-")
 }
 \arguments{
 \item{...}{a quo}
+
+\item{sep}{a character string separator}
 }
 \value{
 a character string

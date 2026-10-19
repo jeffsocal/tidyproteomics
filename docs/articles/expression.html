@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +92,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -107,15 +114,15 @@
       <img src="../logo.png" class="logo" alt=""><h1>Expression</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/vignettes/expression.Rmd" class="external-link"><code>vignettes/expression.Rmd</code></a></small>
       <div class="d-none name"><code>expression.Rmd</code></div>
     </div>
 
     
     
-<div class="section level3">
-<h3 id="analysis-of-two-samples">Analysis of Two Samples<a class="anchor" aria-label="anchor" href="#analysis-of-two-samples"></a>
-</h3>
+<div class="section level4">
+<h4 id="analysis-of-two-samples">Analysis of Two Samples<a class="anchor" aria-label="anchor" href="#analysis-of-two-samples"></a>
+</h4>
 <p>One of the most fundamental analyses for quantitative proteomics is
 the estimation of univariate differences between two samples.
 Tidyproteomics accommodates two sample analysis using the
@@ -130,9 +137,9 @@ it will automatically choose the top proteins to display.</p>
 more recent methods described in literature. These methods could be
 incorporated in future revisions, or through a user provided
 function.</p>
-<div class="section level4">
-<h4 id="available-methods">Available Methods<a class="anchor" aria-label="anchor" href="#available-methods"></a>
-</h4>
+<div class="section level5">
+<h5 id="available-methods">Available Methods<a class="anchor" aria-label="anchor" href="#available-methods"></a>
+</h5>
 <table class="table">
 <colgroup>
 <col width="13%">
@@ -144,7 +151,8 @@ function.</p>
 <td>
 <p>Johnston, L. W. “Student’s t-Test.” <em>Journal of Quality
 Technology</em> 2.4 (1970): 243-245.</p>
-<p><a href="https://stat.eth%%2020z%20.ch/R-manual/R-devel/library/stats/html/t.test.html" class="external-link">R::stats::t.test</a></p>
+<p><a href="https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html" class="external-link">R::stats::t.test</a>
+|</p>
 </td>
 </tr>
 <tr>
@@ -157,20 +165,20 @@ Technology</em> 2.4 (1970): 243-245.</p>
 (2015). “limma powers differential expression analyses for
 RNA-sequencing and microarray studies.” <em>Nucleic Acids Research</em>,
 <strong>43</strong>(7), e47.</p>
-<p><a href="http://bi%%2020o%20conductor.org/packages/release/bioc/html/limma.html" class="external-link">Bioconductor::limma</a></p>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/limma.html" class="external-link">Bioconductor::limma</a></p>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="section level4">
-<h4 id="alternative-methods">Alternative Methods<a class="anchor" aria-label="anchor" href="#alternative-methods"></a>
-</h4>
+<div class="section level5">
+<h5 id="alternative-methods">Alternative Methods<a class="anchor" aria-label="anchor" href="#alternative-methods"></a>
+</h5>
 <table style="width:99%;" class="table">
 <colgroup>
-<col width="20%">
-<col width="64%">
-<col width="13%">
+<col width="14%">
+<col width="46%">
+<col width="37%">
 </colgroup>
 <tbody>
 <tr>
@@ -180,22 +188,18 @@ RNA-sequencing and microarray studies.” <em>Nucleic Acids Research</em>,
 Trevor Killeen, Brendan MacLean, and Olga Vitek. 2014. “MSstats: An R
 Package for Statistical Analysis of Quantitative Mass Spectrometry-Based
 Proteomic Experiments.” <em>Bioinformatics</em> 30 (17): 2524–26.</p>
-<p><a href="msstats.org">msstats.org</a></p>
+<p><a href="https://msstats.org" class="external-link">msstats.org</a></p>
 </td>
 <td></td>
 </tr>
 <tr>
 <td>DEqMS</td>
-<td>
-<p>Zhu, Yafeng, Lukas M. Orre, Yan Zhou Tran, Georgios Mermelekas,
-Henrik J. Johansson, Alina Malyutina, Simon Anders, and Janne Lehtiö.
-2020. “DEqMS: A Method for Accurate Variance Estimation in Differential
-Protein Expression Analysis.” <em>Molecular &amp; Cellular Proteomics:
-MCP</em> 19 (6): 1047–57.</p>
-<p><a href="https://w%20ww.bi%20oco%20nd%20uctor.org/packages/release/bioc/html/DEqMS.html" class="external-link">Bioconductor:
-DEqMS</a></p>
-</td>
-<td></td>
+<td colspan="2">Zhu, Yafeng, Lukas M. Orre, Yan Zhou Tran, | Georgios
+Mermelekas, Henrik J. Johansson, Alina | Malyutina, Simon Anders, and
+Janne Lehtiö. 2020. | “DEqMS: A Method for Accurate Variance |
+Estimation in Differential Protein Expression | Analysis.” <em>Molecular
+&amp; Cellular Proteomics: | MCP</em> 19 (6): 1047–57. | | <a href="https://bioconductor.org/packages/release/bioc/html/DEqMS.html" class="external-link">Bioconductor:
+DEqMS</a> |</td>
 </tr>
 <tr>
 <td>MS -EmpiRe</td>
@@ -204,49 +208,57 @@ Ralf Zimmer. 2019. “MS-EmpiRe Utilizes | Peptide-Level Noise
 Distributions for | Ultra-Sensitive Detection of Differentially |
 Expressed Proteins.” <em>Molecular &amp; Cellular | Proteomics: MCP</em>
 18 (9): 1880–92. | | <a href="https://github.com/zimmerlab/MS-EmpiRe" class="external-link">GitHub::MS-EmpiRe</a>
-</td>
+|</td>
 </tr>
 <tr>
 <td>meqrob</td>
-<td>
-<p>Sticker, Adriaan, Ludger Goeminne, Lennart Martens, and Lieven
-Clement. 2020. “Robust Summarization and Inference in Proteome-Wide
-Label-Free Quantification.” <em>Molecular &amp; Cellular Proteomics:
-MCP</em> 19 (7): 1209–19.</p>
-<p><a href="https://www%20.bioc%20ond%20uc%20tor.org/packages/release/bioc/html/msqrob2.html" class="external-link">Bioconductor:
-msqrob2</a></p>
+<td colspan="2">Sticker, Adriaan, Ludger Goeminne, Lennart | Martens,
+and Lieven Clement. 2020. “Robust | Summarization and Inference in
+Proteome-Wide | Label-Free Quantification.” <em>Molecular &amp; |
+Cellular Proteomics: MCP</em> 19 (7): 1209–19. | | <a href="https://bioconductor.org/packages/release/bioc/html/msqrob2.html" class="external-link">Bioconductor:
+msqrob2</a>
 </td>
-<td></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div class="section level3">
-<h3 id="expression-analysis">Expression Analysis<a class="anchor" aria-label="anchor" href="#expression-analysis"></a>
-</h3>
 <div class="section level4">
-<h4 id="input-parameters">Input Parameters<a class="anchor" aria-label="anchor" href="#input-parameters"></a>
+<h4 id="expression-analysis">Expression Analysis<a class="anchor" aria-label="anchor" href="#expression-analysis"></a>
 </h4>
-<table style="width:83%;" class="table">
+<div class="section level5">
+<h5 id="input-parameters">Input Parameters<a class="anchor" aria-label="anchor" href="#input-parameters"></a>
+</h5>
+<table style="width:97%;" class="table">
 <colgroup>
-<col width="20%">
-<col width="20%">
-<col width="20%">
-<col width="20%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="44%">
 </colgroup>
-<thead><tr>
-<th>parameter</th>
-<th>description</th>
-<th>inputs</th>
-<th>default</th>
-</tr></thead>
 <tbody>
 <tr>
-<td>log2fc_min</td>
-<td>the minimum cutoff for displaying</td>
-<td><em>0 to Inf</em></td>
-<td><em>2</em></td>
+<td rowspan="2">
+<h2 id="parameter">parameter</h2>
+<p>log2fc_min</p>
+</td>
+<td rowspan="2">
+<h2 id="description">description</h2>
+<p>the minimum cutoff for displaying</p>
+</td>
+<td rowspan="2">
+<h2 id="inputs">inputs</h2>
+<p><em>0 to Inf</em></p>
+</td>
+<td rowspan="2">
+<h2 id="default">default</h2>
+<p><em>2</em></p>
+</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
 </tr>
 <tr>
 <td>signifi cance_column</td>
@@ -259,12 +271,14 @@ msqrob2</a></p>
 <p>p_value*</p>
 </td>
 <td><em>a dj_p_value</em></td>
+<td></td>
 </tr>
 <tr>
 <td>sign ificance_max</td>
 <td>the minimum cutoff for displaying</td>
 <td><em>1 to 1/Inf</em></td>
 <td><em>0.05</em></td>
+<td></td>
 </tr>
 <tr>
 <td>l abels_column</td>
@@ -272,18 +286,21 @@ msqrob2</a></p>
 <td>any value in annotations, eg <em>gene_name, description</em>
 </td>
 <td><em>protein</em></td>
+<td></td>
 </tr>
 <tr>
 <td>show_pannels</td>
 <td>show the colored areas highlighting significance</td>
 <td><em>TRUE / FALSE</em></td>
 <td><em>TRUE</em></td>
+<td></td>
 </tr>
 <tr>
 <td>show_lines</td>
 <td>show the dotted cutoff lines</td>
 <td><em>TRUE / FALSE</em></td>
 <td><em>TRUE</em></td>
+<td></td>
 </tr>
 <tr>
 <td>s how_fc_scale</td>
@@ -291,6 +308,7 @@ msqrob2</a></p>
 </em>foldchange*</td>
 <td><em>TRUE / FALSE</em></td>
 <td><em>TRUE</em></td>
+<td></td>
 </tr>
 <tr>
 <td>point_size</td>
@@ -299,18 +317,17 @@ msqrob2</a></p>
 <em>1/10</em> to <em>5</em>
 </td>
 <td><em>NULL</em></td>
+<td></td>
 </tr>
 <tr>
-<td>co lor_positive</td>
-<td>color for positive expression</td>
-<td>[any R accepts] (htt%20ps:// r-charts%20. com/colors/)</td>
-<td><em>dodgerblue</em></td>
+<td colspan="5">color_positive| color for positive expression | <a href="https://r-charts.com/colors/" class="external-link">any R accepts</a> |
+<em>dodgerblue</em>
+</td>
 </tr>
 <tr>
-<td>co lor_negative</td>
-<td>color for negative expression</td>
-<td>[any R accepts] (htt%20ps:// r-charts%20. com/colors/)</td>
-<td><em>firebrick1</em></td>
+<td colspan="5">color_negative| color for negative expression | <a href="https://r-charts.com/colors/" class="external-link">any R accepts</a> |
+<em>firebrick1</em>
+</td>
 </tr>
 </tbody>
 </table>
@@ -322,9 +339,9 @@ msqrob2</a></p>
 <span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="st">'loess'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="exporting-results">Exporting Results<a class="anchor" aria-label="anchor" href="#exporting-results"></a>
-</h4>
+<div class="section level5">
+<h5 id="exporting-results">Exporting Results<a class="anchor" aria-label="anchor" href="#exporting-results"></a>
+</h5>
 <p>The results of this analysis are stored in the tidyproteomics
 data-object and can easily be exported to save as a flat data table or
 used in an external down stream analysis.</p>
@@ -352,9 +369,9 @@ used in an external down stream analysis.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   abundance_knockdown_2 &lt;dbl&gt;, abundance_knockdown_3 &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   description &lt;chr&gt;, biological_process &lt;chr&gt;, cellular_component &lt;chr&gt;, …</span></span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="volcano-plot">Volcano Plot<a class="anchor" aria-label="anchor" href="#volcano-plot"></a>
-</h4>
+<div class="section level5">
+<h5 id="volcano-plot">Volcano Plot<a class="anchor" aria-label="anchor" href="#volcano-plot"></a>
+</h5>
 <p>The default is to plot accoring to adjusted p-value with a Log2
 fold-change cutoff of 2 or greater.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -392,9 +409,9 @@ fold-change cutoff of 2 or greater.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"A nice volcano plot"</span>, subtitle <span class="op">=</span> <span class="st">"with great colors"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="expression_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 </div>
-<div class="section level4">
-<h4 id="proportional-plot">Proportional Plot<a class="anchor" aria-label="anchor" href="#proportional-plot"></a>
-</h4>
+<div class="section level5">
+<h5 id="proportional-plot">Proportional Plot<a class="anchor" aria-label="anchor" href="#proportional-plot"></a>
+</h5>
 <p>The proportional plot is complementary to the volcano plot and
 utilizes all the same underlying data. The default is to show both the
 top 1% (<code>proportion_min = 0.01</code>) along with the values

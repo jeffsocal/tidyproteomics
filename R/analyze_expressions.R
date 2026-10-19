@@ -5,6 +5,7 @@
 #' as foldchange ~ statistical significance. See also `plot_proportion()`.  This function can
 #' take either a tidyproteomics data object or a table with the required headers.
 #'
+#' @param data tidyproteomics data object
 #' @param log2fc_column a character defining the column name of the log2 foldchange values.
 #' @param log2fc_min a numeric defining the minimum log2 foldchange to highlight.
 #' @param significance_column a character defining the column name of the statistical significance values.
@@ -26,11 +27,13 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
 #' hela_proteins %>%
 #'    expression(knockdown/control) %>%
 #'    analyze_expressions(log2fc_min = 0.5, significance_column = "p_value")
+#' }
 #'
 analyze_expressions <- function(
     data = NULL,

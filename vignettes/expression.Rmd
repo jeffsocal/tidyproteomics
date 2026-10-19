@@ -40,7 +40,7 @@ incorporated in future revisions, or through a user provided function.
 | t.test        | Johnston, L. W. "Student's t-Test." *Journal of                                                   |
 |               | Quality Technology* 2.4 (1970): 243-245.                                                          |
 |               |                                                                                                   |
-|               | [R::stats::t.test](https://stat.eth%%2020z%20.ch/R-manual/R-devel/library/stats/html/t.test.html) |
+|               | [R::stats::t.test](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/t.test.html)         |
 +---------------+---------------------------------------------------------------------------------------------------+
 | limma         | Ritchie ME, Phipson B, Wu D, Hu Y, Law CW, Shi W,                                                 |
 |               | Smyth GK (2015). "limma powers differential                                                       |
@@ -48,7 +48,7 @@ incorporated in future revisions, or through a user provided function.
 | Bayes)        | microarray studies." *Nucleic Acids Research*,                                                    |
 |               | **43**(7), e47.                                                                                   |
 |               |                                                                                                   |
-|               | [Bioconductor::limma](http://bi%%2020o%20conductor.org/packages/release/bioc/html/limma.html)     |
+|               | [Bioconductor::limma](https://bioconductor.org/packages/release/bioc/html/limma.html)             |
 +---------------+---------------------------------------------------------------------------------------------------+
 
 #### Alternative Methods
@@ -61,7 +61,7 @@ incorporated in future revisions, or through a user provided function.
 |               | Spectrometry-Based Proteomic Experiments."       |
 |               | *Bioinformatics* 30 (17): 2524--26.              |
 |               |                                                  |
-|               | [msstats.org](msstats.org)                       |
+|               | [msstats.org](https://msstats.org)               |
 +---------------+--------------------------------------------------+
 | DEqMS         | Zhu, Yafeng, Lukas M. Orre, Yan Zhou Tran,       |
 |               | Georgios Mermelekas, Henrik J. Johansson, Alina  |
@@ -71,9 +71,7 @@ incorporated in future revisions, or through a user provided function.
 |               | Analysis." *Molecular & Cellular Proteomics:     |
 |               | MCP* 19 (6): 1047--57.                           |
 |               |                                                  |
-|               | [Bioconductor:                                   |
-|               | DEqMS](https://w%20ww.bi%20oco%20nd              |
-|               | uctor.org/packages/release/bioc/html/DEqMS.html) |
+|               | [Bioconductor: DEqMS](https://bioconductor.org/packages/release/bioc/html/DEqMS.html) |
 +---------------+--------------------------------------------------+
 | MS -EmpiRe    | Ammar, Constantin, Markus Gruber, Gergely Csaba, |
 |               | and Ralf Zimmer. 2019. "MS-EmpiRe Utilizes       |
@@ -90,9 +88,7 @@ incorporated in future revisions, or through a user provided function.
 |               | Label-Free Quantification." *Molecular &         |
 |               | Cellular Proteomics: MCP* 19 (7): 1209--19.      |
 |               |                                                  |
-|               | [Bioconductor:                                   |
-|               | msqrob2](https://www%20.bioc%20ond%20uc          |
-|               | tor.org/packages/release/bioc/html/msqrob2.html) |
+|               | [Bioconductor: msqrob2](https://bioconductor.org/packages/release/bioc/html/msqrob2.html) |
 +---------------+--------------------------------------------------+
 
 ### Expression Analysis
@@ -145,17 +141,9 @@ incorporated in future revisions, or through a user provided function.
 | point_size   | size of each | *1/10* to    | *NULL*       |
 |              | dot          | *5*          |              |
 +--------------+--------------+--------------+--------------+
-| co           | color for    | [any R       | *dodgerblue* |
-| lor_positive | positive     | accepts]     |              |
-|              | expression   | (htt%20ps:// |              |
-|              |              | r-charts%20. |              |
-|              |              | com/colors/) |              |
+| color_positive| color for positive expression | [any R accepts](https://r-charts.com/colors/) | *dodgerblue* |
 +--------------+--------------+--------------+--------------+
-| co           | color for    | [any R       | *firebrick1* |
-| lor_negative | negative     | accepts]     |              |
-|              | expression   | (htt%20ps:// |              |
-|              |              | r-charts%20. |              |
-|              |              | com/colors/) |              |
+| color_negative| color for negative expression | [any R accepts](https://r-charts.com/colors/) | *firebrick1* |
 +--------------+--------------+--------------+--------------+
 
 ```{r, message=FALSE}

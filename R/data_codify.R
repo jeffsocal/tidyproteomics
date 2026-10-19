@@ -120,8 +120,8 @@ codify <- function(
     dplyr::slice_max(imputed, n=1, with_ties = FALSE) %>%
     dplyr::ungroup()
 
-  n_rows_tb_accounting <- tb_accounting %>% dplyr::select(c('sample_id', identifier)) %>% unique() %>% nrow()
-  n_rows_tb_quantitative <- tb_quantitative %>% dplyr::select(c('sample_id', identifier)) %>% unique() %>% nrow()
+  n_rows_tb_accounting <- tb_accounting %>% dplyr::select(dplyr::all_of(c('sample_id', identifier))) %>% unique() %>% nrow()
+  n_rows_tb_quantitative <- tb_quantitative %>% dplyr::select(dplyr::all_of(c('sample_id', identifier))) %>% unique() %>% nrow()
 
   if(n_rows_tb_accounting != n_rows_tb_quantitative) {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))

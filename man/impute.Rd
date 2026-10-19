@@ -43,6 +43,7 @@ Main method for imputing missing values
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
+hela_proteins <- hela_proteins \%>\% subset(description \%like\% "Ribosome")
 hela_proteins \%>\% summary("sample")
 
 hela_proteins \%>\% impute(.function = stats::median) \%>\% summary("sample")

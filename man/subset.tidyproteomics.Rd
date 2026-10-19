@@ -4,10 +4,10 @@
 \alias{subset.tidyproteomics}
 \title{Create a data subset}
 \usage{
-\method{subset}{tidyproteomics}(data = NULL, ..., rm.mbr = TRUE, .verbose = TRUE)
+\method{subset}{tidyproteomics}(x, ..., rm.mbr = TRUE, .verbose = TRUE)
 }
 \arguments{
-\item{data}{tidyproteomics data object}
+\item{x}{tidyproteomics data object}
 
 \item{...}{a three part expression (eg. x == a)}
 

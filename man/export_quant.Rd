@@ -31,10 +31,12 @@ a tibble
 \emph{identifier} as the designation for the measured observation.
 }
 \examples{
+\dontrun{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins \%>\%
    normalize(.method = "loess") \%>\%
    export_quant(file_name = "hela_quant_data.xlsx", normalized = "loess")
+}
 
 }

@@ -1,33 +1,32 @@
 Package: tidyproteomics
-Title: An S3 data object and framework for common quantitative proteomic analyses
-Version: 1.9.14
+Title: S3 Data Object and Framework for Common Quantitative Proteomic Analyses
+Version: 1.9.15
 Authors@R: 
-    person("Jeff", "Jones", , "jeffj@caltech.edu", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-7142-2222"))
+    person("Jeff", "Jones", , "jeffj@caltech.edu", role = c("aut", "cre"))
 Description: 
-    Creates a simple, universal S3 data structure for the post 
-    analysis of mass spectrometry based quantitative proteomic data. In
+    Creates a simple, universal S3 data structure for the post-analysis
+    of mass spectrometry-based quantitative proteomic data. In
     addition, this package collects, adapts and organizes several useful
-    algorithms and methods used in typical post analysis workflows.
+    algorithms and methods used in typical post-analysis workflows.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 VignetteBuilder: knitr
+Additional_repositories: https://bioconductor.org/packages/release/bioc
 Suggests: 
-    utils,
+    doParallel,
     knitr,
     missForest,
     MSstats,
-    testthat (>= 3.0.0)
+    rmarkdown,
+    testthat (>= 3.0.0),
+    utils
 Config/testthat/edition: 3
 Imports: 
     BiocParallel,
-    Biostrings,
-    broom,
     cli,
     digest,
-    doParallel,
     dplyr,
     e1071,
     eulerr,
@@ -55,9 +54,9 @@ Imports:
     tibble,
     tidyr,
     tidyselect,
-    vroom,
     writexl
 Depends: 
     R (>= 3.5.0)
 LazyData: true
-URL: https://jeffsocal.github.io/tidyproteomics/
+URL: https://jeffsocal.github.io/tidyproteomics/, https://github.com/jeffsocal/tidyproteomics
+BugReports: https://github.com/jeffsocal/tidyproteomics/issues

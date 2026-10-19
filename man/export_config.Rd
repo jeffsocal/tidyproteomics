@@ -19,7 +19,7 @@ Helper function to export the config file to current project directory
 }
 \examples{
 library(tidyproteomics)
-#\dontrun{
+\dontrun{
 export_config("mzTab", 'peptides')
 }
 

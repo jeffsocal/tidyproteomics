@@ -21,6 +21,10 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
+#'
+#' # subset for fast execution
+#' hela_proteins <- hela_proteins %>% subset(description %like% "Ribosome")
+#'
 #' hela_proteins %>%
 #'      normalize(.method = c("scaled", "median")) %>%
 #'      summary("sample")
@@ -30,7 +34,7 @@
 #' #   protein complex acts as the majority content and individual inter-actors
 #' #   are of quantitative differentiation
 #' hela_proteins %>%
-#'      normalize(!description %like% "Ribosome", .method = c("scaled", "median")) %>%
+#'      normalize(!description %like% "mitochondrial", .method = c("scaled", "median")) %>%
 #'      summary("sample")
 #'
 normalize <- function(

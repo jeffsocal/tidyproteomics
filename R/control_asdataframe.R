@@ -5,11 +5,15 @@
 #' a tibble. This tibble is in the long-format, such that a there is a single
 #' observation per line.
 #'
-#' @param data tidyproteomics data object
+#' @param x tidyproteomics data object
+#' @param row.names NULL or a character vector giving the row names for the data frame
+#' @param optional logical, passed to base::as.data.frame
+#' @param ... additional arguments passed to base::as.data.frame
 #' @param shape the orientation of the quantitative data as either a single measure
 #' per row (**long**), or as multiple measures per protein/peptide (**wide**).
 #' @param values indicates the selected normalization to output. The default is
 #' that selected at the time of normalization.
+#' @param drop a character vector of column names or annotations to drop
 #' @return a tibble
 #' @exportS3Method
 #'
@@ -30,11 +34,16 @@
 #'    as_tibble()
 #'
 as.data.frame.tidyproteomics <- function(
-    data,
+    x,
+    row.names = NULL,
+    optional = FALSE,
+    ...,
     shape = c('long', 'wide'),
     values = NULL,
     drop = NULL
 ){
+
+  data <- x
 
   check_data(data)
   if(is.null(values)) { values <- data$quantitative_source }

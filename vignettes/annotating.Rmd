@@ -13,7 +13,7 @@ editor_options:
 ---
 
 ```{r, echo = FALSE}
-knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
 set.seed(1041)
 options(dplyr.print_max = 10)
 ```
@@ -46,7 +46,7 @@ the accuracy of the FASTA file before using it to update the imported
 data from FragPipe.
 
 ```{r, eval=FALSE}
-library(tidyverse)
+library(dplyr)
 library(tidyproteomics)
 
 # download the data
@@ -58,7 +58,7 @@ data_prot <- "./data/combined_protein.tsv" %>% import('FragPipe', 'proteins')
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(tidyverse)
+library(dplyr)
 library(tidyproteomics)
 
 data_prot <- "~/Local/data/tidyproteomics/FragPipe_19.1/combined_protein.tsv" %>%

@@ -59,7 +59,7 @@ tested - individual bubble plots for each term can be created separately. Note,
 the _analyze_enrichments()_ function takes the additional parameter __significance_max__ 
 to provide a cutoff for significance highlighting. 
 ```{r, warning=FALSE, message=FALSE}
-library(tidyverse)
+library(dplyr)
 library(tidyproteomics)
 ```
 

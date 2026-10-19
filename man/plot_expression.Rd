@@ -62,6 +62,9 @@ for imputed).
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 
+# subset for fast execution
+hela_proteins <- hela_proteins \%>\% subset(description \%like\% "Ribosome")
+
 hela_proteins \%>\%
   expression(knockdown/control) \%>\%
   plot_expression(knockdown/control, log2fc_min = 0.5, significance_column = "p_value", top_n = 6)

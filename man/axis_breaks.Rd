@@ -7,12 +7,10 @@
 axis_breaks(x)
 }
 \arguments{
-\item{data}{tidyproteomics data object}
-
-\item{pairs}{the list of vector doublets}
+\item{x}{a numeric value representing the range boundary}
 }
 \value{
-list of vectors
+numeric vector of axis break points
 }
 \description{
 Helper function for plotting a human readable axis

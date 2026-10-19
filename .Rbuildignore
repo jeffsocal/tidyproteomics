@@ -1,8 +1,14 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^.LICENSE$
 ^todo$
-^.gitignore$
+^\.gitignore$
 .+xlsx$
 ^docs$
-.+pkgdown.+
+^pkgdown$
+^LICENSE\.md$
+^inst/scripts$
+^_pkgdown\.yml$
+^Rplots\.pdf$
+^.*\.tar\.gz$
+^.*\.Rcheck$
+^.*\.DS_Store$

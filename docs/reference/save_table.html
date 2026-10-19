@@ -14,7 +14,7 @@ passthrough function as it returns the original tibble."><meta property="og:imag
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,13 @@ passthrough function as it returns the original tibble."><meta property="og:imag
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -78,7 +84,7 @@ passthrough function as it returns the original tibble."><meta property="og:imag
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Write table data locally</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/R/table_export.R" class="external-link"><code>R/table_export.R</code></a></small>
       <div class="d-none name"><code>save_table.Rd</code></div>
     </div>
 
@@ -112,7 +118,16 @@ local project, based on the extension given in the file name. This is a
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu"><a href="export_analysis.html">export_analysis</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .analysis <span class="op">=</span> <span class="st">"expression"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>   <span class="fu">save_table</span><span class="op">(</span><span class="st">"expression_limma_ko_over_wt.csv"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>

@@ -72,13 +72,11 @@ pep_data <- "./data/pd_peptides.xlsx" %>% import('ProteomeDiscoverer', 'peptides
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-pep_data <- "~/Local/data/tidyproteomics/ProteomeDiscoverer_2.5/p97KD_HCT116_peptides.xlsx" %>%
-  import("ProteomeDiscoverer", "peptides")
+pep_data <- hela_peptides
 ```
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
-pro_data <- "~/Local/data/tidyproteomics/ProteomeDiscoverer_2.5/p97KD_HCT116_proteins.xlsx" %>%
-  import("ProteomeDiscoverer", "proteins") %>%
+pro_data <- hela_proteins %>%
   normalize(.method = c('median', 'linear', 'loess'))
 
 ```
@@ -300,7 +298,7 @@ tbl_merged_razor %>%
 
 Alternatively, peptide level data can be collapsed to any Annotation term, in this case we will collapse to gene_name after adding the annotations to the peptide data object. See `vignette("annotating")`.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 library(tidyr)
 
 gene_data <- pep_data %>% 
@@ -314,11 +312,11 @@ gene_data <- pep_data %>%
   collapse(collapse_to = 'gene_name', fasta_path = "uniprot_human-20398_20220920.fasta")
 ```
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 gene_data %>% plot_counts()
 ```
 
-```{r}
+```{r, eval=FALSE}
 gene_data %>% 
   normalize(.method = 'linear') %>%
   expression(p97_kd/ctl) %>% 

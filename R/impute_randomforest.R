@@ -14,6 +14,13 @@ impute.randomforest <- function(
   if(!is.matrix(matrix)) { cli::cli_abort('imput data must be a matrix')}
   if(!is.numeric(cores)) { cli::cli_abort('cores must be an integer, not {cores}')}
 
+  if (!requireNamespace("missForest", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg missForest} is required for random forest imputation. Please install it.")
+  }
+  if (!requireNamespace("doParallel", quietly = TRUE)) {
+    cli::cli_abort("Package {.pkg doParallel} is required for parallel random forest imputation. Please install it.")
+  }
+
   cores = min(floor(cores), ncol(matrix))
 
   tryCatch({

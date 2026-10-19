@@ -14,7 +14,7 @@ and vignette("workflow-importing")'><meta property="og:image" content="https://j
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,13 @@ and vignette("workflow-importing")'><meta property="og:image" content="https://j
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -78,7 +84,7 @@ and vignette("workflow-importing")'><meta property="og:image" content="https://j
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Main function for importing data</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/R/control_import.R" class="external-link"><code>R/control_import.R</code></a></small>
       <div class="d-none name"><code>import.Rd</code></div>
     </div>
 
@@ -120,19 +126,13 @@ and <code><a href="../articles/workflow-importing.html">vignette("workflow-impor
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="fu"><a href="path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"p97KD_HCT116"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">import</span><span class="op">(</span><span class="st">"ProteomeDiscoverer"</span>, <span class="st">"proteins"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in path_to_package_data("p97KD_HCT116"):</span> <span style="color: #BB0000;">✖</span> No path found for <span style="color: #FF5F00; font-style: italic;">p97KD_HCT116</span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold;">Summary: sample</span> ──</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    control     7055    66329           58706        0.908 0.16 0.56 0.44</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  knockdown     7055    66329           58706        0.909 0.21 0.72 0.28</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

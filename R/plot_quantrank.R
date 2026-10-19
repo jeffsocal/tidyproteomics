@@ -26,13 +26,14 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
+#' hela_proteins <- hela_proteins %>% subset(description %like% "Ribosome")
 #' hela_proteins %>% plot_quantrank()
 #'
 #' hela_proteins %>% plot_quantrank(type = "lines")
 #'
 #' hela_proteins %>% plot_quantrank(display_filter = "log2_foldchange", display_cutoff = 1)
 #'
-#' hela_proteins %>% plot_quantrank(limit_rank = c(1,50), show_rank_scale = TRUE)
+#' hela_proteins %>% plot_quantrank(limit_rank = c(1,10), show_rank_scale = TRUE)
 #'
 plot_quantrank <- function(
     data = NULL,
@@ -217,11 +218,15 @@ plot_quantrank <- function(
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
+#' hela_proteins <- hela_proteins %>% subset(description %like% "Ribosome")
 #' hela_proteins %>% plot_quantrank()
 #'
 #' hela_proteins %>% plot_quantrank(type = 'lines')
 #'
-#' hela_proteins %>% plot_quantrank(type = 'lines', display_filter = 'log2_foldchange', display_cutoff = 1)
+#' hela_proteins %>%
+#'    plot_quantrank(type = 'lines',
+#'                   display_filter = 'log2_foldchange',
+#'                   display_cutoff = 1)
 #'
 table_quantrank <- function(
     data = NULL,
@@ -261,9 +266,9 @@ table_quantrank <- function(
       dplyr::mutate(adj_p_value = stats::p.adjust(p_value)) %>%
       dplyr::group_by(identifier) %>%
       dplyr::summarise(
-        log2_foldchange = max(log2_foldchange, na.rm = TRUE),
-        p_value = min(p_value, na.rm = TRUE),
-        adj_p_value = min(adj_p_value, na.rm = TRUE),
+        log2_foldchange = if(all(is.na(log2_foldchange))) NA_real_ else max(log2_foldchange, na.rm = TRUE),
+        p_value = if(all(is.na(p_value))) NA_real_ else min(p_value, na.rm = TRUE),
+        adj_p_value = if(all(is.na(adj_p_value))) NA_real_ else min(adj_p_value, na.rm = TRUE),
         .groups = 'drop'
       )
   }

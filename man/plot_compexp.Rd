@@ -70,6 +70,9 @@ library(ggplot2, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 
+# subset for fast execution
+hela_proteins <- hela_proteins \%>\% subset(description \%like\% "Ribosome")
+
 # comparing two analytical methods, in substitute for two conditions
 exp_a <- hela_proteins \%>\%
      expression(knockdown/control) \%>\%

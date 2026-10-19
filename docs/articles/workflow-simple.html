@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -109,7 +116,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Import and Summarize</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/vignettes/workflow-simple.Rmd" class="external-link"><code>vignettes/workflow-simple.Rmd</code></a></small>
       <div class="d-none name"><code>workflow-simple.Rmd</code></div>
     </div>
 
@@ -218,13 +225,13 @@ are summarized</p>
 <span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .terms <span class="op">=</span> <span class="st">'biological_process'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, .terms <span class="op">=</span> <span class="st">'molecular_function'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.2s]</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.4s]</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">biological_process</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">biological_process</span> <span style="color: #B2B2B2;">[4</span>…</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">molecular_function</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">molecular_function</span> <span style="color: #B2B2B2;">[7</span>…</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> .. enrichment::<span style="color: #FF5F00; font-style: italic;">gsea</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> by term <span style="color: #FF5F00; font-style: italic;">molecular_function</span> <span style="color: #B2B2B2;">[8</span>…</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>

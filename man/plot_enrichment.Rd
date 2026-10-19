@@ -55,6 +55,10 @@ take either a tidyproteomics data object or a table with the required headers.
 library(dplyr, warn.conflicts = FALSE)
 library(ggplot2, warn.conflicts = FALSE)
 library(tidyproteomics)
+
+# subset for fast execution
+hela_proteins <- hela_proteins \%>\% subset(description \%like\% "Ribosome")
+
 hela_proteins \%>\%
    expression(knockdown/control, .method = stats::t.test) \%>\%
    enrichment(knockdown/control, .terms = 'biological_process', .method = "wilcoxon") \%>\%

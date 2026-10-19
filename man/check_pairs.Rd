@@ -9,7 +9,7 @@ check_pairs(pairs = NULL, sample_names = NULL)
 \arguments{
 \item{pairs}{the list of vector doublets}
 
-\item{data}{tidyproteomics data object}
+\item{sample_names}{a character vector of valid sample names}
 }
 \value{
 list of vectors

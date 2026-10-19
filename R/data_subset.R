@@ -8,7 +8,7 @@
 #' Note: `rm.mbr()` is run as default, this is to remove MBR proteins that may no
 #' longer have the original "anchor" observation present.
 #'
-#' @param data tidyproteomics data object
+#' @param x tidyproteomics data object
 #' @param ... a three part expression (eg. x == a)
 #' @param rm.mbr a boolean
 #' @param .verbose a boolean
@@ -33,11 +33,13 @@
 #'    summary()
 #'
 subset.tidyproteomics <- function(
-    data = NULL,
+    x,
     ...,
     rm.mbr = TRUE,
     .verbose = TRUE
 ){
+
+  data <- x
 
   # visible bindings
   sample_id <- NULL
@@ -71,7 +73,7 @@ subset.tidyproteomics <- function(
     select_by <- c(identifier,"sample_id")
 
     data[[which_segment]] <- data[[which_segment]] %>%
-      tidyr::pivot_wider(id_cols = identifier,
+      tidyr::pivot_wider(id_cols = dplyr::all_of(identifier),
                          names_from = 'term',
                          values_from = 'annotation') %>%
       down_select(str_quo) %>%
@@ -79,14 +81,14 @@ subset.tidyproteomics <- function(
                           names_to = 'term', values_to = 'annotation')
 
     data$quantitative <- data$annotations %>%
-      dplyr::select(identifier) %>% unique() %>%
+      dplyr::select(dplyr::all_of(identifier)) %>% unique() %>%
       dplyr::inner_join(data$quantitative, by = identifier)
 
     data$experiments <- data$experiments %>%
       dplyr::filter(sample_id %in% data$quantitative$sample_id)
 
     data$accounting <- data$quantitative %>%
-      dplyr::select(select_by) %>%
+      dplyr::select(dplyr::all_of(select_by)) %>%
       dplyr::inner_join(data$accounting, by = select_by)
 
   } else {
@@ -105,8 +107,8 @@ subset.tidyproteomics <- function(
                         by = "sample_id")
 
     data$accounting <- data$quantitative %>%
-      dplyr::select(c("sample_id",identifier)) %>%
-      dplyr::inner_join(data$accounting, by = c("sample_id",identifier))
+      dplyr::select(dplyr::all_of(c("sample_id", identifier))) %>%
+      dplyr::inner_join(data$accounting, by = c("sample_id", identifier))
 
   }
 
@@ -120,13 +122,13 @@ subset.tidyproteomics <- function(
 
     data$quantitative <- data$quantitative %>%
       dplyr::inner_join(data$accounting %>%
-                          dplyr::select(c('sample_id',identifier)),
-                        by = c('sample_id',identifier))
+                          dplyr::select(dplyr::all_of(c('sample_id', identifier))),
+                        by = c('sample_id', identifier))
   }
 
   if(which_segment != 'accounting' & !is.null(data$annotations)) {
     data$annotations <- data$quantitative %>%
-      dplyr::select(identifier) %>% unique() %>%
+      dplyr::select(dplyr::all_of(identifier)) %>% unique() %>%
       dplyr::inner_join(data$annotations, by = identifier)
   }
 
@@ -255,6 +257,7 @@ tidyproteomics_quo <- function(...) {
 #' Helper function to get a name from the ...
 #'
 #' @param ... a quo
+#' @param sep a character string separator
 #'
 #' @return a character string
 #'

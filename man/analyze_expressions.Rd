@@ -24,6 +24,8 @@ analyze_expressions(
 )
 }
 \arguments{
+\item{data}{tidyproteomics data object}
+
 \item{log2fc_min}{a numeric defining the minimum log2 foldchange to highlight.}
 
 \item{log2fc_column}{a character defining the column name of the log2 foldchange values.}
@@ -63,10 +65,12 @@ as foldchange ~ statistical significance. See also \code{plot_proportion()}.  Th
 take either a tidyproteomics data object or a table with the required headers.
 }
 \examples{
+\dontrun{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins \%>\%
    expression(knockdown/control) \%>\%
    analyze_expressions(log2fc_min = 0.5, significance_column = "p_value")
+}
 
 }

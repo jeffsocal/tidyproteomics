@@ -24,10 +24,12 @@ tidyproteomics data object -- see also the documentation \code{vignette("importi
 and \code{vignette("workflow-importing")}
 }
 \examples{
+\dontrun{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins <- path_to_package_data("p97KD_HCT116") \%>\%
    import("ProteomeDiscoverer", "proteins")
 hela_proteins \%>\% summary("sample")
+}
 
 }

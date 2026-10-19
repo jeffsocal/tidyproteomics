@@ -1,7 +1,7 @@
 #' Helper function for iterative expression analysis
 #'
-#' @param data tidyproteomics data object
 #' @param pairs the list of vector doublets
+#' @param sample_names a character vector of valid sample names
 #'
 #' @return list of vectors
 #'

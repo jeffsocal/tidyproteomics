@@ -87,7 +87,8 @@ reference:
     annotations to the data and tables, modify the experimental names, and
     list out the sequence of data transformations.
   contents:
-  - merge
+  - merge.tidyproteomics
+  - merge_tidyproteomics
   - collapse
   - operations
   - reassign

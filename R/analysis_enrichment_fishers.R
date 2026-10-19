@@ -92,7 +92,7 @@ enrichment_fishersexact <- function(
 
     # Fisher's Exact
     cm = matrix(c(  d, q, b, p  ), nrow = 2)
-    pval <- fisher.test(cm)
+    pval <- stats::fisher.test(cm)
     # cli::cli_alert_info("\t Fisher's Exact {pval$p.value}")
 
     tbl_out <- tbl_out %>% list.append(tibble::tibble(annotation = test_annotation,
@@ -105,7 +105,7 @@ enrichment_fishersexact <- function(
   tbl_out <- tbl_out %>%
     dplyr::bind_rows() %>%
     dplyr::arrange(p_value) %>%
-    dplyr::mutate(adj_p_value = p.adjust(p_value))
+    dplyr::mutate(adj_p_value = stats::p.adjust(p_value, method = "BH"))
 
   return(tbl_out)
 

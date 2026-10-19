@@ -16,6 +16,10 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
+#'
+#' # subset for fast execution
+#' hela_proteins <- hela_proteins %>% subset(description %like% "Ribosome")
+#'
 #' hela_proteins %>%
 #'   normalize(.method = c("scaled", "median", "linear", "limma", "loess")) %>%
 #'   plot_variation_cv()
@@ -154,10 +158,19 @@ plot_variation_cv <- function(
   #                 subtitle = "Effect on Variation and Range",
   #                 x = '', y ='')
 
-  plot <- gridExtra::grid.arrange(p_cv, p_dr, nrow = 1,
-                                  widths = c(.85,1.15),
-                                  top=grid::textGrob("Normalization Effects on Variation and Range",
-                                                     x = 0.05, hjust = 0))
+  # arrangeGrob builds the grob layout WITHOUT drawing to the active device.
+  # Ensure an in-memory null device is active during grob layout construction so that
+  # font metric queries during ggplotGrob conversion do not trigger R to create Rplots.pdf.
+  opened_dev <- FALSE
+  if (grDevices::dev.cur() == 1) {
+    grDevices::pdf(file = NULL)
+    opened_dev <- TRUE
+  }
+  plot <- gridExtra::arrangeGrob(p_cv, p_dr, nrow = 1, widths = c(0.85, 1.15),
+                                 top = grid::textGrob("Normalization Effects on Variation and Range", x = 0.05, hjust = 0))
+  if (opened_dev) {
+    invisible(grDevices::dev.off())
+  }
 
   return(plot_save(plot,
                    data,

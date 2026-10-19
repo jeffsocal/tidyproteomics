@@ -42,6 +42,10 @@ a tibble
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
+
+# subset for fast execution
+hela_proteins <- hela_proteins \%>\% subset(description \%like\% "Ribosome")
+
 hela_proteins \%>\%
    expression(knockdown/control) \%>\%
    export_analysis(knockdown/control,

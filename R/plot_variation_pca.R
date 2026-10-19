@@ -17,6 +17,7 @@
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
 #' hela_proteins %>%
+#'   subset(description %like% "Ribosome") %>%
 #'   normalize(.method = c("linear", "loess", "randomforest")) %>%
 #'   plot_variation_pca()
 #'

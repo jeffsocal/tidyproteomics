@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -109,7 +116,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Importing Demo</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/vignettes/workflow-importing.Rmd" class="external-link"><code>vignettes/workflow-importing.Rmd</code></a></small>
       <div class="d-none name"><code>workflow-importing.Rmd</code></div>
     </div>
 
@@ -126,7 +133,7 @@ each platform with basic settings for mass tolerance and PTMs.</p>
 <p>Exporting the data requires some setup for the correct columns. This
 is explained in <code><a href="../articles/importing.html">vignette("importing")</a></code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># download the data</span></span>
@@ -135,27 +142,14 @@ is explained in <code><a href="../articles/importing.html">vignette("importing")
 <span></span>
 <span><span class="co"># import the data</span></span>
 <span><span class="va">data_prot</span> <span class="op">&lt;-</span> <span class="st">"./data/pd_proteins.xlsx"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">'ProteomeDiscoverer'</span>, <span class="st">'proteins'</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (10.67 MB) </span></span>
-<span><span class="co">#&gt; Composition     6 files </span></span>
-<span><span class="co">#&gt;                 2 samples (ctl, p97_kd) </span></span>
-<span><span class="co">#&gt; Quantitation    7055 proteins </span></span>
-<span><span class="co">#&gt;                 4 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 28.8% missing values </span></span>
-<span><span class="co">#&gt;  *imputed        </span></span>
-<span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
-<span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
-<span><span class="co">#&gt;                 gene_id_entrez gene_name wiki_pathway reactome_pathway</span></span>
-<span><span class="co">#&gt;                 gene_id_ensemble </span></span>
-<span><span class="co">#&gt; </span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="maxquant">MaxQuant<a class="anchor" aria-label="anchor" href="#maxquant"></a>
 </h3>
 <p>Exporting the data requires some setup for the correct columns. This
 is explained in <code><a href="../articles/importing.html">vignette("importing")</a></code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># download the data</span></span>
@@ -165,24 +159,14 @@ is explained in <code><a href="../articles/importing.html">vignette("importing")
 <span><span class="co"># import the data</span></span>
 <span><span class="va">data_prot</span> <span class="op">&lt;-</span> <span class="st">"./data/mq_proteinGroups.txt"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">'MaxQuant'</span>, <span class="st">'proteins'</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Origin          MaxQuant </span></span>
-<span><span class="co">#&gt;                 proteins (4.78 MB) </span></span>
-<span><span class="co">#&gt; Composition     6 files </span></span>
-<span><span class="co">#&gt;                 6 samples (ctrl_1, ctrl_2, ctrl_3, p97_kd_1, p97_kd_2, p97_kd_3) </span></span>
-<span><span class="co">#&gt; Quantitation    6452 proteins </span></span>
-<span><span class="co">#&gt;                 4.3 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 10.4% missing values </span></span>
-<span><span class="co">#&gt;  *imputed        </span></span>
-<span><span class="co">#&gt; Accounting      (4) num_psms num_peptides num_unique_peptides imputed </span></span>
-<span><span class="co">#&gt; </span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="fragpipe">FragPipe<a class="anchor" aria-label="anchor" href="#fragpipe"></a>
 </h3>
 <p>Exporting the data requires some setup for the correct columns. This
 is explained in <code><a href="../articles/importing.html">vignette("importing")</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># download the data</span></span>
@@ -192,17 +176,6 @@ is explained in <code><a href="../articles/importing.html">vignette("importing")
 <span><span class="co"># import the data</span></span>
 <span><span class="va">data_prot</span> <span class="op">&lt;-</span> <span class="st">"./data/fp_combined_protein.tsv"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">'FragPipe'</span>, <span class="st">'proteins'</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Origin          FragPipe </span></span>
-<span><span class="co">#&gt;                 proteins (6.33 MB) </span></span>
-<span><span class="co">#&gt; Composition     6 files </span></span>
-<span><span class="co">#&gt;                 2 samples (control, knockdown) </span></span>
-<span><span class="co">#&gt; Quantitation    6670 proteins </span></span>
-<span><span class="co">#&gt;                 3 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 27.3% missing values </span></span>
-<span><span class="co">#&gt;  *imputed        </span></span>
-<span><span class="co">#&gt; Accounting      (3) num_psms num_psms_unique imputed </span></span>
-<span><span class="co">#&gt; Annotations     (2) gene_name description </span></span>
-<span><span class="co">#&gt; </span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

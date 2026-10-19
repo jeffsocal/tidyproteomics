@@ -15,7 +15,7 @@ analyze_enrichments(
 )
 }
 \arguments{
-\item{data}{a character defining the column name of the log2 foldchange values.}
+\item{data}{tidyproteomics data object}
 
 \item{top_n}{a numerical value defining the number of terms to display in the plot}
 
@@ -24,6 +24,8 @@ analyze_enrichments(
 \item{enriched_up_color}{a color to assign the up enriched values}
 
 \item{enriched_down_color}{a color to assign the down enriched values}
+
+\item{height}{a numeric}
 
 \item{width}{a numeric}
 }
@@ -36,10 +38,13 @@ as foldchange ~ statistical significance. See also \code{plot_proportion()}.  Th
 take either a tidyproteomics data object or a table with the required headers.
 }
 \examples{
+\dontrun{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins \%>\%
    expression(knockdown/control) \%>\%
-   analyze_expressions(log2fc_min = 0.5, significance_column = "p_value")
+   enrichment(knockdown/control, .terms = "biological_process") \%>\%
+   analyze_enrichments(significance_max = 0.05)
+}
 
 }

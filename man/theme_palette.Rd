@@ -6,6 +6,9 @@
 \usage{
 theme_palette(n = 16)
 }
+\arguments{
+\item{n}{an integer representing number of colors}
+}
 \value{
 character vector of curated html colors
 }

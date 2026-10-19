@@ -4,16 +4,32 @@
 \alias{as.data.frame.tidyproteomics}
 \title{Helper function to convert the data-object into a tibble}
 \usage{
-\method{as.data.frame}{tidyproteomics}(data, shape = c("long", "wide"), values = NULL, drop = NULL)
+\method{as.data.frame}{tidyproteomics}(
+  x,
+  row.names = NULL,
+  optional = FALSE,
+  ...,
+  shape = c("long", "wide"),
+  values = NULL,
+  drop = NULL
+)
 }
 \arguments{
-\item{data}{tidyproteomics data object}
+\item{x}{tidyproteomics data object}
+
+\item{row.names}{NULL or a character vector giving the row names for the data frame}
+
+\item{optional}{logical, passed to base::as.data.frame}
+
+\item{...}{additional arguments passed to base::as.data.frame}
 
 \item{shape}{the orientation of the quantitative data as either a single measure
 per row (\strong{long}), or as multiple measures per protein/peptide (\strong{wide}).}
 
 \item{values}{indicates the selected normalization to output. The default is
 that selected at the time of normalization.}
+
+\item{drop}{a character vector of column names or annotations to drop}
 }
 \value{
 a tibble

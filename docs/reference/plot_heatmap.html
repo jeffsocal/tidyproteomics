@@ -14,7 +14,7 @@ quantitative values are clustered and visualized."><meta property="og:image" con
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +70,13 @@ quantitative values are clustered and visualized."><meta property="og:image" con
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -78,7 +84,7 @@ quantitative values are clustered and visualized."><meta property="og:image" con
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Plot a heatmap of quantitative values by sample</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/R/plot_heatmap.R" class="external-link"><code>R/plot_heatmap.R</code></a></small>
       <div class="d-none name"><code>plot_heatmap.Rd</code></div>
     </div>
 
@@ -122,25 +128,33 @@ quantitative values are clustered and visualized.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># subset for fast execution</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span> ... done</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scaled"</span>, <span class="st">"median"</span>, <span class="st">"linear"</span>, <span class="st">"limma"</span>, <span class="st">"loess"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="select_normalization.html">select_normalization</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">plot_heatmap</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Normalizing quantitative data</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">scaled shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[119ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">scaled shift</span> <span style="color: #B2B2B2;">[14ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">median shift</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[134ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">median shift</span> <span style="color: #B2B2B2;">[15ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">linear regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[218ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">linear regression</span> <span style="color: #B2B2B2;">[25ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">limma regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">limma regression</span> <span style="color: #B2B2B2;">[453ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">limma regression</span> <span style="color: #B2B2B2;">[19ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> ... using <span style="color: #0000BB;">loess regression</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">loess regression</span> <span style="color: #B2B2B2;">[1.4s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> ... using <span style="color: #0000BB;">loess regression</span> <span style="color: #B2B2B2;">[151ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Selecting best normalization method</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Selecting best normalization method ... done</span>

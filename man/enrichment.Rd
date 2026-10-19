@@ -34,6 +34,8 @@ default ("std") the enrichment score is computed as in the original GSEA. The
 "pos" and "neg" score types are intended to be used for one-tailed tests
 (i.e. when one is interested only in positive ("pos") or negateive ("neg") enrichment)."}
 
+\item{.log2fc_min}{used only for Fisher's Exact Test, a numeric defining the minimum log2 foldchange to consider as "enriched"}
+
 \item{.significance_max}{used only for Fisher's Exact Test, a numeric defining the maximum statistical significance to consider as "enriched"}
 
 \item{.significance_min}{deprecated alias for .significance_max}
@@ -50,6 +52,9 @@ statistics for a given tidyproteomics data object.
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
+
+# subset for fast execution
+hela_proteins <- hela_proteins \%>\% subset(description \%like\% "Ribosome")
 
 # using the default GSEA method
 hela_proteins \%>\%
@@ -69,6 +74,6 @@ comps <- list(c("control","knockdown"),
 
 hela_proteins \%>\%
    expression(.pairs = comps) \%>\%
-   enrichment(.pairs = comps, .terms = c("biological_process", "molecular_function")
+   enrichment(.pairs = comps, .terms = c("biological_process", "molecular_function"))
 
 }

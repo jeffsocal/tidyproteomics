@@ -17,16 +17,21 @@ align_peptide <- function(
 
   l_m <- list()
   for(i in 1:length(peptide)) {
-    mp <- Biostrings::matchPattern(peptide[i], protein)
+    loc <- stringr::str_locate_all(protein, stringr::fixed(peptide[i]))[[1]]
 
-    s <- mp@ranges@start
-    w <- mp@ranges@width
-
-    l_m[[i]] <- tibble::tibble(
-      'peptide' = peptide[i],
-      'position_start' = s,
-      'position_end' = s + w -1
-    )
+    if(nrow(loc) == 0) {
+      l_m[[i]] <- tibble::tibble(
+        'peptide' = peptide[i],
+        'position_start' = integer(0),
+        'position_end' = integer(0)
+      )
+    } else {
+      l_m[[i]] <- tibble::tibble(
+        'peptide' = peptide[i],
+        'position_start' = as.integer(loc[, "start"]),
+        'position_end' = as.integer(loc[, "end"])
+      )
+    }
   }
   l_m %>% dplyr::bind_rows()
 }

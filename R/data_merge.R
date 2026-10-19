@@ -1,7 +1,50 @@
-#' Merge multiple tidyproteomics data-objects
+#' Merge two or more tidyproteomics data objects
 #'
 #' @description
 #' `merge()` returns a single tidyproteomics data object from multiple.
+#'
+#' @param x a tidyproteomics data object
+#' @param y a tidyproteomics data object or list of tidyproteomics data objects
+#' @param ... additional tidyproteomics data objects to merge
+#' @param quantitative_source a character string indicating which quantitative
+#' value to merge on ('raw', 'selected', or 'all'). If `selected` is chosen then each
+#' dataset's specific normalization will be used and renamed to 'abundance_selected'.
+#' If `all` is chosen, then the possibility exists that some normalization values
+#' will fill in with NAs.
+#'
+#' @return a tidyproteomics data object
+#' @exportS3Method base::merge
+#'
+merge.tidyproteomics <- function(
+    x,
+    y = NULL,
+    ...,
+    quantitative_source = c('raw', 'selected', 'all')
+){
+  quantitative_source <- match.arg(quantitative_source)
+  data_list <- list(x)
+  if (!is.null(y)) {
+    if (inherits(y, "tidyproteomics")) {
+      data_list <- c(data_list, list(y))
+    } else if (is.list(y)) {
+      data_list <- c(data_list, y)
+    }
+  }
+  dots <- list(...)
+  for (item in dots) {
+    if (inherits(item, "tidyproteomics")) {
+      data_list <- c(data_list, list(item))
+    } else if (is.list(item)) {
+      data_list <- c(data_list, item)
+    }
+  }
+  merge_tidyproteomics(data_list = data_list, quantitative_source = quantitative_source)
+}
+
+#' Merge multiple tidyproteomics data-objects
+#'
+#' @description
+#' `merge_tidyproteomics()` returns a single tidyproteomics data object from multiple.
 #'
 #' @param data_list a list of tidyproteomics data objects
 #' @param quantitative_source a character string indicating which quantitative
@@ -12,29 +55,17 @@
 #' @return a tidyproteomics data object
 #' @export
 #'
-merge <- function(
+merge_tidyproteomics <- function(
     data_list = NULL,
-    quantitative_source = c('raw', 'selected', 'all'),
-    ...
+    quantitative_source = c('raw', 'selected', 'all')
 ){
 
-  # Delegate to base::merge if called with standard data frames or base arguments
-  dots <- list(...)
-  is_base_call <- inherits(data_list, "data.frame") ||
-                  inherits(quantitative_source, "data.frame") ||
-                  ("x" %in% names(dots)) ||
-                  (!is.null(data_list) && is.list(data_list) && length(data_list) > 0 &&
-                   !inherits(data_list[[1]], "tidyproteomics") && !inherits(data_list, "tidyproteomics"))
-
-  if (is_base_call) {
-    cl <- sys.call()
-    cl[[1]] <- quote(base::merge)
-    return(eval(cl, parent.frame()))
+  if (inherits(data_list, "tidyproteomics")) {
+    data_list <- list(data_list)
   }
 
-  if (inherits(data_list, "tidyproteomics") && inherits(quantitative_source, "tidyproteomics")) {
-    data_list <- list(data_list, quantitative_source)
-    quantitative_source <- "raw"
+  if (!is.list(data_list) || length(data_list) < 2) {
+    cli::cli_abort("merge_tidyproteomics requires a list of at least 2 tidyproteomics objects")
   }
 
   quantitative_source <- rlang::arg_match(quantitative_source)

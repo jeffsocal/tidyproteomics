@@ -26,8 +26,8 @@
 #'
 #' # reassign specific file_ids
 #' hela_proteins %>%
-#'    reassign(sample_file == "f1", .replace = "new") %>%
-#'    reassign(sample_file == "f2", .replace = "new") %>%
+#'    reassign(sample_file == "F1", .replace = "new") %>%
+#'    reassign(sample_file == "F2", .replace = "new") %>%
 #'    summary("sample")
 #'
 reassign <- function(

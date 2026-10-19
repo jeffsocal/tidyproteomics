@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -109,7 +116,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>User Defined Import</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/vignettes/workflow-userimport.Rmd" class="external-link"><code>vignettes/workflow-userimport.Rmd</code></a></small>
       <div class="d-none name"><code>workflow-userimport.Rmd</code></div>
     </div>
 
@@ -533,22 +540,7 @@ should pivot, such as the quant columns identified above.</p></li>
 TMT_10plex. We need to reassign the raw TMT labels to some sample
 designations and filter the data.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_prot</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Origin          PXD004163 </span></span>
-<span><span class="co">#&gt;                 proteins (15.55 MB) </span></span>
-<span><span class="co">#&gt; Composition     10 files </span></span>
-<span><span class="co">#&gt;                 10 samples (s126, s127n, s127c, s128n, s128c, s129n, s129c, s130n, s130c, s131) </span></span>
-<span><span class="co">#&gt; Quantitation    9638 proteins </span></span>
-<span><span class="co">#&gt;                 0.48 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 0.687% missing values </span></span>
-<span><span class="co">#&gt;  *imputed        </span></span>
-<span><span class="co">#&gt; Accounting      (6) num_unique_peptides num_peptides num_psms protein_qvalue protein_error_prob</span></span>
-<span><span class="co">#&gt;                 imputed </span></span>
-<span><span class="co">#&gt; Annotations     (2) gene_name description </span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">data_prot</span></span></code></pre></div>
 <p>Note that the log10 dynamic range is 0.39, typically for TMT this is
 around 3, and for LFQ it can be anywhere from 4 to 8. The plot of
 quantitative rank and quantitative value also looks atypical – the
@@ -559,7 +551,6 @@ which were quantified using the medians of peptide spectrum matches
 quantification ratios.</div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_prot</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_quantrank.html">plot_quantrank</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="workflow-userimport_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
 <p>The TMT labeling assignments are not not provided in the literature,
 but can be found in the DEqMS tutorial:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -575,40 +566,10 @@ but can be found in the DEqMS tutorial:</p>
 <span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample</span> <span class="op">==</span> <span class="st">'s130n'</span>, .replace <span class="op">=</span> <span class="st">'ctrl'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample</span> <span class="op">==</span> <span class="st">'s130c'</span>, .replace <span class="op">=</span> <span class="st">'miR191'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/reassign.html">reassign</a></span><span class="op">(</span><span class="va">sample</span> <span class="op">==</span> <span class="st">'s131'</span>, .replace <span class="op">=</span> <span class="st">'miR372'</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">protein_qvalue</span> <span style="color: #0000BB;">&lt;</span> <span style="color: #FF5F00; font-style: italic;">0.01</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">protein_qvalue</span> <span style="color: #0000BB;">&lt;</span> <span style="color: #FF5F00; font-style: italic;">0.01</span> ... done</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 2</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 3</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 4</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 5</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 6</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 7</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 8</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 9</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Reassigning 10</span></span>
 <span></span>
-<span><span class="va">data_prot</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Origin          PXD004163 </span></span>
-<span><span class="co">#&gt;                 proteins (14.40 MB) </span></span>
-<span><span class="co">#&gt; Composition     10 files </span></span>
-<span><span class="co">#&gt;                 4 samples (ctrl, miR191, miR372, miR519) </span></span>
-<span><span class="co">#&gt; Quantitation    8742 proteins </span></span>
-<span><span class="co">#&gt;                 0.39 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 0.216% missing values </span></span>
-<span><span class="co">#&gt;  *imputed        </span></span>
-<span><span class="co">#&gt; Accounting      (6) num_unique_peptides num_peptides num_psms protein_qvalue protein_error_prob</span></span>
-<span><span class="co">#&gt;                 imputed </span></span>
-<span><span class="co">#&gt; Annotations     (2) gene_name description </span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<span><span class="va">data_prot</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_prot</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_pca.html">plot_pca</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="workflow-userimport_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 <p>Note that DEqMS <em>“<strong>.. takes into account the inherent
 dependence of protein variance on the number of PSMs or peptides used
 for quantification, thereby providing a more accurate variance

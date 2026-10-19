@@ -33,6 +33,10 @@
 #' @examples
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
+#'
+#' # subset for fast execution
+#' hela_proteins <- hela_proteins %>% subset(description %like% "Ribosome")
+#'
 #' hela_proteins %>%
 #'    expression(knockdown/control) %>%
 #'    plot_proportion(knockdown/control, log2fc_min = 0.5, significance_column = 'p_value')
@@ -40,13 +44,14 @@
 #' # generates the same out come
 #' # hela_proteins %>%
 #' #    expression(knockdown/control) %>%
-#' #    export_analysis(knockdown/control, .analysis = 'expression) %>%
+#' #    export_analysis(knockdown/control, .analysis = 'expression') %>%
 #' #    plot_proportion(log2fc_min = 0.5, significance_column = 'p_value')
 #'
 #' # display the gene name instead
 #' hela_proteins %>%
 #'    expression(knockdown/control) %>%
-#'    plot_proportion(knockdown/control, log2fc_min = 0.5, significance_column = 'p_value', labels_column = "gene_name")
+#'    plot_proportion(knockdown/control, log2fc_min = 0.5,
+#'                    significance_column = 'p_value', labels_column = "gene_name")
 #'
 plot_proportion <- function(
     data = NULL,

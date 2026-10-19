@@ -16,7 +16,7 @@ take either a tidyproteomics data object or a table with the required headers.">
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +72,13 @@ take either a tidyproteomics data object or a table with the required headers.">
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -80,7 +86,7 @@ take either a tidyproteomics data object or a table with the required headers.">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Plot proportional expression values</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/R/plot_proportion.R" class="external-link"><code>R/plot_proportion.R</code></a></small>
       <div class="d-none name"><code>plot_proportion.Rd</code></div>
     </div>
 
@@ -205,33 +211,42 @@ take either a tidyproteomics data object or a table with the required headers.</
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># subset for fast execution</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span> ... done</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu">plot_proportion</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, log2fc_min <span class="op">=</span> <span class="fl">0.5</span>, significance_column <span class="op">=</span> <span class="st">'p_value'</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.3s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[63ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #0000BB;">proportional_expression</span> appears to sum to 1 adjusting values to 100(%)</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>ggrepel: 381 unlabeled data points (too many overlaps). Consider increasing max.overlaps</span>
 <span class="r-plt img"><img src="plot_proportion-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># generates the same out come</span></span></span>
 <span class="r-in"><span><span class="co"># hela_proteins %&gt;%</span></span></span>
 <span class="r-in"><span><span class="co">#    expression(knockdown/control) %&gt;%</span></span></span>
-<span class="r-in"><span><span class="co">#    export_analysis(knockdown/control, .analysis = 'expression) %&gt;%</span></span></span>
+<span class="r-in"><span><span class="co">#    export_analysis(knockdown/control, .analysis = 'expression') %&gt;%</span></span></span>
 <span class="r-in"><span><span class="co">#    plot_proportion(log2fc_min = 0.5, significance_column = 'p_value')</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># display the gene name instead</span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>   <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>   <span class="fu">plot_proportion</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, log2fc_min <span class="op">=</span> <span class="fl">0.5</span>, significance_column <span class="op">=</span> <span class="st">'p_value'</span>, labels_column <span class="op">=</span> <span class="st">"gene_name"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>   <span class="fu">plot_proportion</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, log2fc_min <span class="op">=</span> <span class="fl">0.5</span>,</span></span>
+<span class="r-in"><span>                   significance_column <span class="op">=</span> <span class="st">'p_value'</span>, labels_column <span class="op">=</span> <span class="st">"gene_name"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.3s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[61ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> <span style="color: #0000BB;">proportional_expression</span> appears to sum to 1 adjusting values to 100(%)</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 13 rows containing missing values or values outside the scale range</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 1 row containing missing values or values outside the scale range</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> (`geom_text_repel()`).</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>ggrepel: 367 unlabeled data points (too many overlaps). Consider increasing max.overlaps</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 1 row containing missing values or values outside the scale range</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> (`geom_text_repel()`).</span>
 <span class="r-plt img"><img src="plot_proportion-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

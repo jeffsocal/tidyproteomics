@@ -255,8 +255,8 @@ data <- data %>%
   origins(sample_file == "F3", .replace = "donor_2")
 ```
 
-#### `merge(data1, data2, ...)`
-Combines multiple `tidyproteomics` data objects into a single unified object.
+#### `merge(data1, data2, ...)` / `merge_tidyproteomics(data_list, ...)`
+Combines multiple `tidyproteomics` data objects into a single unified object via S3 `merge()` dispatch or `merge_tidyproteomics()`.
 
 #### `rm.mbr(data)`
 Removes quantitative values flagged as Match-Between-Runs (MBR).

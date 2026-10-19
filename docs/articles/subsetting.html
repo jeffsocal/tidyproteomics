@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,14 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -109,7 +116,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Subsetting</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/vignettes/subsetting.Rmd" class="external-link"><code>vignettes/subsetting.Rmd</code></a></small>
       <div class="d-none name"><code>subsetting.Rmd</code></div>
     </div>
 
@@ -131,7 +138,7 @@ groups. For example, the expression
 <strong><em><code>!description %like% 'ribosome'</code></em></strong>
 would keep all proteins with a description that does not include the
 word <em>‘ribosome’</em>. Additionally, together with the
-<code><a href="../reference/merge.html">merge()</a></code> and <code><a href="../reference/reassign.html">reassign()</a></code> functions, data can be
+<code><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge()</a></code> and <code><a href="../reference/reassign.html">reassign()</a></code> functions, data can be
 combined from multiple sources, assigned to specific sample groups and
 analyzed in a single collective. Alternatively, for example, data can be
 separated, normalized and imputed independently then recombined back
@@ -241,7 +248,7 @@ like this, just for demonstration purposes.</p>
 <span>  <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span>.method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'median'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/impute.html">impute</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">data_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge.html">merge</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">data_kd</span>, <span class="va">data_ct</span><span class="op">)</span>, quantitative_source <span class="op">=</span> <span class="st">'all'</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">data_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge</a></span><span class="op">(</span><span class="va">data_kd</span>, <span class="va">data_ct</span>, quantitative_source <span class="op">=</span> <span class="st">'all'</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span></span>
 <span><span class="co">#&gt; Origin          Merged </span></span>

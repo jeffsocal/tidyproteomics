@@ -19,77 +19,104 @@ enrichment_wilcoxon <- function(
   # visible bindings
   log2_foldchange <- NULL
   annotation <- NULL
-  matches <- NULL
-  p.value <- NULL
   p_value <- NULL
   adj_p_value <- NULL
 
   term_group <- rlang::arg_match(term_group, get_annotation_terms(data))
   check_data(data)
 
-  identifier <- data$identifier
-  tbl_expression <- data_expression %>%
-    dplyr::arrange(dplyr::desc(log2_foldchange)) %>%
-    dplyr::mutate(rank = dplyr::row_number()) %>%
-    dplyr::left_join(get_annotations(data, term_group),
-                     by = data$identifier) %>%
-    dplyr::mutate(annotation = ifelse(is.na(annotation), 'other', annotation)) %>%
-    dplyr::mutate(annotation = as.character(annotation))
+  id_col <- data$identifier[1]
 
-  colnames(tbl_expression)[which(colnames(tbl_expression) == data$identifier)] <- 'identifier'
+  # 1. Clean expression data: remove NA / Inf and deduplicate identifiers
+  df_stats <- data_expression %>%
+    dplyr::select(identifier = dplyr::all_of(id_col), log2_foldchange) %>%
+    dplyr::filter(!is.na(log2_foldchange), !is.infinite(log2_foldchange)) %>%
+    dplyr::distinct(identifier, .keep_all = TRUE) %>%
+    dplyr::arrange(dplyr::desc(log2_foldchange))
 
-  # calculate significance by wilcoxon rank
-  wilcox_test <- function(data, x){
-    stats::wilcox.test(
-      data$rank[which(data$annotation == x)],
-      data$rank[which(data$annotation != x)],
-    )
+  if(nrow(df_stats) == 0) {
+    return(tibble::tibble(
+      annotation = character(0),
+      p_value = numeric(0),
+      adj_p_value = numeric(0),
+      enrichment = numeric(0),
+      size = integer(0)
+    ))
   }
 
-  f_enrich <- function(annotation_str, x){
+  # 2. Compute ranks once for the whole experiment (average ranks handle ties cleanly)
+  df_stats$rank <- rank(-df_stats$log2_foldchange, ties.method = "average")
+  c_stats <- stats::setNames(df_stats$log2_foldchange, df_stats$identifier)
+  c_ranks <- stats::setNames(df_stats$rank, df_stats$identifier)
+  all_ids <- names(c_ranks)
+  n_total <- length(c_ranks)
+
+  # 3. Clean annotations: remove NA, blank, and 'other'
+  tbl_anno <- get_annotations(data, term_group) %>%
+    dplyr::filter(!is.na(annotation), annotation != "", annotation != "other")
+
+  if(nrow(tbl_anno) == 0) {
+    return(tibble::tibble(
+      annotation = character(0),
+      p_value = numeric(0),
+      adj_p_value = numeric(0),
+      enrichment = numeric(0),
+      size = integer(0)
+    ))
+  }
+
+  # 4. Map pathways and pre-filter by size BEFORE testing
+  pathways <- split(as.character(tbl_anno[[id_col]]), tbl_anno$annotation)
+  pathways <- lapply(pathways, function(p) intersect(unique(p), all_ids))
+
+  sizes <- lengths(pathways)
+  keep <- sizes >= 3 & sizes <= n_total * 0.66
+  pathways <- pathways[keep]
+  sizes <- sizes[keep]
+
+  if(length(pathways) == 0) {
+    return(tibble::tibble(
+      annotation = character(0),
+      p_value = numeric(0),
+      adj_p_value = numeric(0),
+      enrichment = numeric(0),
+      size = integer(0)
+    ))
+  }
+
+  # 5. Fast Wilcoxon test over clean vectors
+  f_test <- function(term_name) {
+    p <- pathways[[term_name]]
+    in_ranks <- c_ranks[p]
+    out_ranks <- c_ranks[!(all_ids %in% p)]
 
     tryCatch({
-
-      # table of annotation to test
-      tbl_test <- x %>%
-        dplyr::group_by(identifier) %>%
-        dplyr::mutate(rank = ifelse(annotation == annotation_str, 0, rank)) %>%
-        dplyr::mutate(annotation = ifelse(annotation != annotation_str, 'other', annotation)) %>%
-        dplyr::slice_min(rank, n = 1, with_ties = FALSE) %>%
-        dplyr::ungroup() %>%
-        dplyr::arrange(dplyr::desc(log2_foldchange)) %>%
-        dplyr::mutate(rank = dplyr::row_number())
-
-      out <- tbl_test %>%
-        wilcox_test(annotation_str) %>%
-        broom::tidy() %>%
-        dplyr::mutate(enrichment = tbl_test %>% calc_enrichment(annotation_str),
-                      annotation = annotation_str,
-                      size = tbl_test %>%
-                        dplyr::filter(annotation == annotation_str) %>%
-                        nrow()) %>%
-        dplyr::rename(p_value = p.value) %>%
-        dplyr::select(!matches('statistic|method|alternative')) %>%
-        dplyr::relocate(annotation)
-
-      return(out)
-
-    }, error = function(err) {
-      cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
-      cli::cli_alert_info("annotation {.emph {annotation_str}} had issues, not reported")
-
-      return(NULL)
+      wt <- stats::wilcox.test(in_ranks, out_ranks, exact = FALSE)
+      wt$p.value
+    }, error = function(e) {
+      NA_real_
     })
-
   }
 
-  data_out <- unique(tbl_expression$annotation) %>%
-    parallel::mclapply(f_enrich, tbl_expression, mc.cores = cpu_cores) %>%
-    dplyr::bind_rows() %>%
-    dplyr::filter(size >= 3) %>%
-    dplyr::filter(size <= length(unique(tbl_expression$identifier)) * .66) %>%
-    dplyr::mutate(adj_p_value = stats::p.adjust(p_value)) %>%
-    dplyr::relocate(adj_p_value, .after = p_value) %>%
+  pvals <- if (cpu_cores > 1 && .Platform$OS.type != "windows") {
+    res_list <- parallel::mclapply(names(pathways), f_test, mc.cores = cpu_cores)
+    vapply(res_list, function(v) if(is.numeric(v) && length(v) == 1) v else NA_real_, numeric(1))
+  } else {
+    vapply(names(pathways), f_test, numeric(1))
+  }
+
+  med_enrichment <- vapply(pathways, function(p) {
+    stats::median(c_stats[p], na.rm = TRUE)
+  }, numeric(1))
+
+  data_out <- tibble::tibble(
+    annotation = names(pathways),
+    p_value = unname(pvals),
+    adj_p_value = stats::p.adjust(unname(pvals), method = "BH"),
+    enrichment = unname(med_enrichment),
+    size = unname(sizes)
+  ) %>%
+    dplyr::filter(!is.na(p_value)) %>%
     dplyr::arrange(p_value)
 
   return(data_out)

@@ -5,23 +5,25 @@
 #' as foldchange ~ statistical significance. See also `plot_proportion()`.  This function can
 #' take either a tidyproteomics data object or a table with the required headers.
 #'
-#' @param data a character defining the column name of the log2 foldchange values.
+#' @param data tidyproteomics data object
 #' @param top_n a numerical value defining the number of terms to display in the plot
 #' @param significance_max a numeric defining the maximum statistical significance to highlight.
 #' @param enriched_up_color a color to assign the up enriched values
 #' @param enriched_down_color a color to assign the down enriched values
+#' @param height a numeric
 #' @param width a numeric
-
-#'
 #' @return a tidyproteomics data object
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
 #' hela_proteins %>%
 #'    expression(knockdown/control) %>%
-#'    analyze_expressions(log2fc_min = 0.5, significance_column = "p_value")
+#'    enrichment(knockdown/control, .terms = "biological_process") %>%
+#'    analyze_enrichments(significance_max = 0.05)
+#' }
 #'
 analyze_enrichments <- function(
     data = NULL,
@@ -71,15 +73,19 @@ analyze_enrichments <- function(
       stringr::str_replace_all("_", " ") %>%
       stringr::str_to_title()
 
-    plt <- tbl_enrich %>%
+    tbl <- tbl_enrich %>%
       dplyr::slice_min(adj_p_value, n = top_n, with_ties = FALSE) %>%
       dplyr::mutate(is_significant = adj_p_value <= significance_max,
                     is_enriched = enrichment > 0) %>%
       dplyr::mutate(term = term %>% stringr::str_replace_all("gene_ontology\\_", "gene_ontology\n")) %>%
-      dplyr::mutate(annotation = forcats::fct_reorder(annotation, -enrichment)) %>%
+      dplyr::mutate(annotation = forcats::fct_reorder(annotation, -enrichment))
+
+    plt <- tbl %>%
       ggplot2::ggplot(ggplot2::aes(enrichment, annotation)) +
       # ggplot2::geom_col(ggplot2::aes(color = is_enriched), fill = NA) +
-      ggplot2::geom_col(ggplot2::aes(fill = is_enriched, alpha = is_significant)) +
+      ggplot2::geom_col(ggplot2::aes(fill = is_enriched), alpha = 0.5) +
+      ggplot2::geom_col(data = tbl %>% dplyr::filter(is_significant == TRUE),
+                        ggplot2::aes(fill = is_enriched), alpha = 1) +
       ggplot2::facet_grid(term~., space = 'free', scales = 'free', switch = 'y') +
       ggplot2::scale_fill_manual(values = c('TRUE' = enriched_up_color, 'FALSE' = enriched_down_color)) +
       ggplot2::scale_color_brewer(palette = 'Set1') +

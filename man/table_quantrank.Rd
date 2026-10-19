@@ -26,10 +26,14 @@ a (tidyproteomics data-object | ggplot-object)
 \examples{
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
+hela_proteins <- hela_proteins \%>\% subset(description \%like\% "Ribosome")
 hela_proteins \%>\% plot_quantrank()
 
 hela_proteins \%>\% plot_quantrank(type = 'lines')
 
-hela_proteins \%>\% plot_quantrank(type = 'lines', display_filter = 'log2_foldchange', display_cutoff = 1)
+hela_proteins \%>\%
+   plot_quantrank(type = 'lines',
+                  display_filter = 'log2_foldchange',
+                  display_cutoff = 1)
 
 }

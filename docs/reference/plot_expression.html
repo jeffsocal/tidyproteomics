@@ -20,7 +20,7 @@ for imputed)."><meta property="og:image" content="https://jeffsocal.github.io/ti
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,13 @@ for imputed)."><meta property="og:image" content="https://jeffsocal.github.io/ti
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -84,7 +90,7 @@ for imputed)."><meta property="og:image" content="https://jeffsocal.github.io/ti
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Plot protein expression differences</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/R/plot_expression.R" class="external-link"><code>R/plot_expression.R</code></a></small>
       <div class="d-none name"><code>plot_expression.Rd</code></div>
     </div>
 
@@ -184,21 +190,24 @@ for imputed).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># subset for fast execution</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">description</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Ribosome</span> ... done</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">plot_expression</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, log2fc_min <span class="op">=</span> <span class="fl">0.5</span>, significance_column <span class="op">=</span> <span class="st">"p_value"</span>, top_n <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[3.2s]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[66ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 34</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 34</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   plot_label min_y max_y protein imputed     n imputed_control imputed_knockdown</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Q9NXV2      17.8  22.6 Q9NXV2    0         6           0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Q8TBM8      18.8  22.7 Q8TBM8    0.333     6           0.667                 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Q5JUW8      17.4  21.8 Q5JUW8    0         6           0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Q9H0H5      17.8  21.1 Q9H0H5    0         6           0                     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> O95833      19.1  22.9 O95833    0.167     6           0.333                 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> Q9Y385      18.0  21.4 Q9Y385    0         6           0                     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Q14146      18.2  19.8 Q14146        0     6               0                 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A0A087X020  23.7  25.3 A0A087…       0     6               0                 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 26 more variables: average_expression &lt;dbl&gt;, proportional_expression &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   foldchange &lt;dbl&gt;, log2_foldchange &lt;dbl&gt;, p_value &lt;dbl&gt;, adj_p_value &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalization &lt;chr&gt;, abundance_control_1 &lt;dbl&gt;, abundance_control_2 &lt;dbl&gt;,</span></span>

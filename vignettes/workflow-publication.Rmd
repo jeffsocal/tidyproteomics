@@ -18,7 +18,7 @@ options(dplyr.print_max = 10)
 The following is a demonstration workflow for generating the figures from the publication.
 
 ```{r, eval=FALSE}
-library(tidyverse)
+library(dplyr)
 library(tidyproteomics)
 ```
 

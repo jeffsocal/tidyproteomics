@@ -21,7 +21,7 @@ Normalization in tidyproteomics attempts to apply each function universally, mea
 
 ```{r, echo=FALSE}
 library(tidyproteomics)
-library(tidyverse)
+library(dplyr)
 ```
 
 Proteins have a single identifier ...

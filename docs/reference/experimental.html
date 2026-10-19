@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.14</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +66,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/jeffsocal/tidyproteomics/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -74,7 +80,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Returns the data experimental set up</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/jeffsocal/tidyproteomics/blob/HEAD/R/data_experimental.R" class="external-link"><code>R/data_experimental.R</code></a></small>
       <div class="d-none name"><code>experimental.Rd</code></div>
     </div>
 
@@ -106,7 +112,22 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">hela_proteins</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">experimental</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ── <span style="font-weight: bold; font-style: italic;">Experimental Design</span> ──</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  sample_id                import_file sample_file    sample replicate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   9e6ed3ba p97KD_HCT116_proteins.xlsx          F1   control         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   cc56fc1d p97KD_HCT116_proteins.xlsx          F4   control         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   6a21f7a9 p97KD_HCT116_proteins.xlsx          F5   control         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   966be57f p97KD_HCT116_proteins.xlsx          F2 knockdown         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   79a98e41 p97KD_HCT116_proteins.xlsx          F3 knockdown         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   9f804505 p97KD_HCT116_proteins.xlsx          F6 knockdown         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  measurements:6 samples:2</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>

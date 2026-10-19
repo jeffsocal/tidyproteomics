@@ -127,7 +127,7 @@ data_prot <- "miR_Proteintable.tsv" %>%
   import('PXD004163', 'proteins', path = "TMTOpenMS_proteins.tsv")
 ```
 
-```{r, echo=FALSE, message=FALSE}
+```{r, echo=FALSE, message=FALSE, eval=FALSE}
 library(dplyr)
 library(tidyproteomics)
 
@@ -147,7 +147,7 @@ data_prot <- "~/Local/data/tidyproteomics/PXD004163/miR_Proteintable.tsv" %>%
 
 Printing out the data object we can see we have 10 samples from the TMT_10plex. We need to reassign the raw TMT labels to some sample designations and filter the data.
 
-```{r}
+```{r, eval=FALSE}
 data_prot
 ```
 
@@ -156,13 +156,13 @@ Note that the log10 dynamic range is 0.39, typically for TMT this is around 3, a
 | Peptide spectrum matches found at 1% false discovery rate were used to infer gene identities, 
 | which were quantified using the medians of peptide spectrum matches quantification ratios.
 
-```{r}
+```{r, eval=FALSE}
 data_prot %>% plot_quantrank()
 ```
 
 The TMT labeling assignments are not not provided in the literature, but can be found in the DEqMS tutorial:
 
-```{r}
+```{r, eval=FALSE}
 data_prot <- data_prot %>%
   subset(protein_qvalue < 0.01) %>%
   reassign(sample == 's126', .replace = 'ctrl') %>%
@@ -179,7 +179,7 @@ data_prot <- data_prot %>%
 data_prot
 ```
 
-```{r}
+```{r, eval=FALSE}
 data_prot %>% plot_pca()
 ```
 

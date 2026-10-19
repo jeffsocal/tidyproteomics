@@ -129,7 +129,7 @@ data_ct <- hela_proteins %>%
   normalize(.method = c('median')) %>%
   impute()
 
-data_new <- merge(list(data_kd, data_ct), quantitative_source = 'all')
+data_new <- merge(data_kd, data_ct, quantitative_source = 'all')
 ```
 
 ```{r, message = FALSE}

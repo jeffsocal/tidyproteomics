@@ -9,7 +9,7 @@ enrichment_fishersexact(
   data = NULL,
   term_group = NULL,
   log2fc_min = 0,
-  significance_min = 0.05,
+  significance_max = 0.05,
   cpu_cores = 1,
   ...
 )
@@ -23,11 +23,11 @@ enrichment_fishersexact(
 
 \item{log2fc_min}{a numeric defining the minimum log2 foldchange to consider as "enriched"}
 
+\item{significance_max}{a numeric defining the maximum statistical significance to consider as "enriched"}
+
 \item{cpu_cores}{the number of threads used to speed the calculation}
 
 \item{...}{pass through arguments}
-
-\item{significance_max}{a numeric defining the maximum statistical significance to consider as "enriched"}
 }
 \value{
 a tibble
