@@ -12,6 +12,8 @@ normalize_randomforest <- function(
     .cores = 1
 ){
 
+  rlang::check_installed("randomForest", reason = "for random forest normalization.")
+
   # visible bindings
   identifier <- NULL
   abundance <- NULL

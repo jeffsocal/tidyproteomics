@@ -102,7 +102,7 @@ show_annotations <- function(
   annotation <- NULL
 
   check_data(data)
-  v_terms <- get_annotation_terms(data)
+  v_terms <- get_annotation_terms(data, format = "vector")
 
   if(is.null(term)) {
     cli::cli_inform(c("i" = "Current Annotation Terms"))

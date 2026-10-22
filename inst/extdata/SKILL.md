@@ -19,7 +19,7 @@ A `tidyproteomics` object is an S3 list containing:
 - `$accounting`: Tibble storing peptide/PSM counts, identification confidence, and match-between-runs (MBR) flags.
 - `$experiments`: Tibble detailing sample metadata, condition labels, and raw data file associations.
 - `$operations`: Character list logging every transformation applied to the dataset (audit trail).
-- `$analysis`: List storing completed statistical comparisons, differential expression results, and enrichment computations.
+- `$analysis`: List storing completed statistical comparisons, differential expression results, and enrichment computations. Expose and inspect stored analyses using `get_analyses(data)`.
 
 ### Key Principles
 1. **Pipe-First Design**: All primary operations accept the `data` object as their first argument and return an updated `tidyproteomics` object, designed for magrittr `%>%` pipelines.
@@ -122,7 +122,7 @@ Exports comparative expression data between multiple pairwise comparisons.
 #### `export_config(platform, analyte = c('proteins', 'peptides'))`
 Copies the internal configuration TSV file for a given platform and analyte to the current working directory.
 
-#### `export_llm_skill(destination = ".", file_name = "SKILL.md", overwrite = TRUE)`
+#### `export_llm_skill(destination = tempdir(), file_name = "SKILL.md", overwrite = TRUE)`
 Exports this comprehensive `SKILL.md` reference guide to the local working directory or specified path.
 - **`destination`**: Destination directory (default `"."`).
 - **`file_name`**: Output filename (default `"SKILL.md"`).
@@ -195,7 +195,7 @@ Exposes a concise, high-level structural summary of the `tidyproteomics` data ob
 - **Imputed Method**: If missing values were imputed, explicitly indicates the method used (e.g., `*imputed via randomforest`, `*imputed via min`).
 - **Automatic Normalization Selection**: Displays the active quantitative source selected automatically by `select_normalization()` or manually set (e.g., `*normalized loess`).
 - **Annotations**: Summary of all biological annotation categories present in the object (e.g., `(4) biological_process cellular_component molecular_function reactome_pathway`).
-- **Analyses**: Any completed differential expression comparisons and pathway enrichments.
+- **Analyses**: Any completed differential expression comparisons and pathway enrichments (retrieve full catalog with `get_analyses(data)`).
 
 #### `summary(object, by = c("global", "sample", "normalization", ...), contamination = NULL, ...)`
 Primary function for comprehensive **data quality checks** and **normalization checks**. Computes summary statistics returned as a tibble (or printed to console) as a passthrough function without mutating the underlying object:
@@ -214,16 +214,84 @@ Primary function for comprehensive **data quality checks** and **normalization c
 Prints and returns the full sequential history of operations performed on the dataset.
 
 #### Data Object Inspection Getters (`get_*()`)
-Exposed inspection helpers to examine variables, levels, metrics, and annotations within a `tidyproteomics` data object:
+Exposed inspection helpers to examine variables, levels, metrics, annotations, and completed analyses within a `tidyproteomics` data object. All `get_*()` functions support **`format = c("table", "vector")`**, defaulting to **`"table"`** for rich, human- and LLM-readable summary data, and supporting **`"vector"`** for programmatic comparisons, argument matching, and iteration:
 
-- **`get_sample_names(data)`**: Returns a character vector of all unique sample condition names.
-- **`get_quant_names(data)`**: Returns a character vector of available quantitative data columns (e.g., `"raw"`, `"median"`, `"linear"`, `"loess"`).
-- **`get_accountings(data)`**: Returns a character vector of accounting column names (e.g., `"num_peptides"`, `"num_unique_peptides"`).
-- **`get_annotation_terms(data)`**: Returns a character vector of available annotation category terms (including the primary identifier, e.g., `"protein"`, `"gene_name"`, `"description"`).
-- **`get_annotations(data, term = NULL)`**: Returns a 2-column tibble (`identifier`, `annotation`) for the specified annotation term.
-- **`show_annotations(data)`**: Displays a formatted console summary of available annotation categories.
-- **`get_variables(data, segment = c("experiments", "quantitative", "annotations", "accounting"))`**: Returns a character vector of variable names within the requested object segment.
-- **`get_unique_variables(data, variable = NULL)`**: Returns a vector of unique values for any specified variable across the object (including expanded annotation values).
+- **`get_analyses(data, format = c("table", "vector"))`**:
+  Exposes all differential expression and pathway enrichment analyses stored in `data$analysis`.
+  - **`"table"`** (default): Returns a 4-column tibble (`comparison`, `analysis`, `term`, `method`) cataloging each stored analysis unit (e.g. `knockdown/control` with `expression` or `enrichment` by `biological_process`).
+  - **`"vector"`**: Returns a character vector of composite keys formatted as `"comparison:analysis"` or `"comparison:analysis:term"` (e.g., `c("knockdown/control:expression", "knockdown/control:enrichment:biological_process")`).
+  ```r
+  # Inspect all analyses completed on the dataset
+  data %>% get_analyses()
+  # [1] "knockdown/control:expression" "knockdown/control:enrichment:biological_process"
+  data %>% get_analyses(format = "vector")
+  ```
+
+- **`get_sample_names(data, format = c("table", "vector"))`**:
+  Returns the unique experimental sample names present in the dataset.
+  - **`"table"`** (default): Returns a tibble with `sample` and `replicates` counts.
+  - **`"vector"`**: Returns a character vector of unique sample names.
+  ```r
+  data %>% get_sample_names()
+  data %>% get_sample_names(format = "vector")
+  ```
+
+- **`get_quant_names(data, format = c("table", "vector"))`**:
+  Returns all quantitative value sources available in `data$quantitative` (e.g. `"raw"`, `"median"`, `"linear"`, `"loess"`).
+  - **`"table"`** (default): Returns a tibble with `quant_name` and logical `selected` indicating which normalization is currently active.
+  - **`"vector"`**: Returns a character vector of quantitative column suffixes.
+  ```r
+  data %>% get_quant_names()
+  data %>% get_quant_names(format = "vector")
+  ```
+
+- **`get_accountings(data, format = c("table", "vector"))`**:
+  Returns all accounting metric column names present in `data$accounting` (excluding sample and identifier keys).
+  - **`"table"`** (default): Returns a tibble with `accounting` column names and their `data_type` classes.
+  - **`"vector"`**: Returns a character vector of accounting column names.
+  ```r
+  data %>% get_accountings()
+  data %>% get_accountings(format = "vector")
+  ```
+
+- **`get_annotation_terms(data, format = c("table", "vector"))`**:
+  Returns available biological annotation categories present in the object (including the primary identifier).
+  - **`"table"`** (default): Returns a tibble with `term`, `type` (`"identifier"` or `"annotation"`), and `unique_annotations` count per term, ordered by original definition.
+  - **`"vector"`**: Returns a character vector of term names.
+  ```r
+  data %>% get_annotation_terms()
+  data %>% get_annotation_terms(format = "vector")
+  ```
+
+- **`get_annotations(data, term = NULL, format = c("table", "vector"))`**:
+  Extracts all annotations for a specific biological term.
+  - **`"table"`** (default): Returns a 2-column tibble (`identifier`, `annotation`) with semicolon-separated terms expanded into individual rows.
+  - **`"vector"`**: Returns a character vector of unique annotation strings for that term.
+  ```r
+  data %>% get_annotations("biological_process")
+  data %>% get_annotations("biological_process", format = "vector")
+  ```
+
+- **`show_annotations(data)`**:
+  Displays a formatted console summary of available annotation categories.
+
+- **`get_variables(data, segment = c("experiments", "quantitative", "annotations", "accounting"), format = c("table", "vector"))`**:
+  Returns the column/variable names within a specific segment of the `tidyproteomics` data object.
+  - **`"table"`** (default): Returns a tibble with `segment` and `variable`.
+  - **`"vector"`**: Returns a character vector of variable names.
+  ```r
+  data %>% get_variables("experiments")
+  data %>% get_variables("experiments", format = "vector")
+  ```
+
+- **`get_unique_variables(data, variable = NULL, format = c("table", "vector"))`**:
+  Returns all unique values for any specified variable across the object (including expanded annotation terms).
+  - **`"table"`** (default): Returns a tibble with column `value`.
+  - **`"vector"`**: Returns a vector of unique values.
+  ```r
+  data %>% get_unique_variables("sample")
+  data %>% get_unique_variables("sample", format = "vector")
+  ```
 
 
 #### `annotate(data, annotations = NULL, duplicates = c("replace", "merge", "leave"))`
@@ -752,6 +820,10 @@ When using an LLM or AI coding agent (e.g., Antigravity, Claude, ChatGPT, Gemini
    ```r
    tidyproteomics::export_llm_skill()
    ```
+13. **Data Object Inspection Getters (`get_*()`)**:
+   All `get_*()` functions (`get_analyses()`, `get_sample_names()`, `get_quant_names()`, `get_accountings()`, `get_annotation_terms()`, `get_annotations()`, `get_variables()`, `get_unique_variables()`) support `format = c("table", "vector")`, defaulting to `"table"`.
+   - Use the default `"table"` format when inspecting the object interactively or presenting summary tables to users or LLMs (e.g. `get_analyses(data)` to inspect completed pairwise comparisons and terms).
+   - Use `format = "vector"` when passing getter outputs into programmatic checks, vector arguments, or string comparisons (e.g., `check_pairs()`, `rlang::arg_match()`, `%in%`, `setdiff()`).
 
 ---
 

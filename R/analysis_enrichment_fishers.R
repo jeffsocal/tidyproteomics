@@ -28,7 +28,7 @@ enrichment_fishersexact <- function(
   p_value <- NULL
   adj_p_value <- NULL
 
-  term_group <- rlang::arg_match(term_group, get_annotation_terms(data))
+  term_group <- rlang::arg_match(term_group, get_annotation_terms(data, format = "vector"))
   check_data(data)
 
   identifier <- data$identifier

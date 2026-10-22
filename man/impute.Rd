@@ -48,6 +48,8 @@ hela_proteins \%>\% summary("sample")
 
 hela_proteins \%>\% impute(.function = stats::median) \%>\% summary("sample")
 
+\donttest{
 hela_proteins \%>\% impute(.function = impute.randomforest, method = "matrix") \%>\% summary("sample")
+}
 
 }

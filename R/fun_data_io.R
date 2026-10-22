@@ -64,6 +64,7 @@ read_data <- function(
     }
 
   } else if( ext %in% format[5:6] ) {
+    rlang::check_installed("readxl", reason = "to import Excel files.")
     tbl <- path %>% readxl::read_excel(col_types = 'text')
   } else {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))

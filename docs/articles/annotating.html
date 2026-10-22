@@ -123,146 +123,541 @@
     
     
 <div class="section level2">
-<h2 id="annotating-data">Annotating data<a class="anchor" aria-label="anchor" href="#annotating-data"></a>
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>As a part of the Tidyproteomics workflow, we need to update the
-<code>gene_name</code> and <code>description</code> annotated terms in
-the data imported from FragPipe. To accomplish this, we will use
-information from a parsed FASTA file. The parsed FASTA file should
-contain three columns: <code>protein</code> identifier,
-<code>term</code>, and <code>annotation</code>.</p>
-<p>Updating the <code>gene_name</code> and <code>description</code>
-annotated terms will allow for easier interpretation and analysis of the
-data. The <code>gene_name</code> and <code>description</code> attributes
-provide crucial information about the protein, such as its function and
-biological role. By updating these attributes with information from the
-FASTA file, we can ensure that our data is accurate and informative.</p>
-<p>The process of updating the <code>gene_name</code> and
-<code>description</code> annotated terms is simple. First, we will parse
-the FASTA file to extract the necessary information. Then, we will use
-this information to update the corresponding attributes in the imported
-data from FragPipe.</p>
-<p>It is important to note that the parsed FASTA file must contain
-accurate and up-to-date information. If the information in the FASTA
-file is outdated or incorrect, the updated <code>gene_name</code> and
-<code>description</code> attributes will also be incorrect. Therefore,
-it is essential to verify the accuracy of the FASTA file before using it
-to update the imported data from FragPipe.</p>
+<p>In mass spectrometry-based proteomics, raw search engine outputs
+(such as from ProteomeDiscoverer, MaxQuant, or FragPipe) often contain
+minimal metadata—frequently restricted to protein accession identifiers,
+preliminary gene symbols, or abbreviated descriptions.</p>
+<p>To derive biological meaning from quantitative proteomics data,
+proteins must be contextualized with richer functional annotations.
+These include:</p>
+<ul>
+<li>
+<strong>Gene Ontology (GO)</strong> terms: Molecular Function
+(<em>e.g.</em>, catalytic activity, ion binding), Biological Process
+(<em>e.g.</em>, cell division, DNA repair), and Cellular Component
+(<em>e.g.</em>, mitochondrion, nucleus).</li>
+<li>
+<strong>Subcellular Localization</strong>: Organelle and
+compartmental designations.</li>
+<li>
+<strong>Pathways</strong>: Biological reaction networks from
+Reactome, KEGG, or WikiPathways.</li>
+<li>
+<strong>Curated Nomenclature</strong>: Standardized gene symbols and
+protein descriptions from reference sequence databases.</li>
+</ul>
+<p>In <code>tidyproteomics</code>, annotations are integral to
+downstream analysis:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Subsetting &amp; Filtering</strong>: Isolate proteins of
+interest using semantic queries with <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code> and the
+<code>%like%</code> operator.</li>
+<li>
+<strong>Visual Labeling</strong>: Highlight specific proteins or
+protein families on volcano plots, PCA plots, and heatmaps.</li>
+<li>
+<strong>Term Enrichment Analysis</strong>: Identify statistically
+over-represented or systematically skewed functional terms via
+<code><a href="../reference/enrichment.html">enrichment()</a></code> and <code><a href="../reference/plot_enrichment.html">plot_enrichment()</a></code>.</li>
+</ol>
+<p>This vignette guides you through the process of obtaining new
+annotations from UniProt or a reference FASTA file, formatting them into
+tidy tables, importing them into your <code>tidyproteomics</code> data
+object with <code><a href="../reference/annotate.html">annotate()</a></code>, and utilizing them in downstream
+analyses.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># download the data</span></span>
-<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://ftp.ebi.ac.uk/pride-archive/2016/06/PXD004163/Yan_miR_Protein_table.flatprottable.txt"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">url</span>, destfile <span class="op">=</span> <span class="st">"./data/combined_protein.tsv"</span>, method <span class="op">=</span> <span class="st">"auto"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># import the data</span></span>
-<span><span class="va">data_prot</span> <span class="op">&lt;-</span> <span class="st">"./data/combined_protein.tsv"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/import.html">import</a></span><span class="op">(</span><span class="st">'FragPipe'</span>, <span class="st">'proteins'</span><span class="op">)</span></span></code></pre></div>
-<div class="section level3">
-<h3 id="from-a-fasta-file">From a FASTA File<a class="anchor" aria-label="anchor" href="#from-a-fasta-file"></a>
-</h3>
-<p>Read in a FASTA file using some “un-exposed” methods in the
-<code>tidyproteomics</code> package.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_fasta</span> <span class="op">&lt;-</span> <span class="st">"~/Local/data/fasta/uniprot_human-20398_20220920.fasta"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">tidyproteomics</span><span class="fu">:::</span><span class="fu"><a href="../reference/fasta_parse.html">fasta_parse</a></span><span class="op">(</span>as <span class="op">=</span> <span class="st">"data.frame"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html" class="external-link">select</a></span><span class="op">(</span>protein <span class="op">=</span> <span class="va">accession</span>, <span class="va">gene_name</span>, <span class="va">description</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">pivot_longer</span><span class="op">(</span></span>
-<span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'gene_name'</span>, <span class="st">'description'</span><span class="op">)</span>,</span>
-<span>    names_to <span class="op">=</span> <span class="st">'term'</span>,</span>
-<span>    values_to <span class="op">=</span> <span class="st">'annotation'</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="va">data_fasta</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'P68431'</span>, <span class="st">'P62805'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Notice the <code>gene_name</code> annotations are different from the
-FASTA than from the FragPipe outoput.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_prot</span><span class="op">$</span><span class="va">annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'P68431'</span>, <span class="st">'P62805'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>We can <strong>merge</strong> the annotations,</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_new_merged</span> <span class="op">&lt;-</span> <span class="va">data_prot</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/annotate.html">annotate</a></span><span class="op">(</span><span class="va">data_fasta</span>, duplicates <span class="op">=</span> <span class="st">'merge'</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">data_new_merged</span><span class="op">$</span><span class="va">annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'P68431'</span>, <span class="st">'P62805'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Or we can <strong>replace</strong> the annotations,</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_new_replaced</span> <span class="op">&lt;-</span> <span class="va">data_prot</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/annotate.html">annotate</a></span><span class="op">(</span><span class="va">data_fasta</span>, duplicates <span class="op">=</span> <span class="st">'replace'</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">data_new_replaced</span><span class="op">$</span><span class="va">annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'P68431'</span>, <span class="st">'P62805'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span></code></pre></div>
 </div>
+<div class="section level2">
+<h2 id="the-tidyproteomics-annotation-model">The Tidyproteomics Annotation Model<a class="anchor" aria-label="anchor" href="#the-tidyproteomics-annotation-model"></a>
+</h2>
+<p>Annotations in <code>tidyproteomics</code> are structured as a clean,
+long-format table accessible at <code>data$annotations</code>. Every
+annotation table requires three columns:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Identifier column</strong> (<code>protein</code> or
+<code>peptide</code>): Matches <code>data$identifier</code>.</li>
+<li>
+<strong><code>term</code></strong>: The category or ontology
+descriptor (<em>e.g.</em>, <code>'gene_name'</code>,
+<code>'description'</code>, <code>'molecular_function'</code>,
+<code>'biological_process'</code>,
+<code>'subcellular_location'</code>).</li>
+<li>
+<strong><code>annotation</code></strong>: The actual textual term or
+identifier value.</li>
+</ol>
+<p>You can inspect the annotations currently associated with any
+<code>tidyproteomics</code> data object using
+<code><a href="../reference/show_annotations.html">show_annotations()</a></code>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Display available annotation categories in the built-in HeLa dataset</span></span>
+<span><span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/show_annotations.html">show_annotations</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Current Annotation Terms</span></span>
+<span><span class="co">#&gt;   • protein</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • description</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • biological_process</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • cellular_component</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • molecular_function</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • gene_id_entrez</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • gene_name</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • wiki_pathway</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • reactome_pathway</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • gene_id_ensemble</span></span></code></pre></div>
+<p>To view the raw annotation entries for specific proteins, simply
+inspect <code>data$annotations</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hela_proteins</span><span class="op">$</span><span class="va">annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'P68431'</span>, <span class="st">'P62805'</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 3</span></span></span>
+<span><span class="co">#&gt;   protein term               annotation                                         </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> P68431  description        Histone H3.1 OS=Homo sapiens OX=9606 GN=H3C1 PE=1 …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> P68431  biological_process cell growth                                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> P68431  cellular_component cell surface;membrane;nucleus                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> P68431  molecular_function RNA binding;structural molecule activity           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> P68431  gene_id_entrez     8350; 8351; 8352; 8353; 8354; 8355; 8356; 8357; 83…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> P68431  gene_name          H3C1; H3C10; H3C11; H3C12; H3C2; H3C3; H3C4; H3C6;…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> P68431  wiki_pathway       Histone modifications; FBXL10 enhancement of MAP/E…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> P68431  reactome_pathway   Estrogen-dependent gene expression; HATs acetylate…</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="downloading-annotations-from-uniprot">Downloading Annotations from UniProt<a class="anchor" aria-label="anchor" href="#downloading-annotations-from-uniprot"></a>
+</h2>
+<p>The <strong>Universal Protein Resource (<a href="https://www.uniprot.org" class="external-link">UniProt</a>)</strong> is the central
+repository for protein sequence and functional annotation data. The web
+portal provides an intuitive way to customize and export comprehensive
+annotation tables for any proteome.</p>
 <div class="section level3">
-<h3 id="go-annotations">GO Annotations<a class="anchor" aria-label="anchor" href="#go-annotations"></a>
+<h3 id="step-1-search-for-the-proteome-of-interest">Step 1: Search for the Proteome of Interest<a class="anchor" aria-label="anchor" href="#step-1-search-for-the-proteome-of-interest"></a>
 </h3>
-<p>To obtain GO annotations, you can visit UniProt’s website and search
-for the proteins of interest, such as human proteins. Once you have
-found the proteins, you will need to select the “Customize columns”
-option to access several options, including Gene Ontology.</p>
-<p>After selecting Gene Ontology, you will need to choose the desired
-values, such as molecular function, by clicking on them. Once you have
-selected your desired values, click on the “Save” button to save your
-changes.</p>
+<ol style="list-style-type: decimal">
+<li>Navigate to <a href="https://www.uniprot.org" class="external-link">uniprot.org</a>.</li>
+<li>Enter your organism name or taxonomy identifier in the search bar
+(<em>e.g.</em>, <code>Human</code> or
+<code>taxonomy_id:9606</code>).</li>
+<li>On the left filter panel, select <strong>Reviewed
+(Swiss-Prot)</strong> to filter for high-confidence, manually curated
+entries (approximately 20,400 proteins for human).</li>
+</ol>
 <div class="float">
 <img src="images/uniprot_search_01.png" style="width:100.0%" alt="Figure 1 - UniProt web search for human proteins"><div class="figcaption"><em>Figure 1 - UniProt web search for human
 proteins</em></div>
 </div>
-<p>Finally, you can download the table as a TSV file by clicking on the
-“Download” button. This file will contain all the information you need
-about your selected proteins, making it easier to analyze and interpret
-the data.</p>
-<p>Now that you know how to obtain GO annotations, you can use this
-information to enhance your research and analysis. UniProt’s website is
-a valuable resource for obtaining information about proteins, and the
-ability to customize columns and select desired values makes it even
-more useful for researchers and scientists.</p>
+</div>
+<div class="section level3">
+<h3 id="step-2-customize-columns-for-required-annotations">Step 2: Customize Columns for Required Annotations<a class="anchor" aria-label="anchor" href="#step-2-customize-columns-for-required-annotations"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Click the <strong>“Customize columns”</strong> button directly above
+the results table.</li>
+<li>In the configuration modal, expand the categories containing
+annotations relevant to your study:
+<ul>
+<li>
+<strong>Gene Ontology (GO)</strong>: Check <em>Gene Ontology
+(molecular function)</em>, <em>Gene Ontology (biological process)</em>,
+and/or <em>Gene Ontology (cellular component)</em>.</li>
+<li>
+<strong>Subcellular location</strong>: Check <em>Subcellular
+location [CC]</em>.</li>
+<li>
+<strong>Function / Pathways</strong>: Check <em>Pathway</em>,
+<em>Catalytic activity</em>, or <em>Keywords</em>.</li>
+</ul>
+</li>
+<li>Click the blue <strong>“Save”</strong> button at the bottom right of
+the modal to apply the customized view.</li>
+</ol>
 <div class="float">
-<img src="images/uniprot_search_02.png" style="width:100.0%" alt="Figure 2 - UniProt show table layout with Go annotations"><div class="figcaption"><em>Figure 2 - UniProt show table layout with Go
-annotations</em></div>
+<img src="images/uniprot_search_02.png" style="width:100.0%" alt="Figure 2 - UniProt column customization modal with Gene Ontology selection"><div class="figcaption"><em>Figure 2 - UniProt column customization
+modal with Gene Ontology selection</em></div>
 </div>
-<p>Read in the TSV file from the downloaded UniProt table.</p>
+</div>
+<div class="section level3">
+<h3 id="step-3-download-the-data-table">Step 3: Download the Data Table<a class="anchor" aria-label="anchor" href="#step-3-download-the-data-table"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Click the <strong>“Download”</strong> button at the top of the
+search table.</li>
+<li>Set <strong>Format</strong> to <strong>TSV</strong> (Tab-Separated
+Values).</li>
+<li>Choose <strong>Compressed</strong> (gzip) for large datasets or
+<strong>Uncompressed</strong> for smaller sets.</li>
+<li>Save the file to your project directory (<em>e.g.</em>,
+<code>data/uniprot_human_annotations.tsv</code>).</li>
+</ol>
+<blockquote>
+<p><strong>Tip - Programmatic Download via UniProt REST API</strong>:
+You can also download annotations directly within an R script using
+UniProt’s REST API, ensuring complete reproducibility:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Example: Programmatic download of reviewed human proteins with GO and location terms</span></span>
+<span><span class="va">uniprot_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"https://rest.uniprot.org/uniprotkb/stream?"</span>,</span>
+<span>  <span class="st">"format=tsv&amp;"</span>,</span>
+<span>  <span class="st">"query=%28model_organism%3A9606%29+AND+%28reviewed%3Atrue%29&amp;"</span>,</span>
+<span>  <span class="st">"fields=accession%2Cid%2Cgene_names%2Cgo_f%2Cgo_p%2Csubcellular_location"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/download.file.html" class="external-link">download.file</a></span><span class="op">(</span><span class="va">uniprot_url</span>, destfile <span class="op">=</span> <span class="st">"data/uniprot_human_annotations.tsv"</span><span class="op">)</span></span></code></pre></div>
+</blockquote>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="tidying-downloaded-annotations">Tidying Downloaded Annotations<a class="anchor" aria-label="anchor" href="#tidying-downloaded-annotations"></a>
+</h2>
+<p>Files exported from UniProt cannot be attached directly without a
+brief tidying step. Raw UniProt TSVs differ from the
+<code>tidyproteomics</code> specification in several ways:</p>
+<ul>
+<li>The accession column is named <strong><code>Entry</code></strong>
+instead of <strong><code>protein</code></strong>.</li>
+<li>Multi-term fields are concatenated into a single string with
+semicolons (<em>e.g.</em>,
+<code>"structural constituent of chromatin [GO:0005488]; protein binding [GO:0005515]"</code>).</li>
+<li>GO terms and subcellular locations often include accession tags in
+brackets (<em>e.g.</em>, <code>[GO:0005488]</code> or
+<code>[SL-0191]</code>), which should be stripped for clean
+visualization.</li>
+<li>The table is wide (one column per annotation type) and needs to be
+pivoted to the long three-column format (<code>protein</code>,
+<code>term</code>, <code>annotation</code>).</li>
+</ul>
+<div class="section level3">
+<h3 id="tidying-workflow">Tidying Workflow<a class="anchor" aria-label="anchor" href="#tidying-workflow"></a>
+</h3>
+<p>Here is how to read and transform a downloaded UniProt table into the
+required tidy format:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Example of raw UniProt export data matching proteins in hela_proteins</span></span>
+<span><span class="va">uniprot_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  Entry <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"P68431"</span>, <span class="st">"P62805"</span>, <span class="st">"P06576"</span>, <span class="st">"Q15149"</span><span class="op">)</span>,</span>
+<span>  `Gene Ontology (molecular function)` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"structural constituent of chromatin [GO:0005488]; protein binding [GO:0005515]"</span>,</span>
+<span>    <span class="st">"structural constituent of chromatin [GO:0005488]; DNA binding [GO:0003677]"</span>,</span>
+<span>    <span class="st">"ATP binding [GO:0005524]; proton-transporting ATPase activity [GO:0046933]"</span>,</span>
+<span>    <span class="st">"actin binding [GO:0003779]; structural molecule activity [GO:0005198]"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  `Subcellular location [CC]` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Nucleus [SL-0191]"</span>,</span>
+<span>    <span class="st">"Nucleus [SL-0191]; Chromosome [SL-0077]"</span>,</span>
+<span>    <span class="st">"Mitochondrion inner membrane [SL-0168]"</span>,</span>
+<span>    <span class="st">"Cytoplasm [SL-0086]; Cytoskeleton [SL-0090]"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># For your project, load your downloaded file:</span></span>
+<span><span class="co"># uniprot_raw &lt;- readr::read_tsv("data/uniprot_human_annotations.tsv")</span></span>
+<span></span>
+<span><span class="va">uniprot_raw</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;   Entry  `Gene Ontology (molecular function)`             Subcellular location…¹</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> P68431 structural constituent of chromatin [GO:0005488… Nucleus [SL-0191]     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> P62805 structural constituent of chromatin [GO:0005488… Nucleus [SL-0191]; Ch…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> P06576 ATP binding [GO:0005524]; proton-transporting A… Mitochondrion inner m…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Q15149 actin binding [GO:0003779]; structural molecule… Cytoplasm [SL-0086]; …</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ abbreviated name: ¹​`Subcellular location [CC]`</span></span></span></code></pre></div>
+<p>We now tidy the table:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_go</span> <span class="op">&lt;-</span> <span class="st">"~/Local/data/uniprotkb/uniprotkb_human_AND_reviewed_true_AND_m_2023_10_10.tsv"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">read_tsv</span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">tidy_annotations</span> <span class="op">&lt;-</span> <span class="va">uniprot_raw</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># 1. Rename Entry to 'protein' and select columns of interest</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span></span>
+<span>    protein <span class="op">=</span> <span class="va">Entry</span>,</span>
+<span>    molecular_function <span class="op">=</span> <span class="va">`Gene Ontology (molecular function)`</span>,</span>
+<span>    subcellular_location <span class="op">=</span> <span class="va">`Subcellular location [CC]`</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># 2. Split semicolon-delimited entries into separate rows</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate_rows.html" class="external-link">separate_rows</a></span><span class="op">(</span><span class="va">molecular_function</span>, sep <span class="op">=</span> <span class="st">";\\s*"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate_rows.html" class="external-link">separate_rows</a></span><span class="op">(</span><span class="va">subcellular_location</span>, sep <span class="op">=</span> <span class="st">";\\s*"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># 3. Remove trailing bracketed accession IDs [GO:...] or [SL-...]</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    molecular_function <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"\\s*\\[.+\\]$"</span>, <span class="st">""</span>, <span class="va">molecular_function</span><span class="op">)</span>,</span>
+<span>    subcellular_location <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"\\s*\\[.+\\]$"</span>, <span class="st">""</span>, <span class="va">subcellular_location</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># 4. Pivot wide annotation columns to the standard term/annotation format</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span></span>
+<span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">molecular_function</span>, <span class="va">subcellular_location</span><span class="op">)</span>,</span>
+<span>    names_to <span class="op">=</span> <span class="st">"term"</span>,</span>
+<span>    values_to <span class="op">=</span> <span class="st">"annotation"</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># 5. Remove empty or missing annotations</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">annotation</span><span class="op">)</span>, <span class="va">annotation</span> <span class="op">!=</span> <span class="st">""</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">data_go</span></span></code></pre></div>
-<p>We just need to tidy up that data a bit and get it into the format
-needed for attaching the annotations.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_go</span> <span class="op">&lt;-</span> <span class="va">data_go</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html" class="external-link">select</a></span><span class="op">(</span>protein <span class="op">=</span> <span class="va">Entry</span>,</span>
-<span>         molecular_function <span class="op">=</span> <span class="va">`Gene Ontology (molecular function)`</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="co"># separate the GO terms so we get 1/row</span></span>
-<span>  <span class="fu">separate_rows</span><span class="op">(</span><span class="va">molecular_function</span>, sep<span class="op">=</span><span class="st">"\\;\\s"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="co"># remove the [GO:accession]</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>molecular_function <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"\\s\\[.+"</span>, <span class="st">""</span>, <span class="va">molecular_function</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="co"># pivot to the needed format</span></span>
-<span>  <span class="fu">pivot_longer</span><span class="op">(</span><span class="va">molecular_function</span>,</span>
-<span>               names_to <span class="op">=</span> <span class="st">'term'</span>,</span>
-<span>               values_to <span class="op">=</span> <span class="st">'annotation'</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">data_go</span></span></code></pre></div>
-<p>Looks great!</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_new_go</span> <span class="op">&lt;-</span> <span class="va">data_prot</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/annotate.html">annotate</a></span><span class="op">(</span><span class="va">data_go</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">data_new_go</span><span class="op">$</span><span class="va">annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">protein</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'P68431'</span>, <span class="st">'P62805'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Take it for a test drive by subsetting the data based on a specific
-annotation term.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_new_go</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">molecular_function</span> <span class="op">==</span> <span class="st">'structural constituent of chromatin'</span><span class="op">)</span></span></code></pre></div>
-<p>An enrichment plot for “ion binding” for the annotation
-<code>molecular_function</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_new_go</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">molecular_function</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">'ion binding'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, </span>
-<span>             .terms <span class="op">=</span> <span class="st">'molecular_function'</span>,</span>
-<span>             .method <span class="op">=</span> <span class="st">'wilcoxon'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/plot_enrichment.html">plot_enrichment</a></span><span class="op">(</span></span>
-<span>    <span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, </span>
-<span>    .term <span class="op">=</span> <span class="st">'molecular_function'</span>,</span>
-<span>    significance_max <span class="op">=</span> <span class="fl">1</span></span>
-<span>  <span class="op">)</span> </span></code></pre></div>
+<span><span class="va">tidy_annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 3</span></span></span>
+<span><span class="co">#&gt;    protein term                 annotation                         </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> P68431  molecular_function   structural constituent of chromatin</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> P68431  subcellular_location Nucleus                            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> P68431  molecular_function   protein binding                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> P62805  molecular_function   structural constituent of chromatin</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> P62805  subcellular_location Nucleus                            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> P62805  subcellular_location Chromosome                         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> P62805  molecular_function   DNA binding                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> P06576  molecular_function   ATP binding                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> P06576  subcellular_location Mitochondrion inner membrane       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> P06576  molecular_function   proton-transporting ATPase activity</span></span></code></pre></div>
+<p>The resulting table conforms perfectly to the
+<code>tidyproteomics</code> specification: three columns
+(<code>protein</code>, <code>term</code>, and
+<code>annotation</code>).</p>
+<hr>
 </div>
+</div>
+<div class="section level2">
+<h2 id="importing-annotations-with-annotate">Importing Annotations with <code>annotate()</code><a class="anchor" aria-label="anchor" href="#importing-annotations-with-annotate"></a>
+</h2>
+<p>The <code><a href="../reference/annotate.html">annotate()</a></code> function integrates the prepared
+annotation table into your <code>tidyproteomics</code> data object:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/annotate.html">annotate</a></span><span class="op">(</span><span class="va">annotations</span>, duplicates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"replace"</span>, <span class="st">"merge"</span>, <span class="st">"leave"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="managing-duplicate-annotations">Managing Duplicate Annotations<a class="anchor" aria-label="anchor" href="#managing-duplicate-annotations"></a>
+</h3>
+<p>The <code>duplicates</code> argument controls how new annotations
+interact with existing ones:</p>
+<ul>
+<li>
+<strong><code>"replace"</code></strong> (default): Replaces existing
+annotations for that <code>protein</code> and <code>term</code>. Ideal
+when updating gene symbols or descriptions where only one canonical
+value is desired.</li>
+<li>
+<strong><code>"merge"</code></strong>: Appends new values to
+existing ones, concatenating multiple terms with a semicolon separator
+(<code>"; "</code>). Ideal for Gene Ontology categories, pathways, or
+protein domains.</li>
+<li>
+<strong><code>"leave"</code></strong>: Appends all new rows without
+merging, allowing multiple distinct rows for each protein/term
+pair.</li>
+</ul>
+<p>Let’s attach the tidied annotations to <code>hela_proteins</code>
+using <code>duplicates = "merge"</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hela_annotated</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/annotate.html">annotate</a></span><span class="op">(</span><span class="va">tidy_annotations</span>, duplicates <span class="op">=</span> <span class="st">"merge"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Confirm the new annotation categories are present</span></span>
+<span><span class="va">hela_annotated</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/show_annotations.html">show_annotations</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Current Annotation Terms</span></span>
+<span><span class="co">#&gt;   • protein</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • biological_process</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • cellular_component</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • description</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • gene_id_ensemble</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • gene_id_entrez</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • gene_name</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • molecular_function</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • wiki_pathway</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • reactome_pathway</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   • subcellular_location</span></span></code></pre></div>
+<p>Notice that <code>subcellular_location</code> is now available as an
+annotation category, and <code>molecular_function</code> has been
+augmented with the newly imported terms!</p>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="extracting-annotations-from-a-fasta-file">Extracting Annotations from a FASTA File<a class="anchor" aria-label="anchor" href="#extracting-annotations-from-a-fasta-file"></a>
+</h2>
+<p>Search engine outputs often suffer from outdated or truncated gene
+symbols. A reference FASTA file used during the database search is the
+authoritative source for sequence headers.</p>
+<p><code>tidyproteomics</code> includes an internal parser,
+<code>tidyproteomics:::fasta_parse()</code>, capable of extracting FASTA
+headers into structured data frames:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Locate the human FASTA file included with tidyproteomics</span></span>
+<span><span class="va">fasta_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/path_to_package_data.html">path_to_package_data</a></span><span class="op">(</span><span class="st">"fasta"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Parse FASTA headers into a tidy data frame</span></span>
+<span><span class="va">data_fasta</span> <span class="op">&lt;-</span> <span class="fu">tidyproteomics</span><span class="fu">:::</span><span class="fu"><a href="../reference/fasta_parse.html">fasta_parse</a></span><span class="op">(</span><span class="va">fasta_file</span>, as <span class="op">=</span> <span class="st">"data.frame"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>protein <span class="op">=</span> <span class="va">accession</span>, <span class="va">gene_name</span>, <span class="va">description</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span></span>
+<span>    cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gene_name"</span>, <span class="st">"description"</span><span class="op">)</span>,</span>
+<span>    names_to <span class="op">=</span> <span class="st">"term"</span>,</span>
+<span>    values_to <span class="op">=</span> <span class="st">"annotation"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Parsing FASTA file human.fasta</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Parsing FASTA file human.fasta ... done</span></span>
+<span><span class="co">#&gt; </span></span>
+<span></span>
+<span><span class="va">data_fasta</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
+<span><span class="co">#&gt;   protein term        annotation                                   </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> O15205  gene_name   UBD                                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> O15205  description Ubiquitin D                                  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> O60524  gene_name   NEMF                                         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> O60524  description Ribosome quality control complex subunit NEMF</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> P06576  gene_name   ATP5F1B                                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> P06576  description ATP synthase subunit beta, mitochondrial</span></span></code></pre></div>
+<p>We can now use <code>duplicates = "replace"</code> to update the
+<code>gene_name</code> and <code>description</code> annotations with the
+exact canonical values from the FASTA database:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hela_updated</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/annotate.html">annotate</a></span><span class="op">(</span><span class="va">data_fasta</span>, duplicates <span class="op">=</span> <span class="st">"replace"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compare updated annotations for ATP synthase beta (P06576)</span></span>
+<span><span class="va">hela_updated</span><span class="op">$</span><span class="va">annotations</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">protein</span> <span class="op">==</span> <span class="st">"P06576"</span>, <span class="va">term</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gene_name"</span>, <span class="st">"description"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;   protein term        annotation                              </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> P06576  description ATP synthase subunit beta, mitochondrial</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> P06576  gene_name   ATP5F1B</span></span></code></pre></div>
+<hr>
+</div>
+<div class="section level2">
+<h2 id="utilizing-annotations-in-downstream-analyses">Utilizing Annotations in Downstream Analyses<a class="anchor" aria-label="anchor" href="#utilizing-annotations-in-downstream-analyses"></a>
+</h2>
+<p>Once imported, annotations can be leveraged across all
+<code>tidyproteomics</code> workflows.</p>
+<div class="section level3">
+<h3 id="subsetting-by-annotation">1. Subsetting by Annotation<a class="anchor" aria-label="anchor" href="#subsetting-by-annotation"></a>
+</h3>
+<p>Filter datasets based on annotation categories using
+<code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code> and the <code>%like%</code> regular expression
+operator:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Subset proteins residing in the Nucleus based on newly imported annotations</span></span>
+<span><span class="va">nuclear_proteins</span> <span class="op">&lt;-</span> <span class="va">hela_annotated</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">subcellular_location</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"Nucleus"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">subcellular_location</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Nucleus</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">subcellular_location</span> <span style="color: #0000BB;">%like%</span> <span style="color: #FF5F00; font-style: italic;">Nucleus</span> ... done</span></span>
+<span><span class="co">#&gt; </span></span>
+<span></span>
+<span><span class="va">nuclear_proteins</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
+<span><span class="co">#&gt;                 proteins (19.62 kB) </span></span>
+<span><span class="co">#&gt; Composition     6 files </span></span>
+<span><span class="co">#&gt;                 2 samples (control, knockdown) </span></span>
+<span><span class="co">#&gt; Quantitation    2 proteins </span></span>
+<span><span class="co">#&gt;                 0.92 log10 dynamic range </span></span>
+<span><span class="co">#&gt;                 0% missing values </span></span>
+<span><span class="co">#&gt;  *imputed        </span></span>
+<span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
+<span><span class="co">#&gt; Annotations     (10) biological_process cellular_component description gene_id_ensemble</span></span>
+<span><span class="co">#&gt;                 gene_id_entrez gene_name molecular_function wiki_pathway</span></span>
+<span><span class="co">#&gt;                 reactome_pathway subcellular_location </span></span>
+<span><span class="co">#&gt; </span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="functional-enrichment-analysis">2. Functional Enrichment Analysis<a class="anchor" aria-label="anchor" href="#functional-enrichment-analysis"></a>
+</h3>
+<p>Term enrichment analyses (<em>e.g.</em>, using Wilcoxon rank-sum,
+GSEA, or Fisher’s exact test) test whether specific annotation
+categories are significantly skewed or over-represented between
+experimental conditions. Because enrichment algorithms evaluate terms
+relative to the whole proteome background, <code><a href="../reference/expression.html">expression()</a></code> and
+<code><a href="../reference/enrichment.html">enrichment()</a></code> should be performed across the complete
+dataset (rather than a pre-filtered subset):</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Test enrichment of molecular function terms across knockdown vs control</span></span>
+<span><span class="va">enrichment_results</span> <span class="op">&lt;-</span> <span class="va">hela_annotated</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/enrichment.html">enrichment</a></span><span class="op">(</span></span>
+<span>    <span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>,</span>
+<span>    .terms <span class="op">=</span> <span class="st">"molecular_function"</span>,</span>
+<span>    .method <span class="op">=</span> <span class="st">"wilcoxon"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Visualize the enrichment results</span></span>
+<span><span class="va">enrichment_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/plot_enrichment.html">plot_enrichment</a></span><span class="op">(</span></span>
+<span>    <span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>,</span>
+<span>    .term <span class="op">=</span> <span class="st">"molecular_function"</span>,</span>
+<span>    enrichment_min <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>    significance_max <span class="op">=</span> <span class="fl">0.05</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="annotating_files/figure-html/unnamed-chunk-12-1.png" width="672"></p>
+</div>
+<div class="section level3">
+<h3 id="exporting-analysis-tables">3. Exporting Analysis Tables<a class="anchor" aria-label="anchor" href="#exporting-analysis-tables"></a>
+</h3>
+<p>Export your enrichment results along with corresponding statistical
+metrics (p-value, adjusted p-value, enrichment score, and term size) for
+downstream reporting or publication:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">enrichment_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/export_analysis.html">export_analysis</a></span><span class="op">(</span></span>
+<span>    <span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>,</span>
+<span>    .analysis <span class="op">=</span> <span class="st">"enrichment"</span>,</span>
+<span>    .term <span class="op">=</span> <span class="st">"molecular_function"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 5</span></span></span>
+<span><span class="co">#&gt;   annotation                  p_value   adj_p_value enrichment  size</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> RNA binding                1.67<span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span> 0.000<span style="text-decoration: underline;">000</span>001<span style="text-decoration: underline;">33</span>      0.267  <span style="text-decoration: underline;">1</span>038</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> catalytic activity         2.53<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> 0.101              0.372   261</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> signal transducer activity 5.82<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> 0.155              0.389   225</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> enzyme regulator activity  9.56<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span> 0.191              1.43      6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> motor activity             1.26<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> 0.201              0.363   383</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> DNA binding                5.36<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> 0.714              0.361   366</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> protein binding            6.86<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> 0.784              0.303    63</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> antioxidant activity       8.32<span style="color: #949494;">e</span><span style="color: #BB0000;">- 1</span> 0.832              0.347   272</span></span></code></pre></div>
+<hr>
+</div>
+</div>
+<div class="section level2">
+<h2 id="summary-checklist">Summary Checklist<a class="anchor" aria-label="anchor" href="#summary-checklist"></a>
+</h2>
+<p>When adding annotations to your proteomics dataset:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Format Requirements</strong>: Ensure your table contains
+<code>protein</code> (or your dataset’s identifier), <code>term</code>,
+and <code>annotation</code>.</li>
+<li>
+<strong>Text Cleaning</strong>: Split multi-value strings
+(<em>e.g.</em>, with <code><a href="https://tidyr.tidyverse.org/reference/separate_rows.html" class="external-link">separate_rows()</a></code>) and remove bracketed
+accession codes.</li>
+<li>
+<strong>Deduplication Strategy</strong>: Use
+<code>duplicates = "replace"</code> for mutually exclusive terms
+(<em>e.g.</em>, <code>gene_name</code>) and
+<code>duplicates = "merge"</code> for additive ontologies
+(<em>e.g.</em>, GO terms, pathways).</li>
+<li>
+<strong>Verification</strong>: Always verify your imported
+annotations with <code><a href="../reference/show_annotations.html">show_annotations()</a></code>.</li>
+</ol>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

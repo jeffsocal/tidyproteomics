@@ -23,22 +23,27 @@ as it returns the original tidyproteomics data-object.
 library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 
+# subset to minimize compute time
+hela_subset <- hela_proteins \%>\% subset(description \%like\% 'ribosome')
+
 # a global summary
-hela_proteins \%>\% summary()
+hela_subset \%>\% summary()
 
 # a summary by sample
-hela_proteins \%>\% summary("sample")
+hela_subset \%>\% summary("sample")
 
+\donttest{
 # a summary by sample with imputations removed
-hela_proteins \%>\%
+hela_subset \%>\%
    subset(imputed == 0) \%>\%
    summary("sample")
 
 # a summary of imputation
-hela_proteins \%>\% summary("imputed")
+hela_subset \%>\% summary("imputed")
 
-hela_proteins \%>\% summary("cellular_component")
+hela_subset \%>\% summary("cellular_component")
 
-hela_proteins \%>\% summary("biological_process")
+hela_subset \%>\% summary("biological_process")
+}
 
 }

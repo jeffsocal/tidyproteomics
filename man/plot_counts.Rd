@@ -37,6 +37,8 @@ library(dplyr, warn.conflicts = FALSE)
 library(tidyproteomics)
 hela_proteins \%>\% plot_counts()
 
+\donttest{
 hela_proteins \%>\% plot_counts(show_replicates = FALSE, palette = 'Blues')
+}
 
 }

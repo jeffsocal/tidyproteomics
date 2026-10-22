@@ -1,12 +1,12 @@
-#' Export the LLM agent skill document to the working directory
+#' Export the LLM agent skill document
 #'
 #' @description
 #' `export_llm_skill()` copies the bundled `SKILL.md` document from the package's
-#' extdata directory to the current working directory or a specified destination.
+#' extdata directory to a specified destination directory (default: `tempdir()`).
 #' This document contains complete instructions, API references, supported formats,
 #' and workflows for use by Large Language Models (LLMs) and autonomous AI coding agents.
 #'
-#' @param destination path to directory where the file should be saved (default: ".")
+#' @param destination path to directory where the file should be saved (default: `tempdir()`)
 #' @param file_name character string for the output filename (default: "SKILL.md")
 #' @param overwrite boolean whether to overwrite an existing file (default: TRUE)
 #'
@@ -14,12 +14,11 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' library(tidyproteomics)
 #' export_llm_skill()
-#' }
+#'
 export_llm_skill <- function(
-    destination = ".",
+    destination = tempdir(),
     file_name = "SKILL.md",
     overwrite = TRUE
 ){

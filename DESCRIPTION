@@ -7,7 +7,8 @@ Description:
     Creates a simple, universal S3 data structure for the post-analysis
     of mass spectrometry-based quantitative proteomic data. In
     addition, this package collects, adapts and organizes several useful
-    algorithms and methods used in typical post-analysis workflows.
+    algorithms and methods used in typical post-analysis workflows, as
+    described in Jones et al. (2023) <doi:10.1186/s12859-023-05360-7>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -15,21 +16,26 @@ RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 Additional_repositories: https://bioconductor.org/packages/release/bioc
 Suggests: 
+    BiocParallel,
     doParallel,
+    e1071,
+    eulerr,
+    foreach,
     knitr,
     missForest,
     MSstats,
+    pheatmap,
+    randomForest,
+    RColorBrewer,
+    readxl,
     rmarkdown,
     testthat (>= 3.0.0),
-    utils
+    writexl
 Config/testthat/edition: 3
 Imports: 
-    BiocParallel,
     cli,
     digest,
     dplyr,
-    e1071,
-    eulerr,
     fgsea,
     forcats,
     ggplot2,
@@ -41,22 +47,17 @@ Imports:
     magrittr,
     methods,
     parallel,
-    pheatmap,
     prettyunits,
     purrr,
-    randomForest,
-    RColorBrewer,
     readr,
-    readxl,
     rlang,
     scales,
     stringr,
     tibble,
     tidyr,
-    tidyselect,
-    writexl
+    tidyselect
 Depends: 
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 LazyData: true
 URL: https://jeffsocal.github.io/tidyproteomics/, https://github.com/jeffsocal/tidyproteomics
 BugReports: https://github.com/jeffsocal/tidyproteomics/issues

@@ -4,13 +4,15 @@
 \alias{get_quant_names}
 \title{Get the quantitative value names}
 \usage{
-get_quant_names(data)
+get_quant_names(data = NULL, format = c("table", "vector"))
 }
 \arguments{
 \item{data}{a tidyproteomics data-object}
+
+\item{format}{a character string specifying the return format: "table" (default) or "vector"}
 }
 \value{
-a character vector
+a tibble or character vector
 }
 \description{
 \code{get_quant_names()} is a helper function that returns the names for all of the
@@ -19,5 +21,6 @@ normalized quantitative values, such as \emph{raw}, \emph{linear}, \emph{loess}
 \examples{
 library(tidyproteomics)
 get_quant_names(hela_proteins)
+get_quant_names(hela_proteins, format = "vector")
 
 }

@@ -42,7 +42,7 @@ select_normalization <- function(
 
   check_data(data)
   analyte <- data$analyte
-  quant_values <- data %>% get_quant_names()
+  quant_values <- data %>% get_quant_names(format = "vector")
 
   if(!is.null(normalization)) {
     normalization <- rlang::arg_match(normalization, quant_values)

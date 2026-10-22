@@ -21,7 +21,7 @@ extract <- function(
   if(is.null(values)){
     values <- data$quantitative_source
   } else {
-    values <- rlang::arg_match(values, get_quant_names(data), multiple = T)
+    values <- rlang::arg_match(values, get_quant_names(data, format = "vector"), multiple = T)
   }
   if(!is.logical(na.rm) && !na.rm %in% c(TRUE, FALSE)){
     cli::cli_abort(c("x" = "na.rm must be TRUE or FALSE, not `{na.rm}`"))

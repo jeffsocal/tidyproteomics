@@ -62,7 +62,7 @@ plot_quantrank <- function(
   abundance_025 <- NULL
 
   check_data(data)
-  accounting_cols <- unique(c(data$identifier, get_annotation_terms(data)))
+  accounting_cols <- unique(c(data$identifier, get_annotation_terms(data, format = "vector")))
   if(is.null(accounting)) { accounting <- accounting_cols[1]}
   accounting <- rlang::arg_match(accounting, accounting_cols)
 
@@ -248,13 +248,13 @@ table_quantrank <- function(
   check_data(data)
 
   display_filter <- rlang::arg_match(display_filter)
-  accounting_cols <- unique(c(data$identifier, get_annotation_terms(data)))
+  accounting_cols <- unique(c(data$identifier, get_annotation_terms(data, format = "vector")))
   if(is.null(accounting)) { accounting <- accounting_cols[1]}
   accounting <- rlang::arg_match(accounting, accounting_cols)
   # if(deviation_filter < 0 || deviation_filter > 1) {cli::cli_abort("x" = "deviation_filter is between 0 and 1, not `{deviation_filter}`")}
 
   if(display_filter != 'none'){
-    pairs <- data %>% get_sample_names() %>% utils::combn(2)
+    pairs <- data %>% get_sample_names(format = "vector") %>% utils::combn(2)
     tb_exp <- list()
     for(i in 1:ncol(pairs)){
       tb_exp[[i]] <- data %>% expression_test(experiment = pairs[1,i], control = pairs[2,i])

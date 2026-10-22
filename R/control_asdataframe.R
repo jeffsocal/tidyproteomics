@@ -53,7 +53,7 @@ as.data.frame.tidyproteomics <- function(
       cli::cli_abort("trying to drop `{drop}`, only finding `{can_drop}`")
     }
   }
-  values <- rlang::arg_match(values, get_quant_names(data))
+  values <- rlang::arg_match(values, get_quant_names(data, format = "vector"))
   shape <- rlang::arg_match(shape)
 
   # pull the data from each table

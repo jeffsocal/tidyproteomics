@@ -4,13 +4,15 @@
 \alias{get_sample_names}
 \title{Helper function to get all sample names}
 \usage{
-get_sample_names(data = NULL)
+get_sample_names(data = NULL, format = c("table", "vector"))
 }
 \arguments{
 \item{data}{tidyproteomics data object}
+
+\item{format}{a character string specifying the return format: "table" (default) or "vector"}
 }
 \value{
-a character vector of unique sample names
+a tibble or character vector of unique sample names
 }
 \description{
 \code{get_sample_names()} is a helper function that returns the unique sample
@@ -19,5 +21,6 @@ names present in a tidyproteomics data object.
 \examples{
 library(tidyproteomics)
 get_sample_names(hela_proteins)
+get_sample_names(hela_proteins, format = "vector")
 
 }

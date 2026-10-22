@@ -199,7 +199,7 @@ accordingly.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"./table_proteins_enrichment_knockdown-control.csv"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The Enrichment Table</p>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,561 × 6</span></span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 30 × 6</span></span></span>
 <span><span class="co">#&gt;    term               annotation            p_value adj_p_value enrichment  size</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> biological_process conjugation           2.28<span style="color: #949494;">e</span><span style="color: #BB0000;">-6</span>   0.000<span style="text-decoration: underline;">029</span>6      1.12   <span style="text-decoration: underline;">1</span>227</span></span>
@@ -212,7 +212,7 @@ accordingly.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> biological_process coagulation           1.39<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.833          1.08    961</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> biological_process cell differentiation  1.49<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.833          0.953   551</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> biological_process cell growth           1.63<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>   0.833          1.06   <span style="text-decoration: underline;">1</span>782</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,551 more rows</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more rows</span></span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"./proteins_enrichment_knockdown.png"</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu">magick</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/magick/reference/editing.html" class="external-link">image_read</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The Enrichment Plot <img src="images/proteins_enrichment_knockdown-control.png"></p>

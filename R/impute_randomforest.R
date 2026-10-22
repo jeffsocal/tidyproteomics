@@ -17,20 +17,36 @@ impute.randomforest <- function(
   if (!requireNamespace("missForest", quietly = TRUE)) {
     cli::cli_abort("Package {.pkg missForest} is required for random forest imputation. Please install it.")
   }
-  if (!requireNamespace("doParallel", quietly = TRUE)) {
-    cli::cli_abort("Package {.pkg doParallel} is required for parallel random forest imputation. Please install it.")
-  }
-
   cores = min(floor(cores), ncol(matrix))
+
+  if (cores > 1) {
+    if (!requireNamespace("doParallel", quietly = TRUE)) {
+      cli::cli_abort("Package {.pkg doParallel} is required for parallel random forest imputation. Please install it.")
+    }
+
+    on.exit({
+      if (requireNamespace("doParallel", quietly = TRUE)) {
+        try(doParallel::stopImplicitCluster(), silent = TRUE)
+      }
+      if (requireNamespace("foreach", quietly = TRUE)) {
+        try(foreach::registerDoSEQ(), silent = TRUE)
+      }
+    }, add = TRUE)
+  }
 
   tryCatch({
 
     suppressWarnings({
-      doParallel::registerDoParallel(cores=cores)
+      if (cores > 1) {
+        doParallel::registerDoParallel(cores = cores)
+        parallelize <- 'variables'
+      } else {
+        parallelize <- 'no'
+      }
 
       this_matrix <- matrix %>%
         missForest::missForest(
-          parallelize = 'variables',
+          parallelize = parallelize,
           variablewise = TRUE)
     })
 

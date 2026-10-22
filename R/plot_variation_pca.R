@@ -40,7 +40,7 @@ plot_variation_pca <- function(
 
   analyte <- data$analyte
 
-  quant_values <- data %>% get_quant_names()
+  quant_values <- data %>% get_quant_names(format = "vector")
   data_quant <- data %>% extract(values = quant_values)
 
   if(!c('origin') %in% names(data_quant)) {

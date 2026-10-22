@@ -55,7 +55,7 @@ intersect_venn <- function(
     exclude = NULL){
 
   check_data(data)
-  sn <- data %>% get_sample_names()
+  sn <- data %>% get_sample_names(format = "vector")
   include <- rlang::arg_match(include, sn, multiple = T)
   if(!is.null(exclude))
     exclude <- rlang::arg_match(exclude, sn, multiple = T)

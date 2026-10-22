@@ -12,6 +12,8 @@ normalize_svm <- function(
     .cores = 1
 ){
 
+  rlang::check_installed("e1071", reason = "for SVM normalization.")
+
   # visible bindings
   identifier <- NULL
   abundance <- NULL

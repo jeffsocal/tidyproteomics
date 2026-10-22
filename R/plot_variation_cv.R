@@ -45,9 +45,9 @@ plot_variation_cv <- function(
 
   analyte <- data$analyte
 
-  quant_values <- get_quant_names(data)
+  quant_values <- get_quant_names(data, format = "vector")
   data_quant <- data %>% extract(values = quant_values)
-  data_samples <- data %>% get_sample_names()
+  data_samples <- data %>% get_sample_names(format = "vector")
 
   quant_values_all <- c('raw', 'median', 'scaled', 'linear',
                         'limma', 'loess', 'svm', 'randomforest')

@@ -2,12 +2,16 @@
 % Please edit documentation in R/fun_export_llm_skill.R
 \name{export_llm_skill}
 \alias{export_llm_skill}
-\title{Export the LLM agent skill document to the working directory}
+\title{Export the LLM agent skill document}
 \usage{
-export_llm_skill(destination = ".", file_name = "SKILL.md", overwrite = TRUE)
+export_llm_skill(
+  destination = tempdir(),
+  file_name = "SKILL.md",
+  overwrite = TRUE
+)
 }
 \arguments{
-\item{destination}{path to directory where the file should be saved (default: ".")}
+\item{destination}{path to directory where the file should be saved (default: \code{tempdir()})}
 
 \item{file_name}{character string for the output filename (default: "SKILL.md")}
 
@@ -18,13 +22,12 @@ invisible character string of the saved file path
 }
 \description{
 \code{export_llm_skill()} copies the bundled \code{SKILL.md} document from the package's
-extdata directory to the current working directory or a specified destination.
+extdata directory to a specified destination directory (default: \code{tempdir()}).
 This document contains complete instructions, API references, supported formats,
 and workflows for use by Large Language Models (LLMs) and autonomous AI coding agents.
 }
 \examples{
-\dontrun{
 library(tidyproteomics)
 export_llm_skill()
-}
+
 }

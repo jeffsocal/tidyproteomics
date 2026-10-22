@@ -12,7 +12,7 @@ axis_breaks <- function(x) {
   magnitudes <- 10^(-2:2)
 
   # 3. Generate all possible intervals (0.1, 0.2, 0.25, 0.5, 1, 2, etc.)
-  all_intervals <- outer(base_steps, magnitudes, "*") |> as.vector() |> sort()
+  all_intervals <- sort(as.vector(outer(base_steps, magnitudes, "*")))
 
   # 4. Calculate how many elements each interval would create for [-x, x]
   # Formula: (2 * x) / interval + 1

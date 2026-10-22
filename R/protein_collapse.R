@@ -97,7 +97,7 @@ collapse <- function(
   }
 
   check_data(data)
-  collapse_possible <- unique(c(data$identifier, get_annotation_terms(data)))
+  collapse_possible <- unique(c(data$identifier, get_annotation_terms(data, format = "vector")))
 
   tb_fasta <- c()
   if(!is.null(fasta_path)) {
@@ -132,7 +132,7 @@ collapse <- function(
   experiment_ids <- c("sample_id", "import_file", "sample_file", "sample", "replicate")
   quant_accounting_by <- c(experiment_ids, 'abundance', 'peptides', 'num_peptides', 'num_unique_peptides', 'imputed')
   merge_by <- c(collapse_to, experiment_ids)
-  annotation_cols <- setdiff(get_annotation_terms(data), data$identifier)
+  annotation_cols <- setdiff(get_annotation_terms(data, format = "vector"), data$identifier)
 
   if(.verbose == TRUE) {cli::cli_progress_step(' ... gathering peptides')}
 
@@ -259,7 +259,7 @@ collapse <- function(
       dplyr::mutate(abundance_shared = abundance)
   }
 
-  codify_annotations <- unique(setdiff(get_annotation_terms(data), data$identifier), names(tb_fasta))
+  codify_annotations <- unique(setdiff(get_annotation_terms(data, format = "vector"), data$identifier), names(tb_fasta))
   codify_annotations <- intersect(codify_annotations, colnames(tb_pro_quant_shared))
 
   if(.verbose == TRUE) {cli::cli_progress_step(' ... computing {.emph {collapse_to}} stats')}
@@ -275,7 +275,7 @@ collapse <- function(
                      .groups = 'drop')
 
   # WORK AROUND: issue with dplyr renaming with a dynamic variable
-  tb_pro_quant_summed$identifier <- tb_pro_quant_summed[,collapse_to] |> unlist(use.names = FALSE)
+  tb_pro_quant_summed$identifier <- tb_pro_quant_summed[,collapse_to] %>% unlist(use.names = FALSE)
 
   # ISSUE HERE WITH all-possible
   tb_pro_quant_summed <- tb_pro_quant_summed %>%

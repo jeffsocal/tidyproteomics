@@ -41,7 +41,7 @@ stats_summary <- function(
 
   group_by <- rlang::arg_match(group_by)
   if(group_by == 'normalization') {
-    quant_methods <- get_quant_names(data)
+    quant_methods <- get_quant_names(data, format = "vector")
     tbl_stats <- lapply(quant_methods, function(qm) {
       d <- data
       d$quantitative_source <- qm

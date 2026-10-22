@@ -9,3 +9,4 @@ todo
 data/lcms_*
 *.tar.gz
 *.Rcheck/
+Rplots.pdf

@@ -18,10 +18,12 @@
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(tidyproteomics)
 #'
+#' \donttest{
 #' hela_protein_map <- hela_peptides %>%
-#'    protein_map(fasta = path_to_package_data('fasta'))
+#'    protein_map(fasta_path = path_to_package_data('fasta'))
 #'
 #' hela_protein_map %>% plot_protein('P06576')
+#' }
 #'
 plot_protein <- function(
     mapped_data = NULL,

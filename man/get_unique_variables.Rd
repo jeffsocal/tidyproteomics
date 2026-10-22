@@ -2,18 +2,30 @@
 % Please edit documentation in R/get_unique_variables.R
 \name{get_unique_variables}
 \alias{get_unique_variables}
-\title{Helper function to get all sample names}
+\title{Helper function to get unique values for a variable}
 \usage{
-get_unique_variables(data = NULL, variable = NULL)
+get_unique_variables(
+  data = NULL,
+  variable = NULL,
+  format = c("table", "vector")
+)
 }
 \arguments{
 \item{data}{tidyproteomics data object}
 
 \item{variable}{a string character}
+
+\item{format}{a character string specifying the return format: "table" (default) or "vector"}
 }
 \value{
-a vector
+a tibble or vector
 }
 \description{
-Helper function to get all sample names
+Helper function to get unique values for a variable
+}
+\examples{
+library(tidyproteomics)
+get_unique_variables(hela_proteins, "sample")
+get_unique_variables(hela_proteins, "sample", format = "vector")
+
 }

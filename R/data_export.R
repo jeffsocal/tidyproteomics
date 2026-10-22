@@ -44,7 +44,7 @@ export_quant <- function(
 
   cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
 
-  get_raw <- intersect(c('raw', 'selected'), get_quant_names(data))
+  get_raw <- intersect(c('raw', 'selected'), get_quant_names(data, format = "vector"))
   data_quant <- extract(data, get_raw[1]) %>% dplyr::rename(abundance_raw = abundance)
 
   if(normalized != FALSE) {
@@ -97,7 +97,7 @@ export_quant <- function(
       names_from = 'sample',
       values_from = tidyselect::all_of(col_abn)
     ) %>%
-    munge_identifier("separate", data$identifier) |>
+    munge_identifier("separate", data$identifier) %>%
     dplyr::select(!dplyr::matches("^origin"))
 
   if(!is.null(data$annotations)) {
@@ -226,7 +226,7 @@ export_analysis <- function(
 
   if(!is.null(.append)) {
 
-    .append <- rlang::arg_match(.append, get_annotation_terms(data))
+    .append <- rlang::arg_match(.append, get_annotation_terms(data, format = "vector"))
 
     tbl_out <- tbl_out %>%
       dplyr::left_join(
@@ -296,6 +296,7 @@ write_local <- function(
   as <- stringr::str_extract(file_name, "\\..*?$");
   as <- rlang::arg_match(as, c('.rds', '.xlsx', '.csv', '.tsv'))
   if(as == '.xlsx'){
+    rlang::check_installed("writexl", reason = "to export tables to Excel files.")
     table %>% writexl::write_xlsx(file_name)
   } else if(as == '.csv') {
     table %>% readr::write_csv(file_name)

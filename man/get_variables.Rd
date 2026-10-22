@@ -6,17 +6,26 @@
 \usage{
 get_variables(
   data = NULL,
-  segment = c("experiments", "quantitative", "annotations", "accounting")
+  segment = c("experiments", "quantitative", "annotations", "accounting"),
+  format = c("table", "vector")
 )
 }
 \arguments{
 \item{data}{tidyproteomics data object}
 
 \item{segment}{a character string}
+
+\item{format}{a character string specifying the return format: "table" (default) or "vector"}
 }
 \value{
-a vector
+a tibble or character vector
 }
 \description{
 Helper function to get available terms
+}
+\examples{
+library(tidyproteomics)
+get_variables(hela_proteins, "experiments")
+get_variables(hela_proteins, "experiments", format = "vector")
+
 }

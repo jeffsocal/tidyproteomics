@@ -86,7 +86,7 @@ plot_expression <- function(
   log2fc_column <- rlang::arg_match(log2fc_column, table_cols)
   significance_column <- rlang::arg_match(significance_column, table_cols)
 
-  available_labels <- unique(c(data$identifier, get_annotation_terms(data), table_cols))
+  available_labels <- unique(c(data$identifier, get_annotation_terms(data, format = "vector"), table_cols))
   labels_column <- rlang::arg_match(labels_column, available_labels)
 
   # filter by foldchange, significance, and regulation direction

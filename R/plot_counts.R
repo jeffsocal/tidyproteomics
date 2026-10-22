@@ -18,7 +18,9 @@
 #' library(tidyproteomics)
 #' hela_proteins %>% plot_counts()
 #'
+#' \donttest{
 #' hela_proteins %>% plot_counts(show_replicates = FALSE, palette = 'Blues')
+#' }
 #'
 plot_counts <- function(
     data = NULL,
@@ -51,7 +53,7 @@ plot_counts <- function(
   accounting <- rlang::arg_match(accounting, accounting_cols)
 
   fat <- data %>% analysis_counts(impute_max = impute_max)
-  n_samples <- data %>% get_sample_names() %>% length()
+  n_samples <- data %>% get_sample_names(format = "vector") %>% length()
 
   w <- which(duplicated(fat[,c('sample_id', 'sample', accounting)]))
   if(length(w) > 0) {fat <- fat[-w,]}

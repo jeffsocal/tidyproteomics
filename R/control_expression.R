@@ -100,7 +100,7 @@ expression <- function(
   }
 
   # a quick check on pairs to mitigate any issues prior to computing
-  check_pairs(.pairs, get_sample_names(data))
+  check_pairs(.pairs, get_sample_names(data, format = "vector"))
   cli::cli_progress_bar(type = 'tasks')
 
   for(i in 1:length(.pairs)){
@@ -143,7 +143,7 @@ expression <- function(
 
       table_imput_class <- data$accounting %>%
         dplyr::filter(sample_id %in% sample_ids) %>%
-        dplyr::left_join(data$experiment |> dplyr::select(sample_id, sample), by = "sample_id") %>%
+        dplyr::left_join(data$experiment %>% dplyr::select(sample_id, sample), by = "sample_id") %>%
         tidyr::pivot_longer(dplyr::matches("match|impute"), names_to = 'type', values_to = 'imputed') %>%
         dplyr::filter(!is.na(imputed)) %>%
         dplyr::group_by_at(c(data$identifier, "sample_id", "sample")) %>%

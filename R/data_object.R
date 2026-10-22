@@ -42,7 +42,7 @@ print.tidyproteomics <- function(
   println("", glue::glue("{signif(length(which(is.na(missing_values)))/length(missing_values) * 100, 3)}% missing values"))
 
   if(obj$quantitative_source != 'raw') {println(" *normalized", glue::glue("{obj$quantitative_source}"))}
-  v_impt <- obj %>% get_variables('accounting')
+  v_impt <- obj %>% get_variables('accounting', format = "vector")
   if('imputed' %in% v_impt) {
     v_impt <- obj$operations[which(grepl('imputed.*via', obj$operations))]
     v_impt <- sub(".*imputed\\s+", "", v_impt)

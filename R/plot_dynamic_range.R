@@ -45,7 +45,7 @@ plot_dynamic_range <- function(
 
   quant_values_all <- c('raw', 'median', 'scaled', 'linear',
                         'limma', 'loess', 'svm', 'randomforest')
-  quant_values <- get_quant_names(data)
+  quant_values <- get_quant_names(data, format = "vector")
   data_quant <- data %>% extract(values = quant_values)
 
   use_samples <- data$experiments %>%
@@ -59,7 +59,7 @@ plot_dynamic_range <- function(
     cli::cli_abort("No samples with enought replicates to measure variation")
   }
 
-  drop_samples <- setdiff(data %>% get_sample_names(), use_samples)
+  drop_samples <- setdiff(data %>% get_sample_names(format = "vector"), use_samples)
   if(length(drop_samples) > 0) {
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
     cli::cli_alert_info("Samples {.emph {drop_samples}} have been dropped, contain a single replicate")

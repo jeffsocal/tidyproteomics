@@ -29,7 +29,7 @@ enrichment_gsea <- function(
   adj_p_value <- NULL
   size <- NULL
 
-  term_group <- rlang::arg_match(term_group, get_annotation_terms(data))
+  term_group <- rlang::arg_match(term_group, get_annotation_terms(data, format = "vector"))
   score_type <- rlang::arg_match(score_type)
   check_data(data)
 
@@ -44,6 +44,8 @@ enrichment_gsea <- function(
 
   pathways <- split(as.character(tbl_anno[[id_col]]), tbl_anno$annotation)
   pathways <- lapply(pathways, function(p) intersect(unique(p), names(c_stats)))
+
+  rlang::check_installed("BiocParallel", reason = "for parallel GSEA enrichment.")
 
   bpparam <- if (cpu_cores > 1 && .Platform$OS.type != "windows") {
     BiocParallel::MulticoreParam(workers = cpu_cores)

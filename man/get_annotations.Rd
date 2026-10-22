@@ -4,16 +4,24 @@
 \alias{get_annotations}
 \title{Helper function to get all annotations for a given term}
 \usage{
-get_annotations(data = NULL, term = NULL)
+get_annotations(data = NULL, term = NULL, format = c("table", "vector"))
 }
 \arguments{
 \item{data}{tidyproteomics data object}
 
 \item{term}{a character string}
+
+\item{format}{a character string specifying the return format: "table" (default) or "vector"}
 }
 \value{
-a vector
+a tibble or character vector
 }
 \description{
 Helper function to get all annotations for a given term
+}
+\examples{
+library(tidyproteomics)
+get_annotations(hela_proteins, "biological_process")
+get_annotations(hela_proteins, "biological_process", format = "vector")
+
 }

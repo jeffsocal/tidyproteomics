@@ -50,6 +50,7 @@ save_table <- function(
     } else if(format == '.tsv') {
       table %>% readr::write_tsv(file_name)
     } else if(format == '.xlsx') {
+      rlang::check_installed("writexl", reason = "to export tables to Excel files.")
       table %>% writexl::write_xlsx(file_name)
     }
   }, error = function(err) {

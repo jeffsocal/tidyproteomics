@@ -12,3 +12,6 @@
 ^.*\.tar\.gz$
 ^.*\.Rcheck$
 ^.*\.DS_Store$
+^cran-comments\.md$
+^Library$
+^Outputs$

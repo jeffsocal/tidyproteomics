@@ -97,6 +97,7 @@ reference:
   - show_annotations
   - get_sample_names
   - get_quant_names
+  - get_analyses
   - path_to_package_data
 - title: Subsetting
   description: |

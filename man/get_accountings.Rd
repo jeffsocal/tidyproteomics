@@ -4,14 +4,22 @@
 \alias{get_accountings}
 \title{Helper function to get all accounting terms}
 \usage{
-get_accountings(data = NULL)
+get_accountings(data = NULL, format = c("table", "vector"))
 }
 \arguments{
 \item{data}{tidyproteomics data object}
+
+\item{format}{a character string specifying the return format: "table" (default) or "vector"}
 }
 \value{
-a vector
+a tibble or character vector
 }
 \description{
 Helper function to get all accounting terms
+}
+\examples{
+library(tidyproteomics)
+get_accountings(hela_proteins)
+get_accountings(hela_proteins, format = "vector")
+
 }

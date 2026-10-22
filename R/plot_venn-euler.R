@@ -23,6 +23,7 @@ plot_euler <- function(
     ...){
 
   check_data(data)
+  rlang::check_installed("eulerr", reason = "to plot Euler diagrams.")
 
   venn_set <- data %>% list_venn()
 
@@ -59,6 +60,7 @@ plot_venn <- function(
     ...){
 
   check_data(data)
+  rlang::check_installed("eulerr", reason = "to plot Venn diagrams.")
   venn_set <- data %>% list_venn()
 
   plot <- plot(eulerr::venn(venn_set),

@@ -48,7 +48,7 @@ plot_heatmap <- function(
 
   if(is.character(row_names)){
     row_names_bool <- TRUE
-    pos_names <- get_annotation_terms(data)
+    pos_names <- get_annotation_terms(data, format = "vector")
     if(!row_names %in% pos_names){
       cli::cli_abort("`row_names` must be one of {pos_names}")
     }
@@ -58,13 +58,13 @@ plot_heatmap <- function(
   }
 
   if( row_names != data$identifier ){
-    tbl_annotation <- data |> get_annotations(row_names)
+    tbl_annotation <- data %>% get_annotations(row_names)
     id_col <- which(colnames(tbl_annotation) %in% data$identifier)
     colnames(tbl_annotation)[id_col] <- 'identifier'
     id_col <- which(colnames(tbl_annotation) == 'annotation')
     colnames(tbl_annotation)[id_col] <- row_names
 
-    data_quant <- data_quant |>
+    data_quant <- data_quant %>%
       dplyr::inner_join(
         tbl_annotation, by = 'identifier'
       )
@@ -74,7 +74,7 @@ plot_heatmap <- function(
     id_col <- which(colnames(data_quant) == row_names)
     colnames(data_quant)[id_col] <- 'identifier'
 
-    data_quant <- data_quant |>
+    data_quant <- data_quant %>%
       dplyr::filter(!is.na(identifier))
   }
 
@@ -105,6 +105,9 @@ plot_heatmap <- function(
     ) %>% as.data.frame() %>%
     tibble::column_to_rownames('identifier') %>%
     as.matrix()
+
+  rlang::check_installed("pheatmap", reason = "to generate heatmaps.")
+  rlang::check_installed("RColorBrewer", reason = "for heatmap color palettes.")
 
   col <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(10, "RdYlBu"))(32) %>% rev()
 

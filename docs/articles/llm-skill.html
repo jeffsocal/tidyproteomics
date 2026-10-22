@@ -211,7 +211,8 @@ labels, and raw data file associations. - <code>$operations</code>:
 Character list logging every transformation applied to the dataset
 (audit trail). - <code>$analysis</code>: List storing completed
 statistical comparisons, differential expression results, and enrichment
-computations.</p>
+computations. Expose and inspect stored analyses using
+<code>get_analyses(data)</code>.</p>
 </div>
 <div class="section level4">
 <h4 id="key-principles">Key Principles<a class="anchor" aria-label="anchor" href="#key-principles"></a>
@@ -541,8 +542,8 @@ comparisons.</p>
 analyte to the current working directory.</p>
 </div>
 <div class="section level5">
-<h5 id="export_llm_skilldestination---file_name-skill-md-overwrite-true">
-<code>export_llm_skill(destination = ".", file_name = "SKILL.md", overwrite = TRUE)</code><a class="anchor" aria-label="anchor" href="#export_llm_skilldestination---file_name-skill-md-overwrite-true"></a>
+<h5 id="export_llm_skilldestination-tempdir-file_name-skill-md-overwrite-true">
+<code>export_llm_skill(destination = tempdir(), file_name = "SKILL.md", overwrite = TRUE)</code><a class="anchor" aria-label="anchor" href="#export_llm_skilldestination-tempdir-file_name-skill-md-overwrite-true"></a>
 </h5>
 <p>Exports this comprehensive <code>SKILL.md</code> reference guide to
 the local working directory or specified path. -
@@ -685,7 +686,8 @@ active quantitative source selected automatically by
 of all biological annotation categories present in the object (e.g.,
 <code>(4) biological_process cellular_component molecular_function reactome_pathway</code>).
 - <strong>Analyses</strong>: Any completed differential expression
-comparisons and pathway enrichments.</p>
+comparisons and pathway enrichments (retrieve full catalog with
+<code>get_analyses(data)</code>).</p>
 </div>
 <div class="section level5">
 <h5 id="summaryobject-by-cglobal-sample-normalization-----contamination-null----">
@@ -736,41 +738,156 @@ performed on the dataset.</p>
 <div class="section level5">
 <h5 id="data-object-inspection-getters-get_">Data Object Inspection Getters (<code>get_*()</code>)<a class="anchor" aria-label="anchor" href="#data-object-inspection-getters-get_"></a>
 </h5>
-<p>Exposed inspection helpers to examine variables, levels, metrics, and
-annotations within a <code>tidyproteomics</code> data object:</p>
+<p>Exposed inspection helpers to examine variables, levels, metrics,
+annotations, and completed analyses within a <code>tidyproteomics</code>
+data object. All <code>get_*()</code> functions support
+<strong><code>format = c("table", "vector")</code></strong>, defaulting
+to <strong><code>"table"</code></strong> for rich, human- and
+LLM-readable summary data, and supporting
+<strong><code>"vector"</code></strong> for programmatic comparisons,
+argument matching, and iteration:</p>
 <ul>
 <li>
-<strong><code>get_sample_names(data)</code></strong>: Returns a
-character vector of all unique sample condition names.</li>
+<p><strong><code>get_analyses(data, format = c("table", "vector"))</code></strong>:
+Exposes all differential expression and pathway enrichment analyses
+stored in <code>data$analysis</code>.</p>
+<ul>
 <li>
-<strong><code>get_quant_names(data)</code></strong>: Returns a
-character vector of available quantitative data columns (e.g.,
-<code>"raw"</code>, <code>"median"</code>, <code>"linear"</code>,
-<code>"loess"</code>).</li>
+<strong><code>"table"</code></strong> (default): Returns a 4-column
+tibble (<code>comparison</code>, <code>analysis</code>,
+<code>term</code>, <code>method</code>) cataloging each stored analysis
+unit (e.g. <code>knockdown/control</code> with <code>expression</code>
+or <code>enrichment</code> by <code>biological_process</code>).</li>
 <li>
-<strong><code>get_accountings(data)</code></strong>: Returns a
-character vector of accounting column names (e.g.,
-<code>"num_peptides"</code>, <code>"num_unique_peptides"</code>).</li>
+<strong><code>"vector"</code></strong>: Returns a character vector
+of composite keys formatted as <code>"comparison:analysis"</code> or
+<code>"comparison:analysis:term"</code> (e.g.,
+<code>c("knockdown/control:expression", "knockdown/control:enrichment:biological_process")</code>).</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Inspect all analyses completed on the dataset</span></span>
+<span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_analyses.html">get_analyses</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># [1] "knockdown/control:expression" "knockdown/control:enrichment:biological_process"</span></span>
+<span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_analyses.html">get_analyses</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+</li>
 <li>
-<strong><code>get_annotation_terms(data)</code></strong>: Returns a
-character vector of available annotation category terms (including the
-primary identifier, e.g., <code>"protein"</code>,
-<code>"gene_name"</code>, <code>"description"</code>).</li>
+<p><strong><code>get_sample_names(data, format = c("table", "vector"))</code></strong>:
+Returns the unique experimental sample names present in the dataset.</p>
+<ul>
 <li>
-<strong><code>get_annotations(data, term = NULL)</code></strong>:
-Returns a 2-column tibble (<code>identifier</code>,
-<code>annotation</code>) for the specified annotation term.</li>
+<strong><code>"table"</code></strong> (default): Returns a tibble
+with <code>sample</code> and <code>replicates</code> counts.</li>
 <li>
-<strong><code>show_annotations(data)</code></strong>: Displays a
-formatted console summary of available annotation categories.</li>
+<strong><code>"vector"</code></strong>: Returns a character vector
+of unique sample names.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_sample_names.html">get_sample_names</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_sample_names.html">get_sample_names</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+</li>
 <li>
-<strong><code>get_variables(data, segment = c("experiments", "quantitative", "annotations", "accounting"))</code></strong>:
-Returns a character vector of variable names within the requested object
-segment.</li>
+<p><strong><code>get_quant_names(data, format = c("table", "vector"))</code></strong>:
+Returns all quantitative value sources available in
+<code>data$quantitative</code> (e.g. <code>"raw"</code>,
+<code>"median"</code>, <code>"linear"</code>, <code>"loess"</code>).</p>
+<ul>
 <li>
-<strong><code>get_unique_variables(data, variable = NULL)</code></strong>:
-Returns a vector of unique values for any specified variable across the
-object (including expanded annotation values).</li>
+<strong><code>"table"</code></strong> (default): Returns a tibble
+with <code>quant_name</code> and logical <code>selected</code>
+indicating which normalization is currently active.</li>
+<li>
+<strong><code>"vector"</code></strong>: Returns a character vector
+of quantitative column suffixes.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_quant_names.html">get_quant_names</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_quant_names.html">get_quant_names</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p><strong><code>get_accountings(data, format = c("table", "vector"))</code></strong>:
+Returns all accounting metric column names present in
+<code>data$accounting</code> (excluding sample and identifier keys).</p>
+<ul>
+<li>
+<strong><code>"table"</code></strong> (default): Returns a tibble
+with <code>accounting</code> column names and their
+<code>data_type</code> classes.</li>
+<li>
+<strong><code>"vector"</code></strong>: Returns a character vector
+of accounting column names.</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_accountings.html">get_accountings</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_accountings.html">get_accountings</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p><strong><code>get_annotation_terms(data, format = c("table", "vector"))</code></strong>:
+Returns available biological annotation categories present in the object
+(including the primary identifier).</p>
+<ul>
+<li>
+<strong><code>"table"</code></strong> (default): Returns a tibble
+with <code>term</code>, <code>type</code> (<code>"identifier"</code> or
+<code>"annotation"</code>), and <code>unique_annotations</code> count
+per term, ordered by original definition.</li>
+<li>
+<strong><code>"vector"</code></strong>: Returns a character vector
+of term names.</li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_annotation_terms.html">get_annotation_terms</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_annotation_terms.html">get_annotation_terms</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p><strong><code>get_annotations(data, term = NULL, format = c("table", "vector"))</code></strong>:
+Extracts all annotations for a specific biological term.</p>
+<ul>
+<li>
+<strong><code>"table"</code></strong> (default): Returns a 2-column
+tibble (<code>identifier</code>, <code>annotation</code>) with
+semicolon-separated terms expanded into individual rows.</li>
+<li>
+<strong><code>"vector"</code></strong>: Returns a character vector
+of unique annotation strings for that term.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_annotations.html">get_annotations</a></span><span class="op">(</span><span class="st">"biological_process"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_annotations.html">get_annotations</a></span><span class="op">(</span><span class="st">"biological_process"</span>, format <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li><p><strong><code>show_annotations(data)</code></strong>: Displays a
+formatted console summary of available annotation categories.</p></li>
+<li>
+<p><strong><code>get_variables(data, segment = c("experiments", "quantitative", "annotations", "accounting"), format = c("table", "vector"))</code></strong>:
+Returns the column/variable names within a specific segment of the
+<code>tidyproteomics</code> data object.</p>
+<ul>
+<li>
+<strong><code>"table"</code></strong> (default): Returns a tibble
+with <code>segment</code> and <code>variable</code>.</li>
+<li>
+<strong><code>"vector"</code></strong>: Returns a character vector
+of variable names.</li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_variables.html">get_variables</a></span><span class="op">(</span><span class="st">"experiments"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_variables.html">get_variables</a></span><span class="op">(</span><span class="st">"experiments"</span>, format <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p><strong><code>get_unique_variables(data, variable = NULL, format = c("table", "vector"))</code></strong>:
+Returns all unique values for any specified variable across the object
+(including expanded annotation terms).</p>
+<ul>
+<li>
+<strong><code>"table"</code></strong> (default): Returns a tibble
+with column <code>value</code>.</li>
+<li>
+<strong><code>"vector"</code></strong>: Returns a vector of unique
+values.</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_unique_variables.html">get_unique_variables</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/get_unique_variables.html">get_unique_variables</a></span><span class="op">(</span><span class="st">"sample"</span>, format <span class="op">=</span> <span class="st">"vector"</span><span class="op">)</span></span></code></pre></div>
+</li>
 </ul>
 </div>
 <div class="section level5">
@@ -794,7 +911,7 @@ newest annotation value, replacing existing ones. -
 <code>"; "</code> delimiters. - <code>"leave"</code>: Retains multiple
 rows without merging or discarding. - <strong>Returns</strong>: Updated
 <code>tidyproteomics</code> data object.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Add custom GO annotations formatted as identifier, term, and annotation</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/annotate.html">annotate</a></span><span class="op">(</span><span class="va">custom_go_table</span>, duplicates <span class="op">=</span> <span class="st">"merge"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -822,7 +939,7 @@ input file/run. Used critically by
 <code><a href="../reference/expression_me.html">expression_me()</a></code> to account for repeated measures,
 multi-region sampling, or subject batches in linear mixed-effects
 models:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/origins.html">origins</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op">==</span> <span class="st">"F1"</span>, .replace <span class="op">=</span> <span class="st">"donor_1"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/origins.html">origins</a></span><span class="op">(</span><span class="va">sample_file</span> <span class="op">==</span> <span class="st">"F2"</span>, .replace <span class="op">=</span> <span class="st">"donor_1"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -857,7 +974,7 @@ standard <code>data.frame</code> for clean printing.</p>
 <p>Infix operator for case-insensitive regex matching. Syntax:
 <code>string %like% "pattern"</code>. Widely used inside
 <code><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset()</a></code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span><span class="op">)</span></span>
 <span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="op">!</span><span class="va">description</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"Keratin"</span><span class="op">)</span></span></code></pre></div>
 <hr>
@@ -872,7 +989,7 @@ standard <code>data.frame</code> for clean printing.</p>
 </h5>
 <p>Filters proteins or peptides based on annotations, abundance
 thresholds, or identification metrics.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Filter by annotation regex</span></span>
 <span><span class="va">data_ribo</span> <span class="op">&lt;-</span> <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span><span class="op">)</span></span>
 <span></span>
@@ -911,7 +1028,7 @@ in C and D). - <em>Pipeable Downstream</em>: Because it returns a
 <code>tidyproteomics</code> object, you can immediately inspect it with
 <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code>, check it with <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>, or extract a
 clean tabular data frame using <code>extract(na.rm = TRUE)</code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1. Condition-exclusive extraction (proteins unique to control, absent in knockdown):</span></span>
 <span><span class="va">control_exclusive</span> <span class="op">&lt;-</span> <span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">imputed</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -973,7 +1090,7 @@ and <strong>returns the original <code>tidyproteomics</code> data
 object</strong>.</p>
 <p>This design allows you to concatenate multiple plot commands
 sequentially in a clean, readable pipeline:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Concatenate multiple QC plots in a single pipeline</span></span>
 <span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/plot_counts.html">plot_counts</a></span><span class="op">(</span>destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -989,7 +1106,7 @@ invokes <code>print(data)</code> and displays the full quantitative
 proteomics summary in the console. Always <strong>assign the
 result</strong> (e.g., <code>data &lt;- data %&gt;% plot_...</code>) or
 wrap in <strong><code><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible()</a></code></strong>:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/invisible.html" class="external-link">invisible</a></span><span class="op">(</span></span>
 <span>  <span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="../reference/plot_counts.html">plot_counts</a></span><span class="op">(</span>destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -1077,7 +1194,7 @@ Normalization using a common reference bridge channel in TMT workflows.
 - <strong>Targeted Normalization via Subset</strong>: Normalizes based
 on a stable subset (e.g., housekeeping proteins or spike-ins) and
 applies the transformation globally:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/normalize.html">normalize</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"Histone"</span>, .method <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level5">
@@ -1147,7 +1264,7 @@ testing (default <code>"BH"</code> / Benjamini-Hochberg; also
 <code>"bonferroni"</code>, <code>"holm"</code>, <code>"fdr"</code>). -
 <strong><code>.pairs</code></strong>: List of 2-element character
 vectors for multiple pairwise comparisons:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/expression.html">expression</a></span><span class="op">(</span>.pairs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"knockdown"</span>, <span class="st">"control"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"drug"</span>, <span class="st">"control"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level5">
@@ -1194,7 +1311,7 @@ pipeline chaining.</p>
 <p>Produces publication-quality volcano plots
 (<code>log2(Fold Change)</code> vs. <code>-log10(p-value)</code> or
 <code>q-value</code>) with automatic ggrepel text labels.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/plot_volcano.html">plot_volcano</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, log2fc_min <span class="op">=</span> <span class="fl">1.5</span>, significance_max <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level5">
@@ -1222,7 +1339,7 @@ any annotation term such as <code>"gene_name"</code>). -
 (<code>"plot"</code>, <code>"save"</code>, <code>"png"</code>,
 <code>"svg"</code>, <code>"tiff"</code>, <code>"jpeg"</code>), adhering
 to the <code><a href="../reference/plot_save.html">plot_save()</a></code> framework.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>  <span class="fu"><a href="../reference/plot_expression.html">plot_expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>,</span>
 <span>                  log2fc_min <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>                  significance_column <span class="op">=</span> <span class="st">"p_value"</span>,</span>
@@ -1341,7 +1458,7 @@ modification frequencies along the primary sequence.</p>
 <div class="section level4">
 <h4 id="workflow-1-standard-discovery-proteomics-pipeline">Workflow 1: Standard Discovery Proteomics Pipeline<a class="anchor" aria-label="anchor" href="#workflow-1-standard-discovery-proteomics-pipeline"></a>
 </h4>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span>
 <span></span>
@@ -1396,7 +1513,7 @@ modification frequencies along the primary sequence.</p>
 <div class="section level4">
 <h4 id="workflow-2-peptide-to-protein-collapsing-pipeline">Workflow 2: Peptide-to-Protein Collapsing Pipeline<a class="anchor" aria-label="anchor" href="#workflow-2-peptide-to-protein-collapsing-pipeline"></a>
 </h4>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span>
 <span></span>
@@ -1426,7 +1543,7 @@ modification frequencies along the primary sequence.</p>
 <h4 id="workflow-3-batch-automation-pipeline-automating-rmd">Workflow 3: Batch Automation Pipeline
 (<code>automating.Rmd</code>)<a class="anchor" aria-label="anchor" href="#workflow-3-batch-automation-pipeline-automating-rmd"></a>
 </h4>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span>
 <span></span>
@@ -1466,7 +1583,7 @@ modification frequencies along the primary sequence.</p>
 <h4 id="workflow-4-venn-diagramming-underlying-segment-extraction-extracting-rmd">Workflow 4: Venn Diagramming &amp; Underlying Segment Extraction
 (<code>extracting.Rmd</code>)<a class="anchor" aria-label="anchor" href="#workflow-4-venn-diagramming-underlying-segment-extraction-extracting-rmd"></a>
 </h4>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jeffsocal.github.io/tidyproteomics/">tidyproteomics</a></span><span class="op">)</span></span>
 <span></span>
@@ -1595,7 +1712,7 @@ Printing</strong>:
 <p>Because <code>plot_*(..., destination = "png")</code> returns the
 <code>tidyproteomics</code> data object, multiple plot functions can be
 concatenated sequentially in a single pipe chain:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/plot_counts.html">plot_counts</a></span><span class="op">(</span>destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/plot_pca.html">plot_pca</a></span><span class="op">(</span>destination <span class="op">=</span> <span class="st">"png"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">data</span></span></code></pre></div>
@@ -1675,8 +1792,29 @@ long-format tibble ready for <code><a href="https://readr.tidyverse.org/referenc
 <strong>Exporting Skill Locally</strong>: To inspect or store this
 reference in an agent workspace:</li>
 </ol>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tidyproteomics</span><span class="fu">::</span><span class="fu"><a href="../reference/export_llm_skill.html">export_llm_skill</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<ol start="13" style="list-style-type: decimal">
+<li>
+<strong>Data Object Inspection Getters
+(<code>get_*()</code>)</strong>: All <code>get_*()</code> functions
+(<code><a href="../reference/get_analyses.html">get_analyses()</a></code>, <code><a href="../reference/get_sample_names.html">get_sample_names()</a></code>,
+<code><a href="../reference/get_quant_names.html">get_quant_names()</a></code>, <code><a href="../reference/get_accountings.html">get_accountings()</a></code>,
+<code><a href="../reference/get_annotation_terms.html">get_annotation_terms()</a></code>, <code><a href="../reference/get_annotations.html">get_annotations()</a></code>,
+<code><a href="../reference/get_variables.html">get_variables()</a></code>, <code><a href="../reference/get_unique_variables.html">get_unique_variables()</a></code>)
+support <code>format = c("table", "vector")</code>, defaulting to
+<code>"table"</code>.</li>
+</ol>
+<ul>
+<li>Use the default <code>"table"</code> format when inspecting the
+object interactively or presenting summary tables to users or LLMs
+(e.g. <code>get_analyses(data)</code> to inspect completed pairwise
+comparisons and terms).</li>
+<li>Use <code>format = "vector"</code> when passing getter outputs into
+programmatic checks, vector arguments, or string comparisons (e.g.,
+<code><a href="../reference/check_pairs.html">check_pairs()</a></code>, <code><a href="https://rlang.r-lib.org/reference/arg_match.html" class="external-link">rlang::arg_match()</a></code>,
+<code>%in%</code>, <code><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">setdiff()</a></code>).</li>
+</ul>
 <hr>
 </div>
 </div>
@@ -1706,21 +1844,21 @@ Reconnaissance<a class="anchor" aria-label="anchor" href="#prompt-template-1-pha
 </h4>
 <p><em>Use this prompt first to let the LLM generate a quick metadata
 extraction script:</em></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>You are an expert computational proteomics specialist using the R package <span class="in">`tidyproteomics`</span>.</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>Refer to the instructions in SKILL.md.</span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>I have imported my quantitative mass spectrometry dataset in R, but need to inspect its structure before performing statistical analysis.</span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>Please provide a minimal, executable R script that:</span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a><span class="ss">1. </span>Loads <span class="in">`tidyproteomics`</span> and <span class="in">`dplyr`</span>.</span>
-<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a><span class="ss">2. </span>Imports the data file located at "<span class="co">[</span><span class="ot">PATH_TO_DATA_FILE</span><span class="co">]</span>" from platform "<span class="co">[</span><span class="ot">PLATFORM: e.g. MaxQuant / ProteomeDiscoverer / FragPipe / DIA-NN</span><span class="co">]</span>" as "<span class="co">[</span><span class="ot">ANALYTE: proteins / peptides</span><span class="co">]</span>".</span>
-<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="ss">3. </span>Runs <span class="in">`print(data)`</span> to inspect the concise summary of data contents, sample names, number of proteins, imputed method, automatic normalization selection, and annotations.</span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="ss">4. </span>Runs <span class="in">`summary("sample")`</span> as a data quality check to inspect replicate-level counts, CVs, and PCA separation.</span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a><span class="ss">5. </span>Prints all unique sample names using <span class="in">`get_sample_names()`</span>.</span>
-<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="ss">6. </span>Prints available annotation categories using <span class="in">`show_annotations()`</span>.</span>
-<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a><span class="ss">7. </span>Checks for potential sample contaminants using <span class="in">`summary(contamination = 'CRAP')`</span>.</span>
-<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a></span>
-<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a>I will run this script in R and share the console output with you so we can design the comparative analysis.</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>You are an expert computational proteomics specialist using the R package <span class="in">`tidyproteomics`</span>.</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>Refer to the instructions in SKILL.md.</span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>I have imported my quantitative mass spectrometry dataset in R, but need to inspect its structure before performing statistical analysis.</span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a>Please provide a minimal, executable R script that:</span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a><span class="ss">1. </span>Loads <span class="in">`tidyproteomics`</span> and <span class="in">`dplyr`</span>.</span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a><span class="ss">2. </span>Imports the data file located at "<span class="co">[</span><span class="ot">PATH_TO_DATA_FILE</span><span class="co">]</span>" from platform "<span class="co">[</span><span class="ot">PLATFORM: e.g. MaxQuant / ProteomeDiscoverer / FragPipe / DIA-NN</span><span class="co">]</span>" as "<span class="co">[</span><span class="ot">ANALYTE: proteins / peptides</span><span class="co">]</span>".</span>
+<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a><span class="ss">3. </span>Runs <span class="in">`print(data)`</span> to inspect the concise summary of data contents, sample names, number of proteins, imputed method, automatic normalization selection, and annotations.</span>
+<span id="cb33-10"><a href="#cb33-10" tabindex="-1"></a><span class="ss">4. </span>Runs <span class="in">`summary("sample")`</span> as a data quality check to inspect replicate-level counts, CVs, and PCA separation.</span>
+<span id="cb33-11"><a href="#cb33-11" tabindex="-1"></a><span class="ss">5. </span>Prints all unique sample names using <span class="in">`get_sample_names()`</span>.</span>
+<span id="cb33-12"><a href="#cb33-12" tabindex="-1"></a><span class="ss">6. </span>Prints available annotation categories using <span class="in">`show_annotations()`</span>.</span>
+<span id="cb33-13"><a href="#cb33-13" tabindex="-1"></a><span class="ss">7. </span>Checks for potential sample contaminants using <span class="in">`summary(contamination = 'CRAP')`</span>.</span>
+<span id="cb33-14"><a href="#cb33-14" tabindex="-1"></a></span>
+<span id="cb33-15"><a href="#cb33-15" tabindex="-1"></a>I will run this script in R and share the console output with you so we can design the comparative analysis.</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="prompt-template-2-phase-2-what-is-interesting-about-this-dataset-discovery-engine">Prompt Template 2: Phase 2 — “What is Interesting About This
@@ -1728,38 +1866,38 @@ Dataset?” (Discovery Engine)<a class="anchor" aria-label="anchor" href="#promp
 </h4>
 <p><em>Use this prompt once sample names and annotations are
 known:</em></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>You are an expert quantitative proteomics data scientist. You have been provided with the <span class="in">`tidyproteomics`</span> package instructions in SKILL.md.</span>
-<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>I have an imported <span class="in">`tidyproteomics`</span> dataset with the following experimental setup:</span>
-<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a><span class="ss">- </span>Organism: <span class="co">[</span><span class="ot">e.g. Homo sapiens / Mus musculus</span><span class="co">]</span></span>
-<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a><span class="ss">- </span>Biological Question: <span class="co">[</span><span class="ot">e.g. Mechanism of action of Drug X / Knockout phenotype</span><span class="co">]</span></span>
-<span id="cb26-6"><a href="#cb26-6" tabindex="-1"></a><span class="ss">- </span>Sample Groups: <span class="co">[</span><span class="ot">e.g. Treatment = "drug_10uM", Control = "dmso", 3 replicates each</span><span class="co">]</span></span>
-<span id="cb26-7"><a href="#cb26-7" tabindex="-1"></a><span class="ss">- </span>Available Annotations: <span class="co">[</span><span class="ot">e.g. gene_name, description, biological_process, reactome_pathway</span><span class="co">]</span></span>
-<span id="cb26-8"><a href="#cb26-8" tabindex="-1"></a></span>
-<span id="cb26-9"><a href="#cb26-9" tabindex="-1"></a>Your goal is to answer: "What is biologically and technically interesting about this dataset?"</span>
-<span id="cb26-10"><a href="#cb26-10" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" tabindex="-1"></a>Generate a complete, self-contained R analysis script using <span class="in">`tidyproteomics`</span> that:</span>
-<span id="cb26-12"><a href="#cb26-12" tabindex="-1"></a><span class="ss">1. </span>Evaluates Quality Control &amp; Global Structure (Data Quality Check):</span>
-<span id="cb26-13"><a href="#cb26-13" tabindex="-1"></a><span class="ss">   - </span>Performs a data quality check with <span class="in">`summary("sample")`</span> to inspect replicate CVs, quantifiable fraction, and PCA coordinates.</span>
-<span id="cb26-14"><a href="#cb26-14" tabindex="-1"></a><span class="ss">   - </span>Saves QC plots using built-in <span class="in">`destination = "png"`</span> (e.g. <span class="in">`plot_variation_cv(destination = "png")`</span>, <span class="in">`plot_dynamic_range(destination = "png")`</span>, <span class="in">`plot_pca(destination = "png")`</span>).</span>
-<span id="cb26-15"><a href="#cb26-15" tabindex="-1"></a><span class="ss">   - </span>Chains plot calls directly without <span class="in">`ggsave()`</span>, capturing returned data objects in variables (<span class="in">`data &lt;- data %&gt;% plot_...`</span>) to avoid console printing.</span>
-<span id="cb26-16"><a href="#cb26-16" tabindex="-1"></a><span class="ss">2. </span>Selects Optimal Normalization &amp; Normalization Check:</span>
-<span id="cb26-17"><a href="#cb26-17" tabindex="-1"></a><span class="ss">   - </span>Tests candidate normalizations (<span class="in">`c("median", "linear", "loess", "limma")`</span>) and selects the optimal method (<span class="in">`select_normalization()`</span>).</span>
-<span id="cb26-18"><a href="#cb26-18" tabindex="-1"></a><span class="ss">   - </span>Runs <span class="in">`summary("normalization")`</span> as a normalization check to confirm CV reduction and variance preservation across candidate normalizations.</span>
-<span id="cb26-19"><a href="#cb26-19" tabindex="-1"></a><span class="ss">   - </span>Verifies the automatic normalization selection via <span class="in">`print(data)`</span>.</span>
-<span id="cb26-20"><a href="#cb26-20" tabindex="-1"></a><span class="ss">3. </span>Handles Missing Values:</span>
-<span id="cb26-21"><a href="#cb26-21" tabindex="-1"></a><span class="ss">   - </span>Imputes missing data appropriately (e.g. left-censored minimum within sample groups or random forest).</span>
-<span id="cb26-22"><a href="#cb26-22" tabindex="-1"></a><span class="ss">   - </span>Verifies the imputed method via <span class="in">`print(data)`</span>.</span>
-<span id="cb26-23"><a href="#cb26-23" tabindex="-1"></a><span class="ss">4. </span>Uncovers Differential Expression:</span>
-<span id="cb26-24"><a href="#cb26-24" tabindex="-1"></a><span class="ss">   - </span>Compares Treatment vs Control using <span class="in">`expression(Treatment/Control, .method = "limma")`</span>.</span>
-<span id="cb26-25"><a href="#cb26-25" tabindex="-1"></a><span class="ss">   - </span>Generates and saves a publication-ready volcano plot (<span class="in">`plot_volcano(destination = "png")`</span>, log2fc_min = 1.0, significance_max = 0.05).</span>
-<span id="cb26-26"><a href="#cb26-26" tabindex="-1"></a><span class="ss">5. </span>Explores Biological Mechanism (Pathway Enrichment):</span>
-<span id="cb26-27"><a href="#cb26-27" tabindex="-1"></a><span class="ss">   - </span>Runs GSEA (<span class="in">`enrichment(Treatment/Control, .method = "gsea", .terms = "biological_process")`</span>).</span>
-<span id="cb26-28"><a href="#cb26-28" tabindex="-1"></a><span class="ss">   - </span>Generates and saves an enrichment plot (<span class="in">`plot_enrichment(destination = "png")`</span>).</span>
-<span id="cb26-29"><a href="#cb26-29" tabindex="-1"></a><span class="ss">6. </span>Highlights Key Findings:</span>
-<span id="cb26-30"><a href="#cb26-30" tabindex="-1"></a><span class="ss">   - </span>Extracts and prints the top 10 most significantly upregulated and downregulated proteins.</span>
-<span id="cb26-31"><a href="#cb26-31" tabindex="-1"></a><span class="ss">   - </span>Extracts and prints the top enriched biological pathways.</span>
-<span id="cb26-32"><a href="#cb26-32" tabindex="-1"></a><span class="ss">   - </span>Summarizes the findings into coherent biological hypotheses explaining what is most interesting about the dataset.</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>You are an expert quantitative proteomics data scientist. You have been provided with the <span class="in">`tidyproteomics`</span> package instructions in SKILL.md.</span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>I have an imported <span class="in">`tidyproteomics`</span> dataset with the following experimental setup:</span>
+<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a><span class="ss">- </span>Organism: <span class="co">[</span><span class="ot">e.g. Homo sapiens / Mus musculus</span><span class="co">]</span></span>
+<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="ss">- </span>Biological Question: <span class="co">[</span><span class="ot">e.g. Mechanism of action of Drug X / Knockout phenotype</span><span class="co">]</span></span>
+<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a><span class="ss">- </span>Sample Groups: <span class="co">[</span><span class="ot">e.g. Treatment = "drug_10uM", Control = "dmso", 3 replicates each</span><span class="co">]</span></span>
+<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a><span class="ss">- </span>Available Annotations: <span class="co">[</span><span class="ot">e.g. gene_name, description, biological_process, reactome_pathway</span><span class="co">]</span></span>
+<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" tabindex="-1"></a>Your goal is to answer: "What is biologically and technically interesting about this dataset?"</span>
+<span id="cb34-10"><a href="#cb34-10" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" tabindex="-1"></a>Generate a complete, self-contained R analysis script using <span class="in">`tidyproteomics`</span> that:</span>
+<span id="cb34-12"><a href="#cb34-12" tabindex="-1"></a><span class="ss">1. </span>Evaluates Quality Control &amp; Global Structure (Data Quality Check):</span>
+<span id="cb34-13"><a href="#cb34-13" tabindex="-1"></a><span class="ss">   - </span>Performs a data quality check with <span class="in">`summary("sample")`</span> to inspect replicate CVs, quantifiable fraction, and PCA coordinates.</span>
+<span id="cb34-14"><a href="#cb34-14" tabindex="-1"></a><span class="ss">   - </span>Saves QC plots using built-in <span class="in">`destination = "png"`</span> (e.g. <span class="in">`plot_variation_cv(destination = "png")`</span>, <span class="in">`plot_dynamic_range(destination = "png")`</span>, <span class="in">`plot_pca(destination = "png")`</span>).</span>
+<span id="cb34-15"><a href="#cb34-15" tabindex="-1"></a><span class="ss">   - </span>Chains plot calls directly without <span class="in">`ggsave()`</span>, capturing returned data objects in variables (<span class="in">`data &lt;- data %&gt;% plot_...`</span>) to avoid console printing.</span>
+<span id="cb34-16"><a href="#cb34-16" tabindex="-1"></a><span class="ss">2. </span>Selects Optimal Normalization &amp; Normalization Check:</span>
+<span id="cb34-17"><a href="#cb34-17" tabindex="-1"></a><span class="ss">   - </span>Tests candidate normalizations (<span class="in">`c("median", "linear", "loess", "limma")`</span>) and selects the optimal method (<span class="in">`select_normalization()`</span>).</span>
+<span id="cb34-18"><a href="#cb34-18" tabindex="-1"></a><span class="ss">   - </span>Runs <span class="in">`summary("normalization")`</span> as a normalization check to confirm CV reduction and variance preservation across candidate normalizations.</span>
+<span id="cb34-19"><a href="#cb34-19" tabindex="-1"></a><span class="ss">   - </span>Verifies the automatic normalization selection via <span class="in">`print(data)`</span>.</span>
+<span id="cb34-20"><a href="#cb34-20" tabindex="-1"></a><span class="ss">3. </span>Handles Missing Values:</span>
+<span id="cb34-21"><a href="#cb34-21" tabindex="-1"></a><span class="ss">   - </span>Imputes missing data appropriately (e.g. left-censored minimum within sample groups or random forest).</span>
+<span id="cb34-22"><a href="#cb34-22" tabindex="-1"></a><span class="ss">   - </span>Verifies the imputed method via <span class="in">`print(data)`</span>.</span>
+<span id="cb34-23"><a href="#cb34-23" tabindex="-1"></a><span class="ss">4. </span>Uncovers Differential Expression:</span>
+<span id="cb34-24"><a href="#cb34-24" tabindex="-1"></a><span class="ss">   - </span>Compares Treatment vs Control using <span class="in">`expression(Treatment/Control, .method = "limma")`</span>.</span>
+<span id="cb34-25"><a href="#cb34-25" tabindex="-1"></a><span class="ss">   - </span>Generates and saves a publication-ready volcano plot (<span class="in">`plot_volcano(destination = "png")`</span>, log2fc_min = 1.0, significance_max = 0.05).</span>
+<span id="cb34-26"><a href="#cb34-26" tabindex="-1"></a><span class="ss">5. </span>Explores Biological Mechanism (Pathway Enrichment):</span>
+<span id="cb34-27"><a href="#cb34-27" tabindex="-1"></a><span class="ss">   - </span>Runs GSEA (<span class="in">`enrichment(Treatment/Control, .method = "gsea", .terms = "biological_process")`</span>).</span>
+<span id="cb34-28"><a href="#cb34-28" tabindex="-1"></a><span class="ss">   - </span>Generates and saves an enrichment plot (<span class="in">`plot_enrichment(destination = "png")`</span>).</span>
+<span id="cb34-29"><a href="#cb34-29" tabindex="-1"></a><span class="ss">6. </span>Highlights Key Findings:</span>
+<span id="cb34-30"><a href="#cb34-30" tabindex="-1"></a><span class="ss">   - </span>Extracts and prints the top 10 most significantly upregulated and downregulated proteins.</span>
+<span id="cb34-31"><a href="#cb34-31" tabindex="-1"></a><span class="ss">   - </span>Extracts and prints the top enriched biological pathways.</span>
+<span id="cb34-32"><a href="#cb34-32" tabindex="-1"></a><span class="ss">   - </span>Summarizes the findings into coherent biological hypotheses explaining what is most interesting about the dataset.</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="prompt-template-3-multi-condition-screen-analysis-type-multicontrast">Prompt Template 3: Multi-Condition / Screen Analysis
@@ -1767,20 +1905,20 @@ known:</em></p>
 </h4>
 <p><em>Use this prompt when analyzing multiple treatment doses,
 genotypes, or timepoints (<code>automating.Rmd</code>):</em></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>You are an expert quantitative proteomics data scientist using <span class="in">`tidyproteomics`</span> (see SKILL.md).</span>
-<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a>I have a multi-condition experiment with the following pairwise comparisons:</span>
-<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a>[List comparisons, e.g.:</span>
-<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a><span class="ss"> - </span>c("knockdown", "control")</span>
-<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a><span class="ss"> - </span>c("rescue", "control")</span>
-<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a><span class="ss"> - </span>c("rescue", "knockdown")]</span>
-<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a></span>
-<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a>Write a complete R script that:</span>
-<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a><span class="ss">1. </span>Normalizes the dataset using <span class="in">`select_normalization()`</span>.</span>
-<span id="cb27-11"><a href="#cb27-11" tabindex="-1"></a><span class="ss">2. </span>Automates all two-sample tests in batch using <span class="in">`expression(.pairs = pairs, .method = "limma")`</span>.</span>
-<span id="cb27-12"><a href="#cb27-12" tabindex="-1"></a><span class="ss">3. </span>Automates multi-term GSEA across biological processes and pathways using <span class="in">`enrichment(.pairs = pairs, .terms = c("biological_process", "reactome_pathway"))`</span>.</span>
-<span id="cb27-13"><a href="#cb27-13" tabindex="-1"></a><span class="ss">4. </span>Saves out all figures and tables automatically using <span class="in">`analyze_expressions(labels_column = "gene_name")`</span> and <span class="in">`analyze_enrichments(significance_max = 0.05)`</span>.</span>
-<span id="cb27-14"><a href="#cb27-14" tabindex="-1"></a><span class="ss">5. </span>Generates a comparative expression plot (<span class="in">`plot_compexp()`</span>) to contrast fold changes between conditions.</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>You are an expert quantitative proteomics data scientist using <span class="in">`tidyproteomics`</span> (see SKILL.md).</span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" tabindex="-1"></a>I have a multi-condition experiment with the following pairwise comparisons:</span>
+<span id="cb35-4"><a href="#cb35-4" tabindex="-1"></a>[List comparisons, e.g.:</span>
+<span id="cb35-5"><a href="#cb35-5" tabindex="-1"></a><span class="ss"> - </span>c("knockdown", "control")</span>
+<span id="cb35-6"><a href="#cb35-6" tabindex="-1"></a><span class="ss"> - </span>c("rescue", "control")</span>
+<span id="cb35-7"><a href="#cb35-7" tabindex="-1"></a><span class="ss"> - </span>c("rescue", "knockdown")]</span>
+<span id="cb35-8"><a href="#cb35-8" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" tabindex="-1"></a>Write a complete R script that:</span>
+<span id="cb35-10"><a href="#cb35-10" tabindex="-1"></a><span class="ss">1. </span>Normalizes the dataset using <span class="in">`select_normalization()`</span>.</span>
+<span id="cb35-11"><a href="#cb35-11" tabindex="-1"></a><span class="ss">2. </span>Automates all two-sample tests in batch using <span class="in">`expression(.pairs = pairs, .method = "limma")`</span>.</span>
+<span id="cb35-12"><a href="#cb35-12" tabindex="-1"></a><span class="ss">3. </span>Automates multi-term GSEA across biological processes and pathways using <span class="in">`enrichment(.pairs = pairs, .terms = c("biological_process", "reactome_pathway"))`</span>.</span>
+<span id="cb35-13"><a href="#cb35-13" tabindex="-1"></a><span class="ss">4. </span>Saves out all figures and tables automatically using <span class="in">`analyze_expressions(labels_column = "gene_name")`</span> and <span class="in">`analyze_enrichments(significance_max = 0.05)`</span>.</span>
+<span id="cb35-14"><a href="#cb35-14" tabindex="-1"></a><span class="ss">5. </span>Generates a comparative expression plot (<span class="in">`plot_compexp()`</span>) to contrast fold changes between conditions.</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="prompt-template-4-venn-diagram-region-extraction-type-extracting">Prompt Template 4: Venn Diagram &amp; Region Extraction
@@ -1788,22 +1926,22 @@ genotypes, or timepoints (<code>automating.Rmd</code>):</em></p>
 </h4>
 <p><em>Use this prompt when investigating shared vs. unique proteomes
 across conditions (<code>extracting.Rmd</code>):</em></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>You are an expert quantitative proteomics data scientist using <span class="in">`tidyproteomics`</span> (see SKILL.md).</span>
-<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>I have an imported <span class="in">`tidyproteomics`</span> dataset with multiple sample groups:</span>
-<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="co">[</span><span class="ot">List groups, e.g. "control", "drug_low", "drug_high"</span><span class="co">]</span></span>
-<span id="cb28-5"><a href="#cb28-5" tabindex="-1"></a></span>
-<span id="cb28-6"><a href="#cb28-6" tabindex="-1"></a>I want to investigate which proteins are uniquely expressed in specific conditions versus shared across groups.</span>
-<span id="cb28-7"><a href="#cb28-7" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="#cb28-8" tabindex="-1"></a>Write a complete R script that:</span>
-<span id="cb28-9"><a href="#cb28-9" tabindex="-1"></a><span class="ss">1. </span>Filters for non-imputed proteins using <span class="in">`subset(imputed == 0)`</span> to ensure true mass spectrometry identifications.</span>
-<span id="cb28-10"><a href="#cb28-10" tabindex="-1"></a><span class="ss">2. </span>Generates and saves a Venn/Euler diagram (<span class="in">`plot_venn(destination = "png")`</span> or <span class="in">`plot_euler(destination = "png")`</span>).</span>
-<span id="cb28-11"><a href="#cb28-11" tabindex="-1"></a><span class="ss">3. </span>Uses <span class="in">`intersection(.include = ..., .exclude = ...)`</span> to extract the underlying data for:</span>
-<span id="cb28-12"><a href="#cb28-12" tabindex="-1"></a><span class="ss">   - </span>Proteins unique to <span class="co">[</span><span class="ot">GROUP_A</span><span class="co">]</span> (absent in other groups).</span>
-<span id="cb28-13"><a href="#cb28-13" tabindex="-1"></a><span class="ss">   - </span>Proteins shared across all groups.</span>
-<span id="cb28-14"><a href="#cb28-14" tabindex="-1"></a><span class="ss">   - </span>Specific overlap segments of interest.</span>
-<span id="cb28-15"><a href="#cb28-15" tabindex="-1"></a><span class="ss">4. </span>Uses <span class="in">`extract(na.rm = TRUE)`</span> to convert each extracted segment into a tidy long-format tibble and exports them to CSV (<span class="in">`readr::write_csv()`</span>).</span>
-<span id="cb28-16"><a href="#cb28-16" tabindex="-1"></a><span class="ss">5. </span>Prints a concise summary of each extracted segment using <span class="in">`print()`</span>.</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>You are an expert quantitative proteomics data scientist using <span class="in">`tidyproteomics`</span> (see SKILL.md).</span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a>I have an imported <span class="in">`tidyproteomics`</span> dataset with multiple sample groups:</span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a><span class="co">[</span><span class="ot">List groups, e.g. "control", "drug_low", "drug_high"</span><span class="co">]</span></span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a>I want to investigate which proteins are uniquely expressed in specific conditions versus shared across groups.</span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a>Write a complete R script that:</span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="ss">1. </span>Filters for non-imputed proteins using <span class="in">`subset(imputed == 0)`</span> to ensure true mass spectrometry identifications.</span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a><span class="ss">2. </span>Generates and saves a Venn/Euler diagram (<span class="in">`plot_venn(destination = "png")`</span> or <span class="in">`plot_euler(destination = "png")`</span>).</span>
+<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a><span class="ss">3. </span>Uses <span class="in">`intersection(.include = ..., .exclude = ...)`</span> to extract the underlying data for:</span>
+<span id="cb36-12"><a href="#cb36-12" tabindex="-1"></a><span class="ss">   - </span>Proteins unique to <span class="co">[</span><span class="ot">GROUP_A</span><span class="co">]</span> (absent in other groups).</span>
+<span id="cb36-13"><a href="#cb36-13" tabindex="-1"></a><span class="ss">   - </span>Proteins shared across all groups.</span>
+<span id="cb36-14"><a href="#cb36-14" tabindex="-1"></a><span class="ss">   - </span>Specific overlap segments of interest.</span>
+<span id="cb36-15"><a href="#cb36-15" tabindex="-1"></a><span class="ss">4. </span>Uses <span class="in">`extract(na.rm = TRUE)`</span> to convert each extracted segment into a tidy long-format tibble and exports them to CSV (<span class="in">`readr::write_csv()`</span>).</span>
+<span id="cb36-16"><a href="#cb36-16" tabindex="-1"></a><span class="ss">5. </span>Prints a concise summary of each extracted segment using <span class="in">`print()`</span>.</span></code></pre></div>
 </div>
 </div>
 </div>

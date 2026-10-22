@@ -79,9 +79,9 @@ enrichment <- function(
   }
 
   # a quick check on pairs to mitigate any issues prior to computing
-  check_pairs(.pairs, get_sample_names(data))
+  check_pairs(.pairs, get_sample_names(data, format = "vector"))
   identifier <- data$identifier
-  avaiable_terms <- get_annotation_terms(data)
+  avaiable_terms <- get_annotation_terms(data, format = "vector")
   cli::cli_progress_bar(type = 'tasks')
 
   for(i in 1:length(.pairs)){

@@ -17,7 +17,7 @@ This package supports at a high level:
 
 ### Publication
 
-Jones, J., MacKrell, E.J., Wang, TY. et al. *Tidyproteomics: an open-source R package and data object for quantitative proteomics post analysis and visualization.* [BMC Bioinformatics 24, 239 (2023)](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-023-05360-7)
+Jones, J., MacKrell, E.J., Wang, TY. et al. *Tidyproteomics: an open-source R package and data object for quantitative proteomics post analysis and visualization.* [BMC Bioinformatics 24, 239 (2023)](https://link.springer.com/article/10.1186/s12859-023-05360-7)
 
 ### R Package
 
