@@ -62,4 +62,14 @@ test_that("plot_expression creates expected ggplot and options work", {
     "no values significant"
   )
   expect_s3_class(p_fallback, "ggplot")
+  # Tag option produces tagged filename
+  hp_exp %>% plot_expression(
+    knockdown/control,
+    tag = "test_tag",
+    top_n = 2,
+    destination = "png"
+  )
+  expected_file <- "plot_proteins_raw_expression_knockdown-control_test_tag.png"
+  expect_true(file.exists(expected_file))
+  unlink(expected_file)
 })

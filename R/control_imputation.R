@@ -46,7 +46,15 @@ impute <- function(
   imputed <- NULL
   imputed.y <- NULL
 
-  method <- rlang::arg_match(method)
+  impute_function_str <- rlang::as_label(rlang::enexpr(.function))
+  if (identical(.function, impute.randomforest) && !grepl("randomforest", impute_function_str, ignore.case = TRUE)) {
+    impute_function_str <- "impute.randomforest"
+  }
+  if(missing(method) && (identical(.function, impute.randomforest) || grepl("randomforest", impute_function_str, ignore.case = TRUE))){
+    method <- 'matrix'
+  } else {
+    method <- rlang::arg_match(method)
+  }
   if(!is.logical(group_by_sample)) { cli::cli_abort("group_by_sample must be one of [TRUE, FALSE]") }
   group_by_sample <- group_by_sample[1]
 
@@ -83,7 +91,6 @@ impute <- function(
     }
   }
 
-  impute_function_str <- enquote(.function) %>% paste(collapse = ' ') %>% stringr::str_replace_all("\\s+", " ")
   cli::cli_div(theme = list(span.emph = list(color = "#ff4500")))
   cli::cli_progress_step("Imputing by {.emph {method}} using the function {.emph {impute_function_str}}")
 
@@ -109,14 +116,24 @@ impute <- function(
   for(i in 1:length(table$data)){
     this_matrix <- table$data[[i]]
 
-    if(method == 'row'){
+    if(group_by_sample == TRUE && method %in% c('row', 'matrix') && ncol(this_matrix) < 2){
+      cli::cli_alert_warning("Sample group {.val {table$sample[[i]]}} has only {ncol(this_matrix)} replicate(s); within-group {method} imputation requires >= 2 replicates per sample group.")
+    }
+
+    if(method %in% c('row', 'matrix')){
       this_matrix_na <- which(this_matrix %>% base::apply(1, all_na) == TRUE)
-      if(length(this_matrix_na) > 0){ this_matrix <- this_matrix[-this_matrix_na,] }
+      if(length(this_matrix_na) > 0){ this_matrix <- this_matrix[-this_matrix_na, , drop = FALSE] }
     }
 
     # find the values to impute
     w_impute <- which(is.na(this_matrix), arr.ind = TRUE)
-    if(length(w_impute) == 0) { next() }
+    if(length(w_impute) == 0) {
+      this_matrix <- this_matrix %>%
+        undo_matrix(group_by_sample) %>%
+        dplyr::mutate(imputed = FALSE)
+      table$data[[i]] <- this_matrix
+      next()
+    }
 
     # impute by row or col
     # =================================

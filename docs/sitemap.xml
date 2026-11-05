@@ -295,6 +295,12 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/ingest_config.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/input_audit.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/intersect_venn.html</loc>
   </url>
   <url>
@@ -373,6 +379,9 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot.tidyproteomics.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_candidates.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_compexp.html</loc>
   </url>
   <url>
@@ -394,6 +403,9 @@
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_heatmap.html</loc>
   </url>
   <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_imputation_diagnostic.html</loc>
+  </url>
+  <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_normalization.html</loc>
   </url>
   <url>
@@ -410,6 +422,9 @@
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_save.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_signatures.html</loc>
   </url>
   <url>
     <loc>https://jeffsocal.github.io/tidyproteomics/reference/plot_variation_cv.html</loc>

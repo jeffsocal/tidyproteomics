@@ -20,7 +20,7 @@ for imputed)."><meta property="og:image" content="https://jeffsocal.github.io/ti
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.16</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,6 +108,7 @@ for imputed).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_expression</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span>,</span>
+<span>  tag <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  log2fc_min <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  log2fc_column <span class="op">=</span> <span class="st">"log2_foldchange"</span>,</span>
 <span>  significance_max <span class="op">=</span> <span class="fl">0.05</span>,</span>
@@ -115,10 +116,15 @@ for imputed).</p>
 <span>  top_n <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  regulation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"both"</span>, <span class="st">"up"</span>, <span class="st">"down"</span><span class="op">)</span>,</span>
 <span>  labels_column <span class="op">=</span> <span class="st">"protein"</span>,</span>
+<span>  candidates <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  proteins <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  imputed_only <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show_title <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  destination <span class="op">=</span> <span class="st">"plot"</span>,</span>
 <span>  height <span class="op">=</span> <span class="fl">6</span>,</span>
-<span>  width <span class="op">=</span> <span class="fl">8</span></span>
+<span>  width <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  file_name <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -130,6 +136,10 @@ for imputed).</p>
 
 <dt>...</dt>
 <dd><p>two sample comparison expression (e.g. <code>knockdown/control</code>)</p></dd>
+
+
+<dt>tag</dt>
+<dd><p>a character string to append to the plot file name</p></dd>
 
 
 <dt>log2fc_min</dt>
@@ -160,6 +170,18 @@ for imputed).</p>
 <dd><p>a character defining the annotation column for facet titles (default is <code>"protein"</code>).</p></dd>
 
 
+<dt>candidates</dt>
+<dd><p>optional character vector of protein identifiers or gene names to plot.</p></dd>
+
+
+<dt>proteins</dt>
+<dd><p>alias for <code>candidates</code> for backward compatibility.</p></dd>
+
+
+<dt>imputed_only</dt>
+<dd><p>logical; if TRUE, restricts automatic selection to features with imputed values (<code>imputed &gt; 0</code>). Default is FALSE.</p></dd>
+
+
 <dt>show_title</dt>
 <dd><p>input FALSE, TRUE for an auto-generated title or any character string.</p></dd>
 
@@ -174,6 +196,14 @@ for imputed).</p>
 
 <dt>width</dt>
 <dd><p>a numeric plot width in inches. Default is 8.</p></dd>
+
+
+<dt>path</dt>
+<dd><p>optional path to save destination plot.</p></dd>
+
+
+<dt>file_name</dt>
+<dd><p>optional base file name override for saved output.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -201,20 +231,8 @@ for imputed).</p>
 <span class="r-in"><span>  <span class="fu"><a href="expression.html">expression</a></span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">plot_expression</span><span class="op">(</span><span class="va">knockdown</span><span class="op">/</span><span class="va">control</span>, log2fc_min <span class="op">=</span> <span class="fl">0.5</span>, significance_column <span class="op">=</span> <span class="st">"p_value"</span>, top_n <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[71ms]</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> .. expression::<span style="color: #FF5F00; font-style: italic;">t_test</span> testing <span style="color: #FF5F00; font-style: italic;">knockdown / control</span> <span style="color: #B2B2B2;">[64ms]</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 34</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   plot_label min_y max_y protein imputed     n imputed_control imputed_knockdown</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Q14146      18.2  19.8 Q14146        0     6               0                 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> A0A087X020  23.7  25.3 A0A087…       0     6               0                 0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 26 more variables: average_expression &lt;dbl&gt;, proportional_expression &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   foldchange &lt;dbl&gt;, log2_foldchange &lt;dbl&gt;, p_value &lt;dbl&gt;, adj_p_value &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   normalization &lt;chr&gt;, abundance_control_1 &lt;dbl&gt;, abundance_control_2 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_control_3 &lt;dbl&gt;, abundance_knockdown_1 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abundance_knockdown_2 &lt;dbl&gt;, abundance_knockdown_3 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   description &lt;chr&gt;, biological_process &lt;chr&gt;, cellular_component &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   molecular_function &lt;chr&gt;, gene_id_entrez &lt;chr&gt;, gene_name &lt;chr&gt;, …</span></span>
 <span class="r-plt img"><img src="plot_expression-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

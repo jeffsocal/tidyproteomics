@@ -9,7 +9,7 @@ plot_heatmap(data = NULL, tag = NULL, row_names = FALSE, ...)
 \arguments{
 \item{data}{tidyproteomics data object}
 
-\item{tag}{a character string}
+\item{tag}{a character string to append to the plot file name}
 
 \item{row_names}{either FALSE, or an annotation (eg. protein, gene_name, description etc.)}
 

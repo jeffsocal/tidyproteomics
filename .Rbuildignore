@@ -1,17 +1,13 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^todo$
 ^\.gitignore$
 .+xlsx$
 ^docs$
 ^pkgdown$
 ^LICENSE\.md$
-^inst/scripts$
 ^_pkgdown\.yml$
 ^Rplots\.pdf$
 ^.*\.tar\.gz$
 ^.*\.Rcheck$
 ^.*\.DS_Store$
 ^cran-comments\.md$
-^Library$
-^Outputs$

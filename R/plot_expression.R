@@ -10,6 +10,7 @@
 #'
 #' @param data a tidyproteomics data object
 #' @param ... two sample comparison expression (e.g. `knockdown/control`)
+#' @param tag a character string to append to the plot file name
 #' @param log2fc_min a numeric defining the minimum log2 foldchange threshold. Default is 1.
 #' @param log2fc_column a character defining the column name of log2 foldchange values.
 #' @param significance_max a numeric defining the maximum significance threshold. Default is 0.05.
@@ -17,10 +18,15 @@
 #' @param top_n an integer defining the top N proteins to plot post-filtering. Default is 10.
 #' @param regulation a character defining direction: `"both"` (default), `"up"`, or `"down"`.
 #' @param labels_column a character defining the annotation column for facet titles (default is `"protein"`).
+#' @param candidates optional character vector of protein identifiers or gene names to plot.
+#' @param proteins alias for `candidates` for backward compatibility.
+#' @param imputed_only logical; if TRUE, restricts automatic selection to features with imputed values (`imputed > 0`). Default is FALSE.
 #' @param show_title input FALSE, TRUE for an auto-generated title or any character string.
 #' @param destination a character string (`"plot"`, `"save"`, `"png"`, `"svg"`, `"tiff"`, `"jpeg"`).
 #' @param height a numeric plot height in inches. Default is 6.
 #' @param width a numeric plot width in inches. Default is 8.
+#' @param path optional path to save destination plot.
+#' @param file_name optional base file name override for saved output.
 #'
 #' @return a ggplot2 object or tidyproteomics data object depending on `destination`
 #' @export
@@ -39,6 +45,7 @@
 plot_expression <- function(
     data = NULL,
     ...,
+    tag = NULL,
     log2fc_min = 1,
     log2fc_column = 'log2_foldchange',
     significance_max = 0.05,
@@ -46,10 +53,15 @@ plot_expression <- function(
     top_n = 10,
     regulation = c('both', 'up', 'down'),
     labels_column = 'protein',
+    candidates = NULL,
+    proteins = NULL,
+    imputed_only = FALSE,
     show_title = TRUE,
     destination = 'plot',
     height = 6,
-    width = 8
+    width = 8,
+    path = NULL,
+    file_name = NULL
 ){
 
   # visible bindings
@@ -78,9 +90,18 @@ plot_expression <- function(
   check_samples(data, sample_a, sample_b)
 
   str_quo_name <- tidyproteomics_quo_name(...)
-  file_name <- glue::glue("{data$analyte}_{data$quantitative_source}_expression_{str_quo_name}")
+  tag_str <- if(!is.null(tag) && nzchar(tag)) paste0("_", tag) else ""
+  if (is.null(file_name) || !nzchar(file_name)) {
+    file_name <- glue::glue("{data$analyte}_{data$quantitative_source}_expression_{str_quo_name}{tag_str}")
+  }
 
   table <- data %>% export_analysis(..., .analysis = 'expression')
+  id_col <- data$identifier[1]
+  # restrict expression table to entities currently present in data (e.g. after subset)
+  present_ids <- unique(data$quantitative[[id_col]])
+  if(length(present_ids) > 0) {
+    table <- table %>% dplyr::filter(.data[[id_col]] %in% present_ids)
+  }
   table_cols <- colnames(table)
 
   log2fc_column <- rlang::arg_match(log2fc_column, table_cols)
@@ -95,34 +116,63 @@ plot_expression <- function(
                   !is.na(.data[[significance_column]]),
                   !is.infinite(.data[[log2fc_column]]))
 
-  table_filtered <- switch(
-    regulation,
-    'up' = table %>%
-      dplyr::filter(.data[[log2fc_column]] >= log2fc_min,
-                    .data[[significance_column]] <= significance_max) %>%
-      dplyr::arrange(dplyr::desc(.data[[log2fc_column]])),
-    'down' = table %>%
-      dplyr::filter(.data[[log2fc_column]] <= -log2fc_min,
-                    .data[[significance_column]] <= significance_max) %>%
-      dplyr::arrange(.data[[log2fc_column]]),
-    'both' = table %>%
-      dplyr::filter(abs(.data[[log2fc_column]]) >= log2fc_min,
-                    .data[[significance_column]] <= significance_max) %>%
-      dplyr::arrange(dplyr::desc(abs(.data[[log2fc_column]])))
-  )
-
-  if(nrow(table_filtered) == 0){
-    cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "red")))
-    cli::cli_inform(c("i" = "no values significant at current settings",
-                      "i" = "... {.emph {log2fc_column}} ({.info {log2fc_min}}) and {.emph {significance_column}} ({.info {significance_max}})",
-                      "i" = "... falling back to top candidates ranked by effect and significance"))
-
-    table_filtered <- table %>%
-      dplyr::mutate(metric = abs(.data[[log2fc_column]]) + 10 * (1 - .data[[significance_column]])) %>%
-      dplyr::arrange(dplyr::desc(metric))
+  if (is.null(candidates) && !is.null(proteins)) {
+    candidates <- proteins
   }
 
-  table_top <- table_filtered %>% head(top_n)
+  table_top <- NULL
+  if (!is.null(candidates) && length(candidates) > 0) {
+    table_top <- table %>%
+      dplyr::filter(
+        .data[[labels_column]] %in% candidates |
+          .data[[id_col]] %in% candidates
+      )
+    if (nrow(table_top) == 0) {
+      cli::cli_alert_warning("None of the nominated candidates found in expression table; falling back to automatic selection.")
+      table_top <- NULL
+    }
+  }
+
+  if (is.null(table_top)) {
+    table_pool <- table
+    if (isTRUE(imputed_only)) {
+      has_imputed <- "imputed" %in% table_cols && any(!is.na(table$imputed) & table$imputed > 0)
+      if (has_imputed) {
+        table_pool <- table %>% dplyr::filter(!is.na(.data$imputed) & .data$imputed > 0)
+      } else {
+        cli::cli_inform(c("i" = "No imputed values found in expression analysis, falling back to top candidates."))
+      }
+    }
+
+    table_filtered <- switch(
+      regulation,
+      'up' = table_pool %>%
+        dplyr::filter(.data[[log2fc_column]] >= log2fc_min,
+                      .data[[significance_column]] <= significance_max) %>%
+        dplyr::arrange(dplyr::desc(.data[[log2fc_column]])),
+      'down' = table_pool %>%
+        dplyr::filter(.data[[log2fc_column]] <= -log2fc_min,
+                      .data[[significance_column]] <= significance_max) %>%
+        dplyr::arrange(.data[[log2fc_column]]),
+      'both' = table_pool %>%
+        dplyr::filter(abs(.data[[log2fc_column]]) >= log2fc_min,
+                      .data[[significance_column]] <= significance_max) %>%
+        dplyr::arrange(dplyr::desc(abs(.data[[log2fc_column]])))
+    )
+
+    if(nrow(table_filtered) == 0){
+      cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "red")))
+      cli::cli_inform(c("i" = "no values significant at current settings",
+                        "i" = "... {.emph {log2fc_column}} ({.info {log2fc_min}}) and {.emph {significance_column}} ({.info {significance_max}})",
+                        "i" = "... falling back to top candidates ranked by effect and significance"))
+
+      table_filtered <- table_pool %>%
+        dplyr::mutate(metric = abs(.data[[log2fc_column]]) + 10 * (1 - .data[[significance_column]])) %>%
+        dplyr::arrange(dplyr::desc(metric))
+    }
+
+    table_top <- table_filtered %>% head(top_n)
+  }
 
   # establish facet labels preserving rank order
   raw_labels <- table_top[[labels_column]]
@@ -174,8 +224,6 @@ plot_expression <- function(
       is_sig = ifelse(p_value < 0.05, "*", ""),
       is_sig = ifelse(p_value < 0.01, "**", is_sig)
     )
-
-  print(table_annot)
 
   # build title
   title_txt <- str_quo_name %>%
@@ -247,6 +295,7 @@ plot_expression <- function(
     file_name = file_name,
     destination = destination,
     height = height,
-    width = width
+    width = width,
+    path = path
   ))
 }

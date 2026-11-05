@@ -7,6 +7,7 @@
 plot_expression(
   data = NULL,
   ...,
+  tag = NULL,
   log2fc_min = 1,
   log2fc_column = "log2_foldchange",
   significance_max = 0.05,
@@ -14,16 +15,23 @@ plot_expression(
   top_n = 10,
   regulation = c("both", "up", "down"),
   labels_column = "protein",
+  candidates = NULL,
+  proteins = NULL,
+  imputed_only = FALSE,
   show_title = TRUE,
   destination = "plot",
   height = 6,
-  width = 8
+  width = 8,
+  path = NULL,
+  file_name = NULL
 )
 }
 \arguments{
 \item{data}{a tidyproteomics data object}
 
 \item{...}{two sample comparison expression (e.g. \code{knockdown/control})}
+
+\item{tag}{a character string to append to the plot file name}
 
 \item{log2fc_min}{a numeric defining the minimum log2 foldchange threshold. Default is 1.}
 
@@ -39,6 +47,12 @@ plot_expression(
 
 \item{labels_column}{a character defining the annotation column for facet titles (default is \code{"protein"}).}
 
+\item{candidates}{optional character vector of protein identifiers or gene names to plot.}
+
+\item{proteins}{alias for \code{candidates} for backward compatibility.}
+
+\item{imputed_only}{logical; if TRUE, restricts automatic selection to features with imputed values (\code{imputed > 0}). Default is FALSE.}
+
 \item{show_title}{input FALSE, TRUE for an auto-generated title or any character string.}
 
 \item{destination}{a character string (\code{"plot"}, \code{"save"}, \code{"png"}, \code{"svg"}, \code{"tiff"}, \code{"jpeg"}).}
@@ -46,6 +60,10 @@ plot_expression(
 \item{height}{a numeric plot height in inches. Default is 6.}
 
 \item{width}{a numeric plot width in inches. Default is 8.}
+
+\item{path}{optional path to save destination plot.}
+
+\item{file_name}{optional base file name override for saved output.}
 }
 \value{
 a ggplot2 object or tidyproteomics data object depending on \code{destination}

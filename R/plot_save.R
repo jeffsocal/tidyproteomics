@@ -20,6 +20,7 @@ plot_save <- function(
     destination = c("plot", "save", "png", "svg", "tiff", "jpeg"),
     height = 5,
     width = 8,
+    path = NULL,
     ...
 ){
 
@@ -37,6 +38,10 @@ plot_save <- function(
   if(destination == 'save') {destination <- 'png'}
 
   file_name = glue::glue('plot_{file_name}.{destination}')
+  if (!is.null(path) && nzchar(path)) {
+    if (!dir.exists(path)) dir.create(path, recursive = TRUE)
+    file_name <- file.path(path, file_name)
+  }
 
   plot %>% ggplot2::ggsave(filename=file_name, height = height, width = width, ...)
   cli::cli_alert_info("Saved {file_name}")

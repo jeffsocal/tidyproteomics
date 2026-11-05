@@ -31,7 +31,8 @@ operations <- function(
     cli::cli_inform(c("i" = "Data Transformations"))
     cli::cli_ol()
     ulid <- cli::cli_ul()
-    cli::cli_li(v_trans)
+    v_trans_safe <- gsub("\\}", "}}", gsub("\\{", "{{", v_trans))
+    cli::cli_li(v_trans_safe)
     cli::cli_end(ulid)
     cli::cli_end()
   } else {

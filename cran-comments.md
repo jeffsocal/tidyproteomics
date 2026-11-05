@@ -1,6 +1,6 @@
 ## CRAN Submission Comments
 
-### Package: tidyproteomics 1.9.15
+### Package: tidyproteomics 1.9.16
 
 ### Test environments
 * local macOS (R 4.x)

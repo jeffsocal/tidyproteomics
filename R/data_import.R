@@ -34,9 +34,13 @@ data_import <- function(
   if(is.null(platform)) {cli::cli_abort(c("x" = "No file platform indicated"))}
   if(is.null(analyte)) {cli::cli_abort(c("x" = "No file analyte indicated"))}
 
+  local_config <- file.path(getwd(), glue::glue("{platform}_{analyte}.tsv"))
   if(!is.null(path)) {
     if(!file.exists(path)) {cli::cli_abort("Config file not found for {.emph {path}}")}
     path_to_config <- path
+  } else if(file.exists(local_config)) {
+    cli::cli_alert_info("Using local custom config: {.file {basename(local_config)}}")
+    path_to_config <- local_config
   } else {
     path_to_config <- glue::glue("{platform}_{analyte}") %>% path_to_package_data()
   }

@@ -6,7 +6,7 @@
 #' quantitative values are clustered and visualized.
 #'
 #' @param data tidyproteomics data object
-#' @param tag a character string
+#' @param tag a character string to append to the plot file name
 #' @param row_names either FALSE, or an annotation (eg. protein, gene_name, description etc.)
 #' @param ... passthrough for ggsave see `plotting`
 #'
@@ -111,11 +111,18 @@ plot_heatmap <- function(
 
   col <- grDevices::colorRampPalette(RColorBrewer::brewer.pal(10, "RdYlBu"))(32) %>% rev()
 
+  if (isTRUE(row_names_bool) && nrow(data_munge) > 80) {
+    cli::cli_alert_warning("Suppressing heatmap row labels because feature count ({nrow(data_munge)}) exceeds 80; subset data first to display individual gene/protein labels.")
+    row_names_bool <- FALSE
+  }
+  row_fontsize <- if (nrow(data_munge) > 30) max(6, round(240 / nrow(data_munge))) else 9
+
   plot <- pheatmap::pheatmap(data_munge,
                              scale = "none",
                              silent = TRUE,
                              col =  col,
                              show_rownames = row_names_bool,
+                             fontsize_row = row_fontsize,
                              annotation_colors = group_color,
                              #annotation_legend = FALSE,
                              #legend = FALSE,
@@ -132,8 +139,9 @@ plot_heatmap <- function(
 
   if(!'null device' %in% names(grDevices::dev.cur())) { invisible(grDevices::dev.off()) }
 
+  tag_str <- if(!is.null(tag) && nzchar(tag)) paste0("_", tag) else ""
   return(plot_save(plot,
                    data,
-                   glue::glue("{data$analyte}_{data$quantitative_source}_heatmap"),
+                   glue::glue("{data$analyte}_{data$quantitative_source}_heatmap{tag_str}"),
                    ...))
 }

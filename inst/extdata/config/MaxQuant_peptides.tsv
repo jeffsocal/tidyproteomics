@@ -1,9 +1,10 @@
 category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
 sample	sample_file	Raw file				
 sample	sample	Experiment				
-identifier	protein	^Proteins$	(?<=\|).*?(?=\|)		\;	
+identifier	protein	^Proteins$	(?<=[|])[^|]+(?=[|])|^[^|[:space:]]+$		\;	
 identifier	peptide	^Sequence$				
 identifier	modifications	^Modified sequence$				
 quantitative	abundance_raw	^Intensity$				
 impute	match_between_runs	Type	MATCH			
-accounting	num_psms	MS/MS count				
+accounting	num_psms	MS/MS count
+annotation	gene_name	^Gene [nN]ames$				

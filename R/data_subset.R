@@ -58,12 +58,13 @@ subset.tidyproteomics <- function(
   identifier <- data$identifier
   which_segment <- get_segment(data, variable, .verbose)
   if(is.null(which_segment)) {return(data)}
-  operation <- glue::glue("Data subset {inverse_str}`{variable}` {operator} `{value}`")
+  val_str <- paste(value, collapse = ", ")
+  operation <- glue::glue("Data subset {inverse_str}`{variable}` {operator} `{val_str}`")
 
   if(.verbose == TRUE) {
     cli::cli_text("")
     cli::cli_div(theme = list(span.emph = list(color = "#ff4500"), span.info = list(color = "blue")))
-    cli::cli_process_start("Subsetting data: {.emph {inverse_str}{variable}} {.info {operator}} {.emph {value}}")
+    cli::cli_process_start("Subsetting data: {.emph {inverse_str}{variable}} {.info {operator}} {.emph {val_str}}")
   }
 
   identifier <- data$identifier
@@ -120,10 +121,16 @@ subset.tidyproteomics <- function(
       dplyr::mutate(replicate = as.character(dplyr::row_number())) %>%
       dplyr::ungroup()
 
-    data$quantitative <- data$quantitative %>%
-      dplyr::inner_join(data$accounting %>%
-                          dplyr::select(dplyr::all_of(c('sample_id', identifier))),
-                        by = c('sample_id', identifier))
+    data$quantitative <- data$experiments %>%
+      dplyr::select(c("sample_id", "sample", "replicate")) %>%
+      dplyr::inner_join(
+        data$quantitative %>%
+          dplyr::inner_join(data$accounting %>%
+                              dplyr::select(dplyr::all_of(c('sample_id', identifier))),
+                            by = c('sample_id', identifier)) %>%
+          dplyr::select(!c('sample', 'replicate')),
+        by = "sample_id"
+      )
   }
 
   if(which_segment != 'accounting' & !is.null(data$annotations)) {
@@ -160,7 +167,7 @@ down_select <- function(
   value <- tidyproteomics_quo[['value']]
   inverse <- tidyproteomics_quo[['inverse']]
 
-  operator <- rlang::arg_match(operator, c("<","<=",">",">=","==","!=","%like%"))
+  operator <- rlang::arg_match(operator, c("<","<=",">",">=","==","!=","%like%","%in%"))
   if(is.null(table) || is.null(variable) || is.null(value)) {return(table)}
   table <- as.data.frame(table)
 
@@ -171,7 +178,7 @@ down_select <- function(
   else if(operator == ">="){ w <- which(table[,variable] >= value) }
   else if(operator == "=="){ w <- which(table[,variable] == value) }
   else if(operator == "!="){ w <- which(table[,variable] != value) }
-  # if(operator == "%in%"){ w <- which(table[,variable] %in% value) }
+  else if(operator == "%in%"){ w <- which(table[,variable] %in% value) }
   else if(operator == "%like%"){ w <- which(grepl(value, table[,variable], ignore.case = T)) }
   else {}
 
@@ -212,14 +219,23 @@ tidyproteomics_quo <- function(...) {
       error = function(e) as.character(expr[[3]])
     )
     if (is.symbol(val)) val <- as.character(val)
-    if (is.character(val) && !is.na(suppressWarnings(as.numeric(val))) && !grepl("[^0-9.]", val)) {
+    if (length(val) == 1 && is.character(val) && !is.na(suppressWarnings(as.numeric(val))) && !grepl("[^0-9.]", val)) {
       val <- as.numeric(val)
     }
     return(list(variable = var, operator = op, value = val, inverse = inverse))
   }
 
   # Fallback to string parsing for non-standard expressions
-  quo_obj <- rlang::quo_text(rlang_quo)
+  if (is.symbol(expr)) {
+    val <- tryCatch(rlang::eval_tidy(rlang_quo), error = function(e) NULL)
+    if (is.character(val) && length(val) == 1 && nzchar(val)) {
+      quo_obj <- val
+    } else {
+      quo_obj <- rlang::quo_text(rlang_quo)
+    }
+  } else {
+    quo_obj <- rlang::quo_text(rlang_quo)
+  }
   quo_obj <- sub("/", " / ", quo_obj)
 
   quo_obj <- sub("\\s+", " ", quo_obj)

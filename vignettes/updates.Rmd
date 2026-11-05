@@ -27,6 +27,12 @@ major updates and bug-fixes listed here. For quick reference:
 
 ### Version: 1.9.x
 
+#### 1.9.16 - 2026.11.03
+
+-   Added `get_analyses()`, `input_audit()` and `ingest_config()` for viewing, modifying, and auto-repairing (`auto_fix`) ingestion configuration tables.
+-   Added `plot_candidates()`, `plot_signatures()` and `plot_imputation_diagnosti()` to evaluate missing-value imputation across conditions, distinguishing observed from limit-of-detection imputed values.
+-   Fixed accounting-based subsetting to ensure replicate mappings remain synchronized between `experiments` and `quantitative` tables, preventing row duplication during subsequent imputation.
+
 #### 1.9.15 - 2026.10.19
 
 -   Optimized `enrichment_wilcoxon()`, and fixed bug and spurious CLI alerts.

@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.16</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -162,17 +162,17 @@ removed all the “knockdown” proteins and the files specific to them.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">imputed</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">0</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Subsetting data: <span style="color: #FF5F00; font-style: italic;">imputed</span> <span style="color: #0000BB;">==</span> <span style="color: #FF5F00; font-style: italic;">0</span> ... done</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Intersection subset containing <span style="font-style: italic;">60</span> <span style="font-style: italic;">proteins</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Intersection subset containing <span style="font-style: italic;">198</span> <span style="font-style: italic;">proteins</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (78.40 kB) </span></span>
-<span><span class="co">#&gt; Composition     3 files </span></span>
-<span><span class="co">#&gt;                 1 samples (control) </span></span>
-<span><span class="co">#&gt; Quantitation    60 proteins </span></span>
-<span><span class="co">#&gt;                 2.9 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 9.47% missing values </span></span>
+<span><span class="co">#&gt;                 proteins (280.30 kB) </span></span>
+<span><span class="co">#&gt; Composition     6 files </span></span>
+<span><span class="co">#&gt;                 2 samples (control, knockdown) </span></span>
+<span><span class="co">#&gt; Quantitation    198 proteins </span></span>
+<span><span class="co">#&gt;                 3.1 log10 dynamic range </span></span>
+<span><span class="co">#&gt;                 60.9% missing values </span></span>
 <span><span class="co">#&gt;  *imputed        </span></span>
 <span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
 <span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
@@ -214,12 +214,12 @@ with the following code.</p>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (118.22 kB) </span></span>
-<span><span class="co">#&gt; Composition     3 files </span></span>
-<span><span class="co">#&gt;                 3 samples (a, d, c) </span></span>
+<span><span class="co">#&gt;                 proteins (123.45 kB) </span></span>
+<span><span class="co">#&gt; Composition     4 files </span></span>
+<span><span class="co">#&gt;                 4 samples (a, d, b, c) </span></span>
 <span><span class="co">#&gt; Quantitation    82 proteins </span></span>
-<span><span class="co">#&gt;                 2.4 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 23.6% missing values </span></span>
+<span><span class="co">#&gt;                 2.3 log10 dynamic range </span></span>
+<span><span class="co">#&gt;                 13.4% missing values </span></span>
 <span><span class="co">#&gt;  *imputed        </span></span>
 <span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
 <span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
@@ -233,22 +233,22 @@ associated with the proteins exclusive to the intersection we
 selected.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">exp_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/intersection.html">intersection</a></span><span class="op">(</span>.include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'a'</span>,<span class="st">'b'</span><span class="op">)</span>, .exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'c'</span>,<span class="st">'d'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Intersection subset containing <span style="font-style: italic;">21</span> <span style="font-style: italic;">proteins</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Intersection subset containing <span style="font-style: italic;">47</span> <span style="font-style: italic;">proteins</span></span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── <span style="font-weight: bold; font-style: italic;">Quantitative Proteomics Data Object</span> ──</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Origin          ProteomeDiscoverer </span></span>
-<span><span class="co">#&gt;                 proteins (37.29 kB) </span></span>
-<span><span class="co">#&gt; Composition     2 files </span></span>
-<span><span class="co">#&gt;                 2 samples (a, b) </span></span>
-<span><span class="co">#&gt; Quantitation    21 proteins </span></span>
-<span><span class="co">#&gt;                 1.1 log10 dynamic range </span></span>
-<span><span class="co">#&gt;                 11.9% missing values </span></span>
+<span><span class="co">#&gt;                 proteins (73.70 kB) </span></span>
+<span><span class="co">#&gt; Composition     4 files </span></span>
+<span><span class="co">#&gt;                 4 samples (a, d, b, c) </span></span>
+<span><span class="co">#&gt; Quantitation    47 proteins </span></span>
+<span><span class="co">#&gt;                 1.2 log10 dynamic range </span></span>
+<span><span class="co">#&gt;                 36.1% missing values </span></span>
 <span><span class="co">#&gt;  *imputed        </span></span>
 <span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
 <span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
-<span><span class="co">#&gt;                 gene_id_entrez gene_name wiki_pathway reactome_pathway</span></span>
-<span><span class="co">#&gt;                 gene_id_ensemble </span></span>
+<span><span class="co">#&gt;                 gene_id_entrez gene_name gene_id_ensemble wiki_pathway</span></span>
+<span><span class="co">#&gt;                 reactome_pathway </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 </div>
   </main>

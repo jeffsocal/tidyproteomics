@@ -80,7 +80,7 @@ stats_summary <- function(
   tbl_stats <- tbl_long %>%
     dplyr::group_by_at(group_by) %>%
     dplyr::summarise(
-      identifiers = identifier %>% unique() %>% length(),
+      identifiers = identifier[!is.na(abundance)] %>% unique() %>% length(),
       peptides = ceiling(num_peptides %>% sum(na.rm = T) / length(unique(sample_id))),
       peptides_unique = ceiling(num_unique_peptides %>% sum(na.rm = T) / length(unique(sample_id))),
       quantifiable = signif(num_peptides[!is.na(abundance)] %>% sum(na.rm=T) / length(unique(sample_id)) / peptides, 3),

@@ -4,9 +4,6 @@
 .Ruserdata
 .DS_Store
 *.xlsx
-LICENSE
-todo
-data/lcms_*
 *.tar.gz
 *.Rcheck/
 Rplots.pdf

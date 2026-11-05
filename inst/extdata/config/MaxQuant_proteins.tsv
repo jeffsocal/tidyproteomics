@@ -1,8 +1,11 @@
 category	column_defined	column_import	pattern_extract	pattern_remove	pattern_split	pivot
-sample	sample		(?<=(Intensity|Peptides|Unique\speptides)\s).+			
-sample	sample_file		(?<=(Intensity|Peptides|Unique\speptides)\s).+			
-identifier	protein	^Protein IDs	(?<=\|).*?(?=\|)	^REV\_	\;	
+sample	sample		(?<=(LFQ\sintensity|Intensity|Peptides|Unique\speptides)\s).+			
+sample	sample_file		(?<=(LFQ\sintensity|Intensity|Peptides|Unique\speptides)\s).+			
+identifier	protein	^Protein IDs	(?<=[|])[^|]+(?=[|])|^[^|[:space:]]+$	^REV\_	\;	
 quantitative	abundance_raw	^Intensity\s				TRUE
 accounting	num_psms	^MS/MS count$				
 accounting	num_peptides	^Peptides\s				TRUE
 accounting	num_unique_peptides	^Unique peptides\s				TRUE
+annotation	description	^Protein [nN]ames$				
+annotation	gene_name	^Gene [nN]ames$				
+annotation	fasta_header	^Fasta [hH]eaders$				

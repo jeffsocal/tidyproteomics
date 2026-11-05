@@ -17,7 +17,7 @@ list_venn <- function(
   # use just to test the data
   check_data(data)
   data_quant <- data %>%
-    extract() %>%
+    extract(na.rm = TRUE) %>%
     dplyr::group_by(identifier, sample) %>%
     dplyr::slice_max(abundance, n=1, with_ties = FALSE) %>%
     dplyr::select(sample, identifier) %>%

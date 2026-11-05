@@ -29,6 +29,10 @@ Jones, J., MacKrell, E.J., Wang, TY. et al. *Tidyproteomics: an open-source R pa
 -   Code: [github.com/ejmackrell/tidyproteomics-interactive](https://github.com/ejmackrell/tidyproteomics-interactive)
 -   Docs: [ejmackrell.github.io/tidyproteomics-interactive/](https://ejmackrell.github.io/tidyproteomics-interactive/)
 
+### AI Agentic App **NEW**
+
+-   Code: [github.com/jeffsocal/tidyproteomics-agent](https://github.com/jeffsocal/tidyproteomics-agent)
+
 ## Data Support
 
 Importing is currently implemented for a few platforms and assume peptide level FDR (at the user's desired level) has already been accounted for. See `vignette("importing")`. Importing is flexible enough to accept other data platforms in flat files (.csv, .tsv, and .xlsx) with a custom configuration.

@@ -71,6 +71,8 @@ reference:
     flat tables. See `vignette("importing")` for more details and examples.
   contents:
   - import
+  - input_audit
+  - ingest_config
   - export_quant
   - export_analysis
   - export_compexp
@@ -131,6 +133,7 @@ reference:
   contents:
   - impute
   - impute.randomforest
+  - plot_imputation_diagnostic
 - title: Visualization
   description: |
     **Visualizing** data is important for understanding the underlying quality of the
@@ -157,6 +160,8 @@ reference:
   - plot_volcano
   - plot_proportion
   - plot_compexp
+  - plot_candidates
+  - plot_signatures
   - enrichment
   - plot_enrichment
 - title: Automation

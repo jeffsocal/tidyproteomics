@@ -11,6 +11,7 @@ plot_save(
   destination = c("plot", "save", "png", "svg", "tiff", "jpeg"),
   height = 5,
   width = 8,
+  path = NULL,
   ...
 )
 }

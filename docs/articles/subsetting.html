@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidyproteomics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.15</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.9.16</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,8 +149,8 @@ into a single collective for analysis and visualization.</p>
 <span></span>
 <span><span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span></span>
-<span><span class="co">#&gt;    control     7055    66329           58706        0.908 0.16 0.56 0.44</span></span>
-<span><span class="co">#&gt;  knockdown     7055    66329           58706        0.909 0.21 0.72 0.28</span></span></code></pre></div>
+<span><span class="co">#&gt;    control     5273    66329           58706        0.908 0.16 0.56 0.44</span></span>
+<span><span class="co">#&gt;  knockdown     5260    66329           58706        0.909 0.21 0.72 0.28</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
@@ -163,8 +163,8 @@ description:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">description</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"Ribosome"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable    CV  PC1  PC2</span></span>
-<span><span class="co">#&gt;    control       18      224             224        0.976 0.094 0.56 0.44</span></span>
-<span><span class="co">#&gt;  knockdown       18      224             224        0.996 0.170 0.75 0.25</span></span></code></pre></div>
+<span><span class="co">#&gt;    control       17      224             224        0.976 0.094 0.56 0.44</span></span>
+<span><span class="co">#&gt;  knockdown       17      224             224        0.996 0.170 0.75 0.25</span></span></code></pre></div>
 <p>Aside from filtering directly on <code>protein_accession</code>
 values, subsetting can use any of the columns in the
 <code>experiments</code> table:</p>
@@ -193,8 +193,8 @@ values, subsetting can use any of the columns in the
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">cellular_component</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"nucleus"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span></span>
-<span><span class="co">#&gt;    control     4227    44075           39105        0.921 0.16 0.56 0.44</span></span>
-<span><span class="co">#&gt;  knockdown     4227    44075           39105        0.921 0.20 0.73 0.27</span></span></code></pre></div>
+<span><span class="co">#&gt;    control     3218    44075           39105        0.921 0.16 0.56 0.44</span></span>
+<span><span class="co">#&gt;  knockdown     3227    44075           39105        0.921 0.20 0.73 0.27</span></span></code></pre></div>
 <p>Additionally, provided the quantitative platform produces an imputed
 value commonly referred to as “match between runs”, the data can be
 filtered to exclude these values. This can be valuable in cases were
@@ -208,28 +208,28 @@ differ.</p>
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">match_between_runs</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span></span>
-<span><span class="co">#&gt;    control     7055    66329           58706        0.908 0.16 0.56 0.44</span></span>
-<span><span class="co">#&gt;  knockdown     7055    66329           58706        0.909 0.21 0.72 0.28</span></span></code></pre></div>
+<span><span class="co">#&gt;    control     5273    66329           58706        0.908 0.16 0.56 0.44</span></span>
+<span><span class="co">#&gt;  knockdown     5260    66329           58706        0.909 0.21 0.72 0.28</span></span></code></pre></div>
 <p>Also, data can be filtered to proteins containing a desired number of
 underlying peptides.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">mum_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span></span>
-<span><span class="co">#&gt;    control     7055    66329           58706        0.908 0.16 0.56 0.44</span></span>
-<span><span class="co">#&gt;  knockdown     7055    66329           58706        0.909 0.21 0.72 0.28</span></span></code></pre></div>
+<span><span class="co">#&gt;    control     5273    66329           58706        0.908 0.16 0.56 0.44</span></span>
+<span><span class="co">#&gt;  knockdown     5260    66329           58706        0.909 0.21 0.72 0.28</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">num_unique_peptides</span> <span class="op">&lt;=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="st">'sample'</span><span class="op">)</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span></span>
-<span><span class="co">#&gt;    control     1459     4202            1459        0.505 0.19 0.61 0.39</span></span>
-<span><span class="co">#&gt;  knockdown     1459     4202            1459        0.489 0.21 0.65 0.35</span></span></code></pre></div>
+<span><span class="co">#&gt;    control      487     4202            1459        0.505 0.19 0.61 0.39</span></span>
+<span><span class="co">#&gt;  knockdown      481     4202            1459        0.489 0.21 0.65 0.35</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hela_proteins</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">cellular_component</span> <span class="op"><a href="../reference/grapes-like-grapes.html">%like%</a></span> <span class="st">"cytosol"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="co">#&gt;  proteins peptides peptides_unique quantifiable   CV  PC1  PC2</span></span>
-<span><span class="co">#&gt;      2855    33053           29506        0.929 0.24 0.53 0.17</span></span></code></pre></div>
+<span><span class="co">#&gt;      2289    33053           29506        0.929 0.24 0.53 0.17</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="split-then-merge">Split then Merge<a class="anchor" aria-label="anchor" href="#split-then-merge"></a>
@@ -259,7 +259,7 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt;                 NaN log10 dynamic range </span></span>
 <span><span class="co">#&gt;                 NaN% missing values </span></span>
 <span><span class="co">#&gt;  *normalized    all </span></span>
-<span><span class="co">#&gt;  *imputed       by 'row' samples via 'base::quote .Primitive("min")' group_by_sample 'FALSE'. by 'row' samples via 'base::quote .Primitive("min")' group_by_sample 'FALSE'. </span></span>
+<span><span class="co">#&gt;  *imputed       by 'row' samples via 'base::min' group_by_sample 'FALSE'. by 'row' samples via 'base::min' group_by_sample 'FALSE'. </span></span>
 <span><span class="co">#&gt; Accounting      (4) num_peptides num_psms num_unique_peptides imputed </span></span>
 <span><span class="co">#&gt; Annotations     (9) description biological_process cellular_component molecular_function</span></span>
 <span><span class="co">#&gt;                 gene_id_entrez gene_name wiki_pathway reactome_pathway</span></span>
@@ -282,8 +282,8 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> argument is not numeric or logical: returning NA</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Run `dplyr::last_dplyr_warnings()` to see the 7054 remaining warnings.</span></span>
 <span><span class="co">#&gt;     sample proteins peptides peptides_unique quantifiable PC1 PC2</span></span>
-<span><span class="co">#&gt;    control     7055    66329           58706            0  NA  NA</span></span>
-<span><span class="co">#&gt;  knockdown     7055    66329           58706            0  NA  NA</span></span></code></pre></div>
+<span><span class="co">#&gt;    control        0    66329           58706            0  NA  NA</span></span>
+<span><span class="co">#&gt;  knockdown        0    66329           58706            0  NA  NA</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_new</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/operations.html">operations</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Data Transformations</span></span>
@@ -297,7 +297,7 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Normalization automatically selected as median.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: Missing values imputed by 'row' samples via</span></span>
-<span><span class="co">#&gt;   'base::quote .Primitive("min")' group_by_sample 'FALSE'.</span></span>
+<span><span class="co">#&gt;   'base::min' group_by_sample 'FALSE'.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [1]: ... 689 values imputed</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -311,7 +311,7 @@ like this, just for demonstration purposes.</p>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Normalization automatically selected as raw.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: Missing values imputed by 'row' samples via</span></span>
-<span><span class="co">#&gt;   'base::quote .Primitive("min")' group_by_sample 'FALSE'.</span></span>
+<span><span class="co">#&gt;   'base::min' group_by_sample 'FALSE'.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   • ProteomeDiscoverer [2]: ... 753 values imputed</span></span>
 <span><span class="co">#&gt; </span></span>
