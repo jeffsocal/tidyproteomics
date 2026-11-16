@@ -184,8 +184,11 @@ plot_candidates <- function(
   sub <- sub %>% dplyr::arrange(.data[[log2fc_column]])
   sub$plot_label <- factor(sub$plot_label, levels = unique(sub$plot_label))
 
-  # color palette for status
-  statuses <- unique(sub$status)
+  # color palette for status (order descending by log2FC so upregulated = palette[1], downregulated = palette[2])
+  statuses <- sub %>%
+    dplyr::arrange(dplyr::desc(.data[[log2fc_column]])) %>%
+    dplyr::pull(status) %>%
+    unique()
   num_statuses <- length(statuses)
   status_palette <- theme_palette(max(num_statuses, 2))[1:num_statuses]
   names(status_palette) <- statuses
